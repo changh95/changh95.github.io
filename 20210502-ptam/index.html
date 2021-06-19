@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Klein &amp; Murray 2007 PTAM 논문 리뷰">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Klein &amp; Murray 2007 - Parallel Tracking and Mapping for Small AR Workspaces (PTAM)">
+<meta property="og:url" content="https://changh95.github.io/20210502-ptam/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Klein &amp; Murray 2007 PTAM 논문 리뷰">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210502-ptam/geometric_priors.png">
+<meta property="og:image" content="https://changh95.github.io/20210502-ptam/extended_tracking.png">
+<meta property="og:image" content="https://changh95.github.io/20210502-ptam/incremental.png">
+<meta property="article:published_time" content="2021-05-02T05:34:42.000Z">
+<meta property="article:modified_time" content="2021-06-05T13:27:26.707Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="PTAM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210502-ptam/geometric_priors.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210502-ptam/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Klein & Murray 2007 - Parallel Tracking and Mapping for Small AR Workspaces (PTAM) | cv-learn</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method-overview-in-the-context-of-SLAM"><span class="nav-number">3.</span> <span class="nav-text">Method overview in the context of SLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Further-related-work"><span class="nav-number">4.</span> <span class="nav-text">Further related work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Map"><span class="nav-number">5.</span> <span class="nav-text">The Map</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210502-ptam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Klein & Murray 2007 - Parallel Tracking and Mapping for Small AR Workspaces (PTAM)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-05-02 14:34:42" itemprop="dateCreated datePublished" datetime="2021-05-02T14:34:42+09:00">2021-05-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-05 22:27:26" itemprop="dateModified" datetime="2021-06-05T22:27:26+09:00">2021-06-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>Hand-held 카메라로 small AR workspace에서 잘 작동하는 SLAM을 만들었다.</li>
+<li>실시간 조건으로 작동하게 하기 위해 <strong>tracking</strong> 작업과 <strong>mapping</strong> 작업을 <strong>여러 CPU thread에 병렬처리</strong>하였다 (i.e. “Parallel” tracking and mapping…).<ul>
+<li>Tracking - 빠른 hand-held motion을 추정하는 모듈</li>
+<li>Mapping - 지난 프레임들에서 추출된 keypoints들을 기반으로 3D map을 생성하는 모듈.</li>
+</ul>
+</li>
+<li>이러한 병렬처리 구조를 통해 계산량이 많은 <strong>bundle adjustment</strong> 기법을 실시간에 작동하도록 구현할 수 있었다.</li>
+</ul>
+<p> </p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>보통 증강현실 프로그램과 같이 어떠한 환경에서 카메라의 위치를 추정하는데에는 ‘<strong>사전에 미리 측량해둔 주변 환경</strong>‘에 대한 정보가 (i.e. <strong>geometric prior</strong>) 필요하다.<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcHJpbC5lZWNzLnVtaWNoLmVkdS9zb2Z0d2FyZS9hcHJpbHRhZw==">Fiducial marker<i class="fa fa-external-link-alt"></i></span>를 사용하거나, 또는 이런 마커들을 사전에 정의해둔 위치에 부착해둔다던지</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2hnYXRlLm5ldC9wdWJsaWNhdGlvbi8yNjQ4MzM2OF9UcmFja2luZ19vZl9pbmR1c3RyaWFsX29iamVjdHNfYnlfdXNpbmdfQ0FEX21vZGVscw==">CAD-model<i class="fa fa-external-link-alt"></i></span>로 만들어둔 환경이라던지</li>
+<li>지도를 미리 따둔다던지… (<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvU3RydWN0dXJlX2Zyb21fbW90aW9u">SfM<i class="fa fa-external-link-alt"></i></span>?)</li>
+<li>이렇게 ‘사전에 가지고 있는 정보’ + ‘현재 카메라 프레임에서 보이는 정보’를 <strong>정합</strong> (i.e. registration)함으로써 현재 위치를 파악할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20210502-ptam/geometric_priors.png" class="" title="geometric_priors">
+
+<p> </p>
+<ul>
+<li>하지만 2007년 이 당시에는 큰 공간의 맵을 만드는 것은 어려웠다.<ul>
+<li>공간의 map을 정확하게 딴다는 것, 그리고 그것을 이용해서 위치를 추정한다는 개념은 굉장히 복잡한 개념이였다.</li>
+<li>2D LiDAR에 대해서는 연구가 어느정도 되었지만 Visual-SLAM쪽은 거의 없었다.<ul>
+<li>(어떻게보면 PTAM이 잘되는 Visual-SLAM의 시작이였으니…)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>대부분의 ‘<strong>사전 정보</strong>‘는 하나의 fiducial marker, 또는 하나의 object에 대한 정보만 가졌다.<ul>
+<li>카메라가 이 marker나 object를 바라보다가 시야를 다른 곳으로 돌릴 경우, 더 이상 정합을 할 수 없어 위치 추정이 끊기게 되었다.</li>
+<li>이러한 문제를 풀기 위해 ‘<strong>Extensive tracking</strong>‘ 기술에 대한 연구가 진행되었다 (AR업계에서는 Extended tracking이라고도 부른다).<ul>
+<li>Marker나 object의 정보를 ‘최초 환경 정보’로 사용하며, 이 ‘최초 환경 정보’에 점차 ‘주변 환경에 대한 정보’를 이어붙여나가는 것이다.<ul>
+<li>이런 방식을 통해 최초 시야를 벗어나게 되어도 지속적으로 ‘주변 환경’ 정보를 계속 관찰하며 카메라가 자신의 위치를 추정할 수 있는 것이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20210502-ptam/extended_tracking.png" class="" title="extended_tracker">
+
+<p> </p>
+<ul>
+<li>하지만 역시 <strong>최종 형태</strong>는 이러한 <strong>‘사전 정보를 전혀 가지지 않은 상태’에서 map을 만들어나가는 것</strong>일 것이다 (<strong>== SLAM!</strong>).<ul>
+<li><strong>이 논문은 이러한 방식에 초점을 맞춘다</strong> (딴 얘기에 대한 서론이 엄청 길다 ㅋㅋ…)</li>
+</ul>
+</li>
+<li>실시간으로 prior map 없이 카메라 위치 트랙킹 + 주변 환경 맵핑을 할 수 있으면 무엇이 좋은가?<ul>
+<li>VR을 위한 remote expert 시스템을 만들 수 있다… 블라블라…</li>
+</ul>
+</li>
+<li>이러한 시스템을 만들기 위한 제약이 무엇인가?<ul>
+<li><strong>주변 환경은 고정되어야한다</strong> (i.e. <strong>static</strong>). 즉, 형태가 바뀌면 안되고, 움직이는게 없어야한다.</li>
+<li><strong>주변 환경이 작아야한다</strong><ul>
+<li>(이는 PTAM이 만든 제약이다. PTAM 이후의 연구들은 large-scale SLAM으로 연구 방향을 바꾼다)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Method-overview-in-the-context-of-SLAM"><a href="#Method-overview-in-the-context-of-SLAM" class="headerlink" title="Method overview in the context of SLAM"></a>Method overview in the context of SLAM</h2><ul>
+<li><strong>PTAM의 특징</strong>:<ul>
+<li>Tracking과 Mapping 작업의 분리. (여러 CPU thread에 나눠놓음)</li>
+<li>Mapping은 keyframe의 정보만 이용해서 수행. (i.e. Bundle adjustment 기법 사용)</li>
+<li>Initialisation은 <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzEyMTE0NzA/ZGVuaWVkPQ==">Nister 5-point algorithm<i class="fa fa-external-link-alt"></i></span>을 사용해서 만듬.</li>
+<li>새로운 map point들은 epipolar search를 이용해서 만듬.</li>
+<li>Map point가 많다! (~몇천개)</li>
+</ul>
+</li>
+</ul>
+<p>아래는 PTAM 이전의 연구들을 정리한 것.</p>
+<ul>
+<li>Hand-held monocular SLAM으로 잘 알려진 알고리즘들은 Andrew Davison의 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jLmljLmFjLnVrL35hamQvUHVibGljYXRpb25zL2Rhdmlzb25fZXRhbF9wYW1pMjAwNy5wZGY=">MonoSLAM<i class="fa fa-external-link-alt"></i></span>과 Eade &amp; Drummond의 <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50LzE2NDA3OTQ=">Scalable monocular SLAM<i class="fa fa-external-link-alt"></i></span>이 있다.<ul>
+<li>위 두 방법은 <span class="exturl" data-url="aHR0cHM6Ly9qb3VybmFscy5zYWdlcHViLmNvbS9kb2kvYWJzLzEwLjExNzcvMDI3ODM2NDk4NjAwNTAwNDA0">EKF-SLAM<i class="fa fa-external-link-alt"></i></span>과 <span class="exturl" data-url="aHR0cDovL3JvYm90cy5zdGFuZm9yZC5lZHUvcGFwZXJzL01vbnRlbWVybG8wM2EucGRm">FastSLAM 2.0<i class="fa fa-external-link-alt"></i></span>에서 사용된 <strong>incremental SLAM 파이프라인</strong>을 가져온 것이다.</li>
+<li>Incremental SLAM 방식은 <strong>tracking과 mapping을 하나의 filter에 넣어서 동시에 추정하는 방식</strong>이다.<ul>
+<li>(사실 Incremental 방식과 Filter 방식이 완벽하게 동일하진 않다. Filter는 Online SLAM을 부르는 방법 중 하나인데, 이 당시의 filter 방식은 모두 incremental하게 진행되었기 때문에 incremental == filter가 성립한다.)</li>
+<li>아래 사진과 같이 incremental 방식은 최적화 수식을 ‘<strong>가장 최근의 state</strong>‘를 구하는데에 집중한 방식이다. Incremental 방식의 반대는 ‘Full SLAM’, 즉 이번 논문이 사용한 bundle-adjustment이 되겠다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20210502-ptam/incremental.png" class="" title="incremental">
+
+<p> </p>
+<ul>
+<li><strong>저자들은 Hand-held의 경우에는 이러한 incremental SLAM방식이 적합하지 않다</strong>고 한다.<ul>
+<li>EKF-SLAM과 FatSLAM은 로봇을 위해 만들어진 알고리즘이다.<ul>
+<li>로봇은 보통 주행 중 꽤 좋은 퀄리티의 odometry 값을 받을 수 있고, 꽤 천천히 움직이는 편이다.</li>
+</ul>
+</li>
+<li><strong>Hand-held는 언제든지 움직이는 속도가 바뀔 수 있기 때문에</strong>, 로봇 주행에 비해 <strong>data association 문제가 나타날 확률이 굉장히 높다</strong>.<ul>
+<li>갑자기 카메라의 이동이 빨라지면서 data association이 한번만 잘못되도 전체적인 map이 꼬인다는 것이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>그렇기 때문에 <strong>Hand-held camera tracking에는 안정적인 data association이 필수다</strong>.<ul>
+<li>이를 위한 연구가 다음과 같이 진행되었다<ul>
+<li>Covariance-driven gating (i.e. active search)</li>
+<li>Joint Compatibility Branch and Bound (JCBB)</li>
+<li>Random Sample Consensus (RANSAC)</li>
+</ul>
+</li>
+<li>그럼에도 <strong>저자들이 원하는 수준으로 잘 되는 방법론은 없었다</strong>.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<ul>
+<li><strong>저자들은 tracking과 mapping 과정을 분리함으로써 이 문제를 해결</strong>하였다.<ul>
+<li>분리하는 방법은 <strong>2007년 당시 제안되었던 멀티코어 프로그래밍을 이용해서 동시에 연산하는 방법</strong>을 사용하였다.<ul>
+<li>듀얼코어 ㄷㄷ… 2021년에는 64코어 128코어도 쓰는데…</li>
+</ul>
+</li>
+<li><strong>Tracking은 더이상 mapping 과정에서 생기는 확률적인 불안정함의 영향을 받지 않게 되었다.</strong><ul>
+<li>또, tracking 방식도 mapping에 구애받지 않는 다른 방식들을 사용할 수 있게 되었다. 이 논문에서는 coarse-to-fine 방식에 robust estimator를 사용하는 방식을 사용하였다.</li>
+</ul>
+</li>
+<li><strong>Mapping 과정도</strong> 역시 tracking으로 부터 벗어남으로써, <strong>매 프레임마다 mapping 연산을 수행하지 않아도 되게 되었다</strong>.<ul>
+<li>Incremental SLAM은 매 프레임 굉장히 비슷한 이미지들을 처리하면서 컴퓨팅 자원을 낭비한다.</li>
+<li><strong>매 프레임마다 연산을 하지 않으면, 정말로 중요한 정보를 가지고 있는 프레임들에 (i.e. Keyframes) 자원소모를 집중해서 연산</strong>할 수 있다.</li>
+<li>덕분에 연산량은 많지만 좋은 결과를 내주는 ‘<strong>Bundle adjustment</strong>‘ 기법을 적용할 수 있었다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<ul>
+<li>‘<strong>Bundle adjustment</strong>‘ 기법은 Structure-from-Motion (SfM) 연구에서 많이 사용되는 기법이다.<ul>
+<li>Bundle adjustment는 <strong>카메라에서 뽑은 feature point들의 위치를 기반으로 정확한 3D map point와 카메라의 3d pose를 구해내는 방법</strong>이다.</li>
+<li>2007년 당시에 개발되었던 방식인 5-point algorithm + 최근 N개의 카메라 포즈들에 bundle adjustment를 적용하는 방법 (i.e. <strong>Local bundle adjustment</strong>)으로부터 영감을 받았다.</li>
+<li>저자들은 단순히 local BA만 하는 것이 아닌, global BA도 고려하였다.<ul>
+<li>기존의 방식들은 단순히 새 프레임을 쌓아가면서 최근 N개의 이미지들만 사용하였다.</li>
+<li>하지만 이 역시 시간이 지나면서 에러가 누적될것이다.</li>
+<li>PTAM의 저자들은 종종 ‘<strong>저장된 모든 키프레임들에 대해 bundle adjustment</strong>‘ (i.e. <strong>Global bundle adjustment</strong>)를 수행함으로써 맵의 퀄리티가 오랜 시간이 지나도 유지되도록 하였다.<ul>
+<li>(하지만 이것도 한계가 있으며, 방 한바퀴를 세네바퀴 돌면 에러가 많이 누적된다. 그렇기에 이 논문이 ‘… for Small AR workspace’인 것이다.)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Further-related-work"><a href="#Further-related-work" class="headerlink" title="Further related work"></a>Further related work</h2><blockquote>
+<p>굳이 중요한 부분은 아니지만 Survey 느낌으로 넣은듯.</p>
+</blockquote>
+<ul>
+<li>여러가지 monocular SLAM의 성능을 개선시키려는 시도가 있었다.<ul>
+<li>Extended Kalman filter 대신에 particle filter를 사용해서 빠른 모션에 대응하려는 시도.</li>
+<li>Feature tracking을 할 때 patch에 대한 correlation-based search 대신에 image descriptor를 사용함으로써 더 정확한 트랙킹을 하는 방법<ul>
+<li>(이런 방법이 있음에도… PTAM은 이 방법을 안쓴다 왜지!)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>나머지 부분들은 Extensive tracking, CAD tracking, initialization 기술 관련 이야기를 하는데… 별로 중요하지 않음.</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="The-Map"><a href="#The-Map" class="headerlink" title="The Map"></a>The Map</h2>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="bookmark">IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/PTAM/" rel="tag"># PTAM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210415-gtc-2021-lists/" rel="prev" title="관심있는 GTC 2021 토크">
+                  <i class="fa fa-chevron-left"></i> 관심있는 GTC 2021 토크
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210523-cpp-coding-guideline/" rel="next" title="Modern C++ Coding Guideline">
+                  Modern C++ Coding Guideline <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

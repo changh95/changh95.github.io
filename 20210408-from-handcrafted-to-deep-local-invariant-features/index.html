@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Gabriela Csurka와 Martin Humenberger의 2018년도 Local feature 서베이 논문 정리.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Csurka 2018 - From Handcrafted to Deep Local Invariant Features">
+<meta property="og:url" content="https://changh95.github.io/20210408-from-handcrafted-to-deep-local-invariant-features/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Gabriela Csurka와 Martin Humenberger의 2018년도 Local feature 서베이 논문 정리.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210408-from-handcrafted-to-deep-local-invariant-features/pipeline.png">
+<meta property="og:image" content="https://changh95.github.io/20210408-from-handcrafted-to-deep-local-invariant-features/binary_descriptors.png">
+<meta property="article:published_time" content="2021-04-08T08:17:35.000Z">
+<meta property="article:modified_time" content="2021-06-05T13:27:26.703Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="NAVER LABS">
+<meta property="article:tag" content="Visual localization">
+<meta property="article:tag" content="Local features">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210408-from-handcrafted-to-deep-local-invariant-features/pipeline.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210408-from-handcrafted-to-deep-local-invariant-features/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Csurka 2018 - From Handcrafted to Deep Local Invariant Features | cv-learn</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handcrafted-local-features"><span class="nav-number">2.</span> <span class="nav-text">Handcrafted local features</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Keypoint-detectors"><span class="nav-number">2.1.</span> <span class="nav-text">Keypoint detectors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%B4%88%EA%B8%B0-detector-%EB%B0%A9%EB%B2%95-corners-image-gradient-%EC%9D%B4%EC%9A%A9"><span class="nav-number">2.1.1.</span> <span class="nav-text">초기 detector 방법 - corners &#x2F; image gradient 이용</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Segmentation-%EA%B8%B0%EB%B2%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">Segmentation 기법</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mathematical-morphology"><span class="nav-number">2.1.3.</span> <span class="nav-text">Mathematical morphology</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Saliency"><span class="nav-number">2.1.4.</span> <span class="nav-text">Saliency</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Edge-information"><span class="nav-number">2.1.5.</span> <span class="nav-text">Edge information</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Real-descriptors"><span class="nav-number">2.2.</span> <span class="nav-text">Real descriptors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SIFT-%EA%B3%84%EC%97%B4"><span class="nav-number">2.2.1.</span> <span class="nav-text">SIFT 계열</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SIFT%EB%B3%B4%EB%8B%A4-%EB%B9%A0%EB%A5%B8-%EA%B3%84%EC%97%B4"><span class="nav-number">2.2.2.</span> <span class="nav-text">SIFT보다 빠른 계열</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-descriptors"><span class="nav-number">2.3.</span> <span class="nav-text">Binary descriptors</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-learning-%EA%B8%B0%EB%B0%98%EC%9D%98-local-feature"><span class="nav-number">3.</span> <span class="nav-text">Machine learning 기반의 local feature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%9B%84%EA%B8%B0"><span class="nav-number">4.</span> <span class="nav-text">후기</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210408-from-handcrafted-to-deep-local-invariant-features/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Csurka 2018 - From Handcrafted to Deep Local Invariant Features
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-08 17:17:35" itemprop="dateCreated datePublished" datetime="2021-04-08T17:17:35+09:00">2021-04-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-05 22:27:26" itemprop="dateModified" datetime="2021-06-05T22:27:26+09:00">2021-06-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>경험상 나는 ASIFT, ORB, AKAZE가 잘 된다는 걸 알고있다. (OpenCV에도 다 구현되어있어서 그냥 가져다가 써봤는데 잘 됬다).<br>Deep local feature는 아직 잘 써보진 못했지만, 기존의 방식들이 범접하지 못할정도로 잘 된다고 한다.<br>물론 traditional과 deep 방식의 장단점이 있겠다만, 아무래도 미래는 deep local feature가 훨씬 밝지 않을까 생각이 들기 때문에 공부할 필요가 있다고 생각한다.</p>
+<p>이번 서베이를 통해서 어떤 방법론들이 있고 어떤 목적으로 만들어졌는지 간단하게 파악한 후 사용해보려고 한다.</p>
+<p> </p>
+<hr>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<li>Local feature = <strong>Keypoint + local descriptor</strong><ul>
+<li><strong>Keypoint</strong>: 이미지 속 두드러지는 부분<ul>
+<li>Detection 과정을 거쳐서 keypoint를 정확하게 검출해야함.</li>
+<li>다른 시점에서 보았을 때도 동일한 3D 위치에서 검출할 수 있어야하며 (<strong>geometric invariance</strong>), 조명이 변해도 동일한 위치에서 검출할 수 있어야함 (<strong>photometric invariance</strong>)</li>
+<li>Interest point, anchor point라고 불리기도 함.</li>
+</ul>
+</li>
+<li><strong>Local descriptor</strong>: 이미지 속 특정 부분의 특징을 표현하는 방법<ul>
+<li>Keypoint detection을 한 후, 해당 위치에서 local descriptor를 뽑는 경우가 많음.</li>
+<li>픽셀 값들을 저장하거나, 히스토그램을 사용해서 저장함.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Local feature들을 사용해서 다음과 같은 작업을 수행할 수 있음.<ul>
+<li>Face/object detection &amp; recognition, image retrieval, motion detection &amp; tracking, depth-map generation, image stitching, camera calibration, 3D reconstruction, structure-from-motion (SfM), visual odometry, visual-SLAM.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Descriptor는 3가지 방법으로 사용할 수 있음.<ul>
+<li>해당 local feature가 어떤 의미를 가지는지 표현 (i.e. semantics)<ul>
+<li>인공위성 이미지에서 line을 추출했다면, 혹시 그 line이 도로를 의미한다던지</li>
+<li>불량품 검사 이미지에서 blob이 추출됬을 때, 혹시 그 blob이 불량한 부분이라던지</li>
+</ul>
+</li>
+<li><strong>다른 시간, 다른 위치에서 찍은 이미지에서도 동일하게 keypoint들을 검출해서 이미지간의 motion 또는 geometric relationship을 계산하기 위해</strong><ul>
+<li>최대한 동일한 물체를 표현하는 local feature끼리 매칭이 잘 되야함.</li>
+</ul>
+</li>
+<li>여러개의 local feature 정보들을 군집화하여 하나의 큰 global descriptor를 표현.<ul>
+<li>Bag of visual words, Fisher vectors, VLAD를 참고하면 좋음.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>좋은 local feature는…<ul>
+<li><strong>시점 변화, 조명 변화에도 강인함</strong><ul>
+<li>이미지 노이즈, quantization으로 인한 precision loss, 이미지 압축 등으로부터 나타나는 노이즈에도 강인함.</li>
+</ul>
+</li>
+<li><strong>Distinctive한 descripto</strong>r들을 가지고 있어야함.<ul>
+<li>여러개의 local feature들을 가지고 있을 때, 동일한 위치를 표현하는 keypoint들의 descriptor를 매칭할 수 있어야함.<ul>
+<li>이를 위해서 descriptor는 <strong>충분한 정보량</strong>을 가지고 있어야함.</li>
+<li>하지만 <strong>메모리 효율성과 속도</strong>를 고려했을 때, 적당히 compact하기도 해야함.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20210408-from-handcrafted-to-deep-local-invariant-features/pipeline.png" class="" title="Pipeline">
+
+<p> </p>
+<hr>
+<h2 id="Handcrafted-local-features"><a href="#Handcrafted-local-features" class="headerlink" title="Handcrafted local features"></a>Handcrafted local features</h2><hr>
+<h3 id="Keypoint-detectors"><a href="#Keypoint-detectors" class="headerlink" title="Keypoint detectors"></a>Keypoint detectors</h3><h4 id="초기-detector-방법-corners-image-gradient-이용"><a href="#초기-detector-방법-corners-image-gradient-이용" class="headerlink" title="초기 detector 방법 - corners / image gradient 이용"></a>초기 detector 방법 - corners / image gradient 이용</h4><ul>
+<li>Corner 방식은 curve를 찾아서 maxima를 찾거나, edge에 대한 tangent를 찾아서 급격한 방향 변화를 탐지하는 방법</li>
+<li>Image gradient의 변화를 이용하는 방법<ul>
+<li><strong>Hessian detector</strong> 계열<ul>
+<li>[Zuniaga and Haralick 1983]으로 시작</li>
+<li><strong>SURF</strong> 알고리즘에서는 Hessian matrix를 box filter를 이용해서 빠르게 계산 [Bay 2006]</li>
+</ul>
+</li>
+<li><strong>Harris detector</strong> 계열<ul>
+<li><a href="http://changh95.github.io/20201215-Harris-corner/">[Harris and Stephens 1988]</a>으로 시작</li>
+</ul>
+</li>
+<li><strong>SIFT</strong> 계열<ul>
+<li>[Lowe 2004]로 시작</li>
+<li>Difference of Gaussian (DoG)를 이용해서 Laplacian of a Gaussian에 근사함.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Segmentation-기법"><a href="#Segmentation-기법" class="headerlink" title="Segmentation 기법"></a>Segmentation 기법</h4><ul>
+<li>Homogeneous region을 가르는 boundary를 찾는 방법 [Liu and Tsai 1990]</li>
+<li>Homogeneous region을 찾는 방법 [Corso and Hager 2005]<ul>
+<li><strong>MSER</strong> 알고리즘의 경우 wide-baseline stereo에서 disparity를 계산하기 위해 만들어짐 [Matas 2002]</li>
+</ul>
+</li>
+</ul>
+<h4 id="Mathematical-morphology"><a href="#Mathematical-morphology" class="headerlink" title="Mathematical morphology"></a>Mathematical morphology</h4><ul>
+<li>SUSAN detector는 이미지 속 모든 픽셀에 대해, 해당 픽셀과 주변 픽셀 값을 비교해서 밝은지/어두운지를 비교해서 keypoint 검출을 한다. [Smith and Brady 1997]</li>
+<li><strong>FAST</strong>는 SUSAN을 개량한 버전으로써, 해당 픽셀에 원을 그려서 해당 원 위에 위치한 픽셀들과 값을 비교, 그 후 밝거나 어두운 픽셀들이 몇개나 연속해있는지를 판단하여 keypoint 검출을 한다. [Roesten and Drummond 2006]<ul>
+<li>엄청 빠르다</li>
+<li>비슷한 위치에서 keypoint가 다수 발견될 경우, 하나로 묶어주는 Non-maximum suprression 알고리즘도 포함되어있다.</li>
+</ul>
+</li>
+<li>[Lepetit and Fua 2006] 논문에서는 FAST에 Laplacian function을 이용해서 scale selection 기능을 추가하였다.</li>
+</ul>
+<h4 id="Saliency"><a href="#Saliency" class="headerlink" title="Saliency"></a>Saliency</h4><ul>
+<li>‘Keypoint는 주변 픽셀과 비교하였을 때 unpredictable local attribute를 가지고 있다는 점’을 이용해서 keypoint를 검출하는 방식이다.</li>
+<li>[Kadir 2004] 논문에서는 주변 픽셀들과 비교하였을 때 gray-value histogram에서 entropy 값의 변화를 이용하였다.</li>
+<li>Multi-resolution에서 안정적으로 keypoint를 추정하기 위해 wavelet transformation을 사용하는 방법도 제안되었다 [Sebe 2003]</li>
+</ul>
+<h4 id="Edge-information"><a href="#Edge-information" class="headerlink" title="Edge information"></a>Edge information</h4><ul>
+<li>노이즈에 취약한 이미지 밝기 값을 사용하기보다는, 좀 더 안정적인 edge 정보를 사용하는 방법도 있다.</li>
+<li>두개의 edge가 서로 perpendicular할 때, 그 두개의 edge와의 거리가 동일해지는 (i.e. equidistant) edge focus 위치를 keypoint로 사용하는 EdgeFoci 방법도 제안되었다 [Zitnick and Ramnath 2011]</li>
+</ul>
+<p> </p>
+<hr>
+<h3 id="Real-descriptors"><a href="#Real-descriptors" class="headerlink" title="Real descriptors"></a>Real descriptors</h3><blockquote>
+<p>여기서 real은 real number를 의미한다. 0/1로 이루어진 binary descriptor와는 다르다.</p>
+</blockquote>
+<h4 id="SIFT-계열"><a href="#SIFT-계열" class="headerlink" title="SIFT 계열"></a>SIFT 계열</h4><ul>
+<li><strong>SIFT</strong>는 SIFT detector로 keypoint를 뽑은 후 해당 위치로부터 1,2,3,4분면에 4x4 grid에 local gradient histogram을 계산해서 descriptor로 사용함. [Lowe 2004]<ul>
+<li>이 밑으로 전부 SIFT에서 발전한 방법들임.</li>
+</ul>
+</li>
+<li>GLOH는 <strong>grid를 log-polar 형태로 나누고</strong> gradient들의 평균 값으로 변환해서 사용함. (<strong>4x4 grid는 네모난 패치인데, 네모난 형태는 좌우대각선 거리가 일정하지 않아서 모든 방향으로 거리가 일정한 원 형태의 log-polar grid로 바꾼 것</strong>) [Mikolajczyk and Schmid 2003]</li>
+<li>CSIFT는 colour invariant characteristics를 이용함 [Abdel-Hakim and Farag 2006]</li>
+<li>DSP-SIFT는 여러 scale로부터 SIFT descriptor pooling을 수행함 [Dong and Soatto 2015]<ul>
+<li>기존의 SIFT에서 사용된 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.292ex" height="1ex" role="img" focusable="false" viewBox="0 -431 571 442"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D70E" d="M184 -11Q116 -11 74 34T31 147Q31 247 104 333T274 430Q275 431 414 431H552Q553 430 555 429T559 427T562 425T565 422T567 420T569 416T570 412T571 407T572 401Q572 357 507 357Q500 357 490 357T476 358H416L421 348Q439 310 439 263Q439 153 359 71T184 -11ZM361 278Q361 358 276 358Q152 358 115 184Q114 180 114 178Q106 141 106 117Q106 67 131 47T188 26Q242 26 287 73Q316 103 334 153T356 233T361 278Z"></path></g></g></g></svg></mjx-container>로 분리되었던 scale-space를 이용해서 local maxima를 찾지만, DSP-SIFT는 image pyramid를 만들며 생긴 size-space에서 local maxima를 찾음. (Detector 알고리즘)</li>
+<li>기존의 SIFT는 8x8 grid에서 image gradient를 계산해서 histogram으로 만들지만, DSP-SIFT는 location과 scale에서 모두 뽑고, concatenate시킴.<ul>
+<li>즉, 차원 수가 훨씬 많다는 것.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Scale-less SIFT는 다중 scale에 적용되는 subspace SIFT representation을 이용함 [Hassner 2017]</li>
+<li><strong>DSP-SIFT</strong>, <strong>Scale-less SIFT</strong>는 최신 논문이니 직접 읽어보는 것도 좋을 듯.</li>
+</ul>
+<h4 id="SIFT보다-빠른-계열"><a href="#SIFT보다-빠른-계열" class="headerlink" title="SIFT보다 빠른 계열"></a>SIFT보다 빠른 계열</h4><ul>
+<li>SURF는 integral image 기법으로 계산한 Haar filter response를 descriptor로 사용함 [Bay 2006]</li>
+<li>KAZE는 nonlinear scale space를 만드는 detector / descriptor임 [Alcantarialla 2012]</li>
+<li><strong>AKAZE</strong>는 KAZE의 pyramidal framework에 fast explicit diffusion을 사용해서 계산을 가속시킨 방법임. [Alcantarilla 2013]<ul>
+<li>꽤 정확한 편. 보통 ORB<del>AKAZE</del>SIFT로 정확도/속도를 비교함.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h3 id="Binary-descriptors"><a href="#Binary-descriptors" class="headerlink" title="Binary descriptors"></a>Binary descriptors</h3><blockquote>
+<p>실시간 프로세싱 + 적은 메모리를 요구하는 경우에는 (e.g. Visual SLAM) binary feature descriptor를 사용하는게 훨씬 효율적이다. Binary feature descriptor들간의 거리를 구할 때는 <strong>hamming distance</strong>를 사용한다.</p>
+</blockquote>
+<img src="/20210408-from-handcrafted-to-deep-local-invariant-features/binary_descriptors.png" class="" title="binary descriptors">
+<p>(Courtesy: Yukyung Choi)</p>
+<ul>
+<li>LBP와 census transform 방식은 keypoint가 해당하는 픽셀과 주변 픽셀들의 밝기를 비교함. [Ojala 1996, Pietikainen 2011] [Zabih 1994]<ul>
+<li>Keypoint 픽셀이 밝으면 1, 어두우면 0을 저장함.</li>
+</ul>
+</li>
+<li><strong>BRIEF</strong>는 keypoint 픽셀 주변의 픽셀들이 pair로 지정되어서 랜덤한 패턴을 가지고 있음. 이 pair 픽셀끼리 밝기를 비교해서 descriptor로 사용함. [Calonder 2010]<ul>
+<li>이 때 저자들이 만들어둔 (잘되는) 패턴이 몇개 있음.</li>
+</ul>
+</li>
+<li>**Oriented-FAST Rotated-BRIEF (ORB)**는 FAST detection을 하면서 image moment를 구해얻은 방향 정보를 BRIEF에 추가함으로써 회전에 대한 invariance를 얻음 [Rublee 2011]</li>
+<li><strong>BRISK</strong>는 keypoint 픽셀 주변으로 여러개의 원형 region에서 각각 픽셀 샘플링을 하고 밝기 값을 비교함. [Leutenegger 2011]<ul>
+<li>방향을 미리 정해두기 때문에 Rotation invariance가 있음.</li>
+</ul>
+</li>
+<li><strong>FREAK</strong>은 multi-resolution 환경에서 pair를 뽑아 밝기 값을 비교함. [Alahi 2012]<ul>
+<li>사람 눈의 방식을 따라했다고 함</li>
+</ul>
+</li>
+<li>BIO는 LIOP descriptor의 영향을 받아서 패치 안의 밝기 값들에 대해 order와 shape 정보를 저장해둠. [Choi 2014] [Wang 2011, 2016]</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Machine-learning-기반의-local-feature"><a href="#Machine-learning-기반의-local-feature" class="headerlink" title="Machine learning 기반의 local feature"></a>Machine learning 기반의 local feature</h2><p> </p>
+<hr>
+<h2 id="후기"><a href="#후기" class="headerlink" title="후기"></a>후기</h2><p>내가 읽기 어려워하는 바텀업 형태의 논문 ㅜㅜ…<br>엄청 많은 정보를 쫙 다 늘어놓고나서 ‘우리는 이 중에서 2번만 볼것이다’ 같은건 너무 힘듭니다…</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/NAVER-LABS/" rel="tag"># NAVER LABS</a>
+              <a href="/tags/Visual-localization/" rel="tag"># Visual localization</a>
+              <a href="/tags/Local-features/" rel="tag"># Local features</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210408-slamantic-blog/" rel="prev" title="SLAMANTIC – Leveraging semantics to improve VSLAM in dynamic environments (NAVER LABS Europe)">
+                  <i class="fa fa-chevron-left"></i> SLAMANTIC – Leveraging semantics to improve VSLAM in dynamic environments (NAVER LABS Europe)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210415-gtc-2021-lists/" rel="next" title="관심있는 GTC 2021 토크">
+                  관심있는 GTC 2021 토크 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

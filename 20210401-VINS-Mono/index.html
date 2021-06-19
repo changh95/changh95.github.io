@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="Tong Qin, Peiliang Li, Shaojie Shen의 TRO 2018 논문인 VINS-Mono의 정리입니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qin 2018 - VINS-Mono - A Robust and Versatile Monocular Visual-Inertial State Estimator">
+<meta property="og:url" content="https://changh95.github.io/20210401-VINS-Mono/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Tong Qin, Peiliang Li, Shaojie Shen의 TRO 2018 논문인 VINS-Mono의 정리입니다.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-31T15:00:21.000Z">
+<meta property="article:modified_time" content="2021-06-05T13:27:26.703Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="VINS-Mono">
+<meta property="article:tag" content="HKUST">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210401-VINS-Mono/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Qin 2018 - VINS-Mono - A Robust and Versatile Monocular Visual-Inertial State Estimator | cv-learn</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Monocular-state-estimation%EC%9D%98-%ED%8A%B9%EC%A7%95"><span class="nav-number">2.1.</span> <span class="nav-text">Monocular state estimation의 특징</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-inertial-odometry-VIO-%EC%9D%98-%EB%93%B1%EC%9E%A5"><span class="nav-number">2.2.</span> <span class="nav-text">Visual-inertial odometry (VIO)의 등장</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VINS-Mono"><span class="nav-number">2.3.</span> <span class="nav-text">VINS-Mono</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Work"><span class="nav-number">3.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Vision-%EA%B8%B0%EB%B0%98-state-estimation-odometry-SLAM"><span class="nav-number">3.1.</span> <span class="nav-text">Vision 기반 state estimation &#x2F; odometry &#x2F; SLAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%A2%80-%EC%98%9B%EB%82%A0%EC%9D%98-filter-%EA%B8%B0%EB%B0%98-%EB%B0%A9%EC%8B%9D%EB%93%A4"><span class="nav-number">3.2.</span> <span class="nav-text">좀 옛날의 filter 기반 방식들</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9C%A0%EB%AA%85%ED%95%9C-filter-%EA%B8%B0%EB%B0%98-%EB%B0%A9%EC%8B%9D%EB%93%A4"><span class="nav-number">3.3.</span> <span class="nav-text">유명한 filter 기반 방식들?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimization-%EB%B0%A9%EC%8B%9D%EB%93%A4"><span class="nav-number">3.4.</span> <span class="nav-text">Optimization 방식들</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-vs-Indirect-%EB%B0%A9%EC%8B%9D"><span class="nav-number">3.5.</span> <span class="nav-text">Direct vs Indirect 방식</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IMU"><span class="nav-number">3.6.</span> <span class="nav-text">IMU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VINS-bootstrapping"><span class="nav-number">3.7.</span> <span class="nav-text">VINS bootstrapping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loop-closure"><span class="nav-number">3.8.</span> <span class="nav-text">Loop closure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">4.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Measurement-preprocessing"><span class="nav-number">5.</span> <span class="nav-text">Measurement preprocessing</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">172</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210401-VINS-Mono/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Qin 2018 - VINS-Mono - A Robust and Versatile Monocular Visual-Inertial State Estimator
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-01 00:00:21" itemprop="dateCreated datePublished" datetime="2021-04-01T00:00:21+09:00">2021-04-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-05 22:27:26" itemprop="dateModified" datetime="2021-06-05T22:27:26+09:00">2021-06-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/" itemprop="url" rel="index"><span itemprop="name">SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE3MDguMDM4NTIucGRm">Arxiv 논문 링크<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0hLVVNULUFlcmlhbC1Sb2JvdGljcy9WSU5TLU1vbm8=">Github 링크<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
+<li>VINS는 <strong>V</strong>isual-<strong>IN</strong>ertial <strong>S</strong>ystem을 줄인 말이다.<ul>
+<li>Monocular camera + IMU를 함께 사용해서 6DOF pose를 구하는 시스템이다.</li>
+</ul>
+</li>
+<li>Monocular camera는 거리 값을 추정할 수 없다. 이 때문에<ul>
+<li>IMU 센서 값을 정확하게 보정해주거나</li>
+<li>정확한 initialization을 하거나</li>
+<li>정확한 Extrinsic calibration을 하거나</li>
+<li>비선형 최적화가 어렵다 (ㅠㅠ)</li>
+</ul>
+</li>
+<li>논문에서 제안하는 VINS-Mono는 다음과 같은 구조로 6DOF pose를 추정한다.<ol>
+<li>Robust한 initialization을 수행한다.<ul>
+<li>Failure recovery에도 동일한 알고리즘이 사용된다.</li>
+</ul>
+</li>
+<li>Visual-inertial odometry 모듈에서는 tightly-coupled 방식으로 비선형 최적화를 수행한다.<ul>
+<li>Pre-integrated IMU 값과 visual feature 정보를 동시에 최적화하면서 local pose를 구한다.</li>
+</ul>
+</li>
+<li>Loop detection과 tightly-coupled 방식의 최적화를 이용하여 계산량이 적은 relocalization을 수행한다.</li>
+<li>Global consistency를 유지하기 위해 4-dof pose graph optimization을 수행한다.</li>
+<li>PC 버전과 iOS 모바일 버전을 (VINS-Mobile) 만들었다.</li>
+</ol>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Monocular-state-estimation의-특징"><a href="#Monocular-state-estimation의-특징" class="headerlink" title="Monocular state estimation의 특징"></a>Monocular state estimation의 특징</h3><ul>
+<li>Monocular Camera로 state estimation (i.e. SLAM, visual odometry)을 하는데에는 여러 장점이 있다.<ul>
+<li>카메라를 하나만 쓰면 전체 시스템이 작고, 가격이 저렴하고, 하드웨어를 구성하기 쉽다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>하지만 단점도 있다.<ul>
+<li>Metric scale을 구할 수 없다 (i.e. 계산을 할 때 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.027ex" xmlns="http://www.w3.org/2000/svg" width="1.319ex" height="1.597ex" role="img" focusable="false" viewBox="0 -694 583 706"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g></g></g></svg></mjx-container> scale factor를 구할 수 없다. 즉, 실제 거리 단위를 모른다)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Visual-inertial-odometry-VIO-의-등장"><a href="#Visual-inertial-odometry-VIO-의-등장" class="headerlink" title="Visual-inertial odometry (VIO)의 등장"></a>Visual-inertial odometry (VIO)의 등장</h3><ul>
+<li>최근따라 monocular camera + IMU를 사용하는 시도가 늘고 있다. 장점이 있기 때문이다.<ol>
+<li>IMU 센서 값은 metric scale을 포함하고 있다.<ul>
+<li>즉, metric scale을 구할 수 있다.</li>
+<li>또, roll + pitch + yaw 값들에 대한 정보도 함께 state estimation에 사용할 수 있게 된다.</li>
+</ul>
+</li>
+<li>전체적인 motion tracking 성능이 비약적으로 좋아진다.<ul>
+<li>IMU 센서의 값을 얻는 속도가 camera 센서 이미지를 얻는 속도보다 훨씬 빠르기 때문에, camera 프레임들 사이의 우리가 알지 못하는 motion 값을 메워줄 수 있다.</li>
+<li>특히, texture가 적은 곳, 조명 변화, motion blur등이 생김으로써 camera 센서 값이 무용지물이 됬을 때 IMU가 그 부분을 채워주면서 tracking을 유지할 수 있다.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>하지만 monocular camera + IMU 조합도 단점이 있다.<ol>
+<li>Metric scale을 복원하기 위해서는 IMU는 무조건 움직여야한다.<ul>
+<li>Metric scale은 initialization 단계에서 계산해낸다.<ul>
+<li>Initialization 단계에서 움직임이 (i.e. acceleration) 있어야한다는 뜻이다.</li>
+<li>즉, VIO는 무조건 움직이는 / 가속하는 상황에서만 시작할 수 있다.</li>
+<li>반대로, 가만히 있는 상태에서는 가속이 없으므로 시작할 수는 없다.</li>
+</ul>
+</li>
+<li>가만히 있는 상태는 보통 우리가 알고 있는 상태이다.</li>
+<li>반대로, ‘움직이는 상황’은 경우의 수가 굉장히 많다. 속도가 다를 수 있고, 방향이 다를 수 있다.<ul>
+<li>즉, metric scale을 복원하려면 무조건 ‘잘 모르는 상태에서 가속하는 상황’을 전제로 두게 된다.</li>
+<li>이는 문제가 많이 복잡하게 만든다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Visual-inertial system은 센서들 특성상 굉장히 non-linear 하다.<ul>
+<li>이러한 특성은 정확한 initialization을 어렵게 한다.</li>
+<li>추후 visual-inertial odometry에서도 쉽지 않다. Non-linear optimization은 계산량도 많고 복잡하기 때문이다.</li>
+</ul>
+</li>
+<li>센서를 2개를 사용하기 때문에 extrinsic calibration이 필요한다.<ul>
+<li>Extrinsic calibration은 굉장히 정확해야한다.</li>
+</ul>
+</li>
+<li>Long-term drift를 해소하기 위해서는 visual-inertial odometry, loop detection, relocalization, global optimization 모듈이 전부 필요하다.<ul>
+<li>이걸 다 만든 연구는 거의 없다. 아마 이 논문이 나왔을 당시에는 아예 없었을수도?</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="VINS-Mono"><a href="#VINS-Mono" class="headerlink" title="VINS-Mono"></a>VINS-Mono</h3><ul>
+<li>논문에서 소개하는 VINS-Mono 시스템은 다음과 같은 특성을 지닌다.<ol>
+<li>프로그램 시작하고 움직이면 알아서 initialization이 된다 (i.e. on-the-fly로 된다!)<ul>
+<li>Failure recovery에도 동일한 알고리즘이 사용된다.</li>
+</ul>
+</li>
+<li>VIO는 tightly-coupled 방식의 비선형 최적화를 사용한다.<ul>
+<li>VIO로부터 Local pose, velocity, orientation을 구할 수 있다.<ul>
+<li>(Pose에 orientation이 들어가있지 않나…? 지자기계의 orientation을 의미하는걸까? 확인이 필요하다) </li>
+</ul>
+</li>
+<li>Camera-IMU extrinsic calibration + IMU bias correction도 실시간으로 수행하면서 보정해나간다.<ul>
+<li>쩐다!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Loop detection은 DBoW2 라이브러리를 사용한다.</li>
+<li>Relocalization은 tightly-coupled 방식으로 feature 단위로 VIO와 fusion한다.<ul>
+<li>“feature 단위로…” 부분은 정확한 내용은 뒤에서 다시 짚는다.</li>
+<li>이 방식을 통해 계산량을 현저히 감소시켰다.</li>
+</ul>
+</li>
+<li>4dof pose grpah optimization을 통해 global consistency를 유지한다.<ul>
+<li>이는 Loop detection + relocalization을 통해 얻어낸 loop를 pose graph에 추가하고</li>
+<li>VIO로부터 관측된 roll + pitch 각도 값을 이용해서 pose graph optimization을 수행한다.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>VINS-Mono의 이전 연구는 다음과 같다.<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS84NGpaZzdoWEVWYw==">Shen 2015 - Tightly-coupled monocular visual-inertial fusion for autonomous flight of rotorcraft MAV<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzc0NjMwNTk=">Yang 2017 - Monocular visual-inertial state estimation with online initialization and camera-imu extrinsic calibration<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzgyMDYyODQ=">Qin 2017 - Robust initialization of monocular visual-inertial estimation on aerial robots<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzgxMTU0MDA=">Li 2017 - Monocular visual-inertial state estimation for mobile augmented reality<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>여기서 VIO는 Shen 2015, Yang 2017 논문들을 참조했고, initialization 모듈은 Qin 2017 논문을 참조했다. 모바일 버전은 Li 2017을 참조했다.</li>
+<li>이전 논문과 다른 점이라면,<ul>
+<li>IMU pre-integration을 사용한 bias correction 구현과</li>
+<li>tightly-coupled relocalization 모듈 구현,</li>
+<li>global pose optimization 모듈 구현,</li>
+<li>그리고 많은 양의 실험 + 코드의 오픈소스화 이다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h2><h3 id="Vision-기반-state-estimation-odometry-SLAM"><a href="#Vision-기반-state-estimation-odometry-SLAM" class="headerlink" title="Vision 기반 state estimation / odometry / SLAM"></a>Vision 기반 state estimation / odometry / SLAM</h3><ul>
+<li>비전 기반 state estimation / odometry / SLAM에는 다음과 같은 논문이 있다.<ul>
+<li>PTAM</li>
+<li>SVO</li>
+<li>LSD-SLAM</li>
+<li>DSO</li>
+<li>ORB-SLAM</li>
+</ul>
+</li>
+</ul>
+<h3 id="좀-옛날의-filter-기반-방식들"><a href="#좀-옛날의-filter-기반-방식들" class="headerlink" title="좀 옛날의 filter 기반 방식들"></a>좀 옛날의 filter 기반 방식들</h3><ul>
+<li>Visual과 inertial 정보를 섞는 가장 쉬운 방식은 Loosely-coupled 방식이다.<ul>
+<li>Weiss 2012, Lynen 2013 논문</li>
+<li>Visual과 inertial의 정보를 각각 따로 얻고 그냥 짬뽕하는 것이다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>EKF를 사용해서 Visual + inertial fusion을 할 수 있다.<ul>
+<li>IMU는 state propagation을 하고, Vision으로는 pose 업데이트를 한다.</li>
+<li>그 다음 두개의 probability distribution을 짬뽕하는 것</li>
+</ul>
+</li>
+</ul>
+<h3 id="유명한-filter-기반-방식들"><a href="#유명한-filter-기반-방식들" class="headerlink" title="유명한 filter 기반 방식들?"></a>유명한 filter 기반 방식들?</h3><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzQyMDk2NDI=">Mourikis 2007 - MSCKF<i class="fa fa-external-link-alt"></i></span>는 잘된다!<ul>
+<li>EKF 방식</li>
+<li>이전 몇개의 camera pose를 state vector에 담아두고, 여러 카메라 뷰에서 공톡적으로 보이는 keypoint들을 기반으로 추정함.<ul>
+<li>i.e. multi-constraint update</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>SR-ISWF 는 MSCKF의 개량된 버전임<ul>
+<li>Square-root form을 사용해서 계산 안정성을 높힘</li>
+<li>Inverse filter를 사용해서 iterative re-linearization을 수행하는데, 이러한 과정이 optimization기반 odometry 방식과 유사해짐.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Optimization-방식들"><a href="#Optimization-방식들" class="headerlink" title="Optimization 방식들"></a>Optimization 방식들</h3><ul>
+<li>Optimization 방식은 주로 batch graph optimization 또는 bundle adjustment 방식을 뜻하는 것임.<ul>
+<li>가능한 모든 measurement들을 최적화해서 optimal state (i.e. optimal camera pose, optimal map point)를 구하는 것이 목적</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>매 프레임 비슷한 양의 계산 시간을 가져가기 위해 VIO에서는 sliding window optimization 기법을 사용함.<ul>
+<li>Sliding window optimization은 최근 몇개의 프레임들만 사용하는 것임.</li>
+<li>그 이전의 프레임들은 모두 marginalize 해버림 (i.e. 가장 오래된 프레임 값에 하나의 measurement로 묶어버림).</li>
+<li>이 방식을 통해 모든 measurement를 사용하는 것 보다 훨씬 빠르게 계산을 할 수 있음.<ul>
+<li>그럼에도 계산량이 많은 편이라 보통 모바일 기기에서 돌아가는 알고리즘은 얼마 없음 (…라고 말하지만 결국 ‘그럼에도 불구하고’ VINS-Mobile은 모바일에서 돌아간다고 자랑하려고 적은거인듯!)<ul>
+<li>(실제로 돌아가는게 많이 있진 않음 ㅋㅋ 맞는말이지만 자랑하는게 너무 티나서…)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Direct-vs-Indirect-방식"><a href="#Direct-vs-Indirect-방식" class="headerlink" title="Direct vs Indirect 방식"></a>Direct vs Indirect 방식</h3><ul>
+<li>Optimization 방식은 residual 값을 최소화하며 optimal state를 구하는 방향으로 최적화를 수행하는 것임.</li>
+</ul>
+<ul>
+<li>Residual을 계산하는데에는 direct 방식과 indirect (i.e. feature-based) 방식이 있음.<ul>
+<li>Direct 방식은 photometric error를 최소화함</li>
+<li>Indirect 방식은 reprojection error를 최소화함 (논문에서는 geometric displacement라고 표현)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Direct 방식은 좋은 initial guess가 필요한 반면에, indirect 방식은 keypoint를 추출하고 매칭하는데에 리소스를 할애해야함.</li>
+</ul>
+<ul>
+<li>대부분의 SLAM 논문들에는 Indirect 방식이 인기가 많지만, dense mapping을 위해 direct 방식을 채택하기도 함.</li>
+</ul>
+<h3 id="IMU"><a href="#IMU" class="headerlink" title="IMU"></a>IMU</h3><ul>
+<li>IMU는 camera보다 훨씬 빠른 속도로 센서 값을 취득함. (200Hz vs 30Hz)</li>
+<li>IMU를 사용하는 방식은 다양함<ul>
+<li>EKF - IMU를 state propagation에 이용함</li>
+<li>Graph optimization - IMU pre-integration 방식을 많이 사용함.</li>
+</ul>
+</li>
+<li>IMU preintegration?<ul>
+<li>반복되는 IMU re-integration을 피하기 위해 사용됨.</li>
+<li>Lupton 2012 논문에서 최초 제안. Euler angle을 사용해서 rotation error를 parameterize함.</li>
+<li>VINS-Mono 논문의 저자도 IMU-preintegration을 위한 on-manifold rotation formulation연구 수행.<ul>
+<li>IMU eeror state dynamics를 continuous time으로 보았을 때 covariance propagation하여 수행.</li>
+<li>대신 IMU bias는 고려하지 않았음<ul>
+<li>(사실상 저가형 IMU에서는 이게 제일 중요한데…)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MTIuMDIzNjM=">Forster 2015 - On-Manifold Preintegration for Real-Time Visual-Inertial Odometry<i class="fa fa-external-link-alt"></i></span><ul>
+<li>랜드마크 논문. 킹킹킹 논문! Posterior IMU bias correction을 넣어서 아이디어를 완성한 논문!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="VINS-bootstrapping"><a href="#VINS-bootstrapping" class="headerlink" title="VINS bootstrapping"></a>VINS bootstrapping</h3><ul>
+<li>VINS initialization을 이 논문에서는 VINS bootstrap 이라고 함.<ul>
+<li>Monocular VINS bootstrap을 위해서는 정확한 initial 값이 있어야함.</li>
+<li>예전에 제안된 방법으로는 linear한 방식으로 initialize하는 방법이 있었음.<ul>
+<li>짧은 시간동안의 IMU preintegration값들로부터 상대적인 회전 값을 이용한다 어쩌구 하는데</li>
+<li>별로 안좋다고 함.<ul>
+<li>gyroscope bias도 모델링을 못하고</li>
+<li>Projection equation에도 센서 노이즈를 전혀 모델링하지 못한다고…</li>
+</ul>
+</li>
+<li>즉, 못씀!</li>
+</ul>
+</li>
+<li>Martinelli 2014 논문과 Kaiser 2016 논문에서 closed-form으로 initialization하는 방법을 발표함. 2016년 논문은 2014년 논문에 gyroscope bias도 계산하는 것을 추가한 것.<ul>
+<li>이 방법들은 오랜 시간동안 IMU 값들을 2번 적분해서 거리값을 구해서 쓰기 때문에, 노이즈에 취약하지만 이 노이즈를 전혀 모델링하지 않음.<ul>
+<li>즉, 못씀!</li>
+</ul>
+</li>
+<li>(Scaramuzza 교수님은 이 논문들 좋다고 하셨는데… ㄷㄷ)</li>
+</ul>
+</li>
+<li>SVO 기반으로 re-initialization + failure recovery를 하는 알고리즘도 있음<ul>
+<li>하지만 SVO 알고리즘 특성상 바닥을 바라보는 드론 카메라를 기반으로 만들어졌고, 드론의 높이 값을 알고 있을 때를 상정하고 있음.</li>
+<li>그리고 이 높이 값을 알아야 metric scale을 구할 수 있음.<ul>
+<li>즉, 못씀!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ORB-SLAM 기반으로 visual-inertial full bundle-adjustment를 통해서 scale, gravity direction velocity, IMU bias를 전부 얻어내는 방법도 있음.<ul>
+<li>근데 좋은 값으로 수렴하는데에 10초나 걸림</li>
+<li>너무 오래걸림. 못씀!</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>결국은 저자들이 지난 논문에서 제안했던 방법을 씀.</li>
+</ul>
+<h3 id="Loop-closure"><a href="#Loop-closure" class="headerlink" title="Loop closure"></a>Loop closure</h3><ul>
+<li>VIO도 오랜 시간 실행하면 drift가 쌓임.</li>
+<li>ORB-SLAM은 Bag-of-Words (i.e. DBoW2 라이브러리)를 이용해서 loop closure도 하고 map reuse도 가능함.<ul>
+<li>Loop detection이 일어나면 7 DOF (position - xyz, orientation - rx|ry|rz, scale <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.027ex" xmlns="http://www.w3.org/2000/svg" width="1.319ex" height="1.597ex" role="img" focusable="false" viewBox="0 -694 583 706"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D706" d="M166 673Q166 685 183 694H202Q292 691 316 644Q322 629 373 486T474 207T524 67Q531 47 537 34T546 15T551 6T555 2T556 -2T550 -11H482Q457 3 450 18T399 152L354 277L340 262Q327 246 293 207T236 141Q211 112 174 69Q123 9 111 -1T83 -12Q47 -12 47 20Q47 37 61 52T199 187Q229 216 266 252T321 306L338 322Q338 323 288 462T234 612Q214 657 183 657Q166 657 166 673Z"></path></g></g></g></svg></mjx-container>) pose graph optimzation을 수행하는 방식임.</li>
+</ul>
+</li>
+<li>VINS는 IMU가 있기 때문에 drift는 4DOF (position - xyz, orientation - yaw) 로만 일어남.<ul>
+<li>그러므로 이번 논문에서는 최소 4DOF 셋팅으로 pose graph optimization을 할 예정임.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><ul>
+<li>프로그램이 시작하면 visual keypoint를 추출하고 트랙킹을 수행한다. IMU는 2개의 프레임 간의 값을 preintegrate한다.</li>
+<li>Initialization을 수행해서 pose, velocity, gravity vector, gyroscope bias, 3D feature location을 구한다.<ul>
+<li>이 값들은 비선형 최적화 기반의 VIO를 시작하는데에 (i.e. bootstrapping)하는데에 쓰인다.</li>
+</ul>
+</li>
+<li>VIO, relocalization, pose graph optimization이 멀티쓰레딩으로 동시에 돌아간다.<ul>
+<li>VIO와 relocalization모듈은 preintegrate된 IMU 값들과 visual keypoint 값들, 그리고 loop detection이 되었을 때 찾은 공통된 visual keypoint들을 가지고 tightly-fuse (i.e. 비선형 최적화)를 한다.</li>
+<li>Relocalization이 성공하면, 이 값들을 가지고 pose graph optimization 모듈이 global optimization을 수행해서 drift를 제거한다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>앞으로 논문에서 사용할 notation들을 설명한다.<ul>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="3.497ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 1545.8 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mo" transform="translate(389, 0)"><path data-c="22C5" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250Z"></path></g><g data-mml-node="msup" transform="translate(667, 0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(389, 363) scale(0.707)"><path data-c="1D714" d="M495 384Q495 406 514 424T555 443Q574 443 589 425T604 364Q604 334 592 278T555 155T483 38T377 -11Q297 -11 267 66Q266 68 260 61Q201 -11 125 -11Q15 -11 15 139Q15 230 56 325T123 434Q135 441 147 436Q160 429 160 418Q160 406 140 379T94 306T62 208Q61 202 61 187Q61 124 85 100T143 76Q201 76 245 129L253 137V156Q258 297 317 297Q348 297 348 261Q348 243 338 213T318 158L308 135Q309 133 310 129T318 115T334 97T358 83T393 76Q456 76 501 148T546 274Q546 305 533 325T508 357T495 384Z"></path></g></g></g></g></svg></mjx-container>은 world frame이며, z 방향이 중력의 방향이다.</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="3.189ex" height="2.497ex" role="img" focusable="false" viewBox="0 -853.7 1409.3 1103.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mo" transform="translate(389, 0)"><path data-c="22C5" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250Z"></path></g><g data-mml-node="msup" transform="translate(667, 0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(389, 363) scale(0.707)"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></g></svg></mjx-container>는 body frame (i.e. IMU frame)</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="3.195ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 1412.2 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mo" transform="translate(389, 0)"><path data-c="22C5" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250Z"></path></g><g data-mml-node="msup" transform="translate(667, 0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mi" transform="translate(389, 363) scale(0.707)"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g></g></g></g></svg></mjx-container>는 카메라 프레임이다.</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.048ex" xmlns="http://www.w3.org/2000/svg" width="1.717ex" height="1.593ex" role="img" focusable="false" viewBox="0 -683 759 704"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D445" d="M230 637Q203 637 198 638T193 649Q193 676 204 682Q206 683 378 683Q550 682 564 680Q620 672 658 652T712 606T733 563T739 529Q739 484 710 445T643 385T576 351T538 338L545 333Q612 295 612 223Q612 212 607 162T602 80V71Q602 53 603 43T614 25T640 16Q668 16 686 38T712 85Q717 99 720 102T735 105Q755 105 755 93Q755 75 731 36Q693 -21 641 -21H632Q571 -21 531 4T487 82Q487 109 502 166T517 239Q517 290 474 313Q459 320 449 321T378 323H309L277 193Q244 61 244 59Q244 55 245 54T252 50T269 48T302 46H333Q339 38 339 37T336 19Q332 6 326 0H311Q275 2 180 2Q146 2 117 2T71 2T50 1Q33 1 33 10Q33 12 36 24Q41 43 46 45Q50 46 61 46H67Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628Q287 635 230 637ZM630 554Q630 586 609 608T523 636Q521 636 500 636T462 637H440Q393 637 386 627Q385 624 352 494T319 361Q319 360 388 360Q466 361 492 367Q556 377 592 426Q608 449 619 486T630 554Z"></path></g></g></g></svg></mjx-container>은 3x3 rotation matrix</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.439ex" xmlns="http://www.w3.org/2000/svg" width="1.041ex" height="1.439ex" role="img" focusable="false" viewBox="0 -442 460 636"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45E" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g></g></g></svg></mjx-container>는 쿼터니언<ul>
+<li>State vector는 쿼터니언을 쓰지만, 종종 특정 부분에서 계산을 쉽게 하기위해 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.048ex" xmlns="http://www.w3.org/2000/svg" width="1.717ex" height="1.593ex" role="img" focusable="false" viewBox="0 -683 759 704"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D445" d="M230 637Q203 637 198 638T193 649Q193 676 204 682Q206 683 378 683Q550 682 564 680Q620 672 658 652T712 606T733 563T739 529Q739 484 710 445T643 385T576 351T538 338L545 333Q612 295 612 223Q612 212 607 162T602 80V71Q602 53 603 43T614 25T640 16Q668 16 686 38T712 85Q717 99 720 102T735 105Q755 105 755 93Q755 75 731 36Q693 -21 641 -21H632Q571 -21 531 4T487 82Q487 109 502 166T517 239Q517 290 474 313Q459 320 449 321T378 323H309L277 193Q244 61 244 59Q244 55 245 54T252 50T269 48T302 46H333Q339 38 339 37T336 19Q332 6 326 0H311Q275 2 180 2Q146 2 117 2T71 2T50 1Q33 1 33 10Q33 12 36 24Q41 43 46 45Q50 46 61 46H67Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628Q287 635 230 637ZM630 554Q630 586 609 608T523 636Q521 636 500 636T462 637H440Q393 637 386 627Q385 624 352 494T319 361Q319 360 388 360Q466 361 492 367Q556 377 592 426Q608 449 619 486T630 554Z"></path></g></g></g></svg></mjx-container>을 쓰기도 할 것이다.</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.188ex" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.507ex" role="img" focusable="false" viewBox="0 -583 778 666"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2297" d="M56 250Q56 394 156 488T384 583Q530 583 626 485T722 250Q722 110 625 14T390 -83Q249 -83 153 14T56 250ZM582 471Q531 510 496 523Q446 542 381 542Q324 542 272 519T196 471L389 278L485 375L582 471ZM167 442Q95 362 95 250Q95 137 167 58L359 250L167 442ZM610 58Q682 138 682 250Q682 363 610 442L418 250L610 58ZM196 29Q209 16 230 2T295 -27T388 -42Q409 -42 429 -40T465 -33T496 -23T522 -11T544 1T561 13T574 22T582 29L388 222L196 29Z"></path></g></g></g></svg></mjx-container>는 쿼터니언 곱셈이다.</li>
+</ul>
+</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.731ex" xmlns="http://www.w3.org/2000/svg" width="2.264ex" height="2.261ex" role="img" focusable="false" viewBox="0 -676.2 1000.5 999.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msubsup"><g data-mml-node="mi"><path data-c="1D45E" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="TeXAtom" transform="translate(510.7, 363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D714" d="M495 384Q495 406 514 424T555 443Q574 443 589 425T604 364Q604 334 592 278T555 155T483 38T377 -11Q297 -11 267 66Q266 68 260 61Q201 -11 125 -11Q15 -11 15 139Q15 230 56 325T123 434Q135 441 147 436Q160 429 160 418Q160 406 140 379T94 306T62 208Q61 202 61 187Q61 124 85 100T143 76Q201 76 245 129L253 137V156Q258 297 317 297Q348 297 348 261Q348 243 338 213T318 158L308 135Q309 133 310 129T318 115T334 97T358 83T393 76Q456 76 501 148T546 274Q546 305 533 325T508 357T495 384Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(446, -315.5) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></g></g></svg></mjx-container> 와 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.731ex" xmlns="http://www.w3.org/2000/svg" width="2.246ex" height="2.261ex" role="img" focusable="false" viewBox="0 -676.2 992.8 999.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msubsup"><g data-mml-node="mi"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="TeXAtom" transform="translate(503, 363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D714" d="M495 384Q495 406 514 424T555 443Q574 443 589 425T604 364Q604 334 592 278T555 155T483 38T377 -11Q297 -11 267 66Q266 68 260 61Q201 -11 125 -11Q15 -11 15 139Q15 230 56 325T123 434Q135 441 147 436Q160 429 160 418Q160 406 140 379T94 306T62 208Q61 202 61 187Q61 124 85 100T143 76Q201 76 245 129L253 137V156Q258 297 317 297Q348 297 348 261Q348 243 338 213T318 158L308 135Q309 133 310 129T318 115T334 97T358 83T393 76Q456 76 501 148T546 274Q546 305 533 325T508 357T495 384Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(503, -315.5) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g></g></g></g></g></svg></mjx-container>는 rotation과 translation을 body frame -&gt; world frame으로 표현한 것이다.</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.917ex" height="1.927ex" role="img" focusable="false" viewBox="0 -694 847.4 851.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D44F" d="M73 647Q73 657 77 670T89 683Q90 683 161 688T234 694Q246 694 246 685T212 542Q204 508 195 472T180 418L176 399Q176 396 182 402Q231 442 283 442Q345 442 383 396T422 280Q422 169 343 79T173 -11Q123 -11 82 27T40 150V159Q40 180 48 217T97 414Q147 611 147 623T109 637Q104 637 101 637H96Q86 637 83 637T76 640T73 647ZM336 325V331Q336 405 275 405Q258 405 240 397T207 376T181 352T163 330L157 322L136 236Q114 150 114 114Q114 66 138 42Q154 26 178 26Q211 26 245 58Q270 81 285 114T318 219Q336 291 336 325Z"></path></g><g data-mml-node="TeXAtom" transform="translate(429, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g></g></g></g></svg></mjx-container>는 k번째 body frame이다.</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.926ex" height="1.357ex" role="img" focusable="false" viewBox="0 -442 851.4 599.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D450" d="M34 159Q34 268 120 355T306 442Q362 442 394 418T427 355Q427 326 408 306T360 285Q341 285 330 295T319 325T330 359T352 380T366 386H367Q367 388 361 392T340 400T306 404Q276 404 249 390Q228 381 206 359Q162 315 142 235T121 119Q121 73 147 50Q169 26 205 26H209Q321 26 394 111Q403 121 406 121Q410 121 419 112T429 98T420 83T391 55T346 25T282 0T202 -11Q127 -11 81 37T34 159Z"></path></g><g data-mml-node="TeXAtom" transform="translate(433, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g></g></g></g></svg></mjx-container>는 k번째 camera frame이다.</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="13.055ex" height="2.47ex" role="img" focusable="false" viewBox="0 -841.7 5770.5 1091.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g><g data-mml-node="mi" transform="translate(477, 363) scale(0.707)"><path data-c="1D714" d="M495 384Q495 406 514 424T555 443Q574 443 589 425T604 364Q604 334 592 278T555 155T483 38T377 -11Q297 -11 267 66Q266 68 260 61Q201 -11 125 -11Q15 -11 15 139Q15 230 56 325T123 434Q135 441 147 436Q160 429 160 418Q160 406 140 379T94 306T62 208Q61 202 61 187Q61 124 85 100T143 76Q201 76 245 129L253 137V156Q258 297 317 297Q348 297 348 261Q348 243 338 213T318 158L308 135Q309 133 310 129T318 115T334 97T358 83T393 76Q456 76 501 148T546 274Q546 305 533 325T508 357T495 384Z"></path></g></g><g data-mml-node="mo" transform="translate(1244.6, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(2300.4, 0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mn" transform="translate(2578.4, 0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g><g data-mml-node="mo" transform="translate(3078.4, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mn" transform="translate(3523, 0)"><path data-c="30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path></g><g data-mml-node="mo" transform="translate(4023, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(4467.7, 0)"><path data-c="1D454" d="M311 43Q296 30 267 15T206 0Q143 0 105 45T66 160Q66 265 143 353T314 442Q361 442 401 394L404 398Q406 401 409 404T418 412T431 419T447 422Q461 422 470 413T480 394Q480 379 423 152T363 -80Q345 -134 286 -169T151 -205Q10 -205 10 -137Q10 -111 28 -91T74 -71Q89 -71 102 -80T116 -111Q116 -121 114 -130T107 -144T99 -154T92 -162L90 -164H91Q101 -167 151 -167Q189 -167 211 -155Q234 -144 254 -122T282 -75Q288 -56 298 -13Q311 35 311 43ZM384 328L380 339Q377 350 375 354T369 368T359 382T346 393T328 402T306 405Q262 405 221 352Q191 313 171 233T151 117Q151 38 213 38Q269 38 323 108L331 118L384 328Z"></path></g><g data-mml-node="msup" transform="translate(4944.7, 0)"><g data-mml-node="mo"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g><g data-mml-node="mi" transform="translate(278, 363) scale(0.707)"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g></g></g></g></svg></mjx-container>는 world frame으로 표현한 gravity vector이다.</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="2.389ex" height="2.993ex" role="img" focusable="false" viewBox="0 -1073 1056 1323"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mrow"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mo" transform="translate(389, 0)"><path data-c="22C5" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250Z"></path></g><g data-mml-node="mo" transform="translate(667, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="mo" transform="translate(278, 279)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g></g></g></svg></mjx-container>은 두가지 의미를 지닌다.<ul>
+<li>노이즈가 낀 값이거나</li>
+<li>어떠한 추정 값이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Measurement-preprocessing"><a href="#Measurement-preprocessing" class="headerlink" title="Measurement preprocessing"></a>Measurement preprocessing</h2>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="bookmark">IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/VINS-Mono/" rel="tag"># VINS-Mono</a>
+              <a href="/tags/HKUST/" rel="tag"># HKUST</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210330-mersenne-twister/" rel="prev" title="메르센 트위스터 (std::mt19937 / std::mersenne_twister_engine)">
+                  <i class="fa fa-chevron-left"></i> 메르센 트위스터 (std::mt19937 / std::mersenne_twister_engine)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210405-naver-labs-visloc/" rel="next" title="Methods for visual localization (NAVER LABS Europe)">
+                  Methods for visual localization (NAVER LABS Europe) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+  
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
