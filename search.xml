@@ -12279,15 +12279,20 @@ Applications </summary>
     <title>ICRA 2021 튜토리얼 / 워크샵 리스트</title>
     <url>/20210530-icra-2021/</url>
     <content><![CDATA[<h2 id="Workshops-Tutorials"><a href="#Workshops-Tutorials" class="headerlink" title="Workshops / Tutorials"></a>Workshops / Tutorials</h2><ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vcmNhaHViLm9yZy9lbmdhZ2VtZW50L2lzY2Ytcm9ib3RzLWZvci1hLXNhZmVyLXdvcmxkL3Byb3Bvc2VkLXdvcmtzaG9w">Digital Twins for Robots in Industrial Applications<i class="fa fa-external-link-alt"></i></span><ul>
-<li>18:00 KST</li>
-</ul>
-</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rbGFiLXV2YS5naXRodWIuaW8vaWNyYS1hdXRvbm9tb3VzLXJhY2luZy8=">Opportunities and Challenges with Autonomous Racing<i class="fa fa-external-link-alt"></i></span><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9ETDNOd2hMUXZlbw==">Digital Twins for Robots in Industrial Applications<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9wbGF5bGlzdD9saXN0PVBMODY4dHdzeDdPamZMYXVBT3ZjZk5zN2xPOU5odUtyeWM=">Opportunities and Challenges with Autonomous Racing<i class="fa fa-external-link-alt"></i></span><ul>
 <li>9:00 GMT-04</li>
 </ul>
 </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9jdWJvdWxkZXIuem9vbS51cy9qLzk0NDE3ODQ0MTQ3">Robust Perception For Autonomous Field Robots in Challenging Environments<i class="fa fa-external-link-alt"></i></span><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9wbGF5bGlzdD9saXN0PVBMODY4dHdzeDdPamZMYXVBT3ZjZk5zN2xPOU5odUtyeWM=">Robust Perception For Autonomous Field Robots in Challenging Environments<i class="fa fa-external-link-alt"></i></span><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9zNUxMME5ZYkktVQ==">Davide Scaramuzza - Robust Perception For Cars And Drones<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS96UjJ1UjFoQ2NMMA==">CJ Taylor - UPSLAM : Union of Panoramas SLAM<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9LSDVfZUNpdkc3TQ==">Sebastian Scherer - Robust Navigation with Visual and Thermal Sensors in Degraded Visual Environments<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9mVHd0el9hWG5EOA==">Jeanette Bohg - Detect, Reject, Correct: Cross-modal Compensation of Corrupted Sensors<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS93Zy1ELUtUYnRudw==">Claire Tomlin - Learning-Based Waypoint Navigation: a Viewpoint on Perception, Planning, and Control<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9LRnlsM01sTHYxWQ==">Larry Matthies - Terrain-relative navigation for guided descent on Titan<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9ldGkwVHh1aTg5aw==">Sanjiv Singh - Perceptual robustness to obscurants and the world itself<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9xRkF5VktaMDY4TQ==">Tim Barfoot - Dark, Damp, and Dynamic: Recent Progress on Robotic Localization in Challenging Environments<i class="fa fa-external-link-alt"></i></span></li>
 <li>9:00 GMT-04</li>
 </ul>
 </li>
@@ -12295,7 +12300,7 @@ Applications </summary>
 <li>9:00 GMT-04</li>
 </ul>
 </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9ueXUuem9vbS51cy9qLzk0MTg3MTk2MTU5">Resilient and Long-Term Autonomy for Aerial Robotic Systems<i class="fa fa-external-link-alt"></i></span><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYWVyaWFsLXJvYm90aWNzLXdvcmtzaG9wLmNvbS9hZ2VuZGEuaHRtbA==">Resilient and Long-Term Autonomy for Aerial Robotic Systems<i class="fa fa-external-link-alt"></i></span><ul>
 <li>8:00 GMT-04</li>
 </ul>
 </li>
