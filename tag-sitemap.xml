@@ -3,36 +3,92 @@
 
 
     <url>
-        <loc>https://changh95.github.io/tags/ICRA/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
+        <loc>https://changh95.github.io/tags/%EC%9D%B4%ED%8E%99%ED%84%B0/</loc>
+        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Guitar/</loc>
+        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/%EC%9D%BC%EC%83%81/</loc>
+        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Tartan-series/</loc>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Deep-SLAM/</loc>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Robotics/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
+        <loc>https://changh95.github.io/tags/Image-processing/</loc>
+        <lastmod>2021-06-27T05:03:46.250Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/CVPR/</loc>
-        <lastmod>2021-06-21T13:02:47.043Z</lastmod>
+        <lastmod>2021-06-27T05:03:46.250Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Thread/</loc>
+        <lastmod>2021-06-27T05:03:46.250Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Robotics/</loc>
+        <lastmod>2021-06-27T05:03:46.250Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/ICRA/</loc>
+        <lastmod>2021-06-21T13:30:56.081Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -73,13 +129,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Tartan-series/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/%ED%9B%84%EA%B8%B0/</loc>
         <lastmod>2021-06-19T12:41:28.349Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -88,27 +137,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/%EC%9D%B4%EB%A0%A5%EC%84%9C/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/%EC%9D%BC%EC%83%81/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Deep-SLAM/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
         <lastmod>2021-06-19T12:41:28.349Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -690,13 +718,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Process/</loc>
-        <lastmod>2021-06-05T13:27:26.631Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Thread/</loc>
         <lastmod>2021-06-05T13:27:26.631Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

@@ -9,56 +9,56 @@
 
 
     <url>
-        <loc>https://changh95.github.io/categories/Robotics/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/Robotics/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/SLAM/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/SLAM/%25EA%25B3%25B5%25EB%25B6%2580-%25EC%259E%2590%25EB%25A3%258C/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/categories/Life/%25EC%259D%25BC%25EC%2583%2581/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
+        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/Life/</loc>
+        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/SLAM/</loc>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/SLAM/%25EA%25B3%25B5%25EB%25B6%2580-%25EC%259E%2590%25EB%25A3%258C/</loc>
+        <lastmod>2021-06-27T05:03:46.250Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/Robotics/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
+        <lastmod>2021-06-21T13:30:56.081Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/Robotics/</loc>
+        <lastmod>2021-06-21T13:30:56.081Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
         <lastmod>2021-06-19T12:41:28.349Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

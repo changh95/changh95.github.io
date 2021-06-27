@@ -12261,7 +12261,12 @@ Applications </summary>
   <entry>
     <title>Challenges in SLAM - What&#39;s ahead (Prof. Sebastian Scherer, Tartan Series Seminar)</title>
     <url>/20210529-Scherer-tartan/</url>
-    <content><![CDATA[<p>#</p>
+    <content><![CDATA[<h1 id="SLAM이-처음이라면…"><a href="#SLAM이-처음이라면…" class="headerlink" title="SLAM이 처음이라면…"></a>SLAM이 처음이라면…</h1><ul>
+<li>선형대수 공부자료 - <span class="exturl" data-url="aHR0cDovL3Zpc2lvbi5zdGFuZm9yZC5lZHUvdGVhY2hpbmcvY3MxMzFfZmFsbDE2MTcvbGVjdHVyZXMvbGVjdHVyZTJfbGluYWxnX3Jldmlld19jczEzMV8yMDE2LnBkZg==">링크<i class="fa fa-external-link-alt"></i></span></li>
+<li>확률과 통계 공부자료 - <span class="exturl" data-url="aHR0cDovL2hlYWx5LmNyZWF0ZS5zdGVkd2FyZHMuZWR1L0NoZW1pc3RyeS9DSEVNNDM0MS9CYXllc1ByaW1lcjIucGRm">링크<i class="fa fa-external-link-alt"></i></span></li>
+<li>AirLab Summer School - <span class="exturl" data-url="aHR0cDovL3RoZWFpcmxhYi5vcmcvc3VtbWVyMjAyMC8=">링크<i class="fa fa-external-link-alt"></i></span></li>
+<li>CVPR 2020 SLAM 워크샵 - <span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvdmlzbG9jc2xhbWN2cHIyMDIwL2ludml0ZWQtc3BlYWtlcnM=">링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
 ]]></content>
       <categories>
         <category>SLAM</category>
@@ -12284,6 +12289,7 @@ Applications </summary>
 <li>9:00 GMT-04</li>
 </ul>
 </li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9wbGF5bGlzdD9saXN0PVBMZVhXei1nMklmOTY0SVcyVFh2eGltMlR1ZWJUMGRLTUI=">Perception and Action in Dynamic Environments<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9wbGF5bGlzdD9saXN0PVBMODY4dHdzeDdPamZMYXVBT3ZjZk5zN2xPOU5odUtyeWM=">Robust Perception For Autonomous Field Robots in Challenging Environments<i class="fa fa-external-link-alt"></i></span><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9zNUxMME5ZYkktVQ==">Davide Scaramuzza - Robust Perception For Cars And Drones<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS96UjJ1UjFoQ2NMMA==">CJ Taylor - UPSLAM : Union of Panoramas SLAM<i class="fa fa-external-link-alt"></i></span></li>
@@ -12614,6 +12620,11 @@ Applications </summary>
 <li>19일 11:00PM - 3:00AM</li>
 </ul>
 </li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vcGxheWxpc3Q/bGlzdD1QTGpMTGZ4RjdJQXJHMFJoZTdwb09WWEZONHU1VktvRXpz">Normalization Techniques in Deep Learning: Methods, Analyses, and Applications<i class="fa fa-external-link-alt"></i></span><ul>
+<li>19일 11:00PM - 3:00AM</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9wbGF5bGlzdD9saXN0PVBMZVhXei1nMklmOTVtak5wQS15LVdJb0Rhb0I4V3RtRTc=">Workshop on Event-based Vision<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9TVlNOVTZ2S3d3WQ==">DynaVis: The 3rd International Workshop on Dynamic Scene Reconstruction<i class="fa fa-external-link-alt"></i></span><ul>
 <li>20일 0:30AM - 4:00AM</li>
 </ul>
@@ -12634,7 +12645,9 @@ Applications </summary>
 <li>20일 11:50PM - 8:30AM</li>
 </ul>
 </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZXZlbnRzY3JpYmUubmV0LzIwMjEvaW5jbHVkZXMvdHJhY2tpbmcvY2xpY2tUcmFja2luZy5hc3A/bGZwPVdHaEtjRUU0ZVZsRU4zbE5Ta056YUZCVWJUWTRjRkJaZGxCTlYzWndhMEo0U1RKNlVqSlVUVk5KTDBZd1V6SnhZMnAxUmtwNWJIRm9XVmhtVVVsVGIxcEhkQ3RWUkc0eVJVSldaa2xNVkdKMmMyZzNhU3RMZEhoS2VHOU5PVk5pTkhoTk9YazRibTg1T0dkb09ERXhTM3BKYWpKc2NYVk9aaTlzTHl0VGMyNUJTSGxsVUhaelJYVk5UbVE0YUVrcllXZHpkVFF6V0VGU1ltTnJlV0pyZW1wU2ExRnJhblZYVlVaVlBRPT0=">All About Self-Driving<i class="fa fa-external-link-alt"></i></span><ul>
+<li>[All About Self-Driving]<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS8tbnI3LVBRUVlydw==">Part1<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9QM21sQTBtaFVXYw==">Part2<i class="fa fa-external-link-alt"></i></span></li>
 <li>21일 0:45AM - 10:00AM</li>
 </ul>
 </li>
@@ -12642,11 +12655,12 @@ Applications </summary>
 <li>21일 3:00AM - 7:00AM</li>
 </ul>
 </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZXZlbnRzY3JpYmUubmV0LzIwMjEvaW5jbHVkZXMvdHJhY2tpbmcvY2xpY2tUcmFja2luZy5hc3A/bGZwPVkyZEJTV3BRVERKRFJHcGtabWcyZEZGTWMyWmFURFpuTm5kYVZtWm9RemxUY1VsRlQyeEJTM0ZsWjNSWmFuUnJSRkJzU0dkNFRDOUtka2hKWjBwMmNHTkhPRzlhYkZCUlFuWlpjVTlxYlVaRFFVRnRNRXRVTXpndlprbEtRakpUT0RSRmRHZHhUV2xSYVU0MFRqQmlOSGRQYzBvNWJ6WmFNVGNyUW0xVWJXTXdORnBFVFhsMlpVSnVLMU5uSzNNelVDdDJiR2NyWXpSSGNIZDZNMkZXU2pkWFdUY3ZaRmRZUldSSlBRPT0=">ScanNet Indoor Secene Understanding Challenge<i class="fa fa-external-link-alt"></i></span><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9qcl9iS21oNllVWQ==">ScanNet Indoor Secene Understanding Challenge<i class="fa fa-external-link-alt"></i></span><ul>
 <li>21일 0:50AM - 4:30AM</li>
 </ul>
 </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZXZlbnRzY3JpYmUubmV0LzIwMjEvaW5jbHVkZXMvdHJhY2tpbmcvY2xpY2tUcmFja2luZy5hc3A/bGZwPVVXOWFiV3hMVjNOSFlWZ3pNMEZ1YjJaSU4wOVBiRU5tVDI1eE9HMXRjbVpDVW1KRGRtSklNeTgzWlRCVlJVNDNabWxKVGpSb1NsaG9iMnR1WWxKaVdYVjFiRzkwZDNod2ExTTJOa3BtVkRNcmVGbFVkRkZHUkd3MFlsQjRVa1EwY1hoWldXRkxTMVJ1V1dsRVNIWlVRMFl5Y0U1TFlXRmtaM0pyWVRGRFJWZHNkSFJKUW1WRVVVUkRNamxMVEdwWmVIaHZXbGR0V1U5bEsxaENOM1pyTURkVmVsSTVjbFpZWm1sQlBRPT0=">Interpretable Machine Learning for Computer Vision<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Interpretable Machine Learning for Computer Vision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9rQVN2dy1sekxCaw==">Video1<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS94N1U1cUM2ZU1uRQ==">Video2<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9CUTA2RXlkTEYwUQ==">Video3<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9QdFJVMkI2SW1sNA==">Video4<i class="fa fa-external-link-alt"></i></span></li>
 <li>21일 3:00AM - 4:00AM</li>
 </ul>
 </li>
@@ -12654,7 +12668,7 @@ Applications </summary>
 <li>21일 3:00AM - 7:00AM</li>
 </ul>
 </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZXZlbnRzY3JpYmUubmV0LzIwMjEvaW5jbHVkZXMvdHJhY2tpbmcvY2xpY2tUcmFja2luZy5hc3A/bGZwPVZGRjVVUzgwUVROb1ZHNUJOWGQzY0dVNVprUkVhMVJtZEhSSFoyb3hRa0psZFhWRllpc3dUbmd6UVVod2JHVXlURzVsWnl0VFVFdHNlRFZyTTI1RFdsWTJPREpyU0haNmRHUTRPRlZxVjFOTGVuUnhhWEI2ZWt0aFRHMDJRMnQ0Yml0aFkwcHFTM2N5VDBSWGNGaE9ORVJOUnpSSlFtZEVOSEp5T0hWWGJuVk1VRzlLYVhad09FOUZaVUp3UVZCMVkwWllTVEJTZGt0TFFTOXhNMnRoYTB4akswRm1PRlZFYWk4d1BRPT0=">Image Matching: Local Features and Beyond<i class="fa fa-external-link-alt"></i></span><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS85Y1ZWOW1fYjVZcw==">Image Matching Workshop: Local Features and Beyond<i class="fa fa-external-link-alt"></i></span><ul>
 <li>25일 10:00AM - 1:00AM</li>
 </ul>
 </li>
@@ -12666,7 +12680,7 @@ Applications </summary>
 <li>25일 10:00PM - 7:00AM</li>
 </ul>
 </li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZXZlbnRzY3JpYmUubmV0LzIwMjEvaW5jbHVkZXMvdHJhY2tpbmcvY2xpY2tUcmFja2luZy5hc3A/bGZwPVZGRjVVUzgwUVROb1ZHNUJOWGQzY0dVNVprUkVaMFZ2U1ZoSVptVTJjMjFHZW5Vd1ZWQmpRekZFY2tkQ1NqSjRTR2czWTFoblIxWjFWMGRzZGxneksyTlFORTExTmpBeWNWWjVSa1Z3WVdRM2JtSnRVVlF4TDFSNGRpczJLekExTjNoMlFpOTJVVVZTTHpWM1NrWlJaVXhvYWpKVVlscEVibU5zWVhwak4wMTRUa1oxVEhvM1oybG9ZamRZZHpGclRVRndNMWRqVWpoTWFXVjJRMmxGVFd4RVZqQkhkMWhIWkhjd1BRPT0=">Frontiers of monocular 3D perception<i class="fa fa-external-link-alt"></i></span><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9jak1LOWZPMWpBQQ==">Frontiers of monocular 3D perception<i class="fa fa-external-link-alt"></i></span><ul>
 <li>26일 12:00AM - 4:00AM</li>
 </ul>
 </li>
@@ -12674,7 +12688,6 @@ Applications </summary>
 <p>##</p>
 <ul>
 <li>Swin Transformer and 5 reasons to use Transformer and attention in computer vision</li>
-<li>Introduction of Normalization Methods</li>
 </ul>
 ]]></content>
       <categories>
@@ -12686,6 +12699,115 @@ Applications </summary>
         <tag>SLAM</tag>
         <tag>Deep Learning</tag>
         <tag>CVPR</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>새 일렉기타 장만! PRS CE24</title>
+    <url>/20210627-guitar/</url>
+    <content><![CDATA[<h2 id="기타"><a href="#기타" class="headerlink" title="기타!!!!"></a>기타!!!!</h2><p>10년 넘게 꿈꾸던 드림 기타를 장만했다!!</p>
+<p>PRS사의 CE24 세미할로우 모델이다!</p>
+<p><strong>신난다!!!!!</strong> <span class="github-emoji" alias="smile_cat" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f638.png?v8">😸</span></p>
+<img src="/20210627-guitar/guitar.png" class="" title="guitar">
+
+
+<p> </p>
+<hr>
+<h2 id="이-기타를-고르게-된-이유"><a href="#이-기타를-고르게-된-이유" class="headerlink" title="이 기타를 고르게 된 이유"></a>이 기타를 고르게 된 이유</h2><p>이번에 기타를 고르면서 찾던 기능들은 다음과 같다.</p>
+<ul>
+<li>이쁜 룩!</li>
+<li>24프렛 (특별한 경우 22프렛도 괜춘)</li>
+<li>싱/험 전환</li>
+<li>트레몰로</li>
+<li>세미 할로우</li>
+<li>편한 연주감 (높은 빌드 퀄리티)</li>
+<li>좋은 클린 톤 + 범용성 좋은 드라이브 톤</li>
+</ul>
+<p>그렇게 후보로 뽑힌 모델은 다음과 같다 (아래 사진 참조).</p>
+<ul>
+<li>Strandberg의 Salen Deluxe</li>
+<li>PRS US Core 라인</li>
+<li>Dusenberg Starplayer TV</li>
+</ul>
+<img src="/20210627-guitar/guitar3.png" class="" title="guitar3">
+
+<p> </p>
+<p> </p>
+<p> </p>
+<h3 id="Strandberg를-안-고른-이유"><a href="#Strandberg를-안-고른-이유" class="headerlink" title="Strandberg를 안 고른 이유"></a>Strandberg를 안 고른 이유</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/WWpU9fcQG3c" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p><strong>솔직히 제일 끌렸던 모델</strong>이다. 험버커 소리보다는 텔레 소리를 좋아하는 편이기도 하고, 또 제일 특이하게 생겼기 때문이다 ㅋㅋ 하지만 안타깝게도 현재 Salen Deluxe 모델은 메이플 탑을 가공하는 기계에서 결함이 있어서, 작년 하반기부터 내년 상반기까지는 생산이 중단되어있다고 한다 ㅠㅠ</p>
+<p>아쉬운대로 기타샵에 가서 동일한 쉐입의 다른 모델을 쳐봤다. </p>
+<p>근데 왠걸, 내 손이랑 하나도 맞지 않는 기타였던 것이다 ㅋㅋ 가볍고 몸에 착 붙는 기타인건 확실했지만, <strong>넥이 너무 딱딱했다</strong>. Fanned fretboard 이기 때문에 각각의 음들에 대한 액션은 마음에 들었지만, 코드를 치기가 조금 어려웠다.</p>
+<p>그런고로 바로 Strandberg는 아웃!</p>
+<p> </p>
+<h3 id="Dusenberg를-안-못-고른-이유"><a href="#Dusenberg를-안-못-고른-이유" class="headerlink" title="Dusenberg를 안 (못) 고른 이유"></a>Dusenberg를 안 (못) 고른 이유</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/UzL5fYyptdI" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p>소리가 좋고, 픽업도 다른 기타랑 다르게 생겼다. 무엇보다… 저 금장 하드웨어가 너무 멋지다 헉헉 <span class="github-emoji" alias="crying_cat_face" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f63f.png?v8">😿</span></p>
+<p>다만 레스폴 쉐입이라서 걱정이 되었다. 레스폴 쉐입은 하이프렛에서 넥 포켓이 두껍기 때문에 속주가 어렵다.</p>
+<p>이런 경우에는 직접 쳐보고 나서 판단해야하는데… 국내 신품 매물도 없고 심지어 중고 매물도 없었다. 솔직히 손에 잘 맞는다고 해도, 금장 하드웨어에 생기는 녹을 관리할 자신이 없었다 ㅋㅋ 그래서 그냥 포기했다.</p>
+<p>는… <span class="exturl" data-url="aHR0cDovL3d3dy5idXp6YmVlLmNvLmtyL3Nob3AvZ29vZHMvZ29vZHNfdmlldy5waHA/Z29vZHNubz0yMjc3OSZjYXRlZ29yeT0=">어…? 매물이 들어왔네…?<i class="fa fa-external-link-alt"></i></span></p>
+<p> </p>
+<h3 id="PRS를-고른-이유"><a href="#PRS를-고른-이유" class="headerlink" title="PRS를 고른 이유"></a>PRS를 고른 이유</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/50j4UCT3wHI" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p>PRS 제품 라인업에는 사실 위의 조건들을 충족하는 모델들이 많이 있다. 이번에 고르는 기타는 인생기타가 될 예정이라 US Core 라인 이상을 찾아보았다. </p>
+<p>US Core 라인에서 유명한 Custom 24, Studio, McCarty 594, 509의 경우 세미할로우의 경우 최소 500만원 이상을 잡아야해서 사실 부담이 되었다. 그렇다고 가격을 낮추자니 퀄리티가 낮아져서 아쉬웠다.</p>
+<p>그러다가 CE24 모델을 보게 되었다. CE24는 PRS의 US Core 라인 중 가장 하위모델인데, 세미할로우도 200만원 중반 ~ 300만원 초 부터 시작한다. US Core의 다른 모델들보다 퀄리티가 떨어진다는 말이 있었는데, 2020년부터 생산 공장이 통합되어서 사용되는 재료 외의 빌드 퀄리티는 차이가 나지 않는다고 한다. </p>
+<p>다른 PRS US Core 라인 기타들은 넥쓰루 공법인 반면 CE24는 볼트온 방식을 사용해서 저렴하다고 한다. 이렇게 보면 볼트온 방식은 소리가 구려서 저렴한거라고 볼 수 있는데, 그렇게 따지면 1000만원대를 오가는 펜더 커스텀샵도 다 볼트온 방식이다 ㅋㅋ… 볼트온이라고 소리가 나쁠 이유는 없을 것 같다.</p>
+<p>CE24를 고르게 된 이유는 사실 <strong>‘나무 구성이 Custom 24보다 좋아서’</strong> 이다. CE24는 Custom 24와 동일한 마호가니 바디 + 메이플 탑 재료 구성을 가지고 있다. Custom 24는 CE24보다 메이플 탑을 좀 더 두껍게 얹기 때문에 좀 더 강한 패턴이 나타난다고 하는데, 찾아보니 Custom 24와 CE24의 두께는 같았다 (!). 이 뜻은, Custom 24는 마호가니:메이플 비율에서 메이플을 더 많이 가져간다는 뜻이 되고, 역으로 CE24는 마호가니를 더 많이 가져간다는 뜻이 된다. 마호가니 목재는 서스테인이 길고 따뜻한 소리가 나기 때문에 부드러운 클린/드라이브 톤을 가져갈 수 있는데, 이는 세미할로우 형태의 기타와 궁합이 더 잘 맞게 된다. 즉, <strong>세미 할로우의 경우 Custom 24보다 CE24가 가격도 더 저렴한데 오히려 더 좋은 소리를 낼 가능성</strong>이 있다 (???)</p>
+<p>가성비는 못참지! CE24로 결정했다.</p>
+<p> </p>
+<hr>
+<h2 id="계획-어떤-음악을-할것인가"><a href="#계획-어떤-음악을-할것인가" class="headerlink" title="계획 - 어떤 음악을 할것인가?"></a>계획 - 어떤 음악을 할것인가?</h2><p>오랜만에 일렉을 치게되다보니, 특정 장르를 골라서 그것만 파기보다는 여러 장르를 접해보고 싶다.</p>
+<p>많이 좋아했던 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS8yeUxOdGVCazdIbw==">SRV<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9KWlhSQjlCdUxoaw==">헨드릭스<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9WQzAyd0dqNWdQdw==">제프벡<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9KX2kwLUtTUHdsZw==">에릭존슨<i class="fa fa-external-link-alt"></i></span>을 커버하는 것 부터 락, 메탈, EDM 커버까지 하고싶다.</p>
+<p>최근에 관심을 가지게 된 분야는 <strong>앰비언트 음악</strong>이다. 전체적으로 차분한 느낌을 가지는 음악이며, 듣는이에게는 편안한 느낌을 준다 (마치 노동요?). </p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/gvBuTYCZ1IY" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p> </p>
+<p>앰비언트 음악은 의외로 연주자에게는 곡 설계 능력, 소리에 대한 이해와 연주 능력을 요구한다. </p>
+<p>느리지만 지루하지 않게 곡을 설계해야하고, 편안하지만 뻔하지 않게 톤을 만들어야한다. </p>
+<p>이러한 톤은 리버브/딜레이와 같은 공간계 이펙터를 통해 만들어야하는데, 한번 삑사리가 나면 엄청 오랫동안 그 삑사리가 들리기 때문에 실수하면 안된다 (<span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9zT0VzMzhNY1hQUQ==">관련 드립<i class="fa fa-external-link-alt"></i></span>도 있다 ㅋㅋ).</p>
+<p> </p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/ZWREt_fRcC0" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p> </p>
+<p>그래서 요즘은 톤 공부를 하면서 시간을 보내고 있다. </p>
+<p>다른 종류의 딜레이 스택킹, 리버브 모듈레이션, transparent 오버드라이브 스택킹 등등 공부하는데 꿀잼이다 ㅎㅎ </p>
+<p>기회가 된다면 페달보드도 맞춰보고 싶은데, 최근 눈여겨보고 있는 브랜드는 Chase bliss audio와 Strymon이다. </p>
+<p>우선은 아래와 같이 짰다 (지금 다시 보니까, 드라이브 계열은 아마 바뀌지 않을까 싶다!)</p>
+<p> </p>
+<img src="/20210627-guitar/effects.jpg" class="" title="effects">]]></content>
+      <categories>
+        <category>Life</category>
+        <category>일상</category>
+      </categories>
+      <tags>
+        <tag>일상</tag>
+        <tag>Guitar</tag>
+        <tag>이펙터</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>효율적인 이미지 버퍼 구현 (C++17 멀티 쓰레드)</title>
+    <url>/20210625-multithread-image-buffer/</url>
+    <content><![CDATA[<h2 id="Naive-구현-Sequential-method"><a href="#Naive-구현-Sequential-method" class="headerlink" title="Naive 구현 - Sequential method"></a>Naive 구현 - Sequential method</h2><p>OpenCV를 이용해서 실시간 이미지 프로세싱을 구현할 때, 우리는 보통 <code>cv::VideoCapture</code> 기능을 이용한다. 이 기능은 두가지 기능을 지원하는데, 첫째는 기존에 촬영해둔 이미지 데이터셋을 읽어들이는 것이고, 둘째는 PC에 연결된 카메라로부터 실시간 비디오 스트림을 받아오는 것이다.</p>
+<p>종종 실시간 프레임~프레임 트랙킹 알고리즘을 구현할 때, 프레임간의 간격이 짧은 (i.e. FPS가 높은) 데이터가 요구된다.</p>
+<p>데이터셋을 기반으로 개발을 하고 있다면 어렵지 않게 높은 FPS를 얻을 수 있다. 단순히 높은 FPS의 카메라로 촬영을 해두고, 개발은 ‘이미지 읽기 -&gt; 알고리즘 돌리기 -&gt; 다음 이미지 읽기 -&gt; 알고리즘 돌리기’ 를 하면 되기 때문이다. 알고리즘이 실시간에 돌아가던, 10초씩 돌아가던 우리의 이미지는 여전히 실시간의 데이터를 담고 있다.</p>
+<p>카메라로부터 실시간 데이터를 가져오는 경우는 좀 더 복잡하다. 이미지를 읽고 -&gt; 알고리즘을 수행하고 -&gt; 이미지를 읽는… 이런 형태의 파이프라인을 가지고 있다면, 알고리즘을 수행하는데에 걸리는 시간이 길어질수록 그 다음 이미지를 취득하는데에 더 오래 걸릴 것이다. 이 경우, 개발 단계에서도 알고리즘이 실시간성을 유지해야하기 되는데, 대부분 개발 초기단계에서는 최적화가 되지 않은 코드가 많기 때문에 개발이 어렵게 된다.</p>
+<p>실시간 웹캠을 이용하면 데이터셋 기반 방식보다 더 다양한 실험을 빠르게 할 수 있다는 장점이 있기 때문에 이 방법을 포기하기에는 너무 아깝다. 실시간으로 데이터를 받으면서, 알고리즘 실험은 그대로 할 수 있으면 어떨까?</p>
+<h2 id="Thread-기반-구현"><a href="#Thread-기반-구현" class="headerlink" title="Thread 기반 구현"></a>Thread 기반 구현</h2><p>아래 방법은 C++ 멀티쓰레딩 방식을 이용해서 실시간 이미지를 받아서 메모리에 저장하는 코드 구현이다. 2개의 쓰레드가 동시에 돌아가는데, 첫번째는 <code>capture()</code>를 실행하는 t1 쓰레드, 두번째는 <code>process()</code>를 실행하는 t2 쓰레드이다.</p>
+<p>t1은 독립된 쓰레드에서 <code>cv::VideoCapture</code> 기반으로 카메라에서 이미지를 읽는다. 읽은 이미지는 <code>buffer</code>라는 queue에 순차적으로 저장된다.</p>
+<p>t2는 다른 쓰레드에서 수행되는 작업이다. 실시간 트랙킹 알고리즘 등이 이 쓰레드에 구현될 수 있다. 아래 코드에서는 간단하게 rgb2gray가 구현되었고, 시간 제약을 두기 위해 waitKey에 40ms를 넣었다. 이미지를 읽고나</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">queue</span>&lt;cv::Mat&gt; buffer;</span><br><span class="line"><span class="built_in">std</span>::mutex mutex;</span><br><span class="line"><span class="keyword">bool</span> isRunning = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rgb2gray</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat frameGray;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (buffer.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isRunning) <span class="comment">// Program termination</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mutex.lock();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> img = buffer.front();</span><br><span class="line">        buffer.pop();</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Pop:&quot;</span> &lt;&lt; buffer.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        mutex.unlock();</span><br><span class="line"></span><br><span class="line">        cv::cvtColor(img, frameGray, cv::COLOR_RGB2GRAY);</span><br><span class="line">        cv::imshow(<span class="string">&quot;lol&quot;</span>, frameGray);</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">27</span> == cv::waitKey(<span class="number">40</span>))</span><br><span class="line">            isRunning = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">capture</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">cv::VideoCapture <span class="title">cap</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    cap.open(<span class="number">0</span>);</span><br><span class="line">    cv::Mat frame;</span><br><span class="line">    cv::Mat frameClone;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (isRunning)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if (buffer.size() &gt; 100)</span></span><br><span class="line">        <span class="comment">//     buffer.pop();</span></span><br><span class="line"></span><br><span class="line">        cap.read(frame);</span><br><span class="line">        frameClone = frame.clone();</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="built_in">std</span>::scoped_lock <span class="title">lock</span><span class="params">(mutex)</span></span>;</span><br><span class="line">        buffer.push(frameClone);</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; buffer.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    isRunning = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::thread <span class="title">t1</span><span class="params">(&amp;capture)</span></span>;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::thread <span class="title">t2</span><span class="params">(&amp;process)</span></span>;</span><br><span class="line"></span><br><span class="line">    t1.join();</span><br><span class="line">    t2.join();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>공부 자료</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>Visual-SLAM</tag>
+        <tag>Thread</tag>
+        <tag>Image processing</tag>
       </tags>
   </entry>
 </search>

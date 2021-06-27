@@ -9,24 +9,8 @@
 
 
     <url>
-        <loc>https://changh95.github.io/20210530-icra-2021/</loc>
-        <lastmod>2021-06-21T13:28:51.643Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20210619-cvpr-2021/</loc>
-        <lastmod>2021-06-21T13:02:47.043Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20210528-work-history/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
+        <loc>https://changh95.github.io/20210627-guitar/</loc>
+        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -34,6 +18,38 @@
 
     <url>
         <loc>https://changh95.github.io/20210529-Scherer-tartan/</loc>
+        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210619-cvpr-2021/</loc>
+        <lastmod>2021-06-27T05:03:46.250Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210625-multithread-image-buffer/</loc>
+        <lastmod>2021-06-27T05:03:46.250Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210530-icra-2021/</loc>
+        <lastmod>2021-06-21T13:30:56.081Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210528-work-history/</loc>
         <lastmod>2021-06-19T12:41:28.349Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
