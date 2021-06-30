@@ -4,56 +4,98 @@
 
     <url>
         <loc>https://changh95.github.io/tags/%EC%9D%B4%ED%8E%99%ED%84%B0/</loc>
-        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
+        <lastmod>2021-06-30T15:26:41.013Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Guitar/</loc>
-        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
+        <lastmod>2021-06-30T15:26:41.013Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/%EC%9D%BC%EC%83%81/</loc>
-        <lastmod>2021-06-27T08:51:20.765Z</lastmod>
+        <lastmod>2021-06-30T15:26:41.013Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Tartan-series/</loc>
-        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <loc>https://changh95.github.io/tags/Rust/</loc>
+        <lastmod>2021-06-28T02:32:36.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Sebastian-Scherer/</loc>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/CMU/</loc>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/AirLab/</loc>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Tartan/</loc>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Deep-SLAM/</loc>
-        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
-        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
-        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2021-06-27T05:35:31.705Z</lastmod>
+        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/%EC%9D%B4%EB%A0%A5%EC%84%9C/</loc>
+        <lastmod>2021-06-27T06:09:30.096Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/%ED%9B%84%EA%B8%B0/</loc>
+        <lastmod>2021-06-27T06:09:30.096Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -123,20 +165,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Solver/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/%ED%9B%84%EA%B8%B0/</loc>
-        <lastmod>2021-06-19T12:41:28.349Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/%EC%9D%B4%EB%A0%A5%EC%84%9C/</loc>
         <lastmod>2021-06-19T12:41:28.349Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -241,13 +269,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Thoughts/</loc>
-        <lastmod>2021-06-05T13:27:26.703Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Local-features/</loc>
         <lastmod>2021-06-05T13:27:26.703Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -269,13 +290,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
-        <lastmod>2021-06-05T13:27:26.703Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Embodied-AI/</loc>
         <lastmod>2021-06-05T13:27:26.703Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -284,6 +298,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Rearrangement/</loc>
+        <lastmod>2021-06-05T13:27:26.703Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Thoughts/</loc>
         <lastmod>2021-06-05T13:27:26.703Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -333,6 +354,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/SW/</loc>
+        <lastmod>2021-06-05T13:27:26.703Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
         <lastmod>2021-06-05T13:27:26.703Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -703,20 +731,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Questions/</loc>
-        <lastmod>2021-06-05T13:27:26.631Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Interview/</loc>
-        <lastmod>2021-06-05T13:27:26.631Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Process/</loc>
         <lastmod>2021-06-05T13:27:26.631Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -759,22 +773,22 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/tags/Questions/</loc>
+        <lastmod>2021-06-05T13:27:26.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Interview/</loc>
+        <lastmod>2021-06-05T13:27:26.631Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/Data-structures/</loc>
         <lastmod>2021-06-05T13:27:26.623Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/IPU/</loc>
-        <lastmod>2021-06-05T13:27:26.559Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Graphcore/</loc>
-        <lastmod>2021-06-05T13:27:26.559Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -802,6 +816,20 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Community/</loc>
+        <lastmod>2021-06-05T13:27:26.559Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/IPU/</loc>
+        <lastmod>2021-06-05T13:27:26.559Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Graphcore/</loc>
         <lastmod>2021-06-05T13:27:26.559Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

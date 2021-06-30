@@ -2634,8 +2634,8 @@
         <tag>CV</tag>
         <tag>SLAM</tag>
         <tag>Visual-SLAM</tag>
-        <tag>Deep Learning</tag>
         <tag>Direct SLAM</tag>
+        <tag>Deep Learning</tag>
         <tag>LSD-SLAM</tag>
         <tag>DSO</tag>
         <tag>DVSO</tag>
@@ -2828,8 +2828,6 @@
         <tag>SLAM</tag>
         <tag>Visual-SLAM</tag>
         <tag>Deep Learning</tag>
-        <tag>Graphcore</tag>
-        <tag>IPU</tag>
         <tag>Spatial AI</tag>
         <tag>MonoSLAM</tag>
         <tag>DTAM</tag>
@@ -2844,6 +2842,8 @@
         <tag>Fusion++</tag>
         <tag>NodeSLAM</tag>
         <tag>FutureMapping</tag>
+        <tag>Graphcore</tag>
+        <tag>IPU</tag>
         <tag>Graph processor</tag>
         <tag>Andrew Davison</tag>
       </tags>
@@ -3086,8 +3086,8 @@
         <tag>Visual-SLAM</tag>
         <tag>Deep Learning</tag>
         <tag>Deep SLAM</tag>
-        <tag>AR</tag>
         <tag>Tomasz Malisiewicz</tag>
+        <tag>AR</tag>
         <tag>Magic Leap</tag>
         <tag>SuperPoint</tag>
         <tag>DeepChArUco</tag>
@@ -3297,8 +3297,8 @@
         <tag>Visual-SLAM</tag>
         <tag>Deep Learning</tag>
         <tag>Deep SLAM</tag>
-        <tag>3D</tag>
         <tag>AR</tag>
+        <tag>3D</tag>
         <tag>CubeSLAM</tag>
       </tags>
   </entry>
@@ -7124,8 +7124,8 @@ Applications </summary>
       <tags>
         <tag>SLAM</tag>
         <tag>Visual-SLAM</tag>
-        <tag>Sensors</tag>
         <tag>Camera</tag>
+        <tag>Sensors</tag>
         <tag>LiDAR</tag>
         <tag>RADAR</tag>
         <tag>Ultrasonic</tag>
@@ -10714,10 +10714,10 @@ Applications </summary>
         <tag>SLAM</tag>
         <tag>Visual-SLAM</tag>
         <tag>Deep Learning</tag>
+        <tag>Spatial AI</tag>
         <tag>Deep SLAM</tag>
         <tag>Rearrangement</tag>
         <tag>Embodied AI</tag>
-        <tag>Spatial AI</tag>
         <tag>RLBench</tag>
         <tag>iMAP</tag>
       </tags>
@@ -12088,8 +12088,220 @@ Applications </summary>
       <tags>
         <tag>SLAM</tag>
         <tag>일상</tag>
-        <tag>후기</tag>
         <tag>이직</tag>
+        <tag>후기</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Challenges in SLAM - What&#39;s ahead (Prof. Sebastian Scherer, Tartan Series Seminar)</title>
+    <url>/20210529-tartan-scherer/</url>
+    <content><![CDATA[<h2 id="SLAM이-처음이라면…"><a href="#SLAM이-처음이라면…" class="headerlink" title="SLAM이 처음이라면…"></a>SLAM이 처음이라면…</h2><ul>
+<li>선형대수 공부자료 - <span class="exturl" data-url="aHR0cDovL3Zpc2lvbi5zdGFuZm9yZC5lZHUvdGVhY2hpbmcvY3MxMzFfZmFsbDE2MTcvbGVjdHVyZXMvbGVjdHVyZTJfbGluYWxnX3Jldmlld19jczEzMV8yMDE2LnBkZg==">링크<i class="fa fa-external-link-alt"></i></span></li>
+<li>확률과 통계 공부자료 - <span class="exturl" data-url="aHR0cDovL2hlYWx5LmNyZWF0ZS5zdGVkd2FyZHMuZWR1L0NoZW1pc3RyeS9DSEVNNDM0MS9CYXllc1ByaW1lcjIucGRm">링크<i class="fa fa-external-link-alt"></i></span></li>
+<li>AirLab Summer School - <span class="exturl" data-url="aHR0cDovL3RoZWFpcmxhYi5vcmcvc3VtbWVyMjAyMC8=">링크<i class="fa fa-external-link-alt"></i></span></li>
+<li>CVPR 2020 SLAM 워크샵 - <span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvdmlzbG9jc2xhbWN2cHIyMDIwL2ludml0ZWQtc3BlYWtlcnM=">링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="SLAM에서-자주-쓰는-단어들"><a href="#SLAM에서-자주-쓰는-단어들" class="headerlink" title="SLAM에서 자주 쓰는 단어들"></a>SLAM에서 자주 쓰는 단어들</h2><p><img src="./1.png" alt="terms"></p>
+<ul>
+<li>Pose<ul>
+<li>위치 (Position) + 방향 (Orientation)</li>
+</ul>
+</li>
+<li>Odometry<ul>
+<li>두 pose간의 상대적 차이</li>
+</ul>
+</li>
+<li>Localization<ul>
+<li>내가 지도 상 어디에 있는지 풀어내는 문제</li>
+</ul>
+</li>
+<li>Mapping<ul>
+<li>지도를 그려내는 문제</li>
+</ul>
+</li>
+<li>Drift<ul>
+<li>연속적으로 위치를 추정할 때 쌓여가는 pose에 대한 오차</li>
+</ul>
+</li>
+<li>Loop closure<ul>
+<li>동일한 장소로 돌아왔을 때 생기는 loop 내부에서 drift를 해소하는 방법</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="SLAM이란"><a href="#SLAM이란" class="headerlink" title="SLAM이란?"></a>SLAM이란?</h2><ul>
+<li>기술적 의미: Localization ⇄ Mapping 루프를 통해 위치/맵 추정을 하는 것.<ol>
+<li>먼저 나의 위치를 확인 (localization)</li>
+<li>맵을 증축함 (mapping)</li>
+<li>증축된 맵에서 나의 위치를 확인 (localization)</li>
+<li>맵을 증축함 (mapping)</li>
+<li>…</li>
+</ol>
+</li>
+<li>일반적으로 보는 의미: 다양한 센서들로 다양한 추정을 함<ul>
+<li>카메라, 레이더, 라이다, GPS 등과 같이 다양한 센서 값을 어떻게 조합해서 위치/맵 추정을 할 것인가?</li>
+<li>움직이는 객체가 있을 경우에는? Semantic 정보도 추출할 수 있는지? </li>
+<li>종종 ‘위치 추정’ 기술을 쉽게 부르기 위해서 SLAM이라고 부르기도 함 (사실 알고보면 그냥 odometry나 mapping인 경우도 많음)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="SLAM-기술의-발전-방향"><a href="#SLAM-기술의-발전-방향" class="headerlink" title="SLAM 기술의 발전 방향"></a>SLAM 기술의 발전 방향</h2><ul>
+<li>SLAM 성능<ul>
+<li>Robustness의 발전<ul>
+<li>Visual / geometric degeneration / challenging scenes (e.g. 안개, 비/눈, 화재, 탄광)</li>
+</ul>
+</li>
+<li>Efficiency의 발전<ul>
+<li>Lightweight image localization</li>
+<li>Dense reconstruction</li>
+</ul>
+</li>
+<li>Accuracy의 발전<ul>
+<li>High resolution</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>신기능<ul>
+<li>Collaborative SLAM<ul>
+<li>여러 대의 agent가 돌아다니면서 각각 맵을 만드는 것.</li>
+</ul>
+</li>
+<li>Semantic SLAM<ul>
+<li>SLAM을 하면서 semantic 정보도 동시에 추출하는 것.</li>
+</ul>
+</li>
+<li>High resolution map<ul>
+<li>거대 공간 (i.e. large scale)에서 mm단위의 정확한 맵 생성</li>
+</ul>
+</li>
+<li>Unified map representation<ul>
+<li>카메라로 읽던, 라이다로 읽던, 레이더로 읽던 호환되는 맵</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="SLAM-방법론-개요"><a href="#SLAM-방법론-개요" class="headerlink" title="SLAM 방법론 개요"></a>SLAM 방법론 개요</h2><p><img src="./2.png" alt="Overview"></p>
+<blockquote>
+<p>위 이미지에서 설명된 Visual / LiDAR 외로 GPS, 레이더, sonar 등 다른 방식들도 있음.</p>
+</blockquote>
+<h3 id="LiDAR-SLAM"><a href="#LiDAR-SLAM" class="headerlink" title="LiDAR SLAM"></a>LiDAR SLAM</h3><p><img src="./3.png" alt="LiDAR SLAM"></p>
+<ul>
+<li>굉장히 정확한 편</li>
+<li>공간의 생김새에 따라 정확도/안정성이 변화함</li>
+</ul>
+<h3 id="Visual-SLAM"><a href="#Visual-SLAM" class="headerlink" title="Visual SLAM"></a>Visual SLAM</h3><p><img src="./4.png" alt="Visual SLAM"></p>
+<ul>
+<li>저렴한 센서</li>
+<li>공간에 존재하는 texture에 따라 정확도/안정성이 변화함</li>
+<li>3가지 Visual SLAM 방법론이 존재함<ul>
+<li>Sparse SLAM: Sparse local feature를 (e.g. SIFT, ORB) 기반으로 SLAM 추정</li>
+<li>Semi-dense SLAM : Sparse와 Dense SLAM의 중간</li>
+<li>Dense SLAM: 이미지 전체의 정보를 사용해서 SLAM 추정</li>
+</ul>
+</li>
+</ul>
+<h3 id="RGB-D-Visual-Inertial-SLAM"><a href="#RGB-D-Visual-Inertial-SLAM" class="headerlink" title="RGB-D / Visual-Inertial SLAM"></a>RGB-D / Visual-Inertial SLAM</h3><p><img src="./5.png" alt="RGB-D/Visual-Inertial SLAM"></p>
+<ul>
+<li>센서 1개만 쓰면 잘 안될때가 많다 (센서들마다 잘 되는곳/안되는 곳이 있다)<ul>
+<li>여러개의 센서를 써서 잘 안되는 부분을 커버한다.</li>
+<li>e.g. Visual + IMU 방식은 monocular 방식이 (i.e. 1개 카메라) 풀지 못하는 metric scale 복원 (i.e. 실제 m단위 스케일) 작업이 가능하다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="“Deep”-Visual-SLAM"><a href="#“Deep”-Visual-SLAM" class="headerlink" title="“Deep” Visual SLAM"></a>“Deep” Visual SLAM</h3><p><img src="./6.png" alt="Deep Visual SLAM"></p>
+<ul>
+<li>뉴럴넷을 사용해서 state estimation을 진행</li>
+<li>기존의 방식이 가지던 한계점을 뉴럴넷이 극복할 수 있을 것이라는 희망</li>
+<li>Semantic 정보를 추출해내려는 시도</li>
+<li>현재 이러한 방식으로 풀려고 하는 문제들<ul>
+<li>텍스처가 전혀 없는 곳에서 SLAM을 할 수 있을까?</li>
+<li>High dynamic range 환경에서 SLAM을 할 수 있을까?</li>
+<li>모션 블러가 있는 곳에서 SLAM을 할 수 있을까?</li>
+<li>움직이는 객체가 많은 곳에서 SLAM을 할 수 있을까?</li>
+</ul>
+</li>
+</ul>
+<h3 id="Multi-Sensor-Fusion"><a href="#Multi-Sensor-Fusion" class="headerlink" title="Multi-Sensor Fusion"></a>Multi-Sensor Fusion</h3><p><img src="./7.png" alt="Multi sensor fusion"></p>
+<ul>
+<li>여러개의 센서를 사용<ul>
+<li>많은 정보를 얻음</li>
+<li>센서들마다 가진 단점을 서로 상쇄</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="SLAM-성능을-측정하는-방법"><a href="#SLAM-성능을-측정하는-방법" class="headerlink" title="SLAM 성능을 측정하는 방법"></a>SLAM 성능을 측정하는 방법</h2><h3 id="데이터셋"><a href="#데이터셋" class="headerlink" title="데이터셋"></a>데이터셋</h3><p><img src="./8.png" alt="Datasets"></p>
+<ul>
+<li>KITTI, EuRoC, TUM 데이터셋은 SLAM 연구자들 사이에서 많이 쓰이는 데이터셋임.</li>
+<li>하지만 위 데이터셋은 굉장히 단조로움<ul>
+<li>환경, 라벨, 모션 패턴이 모두 단조로움.</li>
+<li>다양한 데이터가 없기 때문에, 위 데이터셋으로 뉴럴넷을 학습할 경우 특정 컨디션에 오버핏 할 가능성이 높음.</li>
+</ul>
+</li>
+<li>그러니 <span class="exturl" data-url="aHR0cHM6Ly90aGVhaXJsYWIub3JnL3RhcnRhbmFpci1kYXRhc2V0Lw==">Tartan Dataset<i class="fa fa-external-link-alt"></i></span>을 써라! (결국 본인 랩실 홍보 ㅋㅋ)<ul>
+<li>Urban, rural, domestic, public, scifi 씬 등 20개 환경 구비</li>
+<li>RGB, Depth, Segmentation, Flow, Pose 등 데이터 구비</li>
+<li>Random translation / rotation의 500+ 모션 구비</li>
+<li>빡센 환경 구비 (e.g. 연기, 안개, 어두운 밤 + 밝은 불빛, 비, 눈)</li>
+</ul>
+</li>
+</ul>
+<h3 id="측정-metric"><a href="#측정-metric" class="headerlink" title="측정 metric"></a>측정 metric</h3><ul>
+<li><strong>Absolute Trajectory Error (ATE)**와 **Relative Pose Error (RPE)</strong> 기반으로 성능을 측정하는 경우가 많음.<ul>
+<li>ATE와 RPE는 중간에 끊기는 데이터 (i.e. tracking lost)에 대응하지 못함.</li>
+<li>Challenging scene에서는 끊기는 경우가 허다함.</li>
+</ul>
+</li>
+<li>AirLab에서는 robustness에 대한 새로운 척도를 제안<ul>
+<li>Valid Rate = Length of valid trajectory / Total length</li>
+<li>Valid = Successfully initialised + not lose tracking<ul>
+<li>‘Valid’ 척도는 사실 굉장히 주관적임…</li>
+</ul>
+</li>
+<li>더 좋은 metric을 만들려고 연구중이라고 함.</li>
+<li>어찌되었건 이 metric으로 봤었을 때, ORB-SLAM은 KITTI 벤치마크 기준 잘된다고 알려져있으나 Tartan Dataset에서는 완전 말아먹는 모습을 보임.</li>
+</ul>
+</li>
+<li>TartanAir-V2를 만들고 있다고 함.<ul>
+<li>더 많은 환경을 만들 예정.</li>
+<li>IMU, LiDAR, Spherical, Fisheye, Event, Radar 등을 추가할 예정.</li>
+<li>Dynamic object를 넣을 예정</li>
+<li>GRound robot motion 패턴도 추가할 예정.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="TartanVO-Learning-based-Visual-Odometry"><a href="#TartanVO-Learning-based-Visual-Odometry" class="headerlink" title="TartanVO: Learning-based Visual Odometry"></a>TartanVO: Learning-based Visual Odometry</h2><p><img src="./9.png" alt="TartanVO"><br><img src="./10.png" alt="TartanVO"></p>
+<ul>
+<li>TartanAir 처럼 다양한 환경/모션 정보가 있는 데이터셋이 있으니, SLAM 뉴럴넷을 학습해볼 수 있겠다.<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9OUTFVRWgzdGhiVQ==">TartanVO<i class="fa fa-external-link-alt"></i></span></li>
+<li>기존의 Feature detection / matching 단계를 하나의 뉴럴넷으로 대체</li>
+<li>기존의 Motion estimation 과정을 deep optical flow + pose 뉴럴넷으로 대체</li>
+</ul>
+</li>
+<li>극심한 모션 블러에도 실패하지 않음 (기존의 SLAM 방식은 tracking lost가 남)</li>
+</ul>
+<hr>
+<h2 id="Super-Odometry-IMU-centric-LiDAR-Visual-Inertial-Estimator-for-Challenging-Environments"><a href="#Super-Odometry-IMU-centric-LiDAR-Visual-Inertial-Estimator-for-Challenging-Environments" class="headerlink" title="Super Odometry: IMU-centric LiDAR-Visual-Inertial Estimator for Challenging Environments"></a>Super Odometry: IMU-centric LiDAR-Visual-Inertial Estimator for Challenging Environments</h2>]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>학회 발표 리뷰</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>Visual-SLAM</tag>
+        <tag>Deep Learning</tag>
+        <tag>Deep SLAM</tag>
+        <tag>Tartan</tag>
+        <tag>AirLab</tag>
+        <tag>CMU</tag>
+        <tag>Sebastian Scherer</tag>
       </tags>
   </entry>
   <entry>
@@ -12254,30 +12466,8 @@ Applications </summary>
       </categories>
       <tags>
         <tag>일상</tag>
-        <tag>이력서</tag>
         <tag>후기</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Challenges in SLAM - What&#39;s ahead (Prof. Sebastian Scherer, Tartan Series Seminar)</title>
-    <url>/20210529-Scherer-tartan/</url>
-    <content><![CDATA[<h1 id="SLAM이-처음이라면…"><a href="#SLAM이-처음이라면…" class="headerlink" title="SLAM이 처음이라면…"></a>SLAM이 처음이라면…</h1><ul>
-<li>선형대수 공부자료 - <span class="exturl" data-url="aHR0cDovL3Zpc2lvbi5zdGFuZm9yZC5lZHUvdGVhY2hpbmcvY3MxMzFfZmFsbDE2MTcvbGVjdHVyZXMvbGVjdHVyZTJfbGluYWxnX3Jldmlld19jczEzMV8yMDE2LnBkZg==">링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>확률과 통계 공부자료 - <span class="exturl" data-url="aHR0cDovL2hlYWx5LmNyZWF0ZS5zdGVkd2FyZHMuZWR1L0NoZW1pc3RyeS9DSEVNNDM0MS9CYXllc1ByaW1lcjIucGRm">링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>AirLab Summer School - <span class="exturl" data-url="aHR0cDovL3RoZWFpcmxhYi5vcmcvc3VtbWVyMjAyMC8=">링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>CVPR 2020 SLAM 워크샵 - <span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvdmlzbG9jc2xhbWN2cHIyMDIwL2ludml0ZWQtc3BlYWtlcnM=">링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>SLAM</category>
-        <category>학회 발표 리뷰</category>
-      </categories>
-      <tags>
-        <tag>SLAM</tag>
-        <tag>Visual-SLAM</tag>
-        <tag>Deep Learning</tag>
-        <tag>Deep SLAM</tag>
-        <tag>Tartan series</tag>
+        <tag>이력서</tag>
       </tags>
   </entry>
   <entry>
@@ -12377,13 +12567,13 @@ Applications </summary>
 ]]></content>
       <categories>
         <category>SLAM</category>
-        <category>Robotics</category>
         <category>학회 발표 리뷰</category>
+        <category>Robotics</category>
         <category>학회 발표 리뷰</category>
       </categories>
       <tags>
-        <tag>Robotics</tag>
         <tag>SLAM</tag>
+        <tag>Robotics</tag>
         <tag>Deep Learning</tag>
         <tag>ICRA</tag>
       </tags>
@@ -12416,8 +12606,8 @@ Applications </summary>
         <category>학회 발표 리뷰</category>
       </categories>
       <tags>
-        <tag>Robotics</tag>
         <tag>SLAM</tag>
+        <tag>Robotics</tag>
         <tag>ICRA</tag>
         <tag>VINS</tag>
         <tag>VIO</tag>
@@ -12695,10 +12885,34 @@ Applications </summary>
         <category>학회 발표 리뷰</category>
       </categories>
       <tags>
-        <tag>Robotics</tag>
         <tag>SLAM</tag>
+        <tag>Robotics</tag>
         <tag>Deep Learning</tag>
         <tag>CVPR</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>효율적인 이미지 버퍼 구현 (C++17 멀티 쓰레드)</title>
+    <url>/20210625-multithread-image-buffer/</url>
+    <content><![CDATA[<h2 id="Naive-구현-Sequential-method"><a href="#Naive-구현-Sequential-method" class="headerlink" title="Naive 구현 - Sequential method"></a>Naive 구현 - Sequential method</h2><p>OpenCV를 이용해서 실시간 이미지 프로세싱을 구현할 때, 우리는 보통 <code>cv::VideoCapture</code> 기능을 이용한다. 이 기능은 두가지 기능을 지원하는데, 첫째는 기존에 촬영해둔 이미지 데이터셋을 읽어들이는 것이고, 둘째는 PC에 연결된 카메라로부터 실시간 비디오 스트림을 받아오는 것이다.</p>
+<p>종종 실시간 프레임~프레임 트랙킹 알고리즘을 구현할 때, 프레임간의 간격이 짧은 (i.e. FPS가 높은) 데이터가 요구된다.</p>
+<p>데이터셋을 기반으로 개발을 하고 있다면 어렵지 않게 높은 FPS를 얻을 수 있다. 단순히 높은 FPS의 카메라로 촬영을 해두고, 개발은 ‘이미지 읽기 -&gt; 알고리즘 돌리기 -&gt; 다음 이미지 읽기 -&gt; 알고리즘 돌리기’ 를 하면 되기 때문이다. 알고리즘이 실시간에 돌아가던, 10초씩 돌아가던 우리의 이미지는 여전히 실시간의 데이터를 담고 있다.</p>
+<p>카메라로부터 실시간 데이터를 가져오는 경우는 좀 더 복잡하다. 이미지를 읽고 -&gt; 알고리즘을 수행하고 -&gt; 이미지를 읽는… 이런 형태의 파이프라인을 가지고 있다면, 알고리즘을 수행하는데에 걸리는 시간이 길어질수록 그 다음 이미지를 취득하는데에 더 오래 걸릴 것이다. 이 경우, 개발 단계에서도 알고리즘이 실시간성을 유지해야하기 되는데, 대부분 개발 초기단계에서는 최적화가 되지 않은 코드가 많기 때문에 개발이 어렵게 된다.</p>
+<p>실시간 웹캠을 이용하면 데이터셋 기반 방식보다 더 다양한 실험을 빠르게 할 수 있다는 장점이 있기 때문에 이 방법을 포기하기에는 너무 아깝다. 실시간으로 데이터를 받으면서, 알고리즘 실험은 그대로 할 수 있으면 어떨까?</p>
+<h2 id="Thread-기반-구현"><a href="#Thread-기반-구현" class="headerlink" title="Thread 기반 구현"></a>Thread 기반 구현</h2><p>아래 방법은 C++ 멀티쓰레딩 방식을 이용해서 실시간 이미지를 받아서 메모리에 저장하는 코드 구현이다. 2개의 쓰레드가 동시에 돌아가는데, 첫번째는 <code>capture()</code>를 실행하는 t1 쓰레드, 두번째는 <code>process()</code>를 실행하는 t2 쓰레드이다.</p>
+<p>t1은 독립된 쓰레드에서 <code>cv::VideoCapture</code> 기반으로 카메라에서 이미지를 읽는다. 읽은 이미지는 <code>buffer</code>라는 queue에 순차적으로 저장된다.</p>
+<p>t2는 다른 쓰레드에서 수행되는 작업이다. 실시간 트랙킹 알고리즘 등이 이 쓰레드에 구현될 수 있다. 아래 코드에서는 간단하게 rgb2gray가 구현되었고, 시간 제약을 두기 위해 waitKey에 40ms를 넣었다. 이미지를 읽고나</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">queue</span>&lt;cv::Mat&gt; buffer;</span><br><span class="line"><span class="built_in">std</span>::mutex mutex;</span><br><span class="line"><span class="keyword">bool</span> isRunning = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rgb2gray</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat frameGray;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (buffer.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isRunning) <span class="comment">// Program termination</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mutex.lock();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> img = buffer.front();</span><br><span class="line">        buffer.pop();</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Pop:&quot;</span> &lt;&lt; buffer.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        mutex.unlock();</span><br><span class="line"></span><br><span class="line">        cv::cvtColor(img, frameGray, cv::COLOR_RGB2GRAY);</span><br><span class="line">        cv::imshow(<span class="string">&quot;lol&quot;</span>, frameGray);</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">27</span> == cv::waitKey(<span class="number">40</span>))</span><br><span class="line">            isRunning = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">capture</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">cv::VideoCapture <span class="title">cap</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    cap.open(<span class="number">0</span>);</span><br><span class="line">    cv::Mat frame;</span><br><span class="line">    cv::Mat frameClone;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (isRunning)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if (buffer.size() &gt; 100)</span></span><br><span class="line">        <span class="comment">//     buffer.pop();</span></span><br><span class="line"></span><br><span class="line">        cap.read(frame);</span><br><span class="line">        frameClone = frame.clone();</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="built_in">std</span>::scoped_lock <span class="title">lock</span><span class="params">(mutex)</span></span>;</span><br><span class="line">        buffer.push(frameClone);</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; buffer.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    isRunning = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::thread <span class="title">t1</span><span class="params">(&amp;capture)</span></span>;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::thread <span class="title">t2</span><span class="params">(&amp;process)</span></span>;</span><br><span class="line"></span><br><span class="line">    t1.join();</span><br><span class="line">    t2.join();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>SLAM</category>
+        <category>공부 자료</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>Visual-SLAM</tag>
+        <tag>Thread</tag>
+        <tag>Image processing</tag>
       </tags>
   </entry>
   <entry>
@@ -12778,7 +12992,7 @@ Applications </summary>
 <img src="/20210627-guitar/effects.jpg" class="" title="effects">]]></content>
       <categories>
         <category>Life</category>
-        <category>일상</category>
+        <category>Guitar</category>
       </categories>
       <tags>
         <tag>일상</tag>
@@ -12787,27 +13001,157 @@ Applications </summary>
       </tags>
   </entry>
   <entry>
-    <title>효율적인 이미지 버퍼 구현 (C++17 멀티 쓰레드)</title>
-    <url>/20210625-multithread-image-buffer/</url>
-    <content><![CDATA[<h2 id="Naive-구현-Sequential-method"><a href="#Naive-구현-Sequential-method" class="headerlink" title="Naive 구현 - Sequential method"></a>Naive 구현 - Sequential method</h2><p>OpenCV를 이용해서 실시간 이미지 프로세싱을 구현할 때, 우리는 보통 <code>cv::VideoCapture</code> 기능을 이용한다. 이 기능은 두가지 기능을 지원하는데, 첫째는 기존에 촬영해둔 이미지 데이터셋을 읽어들이는 것이고, 둘째는 PC에 연결된 카메라로부터 실시간 비디오 스트림을 받아오는 것이다.</p>
-<p>종종 실시간 프레임~프레임 트랙킹 알고리즘을 구현할 때, 프레임간의 간격이 짧은 (i.e. FPS가 높은) 데이터가 요구된다.</p>
-<p>데이터셋을 기반으로 개발을 하고 있다면 어렵지 않게 높은 FPS를 얻을 수 있다. 단순히 높은 FPS의 카메라로 촬영을 해두고, 개발은 ‘이미지 읽기 -&gt; 알고리즘 돌리기 -&gt; 다음 이미지 읽기 -&gt; 알고리즘 돌리기’ 를 하면 되기 때문이다. 알고리즘이 실시간에 돌아가던, 10초씩 돌아가던 우리의 이미지는 여전히 실시간의 데이터를 담고 있다.</p>
-<p>카메라로부터 실시간 데이터를 가져오는 경우는 좀 더 복잡하다. 이미지를 읽고 -&gt; 알고리즘을 수행하고 -&gt; 이미지를 읽는… 이런 형태의 파이프라인을 가지고 있다면, 알고리즘을 수행하는데에 걸리는 시간이 길어질수록 그 다음 이미지를 취득하는데에 더 오래 걸릴 것이다. 이 경우, 개발 단계에서도 알고리즘이 실시간성을 유지해야하기 되는데, 대부분 개발 초기단계에서는 최적화가 되지 않은 코드가 많기 때문에 개발이 어렵게 된다.</p>
-<p>실시간 웹캠을 이용하면 데이터셋 기반 방식보다 더 다양한 실험을 빠르게 할 수 있다는 장점이 있기 때문에 이 방법을 포기하기에는 너무 아깝다. 실시간으로 데이터를 받으면서, 알고리즘 실험은 그대로 할 수 있으면 어떨까?</p>
-<h2 id="Thread-기반-구현"><a href="#Thread-기반-구현" class="headerlink" title="Thread 기반 구현"></a>Thread 기반 구현</h2><p>아래 방법은 C++ 멀티쓰레딩 방식을 이용해서 실시간 이미지를 받아서 메모리에 저장하는 코드 구현이다. 2개의 쓰레드가 동시에 돌아가는데, 첫번째는 <code>capture()</code>를 실행하는 t1 쓰레드, 두번째는 <code>process()</code>를 실행하는 t2 쓰레드이다.</p>
-<p>t1은 독립된 쓰레드에서 <code>cv::VideoCapture</code> 기반으로 카메라에서 이미지를 읽는다. 읽은 이미지는 <code>buffer</code>라는 queue에 순차적으로 저장된다.</p>
-<p>t2는 다른 쓰레드에서 수행되는 작업이다. 실시간 트랙킹 알고리즘 등이 이 쓰레드에 구현될 수 있다. 아래 코드에서는 간단하게 rgb2gray가 구현되었고, 시간 제약을 두기 위해 waitKey에 40ms를 넣었다. 이미지를 읽고나</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">queue</span>&lt;cv::Mat&gt; buffer;</span><br><span class="line"><span class="built_in">std</span>::mutex mutex;</span><br><span class="line"><span class="keyword">bool</span> isRunning = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rgb2gray</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cv::Mat frameGray;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (buffer.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (!isRunning) <span class="comment">// Program termination</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mutex.lock();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> img = buffer.front();</span><br><span class="line">        buffer.pop();</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Pop:&quot;</span> &lt;&lt; buffer.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">        mutex.unlock();</span><br><span class="line"></span><br><span class="line">        cv::cvtColor(img, frameGray, cv::COLOR_RGB2GRAY);</span><br><span class="line">        cv::imshow(<span class="string">&quot;lol&quot;</span>, frameGray);</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">27</span> == cv::waitKey(<span class="number">40</span>))</span><br><span class="line">            isRunning = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">capture</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">cv::VideoCapture <span class="title">cap</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">    cap.open(<span class="number">0</span>);</span><br><span class="line">    cv::Mat frame;</span><br><span class="line">    cv::Mat frameClone;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (isRunning)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if (buffer.size() &gt; 100)</span></span><br><span class="line">        <span class="comment">//     buffer.pop();</span></span><br><span class="line"></span><br><span class="line">        cap.read(frame);</span><br><span class="line">        frameClone = frame.clone();</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="built_in">std</span>::scoped_lock <span class="title">lock</span><span class="params">(mutex)</span></span>;</span><br><span class="line">        buffer.push(frameClone);</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; buffer.size() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    isRunning = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">std</span>::thread <span class="title">t1</span><span class="params">(&amp;capture)</span></span>;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::thread <span class="title">t2</span><span class="params">(&amp;process)</span></span>;</span><br><span class="line"></span><br><span class="line">    t1.join();</span><br><span class="line">    t2.join();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>MS - Beginner&#39;s Series to Rust</title>
+    <url>/20210628-MS-rust/</url>
+    <content><![CDATA[<div class="video-container"><iframe src="https://www.youtube.com/embed/videoseries?list=PLlrxD0HtieHjbTjrchBwOVks_sr8EVW1x" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
 ]]></content>
       <categories>
-        <category>SLAM</category>
-        <category>공부 자료</category>
+        <category>Rust</category>
+        <category>Beginner&#39;s Series to Rust</category>
       </categories>
       <tags>
-        <tag>SLAM</tag>
-        <tag>Visual-SLAM</tag>
-        <tag>Thread</tag>
-        <tag>Image processing</tag>
+        <tag>Rust</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>기타 이펙터 - 오버드라이브 계열과 기초 이론 공부</title>
+    <url>/20210630-overdrive-study/</url>
+    <content><![CDATA[<h2 id="드라이브가-걸리는-원리"><a href="#드라이브가-걸리는-원리" class="headerlink" title="드라이브가 걸리는 원리"></a>드라이브가 걸리는 원리</h2><p>원래 앰프의 본래 역할은 말 그대로 소리 신호를 증폭해주는 역할을 한다 (amplifier). 깔끔한 소리가 들어가면, 깔끔한 소리가 훨씬 크게 나야하는 것이 앰프의 역할이다.</p>
+<p>하지만 어떠한 이유에서 소리 신호를 특정 임계치 이상 증폭시킬 경우 찢어지는 소리가 난다. 이러한 현상에는 여러가지 이유가 있는데 가장 많이 보이는 이유 2개를 설명한다.</p>
+<ul>
+<li>앰프 내부의 회로가 더 큰 소리를 감당하지 못해서 클리핑이 나는 경우</li>
+<li>스피커가 가용할 수 있는 소리보다 더 큰 소리를 낼 수 없어서 불안정하게 진동을 하기 때문에 소리가 찢어지는 경우</li>
+</ul>
+<p>전자의 경우를 그림으로 설명하면 아래와 같다.</p>
+<p><img src="https://www.howtogeek.com/wp-content/uploads/2011/05/Clipping_waveform.jpg?trim=1,1&bg-color=000&pad=1,1"></p>
+<p>신호이론 상 가용치보다 더 큰 신호를 받으면, 해당 앰프가 낼 수 있는 최대 임계치 밑으로 신호가 모이면서 saturation 현상이 발생한다. </p>
+<p>이 때 saturation이 되는 모양은 soft clipping / hard clipping의 두가지 다른 패턴으로 나눠지게 된다. Soft clipping은 파동의 형태가 원래의 모양과 비슷한 것을 볼 수 있고 (i.e. 파형 전체의 크기가 변하는 것), hard clipping은 peak/trough가 주로 깎이는 것을 볼 수 있다. 이렇게 급격하게 입력 소리 파형의 모양이 바뀌는 것일수록 스피커에서는 안정적으로 반응하기 힘들기 때문에 더 찢어지는 소리가 나기도 한다.</p>
+<p>어찌되었건 이런 식으로 소리를 찌그러트리는 것을 ‘드라이브를 건다’ 라는 표현을 쓴다. </p>
+<p>얼마나 드라이브가 걸리냐에 따라서 Overdrive / distortion 등으로 나뉘며, 드라이브 특유의 소리에 따라서 crunch, fuzz 등의 드라이브 타입이 나뉘기도 한다. </p>
+<p>각 타입에서도 제조사의 톤 특색에 맞춰서 이름이 있다.</p>
+<p>보통 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9UMzh2My1TU0djTQ==">블루스<i class="fa fa-external-link-alt"></i></span> 등에서 들리는 정도의 드라이브 소리를 overdrive, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS85ZDR1aTlxN2VETQ==">락/메탈<i class="fa fa-external-link-alt"></i></span>에서 들리는 정도의 드라이브 소리를 distortion이라고 한다.</p>
+<p>기타 이펙터 중에는 overdrive / distortion 계열 이펙터들이 있는데, <strong>실제로 앰프의 소리를 엄청나게 키우지 않고도 소리의 파형을 변형시켜 이와 같이 찢어지는 소리를 내게 해주는 장치</strong>이다.</p>
+<p> </p>
+<h2 id="Bass-Mid-Treble의-영역"><a href="#Bass-Mid-Treble의-영역" class="headerlink" title="Bass / Mid / Treble의 영역"></a>Bass / Mid / Treble의 영역</h2><p>기타 이펙터나 앰프를 보면 Bass/Mid/Treble을 나눠서 소리를 조절할 수 있다. Bass는 낮은 소리 영역, Mid는 중간 소리 영역, Treble은 높은 소리 영역을 뜻하며, 각각 담당하는 스펙트럼 영역은 다음과 같다.</p>
+<ul>
+<li>Bass는 20~180 Hz</li>
+<li>Mid는 180~1200 Hz</li>
+<li>Treble은 1200~10,000 Hz</li>
+</ul>
+<p>(다른 자료에서는 5000Hz부터 Treble이라는 말도 있다. 그냥 대충 이 언저리 쯤에서 mid~treble의 영역을 가르는 것 같다.)</p>
+<p><img src="https://i.pinimg.com/originals/a9/f5/75/a9f57539217d75396452b6e0f50c3c6e.png"></p>
+<p>오버드라이브를 공부할 때 이러한 이유를 알아야하는 이유는 다음과 같다.</p>
+<ul>
+<li>오버드라이브 이펙터마다 강조하는 음역대가 다르다</li>
+<li>다양한 악기들과 합주를 할 때, 내 음역대의 상태에 따라 내 소리가 묻히거나 앞서게 된다.<ul>
+<li>내가 리드기타라면 당연히 앞서야한다.</li>
+<li>내가 백킹기타라면 너무 앞서면 안된다.</li>
+</ul>
+</li>
+</ul>
+<p>내가 원하는 소리를 내기 위해서는 어떤 오버드라이브가 필요한지 알아야 할 필요가 있다. 기타샵에 가면 정말 많은 오버드라이브 이펙터들이 있는데, 어떤 이펙터가 어떤 종류의 소리를 내고 합주에는 어떤 영향을 끼치는지 알면 큰 도움이 된다.</p>
+<p> </p>
+<h2 id="TS-타입-Tube-Screamer"><a href="#TS-타입-Tube-Screamer" class="headerlink" title="TS 타입 (Tube Screamer)"></a>TS 타입 (Tube Screamer)</h2><img src="https://sc1.musik-produktiv.com/pic-003470039xl/ibanez-ts9-tube-screamer.jpg" width="500" height="500" alt="[alternative_text]" title="[이예에~~]">
+
+<p>아마 가장 유명한 드라이브 계열은 TS 계열이지 않을까?</p>
+<p>TS 계열 드라이브 이펙터들 중에서는 Ibanez에서 만든 TS9과 TS808 등이 가장 유명하고, 그 후의 제품들은 리이슈나 리메이크 또는 비슷한 소리를 가진 제품들이 많이 나왔다. TS계열 이펙터를 알아보는 하나의 방법은 ‘초록색 색깔’ 이라는 점인데, 많은 TS계열 제품들이 TS808/TS-9이 가진 초록색 색깔을 그대로 가져가기 때문이다. <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9rc2hyY3ROeEVRRT90PTE1MQ==">TS계열 이펙터들을 비교하는 영상<i class="fa fa-external-link-alt"></i></span>을 보면 초록색 이펙터가 많다 ㅋㅋ</p>
+<p>오리지널 TS808 / TS-9의 드라이브 톤은 굉장히 빈티지한 드라이브 톤을 만든다. <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9BYktlX25hc2gtZw==">Stevie Ray Vaughan<i class="fa fa-external-link-alt"></i></span>가 TS 계열의 드라이브를 적극 활용해서 블루스에 맞는 오버드라이브 톤을 만들어낸다. 하지만 이런 톤은 모던 음악과는 잘 어울리지 않기 때문에 일반적으로는 다른 계열의 드라이브를 사용한다.</p>
+<p>그러면 TS계열은 왜 유명한것일까?</p>
+<p>TS계열의 <strong>진짜 면모는 ‘아주 약간의 드라이브’를 건 상태에서 부스팅을 할 때</strong> 나타난다. <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9oVDlOaGpYZDlMTT90PTk4">Eric Johson<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9uY2lqdjFXQ25Waz90PTU5">John Mayer<i class="fa fa-external-link-alt"></i></span>과 같이 유명한 톤은 다 TS계열 부스팅의 덕을 보았다. Drive 노브는 12시를 넘기지 않고 Level 노브를 높혀서 드라이브가 살짝 묻은 상태로 볼륨을 높히는 것인데, TS계열 특성상 아래 소리 스펙트럼 그래프에서 보이는 것 처럼 <strong>bass와 treble은 깎이면서 mid 볼륨이 엄청나게 커진다</strong>. 이때 이 커진 mid를 <strong>크런치나 퍼즈를 연결하면 후발 드라이브의 효과가 극대화</strong>된다. 또, <strong>mid가 커지면 합주를 할 때도 소리가 두각을 나타내기 때문에 리드기타 톤을 만들기 좋다</strong>.</p>
+<img src="https://heartfx.net/ts9/frtonmax.png" width="500" height="500" alt="[alternative_text]" title="[이예에~~]">
+
+<p>물론 mid가 커진다고 모든 기타에서 좋은 소리가 나는 것은 아니다. 이미 mid가 빵빵한 기타 소리에 mid를 더 밀어주면 굉장히 듣기 거북한 소리가 나게 된다. 그렇기 때문에 보통 <strong>스트랫이나 텔레처럼 mid가 많이 부족한 기타가 TS계열을 썼을 때 큰 효과를 받는 편</strong>이다. 아주 niche한 예시로, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS8xZ21HQm9aV3h3ND90PTIzOQ==">메사부기 앰프<i class="fa fa-external-link-alt"></i></span>를 사용하면서 메탈 음악을 할 때 TS계열 드라이브를 이용해서 mid를 펌핑하고 게인을 미는 경우가 있다.</p>
+<p>TS계열 드라이브는 자글자글한 소리를 내는데, 이는 굵기가 확실하게 들리는 드라이브를 좋아하는 사람들에게는 좋지 않은데, <strong>어떤 드라이브던지 자글자글한 드라이브 감을 추가</strong>해버리기 때문이다.</p>
+<p> </p>
+<h2 id="KLON-계열"><a href="#KLON-계열" class="headerlink" title="KLON 계열"></a>KLON 계열</h2><img src="https://online.berklee.edu/takenote/wp-content/uploads/2013/01/klon-centaur.jpg" width="500" height="500" alt="[alternative_text]" title="[이예에~~]">
+
+<p>위 사진의 이펙터는 KLON Centaur인데, 가격은 4천 달러를 넘어간다. 물론 저 가격이 말도 안된다고 생각하는 사람들이 많아서 소리를 카피한 훨씬 저렴한 이펙터들도 많다 (KLON의 클론… 후후…). 오죽하면 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS84dGpRWFRNZnhZWQ==">블라인드 챌린지<i class="fa fa-external-link-alt"></i></span>도 있었다 ㅋㅋ</p>
+<p>Hard clipping 드라이브라 컴프감이 들어가있는데, 이 <strong>컴프감이 굉장히 자연스럽다</strong>.</p>
+<p>또, 드라이브에 적당히 자연스럽게 클린 시그널도 섞여들어가있는데, <strong>강하게 치면 드라이브가 좀 더 섞이고 약하게 치면 또 부드러운 클린 섞인 소리가 나온다</strong>.</p>
+<p>TS계열이 미드부스팅 특화였다면, KLON은 <strong>특색이 없는 게인 부스터</strong>라고 볼 수 있다. Bass/Mid/Treble을 거의 인풋 그대로 가져가기 때문에 (i.e. 특색이 없기 때문에), <strong>아무 앰프게인/ 오버드라이브 이펙터와 섞어도 자연스럽게 드라이브를 얹어줄 수 있다</strong>. 이러한 점 때문에 인기가 많은 것 같다. <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9aMHBTdDVhR21fZw==">소리 샘플<i class="fa fa-external-link-alt"></i></span></p>
+<p> </p>
+<h2 id="BB-계열-Blues-Breaker"><a href="#BB-계열-Blues-Breaker" class="headerlink" title="BB 계열 (Blues Breaker)"></a>BB 계열 (Blues Breaker)</h2><img src="https://images.reverb.com/image/upload/s--3f35PQ2W--/a_exif,c_limit,e_unsharp_mask:80,f_auto,fl_progressive,g_south,h_1600,q_80,w_1600/v1444947257/irgvvo2soqldx3spmhoa.jpg" width="500" height="500" alt="[alternative_text]" title="[이예에~~]">
+
+<p>KLON처럼 <strong>특색이 없는 드라이브</strong>라고 한다. 대신 다른 점이라면 <strong>soft clipping 오버드라이브</strong>라는 점이다.</p>
+<p>KLON보다 좀 더 두드러지는 드라이브를 가지고 있는데, 오리지널 Marshall Blues breaker 이펙터는 게인량이 그렇게 크지 않다고 한다. 소프트한 블루스 이상의 드라이브를 얻기 어렵다고 하기 때문에, <strong>최근 BB계열 이펙터들은 이러한 점을 개선해서 게인량을 늘렸다</strong>고 한다. <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS83WlM5U1FCRW90dz90PTY2NA==">소리 샘플<i class="fa fa-external-link-alt"></i></span></p>
+<p>하지만 소프트한 블루스에는 이것만큼 좋은게 없다는 이야기도 있는데, 존메이어의 백킹톤이 왠만하면 BB에서 나온다는 이야기가 있다 (리드톤은 아마 TS계열 부스트가 붙지 않을까 싶다). <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9jWUhYTWF6eWhXSQ==">소리 샘플<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>Life</category>
+        <category>Guitar</category>
+      </categories>
+      <tags>
+        <tag>일상</tag>
+        <tag>Guitar</tag>
+        <tag>이펙터</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>기타 이펙터 - 관심있는 오버드라이브</title>
+    <url>/20210629-guitar-overdrive/</url>
+    <content><![CDATA[<h2 id="배경"><a href="#배경" class="headerlink" title="배경"></a>배경</h2><ul>
+<li>듀얼 오버드라이브, 또는 2오버드라이브 스택킹을 할 페달을 찾고있다.</li>
+</ul>
+<h2 id="Wampler-Dual-Fusion"><a href="#Wampler-Dual-Fusion" class="headerlink" title="Wampler Dual Fusion"></a>Wampler Dual Fusion</h2><ul>
+<li>지난 몇년 전 부터 많이 나타나기 시작한 듀얼 오버드라이브 페달 패턴<ul>
+<li>이 페달의 v1은 거의 10년 전에 나타난듯</li>
+</ul>
+</li>
+<li>Wampler의 Euphoria 드라이브 + Paisley 드라이브를 붙힘<ul>
+<li>Euphoria는 transparent 오버드라이브</li>
+<li>Paisley는 색깔이 있는 편</li>
+</ul>
+</li>
+<li>Tom Quayle 시그니처 오버드라이브</li>
+</ul>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/RRhhqKf-EZQ" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/7yPBoKITPXY" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<h2 id="Origian-Revival-Drive"><a href="#Origian-Revival-Drive" class="headerlink" title="Origian Revival Drive"></a>Origian Revival Drive</h2><ul>
+<li>엄청 비싸다 ㄷㄷ,, 80만원…<ul>
+<li>그만큼 이쁨</li>
+</ul>
+</li>
+<li>듀얼 오버드라이브<ul>
+<li>하나는 튜브, 하나는 실리콘 패턴이라고 한다.</li>
+<li>실리콘 패턴이 아무래도 transparent 오버 계열인거 같다.</li>
+</ul>
+</li>
+<li>드라이브가 굉장히 깨끗한듯!</li>
+</ul>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/nSRvly1M2ww" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<h2 id="JHS-double-barrel"><a href="#JHS-double-barrel" class="headerlink" title="JHS double barrel"></a>JHS double barrel</h2><ul>
+<li>듀얼 오버드라이브</li>
+</ul>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/7oRK1IxrGjs" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<h2 id="Klon-KTR"><a href="#Klon-KTR" class="headerlink" title="Klon KTR"></a>Klon KTR</h2><ul>
+<li>Klon Centaur의 카피.<ul>
+<li>Centaur는 희소성 때문에 가격이 엄청 높다 ㄷㄷ,, 300만원?</li>
+</ul>
+</li>
+<li>클론 계열의 부드러운 드라이브 느낌이 잘 살아있음.<ul>
+<li>생톤을 잘 살리는 쪽이라면 가볍게 RC booster 같은거랑 엮어서 다이나믹한 드라이브를 만들 수 있을 듯.</li>
+</ul>
+</li>
+</ul>
+<h2 id="Macron-Audio-드라이브-계열들"><a href="#Macron-Audio-드라이브-계열들" class="headerlink" title="Macron Audio 드라이브 계열들"></a>Macron Audio 드라이브 계열들</h2><ul>
+<li>국산 이펙터. 싱글페달임.</li>
+<li>Astrum + Viento를 섞어서 적당한 리드톤 만들 수 있을듯?</li>
+<li>쎈 드라이브는 Helios로… (메사부기 톤)</li>
+<li>근데 다 해서 80만원 ㄷㄷ</li>
+</ul>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/qiHppO46X3I" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+]]></content>
+      <categories>
+        <category>Life</category>
+        <category>Guitar</category>
+      </categories>
+      <tags>
+        <tag>일상</tag>
+        <tag>Guitar</tag>
+        <tag>이펙터</tag>
       </tags>
   </entry>
 </search>
