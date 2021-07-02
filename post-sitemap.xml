@@ -9,6 +9,14 @@
 
 
     <url>
+        <loc>https://changh95.github.io/20210529-tartan-scherer/</loc>
+        <lastmod>2021-07-02T12:03:54.916Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20210630-overdrive-study/</loc>
         <lastmod>2021-06-30T15:26:41.013Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -35,14 +43,6 @@
     <url>
         <loc>https://changh95.github.io/20210628-MS-rust/</loc>
         <lastmod>2021-06-28T02:32:36.808Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20210529-tartan-scherer/</loc>
-        <lastmod>2021-06-28T02:29:45.517Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
