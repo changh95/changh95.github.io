@@ -1,0 +1,199 @@
+%-------------------------
+% Resume in Latex
+% Author : Sourabh Bajaj
+% Edit : Hyunggi Chang
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-0.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-2pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeEducation}[5]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    #5 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeExperience}[5]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    #5 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeProject}[3]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} \\
+      \small{#2} \\
+      \small{#3}
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeResearch}[5]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} {\small #4 \vspace{-2pt}} & \textit{\small #5} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeTalk}[2]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeLeadership}[2]{
+  \item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      #1 & #2
+    \end{tabular*}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemii}{$\circ$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING-----------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\href{http://WKS.portfolio.com}{\Large WKS KIM}} & Email : \href{mailto:wks@gmail.com}{wks@gmail.com}\\
+  \href{http://wks.github.io}{http://wks.github.io} & Mobile : (+82) 010-1234-5678\\
+\end{tabular*}
+
+%-----------EDUCATION-----------------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeEducation
+      {University of Warwick}{Coventry, UK}
+      {BSc. Economics - Graduation expected in June 2022}{Oct. 2019 -- PRESENT}
+      {Subjects: ...}
+    \resumeSubheading
+      {Some High School}{London, UK}
+      {A-Levels: 3A* 1A}{Oct. 2017 -- Jun. 2017}
+  \resumeSubHeadingListEnd
+
+%-----------Experiences----------------
+\section{Experiences}
+  \resumeSubHeadingListStart
+
+    \resumeExperience
+      {Morgan Stanley}{London, UK}
+      {Summer Analyst Internship}{June. 2020 - Sept. 2020}
+      {- Responsibilities... \\ - Action + Effects... \\ - Action + Effects...}
+    \resumeExperience
+      {McKinsey \& Company}{New York, USA}
+      {Spring Internship - Business Analyst}{Feb. 2020 - Mar. 2020}
+      {- Responsibilities... \\ - Action + Effects... \\ - Action + Effects...}
+  \resumeSubHeadingListEnd
+
+%-----------Projects-----------------
+
+\section{Projects}
+  \resumeSubHeadingListStart
+    \resumeProject
+      {Bloomberg News Crawler}
+         {Built a Python program that delivers news headlines from Bloomberg every morning.} {\url{www.github.com/WKS/bnc/}}
+    \resumeProject
+      {Automatic Trading Bot}
+        {Built a stock trading bot using Python. \$2000 Profit in 1 year.}
+        {\url{www.github.com/WKS/atb/}}
+    \resumeProject
+      {Data Analysis Framework}
+        {Built a framework for simple data analysis. Used for every homework during 2nd year. }
+        {\url{www.github.com/WKS/daf/}}
+  \resumeSubHeadingListEnd
+
+
+%-----------Leadership-----------------
+
+\section{Leadership}
+  \resumeSubHeadingListStart
+    \resumeLeadership{\textbf{President} - Warwick Algorithmic Trading Society}{Nov. 2020 - PRESENT}
+    \resumeLeadership{\textbf{Academic Officer} - Warwick Korean Society}{Nov. 2020 - PRESENT}
+    \resumeLeadership{\textbf{Course Representative} - University of Warwick}{Nov. 2020 - PRESENT}
+  \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\section{Honours and Awards}
+  \resumeSubHeadingListStart
+    \resumeLeadership{\textbf{Scholarship} - Global Excellence Undergraduate Scholarship}{Oct. 2019 - PRESENT }
+    \resumeLeadership{\textbf{Scholarship} - Some High School Scholarship}{Oct. 2017 - Jun. 2019}
+  \resumeSubHeadingListEnd
+  
+%--------------------------------------------
+\section{Skills}
+  \resumeSubHeadingListStart
+    \resumeLeadership{\textbf{Languages} - Korean(Native), English(Native), Mandarin Chinese(Intermediate)}{ }
+    \resumeLeadership{\textbf{Programming} - STATA, R, Python(NumPy, Pandas, Selenium, Jupyter)}{ }
+  \resumeSubHeadingListEnd
+
+\end{document}
