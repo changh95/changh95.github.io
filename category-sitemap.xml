@@ -9,64 +9,162 @@
 
 
     <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-2-C/Language/Modern-C-STL/</loc>
-        <lastmod>2022-05-02T01:25:27.191Z</lastmod>
+        <loc>https://changh95.github.io/categories/4-Maths/</loc>
+        <lastmod>2022-07-04T12:54:34.660Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-2-C/Language/</loc>
-        <lastmod>2022-05-02T01:25:27.191Z</lastmod>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
+        <lastmod>2022-07-04T12:54:21.804Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-2-C/</loc>
-        <lastmod>2022-05-02T01:25:27.191Z</lastmod>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
+        <lastmod>2022-07-04T12:54:21.804Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-7-Go/</loc>
+        <lastmod>2022-07-04T12:53:44.178Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/</loc>
+        <lastmod>2022-07-04T12:53:44.178Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/2-Programming/</loc>
-        <lastmod>2022-05-02T01:25:27.191Z</lastmod>
+        <lastmod>2022-07-04T12:53:44.178Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-4-Robotics/Autonomous-Driving/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
+        <loc>https://changh95.github.io/categories/2-Programming/2-6-Swift/</loc>
+        <lastmod>2022-07-04T12:53:30.464Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-2-C/Language/Build-Compilers-Frameworks/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
+        <loc>https://changh95.github.io/categories/2-Programming/2-4-Rust/</loc>
+        <lastmod>2022-07-04T12:53:12.533Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-4-Robotics/Robotics/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
+        <loc>https://changh95.github.io/categories/2-Programming/2-3-Python/</loc>
+        <lastmod>2022-07-04T12:52:49.442Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/LiDAR-SLAM/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
+        <loc>https://changh95.github.io/categories/2-Programming/2-2-C/</loc>
+        <lastmod>2022-07-04T12:52:15.461Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/</loc>
+        <lastmod>2022-07-04T12:51:03.198Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/MIT-Missing-Semesters-%25EA%25B0%2595%25EC%259D%2598-%25EC%25A0%2595%25EB%25A6%25AC/</loc>
+        <lastmod>2022-07-04T12:46:48.249Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Clean-Coders-%25EC%25B1%2585-%25EC%25A0%2595%25EB%25A6%25AC/</loc>
+        <lastmod>2022-07-04T12:46:28.383Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-2-C/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
+        <lastmod>2022-07-04T12:46:27.487Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/3-Life/3-1-%25EC%259D%25BC%25EC%2583%2581/</loc>
+        <lastmod>2022-07-04T12:43:31.479Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/3-Life/</loc>
+        <lastmod>2022-07-04T12:43:31.479Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Solidity-Blockchain-and-Smart-Contract-%25EA%25B0%2595%25EC%259D%2598-%25EC%25A0%2595%25EB%25A6%25AC/</loc>
+        <lastmod>2022-07-04T12:41:30.631Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-4-Robotics/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
+        <lastmod>2022-07-04T12:34:12.572Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/%25EC%25B9%25B4%25EB%25A9%2594%25EB%259D%25BC-%25EA%25B8%25B0%25EC%25B4%2588-%25EC%258B%259C%25EB%25A6%25AC%25EC%25A6%2588/</loc>
+        <lastmod>2022-07-04T12:33:54.733Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Visual-SLAM-%25EA%25B3%25B5%25EB%25B6%2580-%25EB%25A1%259C%25EB%2593%259C%25EB%25A7%25B5/</loc>
+        <lastmod>2022-07-04T12:30:16.759Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/</loc>
+        <lastmod>2022-07-04T12:30:16.480Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
+        <lastmod>2022-07-04T12:27:51.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Robust-estimation-%25EC%258B%259C%25EB%25A6%25AC%25EC%25A6%2588/</loc>
+        <lastmod>2022-07-04T12:25:15.581Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -79,127 +177,8 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/Deep-Learning/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/3-Life/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
-        <lastmod>2022-04-22T13:42:48.621Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Software-Development/Clean-Coders-%25EC%25A0%2595%25EB%25A6%25AC/</loc>
-        <lastmod>2022-04-22T13:42:48.620Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Software-Development/</loc>
-        <lastmod>2022-04-22T13:42:48.620Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EC%259B%2594%25EA%25B0%2584-SLAM-%25EB%2589%25B4%25EC%258A%25A4/</loc>
         <lastmod>2022-04-22T13:42:48.620Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/Machine-Learning/</loc>
-        <lastmod>2022-04-22T13:42:48.620Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/</loc>
-        <lastmod>2022-04-22T13:42:48.620Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/4-Maths/4-2-Convex-Optimization/</loc>
-        <lastmod>2022-04-22T13:42:48.619Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/4-Maths/</loc>
-        <lastmod>2022-04-22T13:42:48.619Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/Computer-Vision/</loc>
-        <lastmod>2022-04-22T13:42:48.432Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Visual-SLAM/</loc>
-        <lastmod>2022-04-22T13:42:48.432Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/</loc>
-        <lastmod>2022-04-22T13:42:48.432Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Blockchain-NFT/</loc>
-        <lastmod>2022-04-22T13:42:48.431Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-7-Go/GoCV/</loc>
-        <lastmod>2022-04-22T13:42:48.430Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-7-Go/</loc>
-        <lastmod>2022-04-22T13:42:48.430Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -212,99 +191,8 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-2-C/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2022-04-22T13:42:48.429Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/3-Life/3-1-%25EC%259D%25BC%25EC%2583%2581/</loc>
-        <lastmod>2022-04-22T13:42:48.429Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-6-Swift/CS193P/</loc>
-        <lastmod>2022-04-22T13:42:48.428Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-6-Swift/</loc>
-        <lastmod>2022-04-22T13:42:48.428Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-5-Javascript-Typescript/</loc>
         <lastmod>2022-04-22T13:42:48.427Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Dev-tools/</loc>
-        <lastmod>2022-04-22T13:42:48.427Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Blockchain-NFT/Solidity-Blockchain-and-Smart-Contract-%25EA%25B0%2595%25EC%259D%2598-%25EC%25A0%2595%25EB%25A6%25AC/</loc>
-        <lastmod>2022-04-22T13:42:48.296Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/4-Maths/4-1-Linear-Algebra/Programming/</loc>
-        <lastmod>2022-04-22T13:42:48.286Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/4-Maths/4-1-Linear-Algebra/</loc>
-        <lastmod>2022-04-22T13:42:48.286Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-3-Python/%25EA%25B0%259C%25EB%25B0%259C/</loc>
-        <lastmod>2022-04-22T13:42:48.286Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-3-Python/</loc>
-        <lastmod>2022-04-22T13:42:48.286Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/MLOps/</loc>
-        <lastmod>2022-04-22T13:42:48.279Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2022-04-22T13:42:48.277Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Visual-SLAM/Visual-SLAM-%25EA%25B3%25B5%25EB%25B6%2580-%25EB%25A1%259C%25EB%2593%259C%25EB%25A7%25B5/</loc>
-        <lastmod>2022-04-22T13:42:48.276Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -331,21 +219,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-4-Rust/%25EC%2596%25B8%25EC%2596%25B4-%25EA%25B3%25B5%25EB%25B6%2580/</loc>
-        <lastmod>2022-04-22T13:42:48.027Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-4-Robotics/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2022-04-22T13:42:48.027Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-4-Rust/</loc>
         <lastmod>2022-04-22T13:42:48.027Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -354,20 +228,6 @@
     <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-2-C/C-Best-Practices-%25EC%258B%259C%25EB%25A6%25AC%25EC%25A6%2588/</loc>
         <lastmod>2022-04-22T13:42:48.026Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Software/ROS/</loc>
-        <lastmod>2022-04-22T13:42:48.024Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Software/</loc>
-        <lastmod>2022-04-22T13:42:48.024Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -387,36 +247,8 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Software/Docker/</loc>
-        <lastmod>2022-04-22T13:42:48.010Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Backend-Solver/Robust-estimation-%25EC%258B%259C%25EB%25A6%25AC%25EC%25A6%2588/</loc>
-        <lastmod>2022-04-22T13:42:47.997Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/Backend-Solver/</loc>
-        <lastmod>2022-04-22T13:42:47.997Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/categories/3-Life/3-4-Guitar/</loc>
         <lastmod>2022-04-22T13:42:47.995Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-4-Rust/Beginner-s-Series-to-Rust/</loc>
-        <lastmod>2022-04-22T13:42:47.994Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -429,29 +261,8 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/%25EC%25B9%25B4%25EB%25A9%2594%25EB%259D%25BC-%25EA%25B8%25B0%25EC%25B4%2588/</loc>
-        <lastmod>2022-04-22T13:42:47.836Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-2-C/Professional-C-%25EC%25B1%2585/</loc>
         <lastmod>2022-04-22T13:42:47.836Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Dev-tools/MIT-Missing-Semesters-%25EC%25A0%2595%25EB%25A6%25AC/</loc>
-        <lastmod>2022-04-22T13:42:47.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/Algorithms-Data-Structures/</loc>
-        <lastmod>2022-04-22T13:42:47.834Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -480,13 +291,6 @@
     <url>
         <loc>https://changh95.github.io/categories/5-Medicine/</loc>
         <lastmod>2022-04-22T13:42:47.822Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/4-Maths/4-3-Calculus/</loc>
-        <lastmod>2022-04-22T13:42:47.820Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

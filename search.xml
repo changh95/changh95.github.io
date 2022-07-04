@@ -167,10 +167,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>2.1 Software Engineering</category>
-        <category>Algorithms / Data Structures</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -222,9 +218,6 @@
         <category>2. Programming</category>
         <category>2.2 C++</category>
         <category>2.1 Software Engineering</category>
-        <category>Algorithms / Data Structures</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -257,8 +250,7 @@
 ]]></content>
       <categories>
         <category>2. Programming</category>
-        <category>2.1 Software Engineering</category>
-        <category>Algorithms / Data Structures</category>
+        <category>2.2 C++</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -367,7 +359,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Algorithms / Data Structures</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -1428,8 +1419,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -2104,8 +2093,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -2179,8 +2166,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -2237,7 +2222,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.3 Python</category>
-        <category>개발</category>
       </categories>
       <tags>
         <tag>Python</tag>
@@ -2590,8 +2574,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>QIRA</tag>
@@ -2816,7 +2798,6 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
         <category>Visual-SLAM 공부 로드맵</category>
       </categories>
       <tags>
@@ -2853,7 +2834,6 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
         <category>Visual-SLAM 공부 로드맵</category>
       </categories>
       <tags>
@@ -3087,7 +3067,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Algorithms / Data Structures</category>
       </categories>
       <tags>
         <tag>Data structures</tag>
@@ -4480,8 +4459,7 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
-        <category>MIT Missing Semesters 정리</category>
+        <category>MIT Missing Semesters 강의 정리</category>
       </categories>
       <tags>
         <tag>Missing Semesters</tag>
@@ -4686,8 +4664,7 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
-        <category>MIT Missing Semesters 정리</category>
+        <category>MIT Missing Semesters 강의 정리</category>
       </categories>
       <tags>
         <tag>Missing Semesters</tag>
@@ -4802,7 +4779,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Algorithms / Data Structures</category>
       </categories>
       <tags>
         <tag>Algorithms</tag>
@@ -4955,8 +4931,7 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
-        <category>MIT Missing Semesters 정리</category>
+        <category>MIT Missing Semesters 강의 정리</category>
       </categories>
       <tags>
         <tag>Missing Semesters</tag>
@@ -5003,7 +4978,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
       </categories>
       <tags>
         <tag>Tricks</tag>
@@ -5071,8 +5045,7 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
-        <category>MIT Missing Semesters 정리</category>
+        <category>MIT Missing Semesters 강의 정리</category>
       </categories>
       <tags>
         <tag>Missing Semesters</tag>
@@ -5149,7 +5122,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
       </categories>
       <tags>
         <tag>Bash</tag>
@@ -5185,7 +5157,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
       </categories>
       <tags>
         <tag>Bash</tag>
@@ -6063,7 +6034,7 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>카메라 기초</category>
+        <category>카메라 기초 시리즈</category>
       </categories>
       <tags>
         <tag>Camera</tag>
@@ -6147,8 +6118,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -6202,8 +6171,6 @@
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -6254,7 +6221,6 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>Deep Learning</tag>
@@ -6384,7 +6350,6 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>NAVER LABS</tag>
@@ -6676,7 +6641,6 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>NAVER LABS</tag>
@@ -6901,7 +6865,6 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -9007,7 +8970,7 @@
       <categories>
         <category>1. Spatial AI</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>카메라 기초</category>
+        <category>카메라 기초 시리즈</category>
       </categories>
       <tags>
         <tag>Camera</tag>
@@ -10325,7 +10288,6 @@ Applications </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>Deep Learning</tag>
@@ -10787,8 +10749,6 @@ Applications </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -11523,8 +11483,6 @@ Applications </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -11548,7 +11506,6 @@ Applications </summary>
 <img src="/20201212-maths-notes/paul.png" class="" title="paul">]]></content>
       <categories>
         <category>4. Maths</category>
-        <category>4.3 Calculus</category>
       </categories>
       <tags>
         <tag>Maths</tag>
@@ -11613,7 +11570,6 @@ Applications </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
       </categories>
       <tags>
         <tag>NVIDIA</tag>
@@ -11629,7 +11585,6 @@ Applications </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
       </categories>
       <tags>
         <tag>PapersWithCode</tag>
@@ -11644,7 +11599,6 @@ Applications </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Machine Learning</category>
       </categories>
       <tags>
         <tag>Maths</tag>
@@ -12439,8 +12393,6 @@ Applications </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>Visual-SLAM</category>
-        <category>Computer Vision</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -12595,7 +12547,6 @@ Applications </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Backend / Solver</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -12683,7 +12634,6 @@ Applications </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.4 Rust</category>
-        <category>Beginner&#39;s Series to Rust</category>
       </categories>
       <tags>
         <tag>Rust</tag>
@@ -12845,7 +12795,6 @@ Applications </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Backend / Solver</category>
         <category>Robust estimation 시리즈</category>
       </categories>
       <tags>
@@ -12966,7 +12915,6 @@ Applications </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Backend / Solver</category>
         <category>Robust estimation 시리즈</category>
       </categories>
       <tags>
@@ -14764,9 +14712,6 @@ Stereo Depth and Camera Motion </summary>
         <category>1.1 SLAM</category>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
-        <category>Software</category>
-        <category>Docker</category>
       </categories>
       <tags>
         <tag>Linux</tag>
@@ -15473,9 +15418,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1.1 SLAM</category>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
-        <category>Software</category>
-        <category>ROS</category>
       </categories>
       <tags>
         <tag>Docker</tag>
@@ -15876,7 +15818,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>LiDAR SLAM</category>
       </categories>
       <tags>
         <tag>Robotics</tag>
@@ -17324,7 +17265,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.4 Rust</category>
-        <category>언어 공부</category>
       </categories>
       <tags>
         <tag>Rust</tag>
@@ -17510,7 +17450,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
         <category>Visual-SLAM 공부 로드맵</category>
       </categories>
       <tags>
@@ -17529,8 +17468,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -17798,7 +17735,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -17972,8 +17908,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -18000,7 +17934,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>학회 발표 리뷰</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -18021,8 +17954,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -18120,7 +18051,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
       </categories>
       <tags>
         <tag>MacOS</tag>
@@ -18138,7 +18068,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>MLOps</category>
       </categories>
       <tags>
         <tag>MLOps</tag>
@@ -18156,8 +18085,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -18321,7 +18248,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Blockchain/NFT</category>
         <category>Solidity, Blockchain, and Smart Contract 강의 정리</category>
       </categories>
       <tags>
@@ -18348,7 +18274,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -18413,7 +18338,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Blockchain/NFT</category>
         <category>Solidity, Blockchain, and Smart Contract 강의 정리</category>
       </categories>
       <tags>
@@ -18441,7 +18365,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -18458,8 +18381,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -18494,7 +18415,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
+        <category>학회 발표 리뷰</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -18530,7 +18451,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.3 Python</category>
-        <category>개발</category>
       </categories>
       <tags>
         <tag>Python</tag>
@@ -18547,10 +18467,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>4. Maths</category>
-        <category>Visual-SLAM</category>
-        <category>LiDAR SLAM</category>
-        <category>4.1 Linear Algebra</category>
-        <category>Programming</category>
       </categories>
       <tags>
         <tag>Eigen</tag>
@@ -18566,7 +18482,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.3 Python</category>
-        <category>개발</category>
       </categories>
       <tags>
         <tag>Python</tag>
@@ -19044,8 +18959,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
-        <category>LiDAR SLAM</category>
       </categories>
       <tags>
         <tag>PCL</tag>
@@ -19253,7 +19166,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Blockchain/NFT</category>
         <category>Solidity, Blockchain, and Smart Contract 강의 정리</category>
       </categories>
       <tags>
@@ -19273,7 +19185,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Blockchain/NFT</category>
         <category>Solidity, Blockchain, and Smart Contract 강의 정리</category>
       </categories>
       <tags>
@@ -19383,8 +19294,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -19406,7 +19315,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Blockchain/NFT</category>
         <category>Solidity, Blockchain, and Smart Contract 강의 정리</category>
       </categories>
       <tags>
@@ -19554,8 +19462,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -19601,8 +19507,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -19630,8 +19534,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -19718,8 +19620,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>Visual-SLAM</category>
-        <category>LiDAR SLAM</category>
       </categories>
       <tags>
         <tag>Visual-SLAM</tag>
@@ -19818,8 +19718,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -19875,7 +19773,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>3. Life</category>
         <category>2.1 Software Engineering</category>
         <category>3.1 일상</category>
-        <category>Dev tools</category>
       </categories>
       <tags>
         <tag>Apple</tag>
@@ -19960,8 +19857,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
-        <category>Clean Coders 정리</category>
+        <category>Clean Coders 책 정리</category>
       </categories>
       <tags>
         <tag>Clean Coders</tag>
@@ -19981,7 +19877,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Dev tools</category>
       </categories>
       <tags>
         <tag>Apple</tag>
@@ -20085,8 +19980,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>Visual-SLAM</category>
-        <category>Computer Vision</category>
       </categories>
       <tags>
         <tag>Apple</tag>
@@ -20259,8 +20152,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
-        <category>Clean Coders 정리</category>
+        <category>Clean Coders 책 정리</category>
       </categories>
       <tags>
         <tag>Clean Coders</tag>
@@ -20306,8 +20198,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>Visual-SLAM</category>
-        <category>Computer Vision</category>
       </categories>
       <tags>
         <tag>Apple</tag>
@@ -20393,7 +20283,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.6 Swift</category>
-        <category>CS193P</category>
       </categories>
       <tags>
         <tag>MacOS</tag>
@@ -20480,7 +20369,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
       </categories>
       <tags>
         <tag>Deep Learning</tag>
@@ -20528,7 +20416,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
       </categories>
       <tags>
         <tag>Google</tag>
@@ -20776,7 +20663,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
       </categories>
       <tags>
         <tag>Deep Learning</tag>
@@ -20795,8 +20681,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>Visual-SLAM</category>
-        <category>Computer Vision</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -20849,7 +20733,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
       </categories>
       <tags>
         <tag>SOLID</tag>
@@ -20894,7 +20777,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>2.2 C++</category>
         <category>2.1 Software Engineering</category>
         <category>학회 발표 리뷰</category>
-        <category>Software Development</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -20918,9 +20800,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>2. Programming</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>Computer Vision</category>
         <category>2.7 Go</category>
-        <category>GoCV</category>
       </categories>
       <tags>
         <tag>OpenCV</tag>
@@ -20964,8 +20844,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
-        <category>Clean Coders 정리</category>
+        <category>Clean Coders 책 정리</category>
       </categories>
       <tags>
         <tag>Clean Coders</tag>
@@ -21068,7 +20947,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Blockchain/NFT</category>
       </categories>
       <tags>
         <tag>NFT</tag>
@@ -21166,8 +21044,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
-        <category>Clean Coders 정리</category>
+        <category>Clean Coders 책 정리</category>
       </categories>
       <tags>
         <tag>Clean Coders</tag>
@@ -21244,7 +21121,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Blockchain/NFT</category>
       </categories>
       <tags>
         <tag>NFT</tag>
@@ -21261,11 +21137,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
-        <category>Visual-SLAM</category>
         <category>1.4 Robotics</category>
-        <category>Robotics</category>
-        <category>Autonomous Driving</category>
       </categories>
       <tags>
         <tag>Robotics</tag>
@@ -21283,11 +21155,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
         <category>1.4 Robotics</category>
-        <category>LiDAR SLAM</category>
-        <category>Robotics</category>
-        <category>Autonomous Driving</category>
       </categories>
       <tags>
         <tag>Robotics</tag>
@@ -21465,10 +21333,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.3 Computer Vision &amp; Imaging</category>
-        <category>Visual-SLAM</category>
         <category>1.4 Robotics</category>
-        <category>Computer Vision</category>
-        <category>Robotics</category>
       </categories>
       <tags>
         <tag>Visual-SLAM</tag>
@@ -21559,7 +21424,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>LiDAR SLAM</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -21577,7 +21441,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
       </categories>
       <tags>
         <tag>Deep Learning</tag>
@@ -21614,7 +21477,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
 ]]></content>
       <categories>
         <category>4. Maths</category>
-        <category>4.2 Convex Optimization</category>
       </categories>
       <tags>
         <tag>Stanford</tag>
@@ -21629,7 +21491,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
       </categories>
       <tags>
         <tag>Pair programming</tag>
@@ -21780,7 +21641,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
-        <category>LiDAR SLAM</category>
       </categories>
       <tags>
         <tag>SLAM</tag>
@@ -21823,7 +21683,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.4 Robotics</category>
-        <category>Robotics</category>
       </categories>
       <tags>
         <tag>Robotics</tag>
@@ -21868,8 +21727,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
-        <category>Clean Coders 정리</category>
+        <category>Clean Coders 책 정리</category>
       </categories>
       <tags>
         <tag>Clean Coders</tag>
@@ -21908,7 +21766,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Machine Learning</category>
       </categories>
       <tags>
         <tag>Andrew Ng</tag>
@@ -22066,8 +21923,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.1 Software Engineering</category>
-        <category>Software Development</category>
-        <category>Clean Coders 정리</category>
+        <category>Clean Coders 책 정리</category>
       </categories>
       <tags>
         <tag>Clean Coders</tag>
@@ -22095,8 +21951,6 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -22745,8 +22599,6 @@ Domain Calibration via Robust SLAM </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Build &amp; Compilers &amp; Frameworks</category>
       </categories>
       <tags>
         <tag>C++</tag>
@@ -22892,11 +22744,7 @@ Domain Calibration via Robust SLAM </summary>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
         <category>1.2 Machine Learning &amp; Deep Learning</category>
-        <category>Deep Learning</category>
         <category>1.4 Robotics</category>
-        <category>LiDAR SLAM</category>
-        <category>Robotics</category>
-        <category>Autonomous Driving</category>
       </categories>
       <tags>
         <tag>Robotics</tag>
@@ -22939,8 +22787,19 @@ Domain Calibration via Robust SLAM </summary>
       <categories>
         <category>2. Programming</category>
         <category>2.2 C++</category>
-        <category>Language</category>
-        <category>Modern C++ &amp; STL</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Compiler Explorer + QuickBench</title>
+    <url>/20220517-online-cpp-performance-tester/</url>
+    <content><![CDATA[<p><span class="exturl" data-url="aHR0cHM6Ly9nb2Rib2x0Lm9yZy8=">https://godbolt.org<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9xdWljay1iZW5jaC5jb20v">https://quick-bench.com/<i class="fa fa-external-link-alt"></i></span></p>
+]]></content>
+      <categories>
+        <category>2. Programming</category>
+        <category>2.2 C++</category>
       </categories>
       <tags>
         <tag>C++</tag>
