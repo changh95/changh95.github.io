@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://changh95.github.io/tags/Life/</loc>
+        <lastmod>2022-07-07T16:26:30.031Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/%EC%A0%84%EB%AC%B8%EC%97%B0%EA%B5%AC%EC%9A%94%EC%9B%90/</loc>
+        <lastmod>2022-07-07T16:26:30.031Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/Convex-Optimization/</loc>
         <lastmod>2022-07-04T12:54:34.660Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1172,13 +1186,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Life/</loc>
-        <lastmod>2022-04-22T13:42:48.429Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Coffee/</loc>
         <lastmod>2022-04-22T13:42:48.429Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1194,13 +1201,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/%EB%85%BC%EC%82%B0%ED%9B%88%EB%A0%A8%EC%86%8C/</loc>
-        <lastmod>2022-04-22T13:42:48.428Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/%EC%A0%84%EB%AC%B8%EC%97%B0%EA%B5%AC%EC%9A%94%EC%9B%90/</loc>
         <lastmod>2022-04-22T13:42:48.428Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
