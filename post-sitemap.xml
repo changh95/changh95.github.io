@@ -9,6 +9,22 @@
 
 
     <url>
+        <loc>https://changh95.github.io/20220713-slamops-os/</loc>
+        <lastmod>2022-08-12T06:17:06.672Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/</loc>
+        <lastmod>2022-07-09T15:18:51.341Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20220707-army-over/</loc>
         <lastmod>2022-07-07T16:26:30.031Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -137,6 +153,14 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20201125-stl-containers/</loc>
+        <lastmod>2022-07-04T12:52:04.316Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20201217-std-vector-reserve/</loc>
         <lastmod>2022-07-04T12:52:04.316Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -146,14 +170,6 @@
 
     <url>
         <loc>https://changh95.github.io/20210330-mersenne-twister/</loc>
-        <lastmod>2022-07-04T12:52:04.316Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201125-stl-containers/</loc>
         <lastmod>2022-07-04T12:52:04.316Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -705,14 +721,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/</loc>
-        <lastmod>2022-07-04T12:30:13.512Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20210121-visual-slam-roadmap-beginner/</loc>
         <lastmod>2022-07-04T12:27:53.696Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -873,7 +881,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220418-10-lessons-from-smartest-engineer/</loc>
+        <loc>https://changh95.github.io/20220421-10x-developer/</loc>
         <lastmod>2022-04-22T13:42:48.621Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -881,7 +889,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220421-10x-developer/</loc>
+        <loc>https://changh95.github.io/20220418-10-lessons-from-smartest-engineer/</loc>
         <lastmod>2022-04-22T13:42:48.621Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -945,22 +953,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220210-go-5/</loc>
-        <lastmod>2022-04-22T13:42:48.429Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20220210-go-3/</loc>
-        <lastmod>2022-04-22T13:42:48.429Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20220210-go-6/</loc>
         <lastmod>2022-04-22T13:42:48.429Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -969,7 +961,23 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20220210-go-5/</loc>
+        <lastmod>2022-04-22T13:42:48.429Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20220214-coffee-bean-brothers/</loc>
+        <lastmod>2022-04-22T13:42:48.429Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220210-go-3/</loc>
         <lastmod>2022-04-22T13:42:48.429Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1001,7 +1009,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220128-senior-dev-jobsearch/</loc>
+        <loc>https://changh95.github.io/20220128-stop-teaching-c/</loc>
         <lastmod>2022-04-22T13:42:48.427Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1009,7 +1017,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220128-stop-teaching-c/</loc>
+        <loc>https://changh95.github.io/20220128-senior-dev-jobsearch/</loc>
         <lastmod>2022-04-22T13:42:48.427Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1097,7 +1105,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210817-vslam-vs-vio/</loc>
+        <loc>https://changh95.github.io/20210827-new-domain-but-lost-all-view-counts/</loc>
         <lastmod>2022-04-22T13:42:48.024Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1105,7 +1113,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210827-new-domain-but-lost-all-view-counts/</loc>
+        <loc>https://changh95.github.io/20210817-vslam-vs-vio/</loc>
         <lastmod>2022-04-22T13:42:48.024Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1145,7 +1153,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210802-2021-june-slam-news/</loc>
+        <loc>https://changh95.github.io/20210728-2021-july-slam-news/</loc>
         <lastmod>2022-04-22T13:42:48.009Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1153,7 +1161,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210728-2021-july-slam-news/</loc>
+        <loc>https://changh95.github.io/20210802-2021-june-slam-news/</loc>
         <lastmod>2022-04-22T13:42:48.009Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1297,7 +1305,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210327-RFSC-Kim-The-Age-of-Robot-Exploration/</loc>
+        <loc>https://changh95.github.io/20210328-cpp-basics-3/</loc>
         <lastmod>2022-04-22T13:42:47.835Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1305,7 +1313,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210328-cpp-basics-3/</loc>
+        <loc>https://changh95.github.io/20210327-RFSC-Kim-The-Age-of-Robot-Exploration/</loc>
         <lastmod>2022-04-22T13:42:47.835Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1369,6 +1377,14 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20210213-february-slam-news/</loc>
+        <lastmod>2022-04-22T13:42:47.833Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20210216-SW-tech-interview-prep/</loc>
         <lastmod>2022-04-22T13:42:47.833Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1385,14 +1401,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210222-image-projection/</loc>
-        <lastmod>2022-04-22T13:42:47.833Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20210128-2021-january-slam-news/</loc>
         <lastmod>2022-04-22T13:42:47.833Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1401,7 +1409,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210213-february-slam-news/</loc>
+        <loc>https://changh95.github.io/20210222-image-projection/</loc>
         <lastmod>2022-04-22T13:42:47.833Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1409,7 +1417,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210113-maths-for-graduate-school/</loc>
+        <loc>https://changh95.github.io/20210114-graduate-school-math-linear-algebra/</loc>
         <lastmod>2022-04-22T13:42:47.832Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1417,7 +1425,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210114-graduate-school-math-linear-algebra/</loc>
+        <loc>https://changh95.github.io/20210113-maths-for-graduate-school/</loc>
         <lastmod>2022-04-22T13:42:47.832Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1457,14 +1465,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20201228-cvpr2020-slam-yang/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/</loc>
         <lastmod>2022-04-22T13:42:47.830Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1482,6 +1482,14 @@
 
     <url>
         <loc>https://changh95.github.io/20201227-cvpr2020-slam-malisiewicz/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201228-cvpr2020-slam-yang/</loc>
         <lastmod>2022-04-22T13:42:47.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1513,6 +1521,14 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20201215-Harris-corner/</loc>
+        <lastmod>2022-04-22T13:42:47.829Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20201215-case-study-pcl/</loc>
         <lastmod>2022-04-22T13:42:47.829Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1530,14 +1546,6 @@
 
     <url>
         <loc>https://changh95.github.io/20201220-warwick-podcast/</loc>
-        <lastmod>2022-04-22T13:42:47.829Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201215-Harris-corner/</loc>
         <lastmod>2022-04-22T13:42:47.829Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1577,7 +1585,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20201211-string-concat/</loc>
+        <loc>https://changh95.github.io/20201212-2d-matrix-iteration/</loc>
         <lastmod>2022-04-22T13:42:47.819Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1585,7 +1593,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20201212-2d-matrix-iteration/</loc>
+        <loc>https://changh95.github.io/20201211-string-concat/</loc>
         <lastmod>2022-04-22T13:42:47.819Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
