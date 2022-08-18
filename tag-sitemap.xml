@@ -1571,13 +1571,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/GTC/</loc>
-        <lastmod>2022-04-22T13:42:47.837Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/iMAP/</loc>
         <lastmod>2022-04-22T13:42:47.837Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1600,6 +1593,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Rearrangement/</loc>
+        <lastmod>2022-04-22T13:42:47.837Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/GTC/</loc>
         <lastmod>2022-04-22T13:42:47.837Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1844,13 +1844,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Graduate-school/</loc>
-        <lastmod>2022-04-22T13:42:47.832Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Linear-algebra/</loc>
         <lastmod>2022-04-22T13:42:47.832Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1858,56 +1851,14 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/tags/Graduate-school/</loc>
+        <lastmod>2022-04-22T13:42:47.832Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/Retrospective/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SuperMaps/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SuperGlue/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SuperPointVO/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/DeepChArUco/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SuperPoint/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Magic-Leap/</loc>
-        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Tomasz-Malisiewicz/</loc>
         <lastmod>2022-04-22T13:42:47.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -2013,6 +1964,55 @@
 
     <url>
         <loc>https://changh95.github.io/tags/MonoSLAM/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SuperMaps/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SuperGlue/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SuperPointVO/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/DeepChArUco/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SuperPoint/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Magic-Leap/</loc>
+        <lastmod>2022-04-22T13:42:47.830Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Tomasz-Malisiewicz/</loc>
         <lastmod>2022-04-22T13:42:47.830Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
