@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/valgrind.png">
 <meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/massif-visualizer.png">
 <meta property="article:published_time" content="2022-10-13T05:48:45.000Z">
-<meta property="article:modified_time" content="2022-10-13T14:49:16.367Z">
+<meta property="article:modified_time" content="2022-10-13T14:56:03.614Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -435,7 +435,7 @@ mjx-container[display="true"] + br {
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-10-13 14:48:45 / Modified: 23:49:16" itemprop="dateCreated datePublished" datetime="2022-10-13T14:48:45+09:00">2022-10-13</time>
+      <time title="Created: 2022-10-13 14:48:45 / Modified: 23:56:03" itemprop="dateCreated datePublished" datetime="2022-10-13T14:48:45+09:00">2022-10-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -468,7 +468,10 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="C-언어를-쓰는-이유"><a href="#C-언어를-쓰는-이유" class="headerlink" title="C++ 언어를 쓰는 이유"></a>C++ 언어를 쓰는 이유</h1><p>‘<span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwMzMwLXdoeS1jcHAv">C++을 배워야하는 이유<i class="fa fa-external-link-alt"></i></span>‘ 글에서도 소개한 바와 같이, C++ 언어는 비효율적인 개발 시간을 감수하고서라도 ‘<strong>최적화 된 성능</strong>‘을 얻어내기 위해 사용하는 언어이다.</p>
+        <blockquote>
+<p><strong>Compiler Explorer, Disassembly, QuickBench, Easy-profiler, Valgrind, Massif</strong>를 소개합니다.</p>
+</blockquote>
+<h1 id="C-언어를-쓰는-이유"><a href="#C-언어를-쓰는-이유" class="headerlink" title="C++ 언어를 쓰는 이유"></a>C++ 언어를 쓰는 이유</h1><p>‘<span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwMzMwLXdoeS1jcHAv">C++을 배워야하는 이유<i class="fa fa-external-link-alt"></i></span>‘ 글에서도 소개한 바와 같이, C++ 언어는 비효율적인 개발 시간을 감수하고서라도 ‘<strong>최적화 된 성능</strong>‘을 얻어내기 위해 사용하는 언어이다.</p>
 <p>빠르게 개발하고 싶다? 그러면 파이썬이나 자바스크립트를 사용하면 된다. 메모리에 대해 덜 걱정하고싶다? 그러면 garbage collection이 돌아가는 자바나 고랭을 사용하면 된다. C++을 사용한다는 것은 <strong>로우레벨 커맨드까지 내가 직접 건드려서 최대한 효율적으로 연산을 하겠다</strong>는 목표, 이것 단 하나만을 보고 가는 것이다. </p>
 <p>그렇기 때문에 C++ 프로그래밍을 할 때는 내 코드가 정말로 효율적인 연산을 하고 있는지 확인을 할 필요가 있다. 왜냐하면, 내 코드가 효율적인 연산을 하고 있지 않는 경우에는 차라리 파이썬/자바스크립트로 더 짧은 시간 안에 코드를 짜내는게 더 효율적일 것이기 때문이다.</p>
 <p>이번 글에서는 ‘<strong>내 코드가 정말로 효율적인 연산을 하고 있는지 알아내는 방법</strong>‘에 대해 소개한다.</p>
