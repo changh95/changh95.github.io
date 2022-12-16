@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>https://changh95.github.io/tags/%EB%AA%A8%EB%91%90%EC%BD%98/</loc>
+        <lastmod>2022-12-16T07:25:58.498Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/%EB%AA%A8%EB%91%90%EC%9D%98%EC%97%B0%EA%B5%AC%EC%86%8C/</loc>
+        <lastmod>2022-12-16T07:25:58.498Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
+        <lastmod>2022-12-16T07:25:58.498Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SLAM/</loc>
+        <lastmod>2022-12-16T07:25:58.498Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
+        <lastmod>2022-12-16T07:25:58.498Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/3D-Scene-Graph/</loc>
         <lastmod>2022-12-16T07:12:28.435Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -26,41 +61,6 @@
     <url>
         <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
         <lastmod>2022-12-16T07:12:28.435Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2022-12-16T07:12:28.435Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
-        <lastmod>2022-12-16T07:12:28.435Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/%EB%AA%A8%EB%91%90%EC%BD%98/</loc>
-        <lastmod>2022-12-16T07:11:30.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/%EB%AA%A8%EB%91%90%EC%9D%98%EC%97%B0%EA%B5%AC%EC%86%8C/</loc>
-        <lastmod>2022-12-16T07:11:30.319Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
-        <lastmod>2022-12-16T07:11:30.319Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

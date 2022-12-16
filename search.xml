@@ -23124,13 +23124,13 @@ Domain Calibration via Robust SLAM </summary>
 </blockquote>
 <p> </p>
 <hr>
-<h2 id="소개"><a href="#소개" class="headerlink" title="소개"></a>소개</h2><img src="/20221215-moducon2022/slide12.png" class="" title="자기소개"> 
+<img src="/20221215-moducon2022/slide12.png" class="" title="자기소개"> 
 
 <p>발표를 시작하기 전 간단하게 제 소개를 했습니다.</p>
 <p>Facebook 그룹인 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2dyb3Vwcy9zbGFta3Iv">SLAM KR<i class="fa fa-external-link-alt"></i></span> 을 소개하고, 카카오톡 오픈채팅방 그룹인 <span class="exturl" data-url="aHR0cHM6Ly9vcGVuLmtha2FvLmNvbS9vL2c4VDVreExi">저희는_SLAM_마스터가_될겁니다<i class="fa fa-external-link-alt"></i></span>를 소개했습니다. SLAM KR에는 약 3천명, SLAM 마스터 방에는 약 900명의 참여원이 있는데, 이 중에 현업자, 논문 저자, 대학원생, 기업 대표님들 및 팀장님들이 계십니다.<br>전체 청중 중 약 1/3 정도만이 SLAM 이라는 기술에 대해 알고 계신 것 같아, SLAM 기술은 로보틱스 분야에서 주변 환경에 대한 지도를 그리고 그 공간 안에서 자기 자신의 위치를 찾는 기술이라고 간단하게 소개 드렸습니다.</p>
 <p> </p>
 <hr>
-<h2 id="Spatial-AI란"><a href="#Spatial-AI란" class="headerlink" title="Spatial AI란?"></a>Spatial AI란?</h2><img src="/20221215-moducon2022/slide34.png" class="" title="Spatial AI란?">
+<img src="/20221215-moducon2022/slide34.png" class="" title="Spatial AI란?">
 
 <p>Spatial AI는 공간 지능을 뜻합니다.</p>
 <p>최근에 새롭게 부상하는 키워드로써, 수많은 기존의 딥러닝 테크닉들이 포함될 수 있는 포괄적인 개념이기 때문에 기존에 딥러닝을 하시는 분들께서는 spatial AI에 대해 부분적으로 익숙하실 수 있습니다 (e.g. 3D object detection, 3D reconstruction).</p>
