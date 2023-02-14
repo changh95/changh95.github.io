@@ -9,6 +9,27 @@
 
 
     <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-4-Robotics/</loc>
+        <lastmod>2023-02-14T04:58:16.743Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
+        <lastmod>2023-02-14T04:58:16.743Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
+        <lastmod>2023-02-14T04:58:16.743Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-8-Ubuntu-Linux/</loc>
         <lastmod>2023-02-13T05:42:44.935Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -38,20 +59,6 @@
 
     <url>
         <loc>https://changh95.github.io/categories/3-Life/3-2-%25EC%25BB%25A4%25EB%25A6%25AC%25EC%2596%25B4/</loc>
-        <lastmod>2023-01-07T12:21:24.415Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
-        <lastmod>2023-01-07T12:21:24.415Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
         <lastmod>2023-01-07T12:21:24.415Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -109,13 +116,6 @@
     <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-1-Software-Engineering/</loc>
         <lastmod>2022-08-28T08:40:51.421Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-4-Robotics/</loc>
-        <lastmod>2022-07-09T15:18:51.341Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
