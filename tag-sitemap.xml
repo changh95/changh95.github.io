@@ -3,29 +3,36 @@
 
 
     <url>
-        <loc>https://changh95.github.io/tags/Certified-algorithms/</loc>
-        <lastmod>2023-02-14T09:16:19.548Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
-        <lastmod>2023-02-14T09:16:19.548Z</lastmod>
+        <loc>https://changh95.github.io/tags/Semantic-SLAM/</loc>
+        <lastmod>2023-02-16T16:49:59.819Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
-        <lastmod>2023-02-14T09:16:19.548Z</lastmod>
+        <lastmod>2023-02-16T16:49:59.819Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2023-02-14T09:16:19.548Z</lastmod>
+        <lastmod>2023-02-16T16:49:59.819Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Certified-algorithms/</loc>
+        <lastmod>2023-02-16T16:49:22.888Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
+        <lastmod>2023-02-16T16:49:22.888Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -192,13 +199,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Mac/</loc>
-        <lastmod>2022-07-04T12:53:30.464Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/iOS/</loc>
         <lastmod>2022-07-04T12:53:30.464Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -221,6 +221,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/MacOS/</loc>
+        <lastmod>2022-07-04T12:53:30.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Mac/</loc>
         <lastmod>2022-07-04T12:53:30.464Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -724,13 +731,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Oracle/</loc>
-        <lastmod>2022-07-04T12:41:25.130Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Gas/</loc>
         <lastmod>2022-07-04T12:41:25.130Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -739,6 +739,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Metamask/</loc>
+        <lastmod>2022-07-04T12:41:25.130Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Oracle/</loc>
         <lastmod>2022-07-04T12:41:25.130Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -836,14 +843,14 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/NVIDIA-Jetson/</loc>
+        <loc>https://changh95.github.io/tags/NVIDIA/</loc>
         <lastmod>2022-07-04T12:30:16.480Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/NVIDIA/</loc>
+        <loc>https://changh95.github.io/tags/NVIDIA-Jetson/</loc>
         <lastmod>2022-07-04T12:30:16.480Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -941,14 +948,14 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Visual-localization/</loc>
+        <loc>https://changh95.github.io/tags/NAVER-LABS/</loc>
         <lastmod>2022-07-04T12:27:53.391Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/NAVER-LABS/</loc>
+        <loc>https://changh95.github.io/tags/Visual-localization/</loc>
         <lastmod>2022-07-04T12:27:53.391Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -969,13 +976,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Semantic-SLAM/</loc>
-        <lastmod>2022-07-04T12:27:51.950Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/SLAMANTIC/</loc>
         <lastmod>2022-07-04T12:27:51.950Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -990,13 +990,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/VINS/</loc>
-        <lastmod>2022-07-04T12:27:51.087Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/IROS/</loc>
         <lastmod>2022-07-04T12:27:51.087Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1005,6 +998,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/VIO/</loc>
+        <lastmod>2022-07-04T12:27:51.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/VINS/</loc>
         <lastmod>2022-07-04T12:27:51.087Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1130,14 +1130,14 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Intel/</loc>
+        <loc>https://changh95.github.io/tags/Open3D/</loc>
         <lastmod>2022-07-04T12:25:14.167Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Open3D/</loc>
+        <loc>https://changh95.github.io/tags/Intel/</loc>
         <lastmod>2022-07-04T12:25:14.167Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1564,14 +1564,14 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Sebastian-Scherer/</loc>
+        <loc>https://changh95.github.io/tags/%EC%9D%B4%EB%A0%A5%EC%84%9C/</loc>
         <lastmod>2022-04-22T13:42:47.838Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/%EC%9D%B4%EB%A0%A5%EC%84%9C/</loc>
+        <loc>https://changh95.github.io/tags/Sebastian-Scherer/</loc>
         <lastmod>2022-04-22T13:42:47.838Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1774,6 +1774,20 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/tags/Pinhole-camera/</loc>
+        <lastmod>2022-04-22T13:42:47.833Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Image-projection/</loc>
+        <lastmod>2022-04-22T13:42:47.833Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/Process/</loc>
         <lastmod>2022-04-22T13:42:47.833Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1809,14 +1823,14 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Pinhole-camera/</loc>
+        <loc>https://changh95.github.io/tags/IPU/</loc>
         <lastmod>2022-04-22T13:42:47.833Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Image-projection/</loc>
+        <loc>https://changh95.github.io/tags/Graphcore/</loc>
         <lastmod>2022-04-22T13:42:47.833Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1837,28 +1851,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/IPU/</loc>
-        <lastmod>2022-04-22T13:42:47.833Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Graphcore/</loc>
-        <lastmod>2022-04-22T13:42:47.833Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/SLAM-Master/</loc>
-        <lastmod>2022-04-22T13:42:47.832Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Graduate-school/</loc>
         <lastmod>2022-04-22T13:42:47.832Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1873,6 +1866,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Linear-algebra/</loc>
+        <lastmod>2022-04-22T13:42:47.832Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Graduate-school/</loc>
         <lastmod>2022-04-22T13:42:47.832Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -2117,13 +2117,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Kimera/</loc>
-        <lastmod>2022-04-22T13:42:47.829Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/University/</loc>
         <lastmod>2022-04-22T13:42:47.829Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -2160,6 +2153,13 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Data-Structure/</loc>
+        <lastmod>2022-04-22T13:42:47.829Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Kimera/</loc>
         <lastmod>2022-04-22T13:42:47.829Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

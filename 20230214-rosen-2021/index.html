@@ -24,20 +24,21 @@
   </script>
 <meta name="description" content="논문을 리뷰하면서 SLAM 추정 방법에 대한 고찰에 대한 제 의견을 더해 적어봅니다.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping (Part 1 - SLAM 문제 추정에 관한 고찰)">
+<meta property="og:title" content="SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
 <meta property="og:url" content="https://changh95.github.io/20230214-rosen-2021/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="논문을 리뷰하면서 SLAM 추정 방법에 대한 고찰에 대한 제 의견을 더해 적어봅니다.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.png">
 <meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/l_m.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/convex_relaxation.png">
 <meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/se_sync.png">
 <meta property="article:published_time" content="2023-02-14T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-02-14T09:16:19.548Z">
+<meta property="article:modified_time" content="2023-02-16T16:49:22.888Z">
 <meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
-<meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Certified algorithms">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.png">
@@ -55,7 +56,7 @@
     lang   : 'en'
   };
 </script>
-<title>Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping (Part 1 - SLAM 문제 추정에 관한 고찰) | cv-learn</title>
+<title>SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping | cv-learn</title>
   
 
 
@@ -339,7 +340,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">215</span>
+          <span class="site-state-item-count">216</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -422,7 +423,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping (Part 1 - SLAM 문제 추정에 관한 고찰)
+          SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping
         </h1>
 
         <div class="post-meta-container">
@@ -432,10 +433,16 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-02-14 16:50:21 / Modified: 18:16:19" itemprop="dateCreated datePublished" datetime="2023-02-14T16:50:21+09:00">2023-02-14</time>
+      <time title="Created: 2023-02-14 16:50:21" itemprop="dateCreated datePublished" datetime="2023-02-14T16:50:21+09:00">2023-02-14</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-02-17 01:49:22" itemprop="dateModified" datetime="2023-02-17T01:49:22+09:00">2023-02-17</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -478,7 +485,7 @@ mjx-container[display="true"] + br {
 <li>효율적인 SLAM의 representation과 inference 방법 (아마 Rosen이 적으신듯?)</li>
 <li>Semantic SLAM과 learned representation (아마 Doherty가 적으신듯?)</li>
 </ol>
-<p>이번 글에서는 파트 1인 ‘효율적인 SLAM의 representationㅗ가 inference 방법’에 대해 적으려고 한다.</p>
+<p>이번 글에서는 파트 1인 ‘효율적인 SLAM의 representation과 inference 방법’에 대해 적으려고 한다.</p>
 <p>파트 2는 다음 글에서 적으려고 한다.</p>
 <p> </p>
 <hr>
@@ -518,6 +525,8 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="Certifiable-Correct-SLAM"><a href="#Certifiable-Correct-SLAM" class="headerlink" title="Certifiable Correct SLAM"></a>Certifiable Correct SLAM</h1><p>Certifiably correct method라는 분야는 <strong>전역 최적점을 찾았다는 것을 보장할 수 있는 알고리즘</strong>을 연구하는 분야이다. 1/2차 미분으로 로컬 탐색을 하는 보통의 SLAM과는 다르게, convex relaxation 기반으로 전역 최적점을 찾는 연구이다. Convex relaxation은 간단하게 설명하자면, non-convex 문제를 convex 문제로 근사한 후, convex 문제의 최적점을 찾는 방법이다.</p>
+<img src="/20230214-rosen-2021/convex_relaxation.png" class="" title="convex_relaxation_ohh">
+
 <p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MDYuMDA3NDY=">Carlone et.al. 2015 - Lagrangian duality in 3D SLAM: Verification techniques and optimal solutions<i class="fa fa-external-link-alt"></i></span>에서는 Lagrangian duality를 이용해서 SLAM 문제를 2차 함수 프로그램으로 변환해 최적점을 찾았다. 이는 결국 semidefinite program의 해를 찾는 것과 같은데, 당시에는 아쉽게도 해를 찾기 위해 로컬 탐색 기법을 사용하긴 했다.</p>
 <p>하지만 이런 duality 관련 연구가 발전하면서, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MTIuMDczODY=">Rosen et.al. 2016 - A certifiably correct algorithm for synchronization over the special Euclidean group<i class="fa fa-external-link-alt"></i></span> 연구를 통해 3D pose의 조합에서 해를 찾는 방법이 개발되었고, 이는 곧 3년 후 알고리즘이 몇개 더 추가된 후 SE-Sync 라이브러리가 되었다.</p>
 <p>3D pose에 대해 certified algorithm이 개발되었다는건, rotation averaging, two-view registration, sensor extrinsic calibration, 3D registration, shape reconstruction, SLAM에서 사용될 수 있다는 것을 의미한다.</p>
@@ -527,7 +536,7 @@ mjx-container[display="true"] + br {
 <hr>
 <h1 id="Robust-estimation"><a href="#Robust-estimation" class="headerlink" title="Robust estimation"></a>Robust estimation</h1><p>기존 SLAM의 최적화 방식에는 또 다른 큰 문제가 있다. 바로 <strong>MLE 알고리즘의 전제가 ‘모든 데이터가 통계적으로 올바를 때 최적점을 보장한다’ 라는 점</strong>인데, 모든 센서 데이터가 SLAM에 유용한 데이터를 제공하는게 아니기 때문이다. SLAM을 해본 사람들은 알겠지만, 센서 데이터 속에서 SLAM에 유용한 데이터를 솎아주는 frontend 설계하는 부분은 굉장히 섬세하고 어려운 작업이라 많은 피,땀,눈물을 필요로 한다. 통계적으로 <strong>유용한 데이터는 inlier</strong>, <strong>유용하지 않은 데이터는 outlier</strong>라고 칭하는데, 주로 outlier는 SLAM에서 세워둔 물리적인 모델을 따르지 않는 데이터가 된다. 그리고 MLE 문제를 풀 때, outlier가 몇개 끼어있기만해도 아주 잘못된 결과가 나오는 일이 태반이다.</p>
 <p>데이터 속에서 아웃라이어를 제거하기 위해 다양한 방법들이 있다. 가장 많이 사용하는 방법은 <strong>RANSAC</strong>이며, 수많은 데이터 속에서 소수의 데이터를 샘플링 한 후 나머지 데이터들과 비교해서 적절한 모델을 선택했는지 결정해 나머지 데이터를 아웃라이어 처리하는 방법이다. 또 다른 방법으로는 <strong>RRR 전략</strong> (Realizing, reversing, recovering)이 있는데, multiple hypothesis tracking이라고도 불리는 방법으로써 여러가지 가능성을 전부 계산하고, 시간이 지나면서 말이 안되는 가능성은 점점 버리는 방법이다. 최근에는 <strong>Pairwise consistency maximization</strong> (PCM) 방식이 루프 클로저를 할 때 안정적으로 성공시키는 방법으로 뜨고 있다.</p>
-<p>위와 같이 특정 테크닉들을 사용하기도 하지만, 거의 모든 SLAM에 기본적으로 사용하는 기법은 robust estimator (<strong>M-estimator</strong>) 이다. 여러가지 M-estimatior 커널들이 존재하고, 각각의 커널마다 다른 방법으로 아웃라이어를 제거한다. M-estimator를 적절하게 사용하기 위해 <span class="exturl" data-url="aHR0cHM6Ly9uaWtvc3VlbmRlcmhhdWYuZ2l0aHViLmlvL2Fzc2V0cy9wYXBlcnMvSVJPUzEyLXN3aXRjaGFibGVDb25zdHJhaW50cy5wZGY=">Sunderhauf et.al. 2012 - Switchable constraints for robust pose graph SLAM<i class="fa fa-external-link-alt"></i></span> 논문에서는 여러 M-estimator 커널을 상황에 따라 바꿀 수 있는 기법을 소개했고, <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzY2MzA1NTc=">Agarwal et.al. 2014 - Dynamic covariance scaling for robust map optimization<i class="fa fa-external-link-alt"></i></span>에서는 적절히 커널의 노이즈 covariance 값을 변경하는 방법을, <span class="exturl" data-url="aHR0cHM6Ly9hcHJpbC5lZWNzLnVtaWNoLmVkdS9tZWRpYS9wZGZzL29sc29uMjAxM2lqcnIucGRm">Olson 2013 - Inference on networks of mixtures for robust robot mapping<i class="fa fa-external-link-alt"></i></span>에서는 여러개의 커널을 동시에 적용하는 max-mixture 기법을 사용했다. M-estimator는 매니폴드의 특정 부분에 non-convexity를 추가로 적용해 좋은 데이터를 섞어내는 테크닉으로써 매우 성공적이였지만, <strong>잘못 사용할 경우 오히려 더 좋지 않은 결과</strong>가 나타날 수 있기에 <strong>일종의 튜닝의 영역</strong>으로 다뤄진다. 진정한 Robust estimation을 위해 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMDYuMDY3NjkucGRm">Yang et.al. 2020 - One ring to rule them all: Certifiably robust geometric perception with outliers<i class="fa fa-external-link-alt"></i></span>에서는 M-estimator와 certifiably correct optimization 기법을 혼합하는데, 조금 더 설명하자면 semidefinite relaxation을 통해 전체 매니폴드를 convex하게 풀어줌과 동시에 M-estimator를 이용해서 truncated suqared-error loss를 적용해 매니폴드를 polynomial 최적화 문제로 변환한다. 이는 전체 데이터에서 아웃라이어가 50% 이상이 넘을 때도 잘 동작하며, 효율적이게 동작하는 dual problem의 해를 구하는 방식을 채택함으로써 적당한 시간 내에 연산을 끝내는 방식을 제안한다.</p>
+<p>위와 같이 특정 테크닉들을 사용하기도 하지만, 거의 모든 SLAM에 기본적으로 사용하는 기법은 robust estimator (<strong>M-estimator</strong>) 이다. 여러가지 M-estimatior 커널들이 존재하고, 각각의 커널마다 다른 방법으로 아웃라이어를 제거한다. M-estimator를 적절하게 사용하기 위해 <span class="exturl" data-url="aHR0cHM6Ly9uaWtvc3VlbmRlcmhhdWYuZ2l0aHViLmlvL2Fzc2V0cy9wYXBlcnMvSVJPUzEyLXN3aXRjaGFibGVDb25zdHJhaW50cy5wZGY=">Sunderhauf et.al. 2012 - Switchable constraints for robust pose graph SLAM<i class="fa fa-external-link-alt"></i></span> 논문에서는 여러 M-estimator 커널을 상황에 따라 바꿀 수 있는 기법을 소개했고, <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzY2MzA1NTc=">Agarwal et.al. 2014 - Dynamic covariance scaling for robust map optimization<i class="fa fa-external-link-alt"></i></span>에서는 적절히 커널의 노이즈 covariance 값을 변경하는 방법을, <span class="exturl" data-url="aHR0cHM6Ly9hcHJpbC5lZWNzLnVtaWNoLmVkdS9tZWRpYS9wZGZzL29sc29uMjAxM2lqcnIucGRm">Olson 2013 - Inference on networks of mixtures for robust robot mapping<i class="fa fa-external-link-alt"></i></span>에서는 여러개의 커널을 동시에 적용하는 max-mixture 기법을 사용했다. M-estimator는 매니폴드의 특정 부분에 non-convexity를 추가로 적용해 좋은 데이터를 섞어내는 테크닉으로써 매우 성공적이였지만, <strong>잘못 사용할 경우 오히려 더 좋지 않은 결과</strong>가 나타날 수 있기에 <strong>일종의 튜닝의 영역</strong>으로 다뤄진다. 진정한 Robust estimation을 위해 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMDYuMDY3NjkucGRm">Yang et.al. 2020 - One ring to rule them all: Certifiably robust geometric perception with outliers<i class="fa fa-external-link-alt"></i></span>에서는 M-estimator와 certifiably correct optimization 기법을 혼합하는데, 조금 더 설명하자면 semidefinite relaxation을 통해 전체 매니폴드를 convex하게 풀어줌과 동시에 M-estimator를 이용해서 truncated squared-error loss를 적용해 매니폴드를 polynomial 최적화 문제로 변환한다. 이는 전체 데이터에서 아웃라이어가 50% 이상이 넘을 때도 잘 동작하며, 효율적이게 동작하는 dual problem의 해를 구하는 방식을 채택함으로써 적당한 시간 내에 연산을 끝내는 방식을 제안한다.</p>
 <p> </p>
 <hr>
 <h1 id="그래서-앞으로-무엇이-더-연구되어야하는가"><a href="#그래서-앞으로-무엇이-더-연구되어야하는가" class="headerlink" title="그래서 앞으로 무엇이 더 연구되어야하는가?"></a>그래서 앞으로 무엇이 더 연구되어야하는가?</h1><ol>
@@ -565,9 +574,9 @@ mjx-container[display="true"] + br {
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
               <a href="/tags/SLAM/" rel="tag"># SLAM</a>
               <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
-              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
               <a href="/tags/Certified-algorithms/" rel="tag"># Certified algorithms</a>
           </div>
 
@@ -580,6 +589,9 @@ mjx-container[display="true"] + br {
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/20230215-rosen-2021/" rel="next" title="Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
+                  Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
