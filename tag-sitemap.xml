@@ -3,78 +3,78 @@
 
 
     <url>
-        <loc>https://changh95.github.io/tags/Posters/</loc>
-        <lastmod>2023-05-30T13:27:16.850Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
-        <lastmod>2023-05-30T13:27:16.850Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Robotics/</loc>
-        <lastmod>2023-05-30T13:27:16.850Z</lastmod>
+        <loc>https://changh95.github.io/tags/Workshop/</loc>
+        <lastmod>2023-05-30T13:52:22.876Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/ICRA/</loc>
-        <lastmod>2023-05-30T13:27:16.850Z</lastmod>
+        <lastmod>2023-05-30T13:52:22.876Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Posters/</loc>
+        <lastmod>2023-05-30T13:51:25.098Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
+        <lastmod>2023-05-30T13:51:25.098Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Robotics/</loc>
+        <lastmod>2023-05-30T13:51:25.098Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2023-05-30T13:27:16.850Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Workshop/</loc>
-        <lastmod>2023-05-30T12:45:38.702Z</lastmod>
+        <lastmod>2023-05-30T13:51:25.098Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Pretraining-in-robotics/</loc>
-        <lastmod>2023-05-30T12:45:30.347Z</lastmod>
+        <lastmod>2023-05-30T13:51:20.521Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Planning/</loc>
-        <lastmod>2023-05-30T12:45:25.988Z</lastmod>
+        <lastmod>2023-05-30T13:51:18.764Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Gaussian-Belief-Propagation/</loc>
-        <lastmod>2023-05-30T12:45:25.988Z</lastmod>
+        <lastmod>2023-05-30T13:51:18.764Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Distributed-graph-algorithms/</loc>
-        <lastmod>2023-05-30T12:45:25.988Z</lastmod>
+        <lastmod>2023-05-30T13:51:18.764Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Meta/</loc>
-        <lastmod>2023-05-30T12:45:25.988Z</lastmod>
+        <lastmod>2023-05-30T13:51:18.764Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
