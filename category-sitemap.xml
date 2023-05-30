@@ -9,6 +9,20 @@
 
 
     <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
+        <lastmod>2023-05-30T13:27:16.850Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
+        <lastmod>2023-05-30T13:27:16.850Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/categories/4-Maths/</loc>
         <lastmod>2023-04-15T18:04:19.231Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -31,20 +45,6 @@
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2023-04-15T17:45:31.826Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
-        <lastmod>2023-04-15T17:45:31.826Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
         <lastmod>2023-04-15T17:45:31.826Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

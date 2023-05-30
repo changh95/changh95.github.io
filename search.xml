@@ -25240,4 +25240,293 @@ Domain Calibration via Robust SLAM </summary>
         <tag>Linear algebra</tag>
       </tags>
   </entry>
+  <entry>
+    <title>ICRA 2023 - Distributed graph algorithms 워크샵 (Day 1)</title>
+    <url>/20230529-icra2023-day-1/</url>
+    <content><![CDATA[<h2 id="Distributed-planning-for-Multi-quadrotor"><a href="#Distributed-planning-for-Multi-quadrotor" class="headerlink" title="Distributed planning for Multi-quadrotor"></a>Distributed planning for Multi-quadrotor</h2><blockquote>
+<p>Angela Schoellig 교수님의 발표</p>
+</blockquote>
+<ul>
+<li>Distributed algorithm을 사용하는 이유는 무엇인가?<ul>
+<li>(Central 알고리즘은 하나의 성능 좋은 컴퓨터에서 모든 것을 계산하는 것, Distributed algorithm은 다수의 소형 컴퓨터들이 서로 소통을 하며 계산을 하는 것이다)</li>
+<li>시스템 적으로 scale up 하기가 쉽다. 시스템이 3개의 agent를 쓰나, 10개를 쓰나, 100개를 쓰나 알고리즘 자체는 똑같이 유지할 수 있다. </li>
+<li>Robustness를 높일 수 있다. (조금 약한 주장이긴 한데, distributed algorithm은 각가의 소형 컴퓨터에서 빠르게 계산을 함으로써, quadrotor motion에 문제가 생겼을 때 다시 빠르게 re-planning을 할 수 있기 때문에 robustness가 높아진다는 주장을 했다. Planning에서만 가능한 주장으로 보인다.)</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%204.59.43%20PM.png" class="" title="multirotor planning">
+
+<p>(사진 색깔이 왜 이러지…)</p>
+<ul>
+<li>교수님의 랩실에서는 순차적으로 아래와 같은 연구를 진행하셨다.<ul>
+<li>Offline central multi-agent path planning</li>
+<li>Offline distributed multi-agent path planning</li>
+<li>Online distributed multi-agent path planning</li>
+</ul>
+</li>
+<li>드론 하나가 다른 드론 위로 날아가게 되면, Downward force가 생기니까 trajectory가 꼬이지 않을까? Planning이 이거까지 고려하고 하는건지?</li>
+</ul>
+<img src="/20230529-icra2023-day-1/IMG_0741.gif" class="" title="distributed">
+
+<h2 id="Robotics-perception-in-search-for-effective-representations"><a href="#Robotics-perception-in-search-for-effective-representations" class="headerlink" title="Robotics perception - in search for effective representations"></a>Robotics perception - in search for effective representations</h2><blockquote>
+<p>Margarita Chli 교수님의 발표</p>
+</blockquote>
+<ul>
+<li><p>교수님 연구실에서 풀려고 하시는 연구</p>
+<ul>
+<li>High-fidelity SLAM</li>
+<li>Scene representations for interaction and path planning</li>
+<li>Multi-agent collaboration</li>
+</ul>
+</li>
+<li><p>Motion을 어떻게 표현하는게 가장 좋을까?: Continuous-time SLAM</p>
+<ul>
+<li>Continuous-time SLAM을 할 경우, 센서가 데이터를 asynchronous하게 취득해도 괜찮다.</li>
+<li>Motion trajectory는 Cubic B-spline으로 표현한다.</li>
+<li>Gaussian Belief Propagation을 통해 backend 를 풀어보려는 시도를 하고 있다.</li>
+</ul>
+</li>
+<li><p>Collaborative SLAM (CCM-SLAM, COVINS-G)</p>
+<ul>
+<li>CCM-SLAM: 여러 agent가 local BA를 통해 맵을 만들다가, 중앙 서버에서 map merging + global optimziation을 하는 것</li>
+<li>COVINS-G: Collaborative SLAM을 위한 백엔드 프레임워크?</li>
+</ul>
+</li>
+<li><p>Towards generic, decentralized SLAM…</p>
+<ul>
+<li>Map sharing<ul>
+<li>Ownership of local maps</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Distributed SLAM 시스템의 bottleneck은 무엇일까? 로봇을 100개-1000개를 쓰려고 한다면 어떤 bottleneck이 생길까?</p>
+<ul>
+<li>agent들마다 서로 통신을 해야하는데, 통신을 할 때 keyframe 같은 정보를 주고 받는다면 네트워크 bandwidth가 이걸 감당할 수 있어야한다.</li>
+<li>결국 가벼운 정보를 가지고 서로 통신을 해야한다는건데… 어떤 정보를 주고받아야 가벼울지 고민이 필요할 것 같다.</li>
+<li>Mobile agent들끼리의 통신이 bottleneck이 될 수 있다면, Distributed central server는 어떨까…?</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.07%20PM.png" class="" title="distributed1">
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.19%20PM.png" class="" title="distributed2">
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.27%20PM.png" class="" title="distributed3">
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.43%20PM.png" class="" title="distributed4">
+
+<p> </p>
+<h2 id="Open-Problems-in-Machine-Perception-amp-Always-on-AI"><a href="#Open-Problems-in-Machine-Perception-amp-Always-on-AI" class="headerlink" title="Open Problems in Machine Perception & Always-on AI"></a>Open Problems in Machine Perception &amp; Always-on AI</h2><blockquote>
+<p>Meta의 Richard Newcombe가 발표했다.</p>
+</blockquote>
+<img src="/20230529-icra2023-day-1/IMG_0762.gif" class="" title="meta-ai">
+
+<ul>
+<li>AI 기술이 많이 발전했지만, Context 정보가 없다. (Contextual AI)<ul>
+<li>All-day context = All-day wearable + Always-on machine perception<ul>
+<li>All-day wearable: Project ARIA (안경에 카메라. Ego-centric computer vision)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ChatGPT와 같이 인터넷 대화를 통해 얻어낸 reasoning은 굉장히 잘 된다.<ul>
+<li>하지만 실제 세상에서 Physical reality와 digital reality를 엮고 context 정보를 넣어주는 시스템이 없다.</li>
+<li>이 ‘context gap’을 채우기 위해서, wearable machine perception이 필요하다.<ul>
+<li>All-day wearable을 하기 위햇는 저전력 고성능의 디바이스가 필요하다.<ul>
+<li>2개의 SLAM용 카메라 (20FPS), 2개의 RGB 카메라 (25FPS), 2개의 gaze 카메라 (60FPS), gaze를 보기 위한 LED, 7개의 마이크2개의 IMU, GNSS</li>
+</ul>
+</li>
+<li>Project ARIA 디바이스를 받기 위해서는 <span class="exturl" data-url="aHR0cHM6Ly9hYm91dC5tZXRhLmNvbS91ay9yZWFsaXR5bGFicy9wcm9qZWN0YXJpYS8=">웹사이트<i class="fa fa-external-link-alt"></i></span>에 들어가서 요청을 하라고 한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.52.54%20PM.png" class="" title="meta-ai2">
+
+<ul>
+<li>문제 1: What is the sufficient information needed from physical reality for Contextualized AI?<ul>
+<li>100 명이 ARIA를 쓰고 다니면 31 페타바이트가 필요하다,,<ul>
+<li>그렇기 때문에, 대충 적당한 데이터셋에서 학습해서 real-life에 deploy해서 잘될거라고 희망하는건 말이 되지 않는다.</li>
+</ul>
+</li>
+<li>Can state-estimation capture &amp; compress a day-in-the-life?</li>
+<li>Attributes:<ul>
+<li>Location - Where am I?</li>
+<li>Gaze - Where am I looking at?</li>
+<li>Voice - What am I saying?</li>
+<li>Kinematic state - Body pose</li>
+<li>Interaction - What am I interacting with?</li>
+<li>Object Index - What’s in my environment?</li>
+<li>…</li>
+<li>Other’s states</li>
+<li>위의 attribute에 대한 데이터를 저장한다면, raw data에 비해 훨씬 적은 양을 저장할 것이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>문제 2: ARIA의 무게는 70g, Power는 2.5Wh, Sensor module size 4mm^2이다.<ul>
+<li>&lt;30g, 1mm^2, 1.0Wh 정도가 되야한다.</li>
+<li>1.0Wh 를 10시간동안 실행하면서, 10%의 전력만 perception에 쓴다면 약 10mW가 필요하다.<ul>
+<li>LED 하나를 키는게 5mW 이다…</li>
+</ul>
+</li>
+<li>대충 데스크탑의 1만배 정도 더 적은 전력을 사용해야한다.</li>
+</ul>
+</li>
+<li>문제 3:<ul>
+<li>Resolution, Low oice, Continuous lens focusing, Field of view, No motion blur, HDR </li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h3 id="Panel-discussion"><a href="#Panel-discussion" class="headerlink" title="Panel discussion"></a>Panel discussion</h3><ul>
+<li><p>Q. Distributed algorithm을 할 때 어떤 레벨에서 distribution을 해야할지가 고민이 될 수 있다. SLAM을 모바일 디바이스에서 다 끝내고 odometry와 map 정보만 서로 통신을 하는 방법이 있는 반면에, 완전 초기의 센서 데이터도 서로 주고 받을 수 있을 것이다. 적당한 중간을 찾아야할텐데, 그 ‘적당한 중간’은 어디에 있을까?</p>
+<ul>
+<li>Richard Newcombe: 데이터의 흐름을 파악해서 최종 문제를 풀었을 때 minimum energy가 사용되는 방향으로 가야한다. 단순히 알고리즘을 푸는데에 필요한 에너지가 아니라, agent간의 통신에 필요한 에너지도 고려를 해야할 것이다.</li>
+<li>Magarita Chli: ‘적당한 중간’을 찾기는 꽤 어렵다. 왜냐하면 어떤 문제를 푸느냐에따라 optimal 에너지를 소비하는 distribution 레벨이 다를 것이기 때문이다. 특히나 환경이 바뀐다던지, 문제가 바뀐다던지, 상황이 바뀐다던지 할 경우 정보를 송신하는 쪽과 수신하는 쪽에서 내부 알고리즘에 대한 정보 요구조건이 달라질 경우, 최적 에너지 소비 조건이 달라질 가능성이 굉장히 높다. Distributed algorithm은 문제를 효율적이고 빠르게 풀 수 있게 해주는 방법론이지 솔루션 그 자체가 아니다. </li>
+</ul>
+</li>
+<li><p>Q. Distributed algorithm에는 안전 문제가 있는 것 같다. (Andrew Davision 교수님): 우리 랩실에서 낸 논문에 의하면, 여러개의 agent 중 하나가 고장나면 localisation의 경우 모든 agent의 정확도가 조금 떨어지고 끝날 것인데, planning의 경우 완전 큰일나게 될 수도 있다. 이는, 해커가 맘을 먹고 하나의 agent에서 다른 agent로 보내는 메세지들에 거짓말을 섞거나 또는 아무 메세지도 보내지 않는다면 (i.e. 존재하지 않는 척 한다면), 전체 시스템을 망가트릴 수 있다. 이 안전 문제를 해결하기 위해서는 어떻게 해야할까?</p>
+<ul>
+<li>Mustafa: Encrypted message를 사용하는건 어떨까?</li>
+<li>Richard Newcombe: Observation + consistency로 풀어야한다. 단순히 비밀번호 기반의 시스템이 아닌, 여러 agent가 observation을 통해 적절한 space-time 데이터가 나오는 경우 consistent하다고 판단하는 consensus 알고리즘이 필요하다.</li>
+<li>Frank Dellaert: 난 드립을 하나 치려고 하는데, Meta와 Twitter에서 fake news를 없애는 알고리즘을 써보는 것도 좋겠다.</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>ICRA</tag>
+        <tag>Robotics</tag>
+        <tag>Meta</tag>
+        <tag>Spatial AI</tag>
+        <tag>Workshop</tag>
+        <tag>Distributed graph algorithms</tag>
+        <tag>Gaussian Belief Propagation</tag>
+        <tag>Planning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - Pretraining in robotics 워크샵 (Day 1)</title>
+    <url>/20230529-icra2023-day-1-1/</url>
+    <content><![CDATA[<h2 id="Pretraining-in-Robotics"><a href="#Pretraining-in-Robotics" class="headerlink" title="Pretraining in Robotics"></a>Pretraining in Robotics</h2><p>Brown 대학에서 박사과정 중인 Ifrah Idrees의 <span class="exturl" data-url="aHR0cHM6Ly9vcGVucmV2aWV3Lm5ldC9wZGY/aWQ9UGpZVWxmcExKRQ==">Building Long-term Spatial Temporal Semantic Map<i class="fa fa-external-link-alt"></i></span> 스포트라이트 토크를 보았다.</p>
+<img src="/20230529-icra2023-day-1-1/Screenshot%202023-05-30%20at%201.40.17%20PM.png" class="" title="d3a 2">
+
+<p>기본적인 SLAM 알고리즘을 기반으로 지도를 만들면서 object detection을 수행할 때, 해당 지도에 특정 object에 대해 누적된 view를 저장해준다는 아이디어이다.</p>
+<p>어떤 물체에 대해 object detection을 성공했을 때, temporal window 내부에 정보를 저장하고 비슷한 정보끼리 clustering 함으로써 물체를 바라보고 있을 때의 view를 모을 수 있다.</p>
+<p>어떤 물체가 어디에 있는지 query를 할 수 있는데, 이는 CLIP 기반 visual language model을 사용해서 language 기반 쿼리를 통해 지도에서 어디에 object view에 대한 temporal window가 존재하는지 찾아낼 수 있다.</p>
+<img src="/20230529-icra2023-day-1-1/Screenshot%202023-05-30%20at%201.39.59%20PM.png" class="" title="d3a 1">
+
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+      </categories>
+      <tags>
+        <tag>ICRA</tag>
+        <tag>Workshop</tag>
+        <tag>Pretraining in robotics</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - Unconventional spatial representations Opportunities for robotics 워크샵 (Day 1)</title>
+    <url>/20230529-icra2023-day-1-2/</url>
+    <content><![CDATA[<blockquote>
+<p>Teresa Vidal Calleja의 “Physics driven, continuous and probabilistic representations for localisation, mapping and planning” 발표를 중간부터 청취</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly91c3IyMDIzLmdpdGh1Yi5pby8=">워크샵 링크<i class="fa fa-external-link-alt"></i></span>]</p>
+<ul>
+<li><p>Mapping을 통해 지도륾 만들고 해당 지도를 기반으로 Planning을 하는 방법이 아닌, <strong>Joint optimization of mapping and planning</strong>을 제안한다.</p>
+<ul>
+<li>Mapping과 Planning을 따로 하면 문제가 2개가 된다.</li>
+<li>Joint optimization으로 만듦으로써 하나의 문제가 되므로, 속도가 빨라질 수 있는 여지가 있다.<ul>
+<li>실시간 모바일 로보틱스에서는 좋을 수 있겠다.</li>
+<li>흠… 이 방식이 스탠다드가 된다면, 많은 Perception 회사들에게는 타격이 될 수 있겠다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Physics-based localization and mapping을 제안한다.</p>
+<ul>
+<li>자기장의 변화를 인지하여 다수의 agent의 trajectory를 추정하는 방법을 제안했다.</li>
+<li>다중 agent가 움직이는 환경에서 빠르게 trajectory planning을 하는 CHOMP라는 planning 기법을 제안했다.</li>
+</ul>
+</li>
+<li><p>전체적으로 모든 프로세스에 Gaussian process가 들어갔다.</p>
+<ul>
+<li>나는 Gaussian process에 대한 지식이 부족하다. 좀 더 공부해야겠다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+      </categories>
+      <tags>
+        <tag>ICRA</tag>
+        <tag>Workshop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - 포스터 (Day 1)</title>
+    <url>/20230529-icra2023-day1-posters/</url>
+    <content><![CDATA[<img src="/20230529-icra2023-day1-posters/IMG_0754.jpeg" class="" title="1asdf">
+
+<img src="/20230529-icra2023-day1-posters/IMG_0755.jpeg" class="" title="2asdf">
+
+<img src="/20230529-icra2023-day1-posters/IMG_0756.jpeg" class="" title="3fsdf">
+
+<img src="/20230529-icra2023-day1-posters/IMG_0757.jpeg" class="" title="4sdf">
+
+<img src="/20230529-icra2023-day1-posters/IMG_0758.jpeg" class="" title="5sd">
+
+<img src="/20230529-icra2023-day1-posters/IMG_0759.jpeg" class="" title="6sdf">
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>ICRA</tag>
+        <tag>Robotics</tag>
+        <tag>Spatial AI</tag>
+        <tag>Posters</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - 포스터 (Day 2)</title>
+    <url>/20230530-icra2023-day2-poster/</url>
+    <content><![CDATA[<img src="/20230530-icra2023-day2-poster/45BA5CBA-A9BA-4A0E-A704-2C831095C3C0_1_105_c.jpeg" class="" title="1asdf">
+
+<img src="/20230530-icra2023-day2-poster/6660C82C-BB1A-4BED-96E5-19089F796902_1_105_c.jpeg" class="" title="2jkl">
+
+<img src="/20230530-icra2023-day2-poster/A04AAA8A-E043-4D8E-AC97-1F9AFBEE2F96_1_105_c.jpeg" class="" title="3asdasdf">
+
+<img src="/20230530-icra2023-day2-poster/A7218041-4F96-42FA-8B39-5307B19F51AD_1_105_c.jpeg" class="" title="4asdfl1asdf">
+
+<img src="/20230530-icra2023-day2-poster/B8D2E81A-C201-40A7-85F8-2D3172CFA06B_1_105_c.jpeg" class="" title="u0pohjsdf">
+
+<img src="/20230530-icra2023-day2-poster/D46938E0-F911-4AB9-85E8-B74A76C52D68_1_105_c.jpeg" class="" title="1asdf">
+
+<img src="/20230530-icra2023-day2-poster/D293022B-4B83-46F4-9FCC-5E919C3F8A62_1_105_c.jpeg" class="" title="1ashjklnpk;">
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>ICRA</tag>
+        <tag>Robotics</tag>
+        <tag>Spatial AI</tag>
+        <tag>Posters</tag>
+      </tags>
+  </entry>
 </search>
