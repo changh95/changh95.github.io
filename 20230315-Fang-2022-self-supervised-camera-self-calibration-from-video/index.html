@@ -24,18 +24,21 @@
   </script>
 <meta name="description" content="ICRA 2022에 발표된 Self-Supervised Camera Self-Calibration from Video 논문을 리뷰합니다.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fang 2022 - Self-Supervised Camera Self-Calibration from Video">
+<meta property="og:title" content="Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰">
 <meta property="og:url" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="ICRA 2022에 발표된 Self-Supervised Camera Self-Calibration from Video 논문을 리뷰합니다.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-03-15T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-03-15T01:22:54.229Z">
+<meta property="og:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/calib_poster.png">
+<meta property="article:published_time" content="2023-03-15T16:50:21.000Z">
+<meta property="article:modified_time" content="2023-06-02T13:24:26.277Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Self-supervised learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.png">
 
 
 <link rel="canonical" href="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/">
@@ -50,7 +53,7 @@
     lang   : 'en'
   };
 </script>
-<title>Fang 2022 - Self-Supervised Camera Self-Calibration from Video | cv-learn</title>
+<title>Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰 | cv-learn</title>
   
 
 
@@ -307,7 +310,7 @@ mjx-container[display="true"] + br {
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -320,6 +323,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%85%BC%EB%AC%B8-%EB%B0%B0%EA%B2%BD"><span class="nav-number">1.</span> <span class="nav-text">논문 배경</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%8F%AC%EC%8A%A4%ED%84%B0"><span class="nav-number">2.</span> <span class="nav-text">포스터</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Proxy-network-Self-supervised-monocular-depth-estimation"><span class="nav-number">3.</span> <span class="nav-text">Proxy network - Self-supervised monocular depth estimation</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -333,7 +337,7 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">230</span>
+          <span class="site-state-item-count">235</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -345,7 +349,7 @@ mjx-container[display="true"] + br {
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">327</span>
+        <span class="site-state-item-count">329</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -416,7 +420,7 @@ mjx-container[display="true"] + br {
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Fang 2022 - Self-Supervised Camera Self-Calibration from Video
+          Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰
         </h1>
 
         <div class="post-meta-container">
@@ -426,10 +430,16 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-03-15 07:50:21 / Modified: 01:22:54" itemprop="dateCreated datePublished" datetime="2023-03-15T07:50:21+00:00">2023-03-15</time>
+      <time title="Created: 2023-03-15 16:50:21" itemprop="dateCreated datePublished" datetime="2023-03-15T16:50:21+00:00">2023-03-15</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-02 14:24:26" itemprop="dateModified" datetime="2023-06-02T14:24:26+01:00">2023-06-02</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -473,7 +483,22 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h1 id="논문-배경"><a href="#논문-배경" class="headerlink" title="논문 배경"></a>논문 배경</h1><blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3R0aWMuZWR1L3NlbGYtc3VwLXNlbGYtY2FsaWI=">프로젝트 페이지<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1RSSS1NTC92aWRhcg==">GitHub 코드 레포지토리<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>카메라 캘리브레이션은 로보틱스와 컴퓨터 비전 문제를 푸는데에 굉장히 중요한 역할을 한다. 하지만 캘리를 하는 과정 자체가 엄청나게 많은 노력이 들어갈 뿐 더러, 카메라 파라미터가 조금만 바뀌어도 (e.g. 진동이나 열로 인해 바뀌어도) 새로 캘리브레이션을 해야하기 때문에 전반적으로 캘리브레이션 과정 자체가 골칫거리로 여겨지는 경우가 많다.</p>
+<p>그에 비해, self-supervised depth / ego-motion 추정 기법들은 view-synthesis를 목적으로 매 프레임마다 projection model을 계산하는 방법을 통해 이러한 캘리 과정을 건너뛰는 경우가 많다.</p>
+<p>이 논문에서는 in-the-wild 비디오 시퀀스 (i.e. 캘리브레이션 타겟이 전혀 없는 실제 환경)에서 카메라 파라미터를 학습하는 방법을 통해 캘리브레이션을 수행하는 방법을 제안한다. 이 논문에서 제안하는 방식은 sub-pixel 단위의 에러를 보여주며, perspective, fisheye, catadioptric 카메라와 같은 다양한 카메라 모델에도 in-the-wild 캘리브레이션이 가능하다는 것을 보여준다. 또, 이 과정에 있어서 depth estimation 기법의 정확도가 올라가는 것도 보여준다.</p>
+<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.png" class="" title="Pipeline">
+
+<p> </p>
+<hr>
+<h1 id="포스터"><a href="#포스터" class="headerlink" title="포스터"></a>포스터</h1><p>이 논문은 ICRA 2022에 나왔다.</p>
+<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/calib_poster.png" class="" title="poster">
+
+<p> </p>
+<hr>
+<h1 id="Proxy-network-Self-supervised-monocular-depth-estimation"><a href="#Proxy-network-Self-supervised-monocular-depth-estimation" class="headerlink" title="Proxy network - Self-supervised monocular depth estimation"></a>Proxy network - Self-supervised monocular depth estimation</h1>
     </div>
 
     

@@ -9,8 +9,64 @@
 
 
     <url>
+        <loc>https://changh95.github.io/20230602-icra-day-5/</loc>
+        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230602-icra2023-hilti/</loc>
+        <lastmod>2023-06-02T13:27:30.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/</loc>
+        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230531-icra2023-day3-poster/</loc>
+        <lastmod>2023-06-02T13:23:01.416Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230529-icra2023-day1-posters/</loc>
+        <lastmod>2023-06-02T13:16:26.072Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230602-icra2023-day5-poster/</loc>
+        <lastmod>2023-06-02T13:16:03.821Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230531-icra2023-day4-poster/</loc>
+        <lastmod>2023-06-02T13:12:32.729Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20230530-icra2023-day2-poster/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
+        <lastmod>2023-06-02T10:50:36.879Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -19,14 +75,6 @@
     <url>
         <loc>https://changh95.github.io/20230529-icra2023-day-1-2/</loc>
         <lastmod>2023-05-30T13:52:22.876Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20230529-icra2023-day1-posters/</loc>
-        <lastmod>2023-05-30T13:51:22.480Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -91,14 +139,6 @@
     <url>
         <loc>https://changh95.github.io/20230405-q1-2023-slam-news/</loc>
         <lastmod>2023-04-10T14:13:54.738Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/</loc>
-        <lastmod>2023-03-15T01:22:54.229Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

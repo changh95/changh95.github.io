@@ -10,21 +10,42 @@
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
+        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
+        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
+        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
+        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
+        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/</loc>
+        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -51,13 +72,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2023-04-15T17:45:31.826Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-8-Ubuntu-Linux/</loc>
         <lastmod>2023-04-15T15:20:10.351Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -67,20 +81,6 @@
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EC%259B%2594%25EA%25B0%2584-SLAM-%25EB%2589%25B4%25EC%258A%25A4/</loc>
         <lastmod>2023-04-10T14:13:54.738Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2023-03-15T01:22:54.229Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/</loc>
-        <lastmod>2023-03-15T01:22:54.229Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

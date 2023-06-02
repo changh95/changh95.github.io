@@ -24366,9 +24366,24 @@ Domain Calibration via Robust SLAM </summary>
       </tags>
   </entry>
   <entry>
-    <title>Fang 2022 - Self-Supervised Camera Self-Calibration from Video</title>
+    <title>Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰</title>
     <url>/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="논문-배경"><a href="#논문-배경" class="headerlink" title="논문 배경"></a>논문 배경</h1><blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3R0aWMuZWR1L3NlbGYtc3VwLXNlbGYtY2FsaWI=">프로젝트 페이지<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1RSSS1NTC92aWRhcg==">GitHub 코드 레포지토리<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p>카메라 캘리브레이션은 로보틱스와 컴퓨터 비전 문제를 푸는데에 굉장히 중요한 역할을 한다. 하지만 캘리를 하는 과정 자체가 엄청나게 많은 노력이 들어갈 뿐 더러, 카메라 파라미터가 조금만 바뀌어도 (e.g. 진동이나 열로 인해 바뀌어도) 새로 캘리브레이션을 해야하기 때문에 전반적으로 캘리브레이션 과정 자체가 골칫거리로 여겨지는 경우가 많다.</p>
+<p>그에 비해, self-supervised depth / ego-motion 추정 기법들은 view-synthesis를 목적으로 매 프레임마다 projection model을 계산하는 방법을 통해 이러한 캘리 과정을 건너뛰는 경우가 많다.</p>
+<p>이 논문에서는 in-the-wild 비디오 시퀀스 (i.e. 캘리브레이션 타겟이 전혀 없는 실제 환경)에서 카메라 파라미터를 학습하는 방법을 통해 캘리브레이션을 수행하는 방법을 제안한다. 이 논문에서 제안하는 방식은 sub-pixel 단위의 에러를 보여주며, perspective, fisheye, catadioptric 카메라와 같은 다양한 카메라 모델에도 in-the-wild 캘리브레이션이 가능하다는 것을 보여준다. 또, 이 과정에 있어서 depth estimation 기법의 정확도가 올라가는 것도 보여준다.</p>
+<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.png" class="" title="Pipeline">
+
+<p> </p>
+<hr>
+<h1 id="포스터"><a href="#포스터" class="headerlink" title="포스터"></a>포스터</h1><p>이 논문은 ICRA 2022에 나왔다.</p>
+<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/calib_poster.png" class="" title="poster">
+
+<p> </p>
+<hr>
+<h1 id="Proxy-network-Self-supervised-monocular-depth-estimation"><a href="#Proxy-network-Self-supervised-monocular-depth-estimation" class="headerlink" title="Proxy network - Self-supervised monocular depth estimation"></a>Proxy network - Self-supervised monocular depth estimation</h1>]]></content>
       <categories>
         <category>1. Spatial AI</category>
         <category>1.1 SLAM</category>
@@ -25479,17 +25494,27 @@ Domain Calibration via Robust SLAM </summary>
   <entry>
     <title>ICRA 2023 - 포스터 (Day 1)</title>
     <url>/20230529-icra2023-day1-posters/</url>
-    <content><![CDATA[<img src="/20230529-icra2023-day1-posters/IMG_0754.jpeg" class="" title="1asdf">
+    <content><![CDATA[<h1 id="Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture"><a href="#Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture" class="headerlink" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture"></a>Multi S-graphs: A Collaborative Semantic SLAM Architecture</h1><img src="/20230529-icra2023-day1-posters/IMG_0754.jpeg" class="" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture">
 
-<img src="/20230529-icra2023-day1-posters/IMG_0755.jpeg" class="" title="2asdf">
+<p> </p>
+<hr>
+<h1 id="A-Robot-Web-for-Distributed-Many-Device-Localisation"><a href="#A-Robot-Web-for-Distributed-Many-Device-Localisation" class="headerlink" title="A Robot Web for Distributed Many-Device Localisation"></a>A Robot Web for Distributed Many-Device Localisation</h1><img src="/20230529-icra2023-day1-posters/IMG_0755.jpeg" class="" title="A Robot Web for Distributed Many-Device Localisation">
 
-<img src="/20230529-icra2023-day1-posters/IMG_0756.jpeg" class="" title="3fsdf">
+<p> </p>
+<hr>
+<h1 id="ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping"><a href="#ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping" class="headerlink" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping"></a>ConceptFusion: A Real-time Open-set Multimodal 3D Mapping</h1><img src="/20230529-icra2023-day1-posters/IMG_0756.jpeg" class="" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping">
 
-<img src="/20230529-icra2023-day1-posters/IMG_0757.jpeg" class="" title="4sdf">
+<p> </p>
+<hr>
+<h1 id="CLIPGraphs-Multimodal-Graph-Networks-to-Infer-Object-Room-Affinities"><a href="#CLIPGraphs-Multimodal-Graph-Networks-to-Infer-Object-Room-Affinities" class="headerlink" title="CLIPGraphs: Multimodal Graph Networks to Infer Object-Room Affinities"></a>CLIPGraphs: Multimodal Graph Networks to Infer Object-Room Affinities</h1><img src="/20230529-icra2023-day1-posters/IMG_0757.jpeg" class="" title="CLIPGraphs: Multimodal Graph Networks to Infer Object-Room Affinities">
 
-<img src="/20230529-icra2023-day1-posters/IMG_0758.jpeg" class="" title="5sd">
+<p> </p>
+<hr>
+<h1 id="VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation"><a href="#VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation" class="headerlink" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation"></a>VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation</h1><img src="/20230529-icra2023-day1-posters/IMG_0758.jpeg" class="" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation">
 
-<img src="/20230529-icra2023-day1-posters/IMG_0759.jpeg" class="" title="6sdf">
+<p> </p>
+<hr>
+<h1 id="Grounding-Pretrained-eatures-in-3D-Representations"><a href="#Grounding-Pretrained-eatures-in-3D-Representations" class="headerlink" title="Grounding Pretrained eatures in 3D Representations"></a>Grounding Pretrained eatures in 3D Representations</h1><img src="/20230529-icra2023-day1-posters/IMG_0759.jpeg" class="" title="Grounding Pretrained eatures in 3D Representations">
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -25507,36 +25532,95 @@ Domain Calibration via Robust SLAM </summary>
   <entry>
     <title>ICRA 2023 - 포스터 (Day 2)</title>
     <url>/20230530-icra2023-day2-poster/</url>
-    <content><![CDATA[<img src="/20230530-icra2023-day2-poster/1.png" class="" title="1asdf">
+    <content><![CDATA[<h1 id="Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment"><a href="#Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment" class="headerlink" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment"></a>Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment</h1><img src="/20230530-icra2023-day2-poster/1.png" class="" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment">
 
-<img src="/20230530-icra2023-day2-poster/2.png" class="" title="2jkl">
+<p> </p>
+<hr>
+<h1 id="Mapping-with-only-the-Ground"><a href="#Mapping-with-only-the-Ground" class="headerlink" title="Mapping with only the Ground"></a>Mapping with only the Ground</h1><img src="/20230530-icra2023-day2-poster/2.png" class="" title="Mapping with only the Ground">
 
-<img src="/20230530-icra2023-day2-poster/3.png" class="" title="3asdasdf">
+<p> </p>
+<hr>
+<h1 id="Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras"><a href="#Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras" class="headerlink" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras"></a>Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras</h1><img src="/20230530-icra2023-day2-poster/3.png" class="" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras">
 
-<img src="/20230530-icra2023-day2-poster/4.png" class="" title="4asdfl1asdf">
+<p> </p>
+<hr>
+<h1 id="Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types"><a href="#Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types" class="headerlink" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types"></a>Object-based SLAM utilizing unambigous pose parameters considering general symmetry types</h1><img src="/20230530-icra2023-day2-poster/4.png" class="" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types">
 
-<img src="/20230530-icra2023-day2-poster/5.png" class="" title="u0pohjsdf">
+<p> </p>
+<hr>
+<h1 id="Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph"><a href="#Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph" class="headerlink" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph"></a>Towards View-invariant and Accurate Loop Detection Based on Scene Graph</h1><img src="/20230530-icra2023-day2-poster/5.png" class="" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph">
 
-<img src="/20230530-icra2023-day2-poster/6.png" class="" title="1asdf">
+<p> </p>
+<hr>
+<h1 id="Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants"><a href="#Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants" class="headerlink" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants"></a>Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants</h1><img src="/20230530-icra2023-day2-poster/6.png" class="" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants">
 
-<img src="/20230530-icra2023-day2-poster/7.png" class="" title="1ashjklnpk;">
+<p> </p>
+<hr>
+<h1 id="COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM"><a href="#COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM" class="headerlink" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM"></a>COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM</h1><img src="/20230530-icra2023-day2-poster/7.png" class="" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM">
 
-<img src="/20230530-icra2023-day2-poster/8.png" class="" title="1aasdfsdf">
-<img src="/20230530-icra2023-day2-poster/9.png" class="" title="1aasdfsdf">
-<img src="/20230530-icra2023-day2-poster/10.png" class="" title="1adsdf">
-<img src="/20230530-icra2023-day2-poster/11.png" class="" title="1ashgdf">
-<img src="/20230530-icra2023-day2-poster/12.png" class="" title="1asdfsdf">
-<img src="/20230530-icra2023-day2-poster/13.png" class="" title="1asfhjgdf">
-<img src="/20230530-icra2023-day2-poster/14.png" class="" title="1afhgjdf">
-<img src="/20230530-icra2023-day2-poster/15.png" class="" title="1asfjhgdf">
-<img src="/20230530-icra2023-day2-poster/16.png" class="" title="1asfjdf">
-<img src="/20230530-icra2023-day2-poster/17.png" class="" title="1afjghsdf">
-<img src="/20230530-icra2023-day2-poster/18.png" class="" title="1ajfhsdf">
-<img src="/20230530-icra2023-day2-poster/19.png" class="" title="1afjsdf">
-<img src="/20230530-icra2023-day2-poster/20.png" class="" title="gjh">
-<img src="/20230530-icra2023-day2-poster/21.png" class="" title="1atymsdf">
-<img src="/20230530-icra2023-day2-poster/22.png" class="" title="1agmfhmtysdf">
-<img src="/20230530-icra2023-day2-poster/23.png" class="" title="1afmghsdf">
+<p> </p>
+<hr>
+<h1 id="A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes"><a href="#A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes" class="headerlink" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes"></a>A Probabilistic Framework for Visual Localization in Ambiguous Scenes</h1><img src="/20230530-icra2023-day2-poster/8.png" class="" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes">
+
+<p> </p>
+<hr>
+<h1 id="DytanVO-Joint-Refinement-of-Visual-Odometry-and-Motion-Segmentation-in-Dynamic-Environments"><a href="#DytanVO-Joint-Refinement-of-Visual-Odometry-and-Motion-Segmentation-in-Dynamic-Environments" class="headerlink" title="DytanVO: Joint Refinement of Visual Odometry and Motion Segmentation in Dynamic Environments"></a>DytanVO: Joint Refinement of Visual Odometry and Motion Segmentation in Dynamic Environments</h1><img src="/20230530-icra2023-day2-poster/9.png" class="" title="DytanVO: Joint Refinement of Visual Odometry and Motion Segmentation in Dynamic Environments">
+
+<p> </p>
+<hr>
+<h1 id="NoCal-Calibration-Free-Semi-Supervised-Learning-of-Odometry-and-Camera-Intrinsics"><a href="#NoCal-Calibration-Free-Semi-Supervised-Learning-of-Odometry-and-Camera-Intrinsics" class="headerlink" title="NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics"></a>NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics</h1><img src="/20230530-icra2023-day2-poster/10.png" class="" title="NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics">
+
+<p> </p>
+<hr>
+<h1 id="MVTrans-Multi-view-Perception-of-Transparent-Objects"><a href="#MVTrans-Multi-view-Perception-of-Transparent-Objects" class="headerlink" title="MVTrans: Multi-view Perception of Transparent Objects"></a>MVTrans: Multi-view Perception of Transparent Objects</h1><img src="/20230530-icra2023-day2-poster/11.png" class="" title="MVTrans: Multi-view Perception of Transparent Objects">
+
+<p> </p>
+<hr>
+<h1 id="Swarm-LIO-Decentralized-Swam-LiDAR-inertial-Odometry"><a href="#Swarm-LIO-Decentralized-Swam-LiDAR-inertial-Odometry" class="headerlink" title="Swarm-LIO: Decentralized Swam LiDAR-inertial Odometry"></a>Swarm-LIO: Decentralized Swam LiDAR-inertial Odometry</h1><img src="/20230530-icra2023-day2-poster/12.png" class="" title="Swarm-LIO: Decentralized Swam LiDAR-inertial Odometry">
+
+<p> </p>
+<hr>
+<h1 id="Robust-Incremental-Smoothing-and-Mapping-riSAM"><a href="#Robust-Incremental-Smoothing-and-Mapping-riSAM" class="headerlink" title="Robust Incremental Smoothing and Mapping (riSAM)"></a>Robust Incremental Smoothing and Mapping (riSAM)</h1><img src="/20230530-icra2023-day2-poster/13.png" class="" title="Robust Incremental Smoothing and Mapping (riSAM)">
+
+<p> </p>
+<hr>
+<h1 id="Loc-NeRF-Monte-Carlo-Localization-using-Neural-Radiance-Fields"><a href="#Loc-NeRF-Monte-Carlo-Localization-using-Neural-Radiance-Fields" class="headerlink" title="Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields"></a>Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields</h1><img src="/20230530-icra2023-day2-poster/14.png" class="" title="Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields">
+
+<p> </p>
+<hr>
+<h1 id="Ditto-in-the-House-Building-Articulated-Models-of-Indoor-Scenes-through-INteractive-Perception"><a href="#Ditto-in-the-House-Building-Articulated-Models-of-Indoor-Scenes-through-INteractive-Perception" class="headerlink" title="Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception"></a>Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception</h1><img src="/20230530-icra2023-day2-poster/15.png" class="" title="Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception">
+
+<p> </p>
+<hr>
+<h1 id="Category-level-Shape-Estimation-for-Densely-Cluttered-Objects"><a href="#Category-level-Shape-Estimation-for-Densely-Cluttered-Objects" class="headerlink" title="Category-level Shape Estimation for Densely Cluttered Objects"></a>Category-level Shape Estimation for Densely Cluttered Objects</h1><img src="/20230530-icra2023-day2-poster/16.png" class="" title="Category-level Shape Estimation for Densely Cluttered Objects">
+
+<p> </p>
+<hr>
+<h1 id="Category-level-Global-Camera-Pose-Estimation-with-Multi-Hypothesis-Point-Cloud-Correspondence"><a href="#Category-level-Global-Camera-Pose-Estimation-with-Multi-Hypothesis-Point-Cloud-Correspondence" class="headerlink" title="Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence"></a>Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence</h1><img src="/20230530-icra2023-day2-poster/17.png" class="" title="Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence">
+
+<p> </p>
+<hr>
+<h1 id="Simple-BEV-What-Really-Matters-for-Multi-Sensor-BEV-Perception"><a href="#Simple-BEV-What-Really-Matters-for-Multi-Sensor-BEV-Perception" class="headerlink" title="Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?"></a>Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?</h1><img src="/20230530-icra2023-day2-poster/18.png" class="" title="Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?">
+
+<p> </p>
+<hr>
+<h1 id="BEVFusion-Multi-Task-Multi-SEnsor-Fusion-with-Unified-Bird’s-Eye-View-Representation"><a href="#BEVFusion-Multi-Task-Multi-SEnsor-Fusion-with-Unified-Bird’s-Eye-View-Representation" class="headerlink" title="BEVFusion: Multi-Task Multi-SEnsor Fusion with Unified Bird’s-Eye View Representation"></a>BEVFusion: Multi-Task Multi-SEnsor Fusion with Unified Bird’s-Eye View Representation</h1><img src="/20230530-icra2023-day2-poster/19.png" class="" title="BEVFusion: Multi-Task Multi-SEnsor Fusion with Unified Bird" alt="s-Eye View Representation">
+
+<p> </p>
+<hr>
+<h1 id="Cerberus-Low-Drift-Visual-Inertial-Leg-Odometry-for-Agile-Locomotion"><a href="#Cerberus-Low-Drift-Visual-Inertial-Leg-Odometry-for-Agile-Locomotion" class="headerlink" title="Cerberus: Low-Drift Visual-Inertial-Leg Odometry for Agile Locomotion"></a>Cerberus: Low-Drift Visual-Inertial-Leg Odometry for Agile Locomotion</h1><img src="/20230530-icra2023-day2-poster/20.png" class="" title="Cerberus: Low-Drift Visual-Inertial-Leg Odometry for Agile Locomotion">
+
+<p> </p>
+<hr>
+<h1 id="Cross-Modal-Monouclar-Localization-in-Prior-LiDAR-Maps-Utilizing-Semantic-Consistency"><a href="#Cross-Modal-Monouclar-Localization-in-Prior-LiDAR-Maps-Utilizing-Semantic-Consistency" class="headerlink" title="Cross-Modal Monouclar Localization in Prior LiDAR Maps Utilizing Semantic Consistency"></a>Cross-Modal Monouclar Localization in Prior LiDAR Maps Utilizing Semantic Consistency</h1><img src="/20230530-icra2023-day2-poster/21.png" class="" title="Cross-Modal Monouclar Localization in Prior LiDAR Maps Utilizing Semantic Consistency">
+
+<p> </p>
+<hr>
+<h1 id="L-C-Visual-inertial-Loose-Coupling-for-Resilient-and-Lightweight-Direct-Visual-Localization"><a href="#L-C-Visual-inertial-Loose-Coupling-for-Resilient-and-Lightweight-Direct-Visual-Localization" class="headerlink" title="L-C*: Visual-inertial Loose Coupling for Resilient and Lightweight Direct Visual Localization"></a>L-C*: Visual-inertial Loose Coupling for Resilient and Lightweight Direct Visual Localization</h1><img src="/20230530-icra2023-day2-poster/22.png" class="" title="L-C*: Visual-inertial Loose Coupling for Resilient and Lightweight Direct Visual Localization">
+
+<p> </p>
+<hr>
+<h1 id="Category-level-Shape-Estimation-for-Densely-Cluttered-Objects-1"><a href="#Category-level-Shape-Estimation-for-Densely-Cluttered-Objects-1" class="headerlink" title="Category-level Shape Estimation for Densely Cluttered Objects"></a>Category-level Shape Estimation for Densely Cluttered Objects</h1><img src="/20230530-icra2023-day2-poster/23.png" class="" title="Category-level Shape Estimation for Densely Cluttered Objects">
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -25549,6 +25633,230 @@ Domain Calibration via Robust SLAM </summary>
         <tag>Robotics</tag>
         <tag>Spatial AI</tag>
         <tag>Posters</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - Scalable Autonomous Driving 워크샵 (Day 5)</title>
+    <url>/20230602-icra-day-5/</url>
+    <content><![CDATA[<p>(적는 중)</p>
+<h1 id="Toyota"><a href="#Toyota" class="headerlink" title="Toyota"></a>Toyota</h1><p>Foundation models == Zero-shot generalization</p>
+<p>Pre-trained models are great out of the box. We should leverage geometry more. Mathematical formulation in geometry (e.g. epipolar geometry) are essentially the best pre-trained models!</p>
+<p>Geometric foundation models? (== Data + Principles)</p>
+<p> </p>
+<h1 id="Fisher-Yu-calable-4D-Scene-Understanding-with-Less-Hassle"><a href="#Fisher-Yu-calable-4D-Scene-Understanding-with-Less-Hassle" class="headerlink" title="Fisher Yu - calable 4D Scene Understanding with Less Hassle"></a>Fisher Yu - calable 4D Scene Understanding with Less Hassle</h1><ul>
+<li><p>Scaling with Less hassle</p>
+<ul>
+<li>Learn and benefit from large-scale data</li>
+<li>Avoid manual designs / manual labeling</li>
+</ul>
+</li>
+<li><p>Representation Learning in 4D world</p>
+<ul>
+<li>Learning robust 2D tracking</li>
+<li>Learning high-fidelity instalce-level representation</li>
+<li>Leanring 3D motion</li>
+</ul>
+</li>
+<li><p>Current tracking algorithms</p>
+<ul>
+<li>Object detection -&gt; Motion estimation -&gt; Initial Assocation (Location, Appearance) -&gt; Association Optimization</li>
+<li>Pipeline is very complicated and also is fragile.</li>
+<li>Do humans go through all these steps?<ul>
+<li>Humans only need to do ‘Object detection -&gt; Appearance association’</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>학회 발표 리뷰</category>
+      </categories>
+      <tags>
+        <tag>ICRA</tag>
+        <tag>Workshop</tag>
+        <tag>Scalable Autonomous Driving</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - 포스터 (Day 3)</title>
+    <url>/20230531-icra2023-day3-poster/</url>
+    <content><![CDATA[<h1 id="Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping"><a href="#Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping" class="headerlink" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping"></a>Convolutional Bayesian Kernel Inference for 3D Semantic Mapping</h1><img src="/20230531-icra2023-day3-poster/1.png" class="" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping">
+
+<p> </p>
+<hr>
+<h1 id="SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations"><a href="#SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations" class="headerlink" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations"></a>SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations</h1><img src="/20230531-icra2023-day3-poster/2.png" class="" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations">
+
+<p> </p>
+<hr>
+<h1 id="Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking"><a href="#Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking" class="headerlink" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking"></a>Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking</h1><img src="/20230531-icra2023-day3-poster/3.png" class="" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking">
+
+<p> </p>
+<hr>
+<h1 id="Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph"><a href="#Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph" class="headerlink" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph"></a>Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph</h1><img src="/20230531-icra2023-day3-poster/4.png" class="" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph">
+
+<p> </p>
+<hr>
+<h1 id="3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs"><a href="#3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs" class="headerlink" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs"></a>3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs</h1><img src="/20230531-icra2023-day3-poster/5.png" class="" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs">
+
+<p> </p>
+<hr>
+<h1 id="The-Reflectance-Field-Map-Mapping-Glass-and-Specular-Surfaces-in-Dynamic-Environments"><a href="#The-Reflectance-Field-Map-Mapping-Glass-and-Specular-Surfaces-in-Dynamic-Environments" class="headerlink" title="The Reflectance Field Map: Mapping Glass and Specular Surfaces in Dynamic Environments"></a>The Reflectance Field Map: Mapping Glass and Specular Surfaces in Dynamic Environments</h1><img src="/20230531-icra2023-day3-poster/6.png" class="" title="The Reflectance Field Map: Mapping Glass and Specular Surfaces in Dynamic Environments">
+
+<p> </p>
+<hr>
+<h1 id="Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines"><a href="#Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines" class="headerlink" title="Efficient Bundle Adjustment for Coplanar Points and Lines"></a>Efficient Bundle Adjustment for Coplanar Points and Lines</h1><img src="/20230531-icra2023-day3-poster/7.png" class="" title="Efficient Bundle Adjustment for Coplanar Points and Lines">
+
+<p> </p>
+<hr>
+<h1 id="Detecting-Spatiao-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine"><a href="#Detecting-Spatiao-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine" class="headerlink" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine"></a>Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine</h1><img src="/20230531-icra2023-day3-poster/8.png" class="" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine">
+
+<p> </p>
+<hr>
+<h1 id="Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding"><a href="#Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding" class="headerlink" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding"></a>Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding</h1><img src="/20230531-icra2023-day3-poster/9.png" class="" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding">
+
+<p> </p>
+<hr>
+<h1 id="SceneCalib-Automatic-Targetless-Calibration-of-Cameras-and-LiDARs-in-Autonomous-Driving"><a href="#SceneCalib-Automatic-Targetless-Calibration-of-Cameras-and-LiDARs-in-Autonomous-Driving" class="headerlink" title="SceneCalib: Automatic Targetless Calibration of Cameras and LiDARs in Autonomous Driving"></a>SceneCalib: Automatic Targetless Calibration of Cameras and LiDARs in Autonomous Driving</h1><img src="/20230531-icra2023-day3-poster/10.png" class="" title="SceneCalib: Automatic Targetless Calibration of Cameras and LiDARs in Autonomous Driving">
+
+<p> </p>
+<hr>
+<h1 id="Mask3D-Mask-Transformer-for-3D-Instance-Segmentation"><a href="#Mask3D-Mask-Transformer-for-3D-Instance-Segmentation" class="headerlink" title="Mask3D: Mask Transformer for 3D Instance Segmentation"></a>Mask3D: Mask Transformer for 3D Instance Segmentation</h1><img src="/20230531-icra2023-day3-poster/11.png" class="" title="Mask3D: Mask Transformer for 3D Instance Segmentation">
+
+<p> </p>
+<hr>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>학회 발표 리뷰</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>ICRA</tag>
+        <tag>Robotics</tag>
+        <tag>Spatial AI</tag>
+        <tag>Posters</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - 포스터 (Day 4)</title>
+    <url>/20230531-icra2023-day4-poster/</url>
+    <content><![CDATA[<h1 id="Energy-Based-Models-for-Cross-Modal-Localization-using-Covolutional-Transformers"><a href="#Energy-Based-Models-for-Cross-Modal-Localization-using-Covolutional-Transformers" class="headerlink" title="Energy-Based Models for Cross-Modal Localization using Covolutional Transformers"></a>Energy-Based Models for Cross-Modal Localization using Covolutional Transformers</h1><img src="/20230531-icra2023-day4-poster/1.png" class="" title="Energy-Based Models for Cross-Modal Localization using Covolutional Transformers">
+
+<p> </p>
+<hr>
+<h1 id="SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization"><a href="#SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization" class="headerlink" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization"></a>SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization</h1><img src="/20230531-icra2023-day4-poster/2.png" class="" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization">
+
+<p> </p>
+<hr>
+<h1 id="Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network"><a href="#Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network" class="headerlink" title="Implicit Map Representation and Localization with Invertible Neural Network"></a>Implicit Map Representation and Localization with Invertible Neural Network</h1><img src="/20230531-icra2023-day4-poster/3.png" class="" title="Implicit Map Representation and Localization with Invertible Neural Network">
+
+<p> </p>
+<hr>
+<h1 id="Combining-Scene-Coordinate-Regression-and-Absolute-Pose-Regression-for-Visual-Localization"><a href="#Combining-Scene-Coordinate-Regression-and-Absolute-Pose-Regression-for-Visual-Localization" class="headerlink" title="Combining Scene Coordinate Regression and Absolute Pose Regression for Visual Localization"></a>Combining Scene Coordinate Regression and Absolute Pose Regression for Visual Localization</h1><img src="/20230531-icra2023-day4-poster/4.png" class="" title="Combining Scene Coordinate Regression and Absolute Pose Regression for Visual Localization">
+
+<p> </p>
+<hr>
+<h1 id="A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups"><a href="#A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups" class="headerlink" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups"></a>A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups</h1><img src="/20230531-icra2023-day4-poster/5.png" class="" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups">
+
+<p> </p>
+<hr>
+<h1 id="Online-Hand-Eye-Calibration-with-Decoupling-by-3D-Textureless-Object-Tracking"><a href="#Online-Hand-Eye-Calibration-with-Decoupling-by-3D-Textureless-Object-Tracking" class="headerlink" title="Online Hand-Eye Calibration with Decoupling by 3D Textureless Object Tracking"></a>Online Hand-Eye Calibration with Decoupling by 3D Textureless Object Tracking</h1><img src="/20230531-icra2023-day4-poster/6.png" class="" title="Online Hand-Eye Calibration with Decoupling by 3D Textureless Object Tracking">
+
+<p> </p>
+<hr>
+<h1 id="Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning"><a href="#Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning" class="headerlink" title="Open-vocabulary Queryable Scene Representations or Real World Planning"></a>Open-vocabulary Queryable Scene Representations or Real World Planning</h1><img src="/20230531-icra2023-day4-poster/7.png" class="" title="Open-vocabulary Queryable Scene Representations or Real World Planning">
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>학회 발표 리뷰</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>ICRA</tag>
+        <tag>Robotics</tag>
+        <tag>Spatial AI</tag>
+        <tag>Posters</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - 포스터 (Day 5)</title>
+    <url>/20230602-icra2023-day5-poster/</url>
+    <content><![CDATA[<h1 id="F2BEV-Bird’s-Eye-View-Generation-from-Surround-View-Fisheye-Camera-Images-for-Automated-Driving"><a href="#F2BEV-Bird’s-Eye-View-Generation-from-Surround-View-Fisheye-Camera-Images-for-Automated-Driving" class="headerlink" title="F2BEV: Bird’s Eye View Generation from Surround-View Fisheye Camera Images for Automated Driving"></a>F2BEV: Bird’s Eye View Generation from Surround-View Fisheye Camera Images for Automated Driving</h1><img src="/20230602-icra2023-day5-poster/1.png" class="" title="F2BEV: Bird" alt="s Eye View Generation from Surround-View Fisheye Camera Images for Automated Driving">
+
+<p> </p>
+<hr>
+<h1 id="Graph-based-Global-Robot-Localization-and-Maping-using-Architectural-Plans"><a href="#Graph-based-Global-Robot-Localization-and-Maping-using-Architectural-Plans" class="headerlink" title="Graph-based Global Robot Localization and Maping using Architectural Plans"></a>Graph-based Global Robot Localization and Maping using Architectural Plans</h1><img src="/20230602-icra2023-day5-poster/2.png" class="" title="Graph-based Global Robot Localization and Maping using Architectural Plans">
+
+<p> </p>
+<hr>
+<h1 id="Real-time-Localization-and-Mapping-leveraging-Hierarchical-Representations"><a href="#Real-time-Localization-and-Mapping-leveraging-Hierarchical-Representations" class="headerlink" title="Real-time Localization and Mapping leveraging Hierarchical Representations"></a>Real-time Localization and Mapping leveraging Hierarchical Representations</h1><img src="/20230602-icra2023-day5-poster/3.png" class="" title="Real-time Localization and Mapping leveraging Hierarchical Representations">
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>학회 발표 리뷰</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>ICRA</tag>
+        <tag>Robotics</tag>
+        <tag>Spatial AI</tag>
+        <tag>Posters</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ICRA 2023 - Hilti SLAM Challenge (Day 5)</title>
+    <url>/20230602-icra2023-hilti/</url>
+    <content><![CDATA[<p>(적는 중)</p>
+<h2 id="Maplab-2-0"><a href="#Maplab-2-0" class="headerlink" title="Maplab 2.0"></a>Maplab 2.0</h2><ul>
+<li>Process <ul>
+<li>Odometry</li>
+<li>Single session optimization</li>
+<li>Rigid alignment with vision</li>
+<li>GLobal map optimization</li>
+<li>Global LiDAR fine tuning</li>
+</ul>
+</li>
+<li>Raw Maps:<ul>
+<li>OKVIS or FAST-LIO2<ul>
+<li>SuperPoint + SuperGlue</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Rigid Alignment<ul>
+<li>PCA for compression</li>
+<li>Search with HNSW (Malkov 2018 - Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs)</li>
+</ul>
+</li>
+</ul>
+<h2 id="KAIST"><a href="#KAIST" class="headerlink" title="KAIST"></a>KAIST</h2><ul>
+<li>AdaLIO<ul>
+<li>Detects degenerate cases and chanages parameters adaptively.</li>
+</ul>
+</li>
+<li>Quatro</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Tencent-TXR-SLAM"><a href="#Tencent-TXR-SLAM" class="headerlink" title="Tencent TXR SLAM"></a>Tencent TXR SLAM</h2><ul>
+<li>어두운 곳에서는 Histogram equalization을 사용함</li>
+</ul>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>학회 발표 리뷰</category>
+      </categories>
+      <tags>
+        <tag>ICRA</tag>
+        <tag>Workshop</tag>
+        <tag>Hilti SLAM Challenge</tag>
       </tags>
   </entry>
 </search>

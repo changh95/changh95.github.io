@@ -3,43 +3,78 @@
 
 
     <url>
-        <loc>https://changh95.github.io/tags/Posters/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Robotics/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/ICRA/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2023-05-30T16:39:49.045Z</lastmod>
+        <loc>https://changh95.github.io/tags/Scalable-Autonomous-Driving/</loc>
+        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Workshop/</loc>
-        <lastmod>2023-05-30T13:52:22.876Z</lastmod>
+        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/ICRA/</loc>
+        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Hilti-SLAM-Challenge/</loc>
+        <lastmod>2023-06-02T13:27:30.653Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Self-supervised-learning/</loc>
+        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
+        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
+        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Posters/</loc>
+        <lastmod>2023-06-02T13:23:01.416Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
+        <lastmod>2023-06-02T13:23:01.416Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Robotics/</loc>
+        <lastmod>2023-06-02T13:23:01.416Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SLAM/</loc>
+        <lastmod>2023-06-02T13:23:01.416Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -101,13 +136,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
-        <lastmod>2023-04-15T17:45:31.826Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/X11/</loc>
         <lastmod>2023-04-15T15:20:10.351Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -131,20 +159,6 @@
     <url>
         <loc>https://changh95.github.io/tags/%EB%85%BC%EB%AC%B8-%EC%86%8C%EC%8B%9D/</loc>
         <lastmod>2023-04-10T14:13:54.738Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Self-supervised-learning/</loc>
-        <lastmod>2023-03-15T01:22:54.229Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
-        <lastmod>2023-03-15T01:22:54.229Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
