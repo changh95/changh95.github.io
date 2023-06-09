@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Kimera 및 3D Dynamic Scene Graphs 논문을 리뷰합니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰">
+<meta property="og:url" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Kimera 및 3D Dynamic Scene Graphs 논문을 리뷰합니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.16.14%20AM.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.19.35%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.14.39%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.46.15%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.30.19%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.31.21%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.53.48%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.30.52%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.53.56%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-04%20at%208.36.08%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.31.30%20AM1.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.31.30%20AM2.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.33.45%20AM.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.34.11%20AM.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.34.39%20AM.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-12%20at%203.42.28%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-12%20at%204.52.45%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-12%20at%204.55.38%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-14%20at%205.01.41%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-14%20at%205.01.48%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-14%20at%205.24.43%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-04%20at%208.36.14%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%2012.24.42%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.25.51%20AM.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.21.09%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.22.45%20AM.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.02.31%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.01.07%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.06.48%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.26.28%20AM.gif">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.09.15%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.13.54%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.14.02%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.12.04%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.21.43%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.22.55%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.37.36%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.19.27%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.36.14%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.35.25%20AM.png">
+<meta property="og:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.45.04%20AM.png">
+<meta property="article:published_time" content="2023-03-27T07:50:21.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.743Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="Semantic SLAM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.16.14%20AM.gif">
+
+
+<link rel="canonical" href="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%85%BC%EB%AC%B8-%EC%9A%94%EC%95%BD"><span class="nav-number">1.</span> <span class="nav-text">논문 요약</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%85%BC%EB%AC%B8-%EB%B0%B0%EA%B2%BD"><span class="nav-number">2.</span> <span class="nav-text">논문 배경</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spatial-Perception-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%B4-%ED%95%84%EC%9A%94%ED%95%9C-%EC%9D%B4%EC%9C%A0"><span class="nav-number">2.1.</span> <span class="nav-text">Spatial Perception 시스템이 필요한 이유</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Geometry-Semantics-Abstraction-Physics-Spatio-temporal-relations-%EA%B4%80%EB%A0%A8-%EC%97%B0%EA%B5%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8"><span class="nav-number">2.2.</span> <span class="nav-text">Geometry &#x2F; Semantics, Abstraction, Physics &#x2F; Spatio-temporal relations 관련 연구 리스트</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3D-Dynamic-Scene-Graph%EB%9E%80"><span class="nav-number">3.</span> <span class="nav-text">3D Dynamic Scene Graph란?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer-1-Metric-semantic-mesh"><span class="nav-number">3.1.</span> <span class="nav-text">Layer 1: Metric-semantic mesh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer-2-Objects-and-Agents"><span class="nav-number">3.2.</span> <span class="nav-text">Layer 2: Objects and Agents</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Objects"><span class="nav-number">3.2.1.</span> <span class="nav-text">Objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Agents"><span class="nav-number">3.2.2.</span> <span class="nav-text">Agents</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer-3-Places-and-Structures"><span class="nav-number">3.3.</span> <span class="nav-text">Layer 3: Places and Structures</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Places"><span class="nav-number">3.3.1.</span> <span class="nav-text">Places</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Structures"><span class="nav-number">3.3.2.</span> <span class="nav-text">Structures</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer-4-Rooms"><span class="nav-number">3.4.</span> <span class="nav-text">Layer 4: Rooms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layer-5-Building"><span class="nav-number">3.5.</span> <span class="nav-text">Layer 5: Building</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DSG%EB%8A%94-%EC%99%9C-%EC%9D%B4%EB%9F%B0-%ED%98%95%ED%83%9C%EB%A5%BC-%EB%9D%84%EB%8A%94%EA%B0%80"><span class="nav-number">3.6.</span> <span class="nav-text">DSG는 왜 이런 형태를 띄는가?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kimera-Spatial-Perception-Engine-%EA%B0%9C%EC%9A%94"><span class="nav-number">4.</span> <span class="nav-text">Kimera: Spatial Perception Engine 개요</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kimera-Core"><span class="nav-number">5.</span> <span class="nav-text">Kimera-Core</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-Core-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%98%A4%EB%B2%84%EB%B7%B0"><span class="nav-number">5.1.</span> <span class="nav-text">Kimera-Core 시스템 오버뷰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-VIO-Visual-Inertial-Odometry"><span class="nav-number">5.2.</span> <span class="nav-text">Kimera-VIO: Visual-Inertial Odometry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-Mesher-3D-Mesh-Reconstruction"><span class="nav-number">5.3.</span> <span class="nav-text">Kimera-Mesher: 3D Mesh Reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-Semantics-3D-Metric-Semantic-Reconstruction"><span class="nav-number">5.4.</span> <span class="nav-text">Kimera-Semantics: 3D Metric-Semantic Reconstruction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-PGMO-Pose-graph-and-Mesh-Optimization-with-Loop-Closures"><span class="nav-number">5.5.</span> <span class="nav-text">Kimera-PGMO: Pose graph and Mesh Optimization with Loop Closures</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kimera-DSG"><span class="nav-number">6.</span> <span class="nav-text">Kimera-DSG</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-Humans-Humans-Shape-Estimation-and-Robust-Tracking"><span class="nav-number">6.1.</span> <span class="nav-text">Kimera-Humans: Humans Shape Estimation and Robust Tracking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-Objects-Object-Pose-Estimation"><span class="nav-number">6.2.</span> <span class="nav-text">Kimera-Objects: Object Pose Estimation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kimera-BuildingParser-Extracting-Places-Rooms-and-Structures"><span class="nav-number">6.3.</span> <span class="nav-text">Kimera-BuildingParser: Extracting Places, Rooms and Structures</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4%EB%A5%BC-%ED%95%98%EB%8A%94-%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%B4-Kimera%EC%97%90%EC%84%9C-%EB%B0%B0%EC%9A%B8%EB%A7%8C%ED%95%9C-%EC%A0%90"><span class="nav-number">7.</span> <span class="nav-text">오픈소스를 하는 사람들이 Kimera에서 배울만한 점</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%A4%ED%97%98-%EA%B2%B0%EA%B3%BC"><span class="nav-number">8.</span> <span class="nav-text">실험 결과</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VIO-%EC%A0%95%ED%99%95%EB%8F%84-RMSE"><span class="nav-number">8.1.</span> <span class="nav-text">VIO 정확도 (RMSE)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VIO-Dynamic-Masking"><span class="nav-number">8.2.</span> <span class="nav-text">VIO + Dynamic Masking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCM%EC%9D%B4-%EC%99%9C-%EC%A2%8B%EC%9D%80%EA%B0%80"><span class="nav-number">8.3.</span> <span class="nav-text">PCM이 왜 좋은가?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global-mesh%EC%9D%98-%EC%A0%95%ED%99%95%EB%8F%84"><span class="nav-number">8.4.</span> <span class="nav-text">Global mesh의 정확도</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%82%AC%EB%9E%8C-%EA%B2%80%EC%B6%9C"><span class="nav-number">8.5.</span> <span class="nav-text">사람 검출</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%B0%A9-%EA%B2%80%EC%B6%9C"><span class="nav-number">8.6.</span> <span class="nav-text">방 검출</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9E%98-%EC%95%88%EB%90%98%EB%8A%94-%EA%B3%B3"><span class="nav-number">8.7.</span> <span class="nav-text">잘 안되는 곳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%86%8D%EB%8F%84-PC"><span class="nav-number">8.8.</span> <span class="nav-text">속도 (PC)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%86%8D%EB%8F%84-NVIDIA-Jetson-TX2"><span class="nav-number">8.9.</span> <span class="nav-text">속도 (NVIDIA Jetson TX2)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kimera-DSG%EC%9D%98-%EC%82%AC%EC%9A%A9%EC%B2%98"><span class="nav-number">9.</span> <span class="nav-text">Kimera&#x2F;DSG의 사용처</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-03-27 16:50:21" itemprop="dateCreated datePublished" datetime="2023-03-27T16:50:21+09:00">2023-03-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="논문-요약"><a href="#논문-요약" class="headerlink" title="논문 요약"></a>논문 요약</h1><p>이 논문에서는 복잡한 실내 환경에서 지도를 만들고 시간에 따른 변화를 기록하는 프레임워크를 제안한다. 알고리즘 하나하나 다 설명하기보다는, 전체적인 시스템을 설명하는 논문이다.</p>
+<p>지도는 scene graph라는 특수한 구조를 가지고 있는데, 공간을 표현하는 방법을 여러 layer로 나누어 단계적으로 표현하는 방법이다. 이 논문에서는 낮은 layer 순서대로 Metric-semantic mesh, Objects and agents, Places and Structures, Rooms, Buildings 순서로 표현한다. 이 중 agents와 같이 움직이는 객체들이 있기 때문에 Dynamic Scene Graph라고 부른다.</p>
+<p>가장 낮은 layer에 위치한 metric semantic mesh는 semantic segmentation과 mesh를 생성하는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9LaW1lcmEtVklP">visual-inertial odometry<i class="fa fa-external-link-alt"></i></span>로 생성한다.</p>
+<p>Objects와 Agents를 검출할 때, 움직이는 객체는 agent로, 움직이지 않는 객체는 object로 분류한다. Object를 검출할 때에는 물체의 모양을 알고 있는 경우와 알지 못하는 경우를 따로 분리해서 검출할 수 있다. Agents는 로봇이나 사람 등을 검출할 수 있는데, 논문에서는 사람의 자세를 검출하고 트랙킹 하는 방법을 소개한다.</p>
+<p>Places and Structures 및 Room 구분은 바닥/벽/천장을 구분하고 같은 공간끼리 클러스터링하는 방법을 제안한다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.16.14%20AM.gif" class="" title="overview">
+
+<p> </p>
+<hr>
+<h1 id="논문-배경"><a href="#논문-배경" class="headerlink" title="논문 배경"></a>논문 배경</h1><h2 id="Spatial-Perception-시스템이-필요한-이유"><a href="#Spatial-Perception-시스템이-필요한-이유" class="headerlink" title="Spatial Perception 시스템이 필요한 이유"></a>Spatial Perception 시스템이 필요한 이유</h2><blockquote>
+<p>로봇이 사람의 수준만큼 공간을 이해하려면 어떤 조건이 필요할까?</p>
+<ul>
+<li>공간의 기하학적, 의미론적, 물리적 특성을 이해해야한다. </li>
+<li>물체들 사이의 공간-시간적 현상을 이해해야한다. </li>
+<li>모든 관계를 단계적으로 이해할 수 있어야한다.</li>
+</ul>
+</blockquote>
+<p>로봇이 공간 속에서 안전하게 이동하고 작업을 하기 위해서는 어떤 기능이 필요한가? 로봇이 사람과 안전하게 상호작용하기 위해서는 어떤 기능이 필요한가?</p>
+<p>예를 들어서, 건물에 불이 난 화재 현장에서 소방 로봇에게 ‘2층에서 생존자를 찾아라!’ 라는 명령을 줬다고 해보자. 로봇은 건물 입구에서부터 2층까지 이동하고 탐색을 해야한다. 이를 위해 로봇이 해야하는 작업은 이동 경로를 미리 <strong>계획</strong>하고, 경로에서 벗어나지 않게 <strong>제어</strong>를 하며 이동을 하며, 이동 중에는 주변 환경을 실시간으로 <strong>인식</strong>하며 생존자를 찾아야한다. 사람은 이것을 굉장히 쉽게 할 수 있다 - 후다닥 뛰면서 주변을 두리번두리번 거리면 된다. 현재 기술로는 로봇보다 사람이 작업하는 것이 전체적으로 더 쉽고 저렴하기 때문에 소방로봇보다 소방관이 더 많은 것이다.</p>
+<p>공간을 인지하고, 이해하고, 공간 속에서 안전하고 효율적으로 이동하는 것은 사람에게는 굉장히 쉬운 일이다. 로봇의 공간 인지 능력과 이동 능력을 사람의 수준만큼 끌어올리는 것이 자율주행의 핵심이다. 이러한 목표를 달성하기 위해서는 아무래도 사람의 사고 방식을 모방하는 것이 쉬울 수 있다. 사람은 공간에서 공간으로 이동하는데에 어떤 사고 단계를 거칠까?</p>
+<p>사람은 로봇과 다르게 <strong>High-level understanding</strong>을 기준으로 공간을 이해하고 계획하는 경우가 많다. 보스턴에서 로마로 이동을 한다고 할 때, 사람은 집-자동차-운전-공항-체크인-비행기-공항-빠져나오기 와 같은 방식으로의 이동 방법을 계획한다. 이는 <strong>로봇이 공간이동을 할 때 사용하는 미터 단위의 움직임 트랙킹과는 아주 다르다</strong>. 하지만 사람이 항상 이렇게 topological하게만 생각하는 것은 아니다. 사람도 미터 단위의 움직임을 인식하고, 또 state 변화도 인식할 수 있다. 예를 들어, 멀리 보이는 자동차가 주차되어있는 것인지 아니면 이동하고 있는 것인지 구분할 수 있으며, 사람이 벽을 향해 걸어가다가 방향을 돌리지 않으면 몇초 후에 부딪힐지 예상도 할 수 있다.</p>
+<p>이처럼 사람은 동적 객체가 존재하는 복잡한 3D 공간을 굉장히 잘 이해할 수 있다. 몇가지 특징을 분류해보면 다음과 같다.</p>
+<ul>
+<li>공간의 <strong>기하학적 특성</strong>을 이해한다. (Geometry)<ul>
+<li>e.g. 나와 저 벽은 5m 떨어져있다.</li>
+</ul>
+</li>
+<li>공간의 <strong>의미론적인 특성</strong>을 이해한다. (Semantics)<ul>
+<li>e.g. 이것은 의자이다. 저것은 벽이다. 저것은 천장이다.</li>
+</ul>
+</li>
+<li>공간의 <strong>물리적인 특성</strong>을 이해한다. (Physics)<ul>
+<li>e.g. 저기 자동차는 주행중이다. 전진 중이기 때문에 갑작스럽게 후진할 수 없다.</li>
+</ul>
+</li>
+<li>공간을 <strong>여러 단계</strong>로 나누어서 이해할 수 있다. (Multiple levels of abstraction)<ul>
+<li>e.g. 내 앞의 벽은 3m 떨어져있다. 이 벽은 내 방의 벽이다. 내 방은 우리 집의 일부이다. 우리 집은 우리 동네의 일부이다. 우리 동네는 용인시에 있다. 용인시는 경기도에 있다.</li>
+</ul>
+</li>
+<li>객체의 <strong>공간-시간적 특성</strong>을 이해할 수 있다 (Spatio-temporal relations)<ul>
+<li>e.g. 사람이 의자에 앉아있다. 사람이 일어났다. 사람이 앞으로 걸어가면서, 사람과 의자 사이의 거리가 멀어진다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.19.35%20AM.png" class="" title="inspiration">
+
+<p> </p>
+<h2 id="Geometry-Semantics-Abstraction-Physics-Spatio-temporal-relations-관련-연구-리스트"><a href="#Geometry-Semantics-Abstraction-Physics-Spatio-temporal-relations-관련-연구-리스트" class="headerlink" title="Geometry / Semantics, Abstraction, Physics / Spatio-temporal relations 관련 연구 리스트"></a>Geometry / Semantics, Abstraction, Physics / Spatio-temporal relations 관련 연구 리스트</h2><details>
+  <summary> Geometry / Semantics 연구 리스트 (클릭하면 열립니다) </summary>
+
+<ul>
+<li><strong>SLAM</strong><ul>
+<li><a href="">Cadena 2016 - Past, Present, and Future of Simultaneous Localization and Mapping: Toward the robust perception age </a></li>
+</ul>
+</li>
+<li><strong>Structure from Motion (SfM)</strong><ul>
+<li><a href="">Enqvist 2011 - Non-sequential Structure from Motion</a></li>
+</ul>
+</li>
+<li><strong>Multi-view stereo</strong><ul>
+<li><a href="">Schops 2017 - A Multi-view Stereo Benchmark with High-Resolution Images and Multi-Camera Videos</a></li>
+</ul>
+</li>
+<li><strong>Semantic segmentation</strong><ul>
+<li><a href="">Garcia-Garcia 2017 - A review on deep learning techniques applied to semantic segmentation</a></li>
+<li><a href="">Krizhevsky 2012 - ImageNet classification with deep convolutional neural networks</a></li>
+<li><a href="">Redmon and Farhadi 2017 - YOLO9000: Better, faster, stronger</a></li>
+<li><a href="">Ren 2015 - Faster R-CNN: Towards realtime object detection with region proposal networks</a></li>
+<li><a href="">He 2017 - Mask R-CNN</a></li>
+<li><a href="">Hu 2017 - Learning to segment everything</a></li>
+<li><a href="">Badrinarayanan 2017 - SegNet: A deep convolutional encoder-decoder architucture for image segmentation</a></li>
+</ul>
+</li>
+<li><strong>Fusion of above</strong><ul>
+<li><a href="">Bao and Saverese 2011 - Semantic structure from motion</a></li>
+<li><a href="">Bowman 2017 - Probabilistic data associaation for semantic slam</a></li>
+<li><a href="">Hackel 2017 - Semantic3d.net: A new large-scale point cloud classification benchmark</a></li>
+<li><a href="">Grinvald 2019 - Volumetric instance-aware semantic mapping and 3D object discovery</a></li>
+<li><a href="">Zheng 2019 - Active understanding via online semantic reconstruction</a></li>
+<li><a href="">Zheng 2019 - From pixels to buildings: end-to-end probabilistic deep networks for large-scale semantic mapping</a></li>
+<li><a href="">Davison 2018 - Futuremapping: The computational structure of spatial ai system</a></li>
+</ul>
+</li>
+</ul>
+</details>
+
+<details>
+  <summary> Multiple levels of abstraction 관련 연구 (클릭하면 열립니다)) </summary>
+
+<ul>
+<li><strong>Early researches on map representation in robotics</strong><ul>
+<li><a href="">Kuipers 2000 - The Spatial Semantic Hierarchy</a></li>
+<li><a href="">Chatila and Laumond 1985 - Position referencing and consistsent world modelling for mobile robotics</a></li>
+<li><a href="">Vasudewvan 2006 - Cognitive maps for mobile robots: An object based approach</a></li>
+<li><a href="">Galindo 2005 - Multi-hierarchical semantic maps for mobile robotics</a></li>
+<li><a href="">Zender 2008 - Conceptual spatial representations for indoor mobile robots</a></li>
+</ul>
+</li>
+<li><strong>Metric semantic mapping</strong><ul>
+<li><a href="">Salas-Moreno 2013 - SLAM++: Simultaneous localisation and mapping at the level of objects</a></li>
+<li><a href="">Bowman 2017 - Probabilistic data associaation for semantic slam</a></li>
+<li><a href="">Behley - A Dataset for Semantic Scene Understanding fof LiDAR Sequences</a></li>
+<li><a href="">Tateno 2017 - CNN-SLAM: Real-time dense monocular SLAM with learned depth prediction</a></li>
+<li><a href="">Rosinol 2020 - Kimera: an open-source library for real-time metric-semantic localization and mapping</a></li>
+<li><a href="">Grinvald 2019 - Volumetric instance-aware semantic mapping and 3D object discovery</a></li>
+<li><a href="">McCorman 2017 - SemanticFusion: Dense 3D Semantic Mapping with Convolutional Neural Networks</a></li>
+</ul>
+</li>
+</ul>
+</details>
+
+
+<details>
+  <summary>  Physics / Spatio-temporal relations 관련 연구 (클릭하면 열립니다)) </summary>
+
+<ul>
+<li><strong>2D Scene graphs</strong><ul>
+<li><a href="">Choi 2013 - Understanding indoor scene using 3d geometric phrases</a></li>
+<li><a href="">Zhao and Zhu 2013 - Scene parsing by integration function, geometry and appearance models</a></li>
+<li><a href="">Huang 2018 - Holistic 3d scene parsing and reconstruction from a single rgb image</a></li>
+<li><a href="">Jiang 2018 - Configurable 3d scene synthesis and 2d image rendering with per-pixel ground truth using stochastic grammars</a></li>
+</ul>
+</li>
+<li><strong>3D Scene graphs</strong><ul>
+<li><a href="">Armeni 2019 - 3D scene graph: A structure for unified semantics, 3D space, and camera</a></li>
+<li><a href="">Kim 2019 - 3-d scene graph: A sparse and semantic representation of physical environments for intelligent agents</a></li>
+</ul>
+</li>
+</ul>
+</details>
+
+<p> </p>
+<hr>
+<h1 id="3D-Dynamic-Scene-Graph란"><a href="#3D-Dynamic-Scene-Graph란" class="headerlink" title="3D Dynamic Scene Graph란?"></a>3D Dynamic Scene Graph란?</h1><blockquote>
+<p>Kimera = 카메라+IMU로 취득한 데이터로부터 공간정보를 인식해서 3D DSG를 생성하는 시스템<br>5개의 layer로 이뤄짐 - Metric-semantic mesh, Objects and Agents, Places and Structures, Rooms, Buildings</p>
+</blockquote>
+<p>Kimera 시스템의 개발 목적은 인간-로봇의 상호작용을 위한 <strong>공간 인식 시스템</strong> (spatial perception)을 만들기 위함이다. 이를 위해 효과적인 공간 표현법이 필요한데, Kimera는 <strong>3D Dynamic Scene Graph</strong> (3D DSG)를 사용하였다. DSG는 여러개의 계층를 가진 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvR3JhcGhfKGFic3RyYWN0X2RhdGFfdHlwZSk=">그래프 자료구조<i class="fa fa-external-link-alt"></i></span>이며, 각각의 node는 공간 객체 (e.g. object, rooms, agents)를 의미하고 각각의 edge는 공간-시간적인 관계를 의미한다 (pairwise spatio-temporal relation).</p>
+<p>DSG의 node는 공간 객체를 의미하고, edge는 공간-시간적 관계를 의미한다. Kimera의 DSG는 공간 객체를 표현할 때 1. pose (6dof 방향+위치), 2. shape (형태), 3. bounding box (object detection의 결과인 바운딩 박스)를 함께 표현한다. 또, 각각의 node는 unique ID를 가지고 있으며 (i.e. 독립적이다), 아래와 같은 계층 구조로 표현된다.</p>
+<ol>
+<li>Metric-semantic mesh</li>
+<li>Objects and Agents</li>
+<li>Places and structures</li>
+<li>Rooms</li>
+<li>Building</li>
+</ol>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.14.39%20AM.png" class="" title="3D DGS">
+
+<p> </p>
+<h2 id="Layer-1-Metric-semantic-mesh"><a href="#Layer-1-Metric-semantic-mesh" class="headerlink" title="Layer 1: Metric-semantic mesh"></a>Layer 1: Metric-semantic mesh</h2><p>Metric-semantic mesh의 뜻은 다음과 같이 풀어 쓸 수 있다. </p>
+<ul>
+<li>Metric: Meter-ic - 미터-단위의 스케일을 가지고 있는 -&gt; 즉, 실제 세상과 동일한 비율을 가지고 있는 지도를 만든다.</li>
+<li>Semantic: 시맨틱 정보를 가지고 있는 -&gt; 즉, <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hdHRlcnBvcnQvTWFza19SQ05O">Semantic segmentation<i class="fa fa-external-link-alt"></i></span>의 결과가 함께 적용될 것이다.</li>
+<li>Mesh: 공간을 표현할 때 그래프 형태로 엮여있는 표현 방법 (i.e. <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUG9seWdvbl9tZXNo">폴리곤 메쉬<i class="fa fa-external-link-alt"></i></span>). Mesh는 node와 edge로 이뤄져있다.</li>
+</ul>
+<p>즉, 3D DSG는 ‘<strong>실제 세상과 동일한 스케일을 가진 geometry 정보를 mesh로 표현했고, 이 mesh에는 semantic 정보도 함께 담겨있다</strong>‘ 라는 뜻이 된다.</p>
+<p>Metric-semantic mesh의 node는 각각 다음과 같은 정보를 담고 있다 - 1. 3D position, 2. Normal, 3. RGB 색, 4. Semantic label. Edge를 연결하는 방법은 polygon mesh가 되도록 (i.e. 생성되는 면이 삼각형이 되도록) 만든다. </p>
+<p>Metric-semantic mesh는 <strong>정적인 물체 (i.e. static)한 정보만 담는다</strong>. 예를 들어, 바닥, 벽, 천장, 가구 와 같은 것들이 될것이다. 움직이는 로봇이나 사람과 같이 동적인 물체는 곧 설명할 Agents로써 다루며 metric-semantic mesh에는 포함되지 않는다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.46.15%20AM.png" class="" title="metric_semantic_mesh">
+
+<p> </p>
+<h2 id="Layer-2-Objects-and-Agents"><a href="#Layer-2-Objects-and-Agents" class="headerlink" title="Layer 2: Objects and Agents"></a>Layer 2: Objects and Agents</h2><h3 id="Objects"><a href="#Objects" class="headerlink" title="Objects"></a>Objects</h3><p>Objects는 <strong>건물의 일부가 아닌 정적인 물체</strong>를 의미한다. ‘건물의 일부’로써의 예시로는 바닥, 벽, 천장, 기둥과 같은 것들이 있다. </p>
+<p>Object node는 다음과 같은 정보를 담고 있다 - 1. 3D object pose, 2. Bounding box, 3. Semantic class. Kimera에서는 여기까지만 저장하지만, 사실 원한다면 더 많이 저장할 수도 있다. 예를 들어, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMDI1Mjc=">Armeni 2019 - 3D scene graph: A structure for unified semantics, 3D space, and camera<i class="fa fa-external-link-alt"></i></span> 에서는 재질과 같은 정보도 담기도 한다. Node를 이어주는 edge에는 1. co-visibility, 2. 상대적인 크기 차이, 3. 상대적인 거리, 4. 닿아있는지에 대한 여부 와 같은 정보를 저장한다.</p>
+<p>모든 object node는 가장 가까운 place node와 연결되어있다 (Place node는 Layer 3에 있다).</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.30.19%20PM.png" class="" title="Objects">
+
+<h3 id="Agents"><a href="#Agents" class="headerlink" title="Agents"></a>Agents</h3><p>Agents는 <strong>동적인 물체</strong>를 의미한다. Kimera에서는 주로 ‘<strong>로봇</strong>‘과 ‘<strong>사람</strong>‘을 동적인 물체로 분류했다. (논문/코드에서 로봇을 검출&amp;트랙킹 하는 코드는 없고, 사람 검출&amp;트랙킹 관련 부분만 존재한다. 다만, ‘데이터를 수집하는 자기자신’을 로봇으로 인지하긴 한다.)</p>
+<p>Agent node는 다음과 같은 정보를 담고 있다 - 1. 시간에 따른 움직임 정보를 담은 3D pose graph, 2. 시간마다 기록해둔 물체의 형태 (사람의 경우, non-rigid mesh), 3. Semantic class (i.e. 로봇인지, 사람인지).</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.31.21%20PM.png" class="" title="Objects">
+
+<p> </p>
+<h2 id="Layer-3-Places-and-Structures"><a href="#Layer-3-Places-and-Structures" class="headerlink" title="Layer 3: Places and Structures"></a>Layer 3: Places and Structures</h2><h3 id="Places"><a href="#Places" class="headerlink" title="Places"></a>Places</h3><p>Place는 ‘<strong>비어있는 공간</strong>‘을 의미하며, 하나의 node로써 표현이 가능하다. 그리고 이러한 node를 잇는 edge는 place에서 place로 이동이 가능하다는 것을 의미하는 ‘<strong>횡단 가능성</strong>‘가 (traversability) 되겠다.</p>
+<p>Place는 topological 한 성격을 띈다. 이는 place가 다른 하위 node들과 굉장히 다른 성격을 가진다는 것을 의미하는데, 하위 node들은 정확한 위치/형태/크기를 표현하는 geometric한 성격이 강한데에 비해, Place는 단순히 node에 ‘비어있는 공간의 평균 위치’인 3D position 정보만 가지기 때문이다. </p>
+<p>이러한 topological 한 성격은 로봇이 움직이는 방법 (i.e. 실제 scale의 occupancy map에서의 경로 계획)이 아닌 좀 더 사람이 움직이는 방법과 유사하게 생각할 수 있게 해준다 (i.e. 1번 place에서 2번 place로 이동한다). 이를 통해 좀 더 효율적인 경로 계획이 가능해지는데, 이 부분에 대해서는 이후 소개할 Hierarchical planning에서 좀 더 다루기로 한다.</p>
+<p>Layer 2에 있는 object node들은 해당 object가 검출된 가장 가까운 place에 해당하는 node와 연결이 된다. 또, place node들은 가장 가까운 (Layer 4에서 소개할) room node에도 연결된다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.53.48%20PM.png" class="" title="Structures">
+
+<h3 id="Structures"><a href="#Structures" class="headerlink" title="Structures"></a>Structures</h3><p>Structures는 <strong>벽, 바닥, 천장, 기둥</strong>과 같은 것들이며, <strong>place를 나누는 기준</strong>이 된다.</p>
+<p>Structure node는 1. 3D pose, 2. bounding box, 3. semantic class 정보를 담고 있다. 구현에 따라, 어떤 방을 감싸고 있는지에 대한 정보도 저장할 수 있다.</p>
+<p>Layer 2에 있는 object node가 structure node에 연결이 될 수 있다. 예를 들어, ‘액자가 벽에 걸려있다’ 라던지, ‘전등이 천장에 걸려있다’와 같은 경우에 가능하다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.30.52%20PM.png" class="" title="Structures">
+
+<p> </p>
+<h2 id="Layer-4-Rooms"><a href="#Layer-4-Rooms" class="headerlink" title="Layer 4: Rooms"></a>Layer 4: Rooms</h2><p>Rooms는 <strong>방, 복도, 거실</strong>과 같은 공간을 분리하는 기준이 된다. </p>
+<p>Room node는 1. 3D pose, 2. bounding box, 3. Semantic class를 담고 있다.</p>
+<p>Layer 3의 object node들은 object들이 위치해있는 room node로 연결 된다.</p>
+<p>모든 room node는 해당되는 Layer 5의 building node로 연결된다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-03%20at%2011.53.56%20PM.png" class="" title="Structures">
+
+<p> </p>
+<h2 id="Layer-5-Building"><a href="#Layer-5-Building" class="headerlink" title="Layer 5: Building"></a>Layer 5: Building</h2><p>Room들을 모아 하나의 빌딩을 만들 수 있다.</p>
+<p>Building node에 1. 3D pose, 2. Bounding box, 3. Semantic class 정보를 담을 수 있다.</p>
+<p>사실 Kimera 논문에서는 거의 개념만 존재하는 느낌이다. Multi-building 시나리오를 생각하고 만든 것 같지만, 실제로 실험을 진행하거나 하진 않았다. </p>
+<p> </p>
+<h2 id="DSG는-왜-이런-형태를-띄는가"><a href="#DSG는-왜-이런-형태를-띄는가" class="headerlink" title="DSG는 왜 이런 형태를 띄는가?"></a>DSG는 왜 이런 형태를 띄는가?</h2><p>우리는 5개의 layer로 이뤄진 DSG 구조를 보았다. 각각의 layer의 성격과 layer들관의 관계가 명확하게 정의되어있다. 이게 최선일까? 라는 생각이 들 수도 있다. 저자들은 이렇게 디자인한데에는 2가지 이유가 있다고 한다.</p>
+<p>첫째는 <strong>Task planning 와 motion planning을 효율적으로 하기 위함</strong>이다. 높은 수준의 인간-로봇 상호작용을 위해서는 분명 사람의 사고흐름을 따르는 task가 주어질 것인데, 이는 주로 추상적인 경우가 많다 (e.g. ‘거실에 가서 커피 한잔 타와’). 이에 비해서 로봇의 경로 계획 방법은 기하학적인 움직임을 따르는 경우가 많기 떄문에 (e.g. 0.5 m/s로 3m 전진, 이후 45도 좌회전 후 동일 속도로 2m 전진.) 3D DSG는 상위 layer에서는 semantic 정보를 기반으로 한 topological 한 성격을 띄기 때문에 추상적인 task planning에 효과적이며, 이는 사람의 사고흐름과 비슷하게 경로 계획을 할 수 있다는 것을 의미한다. 상위 layer에서 경로 계획이 끝나면, geometric한 성격을 띄는 하위 layer의 정보에 접근하여 로봇의 경로 계획법을 따라 안전하게 구동부를 작동시킬 수 있다.</p>
+<p>둘째는 <strong>확정성</strong>에 있다. 환경에 따라 places, structures, rooms, buildings와 같은 구조는 적합하지 않을 수 있다. 예를 들어서, 고속도로 같은 환경에는 이와 같은 것들이 전혀 없을 것이다. 하지만 그런 경우에는 몇몇 layer를 제거하고, 적절한 layer로 대체할 수 있다는 장점이 있다. 또, 경우에 따라서, 위/아래로 layer를 추가할 수도 있다. 논문에서 소개하는 3D DSG는 하나 또는 다수의 빌딩을 하나의 그래프 안에 담을 수 있을 것이다. 하지만 이론 상 위에 layer를 계속 추가해서 동네, 구, 시, 나라 까지 엮을 수도 있을 것이다.</p>
+<p> </p>
+<hr>
+<h1 id="Kimera-Spatial-Perception-Engine-개요"><a href="#Kimera-Spatial-Perception-Engine-개요" class="headerlink" title="Kimera: Spatial Perception Engine 개요"></a>Kimera: Spatial Perception Engine 개요</h1><p>Kimera를 한줄로 표현하면 ‘<strong>카메라+IMU로 취득한 데이터로부터 공간정보를 인식해서 DSG를 생성하는 시스템</strong>‘이다.</p>
+<p>Kimera 시스템은 <strong>Kimera-core</strong>와 <strong>Kimera-DSG</strong>라는 2개의 모듈로 나눠진다.</p>
+<p> </p>
+<hr>
+<h1 id="Kimera-Core"><a href="#Kimera-Core" class="headerlink" title="Kimera-Core"></a>Kimera-Core</h1><h2 id="Kimera-Core-시스템-오버뷰"><a href="#Kimera-Core-시스템-오버뷰" class="headerlink" title="Kimera-Core 시스템 오버뷰"></a>Kimera-Core 시스템 오버뷰</h2><img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-04%20at%208.36.08%20PM.png" class="" title="Structures">
+
+<p>Kimera-Core는 <strong>실시간으로 metric-semantic mesh를 생성</strong>한다.</p>
+<p>시스템 인풋으로는 <strong>Stereo 또는 RGB-D 카메라</strong>, 그리고 <a target="_blank" rel="noopener" href="https://ko.wikipedia.org/wiki/%EA%B4%80%EC%84%B1_%EC%B8%A1%EC%A0%95_%EC%9E%A5%EB%B9%84"><strong>IMU</strong></a>를 필요로 한다. 위와 같은 데이터를 통해 Segmentation image, Depth image, RGB image, IMU data stream을 만들 수 있다. </p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9LaW1lcmEtVklP">Kimera-VIO<i class="fa fa-external-link-alt"></i></span>는 Stereo RGB image와 IMU를 받는 VIO 모듈을 이용해서 정확하고 빠른 3D 자세 추정을 수행한다. VIO 모듈은 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmdsYWIvZ3RzYW0=">GTSAM<i class="fa fa-external-link-alt"></i></span> 라이브러리를 통해 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MTIuMDIzNjM=">IMU pre-integration<i class="fa fa-external-link-alt"></i></span>과 fixed-lag smoothing 기법을 사용한 것이 특징이다. (참고 논문 <span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2gtY29sbGVjdGlvbi5ldGh6LmNoL2hhbmRsZS8yMC41MDAuMTE4NTAvMjk3NjQ1">1<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzg3OTQ0NTY=">2<i class="fa fa-external-link-alt"></i></span>). <span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9rby1rci9hdXRvbm9tb3VzLW1hY2hpbmVzL2VtYmVkZGVkLXN5c3RlbXMvamV0c29uLXR4Mi8=">NVIDIA Jetson TX2<i class="fa fa-external-link-alt"></i></span>에서도 실시간으로 동작 가능할 정도로 가볍다.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9LaW1lcmEtVklP">Kimera-Mesher<i class="fa fa-external-link-alt"></i></span>는 VIO의 포즈와 맵 정보를 받아 매 프레임 / 다수의 프레임에서 빠른 local mesh을 생성한다.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9LaW1lcmEtU2VtYW50aWNz">Kimera-Semantics<i class="fa fa-external-link-alt"></i></span>는 Kimera-mesher의 결과를 받아 global 3D mesh 생성한다. <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aHotYXNsL3ZveGJsb3g=">VoxBlox<i class="fa fa-external-link-alt"></i></span>의 ESDF (Euclidean Signed Distance Function) 기법 사용하며, 3D Bayesian update 방법론을 통해 mesh에 semantic 정보 부여해 metric-semantic mesh를 생성한다.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9LaW1lcmEtVklP">Kimera-PGMO<i class="fa fa-external-link-alt"></i></span>는 Loop closure를 이용해 Kimera-Semantics의 global metric-semantic mesh를 최적화한다. PGMO는 Pose-graph and mesh optimization을 줄인 말이다. Kimera-PGMO는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9LaW1lcmEtUlBHTw==">Kimera-RPGO<i class="fa fa-external-link-alt"></i></span> (Robust pose-graph optimization) 라이브러리의 mesh 버전이다.</li>
+</ul>
+<p>Kimera-core는 기본적으로 <strong>5개의 쓰레드</strong>를 사용한다.</p>
+<ul>
+<li>1번 쓰레드<ul>
+<li>Kimera-VIO의 frontend가 stereo image와 IMU 데이터를 인풋으로 받는다. 아웃풋으로 feature track과 pre-integrated IMU 값들을 준다.</li>
+</ul>
+</li>
+<li>2번 쓰레드<ul>
+<li>Kimera-VIO의 backend가 최적화를 수행하고, 최적화된 맵/포즈 값을 준다.</li>
+</ul>
+</li>
+<li>3번 쓰레드<ul>
+<li>Kimera-Mesher가 매 프레임마다 3D mesh를 연산하고 (&lt;20ms), 또 여러 프레임 정보를 통합한 3D mesh도 연산한다.</li>
+</ul>
+</li>
+<li>4번 쓰레드<ul>
+<li>Kimera-Semantics가 metric-semantic mesh를 생성한다. 앞의 3개 쓰레드보다는 상당히 많이 느리게 동작한다. Depth map, 2D semantic label, pose 정보를 필요로 한다. Depth map은 RGB-D 센서에서 바로 얻어내거나, Stereo images에서 dense stereo를 통해 얻어낸다. 2D semantic label은 RGB 이미지에 semantic segmentation을 수행해서 얻어낸다. pose 정보는 Kimera-VIO로 추정한 최적 포즈 값이다.</li>
+</ul>
+</li>
+<li>5번 쓰레드<ul>
+<li>Kimera-PGMO를 이용해 loop closure를 수행한다. 최적 metric-semantic mesh가 필요하지 않다면 Kimera-RPGO를 사용할 수도 있다.</li>
+</ul>
+</li>
+</ul>
+<p>아래 서브 섹션부터는 각각의 기능들에 대해 상세히 리뷰한다.</p>
+<p> </p>
+<h2 id="Kimera-VIO-Visual-Inertial-Odometry"><a href="#Kimera-VIO-Visual-Inertial-Odometry" class="headerlink" title="Kimera-VIO: Visual-Inertial Odometry"></a>Kimera-VIO: Visual-Inertial Odometry</h2><blockquote>
+<p>Stereo + Pre-integrated IMU를 이용한 VIO</p>
+</blockquote>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.31.30%20AM1.gif" class="" title="Structures">
+
+<p>Kimera-VIO는 카메라와 IMU의 데이터를 혼합하는 visual-inertial odometry (VIO) 기법을 통해 실시간으로 카메라+IMU 시스템의 6dof pose (i.e. 3D 공간 속에서의 방향 + 3D 공간 속에서의 위치)을 추정한다. 동시에, 3D visual landmark를 통해 sparse하게 scene reconstruction을 할 수 있는데, 이 정보를 기반으로 실제 세상과 동일한 scale을 가지고 있는 (i.e. metric-scale을 가지고 있는) mesh를 만들 수 있다.</p>
+<p>Kimera-VIO는 현재 많은 VIO 시스템이 채택하는 방법인 <strong>keyframe-based 기반 fixed-lag smoothing 기법</strong>을 사용한다. 이 방법은 카메라가 취득한 모든 이미지 데이터를 사용하는 것이 아닌, sliding window 기법을 통해 특정 갯수의 keyframe 데이터로부터만 연산을 하는 방법인데, 효과적으로 연산량을 줄일 수 있다는 장점 때문에 2015년 이후 수많은 VIO 기법들이 이와 같은 keyframe-based 기반 fixed-lag smoothing 기법을 사용한다. 물론 더 많은 이미지 데이터를 사용함으로써 정확도를 높일 수 있는 full smoothing 기법도 프로그램 옵션 변경을 통해 사용 가능하다.  </p>
+<p>내부적으로 사용하는  알고리즘은 다음과 같다.</p>
+<ul>
+<li>Frontend<ul>
+<li>IMU preintegration (Forster 2017)</li>
+<li>Shi-Tomasi corner detection (Shi and Tomasi 1994)<ul>
+<li>매 keyframe마다 수행</li>
+</ul>
+</li>
+<li>Lukas-Kanade tracker (Bouget 2000)<ul>
+<li>Initial 값은 IMU rotation 값을 사용 (Hwangbo 2009)</li>
+<li>매 프레임마다 수행</li>
+</ul>
+</li>
+<li>left-right stereo match + geometric verification<ul>
+<li>Monocular verification -&gt; 5-point RANSAC (Nister 2004)</li>
+<li>Stereo verification -&gt; 3-point RANSAC (Horn 1987)</li>
+<li>Monocular + IMU verification -&gt; 2-point RANSAC (Kneip 2011)</li>
+<li>Stereo + IMU verification -&gt; 1-point RANSAC (Kneip 2011)</li>
+<li>매 keyframe마다 수행</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Backend<ul>
+<li>Preintegrated IMU model + Structureless vision model (Forster 2017)</li>
+<li>GTSAM 라이브러리 (Dellaert 2012) 속 iSAM2 구현을 사용 (Kaess 2012)</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h2 id="Kimera-Mesher-3D-Mesh-Reconstruction"><a href="#Kimera-Mesher-3D-Mesh-Reconstruction" class="headerlink" title="Kimera-Mesher: 3D Mesh Reconstruction"></a>Kimera-Mesher: 3D Mesh Reconstruction</h2><blockquote>
+<p>Per-frame mesh: 매 프레임 빠르게 mesh 생성<br>Multi-frame mesh: 여러 프레임의 mesh를 통합해서 생성</p>
+</blockquote>
+<p>Kimera-Mesher는 2가지 종류의 mesh를 만드는 기능을 가지고 있다.</p>
+<p>우선 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9DNWZGREVKOWNGUQ==">Rosinol 2019 - Incremental Visual-Inertial 3D mesh Generationwith Structural Regularities<i class="fa fa-external-link-alt"></i></span> 논문에서 나온 기법대로 매 프레임 메쉬를 만든다 (논문에서는 <strong>Per-frame mesh</strong>라고 칭한다). 성공적으로 tracking된 2D feature들을 모아 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRGVsYXVuYXlfdHJpYW5ndWxhdGlvbg==">2D Delaunay triangulation<i class="fa fa-external-link-alt"></i></span>을 한 후, back-projection(역투영)을 통해 3D map에 있는 점들과 association을 수행하여 3D mesh를 생성한다. Per-frame mesh는 정확하지는 않으나 짧은 시간 내에 연산이 가능하기 때문에 간단한 장애물 회피 목적으로 사용할 수 있다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.31.30%20AM2.gif" class="" title="per frame mesh">
+
+<p>여러개의 Per-frame mesh를 취합해서 좀 더 정확한 mesh를 만들면 <strong>Multi-frame mesh</strong>가 만들어진다. 새로운 Per-frame mesh가 만들어질 때 마다 t-1 시점의 Multi-frame mesh와 비교해서 새로운 vertices를 추가한다. 또, VIO backend에서 최적화 연산이 끝날 때 마다 Multi-frame mesh에서 모든 vertices 포지션을 업데이트한다. 또, 오래된 vertices는 삭제한다. Multi-frame mesh는 sliding-window mesh라고 보면 쉽게 이해할 수 있다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.33.45%20AM.gif" class="" title="multi frame mesh">
+
+<p> </p>
+<h2 id="Kimera-Semantics-3D-Metric-Semantic-Reconstruction"><a href="#Kimera-Semantics-3D-Metric-Semantic-Reconstruction" class="headerlink" title="Kimera-Semantics: 3D Metric-Semantic Reconstruction"></a>Kimera-Semantics: 3D Metric-Semantic Reconstruction</h2><blockquote>
+<p>Bundled raycasting을 이용해서 global mesh 생성. 3D bayesian update를 이용해서 Metric-semantic mesh 생성</p>
+</blockquote>
+<p>Kimera-Semantics는 Global mesh를 만들고 semantic annotation을 하는 기능을 가지고있다.</p>
+<p><strong>Global Mesh</strong>는 scene 전체에 해당하는 mesh를 의미하며, <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aHotYXNsL3ZveGJsb3g=">Voxblox<i class="fa fa-external-link-alt"></i></span>의 bundled raycasting 기법을 사용해서 <span class="exturl" data-url="aHR0cHM6Ly9yc3MxNi1yZXByZXNlbnRhdGlvbnMubWl0LmVkdS9wYXBlcnMvQmV5b25kR2VvbWV0cnlSU1NXMTZfMl9DYW1lcmFSZWFkeVN1Ym1pc3Npb25fT2xleW5pa292YS5wZGY=">TSDF<i class="fa fa-external-link-alt"></i></span> (Truncated signed distance field) 모델을 만들어 노이즈를 제거한 후, <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTWFyY2hpbmdfY3ViZXM=">Marching cubes<i class="fa fa-external-link-alt"></i></span> 알고리즘을 통해 만들어집니다. 이 기법을 사용하기 위해서는 매 keyframe마다 depth map이 필요한데, RGB-D 센서를 사용할 경우에는 depth 센서로부터 이를 취득하고, Stereo 센서를 사용할 경우에는 Dense stereo (i.e. <span class="exturl" data-url="aHR0cHM6Ly9jb3JlLmFjLnVrL2Rvd25sb2FkL3BkZi8xMTEzNDg2Ni5wZGY=">semi-global matching<i class="fa fa-external-link-alt"></i></span>)를 통해 구할 수 있습니다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.34.11%20AM.gif" class="" title="global mesh">
+
+<p><strong>Semantic annotation</strong>은 global mesh의 vertex마다 semantic class label을 부여해주는 기능을 가지고 있다. Semantic class 추론은 주로 2D semantic segmentation을 통해서 하는데, 다양한 뉴럴넷 기반의 방법이 있겠지만 논문에서는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hdHRlcnBvcnQvTWFza19SQ05O">Mask-RCNN<i class="fa fa-external-link-alt"></i></span>을 사용했다고 한다. 2D label을 3D로 전파하는 방법은 다음과 같다: 1. 2D 이미지에 Semantic segmentation을 수행한다. 2. Global mesh를 생성할 때 스테레오 2D 이미지를 재료로 Dense stereo 기법을 통해 3D point를 만들었을텐데, semantic label을 3D point에 할당한다. 3. Global mesh를 생성할 때 bundled raycasting 기법을 사용했을 텐데, 이 때 ray들마다 semantic class가 몇번 출현했는지를 세어서 label probability를 기록한다. 4. TSDF 연산을 할 때 이 정보도 함께 파싱하고, 이후 매 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MDkuMDUxMzA=">SemanticFusion<i class="fa fa-external-link-alt"></i></span>에서 사용한 방법과 비슷하게 bayesian update 기법을 통해 voxel마다 semantic clas probability를 연산한다. 5. 가장 높은 확률을 가진 label을 할당시킨다. 이후, Global mesh 생성의 마지막 단계인 marching cubes 기법을 사용해서 최종 metric-semantic mesh를 생성한다. 이 연산 과정은 굉장히 오래 걸리나 (~0.1s), 최종 결과는 multi-frame mesh보다도 훨씬 정확하다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.34.39%20AM.gif" class="" title="semantic annotation">
+
+<p> </p>
+<h2 id="Kimera-PGMO-Pose-graph-and-Mesh-Optimization-with-Loop-Closures"><a href="#Kimera-PGMO-Pose-graph-and-Mesh-Optimization-with-Loop-Closures" class="headerlink" title="Kimera-PGMO: Pose graph and Mesh Optimization with Loop Closures"></a>Kimera-PGMO: Pose graph and Mesh Optimization with Loop Closures</h2><blockquote>
+<p>PCM 알고리즘 기반 Loop closure detection. Pose graph + Mesh 최적화</p>
+</blockquote>
+<p>Kimera-Semantics에서 꽤나 정확한 mesh가 생성된다고 해도, 이 mesh는 결국 VIO 모듈에서 에러가 누적된 pose를 (i.e. drift) 기반으로 만들어진 것이기 때문에 global scale에서 부정확한 mesh가 만들어질 것이다. 보통 SLAM에서는 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9CYXFTUmY1cEFaMA==">loop closure<i class="fa fa-external-link-alt"></i></span>를 통해 drift를 해결하는데, Kimera에서는 loop closure detection 후 landmark 최적화를 할 때 mesh deformation 모델을 사용한다. 이는 매 최적화 스텝마다 새롭게 mesh를 생성하는 기법이나, point-cloud 로 바꿔주는 de-integration 기법보다는 훨씬 효율적인 방법이다.</p>
+<p>Loop closure detection은 Feature-based SLAM에서 많이 사용하는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RvcmlhbjNkL0RCb1cy">DBoW2<i class="fa fa-external-link-alt"></i></span> 기법을 사용한다. 기본적인 outlier rejetion을 위해 5-point RANSAC (monocular)과 Stereo 3-point RANSAC을 사용한다. 이후, Kimera의 목적에 맞게 개량한 <strong>Pairwise Consistent Measurement Set Maximization (PCM)</strong> 이라는 기법을 사용해 추가적인 outlier rejection을 수행한다. Kimera PCM은 기존의 multi-robot 사이의 loop closure를 위한 PCM 기법을, 단일 로봇 odometry의 loop closure로 개량한 것이다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-12%20at%203.42.28%20PM.png" class="" title="Kimera PCM">
+
+<p>Kimera PCM은 다음과 같이 동작한다. (절대 그럴리는 없겠지만) drift가 전혀 없다고 했을 때, 이론적으로는 loop closure가 나타난다면 pose들을 쌓았을 때 loop closure가 나타나는 부분은 identity로 포즈가 나타나야한다. 하지만 drift는 항상 존재하는데, Kimera PCM에서는 이 drift를 measurement noise로 취급하여 값을 추적하고 있고, loop closure detection이 수행될 때 이 measurement noise를 Chi-squared test를 통해 ‘drift가 없었다면 factor graph 속 loop의 pose 합들이 identity로 수렴할 것인가?’를 묻는다. 이 테스트를 통과하면 1차 테스트를 통과한 것이다 (논문에서는 이를 <strong>odometry check</strong>라고 부른다). 2차 테스트는 <strong>pairwise consistent check</strong> 라고 부르는데, 과거의 loop closure와 현재의 loop closure가 둘 다 같은 loop에 들어있어야만 성공한다는 조건을 건다 (위 그림을 보면 좀 더 이해가 쉽다 - l1와 l2가 둘 다 같은 루프에 들어있어야한다).</p>
+<p>성공적으로 Loop closure detection을 수행하면 <strong>pose graph와 mesh 최적화</strong>를 진행한다. Pose graph만 최적화를 하려면 Kimera-RPGO를, Pose graph와 Mesh 최적화를 하려면 Kimera-PGMO를 사용한다. Mesh 최적화는 deformation 기반의 방법을 사용하는데, 기존의 point cloud 최적화와는 다른 Loss function을 가진다. Kimera-semantic으로 생성된 mesh는 굉장히 촘촘한데, 이를 최적화에 바로 넣기에는 너무 많은 연산량을 요구하게 된다. 연산량을 효과적으로 감소시키기 위해 <strong>mesh를 간소화</strong>하는데, <span class="exturl" data-url="aHR0cHM6Ly9rby53aWtpcGVkaWEub3JnL3dpa2kvJUVEJThDJTk0JUVDJUE3JTg0JUVEJThBJUI4JUVCJUE2JUFD">octree<i class="fa fa-external-link-alt"></i></span> 구조에 mesh 정보를 담고, 동일 voxel에 있는 vertex는 하나로 합쳐버림으로써 mesh 간소화를 진행할 수 있다. 물론, 이 방식은 정확도를 희생해 속도를 얻는 방법이기 때문에, 성능이 좋은 하드웨어 플랫폼을 사용한다면 voxel 크기를 조정해서 정확도를 더 높일 수 있다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-12%20at%204.52.45%20PM.png" class="" title="Mesh 최적화">
+
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-12%20at%204.55.38%20PM.png" class="" title="Mesh 최적화 수식">
+
+<p>최적화를 위한 Factor graph에는 Mesh vertices와 VIO pose가 node로 있고, Pose-Pose (i.e. odometry), Pose-Mesh_vertex 의 association, Mesh_vertex-Mesh-vertex의 local rigidity association이 edge로 있다. Vertex <code>k</code>의 위치는 Mesh의 coordinate frame에서 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.714ex" xmlns="http://www.w3.org/2000/svg" width="14.545ex" height="2.628ex" role="img" focusable="false" viewBox="0 -846 6429 1161.5"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g><g data-mml-node="TeXAtom" transform="translate(970, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1666.2, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(2722, 0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="msubsup" transform="translate(3000, 0)"><g data-mml-node="mi"><path data-c="1D445" d="M230 637Q203 637 198 638T193 649Q193 676 204 682Q206 683 378 683Q550 682 564 680Q620 672 658 652T712 606T733 563T739 529Q739 484 710 445T643 385T576 351T538 338L545 333Q612 295 612 223Q612 212 607 162T602 80V71Q602 53 603 43T614 25T640 16Q668 16 686 38T712 85Q717 99 720 102T735 105Q755 105 755 93Q755 75 731 36Q693 -21 641 -21H632Q571 -21 531 4T487 82Q487 109 502 166T517 239Q517 290 474 313Q459 320 449 321T378 323H309L277 193Q244 61 244 59Q244 55 245 54T252 50T269 48T302 46H333Q339 38 339 37T336 19Q332 6 326 0H311Q275 2 180 2Q146 2 117 2T71 2T50 1Q33 1 33 10Q33 12 36 24Q41 43 46 45Q50 46 61 46H67Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628Q287 635 230 637ZM630 554Q630 586 609 608T523 636Q521 636 500 636T462 637H440Q393 637 386 627Q385 624 352 494T319 361Q319 360 388 360Q466 361 492 367Q556 377 592 426Q608 449 619 486T630 554Z"></path></g><g data-mml-node="TeXAtom" transform="translate(759, 363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(759, -307.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g></g><g data-mml-node="mo" transform="translate(4552.1, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msubsup" transform="translate(4996.8, 0)"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="TeXAtom" transform="translate(361, 363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(361, -307.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g></g><g data-mml-node="mo" transform="translate(6151, 0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></svg></mjx-container>로 표현된다.</p>
+<p>Mesh 최적화는 위의 수식을 따른다. <code>X</code>는 VIO 시스템의 pose, <code>g</code>는 mesh 속 vertex의 초기 위치 (i.e. deformation 이전의 위치), <code>Z</code>는 loop closure detection으로 얻은 상대적인 자세 변화 (i.e. relative transformation), <code>R</code>과 <code>t</code>는 뒤에 <code>^M</code>이 붙을 경우 Mesh의 rotation/translation, <code>^X</code>가 붙을 경우 VIO pose의 rotation/translation을 의미한다. 총 3개의 값들이 더해져서 최종 Loss를 정의하는데, 각각 다음과 같은 점을 의미한다.</p>
+<ul>
+<li>첫번째 값: Kimera PCM이 정의하는 loop closure가 이뤄질 경우 누적된 odometry의 오차가 최소화되야한다는 점</li>
+<li>두번째 값: 연결되어있는 mesh vertices끼리 Local rigidity를 유지해야한다는 점 (i.e. 최적화 과정에서 소수의 vertex가 구조를 깨부수며 튀어나오거나 사라지는 것을 방지한다)</li>
+<li>세번째 값: 연결되어있는 VIO_pose - Mesh vertices 끼리 local rigidity를 유지해야한다는 점 (i.e. 최적화 과정에서 mesh 전체가 튀어버리거나 pose가 튀어버리는 것을 방지한다)</li>
+</ul>
+<p>각각의 값들에 대한 loss는 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.712ex" xmlns="http://www.w3.org/2000/svg" width="5.932ex" height="2.599ex" role="img" focusable="false" viewBox="0 -833.9 2621.9 1148.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mo" transform="translate(444.7, 0)"><path data-c="2026" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60ZM525 60Q525 84 542 102T585 120Q609 120 627 104T646 61Q646 36 629 18T586 0T543 17T525 60ZM972 60Q972 84 989 102T1032 120Q1056 120 1074 104T1093 61Q1093 36 1076 18T1033 0T990 17T972 60Z"></path></g><g data-mml-node="msubsup" transform="translate(1783.3, 0)"><g data-mml-node="mo"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="TeXAtom" transform="translate(278, 363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mn"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="TeXAtom" transform="translate(278, -314.8) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="3A9" d="M55 454Q55 503 75 546T127 617T197 665T272 695T337 704H352Q396 704 404 703Q527 687 596 615T666 454Q666 392 635 330T559 200T499 83V80H543Q589 81 600 83T617 93Q622 102 629 135T636 172L637 177H677V175L660 89Q645 3 644 2V0H552H488Q461 0 456 3T451 20Q451 89 499 235T548 455Q548 512 530 555T483 622T424 656T361 668Q332 668 303 658T243 626T193 560T174 456Q174 380 222 233T270 20Q270 7 263 0H77V2Q76 3 61 89L44 175V177H84L85 172Q85 171 88 155T96 119T104 93Q109 86 120 84T178 80H222V83Q206 132 162 199T87 329T55 454Z"></path></g></g></g></g></g></svg></mjx-container>는 <span class="exturl" data-url="aHR0cHM6Ly9tYXRod29ybGQud29sZnJhbS5jb20vRnJvYmVuaXVzTm9ybS5odG1s">weighted Frobenius norm<i class="fa fa-external-link-alt"></i></span>을 사용한다 (논문에서는 제곱식을 빼먹었는데, 이는 명백한 오타이다). Frobenius norm은 matrix에 적용된 L2 norm이라고 생각하면 편하다 (L2 norm은 주로 vector에 사용하는 단어이고, 비슷한 의미를 matrix에 적용할 시 Frobenius norm이라고 표현한다). Weighted Frobenius norm은 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="10.441ex" height="2.47ex" role="img" focusable="false" viewBox="0 -841.7 4615 1091.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="mi" transform="translate(361, 0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(812, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msup" transform="translate(1201, 0)"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="TeXAtom" transform="translate(903.2, 363) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g></g></g><g data-mml-node="mi" transform="translate(2652, 0)"><path data-c="3A9" d="M55 454Q55 503 75 546T127 617T197 665T272 695T337 704H352Q396 704 404 703Q527 687 596 615T666 454Q666 392 635 330T559 200T499 83V80H543Q589 81 600 83T617 93Q622 102 629 135T636 172L637 177H677V175L660 89Q645 3 644 2V0H552H488Q461 0 456 3T451 20Q451 89 499 235T548 455Q548 512 530 555T483 622T424 656T361 668Q332 668 303 658T243 626T193 560T174 456Q174 380 222 233T270 20Q270 7 263 0H77V2Q76 3 61 89L44 175V177H84L85 172Q85 171 88 155T96 119T104 93Q109 86 120 84T178 80H222V83Q206 132 162 199T87 329T55 454Z"></path></g><g data-mml-node="mi" transform="translate(3374, 0)"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(4226, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container> 로 계산된다. 여기서 Weight (i.e. <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.633ex" height="1.593ex" role="img" focusable="false" viewBox="0 -704 722 704"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="3A9" d="M55 454Q55 503 75 546T127 617T197 665T272 695T337 704H352Q396 704 404 703Q527 687 596 615T666 454Q666 392 635 330T559 200T499 83V80H543Q589 81 600 83T617 93Q622 102 629 135T636 172L637 177H677V175L660 89Q645 3 644 2V0H552H488Q461 0 456 3T451 20Q451 89 499 235T548 455Q548 512 530 555T483 622T424 656T361 668Q332 668 303 658T243 626T193 560T174 456Q174 380 222 233T270 20Q270 7 263 0H77V2Q76 3 61 89L44 175V177H84L85 172Q85 171 88 155T96 119T104 93Q109 86 120 84T178 80H222V83Q206 132 162 199T87 329T55 454Z"></path></g></g></g></svg></mjx-container>) 값은 보통 초기 값으로 1을 넣은 후, weighted least squares에서 차차 업데이트 되는 방식을 택하는게 일반적인데, 이 부분은 아직 코드를 확인해보지 않아서 실제로 이렇게 구현되어있는지는 잘 모르겠다.</p>
+<p>논문에서는 vio_rotation, vio_translation, mesh_rotation, mesh_translation와 같은 변수들을 아래의 치환식을 통해 <span class="exturl" data-url="aHR0cDovL2ppbnlvbmdqZW9uZy5naXRodWIuaW8vMjAxNi8wNi8wNy9zZTNfc28zX3RyYW5zZm9ybWF0aW9uLw==">SE(3) pose matrix<i class="fa fa-external-link-alt"></i></span> 형태로 바꿈으로써 문제를 좀 더 간단하게 만들었다. 논문에서는 간단하게 만든 이 수식을 ‘augmented pose graph optimization problem’이라고 칭한다 (하지만 사실 치환만 한 것일 뿐, 내용은 크게 바뀌는게 없다).</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-14%20at%205.01.41%20PM.png" class="">
+
+<p>치환식을 거치고나면 기존의 loss 식이 아래와 같이 바뀐다. <code>Z</code>는 모든 odometry와 loop closure edge를 담은 set이 된다. <code>G</code>는 모든 mesh vertex끼리의 edge들의 set을 의미한다. <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex" xmlns="http://www.w3.org/2000/svg" width="1.778ex" height="2.111ex" role="img" focusable="false" viewBox="0 -911 786 933"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D43A" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q492 659 471 656T418 643T357 615T294 567T236 496T189 394T158 260Q156 242 156 221Q156 173 170 136T206 79T256 45T308 28T353 24Q407 24 452 47T514 106Q517 114 529 161T541 214Q541 222 528 224T468 227H431Q425 233 425 235T427 254Q431 267 437 273H454Q494 271 594 271Q634 271 659 271T695 272T707 272Q721 272 721 263Q721 261 719 249Q714 230 709 228Q706 227 694 227Q674 227 653 224Q646 221 643 215T629 164Q620 131 614 108Q589 6 586 3Q584 1 581 1Q571 1 553 21T530 52Q530 53 528 52T522 47Q448 -22 322 -22Q201 -22 126 55T50 252Z"></path></g><g data-mml-node="mo" transform="translate(226.3, 221)"><path data-c="AF" d="M69 544V590H430V544H69Z"></path></g></g></g></g></g></svg></mjx-container>는 mesh vertex - vio pose를 잇는 모든 edge들의 set을 의미한다. 여기서 Mesh local rigidity와 pose-mesh local rigidity에 해당하는 부분 (i.e. 2/3번째 값들)에서 rotation에 대한 information matrix (i.e. weight)는 0로 놓음으로써 translation만 최적화를 한다고 한다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-14%20at%205.01.48%20PM.png" class="">
+
+<p>논문에서는 위 수식은 결국 더욱 간단한 형태로 표현된다고 하는데, 솔직히 너무 간단하게 표현해서 정작 중요한 내용은 하나도 보여주지 않는 수식이 하나 있다. <code>T</code>는 pose/mesh vertex의 transformation을, <code>E</code>는 edge의 transformation을 의미하는데, 결국은 ‘이동한 vertex와 edge간의 오차가 최소화되는 SE(3)움직임은 무엇인가?’라는 문제를 푸는 것이다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-14%20at%205.24.43%20PM.png" class="">
+
+<p> </p>
+<hr>
+<h1 id="Kimera-DSG"><a href="#Kimera-DSG" class="headerlink" title="Kimera-DSG"></a>Kimera-DSG</h1><img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-04%20at%208.36.14%20PM.png" class="" title="Structures">
+
+<p>Kimera-DSG는 <strong>Kimera-core 종료된 후, Kimera-core가 생성한 3D metric-semantic mesh로부터 비-실시간으로 DSG를 생성</strong>한다.</p>
+<p><strong>Kimera-Humans</strong>는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25rb2xvdC9HcmFwaENNUg==">GraphCMR<i class="fa fa-external-link-alt"></i></span>을 이용해서 사람의 dense mesh를 생성한다. Dense mesh는 Skinned Multi-Person Linear Model (SMPL)을 사용한다. 이후, pose graph model을 이용해서 trajectory를 생성하고 최적화한다.</p>
+<p><strong>Kimera-Objects</strong>는 1. 사전에 shape을 정확하게 모르는 객체들에 대해서는 bounding box를 추정, 2. 사전에 shape를 정확하게 알고있는 객체 (i.e. CAD 모델이 존재하는 경우) <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9URUFTRVItcGx1c3BsdXM=">TEASER++<i class="fa fa-external-link-alt"></i></span>를 이용해서 point cloud fitting 및 포즈 추정을 수행한다.</p>
+<p><strong>Kimera-BuildingParser</strong>는 최상단 3개의 layer를 생성한다. 우선 Layer 3를 생성할 때는 Metric-semantic mesh로부터 structure를 검출하고 places 에 대한 topological graph도 생성한다 (<span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDMuMDQzNDU=">참고 링크<i class="fa fa-external-link-alt"></i></span>). 이후 Layer 3 정보를 기반으로 layer 4를 생성, 이후 layer 4 정보를 기반으로 layer 5를 생성한다.</p>
+<p> </p>
+<h2 id="Kimera-Humans-Humans-Shape-Estimation-and-Robust-Tracking"><a href="#Kimera-Humans-Humans-Shape-Estimation-and-Robust-Tracking" class="headerlink" title="Kimera-Humans: Humans Shape Estimation and Robust Tracking"></a>Kimera-Humans: Humans Shape Estimation and Robust Tracking</h2><blockquote>
+<p>로봇 검출: 자기 자신만 트랙킹함<br>사람 검출: GraphCMR을 통해 SMPL 모델 검출. 다양한 방법으로 안정적인 트랙킹을 수행하며, pose graph 형태로 자세 저장.</p>
+</blockquote>
+<p>Kimera-Humans에는 <strong>Robot node</strong>와 <strong>Human node</strong>가 있다.</p>
+<p>Kimera 시스템 컨셉에서는 환경에서 여러 로봇들도 함께 존재할 것을 생각했다. 주변 환경에 위치한 로봇을 인식해 Robot node로 등록해 인식하고, 중앙 서버에서 pose graph를 관리함으로써 동시 최적화 및 multi-map SLAM이 가능할 것이다. 이 논문에서는 멀티-로봇 환경을 지원하지 않아 Robot node에는 ‘자기 자신’밖에 없다. 하지만 이후에 나온 논문인 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9LaW1lcmEtTXVsdGk=">Kimera-Multi<i class="fa fa-external-link-alt"></i></span>에서는 이와 같은 기능을 지원한다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%2012.24.42%20AM.png" class="" title="Kimera multi">
+
+<p>Kimera 시스템은 사람에 대한 dense mesh와 시간에 따른 이동치를 pose grpah 형태로 표현해서 Human node에 담는다. 사람을 인지하기 위해서는 왼쪽 카메라에서 수행한 2D image segmentation 결과에서 사람이 나온 bounding box를 crop한 후, cropped image에서 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25rb2xvdC9HcmFwaENNUg==">GraphCMR<i class="fa fa-external-link-alt"></i></span> 기법을 수행함으로써 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9zZWFyY2g/Y2xpZW50PXNhZmFyaSZybHM9ZW4mcT1TTVBMOitBK3NraW5uZWQrbXVsdGktcGVyc29uK2xpbmVhcittb2RlbCZpZT1VVEYtOCZvZT1VVEYtOA==">SMPL<i class="fa fa-external-link-alt"></i></span> (Skinned Multi-Person Linear Model - 사람의 형태를 가진 dense mesh)를 얻을 수 있다. 이 Dense mesh <a href="">PnP</a> 기법을 통해서 정확한 pose를 구할 수 있는데, 여기서 사람의 골반뼈 부분을 coordinate frame origin으로 잡아서 pose tracking을 수행한다. SNPL mesh 정보는 Kimera-semantics로도 보내지는데, Metric-semantic mesh를 생성할 때 사람의 mesh는 제거하기 위함이다.</p>
+<p>여기서 눈여겨볼점은 ‘어떻게 안정적으로 사람의 움직임을 트랙킹하는가?’이다. GraphCMR은 아주 효과적인 detection 방식이지만, 1. temporal tracking 정보를 전혀 사용하지 않고, 2. partial occlusion이 있을 경우 잘못된 detection을 할 수 있다는 치명적인 단점이 있다. Detection이 불안정하면 자세가 크게 튀기 때문에 안정적으로 트랙킹하는 것이 굉장히 중요하나, 사람의 움직임을 안정적으로 트랙킹하는 것은 생각보다 쉽지 않다. Kimera가 사용하는 방법 중 첫번째 방법은 <strong>human pose를 pose graph 형태로 관리</strong>하는 것이다. Kimera-RPGO와 PCM outlier rejection 방식을 사용해서 경로가 스무하게 나오게 하고 또 잘못된 트랙킹이 나타나지 않도록 잡아줄 수 있다. 두번째 방법은 굉장히 야매(…)방법이긴 하다 - 새로운 human node가 나타났을 때 주변에 가장 가까운 human node와 이어져있다는 가정을 걸어버리는 것인데, 이는 <strong>사람이 생각보다 빠르게 움직이지 않는다는 전제</strong> 하에 만든 것이다. 저자들이 참고한 논문에서는 평균 사람의 걷는 속도는 1.25 m/s (<span class="exturl" data-url="aHR0cHM6Ly9wdWJtZWQubmNiaS5ubG0ubmloLmdvdi8yMTg1MzEwNy8=">Schimpl 2011<i class="fa fa-external-link-alt"></i></span> 발췌)라고 하는데, Kimera에서는 안정적이게 3 m/s로 잡고, 또 관절과 몸통의 거리 차이가 3 m 이상 나지 않는 것을 제약조건으로 두었다. 세번째 방법은 <strong>SMPL 모델이 사람의 형태를 정의하는 방법인 beta parameter를 사용</strong>하는 것이다. Beta parameter에는 사람의 형태에 대한 8가지 속성이 있는데, 예를 들어 신장이나 어깨 넓이 같은 것들이 있다. 이 정보를 이용해서도 data association이 가능하다. 마지막으로, 애초에 <strong>GraphCMR이 잘 동작하기 어려운 환경은 아예 동작을 막아버리는 방법</strong>도 있다. Bounding box가 30 픽셀 미만으로 작게 검출될 경우에는 아예 검출 자체를 해버리지 않고, 또 검출이 되어서 pose grpah가 생성되었다고 해도 10개 이상의 node를 지니지 않으면 추후에 DSG를 수행할 때 아예 연산에서 빼버리기도 한다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.25.51%20AM.gif" class="" title="Human tracking">
+
+<p> </p>
+<h2 id="Kimera-Objects-Object-Pose-Estimation"><a href="#Kimera-Objects-Object-Pose-Estimation" class="headerlink" title="Kimera-Objects: Object Pose Estimation"></a>Kimera-Objects: Object Pose Estimation</h2><blockquote>
+<p>형태를 아는 경우: CAD 모델에서 추출한 point cloud를 이용해서 TEASER++로 point cloud registration<br>형태를 모르는 경우: Point cloud clustering 후 bouding box 생성</p>
+</blockquote>
+<p>Kimera-Objects는 Metric-semantic mesh로부터 정적인 물체들을 검출하는 기능이다. <strong>사전에 형태를 알고 있는 경우</strong> (Objects with known shapes)와 <strong>클래스만 알고 형태는 모르는 경우</strong> (Objects with Unknown shape) 둘 다 모두 검출해서 object node로 넣는다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%201.21.09%20AM.png" class="" title="Human tracking">
+
+<p>형태를 모르는 물체들은 의외로 쉽게 진행될 수 있는데, 이미 metric-semantic mesh에서 semantic한 정보를 가지고 있기 때문이다. 하지만 Mesh 데이터를 순회하면서 다수의 object instance를 떼네 최대한 빠르게 수행하기 위해 metric-semantic mesh 자체를 간단하게 만들 필요가 있다. 우선 <span class="exturl" data-url="aHR0cHM6Ly9wb2ludGNsb3Vkcy5vcmcv">PCL<i class="fa fa-external-link-alt"></i></span> 라이브러리에서 지원하는 <span class="exturl" data-url="aHR0cHM6Ly9wY2wucmVhZHRoZWRvY3MuaW8vZW4vbGF0ZXN0L2NsdXN0ZXJfZXh0cmFjdGlvbi5odG1s">Euclidean clustering<i class="fa fa-external-link-alt"></i></span> 기능을 이용해서 0.1 m 단위로 mesh를 여러개의 object instance로 만든다. 이후, object centroid를 연산해서 position을 연산, world frame과 동일한 orientation을 할당한 후, 이 정보들을 기반으로 3D bounding box를 연산해서 object node에 저장한다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.22.45%20AM.gif" class="" title="TEASER">
+
+<p>형태를 알고 있는 물체들은 pose를 더 정확하게 구할 수 있다는 장점이 있다. 형태를 알고 있다는 것은 주로 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvQ29tcHV0ZXItYWlkZWRfZGVzaWdu">CAD 모델<i class="fa fa-external-link-alt"></i></span>을 가지고 있다는 것을 의미하는데, Kimera-objects는 CAD 모델을 3D point cloud로 변환한 후 <span class="exturl" data-url="aHR0cHM6Ly93d3cuaXZhbi1zaXBpcmFuLmNvbS9wYXBlcnMvU0IxMWIucGRm">3D Harris keypoints<i class="fa fa-external-link-alt"></i></span>를 추출한 후, Metric-semantic mesh에 있는 모든 포인트들과 매칭을 해본다. 이 때 연산량이 아주 높을 수 있는데, 정확하고 빠르게 point cloud registration을 수행하기 위해 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL01JVC1TUEFSSy9URUFTRVItcGx1c3BsdXM=">TEASER++<i class="fa fa-external-link-alt"></i></span>를 이용한다. Registration에 성공하면 object의 3d pose를 정확하게 구할 수 있다.</p>
+<p> </p>
+<h2 id="Kimera-BuildingParser-Extracting-Places-Rooms-and-Structures"><a href="#Kimera-BuildingParser-Extracting-Places-Rooms-and-Structures" class="headerlink" title="Kimera-BuildingParser: Extracting Places, Rooms and Structures"></a>Kimera-BuildingParser: Extracting Places, Rooms and Structures</h2><blockquote>
+<p>Places<br>Structures<br>Rooms</p>
+</blockquote>
+<p>Kimera-BuildingParser는 places, structures, rooms를 검출하는 각각의 방법을 담아놓은 패키지이다.</p>
+<p><strong>Places</strong>를 검출하기 위해서는 우선 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2V0aHotYXNsL3ZveGJsb3g=">Voxblox<i class="fa fa-external-link-alt"></i></span>에서 지원하는 global mesh 재구성법 (i.e. bundled raycasting)과 ESDF 재구성법을 이용한다. 이후 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDMuMDQzNDU=">Voxblox의 저자가 적은 논문<i class="fa fa-external-link-alt"></i></span>에서 사용하는 기법처럼 ESDF에서부터 free space를 sparse sampling을 통해 검출하여 topological map을 만든다. Topological map은 그래프 형태로 되어있는데, node는 free space (즉, place)를 의미하고, edge는 traversability (i.e. 이동 가능성)을 의미한다. 이후, 가장 가까운 objects와 agents를 places에 이어준다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.02.31%20AM.png" class="" title="places">
+
+<p><strong>Structures</strong>는 이미 Kimera-semantics에서 정보를 다 추출해놓았기 때문에 특별한 검출 단계를 필요로 하지 않는다. 벽 (wall)에 대한 normal 방향을 구한 후, 해당 벽에 대해 가장 가까운 place를 찾아서 연결을 시켜놓은다.</p>
+<p><strong>Rooms</strong>를 연산할 때는, Kimera-VIO를 통해 얻을 수 있는 중력의 방향을 기준으로 3D ESDF 지도를 cross-section으로 잘라서 2D map을 생성한다. 이 때 천장의 높이보다 0.3 m 정도 낮게 자르는데, 큰 물건들이 벽으로 인식되는 것을 피하기 위해 이러한 휴리스틱을 사용한다. 이 룰을 따라 만든 2D 지도를 우리는 <strong>2D ESDF</strong>라고 부른다. 이 2D ESDF 지도에서 두께가 0.2 m가 넘는 것들만 남김으로써 문 중턱이라던지 작은 파티셔닝들을 제거한다. 큰 파티셔닝으로 나눠진 공간들로부터 Room을 검출할 수 있게 된다. 아래 그림에서 좌측이 2D ESDF, 우측이 Truncated 2D ESDF 이다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.01.07%20AM.png" class="" title="rooms">
+
+<p> </p>
+<hr>
+<h1 id="오픈소스를-하는-사람들이-Kimera에서-배울만한-점"><a href="#오픈소스를-하는-사람들이-Kimera에서-배울만한-점" class="headerlink" title="오픈소스를 하는 사람들이 Kimera에서 배울만한 점"></a>오픈소스를 하는 사람들이 Kimera에서 배울만한 점</h1><ul>
+<li>Jenkins 기반의 CI 서버를 통해 빌드 테스트, 유닛 테스트, 런타임 테스트를 수행한다.</li>
+<li>VIO 디버깅을 위한 정보를 Jupyter Notebook을 통해 확인할 수 있다 (e.g. feature tracking의 품질, IMU preintegration 에러)</li>
+<li>3D reconstruction의 결과를 Open3D로 볼 수 있다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="실험-결과"><a href="#실험-결과" class="headerlink" title="실험 결과"></a>실험 결과</h1><h2 id="VIO-정확도-RMSE"><a href="#VIO-정확도-RMSE" class="headerlink" title="VIO 정확도 (RMSE)"></a>VIO 정확도 (RMSE)</h2><p>많이 사용되는 VIO인 OKVIS, MSCKF, ROVIO, VINS-Mono, SVO 보다 대체적으로 더 좋은 결과를 보여준다.</p>
+<p>DVIO는 Kimera가 지원하는 motion estimation 알고리즘 중 5-point나 2-point가 아닌 IMU-aware feature tracking + 2-point stereo RANSAC을 사용한 경우를 DVIO라고 부른다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.06.48%20AM.png" class="" title="rmse1">
+
+<p> </p>
+<h2 id="VIO-Dynamic-Masking"><a href="#VIO-Dynamic-Masking" class="headerlink" title="VIO + Dynamic Masking"></a>VIO + Dynamic Masking</h2><p>VIO를 수행할 때 주변 환경에 움직이는 객체가 있을 경우 정확도가 많이 떨어지기도 한다.</p>
+<p>Kimera에서는 Kimera-Humans를 이용해서 mesh로부터 dynamic 객체에 대한 부분을 제거하기 때문에, 더욱 높은 정확도를 얻어낼 수 있었다는 것을 보여준다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screen%20Recording%202023-04-16%20at%201.26.28%20AM.gif" class="" title="dynamic masking">
+
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.09.15%20AM.png" class="" title="dynamic masking rmse">
+
+<p> </p>
+<h2 id="PCM이-왜-좋은가"><a href="#PCM이-왜-좋은가" class="headerlink" title="PCM이 왜 좋은가?"></a>PCM이 왜 좋은가?</h2><p>Loop closure를 할 때 PCM은 파라미터를 어떤 것을 설정하던지 좋은 결과를 보인다. PCM을 사용하지 않는다면, scene마다 사용자가 직접 파라미터 튜닝을 해줘야할 것이다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.13.54%20AM.png" class="" title="pcm ate">
+
+<p> </p>
+<h2 id="Global-mesh의-정확도"><a href="#Global-mesh의-정확도" class="headerlink" title="Global mesh의 정확도"></a>Global mesh의 정확도</h2><p>Multi-frame mesh를 기반으로 최적화를 수행해서 global mesh가 되었을 때, 정확도가 대부분의 경우 많이 올라간다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.14.02%20AM.png" class="" title="multi->global">
+
+<p>최종 mesh를 Ground truth 결과와 비교했을 때, 상당히 높은 정확도 + 높은 완성도를 보인다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.12.04%20AM.png" class="" title="mesh rmse">
+
+<p> </p>
+<h2 id="사람-검출"><a href="#사람-검출" class="headerlink" title="사람 검출"></a>사람 검출</h2><p>수많은 check를 거쳐서 localization error가 꽤 줄어들음.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.21.43%20AM.png" class="" title="human detection">
+
+<p> </p>
+<h2 id="방-검출"><a href="#방-검출" class="headerlink" title="방 검출"></a>방 검출</h2><p>간단한 건축 구조에서는 잘 됨 (좌측)</p>
+<p>중앙에 탁자가 있는 방이 복도와 이어져서 다른 방과 연결되는 복잡한 건축 구조에서는 (i.e. 명확하게 문을 통해 분리가 되지 않은 건축 구조) 잘 안됨. (우측)</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.22.55%20AM.png" class="" title="room parsing">
+
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.37.36%20AM.png" class="">
+
+<p> </p>
+<h2 id="잘-안되는-곳"><a href="#잘-안되는-곳" class="headerlink" title="잘 안되는 곳"></a>잘 안되는 곳</h2><p>논문에서는 종종 정확도가 팍 떨어지는 부분이 있다고 하는데, 주로 stereo 카메라를 사용해서 dense stereo로 depth를 추정할 때 feature가 잘 잡히지 않는 하얀 벽과 같은 곳에서 정확도가 떨어진다고 한다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.19.27%20AM.png" class="" title="fail">
+
+<p> </p>
+<h2 id="속도-PC"><a href="#속도-PC" class="headerlink" title="속도 (PC)"></a>속도 (PC)</h2><p>아쉽게도 컴퓨터 스펙이 안나와있다. 아래 알려져있는 속도 벤치마크이다.</p>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.36.14%20AM.png" class="" title="PC timings">
+<ul>
+<li>Kimera-VIO<ul>
+<li>IMU preintegration: 40us</li>
+<li>Feature tracking: 7.5ms</li>
+<li>Feature detection, Stereo matching, Geometric verification (Keyframe-only): 51ms</li>
+</ul>
+</li>
+<li>Kimera-Mesher<ul>
+<li>Per-frame 3D mesh generation: 7ms</li>
+<li>Multi-frame 3D mesh generation: 15ms</li>
+<li>Factor graph optimization: 60ms</li>
+</ul>
+</li>
+<li>Kimera-Objects<ul>
+<li>3 min for ~100m^2</li>
+<li>12min for ~3000m^2</li>
+</ul>
+</li>
+<li>Kimera-Humans<ul>
+<li>GraphCMR: 33ms (NVIDIA RTX 2080Ti)</li>
+<li>Tracking: 10ms</li>
+</ul>
+</li>
+<li>Kimera-BuildingParser<ul>
+<li>ESDF generatioN: 10 min</li>
+<li>ESDF sparse sampling (i.e. places): 10 min</li>
+<li>Room detection: 2 min</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h2 id="속도-NVIDIA-Jetson-TX2"><a href="#속도-NVIDIA-Jetson-TX2" class="headerlink" title="속도 (NVIDIA Jetson TX2)"></a>속도 (NVIDIA Jetson TX2)</h2><img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.35.25%20AM.png" class="" title="tx2">
+
+<p>논문에서는 ‘Kimera는 Embedded device에서도 돌아요!’라고 홍보하지만, 사실상 VIO만 돈다는게 정론.<br>Kimera-Semantics에 대한 부분도 벤치마크 했다고 하는데, 사실상 Mesh화 알고리즘과 Segmentation도 뺐기 때문에 거의 없다고 보면 된다.<br>그 외의 DSG 관련 작업은 아예 안돈다고 보면 된다.</p>
+<p>MAXN 모드를 사용 (가장 전력을 많이 소비하되, 가장 빠른 모드)</p>
+<p>Kimera-Core만 측정했다고 함 (사실 다른건 TX2에서 돌 수 없음 ㅋㅋ)</p>
+<p>‘Faster’ config는 fast의 250-&gt;200 개 feature만 트랙킹하고, backend optimization도 5-&gt;4.5초 window로 줄어들음.</p>
+<ul>
+<li>Frontend: 10ms (Non-keyframe)</li>
+<li>Frontend: 70ms (Keyframe-only)</li>
+<li>Backend: 60ms</li>
+<li>Kimera-Semantics: 65.8 ms</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="Kimera-DSG의-사용처"><a href="#Kimera-DSG의-사용처" class="headerlink" title="Kimera/DSG의 사용처"></a>Kimera/DSG의 사용처</h1><p>아래는 저자들이 추천/생각하는 Kimera / 3D DSG의 사용처이다.</p>
+<ul>
+<li>Obstacle avoidance and planning<ul>
+<li>Hierarchical path planning</li>
+<li>Semantic path palnning</li>
+</ul>
+</li>
+<li>Human-Robot interaction<ul>
+<li>Question Answering</li>
+</ul>
+</li>
+<li>Long-term autonomy</li>
+<li>Prediction</li>
+</ul>
+<img src="/20230329-rosinol-2021-kimera-3d-dgs/Screenshot%202023-04-16%20at%202.45.04%20AM.png" class="" title="tx2">
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230215-rosen-2021/" rel="bookmark">Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230218-qin-2020-avpslam/" rel="bookmark">Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230218-qin-2021-roadmap/" rel="bookmark">Qin 2021 - RoadMap - A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/Semantic-SLAM/" rel="tag"># Semantic SLAM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230325-xvfb/" rel="prev" title="디스플레이 없이 OpenGL 및 X11 렌더링 하는 방법">
+                  <i class="fa fa-chevron-left"></i> 디스플레이 없이 OpenGL 및 X11 렌더링 하는 방법
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20230405-q1-2023-slam-news/" rel="next" title="2023년 1분기 SLAM 뉴스">
+                  2023년 1분기 SLAM 뉴스 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

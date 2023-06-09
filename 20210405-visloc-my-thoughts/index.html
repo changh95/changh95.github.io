@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Visual localization 기술에 대한 내 생각">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Visual localization 기술의 방향?">
+<meta property="og:url" content="https://changh95.github.io/20210405-visloc-my-thoughts/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Visual localization 기술에 대한 내 생각">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-06T09:40:11.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.839Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="NAVER LABS">
+<meta property="article:tag" content="Visual localization">
+<meta property="article:tag" content="Thoughts">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210405-visloc-my-thoughts/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Visual localization 기술의 방향? | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%8B%A4%EC%99%B8-%EC%8B%A4%EB%82%B4-%EA%B8%B0%EC%88%A0%EB%B3%80%ED%99%94-%EA%B3%A0%EB%A0%A4%ED%95%A0-%EC%A0%90"><span class="nav-number">1.</span> <span class="nav-text">실외&#x2F;실내 기술변화 + 고려할 점</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%8B%A4%EC%99%B8-visual-localization"><span class="nav-number">1.1.</span> <span class="nav-text">실외 visual localization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GPS%EA%B0%80-%EB%8D%94-%ED%95%84%EC%9A%94%ED%95%A0%EA%B9%8C"><span class="nav-number">1.1.1.</span> <span class="nav-text">GPS가 더 필요할까?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EA%B8%B0%EC%A1%B4%EC%9D%98-%EB%B0%A9%EB%B2%95%EC%9D%80"><span class="nav-number">1.1.2.</span> <span class="nav-text">기존의 방법은?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EB%A7%B5%EC%9D%84-%EB%A7%8C%EB%93%A4%EA%B9%8C-%EB%A7%8C%EB%93%A4%EC%A7%80-%EB%A7%90%EA%B9%8C"><span class="nav-number">1.1.3.</span> <span class="nav-text">맵을 만들까? 만들지 말까?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%8B%A4%EB%82%B4-visual-localization"><span class="nav-number">1.2.</span> <span class="nav-text">실내 visual localization</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%97%85%EA%B3%84%EC%9D%98-%EC%B5%9C%EC%95%9E%EB%8B%A8"><span class="nav-number">2.</span> <span class="nav-text">업계의 최앞단</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B8%B0%EC%97%85%EC%9D%98-%EC%9D%B8%EB%A0%A5%EC%88%98%EC%9A%94-%EB%B3%80%ED%99%94"><span class="nav-number">3.</span> <span class="nav-text">기업의 인력수요 변화</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-localization%EC%9D%B4-%EC%A0%95%ED%99%95%ED%95%98%EA%B3%A0-%EB%B9%A0%EB%A5%B4%EB%8B%A4%EB%A9%B4"><span class="nav-number">3.1.</span> <span class="nav-text">Visual localization이 정확하고 빠르다면?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-localization%EC%9D%B4-%EC%A0%95%ED%99%95%ED%95%98%EC%A7%80%EB%A7%8C-%EC%B6%A9%EB%B6%84%ED%9E%88-%EB%B9%A8%EB%A6%AC-%EB%8F%8C%EC%A7%80-%EC%95%8A%EB%8A%94%EB%8B%A4%EB%A9%B4"><span class="nav-number">3.2.</span> <span class="nav-text">Visual localization이 정확하지만 충분히 빨리 돌지 않는다면?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SLAM-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94-%EC%82%AC%EB%9E%8C%EC%9C%BC%EB%A1%9C%EC%8D%A8-%EA%B3%B5%EB%B6%80%ED%95%B4%EC%95%BC%ED%95%A0-%EB%B0%A9%ED%96%A5"><span class="nav-number">4.</span> <span class="nav-text">SLAM 공부하는 사람으로써 공부해야할 방향</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fusion-Multi-modal-Visual-inertial-Visual-LiDAR-Cross-descriptor"><span class="nav-number">4.1.</span> <span class="nav-text">Fusion - Multi-modal (Visual-inertial, Visual-LiDAR), Cross-descriptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Semantic-SLAM"><span class="nav-number">4.2.</span> <span class="nav-text">Semantic SLAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mapping-algorithm-amp-data-structure"><span class="nav-number">4.3.</span> <span class="nav-text">Mapping algorithm &amp; data structure</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210405-visloc-my-thoughts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Visual localization 기술의 방향?
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-06 18:40:11" itemprop="dateCreated datePublished" datetime="2021-04-06T18:40:11+09:00">2021-04-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="실외-실내-기술변화-고려할-점"><a href="#실외-실내-기술변화-고려할-점" class="headerlink" title="실외/실내 기술변화 + 고려할 점"></a>실외/실내 기술변화 + 고려할 점</h2><p>Visual localization 기술은 <strong>실내/실외에서 이미지만으로 현재 위치를 추정하는 기술</strong>이다.</p>
+<p>이는 SLAM 같은 복잡한 시스템에 비해 요구사항이 비교적 적게 느껴진다. 그에 비해 Visual localization은 <strong>그냥 사진 한장 딱 찍으면 알아서 위치 찾아주는 마법같은 기술</strong>처럼 느껴진다. (물론 실제로 이 기술도 학습 과정이라던지 여러가지로 알고보면 굉장히 복잡하겠지만, 단순히 겉으로 드러나는 느낌만 이야기 하는 것이다)</p>
+<p> </p>
+<h3 id="실외-visual-localization"><a href="#실외-visual-localization" class="headerlink" title="실외 visual localization"></a>실외 visual localization</h3><h4 id="GPS가-더-필요할까"><a href="#GPS가-더-필요할까" class="headerlink" title="GPS가 더 필요할까?"></a>GPS가 더 필요할까?</h4><p>실외의 경우 GPS를 사용해서 위치를 추정할 수 있었다. 물론 <strong>GPS</strong>는 1. <strong>에러가 m 단위</strong>로 나타나고, 2. 고층 빌딩 사이에서는 <strong>multi-path 문제</strong>로 위치를 잘못 추정하는 경우가 있고, 3. 자율주행의 경우 <strong>터널이나 주차장</strong> 등에 들어갈 때 if-else가 아닌 방법으로 자연스러운 알고리즘 변환을 할 수 없다.</p>
+<p>그렇기에 <strong>visual localization이 정말 잘 된다면 사실상 GPS를 쓸 이유가 없게 될 수도</strong> 있겠다. <strong>GPS는 search space를 줄여주는 하나의 complementary 센서등으로 전락</strong>할 수도 있겠다.</p>
+<h4 id="기존의-방법은"><a href="#기존의-방법은" class="headerlink" title="기존의 방법은?"></a>기존의 방법은?</h4><p>Visual-SLAM에서의 <strong>relocalization 기능</strong>이 어떻게 보면 이미지만 가지고 6d pose를 찾는 점이 visual localization 기술과 굉장히 유사하다. Relocalization 기술은 visual-SLAM을 통해 <strong>미리 따 놓은 3D map을 기반으로 위치를 구하는 SLAM 모듈</strong>인데, 문제는 우리가 아직 실외에서의 3d map을 잘 만들지 못한다는 점이다. 보통 Structure-from-Motion (SfM)으로 3d map을 따놓고, local feature matching과 geometric verification을 통해 pose를 구한다.</p>
+<p>첫째로 우리는 <strong>‘좋은 DB를 만드는 방법을 잘 모른다</strong>. 조명, 날씨, 시점변화에 robust하다고 자신있게 내놓을만한 local feature / matching방법론도 없고, DB update policy에 대한 de-facto 방법론도 아직 없다. 그렇기 때문에 현재 단계에서는 DB를 조명 단위로, 날씨 단위로, 여러 시점에서 데이터를 수집해서 촘촘하게 만들어놔야한다. 실제로 내가 3d map을 DB 삼아 만든 적이 있는데, 실외에서 COLMAP으로 맵을 만들고 DBoW + ORB 매칭으로 테스트 해봤을 때 오전에 만든 맵은 오후에 작동하지 않았다. 실외에서는 이른 새벽, 해가 조금 뜬 후, 해 뜨고난 오전, 해가 쨍쨍한 정오, 해가 조금 들어간 오후, 노을, 어두컴컴 저녁, 시껌한 밤까지 조명 형태가 엄청 다양하다. 현재 단계의 기술로는 이 모든 케이스마다 map을 만들어야하며, DB의 search space를 줄이기 위해 현재 시간까지 feature로 받아가면서 매칭을 해야했다. 근데 DB에 없는 상황이 나타난다면? 구름이라도 좀 끼거나, 비나 눈이라도 온다면? 그때는 당연히 실패할것이다. DB가 3D map이 아닌 경우에도 같은 논리가 적용될 수 있다. 이 문제를 풀기 위해서는 <strong>조명, 날씨, 시점변화에 robust한 local feature / matching이 무조건 필요</strong>하다.</p>
+<p>둘째로 우리는 <strong>‘실외 DB를 효율적으로 만드는 방법을 모른다</strong>. 실외 DB는 <strong>작게는 빌딩에서부터 크게는 도시나 나라단위</strong>로 스케일이 커질 수 있다. DB는 3D map의 형태를 가질 수도 있고, 아니면 단순 이미지 + pose 페어로 만들어질 수도 있다. SLAM 방식을 사용하는 경우 부터 이야기해보자. 기존의 많은 SLAM 알고리즘들은 하나의 mobile device에서 작동하는 것으로 설계되어있지만, 당연히 mobile device 하나로는 메모리에 이 큰 공간의 map 정보를 담을 수 없다. 결국 메모리가 다 찰때 쯤 메모리 리셋을 통해 작은 맵을 이어붙혀가면서 큰 맵을 만든다던지, 또는 다수의 스캐닝 에이전트가 하나의 큰 맵을 서버에서 만들어간다던지 등등 맵을 만드는 방법론이 바뀔 수 밖에 없다. DB가 3D map 형태를 쓰지 않는 경우에는, 실제 위치에서 찍어낸 이미지로부터 global + local feature를 뽑은 후 벡터화 시킨 다음, 그래프의 형태로 엮어서 저장하는 방법이 있을 것이다. 이 방법은 메모리적인 부분에서는 조금 덜 부하가 있겠지만, graph node를 업데이트 시킬지 또는 추가할지에 대한 방법론이 아직 정해지지 않았다. Graph node를 업데이트 시킨다는건 사실상 ‘동일한 위치에서의 데이터 변화를 업데이트한다’ 라는 뜻을 가진다. 하지만 map을 사용하지 않고는 GT pose값을 m 단위의 에러를 가지는 GPS를 써야할텐데, 당연히 높은 확률로 동일한 위치에 올라갈 수 없다는 것을 뜻한다 (실제로 동일한 위치에 올라가도 센서 노이즈로 인해 다른 위치로 인식할 수 있다). 그렇다면 graph update policy가 필요한데, 이 역시 de-facto 방식이 없다. 어찌되었건 결국 <strong>맵을 만드는 방식은 대규모 처리를 수행</strong>하는 방면으로 바뀌게 될 텐데, 아직 DB를 만들어가면서 map 또는 graph reconstruction 과정 중 geometric local minima에 빠지지 않는다고 보장할 수 있는 알고리즘도 나오지 않았고, 이러한 <strong>geometric DB 생성을 위한 대규모 처리 인프라도 아직 익숙한 사람이 없다</strong>.</p>
+<p>최근 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2VvZ3Vlc3NyLmNvbS8=">geoguessr<i class="fa fa-external-link-alt"></i></span>라는 게임을 해봤는데, 이 게임이 대규모 실외 visual localization을 구현하는데에 어려움을 정확히 잘 짚어주는 것 같았다. 게임에서는 사진을 그냥 딱 하나 주고는 우리나라 지도에서 어디인지 pin을 찍으라고 한다. 주변 정보도 이용하고, 픽셀이 다 깨져버린 이미지에서 이정표를 읽으면서 대관령 제 4터널 앞 도로 어딘가임을 알아채고 위치를 찍었지만, 실제 위치에서 약 150m 정도 떨어졌다는 결과를 받았다. 물론 사람이 이걸 푼다는게 웃기기는 하지만, 여기서 내가 했던 생각은 ‘이미지는 거의 똑같아 보이는데 150m인지 어떻게 확신할 수 있다는 것인가?’ 였다. Visual localization 알고리즘이 주행 알고리즘에도 하나의 센서 값으로 포함되어있다면, VL의 결과가 1m, 5m, 10m 오차가 있으면 어떤 결과가 나타날까? 아니면 나처럼 150m, 200m 오차가 있다면? 너무나도 똑같이 생긴 이미지에서 추리를 하고 또 해서 나온 best 결과임에도 부족하다면, 오히려 GPS가 더 믿을만한게 되는것일까? Visual localization은 distinctive feature가 가득한 도시에서만 쓸 수 있는게 되는걸까? 도시에서만 되는 자율주행은 어떤 쓸모가 있는 것인가? <strong>전국에서 VL이 가능하게 만들려면 어떤 점이 더 개선되야 하는가?</strong></p>
+<h4 id="맵을-만들까-만들지-말까"><a href="#맵을-만들까-만들지-말까" class="headerlink" title="맵을 만들까? 만들지 말까?"></a>맵을 만들까? 만들지 말까?</h4><p>Visual-localization에는 <strong>3D map을 사용하는 방법</strong>과 <strong>사용하지 않는 방법</strong>이 있다고 한다. <strong>3D map이 필요한 경우에는 결국 대규모 맵핑을 위한 인프라와 인력이 필요하게 될 것</strong>임을 생각할 수 있다. 하지만 반대로 3D map을 사용하지 않는 방법이 대세를 탈 수 있다는 생각도 들게 된다. 3D map을 사용하지 않는 방법은 3D map을 사용하는 방법보다 정확도가 낮다. 그러면 정확도의 문제만 해결되면 3D map을 만들 필요가 없어지는 것인가? 이 경우 <strong>실외에서는 3D map을 만들 필요가 없어질 수도</strong> 있다. 그렇다면 정확도는 어떻게 올려야하는 것인가? 3D map을 사용하지 않는 방법은 딥러닝 기반 pose regression과 같은 방법을 사용하는 것으로 알고 있는데, 그렇다면 <strong>단순히 모델을 개발시키고 좋은 트레이닝 데이터셋</strong>만 만들면 되는 것인가? <strong>모델의 한계</strong>는 어느정도인가? 트레이닝 데이터셋이 얼마나 필요한가? <strong>충분한 성능을 끌어올릴 수 있는 트레이닝 데이터셋은 만들 수 있는 것 (feasible)인가?</strong></p>
+<p> </p>
+<h3 id="실내-visual-localization"><a href="#실내-visual-localization" class="headerlink" title="실내 visual localization"></a>실내 visual localization</h3><p>실내 localization GPS 대신 <strong>UWB 센서, QR코드, WiFi, AR마커</strong> 등의 localization 기술들을 사용해서 위치를 추정한다. 물론 <strong>GPS를 쓰는 것 처럼 편하지 않다</strong>. 그렇기에 몇몇 실내 로봇들은 이러한 센서들을 특정 위치에만 설치해서 대략의 위치만 추정하고, 주행등의 목적에서는 단순히 딥러닝 기반 perception / path planning을 사용하기도 한다.</p>
+<p>실내 visual localization이 된다면, <strong>localization 정보를 이용해서 훨씬 정확한 주행을 할 수 있다</strong>. 또, UWB 센서, QR코드, WiFi 등등 고려할 점들이 많은 귀찮은 센서들에 의존할 필요가 없어진다. 이 센서들은 사용한다고 해도 특수 용도 또는 complementary 센서로 전락하게 될 것이다. </p>
+<p>카메라를 사용하면서 단순히 6d 위치 정보를 뽑아내는 것 뿐만이 아닌, <strong>기존의 딥러닝 컴퓨터 비전 기법</strong>들도 함께 사용할 수 있다. 이 경우, object detection이나 semantic segmentation을 통해 semantic 정보를 뽑아낼 수 있다. 내 앞에 어떤 물건을 geometric한 성질로 인식하고, 그 물건의 semantic한 성질을 기반으로 더 다양한 interaction을 사용할 수 있게 된다. 이 때 <strong>여러가지 방법을 통해 semantic한 정보가 단순히 어떤 object의 class가 아니라 instance로 구분</strong>하게 해줄 수 있는데, <strong>그 중 하나가 visual localization</strong>이 될 확률이 높다고 본다. Visual localization을 통해 <strong>어떤 object instance가 static하고 dynamic한 것인지 알 수 있다면</strong>, static한 object들은 단순히 class가 아니라 instance로 구분하여 각각의 object instance와 상호작용을 할 수 있을 것이다. 사실상 Object oriented programming에서 어떠한 class instance를 가져와 method를 호출해서 기능을 사용하는 것 처럼 사용할 수 있게 되면서, 실제 세상에서의 object와의 상호작용을 프로그래밍 할 수 있게 될 것이다. 그리고 <strong>이미지에 나타나는 물체들 중 어떤 것들이 static/dynamic한것인지 알 수 있다면 이 역시 localization의 성능을 끌어올려줄 수 있을 것</strong>이다.</p>
+<p> </p>
+<hr>
+<h2 id="업계의-최앞단"><a href="#업계의-최앞단" class="headerlink" title="업계의 최앞단"></a>업계의 최앞단</h2><p>‘국내에서 visual localization 기술을 잘 하는 곳이 어디인가?’ 라는 질문을 들었을 때 나는 가장 먼저 <strong>네이버랩스</strong>가 떠오른다. 다른 기업들도 물론 연구개발을 하고있겠지만, 아무래도 visual localization 기술로 대중에게 제일 잘 알려져있으면서 동시에 가장 자신있게 자신들의 제품/기술력을 보여주는 곳은 네이버랩스라고 생각된다.</p>
+<p>해외는 어디가 있을까? 솔직히 Visual localization으로 딱 손에 꼽을 수 있는 곳은 아직 잘 모르겠다.</p>
+<p>아무래도 <strong>자율주행 관련으로 데이터를 많이 수집한 곳</strong>이지 않을까? 라고 생각해서 모빌아이, 테슬라, Waymo, ZOOX, Uber 등을 우선 생각했다. 아무래도 기존의 Bag-of-visual-words를 통한 search space reduction 후 local feature matching을 하는 파이프라인은 진작에 모두가 알고 있기 때문에, 왠만한 회사들은 다 시도해보지 않았을까 생각한다. 딥러닝 방식도 2015년에 PoseNet이 나온 후로 진작에 가능성을 보여줬으니, 역시 왠만한 회사들은 다 시도해보지 않았을까 생각한다. </p>
+<p>하지만 이런 <strong>큰 회사들은 누가 먼저 더 빨리 제품을 만들 수 있는지에 대해 경쟁</strong>하고 있다. 그리고 visual localization은 아직 사실 제품의 주력 기술이 되기에는 기술, 인력, 인프라 등이 충분히 갖춰지지 않았다고 생각된다. 빠르게 먼저 ‘자율주행인것 처럼 보이는 제품’을 보여주기 위해서는 딥러닝 기반 주행 알고리즘을 짜는 것이 더 쉬울 수 있을 것 같다. 그렇다면 맵핑에 집중한 회사는 어디가 있을까? 아무래도 <strong>기존의 네비게이션 서비스를 하던 회사</strong>가 아닐까 생각한다. 그래서 해외 큰 회사들은 <strong>주행 알고리즘에 집중한 회사</strong> (e.g. 테슬라, Uber)와 <strong>맵핑에 집중한 회사</strong> (e.g. TomTom, Mapbox)가 나눠질 것 같다. 맵핑에 집중한 회사들 중, 그 중 특히나 특정 공간을 실험 지구로 삼아서 테스트를 하고 있는 회사들이 visual localization을 잘 하고 있지 않을까 생각한다. 또 다른 가능성은, 딥러닝 기반 pose regression 방식의 가장 첫번째 시도인 PoseNet의 창시자인 Alex Kendall이 세운 회사인 <strong>Wayve</strong>와 같은 곳이 이런 기술에 조금 집중하지 않았을까 생각도 든다.</p>
+<p> </p>
+<hr>
+<h2 id="기업의-인력수요-변화"><a href="#기업의-인력수요-변화" class="headerlink" title="기업의 인력수요 변화"></a>기업의 인력수요 변화</h2><h3 id="Visual-localization이-정확하고-빠르다면"><a href="#Visual-localization이-정확하고-빠르다면" class="headerlink" title="Visual localization이 정확하고 빠르다면?"></a>Visual localization이 정확하고 빠르다면?</h3><p>Visual localization이 충분히 빨리 돌 수 있다면, pose를 계산할 때 다른 알고리즘을 고려할 필요 없이 VL만 사용하게 될 것 같다. 사전에 DB만 만들어 놓는다면 위치 추정을 위해 SLAM을 더 사용하지 않게 될 수도 있다. 방식에 따라 많이 다르겠지만, 몇가지 VL 방식들은 absolute pose를 계산해내기도 한다. 이러한 방식이 정확하게 + 강인하게 + 빠르게 작동할 수 있다면 사실상 SLAM은 앞으로 mapping만 하게 되고 VL이 모든 localization 작업을 담당하게 될 것 같다.</p>
+<p>자율주행이나 로보틱스/VR/AR을 위한 인도어 맵핑과 같이 맵을 따는 작업은 기업쪽에서 맵을 따서 관리하는게 맞다. 품질 유지의 이유도 있고, 무엇보다 유저가 맵핑 과정을 좋아할리가 없기 때문이다. 유저는 다 만들어진 환경에서 잘되는 localization을 통해 서비스를 즐기고 싶을 것이다. <strong>Mapping 서비스는 B2B</strong>가 되겠고, <strong>VL 서비스는 B2C</strong>가 되면서 자연스럽게 VL 분야가 SLAM 분야보다 커질것 같다. <strong>많은 기업들에서 Visual localization에 대한 수요가 늘어날거고</strong>, 서비스가 늘어나면서 대량의 리퀘스트를 떠받치는 <strong>인프라</strong>가 필요할 것이다. VL이 빠르게 돌면서 많은 사용자를 거느리려면 아무래도 <strong>분산처리와 GPU 가속 및 인프라</strong>가 중요할 것 같다는 생각이 드는데, 이는 많은 <strong>SLAM 및 spatial computing 전문가들의 기술 스택을 백엔드로</strong> 이끌 것 같다. Visual localization 기술이 SfM을 요구하게 되는 방향으로 흘러간다면, mapping을 위한 SLAM 역시 굉장히 중요한 role을 맡게 될 것 같다. 큰 기업들은 map을 유지보수하기 위해 mapping agent를 만들거나, 아니면 모든 유저를 mapping agent로 만드는 전략을 취할 것 같은데, 어찌되었건 다수의 map update가 있어야하는 것은 맞다. 이를 위해 역시 또 대규모 맵을 다루고 유지보수하는 기술, 그리고 분산처리 + 가속 시스템이 필요할 것으로 보인다. 이 역시 많은 SLAM 기술자들의 기술 스택을 백엔드로 이끌 것 같다.</p>
+<p> </p>
+<h3 id="Visual-localization이-정확하지만-충분히-빨리-돌지-않는다면"><a href="#Visual-localization이-정확하지만-충분히-빨리-돌지-않는다면" class="headerlink" title="Visual localization이 정확하지만 충분히 빨리 돌지 않는다면?"></a>Visual localization이 정확하지만 충분히 빨리 돌지 않는다면?</h3><p>Visual localization이 생각보다 그렇게 빨리 돌지 않는다고 해도, <strong>VL은 충분히 SLAM과 사용될 수 있다</strong>. SLAM을 하다보면 맵 생성 + pose 계산을 하면서 메모리와 프로세서를 엄청나게 잡아먹는다. 맵핑 목적으로해서 맵을 계속 이어나가고 있다면, 메모리는 한계치가 있을 것이다. 그렇다면 단순히 localization이 목적이라면, <strong>sliding window VIO</strong> 등을 사용하면서 pose만 계산하는 방법이 있을 것이다. 적당한 local map만 유지하면서 메모리를 아끼는 전략이다. 이 경우에는 대신 global consistency를 유지하기 힘들게 되는데, 이 때 visual localization을 통해 relocalization과 같은 전략을 취해주면 충분히 <strong>global consistency</strong>를 유지하는 localization agent를 만들 수 있지 않을까 싶다.</p>
+<p> </p>
+<hr>
+<h2 id="SLAM-공부하는-사람으로써-공부해야할-방향"><a href="#SLAM-공부하는-사람으로써-공부해야할-방향" class="headerlink" title="SLAM 공부하는 사람으로써 공부해야할 방향"></a>SLAM 공부하는 사람으로써 공부해야할 방향</h2><h3 id="Fusion-Multi-modal-Visual-inertial-Visual-LiDAR-Cross-descriptor"><a href="#Fusion-Multi-modal-Visual-inertial-Visual-LiDAR-Cross-descriptor" class="headerlink" title="Fusion - Multi-modal (Visual-inertial, Visual-LiDAR), Cross-descriptor"></a>Fusion - Multi-modal (Visual-inertial, Visual-LiDAR), Cross-descriptor</h3><p>3D map을 사용하는 visual localization 방식이 주 방식이 된다면 <strong>정확한 맵핑을 할 수 있는 SLAM 알고리즘이 꼭 필요</strong>할 것이다. 그렇다면 기존의 Visual-only 방식은 정확도가 떨어질 것이고, 정확도를 끌어올려줄 수 있는 complementary 센서를 사용하는 것이 새로운 norm이 될 것이다. 가장 가능성이 있는 것은 <strong>VINS (Visual-inertial system)**이지 아닐까 싶다. 모바일 기기와 자동차 등에도 IMU가 기본적으로 탑재되어있고, 이를 위한 (아직 visual-only보다는 훨씬 적지만) 선행 연구가 많이 되었다. 특히나 IMU preintegration 연구 이후로 박차를 가한 것으로 보인다. 실외 맵핑 특정으로 GNSS까지 함께 사용할 수 있는데, Visual-inertial-GNSS 시스템을 다루는 SLAM 엔지니어라면 몸값이 굉장히 높아질 것 같다. 또 다른 가능성은 **Visual-LiDAR</strong>가 될 텐데, 이 경우 LiDAR mapping의 경우 2D image로부터 local feature를 뽑는 것이 아닌 3d structural descriptor를 뽑을 수 있다는 것이 큰 장점이다. Visual 정보를 혼합하면서 이 <strong>3d structural descriptor를 visual 센서 값으로 읽을 수 있다면</strong>, 사실상 robust한 descriptor를 얻게 되는게 아닌가 생각이 든다. 이 경우, mapping agent는 visual-lidar 구조를 가지게 되고 VL agent는 visual-only 또는 vins가 되며 하드웨어 구조가 달라진다고 볼 수 있다. 또 다른 가능성은 <strong>Cross-descriptor</strong>로써, 다양한 local feature들을 모두 사용해서 최대한 빽빽한 3d map을 만들고, 이 정보를 모두 호환할 수 있는 local feature를 사용하는 것이다. 이를 통해 ‘오래 걸리지만 정확하게 matching이 되는 feature’ 정보를 ‘부정확하지만 빠르게 돌아가는 feature’와 호환할 수 있게 되면서 새로운 가능성을 부여한다.</p>
+<p> </p>
+<h3 id="Semantic-SLAM"><a href="#Semantic-SLAM" class="headerlink" title="Semantic SLAM"></a>Semantic SLAM</h3><p>Semantic SLAM은 Object detection/tracking, segmentation 등을 통해서 <strong>semantic 정보를 SLAM에 포함하는 방법</strong>이다. 간단한 방법으로는 segmentation으로 움직이는 객체들에 제외해서 static 환경만 맵핑하는 것도 있지만, 학계에서 크게 주목을 받고있지는 않다. 제대로 연구를 해볼만한 분야로써는 semantic 정보를 SLAM optimization 파이프라인에 넣는 것이 있는데, Detection / Segmentation으로부터 나오는 픽셀 값들의 reprojection error나 depth 값을 optimization에 사용한다거나, 또는 segmentation 등으로 object class를 얻어내고 shape descriptor, reflectance 같은 embedding feature를 optimization하는 방식들이 주목을 받고 있다. 하지만 이런 연구들도 <strong>사실 아직 object들을 class로 다루고 있으며, 각각의 instance로 다루지 못한다</strong>. SLAM++ 논문에서 보여준 것 처럼 동일 class의 객체들을 각각 트랙킹하면서 해당 객체들에 대한 정보를 메모리로 가지고 있을 수 있다면, UX와 interaction관련으로 엄청나게 큰 가능성을 제시해준다. 예를 들어, 실외 자율주행 중 이미지에 63빌딩이 보인다면, 기존의 방식처럼 단순히 global feature + local feature로 프로세싱하는 것이 아니라 63빌딩이 보이는 위치들로 우선 search space를 제한한뒤 그 후 global + local feature 탐색을 하면서 서치속도를 가속할 수 있겠다.</p>
+<p> </p>
+<h3 id="Mapping-algorithm-amp-data-structure"><a href="#Mapping-algorithm-amp-data-structure" class="headerlink" title="Mapping algorithm & data structure"></a>Mapping algorithm &amp; data structure</h3><p>기존의 local feature matching 알고리즘은 많이 FLANN 또는 Multi-probe LSH 방식을 사용한다. 즉, <strong>binary tree 또는 pseudo-hashing</strong>을 사용한다는 것이다. 우리가 컴퓨터 과학에서 알고리즘을 공부하면서 배우는 것 처럼 이 둘은 N의 사이즈가 커지면서 <strong>tree balancing이라던지 hash collision 등의 문제</strong>가 나타날 수 있다. 여러 sub-tree를 관리한다던지, multi-hashing 등을 사용해서 최대한 distance를 벌려 문제를 피해보는 것도 방법이 되겠지만, 정말로 큰 대규모 맵핑을 할 때는 어쩔 수 없이 이러한 문제를 마주할 수 밖에 없다. 이를 타파하기 위해서는 여러가지 다양한 아이디어로 search space reduction이 필요한데, 위에서 이야기한 GPS나 semantic 정보를 사용하는 것이 방법이 될 수 있을 것 같다. 또 다른 문제는, semantic slam 분야 연구가 계속되면서 object class가 아닌 object intance들을 관리할 수 있게 된다면, 이 instance들을 어떤 자료구조에 넣어서 관리할지 잘 정해지지 않았다는 것이다. 이 문제를 해결하려고 했던 SLAM++에서는 graph 형태를 사용하였는데, 우리가 semantic 정보를 이용해서 graph node를 발견하고, 이 정보를 사용해서 거대한 binary tree / hash에서의 search space reduction을 하기에는 자료구조의 형태가 너무 달라서 쉽지 않다. 서로 다른 자료구조의 interlinking은 엄청나게 복잡한 문제이고, 이 부분에 있어서 <strong>대규모 mapping 및 search에 적합한 알고리즘 + 자료구조가 제시되어야할 것</strong> 같다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210405-R2D2/" rel="bookmark">R2D2 - Repeatable and Reliable Detector and Descriptor (NAVER LABS Europe)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210405-naver-labs-europe-kapture/" rel="bookmark">Kapture + CVPR2020 Visual localization challenge (NAVER LABS Europe)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210405-naver-labs-visloc/" rel="bookmark">Methods for visual localization (NAVER LABS Europe)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210327-Andrew-Ng-MLOps-talk/" rel="bookmark">MLOps - From Model-centric to Data-centric AI (Andrew Ng 발표)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/NAVER-LABS/" rel="tag"># NAVER LABS</a>
+              <a href="/tags/Visual-localization/" rel="tag"># Visual localization</a>
+              <a href="/tags/Thoughts/" rel="tag"># Thoughts</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210405-R2D2/" rel="prev" title="R2D2 - Repeatable and Reliable Detector and Descriptor (NAVER LABS Europe)">
+                  <i class="fa fa-chevron-left"></i> R2D2 - Repeatable and Reliable Detector and Descriptor (NAVER LABS Europe)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210407-3dgv-andrew-davison/" rel="next" title="3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)">
+                  3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="팟캐스트 들으면서 적은 노트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Event Cameras with Davide Scaramuzza 노트 (Robohub 팟캐스트 Ep.347)">
+<meta property="og:url" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="팟캐스트 들으면서 적은 노트">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/1.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/2.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/3.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/4.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/5.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/6.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/7.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/8.gif">
+<meta property="article:published_time" content="2022-03-15T05:10:31.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.323Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Computer Vision">
+<meta property="article:tag" content="Event Camera">
+<meta property="article:tag" content="ETH Zurich">
+<meta property="article:tag" content="Davide Scaramuzza">
+<meta property="article:tag" content="Drone">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/1.gif">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Event Cameras with Davide Scaramuzza 노트 (Robohub 팟캐스트 Ep.347) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%86%8C%EA%B0%9C"><span class="nav-number">1.</span> <span class="nav-text">소개</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%9D%B4-%EC%97%B0%EA%B5%AC%EB%A5%BC-%ED%95%98%EA%B2%8C-%EB%90%9C-%EA%B3%84%EA%B8%B0%EB%8A%94"><span class="nav-number">2.</span> <span class="nav-text">이 연구를 하게 된 계기는?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-camera%EB%9E%80"><span class="nav-number">3.</span> <span class="nav-text">Event camera란?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-camera%EC%9D%98-%EC%9E%A5%EC%A0%90-%EC%9E%A5%EC%A0%90%EC%9D%B4-%EB%93%9C%EB%9F%AC%EB%82%98%EB%8A%94-%EC%97%B0%EA%B5%AC%EB%93%A4"><span class="nav-number">4.</span> <span class="nav-text">Event camera의 장점 &#x2F; 장점이 드러나는 연구들</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-camera%EB%A5%BC-%EC%82%AC%EB%9E%8C%EC%9D%B4-%EC%9D%B4%ED%95%B4%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C"><span class="nav-number">5.</span> <span class="nav-text">Event camera를 사람이 이해할 수 있을까?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-camera%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%93%B8-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C"><span class="nav-number">6.</span> <span class="nav-text">Event camera를 어떻게 쓸 수 있을까?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-camera-%EA%B7%BC%EB%8D%B0-%EB%B9%84%EC%8B%B8%EC%A7%80-%EC%95%8A%EB%82%98%E2%80%A6"><span class="nav-number">7.</span> <span class="nav-text">Event camera, 근데 비싸지 않나…?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-camera%EB%A1%9C-%EA%B1%B0%EB%A6%AC-%EC%B6%94%EC%A0%95%EB%8F%84-%EA%B0%80%EB%8A%A5%ED%95%9C%EC%A7%80"><span class="nav-number">8.</span> <span class="nav-text">Event camera로 거리 추정도 가능한지?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Event-camera%EB%A5%BC-%EC%8D%A8%EB%B3%B4%EA%B3%A0-%EC%8B%B6%EB%8B%A4%EB%A9%B4"><span class="nav-number">9.</span> <span class="nav-text">Event camera를 써보고 싶다면?</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Event Cameras with Davide Scaramuzza 노트 (Robohub 팟캐스트 Ep.347)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-15 14:10:31" itemprop="dateCreated datePublished" datetime="2022-03-15T14:10:31+09:00">2022-03-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/" itemprop="url" rel="index"><span itemprop="name">1.3 Computer Vision & Imaging</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-4-Robotics/" itemprop="url" rel="index"><span itemprop="name">1.4 Robotics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/-Tthu0D4dps" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<h1 id="소개"><a href="#소개" class="headerlink" title="소개"></a>소개</h1><ul>
+<li>Prof. Davide Scaramuzza</li>
+<li>ETH-Zurich (취리히 공대)의 Robotics and Perception 그룹의 리더<ul>
+<li>약 10년정도 된 그룹</li>
+<li>약 15명의 연구자들이 robotics, computer vision, learning &amp; control의 융합연구를 진행중</li>
+<li>로봇이 A-&gt;B로 이동하기 위해 주변 환경을 인식하고 이동하는 방법에 대해 연구중</li>
+<li>주 로봇 플랫폼은 Drone임. Ground 로봇보다 훨씬 빨라서 좋다.</li>
+<li>주 센서는 카메라와 IMU 임.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h1 id="이-연구를-하게-된-계기는"><a href="#이-연구를-하게-된-계기는" class="headerlink" title="이 연구를 하게 된 계기는?"></a>이 연구를 하게 된 계기는?</h1><ul>
+<li>처음에는 나도 조교수였다. 박사 학생도 아무도 없었고 (ㅋㅋ). 많은 research proposal들을 지원하다보니 약 10명정도 까지 생겼다.</li>
+<li>첫 연구 주제는 drone navigation이였는데, 몇년 후 event camera쪽 연구를 시작하게 되었다.<ul>
+<li>사람보다 더 빠르게 주변 환경을 인식하는 시스템을 만들고 싶었는데, 이를 위해서는 <strong>더 빠른 센서</strong>가 필요하다고 생각했기 떄문이다.</li>
+<li>로봇을 쓰는 이유를 생각해보면, 다 사람보다 훨씬 효율성있기 떄문이다 (e.g. 산업로봇들이 사람들을 대체한 케이스). 그렇기 때문에, <strong>로봇으로써 가치가 있기 위해서는 사람보다 더 빠르게 주변환경을 인식해야하고 더 빠르게 결정을 내릴 수 있어야한다</strong>.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h1 id="Event-camera란"><a href="#Event-camera란" class="headerlink" title="Event camera란?"></a>Event camera란?</h1><ul>
+<li>Event camera는 모든 pixel이 각각 독립적으로 작동하는 카메라이다.<ul>
+<li>각각의 pixel에는 마이크로칩이 있어서, <strong>pixel마다 intensity의 변화가 (i.e. event) 생김을 감지</strong>할 수 있다.<ul>
+<li>+ve의 intensity 변화는 +ve event, -ve의 intensity 변화는 -ve event라고 할 수 있다.</li>
+<li>기존의 카메라처럼 frame을 받는게 아닌, per-pixel intensity change를 받게 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20220315-event-cameras-with-davide-scaramuzza/1.gif" class="" title="dfsdf"> 
+
+<p> </p>
+<ul>
+<li>Event camera는 기존의 카메라처럼 discrete-time sampling을 통해 데이터를 취득하는게 아닌, <strong>continuous-time sampling</strong>을 통해 데이터를 취득한다.<ul>
+<li>Frame이라는 개념 자체가 없다. 단순히 stream of data일뿐! 이 data 에는 event가 있는 pixel location과 intensity 변화 값이 있다.</li>
+<li>선풍기가 event camera 앞에서 돌고 있다면, high-frame rate로 frame을 받는게 아닌, spiral events가 생긴다.<ul>
+<li>이것을 spiral events of space-time 이라고 한다.</li>
+</ul>
+</li>
+<li>기존의 카메라는 모든 pixel이 동일한 시간에 값을 취득하지만, event camera는 그렇지 않다.</li>
+</ul>
+</li>
+<li>(솔직히 여기를 듣고나서 충분히 설득이 되진 않았지만… 모든 센서는 다 discrete-time sampling이고, event camera는 그냥 그게 엄청 빠른거 아닌가? ‘Resolution of microseconds’를 가지고 있다고 하셨는데, 이거 자체가 사실 discrete-time sampling이라는 얘기인거 같은데… 그런데 이런 주장에는 단호하게 ‘no’라고 하신 이유가 궁금하다.)</li>
+</ul>
+<img src="/20220315-event-cameras-with-davide-scaramuzza/2.gif" class="" title="asdfasdf"> 
+
+<p> </p>
+<h1 id="Event-camera의-장점-장점이-드러나는-연구들"><a href="#Event-camera의-장점-장점이-드러나는-연구들" class="headerlink" title="Event camera의 장점 / 장점이 드러나는 연구들"></a>Event camera의 장점 / 장점이 드러나는 연구들</h1><ul>
+<li>Event camera를 사용하면 ‘<strong>어떤 motion이 들어와도 깨지지 않는 state estimation</strong>‘이 가능하다.<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDkuMDYzMTA=">‘Ultimate SLAM’<i class="fa fa-external-link-alt"></i></span>이라고 공개한 논문이 있는데, 기존의 카메라들이 실패하는 케이스를 event 카메라로 매우 훌륭하게 풀어냈다.</li>
+<li>여기서는 카메라를 USB 케이블에 달아서 카우보이처럼 빙빙 돌렸다 ㅋㅋ</li>
+<li>기존의 카메라들은 모션블러로 인해 진작에 실패했겠지만, event camera의 <strong>높은 temporal resolution</strong>을 통해 얻은 데이터에서 corner 정보를 취득해서 (물론 데이터가 다르게 생겼기 때문에 기존의 corner detection 방식을 사용하지는 못한다), IMU 정보와 fusion을 통해 아주 정확한 trajectory를 그릴 수 있었다.</li>
+<li>이 연구를 통해 <strong>event camera를 사용하면 기존의 카메라를 사용해서 실패하는 경우의 85% 이상을 전부 개선할 수 있다</strong>는 결론을 내렸다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20220315-event-cameras-with-davide-scaramuzza/3.gif" class="" title="ultimate slam"> 
+
+<p> </p>
+<ul>
+<li>기존 카메라들보다 <strong>~8배 정도의 dynamic range</strong>를 가지고 있다.<ul>
+<li>어두운 곳에서도 잘 볼 수 있다. 터널에서 나오거나 하는 상황에서도 굉장히 잘 볼 수 있다.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDIuMTM0MDY=">‘Rotor failure’<i class="fa fa-external-link-alt"></i></span> 연구에서는 드론이 비행 중 하나의 rotor가 고장나서 비상착륙을 해야하는 시나리오를 다룬다. 이 때 드론이 아무데나 막 날라가지 않고 제자리에서 높이만 낮춰서 착륙을 해야하는데, 로터가 하나 고장났기 때문에 제자리에서 빠른 속도로 회전을 하면서 내려오게 된다.</li>
+<li>광량이 충분한 상황에서는 SVO 같이 빠른 알고리즘을 사용하면 기존의 카메라로도 충분히 자세를 보정할 수 있었지만, 광량이 적은 곳에서는 motion blur가 너무 크게 나타나 불가능하다.</li>
+<li>‘Rotor failure’ 연구에서는 <strong>event camera를 사용했을 때는 높은 dynamic range를 이용해서 아주 적은양의 광량에서도 안정적으로 위치를 추정할 수 있다는 것</strong>을 보여준다. 10 lux 정도까지 낮추는데에 성공했는데, 이는 보름달이 뜨는 밤 정도라고 한다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20220315-event-cameras-with-davide-scaramuzza/4.gif" class="" title="Dynamic range"> 
+
+<ul>
+<li>Event camera는 <strong>기본적으로 엄청 빠르다</strong>.<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ycGcuaWZpLnV6aC5jaC9kb2NzL1JBTDE5X0ZhbGFuZ2EucGRm">‘Rapid, dynamic obstacle avoidance’<i class="fa fa-external-link-alt"></i></span> 연구에서는 드론에 축구공을 던졌을 때 바로 피할 수 있을 정도의 속도를 낼 수 있었다.</li>
+<li>기존의 카메라로는 ‘이미지 취득 - 이미지 취득 - 트랙킹 알고리즘 수행 - 동적 객체 인지’에 보통 20~30 ms씩 걸리는데에 비해, event camera에서는 3.5 ms 밖에 걸리지 않았다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h1 id="Event-camera를-사람이-이해할-수-있을까"><a href="#Event-camera를-사람이-이해할-수-있을까" class="headerlink" title="Event camera를 사람이 이해할 수 있을까?"></a>Event camera를 사람이 이해할 수 있을까?</h1><ul>
+<li>인터뷰어는 ‘기존의 카메라는 그래도 사람이 봤을 때 바로 이해할 수 있는데, 이벤트 카메라는 그렇지 않을 것 같다. <strong>사람이 이벤트 카메라도 이해할 수 있을까?</strong>‘ 라는 질문을 했다.</li>
+<li>답변은 ‘<strong>Raw 데이터를 직접적으로 이해하기는 어렵다</strong>‘ 였다.</li>
+<li>하지만 <span class="exturl" data-url="aHR0cHM6Ly9vcGVuYWNjZXNzLnRoZWN2Zi5jb20vY29udGVudF9DVlBSXzIwMTkvcGFwZXJzL1JlYmVjcV9FdmVudHMtVG8tVmlkZW9fQnJpbmdpbmdfTW9kZXJuX0NvbXB1dGVyX1Zpc2lvbl90b19FdmVudF9DYW1lcmFzX0NWUFJfMjAxOV9wYXBlci5wZGY=">‘Event-to-Video 변환 뉴럴넷 개발’<i class="fa fa-external-link-alt"></i></span>연구에서는 RNN을 이용하여 사람이 이해할 수 있는 이미지의 형태로 event 데이터를 변환하는 네트워크를 개발하였다.<ul>
+<li>처음에는 Event camera 시뮬레이터에서 학습을 하고, 아래 이미지는 실제 event camera에서 recon을 한 모습이다. 다양한 event camera의 제조사 제품에도 다 적용된다고 한다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20220315-event-cameras-with-davide-scaramuzza/5.gif" class="" title="Event-to-Videos"> 
+
+<ul>
+<li>Event camera는 <strong>단일 센서로써 사용되면 안되고, 항상 기존의 camera와 함께 사용</strong>되어야한다고 생각한다. <ul>
+<li>Event camera 자체는 하나의 high-pass filter로 볼 수 있다.</li>
+<li>움직임이 전혀 없을 때, 예를 들어 자동차가 신호를 기다리면서 멈춰있을 때, 다양한 정보를 얻을 수 있다. <strong>기존의 카메라는 이렇게 움직임이 없는 상황에서 더욱 깔끔한 이미지를 얻으며 많은 정보를 높은 품질로 수집</strong>할 수 있다. </li>
+<li>Event camera는 움직이지 않으면 아무런 데이터도 얻을 수 없다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h1 id="Event-camera를-어떻게-쓸-수-있을까"><a href="#Event-camera를-어떻게-쓸-수-있을까" class="headerlink" title="Event camera를 어떻게 쓸 수 있을까?"></a>Event camera를 어떻게 쓸 수 있을까?</h1><ul>
+<li>인터뷰어는 ‘Event camera가 실제로 어떻게 적용되고 있는지? 스타트업 같은 곳에서 event camera를 사용해서 차별점을 두고 싶다면 어떻게 해야하는지?’ 에 대해 질문을 했다.</li>
+<li>답변으로는 우선 ‘<strong>Top tier 회사와 automotive 목적으로 연구를 진행하고 있고, HDR imaging 쪽도 연구</strong>를 하고 있다. <strong>Pedestrian detection 연구</strong>도 하고 있다.’<ul>
+<li>목표는 이러한 task들을 하는데에 10ms 미만으로 떨어트리는 것이다.</li>
+</ul>
+</li>
+<li>Event camera를 쓰면서 느낀 점 중 하나는, <strong>기존의 카메라보다 훨씬 적은 memory를 필요로 한다는 것</strong>이다.<ul>
+<li><a href="">‘TimeLens’</a>연구에서는 기존의 FullHD 카메라로 얻은 2개의 이미지 사이에 event 카메라로 취득한 event 정보를 이용해서 frame-rate를 대폭 향상시키는 연구를 진행했다.</li>
+<li>High-FPS 이미지를 얻기 위해 <strong>비싼 초고속카메라를 쓸 필요가 없을 뿐</strong>더러, <strong>약 40% 정도 더 적은 메모리를 사용</strong>한다는 점이 매력적인 연구였다.</li>
+<li>예를 들어, Huawei P40로 촬영한 8000FPS 이미지는 1초당 약 16GB의 데이터 저장공간을 요구하는데, event camera를 이용한 것은 4GB만 이용한다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20220315-event-cameras-with-davide-scaramuzza/6.gif" class="" title="TimeLens"> 
+<img src="/20220315-event-cameras-with-davide-scaramuzza/7.gif" class="" title="TimeLens2"> 
+
+<p> </p>
+<h1 id="Event-camera-근데-비싸지-않나…"><a href="#Event-camera-근데-비싸지-않나…" class="headerlink" title="Event camera, 근데 비싸지 않나…?"></a>Event camera, 근데 비싸지 않나…?</h1><ul>
+<li><strong>현재 가격으로는 $3000~5000</strong> 정도 한다. 하지만 이는 대량생산 이전의 가격이고, killer application만 찾게 된다면 <strong>$5 정도로 낮춰질 수 있지 않을까</strong> 예상을 하고 있다.<ul>
+<li>마치 예전에 depth sensor가 $10,000로 엄청나게 비쌌지만, 20년이 지난 현재는 많이 가격이 떨어진 것과 같은 행보를 걷고 있다고 생각한다.</li>
+<li>시간은 걸릴거다. 하지만 언젠간 훨씬 저렴해질 것이라는걸 확신한다.</li>
+<li>중국에서도 꽤 쓰고 있다고 알고있다.</li>
+<li>SynSense라는 회사는 event camera를 이용해서 face recognition을 하는데 1mV의 전력을 소비하는 초저전력 시스템을 만들었다고 한다. 이 회사는 edge device / always-on-device 를 노린다고 한다.</li>
+<li>로켓이나 미사일 추격시스템 같은 시스템에서도 쓰려고 한다.</li>
+<li>Un-blurring image로도 쓸 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h1 id="Event-camera로-거리-추정도-가능한지"><a href="#Event-camera로-거리-추정도-가능한지" class="headerlink" title="Event camera로 거리 추정도 가능한지?"></a>Event camera로 거리 추정도 가능한지?</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ycGcuaWZpLnV6aC5jaC9kb2NzL1JBTDE2X0VWTy5wZGY=">‘EVO’<i class="fa fa-external-link-alt"></i></span> 연구에서 <strong>visual odometry</strong> 연구를 진행했다.<ul>
+<li>1개의 event camera와 IMU를 섞어서 VIO를 할 수도 있고, 2개의 event camera를 사용해서 triangulation을 통해 depth 추정을 할 수도 있다. 이 중 하나는 rgb 카메라로도 바꿀 수 있다.</li>
+<li>최근에는 Sony Zurich와 합작해서 event-depth sensor를 만들고 있다. 레이저 포인트 프로젝터를 연결해서 엄청나게 빠른 속도로 레이저가 환경을 스캔하고, event 카메라가 이 레이저를 트랙킹해서 60ms 마다 뎁스를 추정하는 센서를 만들었다. 근데 event camera는 사실 더 빠르게 추적할 수 있는데, 레이저 포인터의 최대 속도 떄문에 60ms가 걸린다고 한다. (<span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMTEuMTU1MTAucGRm">‘Event-based structured light 연구<i class="fa fa-external-link-alt"></i></span>)</li>
+</ul>
+</li>
+<li>최근에 Sony Zurich와는 Event-based LiDAR 연구도 하고 있다.<ul>
+<li>생각해보면, LiDAR는 엄청나게 많은 전력을 소비한다. 심지어 주변의 환경이 크게 변화하지 않을 때도 말이다. Event-camera를 이용해서 event가 있는 부분만이 moving object가 있다고 판단할 수 있고, 해당 위치에만 LiDAR 레이저를 쏨으로써 전체 전력량을 획기적으로 낮출 수 있다는 방법을 제안하고 있다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20220315-event-cameras-with-davide-scaramuzza/8.gif" class="" title="evo"> 
+
+<p> </p>
+<h1 id="Event-camera를-써보고-싶다면"><a href="#Event-camera를-써보고-싶다면" class="headerlink" title="Event camera를 써보고 싶다면?"></a>Event camera를 써보고 싶다면?</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ycGcuaWZpLnV6aC5jaC9yZXNlYXJjaF9kdnMuaHRtbA==">‘Event camera resources’ 웹페이지<i class="fa fa-external-link-alt"></i></span>를 팔로우하자! 여기에 관련된 데이터셋, 지난 10년간의 연구, 등등이 다 있다!</li>
+<li>Event camera는 살 필요가 없다. 비싸니까! 데이터셋을 쓰면 된다.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220214-szeliski-book/" rel="bookmark">Szeliski - Computer Vision - Algorithms and Applications (2nd ed) 책 링크</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Computer-Vision/" rel="tag"># Computer Vision</a>
+              <a href="/tags/Event-Camera/" rel="tag"># Event Camera</a>
+              <a href="/tags/ETH-Zurich/" rel="tag"># ETH Zurich</a>
+              <a href="/tags/Davide-Scaramuzza/" rel="tag"># Davide Scaramuzza</a>
+              <a href="/tags/Drone/" rel="tag"># Drone</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220315-lidar-imu-pitfalls/" rel="prev" title="IMU와 LiDAR를 사용할 때 주의해야하는 점 (번역)">
+                  <i class="fa fa-chevron-left"></i> IMU와 LiDAR를 사용할 때 주의해야하는 점 (번역)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220319-stanford-robotics-cs223a/" rel="next" title="CS223a - Introduction to Robotics 코스 레퍼런스 (Stanford)">
+                  CS223a - Introduction to Robotics 코스 레퍼런스 (Stanford) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

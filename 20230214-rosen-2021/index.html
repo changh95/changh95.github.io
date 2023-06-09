@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="논문을 리뷰하면서 SLAM 추정 방법에 대한 고찰에 대한 제 의견을 더해 적어봅니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
+<meta property="og:url" content="https://changh95.github.io/20230214-rosen-2021/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="논문을 리뷰하면서 SLAM 추정 방법에 대한 고찰에 대한 제 의견을 더해 적어봅니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/l_m.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/convex_relaxation.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/se_sync.png">
+<meta property="article:published_time" content="2023-02-14T07:50:21.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.719Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Certified algorithms">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20230214-rosen-2021/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">시작하기 전…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-SLAM-%EB%AC%B8%EC%A0%9C%EC%9D%98-%EA%B5%AC%EC%84%B1"><span class="nav-number">2.</span> <span class="nav-text">기본적인 SLAM 문제의 구성</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM%EC%9D%B4-%ED%92%80%EA%B8%B0-%EC%96%B4%EB%A0%A4%EC%9A%B4-%EC%9D%B4%EC%9C%A0%EC%99%80-Nonconvexity%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AC%B8%EC%A0%9C"><span class="nav-number">3.</span> <span class="nav-text">SLAM이 풀기 어려운 이유와 Nonconvexity에 대한 문제</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Certifiable-Correct-SLAM"><span class="nav-number">4.</span> <span class="nav-text">Certifiable Correct SLAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Robust-estimation"><span class="nav-number">5.</span> <span class="nav-text">Robust estimation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B7%B8%EB%9E%98%EC%84%9C-%EC%95%9E%EC%9C%BC%EB%A1%9C-%EB%AC%B4%EC%97%87%EC%9D%B4-%EB%8D%94-%EC%97%B0%EA%B5%AC%EB%90%98%EC%96%B4%EC%95%BC%ED%95%98%EB%8A%94%EA%B0%80"><span class="nav-number">6.</span> <span class="nav-text">그래서 앞으로 무엇이 더 연구되어야하는가?</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20230214-rosen-2021/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-14 16:50:21" itemprop="dateCreated datePublished" datetime="2023-02-14T16:50:21+09:00">2023-02-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><p>1저자인 <span class="exturl" data-url="aHR0cHM6Ly9kYXZpZC1tLXJvc2VuLmdpdGh1Yi5pby8=">David Rosen<i class="fa fa-external-link-alt"></i></span>은 Northeastern 대학의 조교수이며, John Leonard 교수님, Frank Dellaert 교수님, Luca Carlone 교수님과 함께 다수의 논문을 집필하셨다. SLAM 문제에 대해 수학적으로 파고드는 연구가 많으며, 주로 Certifiable algorithm 연구를 진행하셨다. 대표적인 작업물로는 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwNjA3LXNvbHZlci1jb21wLz9oaWdobGlnaHQ9c2Urc3luYw==">Juric 2021 논문리뷰<i class="fa fa-external-link-alt"></i></span>에도 나왔던 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkLW0tcm9zZW4vU0UtU3luYw==">SE-Sync<i class="fa fa-external-link-alt"></i></span> 라이브러리이다.</p>
+<p>2저자 중 한명인 <span class="exturl" data-url="aHR0cHM6Ly9wZW9wbGUuY3NhaWwubWl0LmVkdS9rZG9oZXJ0eS8=">Kevin Doherty<i class="fa fa-external-link-alt"></i></span>는 Semantic SLAM 분야에서 data association 관련 연구를 많이 진행하는 연구자이다.</p>
+<p>이 논문은 2가지 파트로 나눌 수 있는데, 저자들이 각각 한 파트씩 적은 것 같다.</p>
+<ol>
+<li>효율적인 SLAM의 representation과 inference 방법 (아마 Rosen이 적으신듯?)</li>
+<li>Semantic SLAM과 learned representation (아마 Doherty가 적으신듯?)</li>
+</ol>
+<p>이번 글에서는 파트 1인 ‘효율적인 SLAM의 representation과 inference 방법’에 대해 적으려고 한다.</p>
+<p>파트 2는 다음 글에서 적으려고 한다.</p>
+<p> </p>
+<hr>
+<h1 id="기본적인-SLAM-문제의-구성"><a href="#기본적인-SLAM-문제의-구성" class="headerlink" title="기본적인 SLAM 문제의 구성"></a>기본적인 SLAM 문제의 구성</h1><p>Thrun의 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWxhZGluLmNvLmtyL3Nob3Avd3Byb2R1Y3QuYXNweD9JdGVtSWQ9MjQyMDg1MDY5">확률론적 로보틱스 책<i class="fa fa-external-link-alt"></i></span>, Stachniss의 <span class="exturl" data-url="aHR0cHM6Ly93d3cuc3ByaW5nZXJwcm9mZXNzaW9uYWwuZGUvZW4vc2ltdWx0YW5lb3VzLWxvY2FsaXphdGlvbi1hbmQtbWFwcGluZy8xMDUzOTE3Ng==">Handbook of robotics 책 중 SLAM 챕터<i class="fa fa-external-link-alt"></i></span>, Dellaert &amp; Kaess의 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3MuY211LmVkdS9+a2Flc3MvcHViL0RlbGxhZXJ0MTdmbnQucGRm">Factor graphs for robot perception 논문<i class="fa fa-external-link-alt"></i></span>이나 모두 입을 모아 이야기하고 있다.</p>
+<blockquote>
+<p>“<strong>SLAM은 local observation을 모아 global model을 만드는 것이다</strong>“.</p>
+</blockquote>
+<p>여기서 <strong>local observation은 특정 시점의 센서 데이터</strong> (e.g. 이미지, 라이다 스캔)을 의미하고, <strong>global model은 3D scene geometry와 trajectory 정보</strong>를 의미하는 것이다.</p>
+<p>Local observation을 의미하는 Y 데이터와 global model X가 있을 때, Joint likelihood인 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="7.181ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 3174 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mo" transform="translate(503, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(892, 0)"><path data-c="1D44C" d="M66 637Q54 637 49 637T39 638T32 641T30 647T33 664T42 682Q44 683 56 683Q104 680 165 680Q288 680 306 683H316Q322 677 322 674T320 656Q316 643 310 637H298Q242 637 242 624Q242 619 292 477T343 333L346 336Q350 340 358 349T379 373T411 410T454 461Q546 568 561 587T577 618Q577 634 545 637Q528 637 528 647Q528 649 530 661Q533 676 535 679T549 683Q551 683 578 682T657 680Q684 680 713 681T746 682Q763 682 763 673Q763 669 760 657T755 643Q753 637 734 637Q662 632 617 587Q608 578 477 424L348 273L322 169Q295 62 295 57Q295 46 363 46Q379 46 384 45T390 35Q390 33 388 23Q384 6 382 4T366 1Q361 1 324 1T232 2Q170 2 138 2T102 1Q84 1 84 9Q84 14 87 24Q88 27 89 30T90 35T91 39T93 42T96 44T101 45T107 45T116 46T129 46Q168 47 180 50T198 63Q201 68 227 171L252 274L129 623Q128 624 127 625T125 627T122 629T118 631T113 633T105 634T96 635T83 636T66 637Z"></path></g><g data-mml-node="mo" transform="translate(1655, 0)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mi" transform="translate(1933, 0)"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(2785, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>을 작은 conditional likelihood로 표현하면 아래와 같은 식이 된다. 결국 작은 likelihood를 모아 확률론적으로 가장 정확한 global model을 찾는다는 말이 된다.</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.864ex" xmlns="http://www.w3.org/2000/svg" width="26.282ex" height="6.399ex" role="img" focusable="false" viewBox="0 -1562.5 11616.5 2828.3"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mo" transform="translate(503, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(892, 0)"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D44C" d="M66 637Q54 637 49 637T39 638T32 641T30 647T33 664T42 682Q44 683 56 683Q104 680 165 680Q288 680 306 683H316Q322 677 322 674T320 656Q316 643 310 637H298Q242 637 242 624Q242 619 292 477T343 333L346 336Q350 340 358 349T379 373T411 410T454 461Q546 568 561 587T577 618Q577 634 545 637Q528 637 528 647Q528 649 530 661Q533 676 535 679T549 683Q551 683 578 682T657 680Q684 680 713 681T746 682Q763 682 763 673Q763 669 760 657T755 643Q753 637 734 637Q662 632 617 587Q608 578 477 424L348 273L322 169Q295 62 295 57Q295 46 363 46Q379 46 384 45T390 35Q390 33 388 23Q384 6 382 4T366 1Q361 1 324 1T232 2Q170 2 138 2T102 1Q84 1 84 9Q84 14 87 24Q88 27 89 30T90 35T91 39T93 42T96 44T101 45T107 45T116 46T129 46Q168 47 180 50T198 63Q201 68 227 171L252 274L129 623Q128 624 127 625T125 627T122 629T118 631T113 633T105 634T96 635T83 636T66 637Z"></path></g><g data-mml-node="mo" transform="translate(268, 199)"><path data-c="AF" d="M69 544V590H430V544H69Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1937.8, 0)"><path data-c="2223" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mi" transform="translate(2493.6, 0)"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(3345.6, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="mo" transform="translate(4012.3, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="munderover" transform="translate(5068.1, 0)"><g data-mml-node="mo"><path data-c="220F" d="M220 812Q220 813 218 819T214 829T208 840T199 853T185 866T166 878T140 887T107 893T66 896H56V950H1221V896H1211Q1080 896 1058 812V-311Q1076 -396 1211 -396H1221V-450H725V-396H735Q864 -396 888 -314Q889 -312 889 -311V896H388V292L389 -311Q405 -396 542 -396H552V-450H56V-396H66Q195 -396 219 -314Q220 -312 220 -311V812Z"></path></g><g data-mml-node="TeXAtom" transform="translate(3, -1107.7) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mo" transform="translate(521, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mn" transform="translate(1299, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g></g><g data-mml-node="mi" transform="translate(328.6, 1150) scale(0.707)"><path data-c="1D45A" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g></g><g data-mml-node="msub" transform="translate(6512.8, 0)"><g data-mml-node="mi"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mi" transform="translate(503, -150) scale(0.707)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g><g data-mml-node="mrow" transform="translate(7434.2, 0)"><g data-mml-node="mo"><path data-c="28" d="M152 251Q152 646 388 850H416Q422 844 422 841Q422 837 403 816T357 753T302 649T255 482T236 250Q236 124 255 19T301 -147T356 -251T403 -315T422 -340Q422 -343 416 -349H388Q359 -325 332 -296T271 -213T212 -97T170 56T152 251Z"></path></g><g data-mml-node="msub" transform="translate(458, 0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D44C" d="M66 637Q54 637 49 637T39 638T32 641T30 647T33 664T42 682Q44 683 56 683Q104 680 165 680Q288 680 306 683H316Q322 677 322 674T320 656Q316 643 310 637H298Q242 637 242 624Q242 619 292 477T343 333L346 336Q350 340 358 349T379 373T411 410T454 461Q546 568 561 587T577 618Q577 634 545 637Q528 637 528 647Q528 649 530 661Q533 676 535 679T549 683Q551 683 578 682T657 680Q684 680 713 681T746 682Q763 682 763 673Q763 669 760 657T755 643Q753 637 734 637Q662 632 617 587Q608 578 477 424L348 273L322 169Q295 62 295 57Q295 46 363 46Q379 46 384 45T390 35Q390 33 388 23Q384 6 382 4T366 1Q361 1 324 1T232 2Q170 2 138 2T102 1Q84 1 84 9Q84 14 87 24Q88 27 89 30T90 35T91 39T93 42T96 44T101 45T107 45T116 46T129 46Q168 47 180 50T198 63Q201 68 227 171L252 274L129 623Q128 624 127 625T125 627T122 629T118 631T113 633T105 634T96 635T83 636T66 637Z"></path></g><g data-mml-node="mo" transform="translate(268, 199)"><path data-c="AF" d="M69 544V590H430V544H69Z"></path></g></g></g><g data-mml-node="mi" transform="translate(768, -150) scale(0.707)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g><g data-mml-node="mo" transform="translate(1922.2, 0)"><path data-c="2223" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="msub" transform="translate(2478, 0)"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mi" transform="translate(828, -150) scale(0.707)"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g></g><g data-mml-node="mo" transform="translate(3724.4, 0)"><path data-c="29" d="M305 251Q305 -145 69 -349H56Q43 -349 39 -347T35 -338Q37 -333 60 -307T108 -239T160 -136T204 27T221 250T204 473T160 636T108 740T60 807T35 839Q35 850 50 850H56H69Q197 743 256 566Q305 425 305 251Z"></path></g></g></g></g></svg></mjx-container></p>
+<p>그리고 SLAM 문제를 잘 표현하기 위해 우리는 probabilistic graphical model을 사용한다. 사실 이렇게 길게 잘 표현하지는 않고, <strong>factor graph</strong>라고 부르는 경우가 더 많다.</p>
+<p>Factor graph를 통해 우리는 수많은 state 사이의 conditional dependency 및 joint distribution을 표현할 수 있다. </p>
+<img src="/20230214-rosen-2021/factor_graph.png" class="" title="factor_graph">
+
+<p>이렇게 joint distribution을 찾아낸 후, joint optimization을 통해 최적의 global model을 찾는게 SLAM이라고 볼 수 있다. Joint optimization을 위해 iSAM, GTSAM, g2o, Ceres-solver와 같은 비선형 최적화 라이브러리를 사용한다.</p>
+<p>그러면 이제 질문을 해보자. </p>
+<blockquote>
+<p>“가장 효율적인 SLAM은 무엇일까?”</p>
+</blockquote>
+<p>가장 효율적인 SLAM을 하기 위해서는 2가지 고려할 점이 생긴다. </p>
+<p>첫째는 <strong>Representation</strong> - ‘<strong>시스템 모델 X는 어떤 정보를 담고 있어야하는가? 이 정보는 인풋 데이터 Y와 어떤 관계를 가지고 있는가?</strong>“</p>
+<p>둘째는 <strong>Inference</strong> - ‘<strong>X와 Y 사이의 Joint probability distribution을 풀기 위해 어떤 방법을 사용해야하는가?</strong>“ 이다.</p>
+<p> </p>
+<hr>
+<h1 id="SLAM이-풀기-어려운-이유와-Nonconvexity에-대한-문제"><a href="#SLAM이-풀기-어려운-이유와-Nonconvexity에-대한-문제" class="headerlink" title="SLAM이 풀기 어려운 이유와 Nonconvexity에 대한 문제"></a>SLAM이 풀기 어려운 이유와 Nonconvexity에 대한 문제</h1><p>SLAM 문제에 대한 매니폴드를 그려보면, 굉장히 큰 고차원의 non-convex한 모양을 가질 것이다. 이 non-convex한 state space를 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.928ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 852 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g></g></g></svg></mjx-container> 라고 해보자. 이런 매니폴드에서 global minimum (i.e. 에러가 가장 낮은, 가장 정답에 가까운 파라미터들의 조합)을 찾기란 굉장히 어렵다.</p>
+<p>초창기 SLAM에서는 <strong>간단하지만 추적이 가능한 인퍼런스</strong> 방법을 사용해서 문제를 풀었다. 예를 들어, Extended Kalman Filter (EKF)나 Monte Carlo sampling 방법 같은 방법으로 말이다. </p>
+<p>하지만 2016년 발표된 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.05830"><strong>Past, Present and future of SLAM</strong></a>에서 새로운 SLAM의 기준을 **maximum likelihood estimation (MLE)**로 푸는 방법을 제안하면서 판도가 바뀌게 되었다. MLE 방법은 <em>이론적으로</em> 최적의 값을 찾을 수 있다. 이 때문에 SLAM 문제의 성향은 사실 Maximum-a-posteriori (MAP)문제에 가깝지만, 여러 테크닉을 사용해서 MLE 문제로 치환해 최적의 값을 찾는 문제로 방향을 바꾼다. 또, SLAM 문제의 특징 중 하나인 sparsity를 이용한다. Sparsity는 간단하게 설명하면 ‘state들끼리 연결되지 않은 경우가 많다’ 라고 할 수 있는데, 예시를 들면 SLAM을 수행하면서 이동하다보면 SLAM을 막 실행한 첫 시점에 보였던 랜드마크가 더 이상 보이지 않아 현재의 위치와 보이지 않는 랜드마크 간에 conditional probability를 연결할 수 없는 경우가 있다. Sparsity를 이용한 1차 또는 2차 미분을 이용해서 최적화를 수행하면, 모든 매니폴드를 탐색하지 않고 빠르게 critical point를 찾아 최적 값을 탐색할 수 있다는 장점이 있다. Gauss-Newton이나 Levenberg-Marquardt 최적화 기법이 여기에 해당하며, 이러한 알고리즘을 충분히 빨리 동작할 수 있게 만들어 실시간으로 동작시킨게 현재까지의 SLAM이다.</p>
+<img src="/20230214-rosen-2021/l_m.png" class="" title="l_m">
+
+<p>하지만 문제가 있다. 1차/2차 미분 값을 이용한다는건 ‘초기값’이 존재하며 최적화 수행 시 초기값 기준으로 1차/2차 미분값을 기반으로 더 좋은 값을 찾아가는 로컬 탐색을 한다는 것인데, 로컬 탐색을 ‘초기값 주변의 critical point’를 찾게 해주는 기능이지, <strong>MLE 문제의 전역 최적변수를 찾는 것이 아니다</strong> (i.e. Global minimum이 아닌 local minima를 찾는 것이다). 물론 로컬 탐색으로 찾은 변수가 global minimum일 확률이 아예 없는건 아니지만, SLAM을 해본 사람들은 대부분 최적화 실패로 인한 소위 ‘망한 값’을 본 적이 있을 것이고, 최적화가 성공했다고 해도 은근히 에러가 많이 쌓인 값을 본 적이 있을 것이다. <strong>로컬 탐색은 이처럼 전역 최적 변수를 보장할 수 없다</strong>.</p>
+<p>그러면 MLE 문제의 전역 최적 변수는 어떻게 찾는 것일까? SLAM 문제처럼 고차원의 non-convex 공간에서 최적점을 찾는 것은 NP-hard 문제이기 때문에, 모든 경우의 수를 검토하는 것은 좋은 방법이 아니다. 근데 또 생각해봐야하는건, 로컬 탐색이 항상 실패하는건 아니다. 우리가 만족할 만큼 꽤나 잘 동작했으니 또 SLAM이 연구개발되온 것일텐데, 그러면 ‘잘된 SLAM’과 ‘안된 SLAM’의 경계가 무엇인지도 생각해봐야한다.</p>
+<p>이렇게 SLAM inference 방법을 개발하고 평가할 때는 다음과 같은 2가지 기준으로 평가해야한다.</p>
+<ol>
+<li>알고리즘 - 어떤 조건에서 MLE 전역 최적점을 찾을 수 있을 것인가?</li>
+<li>통계 - MLE 전역 최적점을 찾을 수 있다면, 그 확률이 어떻게 되는가?</li>
+</ol>
+<p> </p>
+<hr>
+<h1 id="Certifiable-Correct-SLAM"><a href="#Certifiable-Correct-SLAM" class="headerlink" title="Certifiable Correct SLAM"></a>Certifiable Correct SLAM</h1><p>Certifiably correct method라는 분야는 <strong>전역 최적점을 찾았다는 것을 보장할 수 있는 알고리즘</strong>을 연구하는 분야이다. 1/2차 미분으로 로컬 탐색을 하는 보통의 SLAM과는 다르게, convex relaxation 기반으로 전역 최적점을 찾는 연구이다. Convex relaxation은 간단하게 설명하자면, non-convex 문제를 convex 문제로 근사한 후, convex 문제의 최적점을 찾는 방법이다.</p>
+<img src="/20230214-rosen-2021/convex_relaxation.png" class="" title="convex_relaxation_ohh">
+
+<p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MDYuMDA3NDY=">Carlone et.al. 2015 - Lagrangian duality in 3D SLAM: Verification techniques and optimal solutions<i class="fa fa-external-link-alt"></i></span>에서는 Lagrangian duality를 이용해서 SLAM 문제를 2차 함수 프로그램으로 변환해 최적점을 찾았다. 이는 결국 semidefinite program의 해를 찾는 것과 같은데, 당시에는 아쉽게도 해를 찾기 위해 로컬 탐색 기법을 사용하긴 했다.</p>
+<p>하지만 이런 duality 관련 연구가 발전하면서, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MTIuMDczODY=">Rosen et.al. 2016 - A certifiably correct algorithm for synchronization over the special Euclidean group<i class="fa fa-external-link-alt"></i></span> 연구를 통해 3D pose의 조합에서 해를 찾는 방법이 개발되었고, 이는 곧 3년 후 알고리즘이 몇개 더 추가된 후 SE-Sync 라이브러리가 되었다.</p>
+<p>3D pose에 대해 certified algorithm이 개발되었다는건, rotation averaging, two-view registration, sensor extrinsic calibration, 3D registration, shape reconstruction, SLAM에서 사용될 수 있다는 것을 의미한다.</p>
+<img src="/20230214-rosen-2021/se_sync.png" class="" title="se_sync">
+
+<p> </p>
+<hr>
+<h1 id="Robust-estimation"><a href="#Robust-estimation" class="headerlink" title="Robust estimation"></a>Robust estimation</h1><p>기존 SLAM의 최적화 방식에는 또 다른 큰 문제가 있다. 바로 <strong>MLE 알고리즘의 전제가 ‘모든 데이터가 통계적으로 올바를 때 최적점을 보장한다’ 라는 점</strong>인데, 모든 센서 데이터가 SLAM에 유용한 데이터를 제공하는게 아니기 때문이다. SLAM을 해본 사람들은 알겠지만, 센서 데이터 속에서 SLAM에 유용한 데이터를 솎아주는 frontend 설계하는 부분은 굉장히 섬세하고 어려운 작업이라 많은 피,땀,눈물을 필요로 한다. 통계적으로 <strong>유용한 데이터는 inlier</strong>, <strong>유용하지 않은 데이터는 outlier</strong>라고 칭하는데, 주로 outlier는 SLAM에서 세워둔 물리적인 모델을 따르지 않는 데이터가 된다. 그리고 MLE 문제를 풀 때, outlier가 몇개 끼어있기만해도 아주 잘못된 결과가 나오는 일이 태반이다.</p>
+<p>데이터 속에서 아웃라이어를 제거하기 위해 다양한 방법들이 있다. 가장 많이 사용하는 방법은 <strong>RANSAC</strong>이며, 수많은 데이터 속에서 소수의 데이터를 샘플링 한 후 나머지 데이터들과 비교해서 적절한 모델을 선택했는지 결정해 나머지 데이터를 아웃라이어 처리하는 방법이다. 또 다른 방법으로는 <strong>RRR 전략</strong> (Realizing, reversing, recovering)이 있는데, multiple hypothesis tracking이라고도 불리는 방법으로써 여러가지 가능성을 전부 계산하고, 시간이 지나면서 말이 안되는 가능성은 점점 버리는 방법이다. 최근에는 <strong>Pairwise consistency maximization</strong> (PCM) 방식이 루프 클로저를 할 때 안정적으로 성공시키는 방법으로 뜨고 있다.</p>
+<p>위와 같이 특정 테크닉들을 사용하기도 하지만, 거의 모든 SLAM에 기본적으로 사용하는 기법은 robust estimator (<strong>M-estimator</strong>) 이다. 여러가지 M-estimatior 커널들이 존재하고, 각각의 커널마다 다른 방법으로 아웃라이어를 제거한다. M-estimator를 적절하게 사용하기 위해 <span class="exturl" data-url="aHR0cHM6Ly9uaWtvc3VlbmRlcmhhdWYuZ2l0aHViLmlvL2Fzc2V0cy9wYXBlcnMvSVJPUzEyLXN3aXRjaGFibGVDb25zdHJhaW50cy5wZGY=">Sunderhauf et.al. 2012 - Switchable constraints for robust pose graph SLAM<i class="fa fa-external-link-alt"></i></span> 논문에서는 여러 M-estimator 커널을 상황에 따라 바꿀 수 있는 기법을 소개했고, <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzY2MzA1NTc=">Agarwal et.al. 2014 - Dynamic covariance scaling for robust map optimization<i class="fa fa-external-link-alt"></i></span>에서는 적절히 커널의 노이즈 covariance 값을 변경하는 방법을, <span class="exturl" data-url="aHR0cHM6Ly9hcHJpbC5lZWNzLnVtaWNoLmVkdS9tZWRpYS9wZGZzL29sc29uMjAxM2lqcnIucGRm">Olson 2013 - Inference on networks of mixtures for robust robot mapping<i class="fa fa-external-link-alt"></i></span>에서는 여러개의 커널을 동시에 적용하는 max-mixture 기법을 사용했다. M-estimator는 매니폴드의 특정 부분에 non-convexity를 추가로 적용해 좋은 데이터를 섞어내는 테크닉으로써 매우 성공적이였지만, <strong>잘못 사용할 경우 오히려 더 좋지 않은 결과</strong>가 나타날 수 있기에 <strong>일종의 튜닝의 영역</strong>으로 다뤄진다. 진정한 Robust estimation을 위해 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMDYuMDY3NjkucGRm">Yang et.al. 2020 - One ring to rule them all: Certifiably robust geometric perception with outliers<i class="fa fa-external-link-alt"></i></span>에서는 M-estimator와 certifiably correct optimization 기법을 혼합하는데, 조금 더 설명하자면 semidefinite relaxation을 통해 전체 매니폴드를 convex하게 풀어줌과 동시에 M-estimator를 이용해서 truncated squared-error loss를 적용해 매니폴드를 polynomial 최적화 문제로 변환한다. 이는 전체 데이터에서 아웃라이어가 50% 이상이 넘을 때도 잘 동작하며, 효율적이게 동작하는 dual problem의 해를 구하는 방식을 채택함으로써 적당한 시간 내에 연산을 끝내는 방식을 제안한다.</p>
+<p> </p>
+<hr>
+<h1 id="그래서-앞으로-무엇이-더-연구되어야하는가"><a href="#그래서-앞으로-무엇이-더-연구되어야하는가" class="headerlink" title="그래서 앞으로 무엇이 더 연구되어야하는가?"></a>그래서 앞으로 무엇이 더 연구되어야하는가?</h1><ol>
+<li>Semidefinite programming을 효율적으로 푸는 방법이 필요하다. 엄청나게 많은 데이터를 모아두고 엄청나게 큰 문제를 푸는 방식이 아닌, 실시간으로 SLAM을 돌릴면서 풀 수 있도록 최적화된 incremental semidefinite optimization 기법이 만들어져서 iSAM이나 GTSAM 같은 라이브러리에 포함되면 좋을 것 같다.</li>
+<li>Certifiable correct perception 모델의 초창기를 보게 되었는데, 이걸 실시간으로 수행하고 검증할 수 있으면 좋을 것 같다. 왜냐하면, 100% correct한 정보만을 모아서 SLAM을 돌린다면 outlier rejection 과정을 전부 제거할 수 있기 때문이다. 100% 정확한 prior들만 가지고 연산을 한다? 벌써 심장이 뛴다.</li>
+<li>단순히 포인트 클라우드가 아닌, 다른 형태의 맵을 사용해보면 좋을 것 같다. 포인트 클라우드에서 각각의 3D landmark들은 서로 관계가 없고, 이 때문에 서로간의 conditional probability가 전혀 없다. 언제든 랜드마크가 사라져도 할말이 없다는 것이다. 하지만 실제 환경을 보면, 동일 물체에서 나타난 포인트들은 서로 연관이 있을 확률이 굉장히 높다. 예를 들어, 하나의 line에서는 2개의 point가 나타날 것이 아닌가? line이 존재하는 한 다른 point는 절대 사라질 수 없다. 포인트를 넘어서는 representation, 예를 들어 line, plane… semantics 같은 정보를 쓸 수 있다면 더욱 안정적인 매니폴드를 구축할 수 있을 것이다.</li>
+</ol>
+<p>그런 의미에서 다음 글에서는 Semantic 정보에 대해 이야기해본다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Certified-algorithms/" rel="tag"># Certified algorithms</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230214-sensor-calibration/" rel="prev" title="자율주행 차량을 위한 센서 캘리브레이션 기법">
+                  <i class="fa fa-chevron-left"></i> 자율주행 차량을 위한 센서 캘리브레이션 기법
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20230215-rosen-2021/" rel="next" title="Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
+                  Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

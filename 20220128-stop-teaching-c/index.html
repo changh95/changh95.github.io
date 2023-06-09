@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="C++를 공부할 때 제발 C처럼 공부하지 않기를!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CppCon 2015 - &quot;Stop Teaching C&quot; (Kate Gregory)">
+<meta property="og:url" content="https://changh95.github.io/20220128-stop-teaching-c/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="C++를 공부할 때 제발 C처럼 공부하지 않기를!">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-27T23:27:00.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.323Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="CppCon">
+<meta property="article:tag" content="Kate Gregory">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220128-stop-teaching-c/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>CppCon 2015 - "Stop Teaching C" (Kate Gregory) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0%EC%97%90-%EC%95%9E%EC%84%9C"><span class="nav-number">1.</span> <span class="nav-text">시작하기에 앞서</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-gt-C-%EA%B3%B5%EB%B6%80-%EB%B0%A9%EB%B2%95%EC%9D%B4-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%AC%B8%EC%A0%9C"><span class="nav-number">2.</span> <span class="nav-text">C-&gt;C++ 공부 방법이 만드는 문제</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%EC%BD%94%EC%8A%A4-Day-1%EC%97%90-%EA%B0%80%EB%A5%B4%EC%B3%90%EC%84%9C%EB%8A%94-%EC%95%88%EB%90%A0-%EA%B2%83%EB%93%A4"><span class="nav-number">3.</span> <span class="nav-text">C++ 코스 Day 1에 가르쳐서는 안될 것들</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#char-string"><span class="nav-number">3.1.</span> <span class="nav-text">char* string</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%ED%95%B4%EA%B2%B0%EC%B1%85"><span class="nav-number">3.1.1.</span> <span class="nav-text">해결책</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printf"><span class="nav-number">3.2.</span> <span class="nav-text">printf</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%ED%95%B4%EA%B2%B0%EC%B1%85-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">해결책</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arrays"><span class="nav-number">3.3.</span> <span class="nav-text">[] arrays</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%ED%95%B4%EA%B2%B0%EC%B1%85-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">해결책</span></a></li></ol></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220128-stop-teaching-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CppCon 2015 - "Stop Teaching C" (Kate Gregory)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-28 08:27:00" itemprop="dateCreated datePublished" datetime="2022-01-28T08:27:00+09:00">2022-01-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="시작하기에-앞서"><a href="#시작하기에-앞서" class="headerlink" title="시작하기에 앞서"></a>시작하기에 앞서</h2><p>“Stop Teaching C” 토크는 C++ 컨퍼런스인 CppCon에서 Kate Gregory가 발표한 토크의 제목입니다.</p>
+<p>C 언어를 쓰지 말라는 의미가 아니라, <strong>C++을 가르치는데 C처럼 가르치지 말라</strong>는 의미입니다.</p>
+<p>C 언어는 좋은 언어입니다. 오해가 없길 바랍니다 ㅎㅎ,,</p>
+<p> </p>
+<hr>
+<h2 id="C-gt-C-공부-방법이-만드는-문제"><a href="#C-gt-C-공부-방법이-만드는-문제" class="headerlink" title="C->C++ 공부 방법이 만드는 문제"></a>C-&gt;C++ 공부 방법이 만드는 문제</h2><p>현재 많은 C++ 커리큘럼들이 C를 먼저 공부한 후 C++을 공부하는 방향을 지향합니다.</p>
+<p>이는 두 언어가 상당히 비슷해 C를 아는 사람에게 C++을 가르치기 쉽기 때문입니다.</p>
+<p>상당수의 현업 C++ 유저들이 C++이 생겨나기 전 C를 먼저 사용하다가 넘어온 경우가 많은데, 본인들이 겪은 공부 과정을 전수하기 위해 이 방법을 사용하기도 합니다.</p>
+<p>하지만 이 방법을 채택하면 제대로 된 C++를 공부하는데에 더 오랜 시간이 걸리게 됩니다.</p>
+<p> </p>
+<p>C와 C++에는 극명한 차이가 있습니다.</p>
+<p>C에는 RAII, type-safety, template, lambda, exceptions, iterator와 같은 기능이 없습니다.</p>
+<p>C로는 Object-oriented design을 공부할 수 없습니다.</p>
+<p>C를 먼저 배운 후 C++을 공부하게 되면, <strong>이미 익숙해진 C스타일을 버리고 C++을 새롭게 공부</strong>해야합니다.</p>
+<p>그럴바에는 <strong>Day 1 부터 C++ 스타일을 공부하는게 더 효율적</strong>일 겁니다.</p>
+<p> </p>
+<hr>
+<h2 id="C-코스-Day-1에-가르쳐서는-안될-것들"><a href="#C-코스-Day-1에-가르쳐서는-안될-것들" class="headerlink" title="C++ 코스 Day 1에 가르쳐서는 안될 것들"></a>C++ 코스 Day 1에 가르쳐서는 안될 것들</h2><p>아래에 있는 내용들은 ‘C++에서 쓰면 안되는 것들’이 아닙니다.</p>
+<p>C++을 공부하는데에 Day 1에 가르치면, 공부하는 사람 입장에서 굉장히 헷갈리게 되는 것들입니다.</p>
+<p>대학교에서 C++ 코스를 듣고 ‘와 에반데- C++은 내 길이 아닌가보다’ 하고 생각하게 만드는 것들입니다.</p>
+<h3 id="char-string"><a href="#char-string" class="headerlink" title="char* string"></a>char* string</h3><p><code>char*</code>로 string을 다루기 위해서는 pointer를 이해해야합니다.</p>
+<p>기본적인 Hello world까지야 <code>printf()</code>와 <code>sscanf()</code>로 어떻게든 됩니다.</p>
+<p>하지만 조금만 더 깊게 들어가 string을 다루기 위해서는 1. char array에서 pointer를 이동하는 방법, 2. off-by-one error 이해, 3. null terminator의 대한 개념까지 이해해야합니다.</p>
+<p>그 이후에 구현을 위해 여러가지 C에서 제공하는 string 함수들을 외워야합니다 (e.g. <code>strcmp()</code>).</p>
+<p>5분만 들어도 **’와 쓰읍 C++은 어렵구나’**라고 생각하게 만드는 주범 입니다.</p>
+<h4 id="해결책"><a href="#해결책" class="headerlink" title="해결책"></a>해결책</h4><p>C++ 방식으로 처음부터 가르치면 <code>char*</code> 대신에 <code>&lt;string&gt;</code>을 사용할 수 있습니다.</p>
+<p><code>&lt;string&gt;</code>은 <code>char*</code>에 비해 이해하기 훨씬 쉬우며, Python이나 javascript와 같이 string이 built-in 기능으로 포함되어있는 다른 프로그래밍 언어를 겪은 사람들은 string을 곧바로 이해할 수 있습니다.</p>
+<p>1980~년대에 공부하신 분들은 char*로 배우셨을 텐데, 이는 그 당시에 <code>&lt;string&gt;</code>이라는 기능 자체가 최신 기능처럼 느껴졌을 것 이기 때문입니다. (그리고 2021년 현대에 string은 그냥 어디에든 있는 기본 기능입니다)</p>
+<p><code>&lt;string&gt;</code>을 사용하면서 C++의 강점인 operator overloading과 strong type을 소개할 수도 있습니다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> name;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="built_in">string</span> greeting = <span class="string">"Hello, "</span> + name;</span><br><span class="line"><span class="keyword">if</span> (name == <span class="string">"Kate"</span>)</span><br><span class="line">    greeting += <span class="string">", I know you!"</span>;</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><p>변수의 값을 확인하기 위해 <code>printf()</code>를 가르칩니다.</p>
+<p><code>printf()</code>를 사용하기 위해서는 format specifier를 다 외워야합니다.</p>
+<p>그리고 많은 경우 초보자들은 format specifier로 인해 에러를 경험합니다. (e.g. <code>%c</code> vs <code>%s</code>)</p>
+<p>오전 10시 반 Day1 C++ 클래스를 들으면서, 초보자들은 벌써 복잡한 에러메세지를 마주하며 본인이 짠 간단한 프로그램의 변수 값도 확인하지 못하게 됩니다.</p>
+<h4 id="해결책-1"><a href="#해결책-1" class="headerlink" title="해결책"></a>해결책</h4><p>Debugger를 써서 코드 한줄한줄 넘어갈 때 변수 값이 어떻게 바뀌는지 보여줍시다.</p>
+<p>실제로 출력도 해야하는 경우에는 <code>cout</code>, <code>cin</code>, <code>cerr</code>로 빠르게 결과를 보여줍시다.</p>
+<p>stream 방식을 사용할 경우 속도가 좀 느려질 수 있다는 걸 언급만 하고 넘어가도 괜찮습니다.</p>
+<p>Day1 이니까요.</p>
+<p> </p>
+<h3 id="arrays"><a href="#arrays" class="headerlink" title="[] arrays"></a>[] arrays</h3><p><code>char*</code>와 비슷하게, 초보자에게 array의 기본 기능을 가르치기도 전 부터 포인터 개념을 요구합니다.</p>
+<p>기본적으로 address와 reference의 개념을 익혀야하고, 그 후 bounds checking, off-by-one 과 같은 에러에 부닥치며, array를 익히기도 전에 여러가지 개념을 헷갈리기 시작합니다.</p>
+<p>심지어 대부분의 [] array를 사용한 예제는 더 쉽게 적을 수 있는 방식이 있음에도 raw for loop 내부에 알고리즘을 직접 구현하는 방식을 씁니다.</p>
+<p>예를 들어, “이 array 안에 3이 몇개가 있을까요?”라는 문제를 푸는 코드를 작성할 때, 쉽게 하려면 range-based for loop를 써서 가독성을 높이거나, 또는 <code>std::count</code>를 쓰면 됩니다. raw for-loop에서 i 값 하나하나 세면서 하지 말구요.</p>
+<h4 id="해결책-2"><a href="#해결책-2" class="headerlink" title="해결책"></a>해결책</h4><p><code>std::vector</code>를 쓰면 됩니다.</p>
+<p>초심자에게는 <code>std::vector</code>로 거의 모든 케이스를 커버할 수 있습니다.</p>
+<p>기본기를 익히고나서, 성능이 중요하게 될 때 STL에 성능을 개선할 수 있는 다른 형태의 자료구조들이 존재한다고 알려주기만 해도 충분합니다.</p>
+<p>하지만 처음부터 iterator를 알려주는건 추천하지 않습니다.</p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/YnWhqhNdYyk" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220110-misra-c-c-17/" rel="bookmark">CppCon 2021 - Misra Parallelism Safety-critical Guidelines for C++11, 17, Then C++20,</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220221-tdd/" rel="bookmark">Test-Driven C++ (CppCon 2020 - Phil Nash)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/CppCon/" rel="tag"># CppCon</a>
+              <a href="/tags/Kate-Gregory/" rel="tag"># Kate Gregory</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220128-senior-dev-jobsearch/" rel="prev" title="Senior 엔지니어의 이직 방법">
+                  <i class="fa fa-chevron-left"></i> Senior 엔지니어의 이직 방법
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220128-homebrew-install/" rel="next" title="MacOS에 Rosetta & Homebrew 설치">
+                  MacOS에 Rosetta & Homebrew 설치 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

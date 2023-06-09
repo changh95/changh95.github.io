@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="+ &#96;내 컴퓨터에서는 잘 되는데?&#96; 퇴치법">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLAMOps를 위한 첫걸음 - Docker + CI">
+<meta property="og:url" content="https://changh95.github.io/20210808-docker-for-slam/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="+ &#96;내 컴퓨터에서는 잘 되는데?&#96; 퇴치법">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/ddocker.jpg">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/bug.jpg">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/hello-docker.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/clean_ubuntu.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/docker_images.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/docker_ps_a.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/docker_ps_a_2.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/docker_rmi.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/docker_run_name.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/docker_attach.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/dockerfile_build.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/building.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/ga.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/status_check.png">
+<meta property="og:image" content="https://changh95.github.io/20210808-docker-for-slam/ga_2.png">
+<meta property="article:published_time" content="2021-08-08T05:48:45.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.975Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210808-docker-for-slam/ddocker.jpg">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210808-docker-for-slam/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>SLAMOps를 위한 첫걸음 - Docker + CI | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Docker"><span class="nav-number">1.</span> <span class="nav-text">Why Docker?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SLAM%EB%A7%8C-%ED%95%B4%EB%8F%84-%ED%9E%98%EB%93%A4%EC%96%B4%EC%A3%BD%EA%B2%A0%EB%8A%94%EB%8D%B0-Docker%EA%B9%8C%EC%A7%80-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98%E2%80%A6"><span class="nav-number">2.</span> <span class="nav-text">SLAM만 해도 힘들어죽겠는데 Docker까지 해야하나…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95"><span class="nav-number">3.</span> <span class="nav-text">Docker 설치 방법</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clean-Ubuntu-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95"><span class="nav-number">4.</span> <span class="nav-text">Clean Ubuntu 설치 방법</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-Container-%EC%82%AC%EC%9A%A9%EB%B2%95"><span class="nav-number">5.</span> <span class="nav-text">Image &#x2F; Container 사용법</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Image-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0"><span class="nav-number">5.1.</span> <span class="nav-text">Image 확인하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container-%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0"><span class="nav-number">5.2.</span> <span class="nav-text">Container 확인하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container-%EC%A7%80%EC%9A%B0%EA%B8%B0"><span class="nav-number">5.3.</span> <span class="nav-text">Container 지우기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Image-%EC%A7%80%EC%9A%B0%EA%B8%B0"><span class="nav-number">5.4.</span> <span class="nav-text">Image 지우기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0-CLI"><span class="nav-number">5.5.</span> <span class="nav-text">Container 생성하기 (CLI)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Clean-Ubuntu-20-04-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0-i-e-Container-%EC%8B%A4%ED%96%89%ED%95%98%EA%B8%B0"><span class="nav-number">5.6.</span> <span class="nav-text">Clean Ubuntu 20.04 실행하기 (i.e. Container 실행하기)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container-%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0-Dockerfile"><span class="nav-number">5.7.</span> <span class="nav-text">Container 생성하기 (Dockerfile)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B3%A0%EC%88%98%EC%B2%98%EB%9F%BC-CI-Docker-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">6.</span> <span class="nav-text">고수처럼 CI + Docker 사용하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-Actions-%ED%99%9C%EC%84%B1%ED%99%94%ED%95%98%EA%B8%B0"><span class="nav-number">6.1.</span> <span class="nav-text">GitHub Actions 활성화하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B0%9C%EC%9D%B8%EC%9E%A5%EB%B9%84%EB%A1%9C-%EB%B9%8C%EB%93%9C%ED%95%98%EA%B8%B0-Self-hosted-runners"><span class="nav-number">6.2.</span> <span class="nav-text">개인장비로 빌드하기 (Self-hosted runners)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MS-Azure-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%84%9C%EB%B2%84%EB%A1%9C-%EB%B9%8C%EB%93%9C%ED%95%98%EA%B8%B0"><span class="nav-number">6.3.</span> <span class="nav-text">MS Azure 클라우드 서버로 빌드하기</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210808-docker-for-slam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SLAMOps를 위한 첫걸음 - Docker + CI
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-08 14:48:45" itemprop="dateCreated datePublished" datetime="2021-08-08T14:48:45+09:00">2021-08-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-1-Software-Engineering/" itemprop="url" rel="index"><span itemprop="name">2.1 Software Engineering</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>서문은 건너뛰고 바로 Docker 설치하실 분은 <code>3. Docker 설치방법</code>으로 넘어가세요!</p>
+</blockquote>
+<h2 id="Why-Docker"><a href="#Why-Docker" class="headerlink" title="Why Docker?"></a>Why Docker?</h2><p><code>???: "내 컴퓨터에서는 잘 되는데?"</code></p>
+<p>이 말에는 다음과 같은 뜻이 숨겨져있습니다.</p>
+<ul>
+<li>“니 컴에서 안되는건 내 문제가 아닙니다”</li>
+<li>“니 컴 문제는 니가 해결하십시오”</li>
+</ul>
+<img src="/20210808-docker-for-slam/ddocker.jpg" class="" title="ddocker">
+
+<p> </p>
+<p>보통 <strong>어떤 팀원이 새로운 코드를 팀 전체가 사용하는 코드에 푸쉬해놓고, 다른 팀원의 컴퓨터에서 빌드가 터질 때 변명처럼 나오는 말</strong>입니다.</p>
+<p>정말 무책임하지 않나요?</p>
+<p>다른 팀원은 지금 이 코드 업데이트 때문에 빌드도 안되서 일을 못하는데, 이 버그를 만든 장본인은 본인의 컴퓨터에는 문제가 없으므로 계속 일을 하겠다는거 말이죠.</p>
+<p><strong>본인이 만든 버그는 본인이 책임지는게 맞는겁니다</strong>.</p>
+<p> </p>
+<p>근데 사실 왠만큼 인성이 비뚤어진 사람이거나, 아니면 우리 팀의 업무를 터트리려는 산업스파이가 아닌 이상, 본인도 어느정도 죄책감을 느낄겁니다.</p>
+<p>다만 이 버그를 풀기 위해서는 <strong>다양한 컴퓨터 환경에서 복잡한 디펜던시 이슈를 풀어야하는데, 이 작업을 뚝딱 해결할 자신이 나지 않기 때문에 변명처럼 말하는거죠</strong>.</p>
+<p> </p>
+<p>이러한 문제를 단번에 해결해주는 것이 바로 <strong>Docker</strong>입니다.</p>
+<p>Docker는 <strong>모든 팀원이 동일한 환경에서 빌드 &amp; 테스트</strong> 할 수 있게 해줍니다.</p>
+<p>킹갓Docker를 사용하는 순간부터, 누가 다시 ‘내 컴퓨터에서는 잘 되는데?’ 라고 하면 다음과 같이 이야기해주시면 되겠습니다.</p>
+<blockquote>
+<p>A: “내 컴퓨터에서는 잘 되는데???”<br>B: “<strong>아! 그러면 너님의 컴퓨터를 제품으로 팔겠습니다!</strong>“<br>A: “?!”</p>
+</blockquote>
+<p> </p>
+<hr>
+<h2 id="SLAM만-해도-힘들어죽겠는데-Docker까지-해야하나…"><a href="#SLAM만-해도-힘들어죽겠는데-Docker까지-해야하나…" class="headerlink" title="SLAM만 해도 힘들어죽겠는데 Docker까지 해야하나…"></a>SLAM만 해도 힘들어죽겠는데 Docker까지 해야하나…</h2><p>로컬 환경에서 여러 SLAM 프로젝트를 진행하다보면 다양한 라이브러리들이 시스템에 설치되게 됩니다.</p>
+<p>SLAM에서 많이 사용되는 OpenCV, PCL, Open3D 등등이 시스템에 설치되어있다면, 많은 오픈소스 프로젝트는 git clone으로 끌어와 바로 빌드할 수 있습니다.</p>
+<p> </p>
+<p>하지만 이러한 환경을 가지고 있을 때 다음과 같은 문제가 생깁니다.</p>
+<ol>
+<li>새로운 프로젝트를 시작할 때<ul>
+<li>새 프로젝트의 디펜던시가 이미 설치되어있을 수 있다면?<ul>
+<li>디펜던시 자동 설치 스크립트를 작성할 때, <strong>사전에 설치된 라이브러리에 대해 테스팅을 하지 않는 실수를 하기 쉬움</strong>.</li>
+</ul>
+</li>
+<li>새 프로젝트의 디펜던시가 ‘다른 버전’으로 설치되어있을 수 있다면?<ul>
+<li><strong>다른 버전을 사용하면서 API 충돌</strong>이 날 수 있음.</li>
+<li>다른 버전을 사용하면서 API가 충돌이 나지 않는 경우는… 보통 성능개선 업데이트만 있는 경우인데, <strong>아무도 잘못된 버전을 사용한다는 것을 모른 채 계속 구린 성능의 버전을 쓸 수도 있음</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>옛날 프로젝트를 다시 볼 때<ul>
+<li>OpenCV3 기반 프로젝트를 잠시 중단하고… OpenCV4 기반 프로젝트를 하다가… 다시 이 프로젝트로 돌아온다면?<ul>
+<li>find_package(OpenCV REQUIRED)를 하면 <strong>어떤 버전의 라이브러리를 잡을지는 아무도 모름</strong></li>
+<li>(확률적인 버그 잡이는 최악입니다…)</li>
+<li>(진짜 마음만 같아서는 프로젝트마다 컴퓨터 한대씩 쓰고 싶다는 생각이 듭니다…)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p> </p>
+<p>위와 같은 문제를 해결하는건 정말 귀찮은 작업입니다.</p>
+<ol>
+<li>현재 시스템에 빌드되어있는 라이브러리들을 전부 정리해야합니다.<ul>
+<li>설치된 라이브러리 이름, 버전명, 빌드 옵션, 빌드 컴파일러, 설치 경로…</li>
+</ul>
+</li>
+<li>현재 시스템에 apt로 설치된 라이브러리들도 전부 정리해야합니다.<ul>
+<li>컴파일러? 시스템 유틸?</li>
+</ul>
+</li>
+<li>내가 진행한 프로젝트들마다 ‘각각’ 어떤 라이브러리를 어떤 옵션으로 사용하고 어떤 경로를 지정했는지 알아야합니다.</li>
+<li>모든 프로젝트들을 클린 리눅스에서 테스트 해봐야합니다.</li>
+<li>이제 이 환경을 모든 팀원들 컴퓨터에 그대로 깔아줘야합니다.</li>
+</ol>
+<p>1/2/3을 풀기 위해 이전에 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1L2NwcC1jdi1wcm9qZWN0LXRlbXBsYXRl">시스템 설치 디펜던시를 최소화하는 프로젝트(cpp-cv-project-template)<i class="fa fa-external-link-alt"></i></span>를 진행한 적이 있습니다.</p>
+<p>하지만 이 방법도 <strong>설치해야하는 모든 시스템 라이브러리를 리스팅 하는 노가다</strong>를 엄청 많이 했어요.</p>
+<p>디버깅을 하면서도 <strong>‘이게 맞나…? 다 한건가…?’ 싶다가도 버그가 터지면 ‘내가 그럼 그렇지’를 외치기를 몇번씩 반복</strong>했던 것 같습니다.</p>
+<img src="/20210808-docker-for-slam/bug.jpg" class="" title="bug">
+
+<p> </p>
+<p><strong>근데 Docker를 쓰고 엄청 쉬워졌습니다.</strong></p>
+<ol>
+<li>디펜던시 빌드<ul>
+<li>Docker로 Clean Ubuntu 20.04 이미지 생성</li>
+<li>디버깅을 할 때마다 git에서 소스코드만 끌어와서 빌드<ul>
+<li>버그가 나타나면 로그 남김</li>
+</ul>
+</li>
+<li>코드를 수정하고 다시 디버깅을 시작하면, 5초만에 Clean Ubuntu 20.04가 다시 만들어짐.</li>
+<li>다시 빌드를 시작</li>
+<li>몇번 반복 후 완벽한 디펜던시 스크립트 작성 완료.</li>
+</ul>
+</li>
+<li>SLAM 프로그램 빌드<ul>
+<li>OpenCV랑 Ceres를 매번 빌드하기에는 너무 오래걸림 (30분 ~ 1시간)</li>
+<li>그러니 Ubuntu 20.04에 OpenCV랑 Ceres를 미리 빌드해놓은 이미지를 생성</li>
+<li>git에서 소스코드만 떙겨와서 빌드<ul>
+<li><strong>1분만에 Clean Ubuntu 20.04에 OpenCV + Ceres + 나의 SLAM 프로그램이 빌드</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>진짜 ‘<strong>아 왜 Docker를 지금 알게된거지? 인생 낭비했네</strong>‘ 생각이 들 정도였습니다.</p>
+<p> </p>
+<hr>
+<h2 id="Docker-설치-방법"><a href="#Docker-설치-방법" class="headerlink" title="Docker 설치 방법"></a>Docker 설치 방법</h2><p>바로 Docker를 설치해보겠습니다.</p>
+<ol>
+<li>이전에 Docker를 설치하려고 한 경험이 있다면, Docker 버전 충돌을 피하기 위해 예전 Docker를 삭제합니다. (이전에 설치 경험이 없으면 이 단계는 건너뜁시다)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>apt에 Docker repository를 추가해줍니다. 이 과정을 거치면 apt install docker~~~ 로 쉽게 받을 수 있습니다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br><span class="line"></span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> \</span><br><span class="line"><span class="string">"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string"><span class="subst">$(lsb_release -cs)</span> stable"</span> | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Docker engine을 설치해줍니다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Docker의 Hello world를 실행해서 잘 설치되었는지 확인합니다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>다음과 같은 화면이 나오면 성공입니다.</p>
+<img src="/20210808-docker-for-slam/hello-docker.png" class="" title="hello-docker">
+
+<ol start="5">
+<li>(선택) Docker를 쓸 때는 항상 <code>sudo docker...</code>로 써야합니다. 매번 sudo 쳐주는것도 귀찮고, 아니면 CI 등 자동화 스크립트를 쓸 때 비밀번호 쳐주기 귀찮다면 sudo를 떼버립시다. 한번 로그아웃하고 다시 로그인해야지 적용됩니다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd docker</span><br><span class="line"></span><br><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br><span class="line"></span><br><span class="line">newgrp docker</span><br><span class="line"></span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<hr>
+<h2 id="Clean-Ubuntu-설치-방법"><a href="#Clean-Ubuntu-설치-방법" class="headerlink" title="Clean Ubuntu 설치 방법"></a>Clean Ubuntu 설치 방법</h2><p>엄청 간단합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -dit ubuntu:latest</span><br><span class="line"></span><br><span class="line">sudo docker images</span><br></pre></td></tr></table></figure>
+
+<img src="/20210808-docker-for-slam/clean_ubuntu.png" class="" title="clean_ubuntu">
+
+<p> </p>
+<hr>
+<h2 id="Image-Container-사용법"><a href="#Image-Container-사용법" class="headerlink" title="Image / Container 사용법"></a>Image / Container 사용법</h2><p>기본적인 Docker 사용을 위해서는 image와 container의 개념을 이해해야합니다.</p>
+<ul>
+<li>Image<ul>
+<li><strong>붕어빵을 찍어내는 빵판</strong>과 같습니다.</li>
+<li>어떤 환경을 만들어낼지에 대한 instruction이 들어가있다고 보면 됩니다.</li>
+</ul>
+</li>
+<li>Container<ul>
+<li><strong>빵판에 찍혀나온 빵들</strong>과 같습니다.</li>
+<li>Image에 명시된 instruction을 기반으로 만들어진 환경입니다.</li>
+<li>하나의 image 기반으로 여러개의 container를 만들 수 있습니다.<ul>
+<li>예를 들어, clean ubuntu 20.04의 이미지로, 100개의 clean ubuntu 20.04 환경을 만들어 낼 수 있습니다. 각각 다른 라이브러리를 깔아서 실험을 할 수 있겠죠.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Image-확인하기"><a href="#Image-확인하기" class="headerlink" title="Image 확인하기"></a>Image 확인하기</h3><p>현재 내 Docker에 설정이 된 image들은 다음과 같은 커맨드로 확인할 수 있습니다</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker images</span><br></pre></td></tr></table></figure>
+
+<img src="/20210808-docker-for-slam/docker_images.png" class="" title="docker_images">
+
+<h3 id="Container-확인하기"><a href="#Container-확인하기" class="headerlink" title="Container 확인하기"></a>Container 확인하기</h3><p>현재 내 Docker에서 만든 container들은 다음과 같은 커맨드로 확인할 수 있습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps -a</span><br></pre></td></tr></table></figure>
+
+<img src="/20210808-docker-for-slam/docker_ps_a.png" class="" title="docker_ps_a">
+
+<h3 id="Container-지우기"><a href="#Container-지우기" class="headerlink" title="Container 지우기"></a>Container 지우기</h3><p>우리가 앞으로 딱히 hello-world container를 더 쓸 것 같지 않습니다. 지워주도록 하겠습니다. 지울때는 container ID로 지워주거나, names로 지워주면 됩니다. <code>sad_faraday</code>나 <code>clever_meitner</code> 같은 것들이 name인데, 이는 우리가 container 생성 시 이름을 지어주지 않았기 때문에 docker가 임의로 지어준 것입니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NAMES 로 지우기</span></span><br><span class="line">sudo docker rm sad_farady</span><br><span class="line">sudo docker rm clever_meitner</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONTAINER ID로 지우기</span></span><br><span class="line"></span><br><span class="line">sudo docker rm ceb8a255cab8</span><br><span class="line">sudo docker rm 425b90a1a354</span><br></pre></td></tr></table></figure>
+
+<p>그러면 container가 지워진 걸 볼 수 있습니다</p>
+<img src="/20210808-docker-for-slam/docker_ps_a_2.png" class="" title="docker_ps_a2">
+
+<h3 id="Image-지우기"><a href="#Image-지우기" class="headerlink" title="Image 지우기"></a>Image 지우기</h3><p>hello-world 이미지도 지워보겠습니다.</p>
+<p>Image를 지울때는 remove-image를 줄인 <code>rmi</code>를 사용합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker rmi d1165f221234</span><br></pre></td></tr></table></figure>
+
+<img src="/20210808-docker-for-slam/docker_rmi.png" class="" title="docker_rmi">
+
+<h3 id="Container-생성하기-CLI"><a href="#Container-생성하기-CLI" class="headerlink" title="Container 생성하기 (CLI)"></a>Container 생성하기 (CLI)</h3><p>이제 image로부터 Container를 생성해보겠습니다.</p>
+<p>가장 쉬운 방법은 아까의 <code>Clean Ubuntu 설치 방법</code> 섹션의 run 커맨드입니다. 여기에 <code>--name</code> flag를 주어서 container에 이름을 부여해줄 수 있습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --name clean_ubuntu -dit ubuntu:latest</span><br></pre></td></tr></table></figure>
+
+<img src="/20210808-docker-for-slam/docker_run_name.png" class="" title="docker_run_name">
+
+<h3 id="Clean-Ubuntu-20-04-실행하기-i-e-Container-실행하기"><a href="#Clean-Ubuntu-20-04-실행하기-i-e-Container-실행하기" class="headerlink" title="Clean Ubuntu 20.04 실행하기 (i.e. Container 실행하기)"></a>Clean Ubuntu 20.04 실행하기 (i.e. Container 실행하기)</h3><p><code>sudo docker ps -a</code>로 container가 생성된 것을 확인할 수 있습니다. recursive_wing과 같이 Docker에서 임의로 정한 구린 이름 말고, 내가 직접 지정한 좋은 이름으로 생성되었습니다.</p>
+<p>이제 생성된 container를 실행해서 실제로 Clean Ubuntu 환경으로 들어가보겠습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NAME으로 접근하기</span></span><br><span class="line">sudo docker attach clean_ubuntu</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONTAINER ID로 접근하기</span></span><br><span class="line">sudo docker attach 3cff7e522c6f</span><br></pre></td></tr></table></figure>
+
+<p>아래 사진과 같이 Clean Ubuntu 20.04 환경에 root 권한으로 <code>/</code>에 들어왔습니다. <code>exit</code>을 사용해서 container를 빠져나올 수 있습니다.</p>
+<img src="/20210808-docker-for-slam/docker_attach.png" class="" title="docker_attach">
+
+<p>이제 여기서 <code>git clone ...</code>으로 소스코드를 땡겨오고 빌드를 하고 여러가지 실험을 할 수 있습니다. 실험이 끝나면 container를 삭제해주면 됩니다.</p>
+<h3 id="Container-생성하기-Dockerfile"><a href="#Container-생성하기-Dockerfile" class="headerlink" title="Container 생성하기 (Dockerfile)"></a>Container 생성하기 (Dockerfile)</h3><p>근데 Clean Ubuntu이다보니 너무 clean 합니다.</p>
+<p>git, cmake, build-essential, gcc, wget, curl 뭐 다 새로 깔아줘야하는데, <strong>실험을 위해 container를 만들 때 마다 매번 커맨드를 쳐주기 너무 귀찮습니다</strong>.</p>
+<p>걱정하지마세요.</p>
+<p><strong>이 반복적인 작업을 자동화하는 방법, Dockerfile</strong>이 있습니다.</p>
+<p>우선 container에서 빠져나온 후, 원하는 위치에 Dockerfile을 만들고 (i.e. <code>touch Dockerfile</code>) 저장해봅시다.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu:latest는 20.04를 의미합니다.</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:latest </span><br><span class="line"></span><br><span class="line"><span class="comment"># 작성자 이름입니다</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> changh95</span><br><span class="line"></span><br><span class="line"><span class="comment"># apt로 패키지 받을 때 interative하게 사용하는 기능들을 끕니다. Docker에서 로그를 넘길 때 문제가 생길 수 있으므로 이 옵션은 필수입니다!</span></span><br><span class="line"><span class="keyword">ARG</span> DEBIAN_FRONTEND=noninteractive</span><br><span class="line"></span><br><span class="line"><span class="comment"># apt-get update와 기본적인 패키지들을 깔아줍니다.</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get -y update &amp;&amp;\</span></span><br><span class="line"><span class="bash">apt-get -y install build-essential cmake git sudo wget &amp;&amp;\</span></span><br><span class="line"><span class="bash">apt-get -y install python3 python3-pip &amp;&amp;\</span></span><br><span class="line"><span class="bash">apt-get autoclean</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 원하는 프로젝트의 소스코드를 clone해와서 빌드 스크립트를 실행합니다</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir cv-project &amp;&amp;\</span></span><br><span class="line"><span class="bash"><span class="built_in">cd</span> cv-project &amp;&amp;\</span></span><br><span class="line"><span class="bash">git <span class="built_in">clone</span> https://github.com/changh95/cpp-cv-project-template.git . &amp;&amp;\</span></span><br><span class="line"><span class="bash">git checkout <span class="string">"develop"</span> &amp;&amp;\</span></span><br><span class="line"><span class="bash">pip3 install pyyaml &amp;&amp;\</span></span><br><span class="line"><span class="bash">./setup.py</span></span><br></pre></td></tr></table></figure>
+
+<p>그리고 <code>sudo docker build ...</code> 커맨드를 Dockerfile에 명시된 instruction을 따라 이미지를 생성합니다. 여러가지 flag도 사용하는데, 함께 설명합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build --no-cache --force-rm -f Dockerfile -t cvproject:base .</span><br><span class="line"></span><br><span class="line"><span class="comment"># --no-cache 는 이전 빌드에서 생성된 캐시를 사용하지 않겠다는겁니다. 생성시간을 줄이기 위해서 캐시를 사용하는 경우도 있는데, 처음 사용하는 사람은 실수하기 쉬우니 일단 no cache 옵션을 씁시다.</span></span><br><span class="line"><span class="comment"># --force-rm 은 빌드하다가 터지면 이미지/컨테이너를 지워줍니다.</span></span><br><span class="line"><span class="comment"># -f 는 사용할 Dockerfile의 이름을 명시합니다</span></span><br><span class="line"><span class="comment"># -t 는 우리가 만드는 이미지의 이름 + 태그를 명시합니다</span></span><br><span class="line"><span class="comment"># . 는 Dockerfile의 경로를 명시합니다.</span></span><br></pre></td></tr></table></figure>
+
+<img src="/20210808-docker-for-slam/dockerfile_build.png" class="" title="docker_attach">
+
+<p> </p>
+<hr>
+<h2 id="고수처럼-CI-Docker-사용하기"><a href="#고수처럼-CI-Docker-사용하기" class="headerlink" title="고수처럼 CI + Docker 사용하기"></a>고수처럼 CI + Docker 사용하기</h2><p>우리는 이제 Docker의 기본적인 사용법을 알고있습니다.</p>
+<p>Docker 이미지를 만들거나 Dockerfile을 만들어서 팀원들에게 공유하고, 모두가 같은 환경에서 코드를 짤 수 있게 되었죠.</p>
+<p>하지만 아쉬운 점이라면… 로컬에서밖에 못쓴다는거죠.</p>
+<p>그에 비해, 팀원들과의 협업은 GitHub나 GitLab 같은 온라인 Git 서비스에서 이뤄지는 경우가 대부분입니다.</p>
+<p>GitHub에 Docker를 연결할 수 있는 방법이 있을까요?</p>
+<img src="/20210808-docker-for-slam/building.png" class="" title="Docker CI">
+
+<p> </p>
+<p>여기서부터는 **CI (Continuous Integration)**을 개발한다고 볼 수 있습니다.</p>
+<p>가장 간단한 CI 개념으로, <strong>Pull Request로 코드가 들어오면 자동으로 Docker build를 하고 성공/실패 결과를 표시</strong>할 수 있습니다.</p>
+<p>간단하게 <strong>GitHub Actions</strong>를 사용해봅시다.</p>
+<h3 id="GitHub-Actions-활성화하기"><a href="#GitHub-Actions-활성화하기" class="headerlink" title="GitHub Actions 활성화하기"></a>GitHub Actions 활성화하기</h3><p>GitHub 레포지토리에 들어가서, <code>Actions</code> 탭을 눌러 들어가면 아래와 같은 화면이 나옵니다.</p>
+<img src="/20210808-docker-for-slam/ga.png" class="" title="github actions">
+
+<p>‘set up a workflow yourself’를 누르면 <code>.github/workflows/main.yml</code>이라는 파일을 생성하며, 해당 파일이 가질 내용을 보여줍니다.</p>
+<p>일단 이 파일을 저장해줍니다.</p>
+<p>이제 우리는 1. <strong>MS Azure 클라우드 서버에서 빌드를 할지</strong>, 2. <strong>개인 장비에서 빌드를 할지 선택</strong>해야합니다.</p>
+<p> </p>
+<h3 id="개인장비로-빌드하기-Self-hosted-runners"><a href="#개인장비로-빌드하기-Self-hosted-runners" class="headerlink" title="개인장비로 빌드하기 (Self-hosted runners)"></a>개인장비로 빌드하기 (Self-hosted runners)</h3><p>Self-hosted runners 빌드 방법은 다음과 같은 경우에 좋습니다.</p>
+<ul>
+<li>많은 코어로 빌드를 빠르게 하고 싶을 때</li>
+<li>다수의 코어 / 높은 메모리 사용량을 요구할 때<ul>
+<li>e.g. SLAM 벤치마크…</li>
+</ul>
+</li>
+<li>GitHub Actions 제한시간으로 부족할 때<ul>
+<li>OpenCV + Ceres를 Debug/Release 모드로 빌드 할 때, GitHub Action의 무료제공 서버로는 제한시간 내 빌드할 수 없었습니다.</li>
+</ul>
+</li>
+</ul>
+<p>Self-hosted runner를 설정하는 방법은 이 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdpdGh1Yi5jb20vZW4vYWN0aW9ucy9ob3N0aW5nLXlvdXItb3duLXJ1bm5lcnMvYWRkaW5nLXNlbGYtaG9zdGVkLXJ1bm5lcnM=">링크<i class="fa fa-external-link-alt"></i></span>를 참조해주세요.</p>
+<p>파일의 내용을 다음과 같이 바꿔줍니다. (cpp-cv-project-template는 바꿔도 됩니다!)</p>
+<p>아래 스크립트는 main / development 브랜치에 push하거나 Pull request가 생기는 상황에서 GitHub Actions를 통해 Self-hosted runner에 Dockerfile 기반 빌드를 지시하는 커맨드입니다.</p>
+<p>우리가 보았던 커맨드는 왠만하면 다 들어가있습니다.</p>
+<p>추가로, Docker 빌드가 실패했을 경우 실패한 image / container를 삭제해주는 기능이 있습니다.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">CI</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">development</span></span><br><span class="line">  <span class="attr">pull_request:</span></span><br><span class="line">    <span class="attr">branches:</span> [<span class="string">development</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">self-hosted</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">Docker</span> <span class="string">image</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Build start==="</span></span><br><span class="line">         <span class="string">echo</span> <span class="string">${{</span> <span class="string">github.head_ref</span> <span class="string">}}</span></span><br><span class="line">        </span><br><span class="line">         <span class="string">cd</span> <span class="string">Dockerfiles</span></span><br><span class="line">         <span class="string">docker</span> <span class="string">build</span> <span class="string">--force-rm</span> <span class="string">--no-cache</span> <span class="string">-f</span> <span class="string">build.dockerfile</span> <span class="string">-t</span> <span class="string">"cpp-cv-project-template:base"</span> <span class="string">--build-arg</span> <span class="string">BRANCH=${{</span> <span class="string">github.head_ref</span> <span class="string">}}</span> <span class="string">.</span> </span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Build finished==="</span></span><br><span class="line">         </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Clean</span> <span class="string">up</span> <span class="string">Docker</span> <span class="string">image</span> <span class="string">if</span> <span class="string">build</span> <span class="string">fails</span></span><br><span class="line">        <span class="attr">if:</span> <span class="string">failure()</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Remove failed image start==="</span></span><br><span class="line">         <span class="string">docker</span> <span class="string">rmi</span> <span class="string">-f</span> <span class="string">$(docker</span> <span class="string">images</span> <span class="string">-f</span> <span class="string">"dangling=true"</span> <span class="string">-q)</span></span><br><span class="line">         <span class="string">docker</span> <span class="string">images</span> </span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Removal finished==="</span></span><br></pre></td></tr></table></figure>
+
+<p>레포지토리에서 branch protetion rule 까지 설정해주고 나면, <strong>빌드가 성공한 경우에만 merge가 가능하게 설정</strong>을 바꿀 수 있습니다.</p>
+<p>제가 좋아하는 설정은 주로 1. <strong>최소 N명 이상의 코드 리뷰에서 approve</strong>를 받아야함, 2. <strong>모든 status check를 통과</strong>해야함 (e.g. 빌드, 유닛테스트, 린터/포맷터, 벤치마크)입니다.</p>
+<p>아래는 가장 간단한 빌드 테스트에 대한 status check가 적용된 모습입니다.</p>
+<img src="/20210808-docker-for-slam/status_check.png" class="" title="Status check">
+
+<p>빌드가 진행되는 동안에는 다음과 같이 확인할 수 있습니다 (원래 빌드 진행 중 로그도 볼 수 있는데, 1시간동안 로그가 많이 쌓여서 로딩하는데 시간이 좀 걸리는 것 같습니다)</p>
+<img src="/20210808-docker-for-slam/ga_2.png" class="" title="asdf">
+
+<p> </p>
+<h3 id="MS-Azure-클라우드-서버로-빌드하기"><a href="#MS-Azure-클라우드-서버로-빌드하기" class="headerlink" title="MS Azure 클라우드 서버로 빌드하기"></a>MS Azure 클라우드 서버로 빌드하기</h3><p>MS Azure 클라우드의 경우 2코어 7GB 램의 옵션을 가지고 있는데, Public repository의 경우 제한시간동안 공짜로 사용할 수 있습니다.</p>
+<p>이 방법도 Self-hosted runner 방법과 크게 다르지 않으며, 대신 아래의 옵션들 중에 선택해서 넣으면 됩니다.</p>
+<ul>
+<li>Windows server: <code>windows-latest</code> (2019) 또는 <code>windows-2016</code></li>
+<li>Ubuntu: <code>ubuntu-latest</code> (20.04) 또는 <code>ubuntu-18.04</code></li>
+<li>Mac: <code>macos-11</code> (Big Sur) 또는 <code>macos-latest</code> (Catalina)</li>
+</ul>
+<p>근데 이 방법은 사실상 위의 환경들이 Docker로 만들어지는거라… Clean 환경이 필요한거라면 또 다시 Docker로 만들 필요는 굳이 없습니다.</p>
+<p>Pre-built Docker image를 쓰고싶은 거라면, <span class="exturl" data-url="aHR0cHM6Ly9odWIuZG9ja2VyLmNvbS8=">DockerHub<i class="fa fa-external-link-alt"></i></span>에 올려놓고, GitHub Actions에서 Docker image를 긁어온다음에 프로그램만 빌드해서 실행하는 것도 좋습니다.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line"><span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210326-tmux/" rel="bookmark">Linux tmux 설정 방법 (쉽게 쓰기)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210912-ros-tutorials-1/" rel="bookmark">(ROS 삽질기 - 0) Docker 환경에서 ROS 돌리기</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210728-2021-july-slam-news/" rel="prev" title="2021년 7월 SLAM 뉴스">
+                  <i class="fa fa-chevron-left"></i> 2021년 7월 SLAM 뉴스
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210816-tightly-loosely-coupled/" rel="next" title="Tightly-coupled vs Loosely-coupled 방식">
+                  Tightly-coupled vs Loosely-coupled 방식 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

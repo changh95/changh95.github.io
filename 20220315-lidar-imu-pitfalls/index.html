@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="LiDAR와 IMU를 사용할 때 주의해야하는 점">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IMU와 LiDAR를 사용할 때 주의해야하는 점 (번역)">
+<meta property="og:url" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="LiDAR와 IMU를 사용할 때 주의해야하는 점">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/1.gif">
+<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/2.png">
+<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/3.png">
+<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/4.png">
+<meta property="article:published_time" content="2022-03-15T04:10:31.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.447Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="IMU">
+<meta property="article:tag" content="LiDAR SLAM">
+<meta property="article:tag" content="LIO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/1.gif">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220315-lidar-imu-pitfalls/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>IMU와 LiDAR를 사용할 때 주의해야하는 점 (번역) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%9B%90-%EC%A0%80%EC%9E%90-Mateusz-Sadowski-%EB%B8%94%EB%A1%9C%EA%B7%B8"><span class="nav-number">1.</span> <span class="nav-text">원 저자 - Mateusz Sadowski 블로그</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IMUs"><span class="nav-number">2.</span> <span class="nav-text">IMUs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IMU-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%95%8C-%EA%B3%A0%EB%A0%A4%ED%95%B4%EC%95%BC%ED%95%A0-%EC%A0%90"><span class="nav-number">3.</span> <span class="nav-text">IMU 사용할 때 고려해야할 점</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9E%90%EA%B8%B0%EC%9E%A5-%EA%B0%84%EC%84%AD"><span class="nav-number">3.1.</span> <span class="nav-text">자기장 간섭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A7%84%EB%8F%99"><span class="nav-number">3.2.</span> <span class="nav-text">진동</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B6%95-%EB%B0%A9%ED%96%A5-%EC%A0%95%EC%9D%98"><span class="nav-number">3.3.</span> <span class="nav-text">축 방향 정의</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98"><span class="nav-number">3.4.</span> <span class="nav-text">캘리브레이션</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LiDARs"><span class="nav-number">4.</span> <span class="nav-text">LiDARs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LiDAR%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%95%8C-%EA%B3%A0%EB%A0%A4%ED%95%B4%EC%95%BC%ED%95%98%EB%8A%94-%EC%A0%90"><span class="nav-number">5.</span> <span class="nav-text">LiDAR를 사용할 때 고려해야하는 점</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%88%88-%ED%94%BC%EB%A1%9C"><span class="nav-number">5.1.</span> <span class="nav-text">눈 피로</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flip-effect"><span class="nav-number">5.2.</span> <span class="nav-text">Flip effect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%8B%9C%EC%95%BC%EA%B0%81"><span class="nav-number">5.3.</span> <span class="nav-text">시야각</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B5%9C%EB%8C%80%EA%B1%B0%EB%A6%AC-vs-%EC%99%B8%EB%B6%80%ED%99%98%EA%B2%BD"><span class="nav-number">5.4.</span> <span class="nav-text">최대거리 vs 외부환경</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220315-lidar-imu-pitfalls/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IMU와 LiDAR를 사용할 때 주의해야하는 점 (번역)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-15 13:10:31" itemprop="dateCreated datePublished" datetime="2022-03-15T13:10:31+09:00">2022-03-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="원-저자-Mateusz-Sadowski-블로그"><a href="#원-저자-Mateusz-Sadowski-블로그" class="headerlink" title="원 저자 - Mateusz Sadowski 블로그"></a>원 저자 - Mateusz Sadowski 블로그</h1><p>M. Sadowski는 SLAM toolbox 소프트웨어와 Weekly robotics 뉴스레터로 유명한 로보틱스 개발자다!</p>
+<p>그 분이 쓰신 글을 살포시 번역했다.</p>
+<p>출처: <span class="exturl" data-url="aHR0cHM6Ly9tc2Fkb3dza2kuZ2l0aHViLmlvL2Jhc2ljLXNlbnNvcnMtZm9yLW1vYmlsZS1yb2JvdHMv">https://msadowski.github.io/basic-sensors-for-mobile-robots/<i class="fa fa-external-link-alt"></i></span></p>
+<p> </p>
+<hr>
+<h1 id="IMUs"><a href="#IMUs" class="headerlink" title="IMUs"></a>IMUs</h1><p>Mobile Robot을 쓴다면 IMU를 쓸 확률이 굉장히 높다.</p>
+<p>IMU를 고를 때 고려해야하는 점들은 다음과 같다.</p>
+<ul>
+<li>가격</li>
+<li>센서의 속도<ul>
+<li>바퀴로 움직이는 로봇은 ~50Hz면 충분하다</li>
+<li>UAV는 100~500Hz 정도 되야한다</li>
+</ul>
+</li>
+<li>Attitude fusion이 센서 단에서 일어나는지, 아니면 여러 센서를 퓨전해야하는지?</li>
+<li>인터페이스<ul>
+<li>ROS를 쓴다면 USB가 제일 쉬움</li>
+</ul>
+</li>
+<li>해상도, 최대치, gyro drift</li>
+<li>캘리브레이션의 필요 유무</li>
+</ul>
+<p>&amp;nbsp</p>
+<h1 id="IMU-사용할-때-고려해야할-점"><a href="#IMU-사용할-때-고려해야할-점" class="headerlink" title="IMU 사용할 때 고려해야할 점"></a>IMU 사용할 때 고려해야할 점</h1><blockquote>
+<p>내 경험상으로는, 모바일 로봇에서 사용하기 가장 까다로운 센서는 IMU이다.</p>
+</blockquote>
+<h2 id="자기장-간섭"><a href="#자기장-간섭" class="headerlink" title="자기장 간섭"></a>자기장 간섭</h2><p>내가 사용하던 IMU는 magnetometer를 사용해서 heading (i.e. 북쪽방향)을 감지하고, 이를 통해 IMU 값도 보정하는 시스템이였다. 이 IMU는 드론에 탑재되어 heading 값으로 방향도 추정하고 IMU 값으로 움직임 값도 추정했는데, 며칠을 튜닝해도 heading 값이 안정화가 되지 않았었다. 그러다가 ‘우연히’ heading 값에서 보이는 노이즈의 원인을 알게 되었는데, 드론의 메인 로터의 속도가 올라가면서 노이즈도 같이 올라가는 것을 알 수 있었다. 나중에 알고보니, 우리 <strong>드론의 날개가 철을 포함하고 있어서 자기장 간섭을 일으켰던 것</strong>이다.</p>
+<blockquote>
+<p>로봇에 IMU를 쓴다면, 무조건 <strong>자기장이 발생할 수 있는 위치에서 최대한 멀리 떼놔야한다</strong>. 자기장이 발생하기 쉬운 곳은 1. 철로 된 파트, 2. 액추에이터, 3. 고전류 케이블이다.</p>
+</blockquote>
+<h2 id="진동"><a href="#진동" class="headerlink" title="진동"></a>진동</h2><p>모든 로봇은 진동한다. 다만 그 진동의 형태는 로봇이 어떤 재료로 만들어져있고 어떤 땅을 밟고 있냐에 따라 달라진다. 우리 팀이 만든 규칙으로는, 드론을 날려서 x,y,z축의 움직임을 그렸을 때, x축이나 y축의 움직임이 z축을 교차한다면 진동이 너무 강하다고 판단하기로 했다.</p>
+<blockquote>
+<p><strong>로봇을 평지에 가만히 세워놨는데, x/y축 움직임이 z축을 교차한다면 아마 그 진동을 댐프닝 해야할 것</strong>이다. </p>
+</blockquote>
+<h2 id="축-방향-정의"><a href="#축-방향-정의" class="headerlink" title="축 방향 정의"></a>축 방향 정의</h2><p>회사마다 IMU 축을 다르게 정의한다. IMU를 쓰고 있다면, 지금 당장 당신이 생각했던 축이랑 실제 축이랑 같은지 확인하길 추천한다. 심지어 종종 IMU 회사에서 제공하는 소프트웨어에서 정의한 축과 실제 축이 다를 때도 있다. 얼른 가서 확인해라. 왜냐면 나도 엄청 많이 틀렸거든.</p>
+<blockquote>
+<p><strong>실제 IMU 센서의 축과, 소프트웨어의 축이 맞는지 다시 한번 확인하자</strong>.</p>
+</blockquote>
+<h2 id="캘리브레이션"><a href="#캘리브레이션" class="headerlink" title="캘리브레이션"></a>캘리브레이션</h2><p>종종 직접 캘리브레이션 해야하는 IMU 들이 있다. 그리고 진짜 가끔, 캘리를 해줬는데 껐다가 키면 캘리 정보가 날아가는 IMU도 있다 (너 말하는거다, BNO055…). IMU를 타겟 디바이스에 탑재하고나서 모든 축으로 회전할 수 있는지, IMU를 사기 전에 꼭 확인하자. 탑재까지 다 했는데 캘리 다시해야하면 진짜 골치아프다.</p>
+<img src="/20220315-lidar-imu-pitfalls/1.gif" class="" title="rofl"> 
+
+<p> </p>
+<hr>
+<h1 id="LiDARs"><a href="#LiDARs" class="headerlink" title="LiDARs"></a>LiDARs</h1><p>라이다를 쓰면 ‘스마트’해진다. 내 로봇이 드디어 주변 환경을 ‘인식’할 수 있게 되고, 또 라이다라는거 그 자체가 그냥 엄청 미래적이잖아! </p>
+<p>라이다를 쓴다는건 레이저 펄스를 쏴서 돌아오는 시간이 얼마나 걸리는지 측정한다는걸 의미한다. (종종 phase shift 같은거도 고려할거다.)</p>
+<p>라이다는 다음과 같은 종류가 있다.</p>
+<ol>
+<li>단일 점 거리 센서  (e.g. Terabee TeraRanger Evo, Lightware SF11/C)</li>
+<li>2D 라이다 (e.g. RPLidar A1, Hokuyo UTM-30LX) </li>
+<li>3D 라이다  (e.g. Ouster, Velodyne Puck)</li>
+<li>비-반복 패턴의 라이다 (e.g. Livox Mid-40)</li>
+</ol>
+<p>원하는 목적에 맞춰서, 원하는 인터페이스에 맞춰서, 필요한 파워에 맞춰서 제품을 고르면 된다.</p>
+<p> </p>
+<h1 id="LiDAR를-사용할-때-고려해야하는-점"><a href="#LiDAR를-사용할-때-고려해야하는-점" class="headerlink" title="LiDAR를 사용할 때 고려해야하는 점"></a>LiDAR를 사용할 때 고려해야하는 점</h1><p>라이다를 써보기 전 까지는 빛이 이렇게 짜증난다는걸 몰랐다.</p>
+<h2 id="눈-피로"><a href="#눈-피로" class="headerlink" title="눈 피로"></a>눈 피로</h2><p>자, 여기서 얘기할 내용에 과학적인 증거는 없다는 점을 미리 밝힌다.</p>
+<p>근데 라이다 쓰다보면 <strong>눈이 겁나 빨리 피곤해진다</strong>. 뭔가 엄청 얼얼한데, 내 동료 말로는 ‘아프진 않은데 아픈 느낌’이라고 한다. 대부분의 라이다들은 ‘Eyes-safe’하다고 하지만, 그래도 라이다를 직접 쳐다보지 않는걸 추천한다.</p>
+<p>라이다를 오래 쓰면서 생기는 시력문제들에 대해 아는 사람들이 있으면 댓글로 좀 알려주길.</p>
+<h2 id="Flip-effect"><a href="#Flip-effect" class="headerlink" title="Flip effect"></a>Flip effect</h2><p>아주 가끔 나타나는 현상이지만, 한번 나타나면 사람 돌아버리게 하는 현상이다.</p>
+<p>이건 뭐 어떻게 고쳐야할지도 모르겠다. 그냥 센서 펌웨어를 업데이트하고 기도할 수밖에.</p>
+<p>정확히 어떤 현상이나면, <strong>실제 거리보다 훨씬 적은 거리로 센서 값이 나오는 것</strong>이다.</p>
+<p>실제 거리는 초록색+빨간색이다. 근데 센서는 초록색이라고 말하는거고.</p>
+<img src="/20220315-lidar-imu-pitfalls/2.png" class="" title="flip"> 
+
+<h2 id="시야각"><a href="#시야각" class="headerlink" title="시야각"></a>시야각</h2><p>LiDAR에 탑재된 레이저 에미터도 시야각이 있다. 약 1~3도 정도 된다.</p>
+<p>아래 그림처럼 생긴 상황에서 레이저를 쏘면, 센서는 어떤 값을 내놓을거라고 생각하는가?</p>
+<p>정답: 센서마다 다르다. <strong>어떤 센서는 Y를 주고, 어떤 센서는 X,Y 다 주고, 어떤 센서는 X랑 Y의 평균값을 준다</strong>. 이런-</p>
+<img src="/20220315-lidar-imu-pitfalls/3.png" class="" title="fov"> 
+
+<h2 id="최대거리-vs-외부환경"><a href="#최대거리-vs-외부환경" class="headerlink" title="최대거리 vs 외부환경"></a>최대거리 vs 외부환경</h2><p>LiDAR의 데이터시트를 보면 최대거리를 보통 알려준다. 하지만 실제로 쓸 떄는 이 <strong>최대거리에서 센서 값 절대로 안나온다</strong>.</p>
+<p>이런 라이다 스펙은 보통 어느정도 반사가 가능한 물체들에 대해서 테스트 되기 때문이다. 완전 시꺼먼 물체에서는 절대로 최대거리로 나오지 않는다.</p>
+<p>아래 그림은 태양빛에 있는 여러 빛의 스펙트럼이다. 보통 라이다 센서들은 여기 빨간색으로 표시된 부분에서 푹 떨어지는 곳들의 파장으로 레이저를 쏜다. 그래야 태양빛에 대한 간섭을 덜 받게 된다.</p>
+<p><strong>라이다를 사려고 하는데 몇 nm의 파장을 쓰는지 안알려준다? 그 라이다 회사는 걸러야한다</strong>.</p>
+<img src="/20220315-lidar-imu-pitfalls/4.png" class="" title="fov"> 
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210228-AD-sensors/" rel="bookmark">SLAM에서 사용할 수 있는 센서의 종류</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20211201-lidar-slam/" rel="bookmark">LiDAR SLAM 논문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220108-slam-libraries/" rel="bookmark">SLAM 개발에 유용한 라이브러리</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220322-is-slam-solved/" rel="bookmark">Is SLAM solved? 고수들에게 물어본다</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/IMU/" rel="tag"># IMU</a>
+              <a href="/tags/LiDAR-SLAM/" rel="tag"># LiDAR SLAM</a>
+              <a href="/tags/LIO/" rel="tag"># LIO</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220315-autonomous-driving-lidar/" rel="prev" title="자율주행 자동차의 눈 - 라이다 - 이용이 책임 발표 노트">
+                  <i class="fa fa-chevron-left"></i> 자율주행 자동차의 눈 - 라이다 - 이용이 책임 발표 노트
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220315-event-cameras-with-davide-scaramuzza/" rel="next" title="Event Cameras with Davide Scaramuzza 노트 (Robohub 팟캐스트 Ep.347)">
+                  Event Cameras with Davide Scaramuzza 노트 (Robohub 팟캐스트 Ep.347) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Having fun with Palindrome words&#96;&quot;을 적당히 번역했습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (12) - 필요없는 조건문은 없애줍시다!">
+<meta property="og:url" content="https://changh95.github.io/20201216-fast-palindrome/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Having fun with Palindrome words&#96;&quot;을 적당히 번역했습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20201216-fast-palindrome/fizzbuzz.jpg">
+<meta property="og:image" content="https://changh95.github.io/20201216-fast-palindrome/palindrome_benchmark.png">
+<meta property="article:published_time" content="2020-12-16T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="Optimisation">
+<meta property="article:tag" content="Coding Interviews">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20201216-fast-palindrome/fizzbuzz.jpg">
+
+
+<link rel="canonical" href="https://changh95.github.io/20201216-fast-palindrome/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (12) - 필요없는 조건문은 없애줍시다! | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%BD%94%EB%94%A9-%EC%9D%B8%ED%84%B0%EB%B7%B0"><span class="nav-number">1.</span> <span class="nav-text">코딩 인터뷰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8D%94-%EB%B9%A0%EB%A5%B8-IsPalindrome"><span class="nav-number">2.</span> <span class="nav-text">더 빠른 IsPalindrome()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC"><span class="nav-number"></span> <span class="nav-text">벤치마크</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%A0%95%EB%A6%AC%ED%95%98%EC%9E%90%EB%A9%B4%E2%80%A6"><span class="nav-number"></span> <span class="nav-text">정리하자면…</span></a></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20201216-fast-palindrome/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (12) - 필요없는 조건문은 없애줍시다!
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-16 20:38:19" itemprop="dateCreated datePublished" datetime="2020-12-16T20:38:19+09:00">2020-12-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%B9%84%EC%A0%84%EC%9D%84-%EC%9C%84%ED%95%9C-C-%EC%B5%9C%EC%A0%81%ED%99%94-%EC%8B%9C%EB%A6%AC%EC%A6%88/" itemprop="url" rel="index"><span itemprop="name">실시간 컴퓨터 비전을 위한 C++ 최적화 시리즈</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Case study: filter a Point Cloud faster”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9wYWxpbmRyb21lLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
+<br>
+
+<p>이번 글은 다른 글들에 비해서 컴퓨터 비전과 크게 관련은 없을 수 있습니다.</p>
+<p>그래도 적는 이유는… 조건 분기문을 없앰으로써 얼마나 코드가 빨라질 수 있는지 보여줄 수 있는 좋은 예시라고 생각되서입니다.</p>
+<p><code>if</code>문은 보통 엄청나게 빠르기 때문에 런타임 cost를 보통 생각하지 않아도 됩니다. 하지만 종종 특수 케이스에서는 실제로 눈에 보일만큼 성능 향상이 나타날 때도 있습니다.</p>
+<br>
+
+<h2 id="코딩-인터뷰"><a href="#코딩-인터뷰" class="headerlink" title="코딩 인터뷰"></a>코딩 인터뷰</h2><hr>
+<p>제가 이 글을 적고 있었을 때는 (역자 코멘트: 제가 아니라, 원글의 저자입니다!), 저는 엄청 활발하게 이직할 회사를 찾고 있었습니다. 그러다보니 자연스럽게 코딩 인터뷰도 보게 되었지요.</p>
+<p>코딩 인터뷰는 왠만하면 할만합니다.</p>
+<p>언젠가 하루는 이런 질문을 받았습니다.</p>
+<blockquote>
+<p>String이 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvUGFsaW5kcm9tZQ==">palindrome<i class="fa fa-external-link-alt"></i></span>인지 확인할 수 있는 함수를 짜주시겠어요? (역자 코멘트: palindrome은 거꾸로 뒤집어도 똑같은 단어를 의미합니다. <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS92SmZZSmh0ZGNLRQ==">로꾸거<i class="fa fa-external-link-alt"></i></span> 를 참조하세요.)</p>
+</blockquote>
+<p>자연스럽게 이런 생각이 들더군요</p>
+<img src="/20201216-fast-palindrome/fizzbuzz.jpg" class="" title="fizzbuzz">
+
+<p>나랑 말장난하자는거군!</p>
+<p>이런 질문을 하는게 잘못된건 아닙니다 ㅎㅎ. 아이스 브레이킹 용도로 딱 좋은 질문인 것 같아요. 하지만 저는 좀 더 real-world code를 적는 걸 예상했는데 말이죠.</p>
+<p>어찌되었건, 이렇게 답을 했습니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsPalindrome</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N = str.size();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_half = N / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;N_half; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( str[i] != str[N<span class="number">-1</span>-i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>이 정도 문제는 껌이지요 :)</p>
+<p>너무 쉽습니다!</p>
+<p>여기에 최적화를 끼얹어서 재미를 좀 봅시다!</p>
+<br>
+
+<h2 id="더-빠른-IsPalindrome"><a href="#더-빠른-IsPalindrome" class="headerlink" title="더 빠른 IsPalindrome()"></a>더 빠른 IsPalindrome()</h2><hr>
+<p>오리지널 버전도 나쁘진 않았습니다.</p>
+<ul>
+<li>복사가 없었구요</li>
+<li>찾는 즉시 loop를 멈췄구요</li>
+<li>모든 코너 케이스에 대해 대응할 수 있었습니다.</li>
+</ul>
+<p>하지만 여기서 더 빠르게 만들 수 있는 방법이 떠올랐습니다. <code>if</code>가 반복되는 수를 줄일 수 있죠.</p>
+<p>한 글자씩 비교하는게 아니라, ‘word’끼리 비교를 하는겁니다.</p>
+<p><code>uint32_t</code>에 word를 저장해봅시다. <code>uint32_t</code>는 4바이트를 한번에 다룰 수 있습니다.</p>
+<p>구현하면 아래 코드처럼 되겠습니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;byteswap.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">IsPalindromeWord</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N = str.size();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_half = (N/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> S = <span class="keyword">sizeof</span>(<span class="keyword">uint32_t</span>);</span><br><span class="line">    <span class="comment">// number of words of size S in N_half</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_words = (N_half / S);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// example: if N = 18, half string is 9 bytes and</span></span><br><span class="line">    <span class="comment">// we need to compair 2 pairs of words and 1 pair of chars</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">size_t</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;N_words; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">uint32_t</span> word_left, word_right;</span><br><span class="line">        <span class="built_in">memcpy</span>(&amp;word_left, &amp;str[index], S);</span><br><span class="line">        <span class="built_in">memcpy</span>(&amp;word_right, &amp;str[N - S - index], S);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( word_left != bswap_32(word_right))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        index += S;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// remaining bytes.</span></span><br><span class="line">    <span class="keyword">while</span>(index &lt; N_half)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( str[index] != str[N<span class="number">-1</span>-index])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        index++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>여기서 우리는 string을 4바이트의 ‘블럭’으로 쪼갤겁니다. 좌,우 순서대로 쪼갤거고, 중간에 남는 값들은 그대로 str로 둘겁니다.</p>
+<p>블럭끼리 비교는 <strong><em>단 한번</em></strong>만 하면 됩니다.</p>
+<p>뒤에서오는 블럭은 순서가 거꾸로 뒤집어져야 합니다. 우리는 이 방법을 위해 STL에 있는 <span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMy9ic3dhcF8zMi4zLmh0bWw=">bswap_32<i class="fa fa-external-link-alt"></i></span>라는 방식을 사용하겠습니다.  </p>
+<br>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">uint32_t</span> <span class="title">Swap</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uint32_t</span>&amp; val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">uint32_t</span> n;</span><br><span class="line">  &#125; data;</span><br><span class="line">  data.n = val;</span><br><span class="line">  <span class="built_in">std</span>::swap(data.c[<span class="number">0</span>], data.c[<span class="number">3</span>]);</span><br><span class="line">  <span class="built_in">std</span>::swap(data.c[<span class="number">1</span>], data.c[<span class="number">2</span>]);</span><br><span class="line">  <span class="keyword">return</span> data.n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="벤치마크"><a href="#벤치마크" class="headerlink" title="벤치마크"></a>벤치마크</h1><hr>
+<img src="/20201216-fast-palindrome/palindrome_benchmark.png" class="" title="벤치마크">
+
+<p>긴 string을 사용했을 때에 (8바이트보다 컸을 때) 성능은 약 <strong><em>50%</em></strong> 정도, 그리고 짧은 string에서는 약 <strong><em>150</em></strong>% 정도 성능 향상이 있었습니다.</p>
+<p>실제로 엄청나게 긴 string의 경우에는, 128이나 256 비트를 사용할수도 있겠습니다. 이 경우에는 <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmJsb2cvMjAyMC8wNy8wOC9pbXByb3ZpbmctcGVyZm9ybWFuY2Utd2l0aC1zaW1kLWludHJpbnNpY3MtaW4tdGhyZWUtdXNlLWNhc2VzLw==">SIMD<i class="fa fa-external-link-alt"></i></span>를 사용할 수 있겠네요. 하지만 SIMD는 이번 글의 목적이 아닙니다.</p>
+<h1 id="정리하자면…"><a href="#정리하자면…" class="headerlink" title="정리하자면…"></a>정리하자면…</h1><p>이번 글에서 나온 코드는 ‘심플하고 읽기 좋은 코드를 적고, 최적화에 너무 집중하지 마세요’라는 말의 완전한 반대를 실천합니다.</p>
+<p>이런 경우가 사실 좋다고 할 수는 없습니다. 가독성 좋고 유지보수가 가능한 코드를 짜는 것은 중요하지요.</p>
+<p>여기 나온 예제는 대체적으로 ‘for fun’용도로 짠 것이고, 생각하기 어려운 <strong><em>특정 케이스</em></strong>에서도 최적화의 가능성이 있다는 것을 보여줍니다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201205-faconti-do-not-use-linked-list/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (2) - Linked List 쓰지 마세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201205-faconti-use-vector-reserve/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201206-do-you-need-map/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201208-small-vector-optimisation/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (4) - 사이즈가 작은 vector를 쓸 때...</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/Optimisation/" rel="tag"># Optimisation</a>
+              <a href="/tags/Coding-Interviews/" rel="tag"># Coding Interviews</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20201217-std-vector-reserve/" rel="prev" title="컴퓨터 비전에서 std::vector 초기화 vs reserve 성능비교">
+                  <i class="fa fa-chevron-left"></i> 컴퓨터 비전에서 std::vector 초기화 vs reserve 성능비교
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20201220-warwick-podcast/" rel="next" title="워릭 대학교 팟캐스트 인터뷰 - 프로그래밍 공부 + LaTeX로 CV작성 + Github + 취업준비 개인 포트폴리오/블로그 관련 이모저모">
+                  워릭 대학교 팟캐스트 인터뷰 - 프로그래밍 공부 + LaTeX로 CV작성 + Github + 취업준비 개인 포트폴리오/블로그 관련 이모저모 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

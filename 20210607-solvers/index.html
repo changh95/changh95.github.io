@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Ceres-solver, g2o, GTSAM, SE-Sync 라이브러리를 소개합니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph-based SLAM 입문 + Solver 프레임워크 소개 (Ceres-solver, g2o, GTSAM, SE-Sync)">
+<meta property="og:url" content="https://changh95.github.io/20210607-solvers/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Ceres-solver, g2o, GTSAM, SE-Sync 라이브러리를 소개합니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png">
+<meta property="og:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.png">
+<meta property="article:published_time" content="2021-06-07T04:50:21.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.963Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Solver">
+<meta property="article:tag" content="GTSAM">
+<meta property="article:tag" content="Ceres-solver">
+<meta property="article:tag" content="g2o">
+<meta property="article:tag" content="SE-Sync">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210607-solvers/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Graph-based SLAM 입문 + Solver 프레임워크 소개 (Ceres-solver, g2o, GTSAM, SE-Sync) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimisation-%EA%B8%B0%EB%B0%98-SLAM"><span class="nav-number">1.</span> <span class="nav-text">Optimisation 기반 SLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solver-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%86%8C%EA%B0%9C"><span class="nav-number">2.</span> <span class="nav-text">Solver 라이브러리 소개</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%96%B4%EB%96%A4%EA%B2%83%EC%9D%84-%EC%8D%A8%EC%95%BC%ED%95%98%EB%8A%94%EA%B0%80"><span class="nav-number">3.</span> <span class="nav-text">어떤것을 써야하는가?</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210607-solvers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Graph-based SLAM 입문 + Solver 프레임워크 소개 (Ceres-solver, g2o, GTSAM, SE-Sync)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-07 13:50:21" itemprop="dateCreated datePublished" datetime="2021-06-07T13:50:21+09:00">2021-06-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Optimisation-기반-SLAM"><a href="#Optimisation-기반-SLAM" class="headerlink" title="Optimisation 기반 SLAM"></a>Optimisation 기반 SLAM</h2><p>SLAM 기술의 코어는 non-linear한 특성의 센서 데이터를 기반으로 map과 pose에 대한 최적의 state를 추정하는 것이다.</p>
+<p>이전에는 Kalman filter나 particle filter 기반의 알고리즘들을 사용하여 observation model과 motion model이 확률/수치적으로 동의할 수 있는 최적의 state를 찾았다. 하지만 최근에는 <strong>batch optimisation 기술</strong>을 이용하여 최적의 state를 찾아내는 방식을 사용하는데, 이는 컴퓨터의 발전으로 인해 무거운 batch optimisation 게산을 실시간으로 수행할 수 있게 되었기 때문이다. Batch optimisation 방식은 filter 방식에 비교했을 때 절대적인 계산량은 더 많지만, <strong>동일한 계산량 (i.e. CPU 사이클)에서 더 높은 정확도를 보여주기 때문</strong>에 컴퓨팅 파워가 받쳐주는 플랫폼에서는 optimisation 기법을 선호하는 경우가 많다.</p>
+<blockquote>
+<p>이번 글에서는 이러한 optimisation 기반 SLAM solver에 대해 이야기한다.</p>
+</blockquote>
+<p>Optimisation 기반 SLAM 방법론 중 가장 유명한 방법은 <strong>Graph-based SLAM</strong>이며, 보통 <strong>Frontend</strong>와 <strong>Backend</strong> 두가지 단계를 거친다.</p>
+<p><strong>Frontend</strong>는 센서 값들로부터 현재 <strong>로봇의 이동치</strong>와 <strong>주변 환경</strong>에 대한 정보를 계산하는데, 이 때 이동치는 motion model을, 주변 환경 정보는 observation model을 사용해서 계산한다. Graph-based SLAM에서는 로봇의 위치와 주위 랜드마크의 위치를 node로 표현하는데, 우리가 계산한 <strong>이동치는 로봇의 위치를 표현하는 node끼리를 이어주는 motion constraint</strong>, 그리고 <strong>주변 환경의 위치 정보는 로봇-랜드마크 간의 상대적인 관계를 표현하는 node를 이어주는 observation constraint</strong>로 표현된다. Frontend는 이렇게 새로운 node를 만들고, 또 node 끼리의 constraint도 이어주기 때문에 graph construction이라고 불리기도 한다.</p>
+<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png"></p>
+<p><strong>Backend</strong>는 frontend에서 생성된 <strong>constraint들을 기반으로 최적의 (i.e. optimal) pose &amp; map을 계산</strong>한다. Graph solving에 가장 보편적인 방법은 <strong>least squares</strong>로써, 선형대수에서 이야기하는 Ax=b 형태의 문제에서 A가 graph matrix, b가 센서 정보일 때, x가 무엇이 나와야하는지 찾는 것이라고 보면 된다. 이러한 Graph matrix는 엄청나게 거대하기 때문에 단번에 푸는 것은 불가능하고 (특히나 SLAM에서 요구하는 실시간 계산 조건에서는!), 그렇기 때문에 <strong>iterative</strong>하게 풀어야한다. <strong>우리가 사용하는 센서들은 non-linear</strong>하기 때문에 iterative solving에도 매번 <strong>linearization 과정</strong>이 들어가야한다.</p>
+<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.png"></p>
+<blockquote>
+<p>Backend를 좀 더 자세히 이해하고 싶다면 다음 글을 참조하면 좋다. 1.’<a href="https://changh95.github.io/20210313-ba/">Bundle adjustment란?</a>‘, 2. ‘<a href="https://changh95.github.io/20210314-nonlinear-optimisation/">비선형 최적화 Non-linear optimisation - Gradient descent, Newton-Raphson, Gauss-Newton, Levenberg-Marquardt</a>‘</p>
+</blockquote>
+<p>Backend의 과정을 정리해보자면 다음과 같은 단계가 있다.</p>
+<ul>
+<li>Constraint 기반으로 least squares optimisation problem 생성</li>
+<li>Linearization</li>
+<li>Iterative solving</li>
+</ul>
+<p>이 모든 과정을 쉽게 계산하기 위해 우리는 <strong>Solver 라이브러리</strong>들을 사용한다.</p>
+<p> </p>
+<hr>
+<h2 id="Solver-라이브러리-소개"><a href="#Solver-라이브러리-소개" class="headerlink" title="Solver 라이브러리 소개"></a>Solver 라이브러리 소개</h2><p>이러한 optimisation 계산을 빠르게 구현할 수 있도록 여러 solver 프레임워크들이 개발되었다. 가장 유명한 것들로는 다음과 같은 라이브러리들이 있다.</p>
+<ul>
+<li>Freiburg 대학의 <span class="exturl" data-url="aHR0cHM6Ly9vcGVuc2xhbS1vcmcuZ2l0aHViLmlvL2cybw==">g2o<i class="fa fa-external-link-alt"></i></span></li>
+<li>Google의 <span class="exturl" data-url="aHR0cDovL2NlcmVzLXNvbHZlci5vcmcv">ceres-solver<i class="fa fa-external-link-alt"></i></span></li>
+<li>Georgia Tech의 <span class="exturl" data-url="aHR0cHM6Ly9ndHNhbS5vcmcv">GTSAM<i class="fa fa-external-link-alt"></i></span></li>
+<li>MIT의 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkLW0tcm9zZW4vU0UtU3luYw==">SE-Sync<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p> </p>
+<div class="tabs" id="solvers"><ul class="nav-tabs"><li class="tab active"><a href="#solvers-1">g2o</a></li><li class="tab"><a href="#solvers-2">Ceres-solver</a></li><li class="tab"><a href="#solvers-3">GTSAM</a></li><li class="tab"><a href="#solvers-4">SE-Sync</a></li></ul><div class="tab-content"><div class="tab-pane active" id="solvers-1"><p>g2o는 graph 형태의 nonlinear 함수들을 최적화 할 수 있는 오픈소스 프레임워크이다.</p>
+<p>2011년 릴리즈 당시 저자들은 SOTA 알고리즘들의 성능에 준한다고 이야기했고, 현재도 지속적으로 업데이트되면서 다양한 모던 프로세서에 대해 호환성도 가지고 있다. </p>
+<p>프레임워크에서 Pose graph optimisation을 푸는 방법으로는 Gauss-Newton, Levenberg-Marquardt, Doglog 방식을 지원하는데, 이는 <strong>왠만한 SLAM 문제는 다 풀 수 있다</strong>고 볼 수 있다. <strong>사용하기 굉장히 쉬운 편</strong>이기 때문에 Visual-SLAM 연구/개발에서 많이 사용하며, <strong>ORB-SLAM과 SVO에서도 사용</strong>되었다. </p>
+<p>특정 모듈들이 LGPL3+와 GPL3+ 라이센스를 가지고 있지만, 특정 linear solver 및 뷰어에 한정되어있다. 연구 쪽에서는 오픈소스하는 경우가 많기 때문에 GPL-v3 라이센스는 문제가 되지 않아 <strong>연구와 궁합이 잘 맞고</strong>, 상용쪽에서는 최적의 성능을 위해 어차피 뷰어를 잘 사용하지 않기 때문에 <strong>상용에도 궁합이 잘 맞는 편</strong>이다.</p></div><div class="tab-pane" id="solvers-2"><p>Ceres-solver는 대형 nonlinear least squares 최적화 문제를 풀기위해 만든 오픈소스 라이브러리이다. Bundle adjustment 기법을 사용하는 SLAM과 SfM (i.e. Structure from Motion) 분야에서 많이 사용한다.</p>
+<p><strong>사용하기 쉬운 편</strong>이며 <strong>뛰어난 성능</strong>을 가졌고 <strong>portable</strong>하다는 장점을 가지고 있다. 하지만 무엇보다 가장 큰 장점은 <strong>최적화에 필요한 objective function을 유저가 직접 만들 수 있다는 점 (i.e. custom function)**인데, 이는 새로운 아이디어/방법론을 연구할 때 엄청난 이점이 된다. 여기에 **linearization을 쉽게 할 수 있는 auto-diff 기능</strong>까지 있으니 <strong>기능과 편의성을 동시에 잡았다</strong>고 볼 수 있다.</p>
+<p>지원하는 solver는 trust region solver (i.e. Levenberg-marquardt, dogleg)와 line search solver가 있다.</p>
+<p><strong>센서퓨전을 이용해서 tightly-fused 알고리즘들은 왠만하면 Ceres를 이용</strong>하며, Camera + IMU를 사용하는 <strong>OKVIS와 VINS-Mono가 Ceres 를 사용</strong>한다.</p></div><div class="tab-pane" id="solvers-3"><p>GTSAM은 로보틱스 환경에서 센서퓨전 최적화 문제를 풀기 위해 만든 오픈소스 라이브러리이다.</p>
+<p>GTSAM은 <strong>factor graph</strong>를 이용해서 최적화 문제를 모델링하는데, 다른 라이브러리들에 비해 내부적으로 matrix sparsity를 잘 이용해서 <strong>계산 효율이 가장 좋다</strong>고 볼 수 있다. </p>
+<p>다른 라이브러리들이 지원하는 Gauss-Newton, Levenberg-Marquardt, dogleg에 더불어 conjugate gradient optimizer와 <strong>iSAM solver</strong> (i.e. incremental smoothing and mapping) 기능을 가지고 있다. 최근 graph-based SLAM 형태로 VIO를 구현할 때는 <strong>IMU preintegration 기술</strong>의 사용이 필수적인데, 이러한 기능을 쉽게 사용 가능한 함수 API로 구현해두었다. </p>
+<p>현재 구현 단계에서도 <strong>연구/개발 양쪽 다 쉽게 사용</strong>할 수 있지만, 최근 OpenSAM이라는 이름으로 좀 더 industry에서 사용하기 좋은 형태를 만들고 있다는 소식이 있다.</p></div><div class="tab-pane" id="solvers-4"><p>SE-Sync는 special Euclidean group (i.e. 3D pose) 최적화 문제에서 <strong>global minima를 보장하는 certifiably correct algorithm</strong>을 이용한 최적화 라이브러리이다.</p>
+<p>2D/3D geometry fitting, graph-based SLAM, camera motion estimation 등에서 사용할 수 있다.</p>
+<p>가장 최신의 프레임워크이라 <strong>아직 유저층이 두텁지는 않다</strong>.</p>
+<p>다른 프레임워크들에 비해 <strong>가장 진보된 알고리즘</strong>을 가지고 있다. 예를 들어, large scale optimisation을 풀 때는 많은 constraint들로 인해 non-convex한 manifold가 구축되는데 (i.e. local minima가 많이 생기는데), 이 문제를 좀 더 <strong>풀기 쉬운 convex 형태의 문제로 근사시켜 global minima를 계산하는 semidefinite relaxation 기법</strong> 등이 있다. (Trust region 방법으로 truncated-Newton Riemannian method를 사용한다고 하는데… 뭔지 잘 모르겠다 이름은 멋있는데!)</p></div></div></div>
+
+<hr>
+<h2 id="어떤것을-써야하는가"><a href="#어떤것을-써야하는가" class="headerlink" title="어떤것을 써야하는가?"></a>어떤것을 써야하는가?</h2><p><a href="https://changh95.github.io/20210607-solver-comp/">Juric 2021 논문</a>에서 발표한 내용은 다음과 같다.</p>
+<ul>
+<li>가장 빠른걸 원한다면 SE-Sync<ul>
+<li>SLAM 프론트엔드에서 노이즈를 잘 잡아낸다면 GTSAM도 상관 없음</li>
+</ul>
+</li>
+<li>모든 성능면에서 평균적인건 Ceres-solver</li>
+<li>g2o는 쉬운 문제에서 잘 됨</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210607-solver-comp/" rel="bookmark">Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Solver/" rel="tag"># Solver</a>
+              <a href="/tags/GTSAM/" rel="tag"># GTSAM</a>
+              <a href="/tags/Ceres-solver/" rel="tag"># Ceres-solver</a>
+              <a href="/tags/g2o/" rel="tag"># g2o</a>
+              <a href="/tags/SE-Sync/" rel="tag"># SE-Sync</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210604-tartan-kaess/" rel="prev" title="Tartan Series 2021 - Factor Graphs and Robust Perception (Prof. Michael Kaess)">
+                  <i class="fa fa-chevron-left"></i> Tartan Series 2021 - Factor Graphs and Robust Perception (Prof. Michael Kaess)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210607-solver-comp/" rel="next" title="Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM">
+                  Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

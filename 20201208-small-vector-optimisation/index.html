@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Small vector optimization&quot;을 적당히 번역했습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (4) - 사이즈가 작은 vector를 쓸 때...">
+<meta property="og:url" content="https://changh95.github.io/20201208-small-vector-optimisation/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Small vector optimization&quot;을 적당히 번역했습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20201208-small-vector-optimisation/inconceivably.jpg">
+<meta property="article:published_time" content="2020-12-08T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.827Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="Optimisation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20201208-small-vector-optimisation/inconceivably.jpg">
+
+
+<link rel="canonical" href="https://changh95.github.io/20201208-small-vector-optimisation/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (4) - 사이즈가 작은 vector를 쓸 때... | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Small-%EB%B2%A1%ED%84%B0-%EC%B5%9C%EC%A0%81%ED%99%94"><span class="nav-number">1.</span> <span class="nav-text">Small 벡터 최적화</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%80%9CStatic%E2%80%9D-vector%EC%99%80-%E2%80%9CSmall%E2%80%9D-vector"><span class="nav-number">2.</span> <span class="nav-text">“Static” vector와 “Small” vector</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#StaticVector%EC%99%80-SmallVector%EB%A5%BC-%EC%8B%A4%EC%A0%9C%EB%A1%9C-%EC%93%B0%EB%A0%A4%EB%A9%B4%E2%80%A6"><span class="nav-number">2.1.</span> <span class="nav-text">StaticVector와 SmallVector를 실제로 쓰려면…</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20201208-small-vector-optimisation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (4) - 사이즈가 작은 vector를 쓸 때...
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-08 20:38:19" itemprop="dateCreated datePublished" datetime="2020-12-08T20:38:19+09:00">2020-12-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%B9%84%EC%A0%84%EC%9D%84-%EC%9C%84%ED%95%9C-C-%EC%B5%9C%EC%A0%81%ED%99%94-%EC%8B%9C%EB%A6%AC%EC%A6%88/" itemprop="url" rel="index"><span itemprop="name">실시간 컴퓨터 비전을 위한 C++ 최적화 시리즈</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Small vector optimization”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9zbWFsbF92ZWN0b3JzLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
+<br>
+
+<h1 id="Small-벡터-최적화"><a href="#Small-벡터-최적화" class="headerlink" title="Small 벡터 최적화"></a>Small 벡터 최적화</h1><hr>
+<p>여기까지 읽으셨다면… 여러분들께서는 이제 우리가 associative container가 정말로 필요하지 않는 이상 왠만하면 <code>std::vector</code>를 사용해봐야 하는 것을 이해하실 겁니다.</p>
+<p><code>std::vector</code>를 사용하면서 사이즈가 늘어날 때 마다 비싼 heap allocation를 방지하기 위해 우리는 <code>reserve</code>를 사용했었습니다. 하지만, 이 방법을 쓰면 <strong><em>무조건 처음에 단 한번</em></strong>은 heap allocation을 해야하죠. 이 점이 굉장히 아쉽습니다. 좋은 방법이 없을까요?</p>
+<p>사실 여기에도 방법이 있습니다. 추후에 적을 <a href="https://changh95.github.io/20201210-small-string-optimisation/">Small String Optimisation (SSO)</a> 글에도 이 방법을 사용할겁니다.</p>
+<br>
+
+<h1 id="“Static”-vector와-“Small”-vector"><a href="#“Static”-vector와-“Small”-vector" class="headerlink" title="“Static” vector와 “Small” vector"></a>“Static” vector와 “Small” vector</h1><hr>
+<p>우리가 사용할 vector의 크기가 작고, 최악의 상황에도 작은 크기로 있을 것을 알 때가 있습니다. 이 경우에는 모든 element들을 heap가 아니라 stack에 넣어둘 수 있습니다. Heap allocation은 비싸거든요.</p>
+<p>사이즈가 작은 vector를 쓴다니, 이런 경우가 얼마나 자주 있겠나~ 라고 생각하실 수도 있지만, 생각보다 굉장히 자주 나타납니다. 당장 2주 전만해도, 제가 사용하는 라이브러리에서 이러한 패턴을 발견했습니다. 이 vector의 크기는 0에서 최대 8까지 element를 가집니다.</p>
+<p>30분 정도 리팩토링을 했고, 20%정도의 성능 향상을 얻었습니다!</p>
+<p>리팩토링의 결과를 요약하자면… </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; my_data; <span class="comment">// 이 vector를 사용하려면 heap allocation이 필요합니다.</span></span><br></pre></td></tr></table></figure>
+<p>위 코드를 이런 방식으로 바꿨죠.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> my_data[MAX_SIZE]; <span class="comment">// Heap allocation이 없는 형태 </span></span><br><span class="line"><span class="keyword">int</span> size_my_data;</span><br></pre></td></tr></table></figure>
+<p>이 <code>StaticVector</code>의 간단한 구현을 한번 함께 봅시다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;initializer_list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">size_t</span> N&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StaticVector</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">  <span class="keyword">using</span> iterator       = <span class="keyword">typename</span> <span class="built_in">std</span>::<span class="built_in">array</span>&lt;T,N&gt;::iterator;</span><br><span class="line">  <span class="keyword">using</span> const_iterator = <span class="keyword">typename</span> <span class="built_in">std</span>::<span class="built_in">array</span>&lt;T,N&gt;::const_iterator;</span><br><span class="line"></span><br><span class="line">  StaticVector(<span class="keyword">uint8_t</span> n=<span class="number">0</span>): _size(n) &#123;</span><br><span class="line">    <span class="keyword">if</span>( _size &gt; N )&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">std</span>::runtime_error(<span class="string">&quot;SmallVector overflow&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  StaticVector(<span class="keyword">const</span> StaticVector&amp; other) = <span class="keyword">default</span>;</span><br><span class="line">  StaticVector(StaticVector&amp;&amp; other) = <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">  StaticVector(<span class="built_in">std</span>::<span class="built_in">initializer_list</span>&lt;T&gt; init)</span><br><span class="line">  &#123;</span><br><span class="line">    _size = init.size();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;_size; i++) &#123; _storage[i] = init[i]; &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">push_back</span><span class="params">(T val)</span></span>&#123;</span><br><span class="line">    _storage[_size++] = val;</span><br><span class="line">    <span class="keyword">if</span>( _size &gt; N )&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">std</span>::runtime_error(<span class="string">&quot;SmallVector overflow&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">pop_back</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( _size == <span class="number">0</span> )&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">std</span>::runtime_error(<span class="string">&quot;SmallVector underflow&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    back().~T(); <span class="comment">// call destructor</span></span><br><span class="line">    _size--;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _size; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>&#123; <span class="keyword">while</span>(_size&gt;<span class="number">0</span>) &#123; pop_back(); &#125; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">T&amp; <span class="title">front</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _storage.front(); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">const</span> T&amp; <span class="title">front</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _storage.front(); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">T&amp; <span class="title">back</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _storage[_size<span class="number">-1</span>]; &#125;</span><br><span class="line">  <span class="function"><span class="keyword">const</span> T&amp; <span class="title">back</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _storage[_size<span class="number">-1</span>]; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">iterator <span class="title">begin</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _storage.begin(); &#125;</span><br><span class="line">  <span class="function">const_iterator <span class="title">begin</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _storage.begin(); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">iterator <span class="title">end</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _storage.end(); &#125;</span><br><span class="line">  <span class="function">const_iterator <span class="title">end</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _storage.end(); &#125;</span><br><span class="line"></span><br><span class="line">  T&amp; <span class="keyword">operator</span>[](<span class="keyword">uint8_t</span> index) &#123; <span class="keyword">return</span> _storage[index]; &#125;</span><br><span class="line">  <span class="keyword">const</span> T&amp; <span class="keyword">operator</span>[](<span class="keyword">uint8_t</span> index) <span class="keyword">const</span> &#123; <span class="keyword">return</span> _storage[index]; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function">T&amp; <span class="title">data</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> _storage.data(); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">const</span> T&amp; <span class="title">data</span><span class="params">()</span> <span class="keyword">const</span> </span>&#123; <span class="keyword">return</span> _storage.data(); &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">array</span>&lt;T,N&gt; _storage;</span><br><span class="line">  <span class="keyword">uint8_t</span> _size = <span class="number">0</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>StaticVector는 겉으로 보기에는 <code>std::vector</code>와 굉장히 유사하지만… 결과는 매우 서프라이징하네요.</p>
+<img src="/20201208-small-vector-optimisation/inconceivably.jpg" class="" title="아 예 써프라이징 성능~~">
+
+<p>종종 우리는 vector 컨테이너가 최대 <strong><em>N</em></strong>개의 element를 가질 확률이 높다는건 알지만, 항상 그럴것인지 확신하지 못할 때가 있죠.</p>
+<p>그런 경우에 우리는 <strong><em>Small vector (작은 벡터)</em></strong>를 사용할 수 있습니다. 작은 vector는 첫 N개의 element는 stack에 미리 저장한 메모리 값을 사용하고, 그리고 그 벡터가 더 확장해야할 때**<em>만**</em> 새로운 heap allocation을 통해 사이즈를 확장할 수 있습니다.</p>
+<br>
+
+<h2 id="StaticVector와-SmallVector를-실제로-쓰려면…"><a href="#StaticVector와-SmallVector를-실제로-쓰려면…" class="headerlink" title="StaticVector와 SmallVector를 실제로 쓰려면…"></a>StaticVector와 SmallVector를 실제로 쓰려면…</h2><hr>
+<p>찾아봤더니 이런 트릭은 실제로 많은 라이브러리에서 이미 구현이 되어있더라구요. 예시로는 아래의 라이브러리들이 있습니다.</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYm9vc3Qub3JnL2RvYy9saWJzLzFfNzNfMC9kb2MvaHRtbC9jb250YWluZXIuaHRtbA==">Boost::container<i class="fa fa-external-link-alt"></i></span>. (이런 트릭이 존재한다는건, Boost에 이미 있다는 뜻입니다 ㅋㅋ)</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Fic2VpbC9hYnNlaWwtY3BwL3RyZWUvbWFzdGVyL2Fic2wvY29udGFpbmVy">Abseil<i class="fa fa-external-link-alt"></i></span>. 여기서는 <code>fixed array</code> 또는 <code>inlinec_vector</code>라고 합니다. </li>
+<li>제대로 공부하고 싶으신 분들은, 여기 링크를 타고 가시는 것을 추천드립니다. <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xsdm0vbGx2bS1wcm9qZWN0L2Jsb2IvbWFzdGVyL2xsdm0vaW5jbHVkZS9sbHZtL0FEVC9TbWFsbFZlY3Rvci5o">SmallVector used internally by LLVM<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201205-faconti-do-not-use-linked-list/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (2) - Linked List 쓰지 마세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201205-faconti-use-vector-reserve/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201206-do-you-need-map/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201209-strings-are-almost-vectors/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (5) - String은 vector처럼 써야합니다</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/Optimisation/" rel="tag"># Optimisation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20201206-do-you-need-map/" rel="prev" title="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요?">
+                  <i class="fa fa-chevron-left"></i> (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20201209-strings-are-almost-vectors/" rel="next" title="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (5) - String은 vector처럼 써야합니다">
+                  (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (5) - String은 vector처럼 써야합니다 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

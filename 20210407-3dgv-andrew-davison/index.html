@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="3DGV 세미나 중 Prof. Andrew Davison 교수님 세미나 정리. Rearrangement, RLBench, iMAP 연구 소개.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)">
+<meta property="og:url" content="https://changh95.github.io/20210407-3dgv-andrew-davison/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="3DGV 세미나 중 Prof. Andrew Davison 교수님 세미나 정리. Rearrangement, RLBench, iMAP 연구 소개.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-04-07T13:14:31.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.839Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Deep SLAM">
+<meta property="article:tag" content="Rearrangement">
+<meta property="article:tag" content="Embodied AI">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="RLBench">
+<meta property="article:tag" content="iMAP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210407-3dgv-andrew-davison/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spatial-AI-Perception-for-Embodied-Intelligence"><span class="nav-number">1.</span> <span class="nav-text">Spatial AI - Perception for Embodied Intelligence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rearrangement-A-Challenge-for-Embodied-AI"><span class="nav-number">2.</span> <span class="nav-text">Rearrangement: A Challenge for Embodied AI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RLBench"><span class="nav-number">3.</span> <span class="nav-text">RLBench</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-map-representations%E2%80%A6"><span class="nav-number">4.</span> <span class="nav-text">Creating map representations…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iMAP-Implicit-Mapping-and-Positioning-in-Real-Time"><span class="nav-number">5.</span> <span class="nav-text">iMAP - Implicit Mapping and Positioning in Real-Time</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-based-SLAM"><span class="nav-number">6.</span> <span class="nav-text">Object-based SLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Processor-for-Spatial-AI"><span class="nav-number">7.</span> <span class="nav-text">Processor for Spatial AI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Research-plans-for-Gaussian-Belief-Propagation-amp-Factorized-Computation"><span class="nav-number">8.</span> <span class="nav-text">Research plans for Gaussian Belief Propagation &amp; Factorized Computation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A7%88%EB%AC%B8"><span class="nav-number">9.</span> <span class="nav-text">질문</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210407-3dgv-andrew-davison/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-07 22:14:31" itemprop="dateCreated datePublished" datetime="2021-04-07T22:14:31+09:00">2021-04-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/ERCqnJnLH9Y" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p>토크의 상당 부분은 <a href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">이전 세미나</a>와 내용이 겹칠 것으로 예상된다. 이번 글에서는 새로 업데이트 된 내용만 커버하기로…</p>
+<hr>
+<h2 id="Spatial-AI-Perception-for-Embodied-Intelligence"><a href="#Spatial-AI-Perception-for-Embodied-Intelligence" class="headerlink" title="Spatial AI - Perception for Embodied Intelligence"></a>Spatial AI - Perception for Embodied Intelligence</h2><ul>
+<li>To enable embodied AI, a Spatial AI system should build <strong>a persistent and understandable scene representation</strong> which is close to metric 3D geometry, at least locally.<ul>
+<li>Map 처럼 생겼다던가…</li>
+<li>쉽게 update 가능한다던가…</li>
+<li>Planning 같은게 쉽게 만들어졌다던가…</li>
+</ul>
+</li>
+<li>Generality…<ul>
+<li>다른 도메인에 사용되더라도 Spatial AI는 공통적으로 가지는 특성이 있을 것이다.<ul>
+<li>드론, 로봇, AR… 상관 없다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Rearrangement-A-Challenge-for-Embodied-AI"><a href="#Rearrangement-A-Challenge-for-Embodied-AI" class="headerlink" title="Rearrangement: A Challenge for Embodied AI"></a>Rearrangement: A Challenge for Embodied AI</h2><ul>
+<li>다양한 분야의 전문가들과 함께 만든 discussion 논문.</li>
+<li><strong>“Spatial perception, navigation, interaction을 위해 어떤 challenge를 푸는게 좋을까?”에 대한 전문가들의 답변.</strong></li>
+<li>여러가지 질문들<ul>
+<li>하나의 dominant task를 수행하기 위해 subtask는 어떻게 알아낼 것인가?</li>
+<li>각각의 agent가 얼마나 task를 잘 수행하고 있는지 알 수 있을까?<ul>
+<li>Task specification, settings, evaluation</li>
+<li>로봇이 방을 치우는 task라면, tidy-state라는 것은 무엇인가?<ul>
+<li>정확한 3D coordinate을 줄까?</li>
+<li>대충 이미지 하나를 던져줄까?</li>
+<li>Exploration을 통해 알아서 학습하게 할까? (강화학습?)</li>
+</ul>
+</li>
+<li>다양한 ‘정확도’로 방이 치워질 수 있는데, 이 때 ‘방이 깔끔해진 정도’를 어떤 metric으로 결정해야할까?<ul>
+<li>테이블 위에 접시를 놓고, 접시 위에 칼을 놔야한다면…</li>
+<li>접시는 테이블 위 아무데나 있어도 되지만, 칼은 더 좁은 공간인 접시 위에 있어야한다. 이 경우 어떻게 score를 매길 것인가?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>교수님이 이 연구에서 관심을 가지셨던것은 ‘<strong>어떤 방식으로 scene representation을 만들어야 real-time, persistent, updatable할 수 있을까?</strong>‘ 라고 하셨다.</li>
+<li>이런 문제를 풀기 위해서 end-to-end로 푼다는 것은 아직 상상도 못하겠다.<ul>
+<li>어떠한 intermediate representation이 꼭 필요할 것이라고 생각한다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="RLBench"><a href="#RLBench" class="headerlink" title="RLBench"></a>RLBench</h2><ul>
+<li>Rearrangement 논문에서 참고된 시뮬레이션 소프트웨어.<ul>
+<li>Robot learning을 위해 만듬.</li>
+</ul>
+</li>
+<li>Prof Andrew Davison은 원래 벤치마크를 별로 안좋아하심<ul>
+<li>근데 이건 교수님께서 직접 만드셨네…? ㄷㄷ 뭐지</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Creating-map-representations…"><a href="#Creating-map-representations…" class="headerlink" title="Creating map representations…"></a>Creating map representations…</h2><ul>
+<li><a href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">이전 세미나</a>와 내용이 많이 겹침</li>
+<li>MonoSLAM</li>
+<li>ElasticFusion</li>
+<li>SemanticFusion</li>
+<li>Semantic SLAM Computation Graph</li>
+<li>SLAM meets deep learing<ul>
+<li>End-to-End algorithm &lt;-&gt; Fully human-designed algorithm</li>
+</ul>
+</li>
+<li>CodeSLAM, SceneCode, DeepFactors</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="iMAP-Implicit-Mapping-and-Positioning-in-Real-Time"><a href="#iMAP-Implicit-Mapping-and-Positioning-in-Real-Time" class="headerlink" title="iMAP - Implicit Mapping and Positioning in Real-Time"></a>iMAP - Implicit Mapping and Positioning in Real-Time</h2><div class="video-container"><iframe src="https://www.youtube.com/embed/c-zkKGArl5Y" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<ul>
+<li>Uses <strong>implicit neural representations</strong>, like how <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMDg5MzQ=">NeRF<i class="fa fa-external-link-alt"></i></span> is using the thing<ul>
+<li>하지만 이 논문에서는 RGB-D를 사용하기 때문에 훨씬 쉽다고 교수님이 얘기하심.</li>
+</ul>
+</li>
+<li>Multi-layer perceptron 내부에서 처리되는 값들만을 가지고 실시간으로 scene representation을 표현.<ul>
+<li>사실상 <strong>실시간으로 multi-layer perceptron을 학습</strong>하면서 값들을 사용하는 것.</li>
+<li><strong>xyz coordinate을 인풋으로 주면, scene속에 있는 어떤 3D point의 occupancy와 colour 값을 아웃풋으로 내뱉는 네트워크</strong>임.</li>
+</ul>
+</li>
+<li>카메라가 어디있는지 알고 있고, 센서 인풋으로 raw colour + depth 이미지가 들어올 때, 우리는 <strong>MLP 네트워크가 내뱉는 아웃풋이 raw colour + depth 이미지에 매칭되게 optimise</strong>할 수 있다.<ul>
+<li>즉, RGB+Depth 이미지는 optimizing cost function을 위해서만 사용되고, 실제로 SLAM 계산에는 사용되지 않음? </li>
+</ul>
+</li>
+<li>이러한 결과물을 SLAM 시스템으로 변환하기 위해서는, RGB+Depth render 값들이 어떠한 하나의 map representation으로 수렴할 수 있어야한다.<ul>
+<li>여기서 <strong>Keyframe 구조</strong>를 사용해서 맵을 딴다.</li>
+<li>교수님께서는 PTAM을 예시로 들면서 tracking / mapping이 쓰레드로 따로 도는 것을 설명하셨다.</li>
+<li>영상에서 빨간색 피라미드 형태로 나타나는 것이 keyframe이다.</li>
+</ul>
+</li>
+<li>Keyframe은 DB를 만들어서 관리한다.<ul>
+<li>Mapping thread에서는 이전에 취득한 키프레임과 가장 최신의 프레임을 이용해서 정보를 공유한다.</li>
+<li>모든 키프레임을 다 쓰는거는 아니다. 그러면 너무 느릴것이다.</li>
+<li>**’가장 유용한 키프레임’**을 고르고, 그 후 그 키프레임에서 **’가장 유용한 point’**를 뽑아 최적화한다.<ul>
+<li>이런 방식으로 <strong>계산해야할 포인트의 수를 줄여서 실시간 작동</strong>을 구현할 수 있었다.</li>
+<li>2Hz (ㅋㅋ 겨우 실시간)으로 실시간 맵핑을 할 수 있었다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>진짜 신기한건, 아직 보지도 않은 공간의 데이터도 대충 채워넣을 수 있다는 것이다.<ul>
+<li>딥러닝 없이 RGB-D SLAM으로 했을 경우에는, 보지 못한 공간은 구멍이 숭숭 뚫려있다.</li>
+</ul>
+</li>
+<li>결국에 그냥 SLAM한거랑 뭐가 다른거지…? 라는 생각이 들긴했지만,<ul>
+<li>교수님 말씀으로는 ‘<strong>하나의 네트워크를 가지고 tracking + mapping을 다 할 수 있는 neural representation을 만든 것이다</strong>‘ 라고 하심</li>
+<li>그리고 그 네트워크는 <strong>단지 1mb의 작은 모델</strong>이다. (호우,,,)</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Object-based-SLAM"><a href="#Object-based-SLAM" class="headerlink" title="Object-based SLAM"></a>Object-based SLAM</h2><ul>
+<li><a href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">이전 세미나</a>와 내용이 많이 겹침</li>
+<li>SLAM++</li>
+<li>MoreFusion</li>
+<li>Fusion++</li>
+<li>NodeSLAM</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Processor-for-Spatial-AI"><a href="#Processor-for-Spatial-AI" class="headerlink" title="Processor for Spatial AI"></a>Processor for Spatial AI</h2><ul>
+<li><a href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">이전 세미나</a>와 내용이 많이 겹침</li>
+<li>SLAMBench</li>
+<li>Graphcore IPU</li>
+<li>Futuremapping</li>
+<li>Bundle Adjustment on a Graph Processor </li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Research-plans-for-Gaussian-Belief-Propagation-amp-Factorized-Computation"><a href="#Research-plans-for-Gaussian-Belief-Propagation-amp-Factorized-Computation" class="headerlink" title="Research plans for Gaussian Belief Propagation & Factorized Computation"></a>Research plans for Gaussian Belief Propagation &amp; Factorized Computation</h2><ul>
+<li>Dynamic, self-abstracting graph map: Object-based SLAM?</li>
+<li>General dense front-end image processing<ul>
+<li>Unifying flow estimation and segmentation</li>
+<li>Smart cameras</li>
+</ul>
+</li>
+<li>Multi-device distributed mapping<ul>
+<li>Towards a robot web?</li>
+</ul>
+</li>
+<li>GBP learning<ul>
+<li>Continual, self-supervised convergent</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="질문"><a href="#질문" class="headerlink" title="질문"></a>질문</h2><p>Q. iMAP에서 implicit neural representation을 쓴 이유는 무엇인가요? 그냥 mesh에 optimisation하면 안되나요?<br>A. Mesh optimisation은 굉장히 어렵다. Topology 자체가 굉장히 복잡한데, 그 위에 새로운 measurement가 생길때마다 editing을 해야한다면 끔찍하다. 솔직히 어떻게 해야할지 모르겠다. 3D representation에는 여러 방법이 있고 각각의 장단점이 있다.</p>
+<p>Q. iMap을 large-scale로 가져가려면 어떤 난관이 있을까요?<br>A. Large-scale을 고려하고 실험한적은 아직 없다. 아마 더 큰 네트워크가 필요하지 않을까? Reprsentation을 더 풍부하게 하고 싶다면 네트워크는 커져야할것이다.</p>
+<p>Q. iMap의 경우 online learning이 된다는 것이 굉장히 특이하고 신기하지만, 기존의 Deep SLAM 방법론들은 미리 학습해온 모델을 사용하는 경우가 많습니다. 이 두가지를 혼용할 경우 정확도는 당연히 떨어지게 될 것으로 보이고, 이는 두가지 방법론이 적대적으로 보이기도 하는데, 어떻게 이 두가지 연구방법론을 유지하면서 정확도/성능을 높일 생각이신가요? (Stefan Leutenegger 교수님 질문 ㄷㄷ, Davison 교수님 당황 ㅋㅋ)<br>A. 이 방법론 둘 다 해야한다. 하지만 우리는 두 방법이 각각 장단점을 가지고 있다는 것을 안다. Pre-learned된 방법들은 적당히 좋은 성능을 보이지만, 새로운 환경에 가져갔을 때 항상 성능이 애매해지는 것을 볼 수 있다. iMAP 같은 방법은 새로운 환경에서도 바닥부터 새로 트레이닝하면서 좋은 결과를 만들 수 있지만, 매번 새롭게 트레이닝 해야한다는게 매우 귀찮을 것이다. 미래의 로봇은 사실 이 두개를 동시에 다 해야할것이다. 로봇을 샀으면 키자마자 뭔가를 해야하지 않을까? (ㅋㅋ) 하지만 새로운 환경인만큼 새로운 무언가를 배우긴 해야할 것이다. 예를 들어 기본적인 맵핑 알고리즘들은 탑재했지만, semantic 정보를 한 10~30분정도 학습하는건 어떨까? Bayesian의 생각으로 이야기할 때, 결국 <strong>우리는 새로운 것을 배우는 방법</strong>과 <strong>이전에 배운 것 (prior)을 잘 활용하는 방법들</strong>을 <strong>잘 밸런스</strong> 할 수 있지 않을까 생각한다.</p>
+<p>Q. 이 두 방법을 밸런스해야할까요? 아니면 두개를 병렬처리해야할까요?? (ㄷㄷㄷ)<br>A. </p>
+<p>Q. Unified representation이 정말 필요할까요?<br>A. 당연히 상황에 따라서 여러 파라미터가 조정되어야한다. Rearrange task의 경우에는 semantic class / instance도 잘 알아야할 것이고, 정확도도 중요할 것이다. 단순히 장애물을 회피하는 로봇이라면 굳이 그런걸 알 필요는 없다. Manipulation 로봇이라면 mm 단위의 정확도가 필요할수도 있고, 아닐수도 있다 (suction cup같은걸 쓰면 mm단위는 필요없다). Representation에 대해 연구하면서 여러가지 고민을 새롭게 하게 된다.</p>
+<p>Q. iMAP이 맵 하나를 implicit representation에 넣는 것은 잘 보았다. Object-level SLAM을 할 때도 implicit representation이 될 것 같은가? 아니면 graph라던지 explicit representation밖에 없는것인가? (Angela Dai 교수님 질문)<br>A. 아직 잘 모르겠다. 하지만 iMAP을 만들면서 본 것이, 매 프레임마다 맵 자체가 굉장히 흔들리는 것을 볼 수 있다. 이 흔들림은 사실 SGD 등을 통해 네트워크를 최적화하면서 모델 weight가 바뀌는데, 이 때 특정 object (map안에 있는 축구공이라던지)를 자세히 보면, 이 흔들림이 object단위로 균일하게 흔들리는 것을 보았다. 아마 이 object에 대한 weight 파라미터는 그리 많지 않을 것이다. 나는 이를 통해 네트워크 안에 implicit한 형태로 object에 대한 representation이 들어있다고 보고있다. 이러한 representation을 code로 뽑아낸다던지… 등은 아직 잘 모르겠다.</p>
+<p>Q. 그렇다면 몇개의 파라미터만 바꿔서 object를 다룰 수 있게 된다면…  Object를 마음대로 옮긴다던지, 또는 scene deformation을 만들어서 loop closure라던지 구현할 수 있을까요? 아무래도 SLAM 특성 상 이런 방향으로 가고싶을 것 같은데요.(Stefan Leutenegger 교수님 질문)<br>A. 나도 이런 방향으로 연구하고싶다 (ㅋㅋ) 몇개의 파라미터만 조정해서 loop closure를 만들 수 있을까? 그게 될지는 잘 모르겠다. 진짜 잘 모르겠음 (이 말 하시고 고민에 빠지심 ㅋㅋ)</p>
+<p>Q. Rearrangement를 할 때, indirect한 effect가 있다면 이것은 implicit representation이 되야할까? explicit representation이 되야할까?<br>A. </p>
+<p>Q. CAD-model 없이 Object-level SLAM이 가능할까요?<br>A. 어후… 어려울거같다. Class만 가지고 모든 instance의 geometry를 추정할 수 있을까? 사람은 가방을 보았을 때 어디에 포켓이 있고 어디에 지퍼가 있고 등등 잘 알고있지만, 딥러닝은 아직 그정도까지 깊게 이해하고 있지는 않는 것 같다. 간단한 컵/접시 모양은 할 수 있겠다만, 이것 이상의 복잡한 물체들은 아직 많이 어렵다고 본다.<br>코멘트: 그게 된다면 그게 Spatial AI일듯 ㅋㅋ (Angela Dai교수님 ㅋㅋ)</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210529-tartan-scherer/" rel="bookmark">Tartan Series 2021 - Challenges in SLAM - What's ahead (Prof. Sebastian Scherer)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Deep-SLAM/" rel="tag"># Deep SLAM</a>
+              <a href="/tags/Rearrangement/" rel="tag"># Rearrangement</a>
+              <a href="/tags/Embodied-AI/" rel="tag"># Embodied AI</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/RLBench/" rel="tag"># RLBench</a>
+              <a href="/tags/iMAP/" rel="tag"># iMAP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210405-visloc-my-thoughts/" rel="prev" title="Visual localization 기술의 방향?">
+                  <i class="fa fa-chevron-left"></i> Visual localization 기술의 방향?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210408-slamantic-blog/" rel="next" title="SLAMANTIC – Leveraging semantics to improve VSLAM in dynamic environments (NAVER LABS Europe)">
+                  SLAMANTIC – Leveraging semantics to improve VSLAM in dynamic environments (NAVER LABS Europe) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

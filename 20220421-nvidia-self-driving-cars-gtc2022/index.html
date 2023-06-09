@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="강의 들으면서 적은 노트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GTC 2022 - NVIDIA&#39;s self-driving cars">
+<meta property="og:url" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="강의 들으면서 적은 노트">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/1.png">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/2.gif">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/3.png">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/4.png">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/5.png">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/6.png">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/7.gif">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/8.gif">
+<meta property="og:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/9.gif">
+<meta property="article:published_time" content="2022-04-21T13:20:30.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.467Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Autonomous driving">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/1.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>GTC 2022 - NVIDIA's self-driving cars | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%9B%90%EB%B3%B8-%EC%98%81%EC%83%81"><span class="nav-number">1.</span> <span class="nav-text">원본 영상</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">2.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NVIDIA-Drive-%EB%8D%B0%EB%AA%A8"><span class="nav-number">3.</span> <span class="nav-text">NVIDIA Drive 데모</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A7%80%EB%8F%84-%EC%83%9D%EC%84%B1-NVIDIA-DRIVE-Map"><span class="nav-number">3.1.</span> <span class="nav-text">지도 생성 (NVIDIA DRIVE Map)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DRIVE-Concierge"><span class="nav-number">3.2.</span> <span class="nav-text">DRIVE Concierge</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hyperion-8-%ED%94%8C%EB%9E%AB%ED%8F%BC"><span class="nav-number">4.</span> <span class="nav-text">Hyperion 8 플랫폼</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hyperion-9-%ED%94%8C%EB%9E%AB%ED%8F%BC"><span class="nav-number">5.</span> <span class="nav-text">Hyperion 9 플랫폼</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DRIVE-map"><span class="nav-number">6.</span> <span class="nav-text">DRIVE map</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GTC 2022 - NVIDIA's self-driving cars
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-21 22:20:30" itemprop="dateCreated datePublished" datetime="2022-04-21T22:20:30+09:00">2022-04-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">1.2 Machine Learning & Deep Learning</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-4-Robotics/" itemprop="url" rel="index"><span itemprop="name">1.4 Robotics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="원본-영상"><a href="#원본-영상" class="headerlink" title="원본 영상"></a>원본 영상</h1><p><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9Mam94SGFEQ3VzWQ==">https://youtu.be/LjoxHaDCusY<i class="fa fa-external-link-alt"></i></span></p>
+<p>&nbsp;</p>
+<hr>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><ul>
+<li>Ground truth 데이터를 얻는 방법<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9ncy5udmlkaWEuY29tL2Jsb2cvMjAyMS8wNi8xMC9udmlkaWEtZGVlcG1hcC1tYXBwaW5nLWRyaXZlLXBsYXRmb3JtLw==">DeepMap 회사 인수<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9rby1rci9zZWxmLWRyaXZpbmctY2Fycy9oZC1tYXBwaW5nLw==">HD Mapping (DRIVE MAP) 알고리즘<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9udmlkaWFuZXdzLm52aWRpYS5jb20vbmV3cy9udmlkaWEtYW5ub3VuY2VzLW9tbml2ZXJzZS1yZXBsaWNhdG9yLXN5bnRoZXRpYy1kYXRhLWdlbmVyYXRpb24tZW5naW5lLWZvci10cmFpbmluZy1haXM=">Omniverse 시뮬레이터<i class="fa fa-external-link-alt"></i></span></li>
+<li>Human-labeled 데이터</li>
+</ul>
+</li>
+<li>딥러닝 네트워크 트레이닝<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9rby1rci9kYXRhLWNlbnRlci9kZ3gtc3lzdGVtcy8=">DGX 학습 워크스테이션<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubnZpZGlhLmNvbS9kcml2ZQ==">DRIVE AV 알고리즘<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>디지털 트윈 워크스테이션<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9rby1rci9vbW5pdmVyc2UvcGxhdGZvcm0vb3Z4Lw==">OVX 학습 워크스테이션<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>자동차에 올라가는 보드<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9rby1rci9hdXRvbm9tb3VzLW1hY2hpbmVzL2VtYmVkZGVkLXN5c3RlbXMvamV0c29uLW9yaW4v">NVIDIA Jetson AGX Orin<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/1.png" class="" title="overview"> 
+
+<p>&nbsp;</p>
+<hr>
+<h1 id="NVIDIA-Drive-데모"><a href="#NVIDIA-Drive-데모" class="headerlink" title="NVIDIA Drive 데모"></a>NVIDIA Drive 데모</h1><h2 id="지도-생성-NVIDIA-DRIVE-Map"><a href="#지도-생성-NVIDIA-DRIVE-Map" class="headerlink" title="지도 생성 (NVIDIA DRIVE Map)"></a>지도 생성 (NVIDIA DRIVE Map)</h2><blockquote>
+<p>TLDR; 자동 맵핑</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9rby1rci9zZWxmLWRyaXZpbmctY2Fycy9oZC1tYXBwaW5nLw==">HD Mapping (DRIVE MAP) 알고리즘<i class="fa fa-external-link-alt"></i></span>을 기반으로 사전에 이미 따놓은 지도를 사용함. 이 지도는 NVIDIA가 인수한 DeepMap이라는 회사의 알고리즘과 기존의 NVIDIA가 만든 DRIVE Map 기술의 클라우드 인프라를 합친 것임.</p>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/2.gif" class="" title="deepmap"> 
+
+<p>&nbsp;</p>
+<h2 id="DRIVE-Concierge"><a href="#DRIVE-Concierge" class="headerlink" title="DRIVE Concierge"></a>DRIVE Concierge</h2><blockquote>
+<p>TLDR; 잘되는 대화형 AI. 시선인식. 멀티모달 디텍션. 자동주차. 서라운드뷰 모니터링.</p>
+</blockquote>
+<p>데모에서 주인공은 차를 탄다. 차를 타면 대화형 AI인 DRIVE 아바타가 반겨준다.</p>
+<p>주인공의 친구가 ‘San Jose civic에서 나 좀 태워줘’라는 문자를 받은걸 아바타가 주인공에게 알려주며, ‘거기로 갈까요?’라고 물어본다. 주인공은 ‘응 거기로 가자’라고 얘기하고, 아바타는 목적지를 그곳으로 설정한다.</p>
+<p>운행을 시작하고 얼마 안되서 ‘DRIVE Pilot 실행해’라고 말함으로써 자율주행이 시작된다.</p>
+<p>주인공이 ‘친구에게 가고있다고 알려줄래?’ 라고 얘기하니, 아바타는 주인공의 친구에게 ‘12분 후 도착 예정’이라는 문자를 보낸다. </p>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/3.png" class="" title="avartar"> 
+
+<p>보행자, 공사 사인 등을 잘 피해간다. 움직이는 객체들에 대해서는 confidence map을 통해 검출 정확도도 표시한다. 자전거 도로도 잘 피해낸다.</p>
+<p>차는 특정 인물을 검출할 수 있는 능력이 있어, 주인공의 친구를 바로 알아챈다.</p>
+<p>주인공이 바깥을 바라보며 ‘저 빌딩이 뭐야?’라고 물어본다. 이 때, 자동차는 시선트랙킹을 통해 어떤 빌딩을 이야기하는지 추론한다. 주인공이 물어본 빌딩은 쇼를 하는 곳인데, 주인공은 ‘무슨 쇼를 하는지’ 물어보고 아바타가 답을해주자 ‘토요일 저녁에 티켓 2개 예약해줘’라고 한다.</p>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/4.png" class="" title="multimodal"> 
+
+<p>데모에서는 실제 세상과 Omniverse 기반의 DRIVE SIM의 세상이 거의 비슷하다고 이야기한다. DRIVE SIM에서도 NVIDIA 자동차 플랫폼인 Hyperion 8과 동일한 센서를 가지고 있다.</p>
+<p>좌측 이미지가 omniverse 시뮬레이션, 오른쪽이 실제이다.</p>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/5.png" class="" title="hyperion and omniverse"> 
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/6.png" class="" title="omniverse vs real"> 
+
+<p>도착하고나서, 주인공은 ‘차를 주차해줘’라고 얘기한다. 자동차는 Surround view를 이용해서 주변에 주차할 수 있는 곳을 자동으로 탐색해 주차에 성공한다.</p>
+<p>&nbsp;</p>
+<hr>
+<h1 id="Hyperion-8-플랫폼"><a href="#Hyperion-8-플랫폼" class="headerlink" title="Hyperion 8 플랫폼"></a>Hyperion 8 플랫폼</h1><blockquote>
+<p>TLDR; 잘나가는 히페리온 8</p>
+</blockquote>
+<p>Hyperion 8 플랫폼은 NVIDIA DRIVE의 가장 중요한 부분이다. 센서, 네트워크, 2개의 드라이빙을 위한 컴퓨터, 1개의 아바타 컴퓨터, 1개의 mission recorder, safety + cybersecurity 시스템이 있다고 한다.</p>
+<p>8개의 카메라를 사용해서 360 각도를 커버한다. 레이더, 라이다, 초음파 센서를 사용하고 있다.</p>
+<p>2024년부터 벤츠 차에 올라간다. 2025년에는 재규어 랜드로버에 올라간다.</p>
+<p>&nbsp;</p>
+<hr>
+<h1 id="Hyperion-9-플랫폼"><a href="#Hyperion-9-플랫폼" class="headerlink" title="Hyperion 9 플랫폼"></a>Hyperion 9 플랫폼</h1><blockquote>
+<p>TLDR; 더 잘나갈 히페리온 9</p>
+</blockquote>
+<p>2026년부터 차에 탑재될 새로운 <strong>Hyperion 9 플랫폼</strong>도 공개했다.</p>
+<p>14 카메라, 9개 레이더, 3개 라이다, 20 초음파 센서를 사용한다. Hyperion 8보다 2배나 되는 센서의 양을 처리할 수 있다.</p>
+<p>&nbsp;</p>
+<hr>
+<h1 id="DRIVE-map"><a href="#DRIVE-map" class="headerlink" title="DRIVE map"></a>DRIVE map</h1><blockquote>
+<p>TLDR; 지구 스케일 지도 딸 예정. DRIVE map으로 딴 다음에 omniverse에 올려서 다양한 상황 시뮬레이션 가능. 또, 최근 연구하는 기술로는 NeRF를 써서 새로운 시점에서의 데이터 생성 및 물리적인 렌더링 가능.</p>
+</blockquote>
+<p>카메라, 레이더, 라이다로 지도를 만든다. 각각의 센서가 모든 지도 레이어에 접근해서 독립적으로 위치 추정을 수행할 수 있다.</p>
+<p>DRIVE map은 2가지 모드가 있다. 1. Ground truth survey mapping, 2. Crowd-sourced fleet mapping 이다. 아마 전자는 엄청나게 센서가 많은 차량이 돌아다니면서 정확하게 맵을 잡아내는걸꺼고, 후자는 양산된 차들이 돌아다니면서 맵을 업데이트 시켜주는 걸 것이다.</p>
+<p>2024년까지 북미, 유럽, 아시아의 대부분의 고속도로 지도를 따서 디지털 트윈을 만들 계획을 추진하고 있다고 한다. 목표는 지구의 스케일의 디지털 트윈을 만들어서, 자율주행 차를 출시하기 전에 엄청난 양의 데이터로 안전을 검증하는 시스템을 만드는 것이라고 한다.</p>
+<p>&nbsp;</p>
+<p>현재 이를 위해 2가지 방법을 쓰고 있다고 한다.</p>
+<p>첫번째 방법은 NVIDIA DRIVE Map을 NVIDIA Omniverse로 로딩한 후, 실제 객체들의 위치에 가상 렌더링 객체를 올려 정확한 그래픽 요소를 채운다.</p>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/7.gif" class="" title="drive map to omniverse"> 
+
+<p>그 후, DRIVE Map에 있는 동적 객체들을 딥러닝으로 검출해서, 그 위치를 디지털 트윈으로 대체한다. 해당 객체들은 이제 직접 컨트롤 할 수 있게 되며, 이를 통해 다양한 상황들을 시뮬레이션으로 만들어낼 수 있다.</p>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/8.gif" class="" title="adversarial scenarios">
+
+<p>&nbsp; </p>
+<p>두번째 방법은, 운전 중에 녹화된 영상을 기반으로 3D reconstruction을 사용해서 지도를 만든다. 동적 객체들을 검출해서 정적 물체만 가득한 지도를 만들고, 빈 곳들은 neural reconstruction (i.e. NeRF)를 이용해서 채워넣는다. 또, NeRF를 사용해서 자동차의 시점을 원하는대로 돌려 새로운 데이터를 만들어낼 수 있다.</p>
+<img src="/20220421-nvidia-self-driving-cars-gtc2022/9.gif" class="" title="nerf"> 
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220315-autonomous-driving-lidar/" rel="bookmark">자율주행 자동차의 눈 - 라이다 - 이용이 책임 발표 노트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220315-autonomous-driving-tech-and-datasets/" rel="bookmark">자율주행 주요 기술 및 데이터셋 관련 동향 - 정구민 교수님 발표 노트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210530-icra-2021/" rel="bookmark">ICRA 2021 튜토리얼 / 워크샵 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210619-cvpr-2021/" rel="bookmark">CVPR 2021 튜토리얼 / 워크샵 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210719-icra-vins-stefan-leutenegger/" rel="bookmark">ICRA 2021 - Visual-Inertial SLAM and Spatial AI for Mobile Robotics (Prof. Stefan Leutenegger)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Autonomous-driving/" rel="tag"># Autonomous driving</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220421-10x-developer/" rel="prev" title="10x 개발자 되는 방법">
+                  <i class="fa fa-chevron-left"></i> 10x 개발자 되는 방법
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220428-thread-esyang/" rel="next" title="은성의 Thread 수업">
+                  은성의 Thread 수업 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

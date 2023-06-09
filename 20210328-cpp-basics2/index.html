@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Marc Gregoire의 &quot;Professional C++&quot;의 챕터1 파트2 정리 - 쉬운 내용이니까 중요한 내용만...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Professional C++ - C++ 고급 기능 (?) (Ch1, Part 2)">
+<meta property="og:url" content="https://changh95.github.io/20210328-cpp-basics2/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Marc Gregoire의 &quot;Professional C++&quot;의 챕터1 파트2 정리 - 쉬운 내용이니까 중요한 내용만...">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-27T15:51:41.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.839Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210328-cpp-basics2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Professional C++ - C++ 고급 기능 (?) (Ch1, Part 2) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-2-C-String"><span class="nav-number">1.</span> <span class="nav-text">1.2.2 C++ String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-2-Pointer-Dynamic-memory-allocation"><span class="nav-number">2.</span> <span class="nav-text">1.2.2 Pointer + Dynamic memory allocation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-3-const"><span class="nav-number">3.</span> <span class="nav-text">1.2.3 const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-4-%EB%A0%88%ED%8D%BC%EB%9F%B0%EC%8A%A4"><span class="nav-number">4.</span> <span class="nav-text">1.2.4 레퍼런스</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-5-Exception"><span class="nav-number">5.</span> <span class="nav-text">1.2.5 Exception</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-6-Type-inferencing"><span class="nav-number">6.</span> <span class="nav-text">1.2.6 Type inferencing</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210328-cpp-basics2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Professional C++ - C++ 고급 기능 (?) (Ch1, Part 2)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-03-28 00:51:41" itemprop="dateCreated datePublished" datetime="2021-03-28T00:51:41+09:00">2021-03-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/Professional-C-%EC%B1%85/" itemprop="url" rel="index"><span itemprop="name">Professional C++ 책</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="1-2-2-C-String"><a href="#1-2-2-C-String" class="headerlink" title="1.2.2 C++ String"></a>1.2.2 C++ String</h2><p> </p>
+<h2 id="1-2-2-Pointer-Dynamic-memory-allocation"><a href="#1-2-2-Pointer-Dynamic-memory-allocation" class="headerlink" title="1.2.2 Pointer + Dynamic memory allocation"></a>1.2.2 Pointer + Dynamic memory allocation</h2><ul>
+<li><strong>Stack</strong><ul>
+<li>함수마다 독립적인 메모리 공간 제공</li>
+<li>함수가 끝나면 자동으로 메모리 할당 해제</li>
+</ul>
+</li>
+<li><strong>Heap</strong><ul>
+<li>Stack과 독립적인 메모리 공간</li>
+<li>함수가 끝나도 계속 저장하고 싶으면 Heap에 저장</li>
+<li>스마트 포인터가 아닌 이상 자동으로 할당 해제 불가능</li>
+</ul>
+</li>
+<li>Raw pointer<ul>
+<li>C에서 사용하는 malloc/free 대신 new/delete 사용.</li>
+<li>개인적으로 코딩테스트용 아니면 잘 안쓰는 편…</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본 구조</span></span><br><span class="line"><span class="keyword">int</span>* intPointer;</span><br><span class="line"><span class="keyword">int</span>* intPointer2 = <span class="literal">nullptr</span>;</span><br><span class="line"><span class="keyword">auto</span> intPointer = <span class="keyword">new</span> <span class="keyword">int</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 동적 배열 할당</span></span><br><span class="line"><span class="keyword">int</span> arraySize = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span>* myVariableSizedARray = <span class="keyword">new</span> <span class="keyword">int</span>[ArraySize];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 참조 + 역참조</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">8</span>;</span><br><span class="line"><span class="keyword">int</span>* intPointer = &amp;i;</span><br><span class="line">*intPointer = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 구조체 리턴</span></span><br><span class="line">Employee* employee = getEmployee(); </span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; (*employee).salary &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">Employee* employee = getEmployee(); </span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; employee-&gt;salary &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// 이 방식이 좀 더 읽기 쉬운듯</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Smart pointer</strong><ul>
+<li><strong>std::unique_ptr</strong><ul>
+<li>scope를 벗어나거나 삭제되면 메모리 자동 해제<ul>
+<li>return, 또는 exception에서 이득</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>std::shared_ptr</strong><ul>
+<li>Reference counter가 0이 되면 메모리 해제</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 기본</span></span><br><span class="line"><span class="keyword">auto</span> employee_unique = <span class="built_in">std</span>::make_unique&lt;Employee&gt;(); <span class="comment">// unique_ptr</span></span><br><span class="line"><span class="keyword">auto</span> employee_shared = <span class="built_in">std</span>::make_shared&lt;Employee&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 배열</span></span><br><span class="line"><span class="keyword">auto</span> employees = <span class="built_in">std</span>::make_unique&lt;Employee[]&gt;(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 구조체 멤버 변수 호출</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; employee-&gt;salary &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; <span class="comment">// raw pointer랑 동일</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-3-const"><a href="#1-2-3-const" class="headerlink" title="1.2.3 const"></a>1.2.3 const</h2><ul>
+<li>C에서는 상수 값을 <code>#define</code>으로 사용했었음.</li>
+<li>C++에서는 <code>const</code>를 사용함.<ul>
+<li><code>#define</code>은 보통 하드웨어 또는 빌드 configuration이 아닌 이상 잘 안씀.</li>
+</ul>
+</li>
+<li>값이 변경되지 않도록 보장하는 작업.<ul>
+<li>실수로 변경하는 경우만 보호해줌.</li>
+</ul>
+</li>
+<li>함수 매개변수로 const를 사용해서, 함수가 실행되는 도중 정보가 의도치 않게 변경되는 것으로부터 보호함.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> kPi = <span class="number">3.141592654</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> path = <span class="string">"../../file.exe"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; someString)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  someString = <span class="string">"New string!"</span>; <span class="comment">// 여기서 컴파일 에러 발생</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h2 id="1-2-4-레퍼런스"><a href="#1-2-4-레퍼런스" class="headerlink" title="1.2.4 레퍼런스"></a>1.2.4 레퍼런스</h2><ul>
+<li>메모리를 새로 할당하지 않고 기존 변수에 새 이름을 지정할 수 있음.<ul>
+<li><code>int x = 100; int&amp; refVariable = x;</code></li>
+</ul>
+</li>
+<li>‘<strong>Pass by reference</strong>‘는 함수를 만들 때 고려해야하는 중요한 포인트임.<ul>
+<li>일반적으로 함수에 변수를 전달할 때는 pass by value를 사용함.<ul>
+<li>이 방식은 기존 변수를 copy한 후에 함수에 전달 함.<ul>
+<li>원본이 손상되지 않음</li>
+</ul>
+</li>
+<li>즉, copy에 대한 계산이 필요없어짐.</li>
+<li>또 원본을 수정할 수 있음.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>종종 큰 구조체를 넘기는 경우 1. 원본을 수정하고 싶지 않으면서, 2. 복사에 시간이 너무 오래걸리는 경우가 있음.<ul>
+<li>그럴 때는 ‘<strong>Pass by const reference</strong>‘를 사용하면 됨.</li>
+<li>복사를 하지 않고 reference를 넘기면서, const로 보호처리를 하는 것임.</li>
+<li>container의 형태를 하고 있는 것들은 왠만하면 다 reference를 걸고 넘기는 것이 좋음.<ul>
+<li>primitives는 그냥 넘겨도 무방함.</li>
+<li><strong>이미지</strong> 같이 큰 구조체를 넘긴다? <strong>백프로 reference걸고 넘겨야함</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">passByValue</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  ... <span class="comment">// i, j, k의 복사본이 들어옴.</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">passByReference</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span>&amp; inputString)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  inputString = <span class="string">"String updated"</span>; <span class="comment">// 원본 inputString의 값이 업데이트 됨</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">passByConstReference</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; inputString)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  inputString = <span class="string">"String updated?"</span>; <span class="comment">// 컴파일러 에러</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h2 id="1-2-5-Exception"><a href="#1-2-5-Exception" class="headerlink" title="1.2.5 Exception"></a>1.2.5 Exception</h2><ul>
+<li>C++는 잘못된 메모리에 접근해도 에러를 내지 않는다.</li>
+<li>이런 의도치 않은 실수를 예방하기 위해 exception을 사용한다<ul>
+<li>Exception을 사용해서 프로그램이 터질 때 버그리포트를 만들게 할 수 있다.</li>
+</ul>
+</li>
+<li><code>throw</code>, 또는 <code>try</code> &amp; <code>catch</code>가 많이 사용된다.<ul>
+<li>하지만 이걸 쓰지 않고 <code>assert</code>로 통일해서 쓰는 회사들도 있다.</li>
+<li>assert는 debug 모드일 때 버그를 확인할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">processImage</span><span class="params">(<span class="keyword">const</span> Image&amp; img)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="keyword">if</span> (img.empty())</span><br><span class="line">    <span class="keyword">throw</span> <span class="built_in">std</span>::invalid_arguemnt(<span class="string">"Input image is empty. Cannot process empty images"</span>);</span><br><span class="line"></span><br><span class="line">  ... <span class="comment">// some image processing</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">{</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; foo(<span class="number">0</span>,<span class="number">0</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; foo(<span class="number">10</span>,<span class="number">0</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; foo(<span class="number">100</span>,<span class="number">0</span>) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>; </span><br><span class="line">}</span><br><span class="line"><span class="keyword">catch</span> (<span class="keyword">const</span> <span class="built_in">std</span>::invalid_argument&amp; exception)</span><br><span class="line">{</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Exception"</span> &lt;&lt; exception.what() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h2 id="1-2-6-Type-inferencing"><a href="#1-2-6-Type-inferencing" class="headerlink" title="1.2.6 Type inferencing"></a>1.2.6 Type inferencing</h2><ul>
+<li><code>auto</code> 키워드<ul>
+<li>어디서 쓰나?<ul>
+<li>자동으로 함수의 리턴 타입 추론</li>
+<li>Structural binding</li>
+<li>lambda 함수 등에서 쓰임</li>
+</ul>
+</li>
+<li>되도록이면 auto 쓰기!<ul>
+<li>처음에 type이 어떤 형태인지 명시적으로 표현할 때만 제대로 표현해주고, 그 후에는 변수 이름을 적당히 만들어줘서 모두 auto로 돌리는게 좋다.</li>
+<li>개인적으로 함수를 만들 때 리턴 타입에는 auto를 안쓰는 편.</li>
+<li><code>std::make_unique&lt;&gt;()</code>나 <code>std::make_shared&lt;&gt;()</code>를 쓸 때 좌변에는 무조건 auto를 쓰는 편. 왜냐하면 오른쪽에 어차피 타입이 적혀있기 때문.<ul>
+<li>가독성 부스트</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>decltype</code> 키워드<ul>
+<li>인수로 지정한 표현식의 타입을 알아냄.</li>
+<li>const를 삭제하지 않음.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> str = <span class="string">"some string"</span>;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">constFoo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> str = <span class="string">"some const string"</span>;</span><br><span class="line">  <span class="keyword">return</span> str;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="comment">// auto 쓰기</span></span><br><span class="line">  <span class="keyword">auto</span> str1 = foo();</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">auto</span> str2 = constFoo(); <span class="comment">// 여기서 const 중요!! const를 return하는데 그냥 auto만 써버리면 copy가 일어남.</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// decltype</span></span><br><span class="line">  <span class="keyword">int</span> x = <span class="number">123</span>;</span><br><span class="line">  <span class="keyword">decltype</span>(x) y = <span class="number">456</span>; <span class="comment">// x의 타입 가져오기</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">decltype</span>(constFoo()) str3 = constFoo(); <span class="comment">// const std::string 리턴 타입을 전부 추론함.</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210327-Andrew-Ng-MLOps-talk/" rel="prev" title="MLOps - From Model-centric to Data-centric AI (Andrew Ng 발표)">
+                  <i class="fa fa-chevron-left"></i> MLOps - From Model-centric to Data-centric AI (Andrew Ng 발표)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210328-cpp-basics-3/" rel="next" title="Professional C++ - C++의 객체지향 언어 특성 소개 + 프로그램 만들기 (Ch1, Part 3-6)">
+                  Professional C++ - C++의 객체지향 언어 특성 소개 + 프로그램 만들기 (Ch1, Part 3-6) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

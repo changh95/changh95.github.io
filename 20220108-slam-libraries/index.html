@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="SLAM 개발에 유용한 라이브러리">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLAM 개발에 유용한 라이브러리">
+<meta property="og:url" content="https://changh95.github.io/20220108-slam-libraries/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="SLAM 개발에 유용한 라이브러리">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-08T06:10:39.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.195Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="PCL">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual SLAM">
+<meta property="article:tag" content="LiDAR SLAM">
+<meta property="article:tag" content="Tutorial">
+<meta property="article:tag" content="Eigen">
+<meta property="article:tag" content="OpenCV">
+<meta property="article:tag" content="Open3D">
+<meta property="article:tag" content="COLMAP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220108-slam-libraries/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>SLAM 개발에 유용한 라이브러리 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%98%81%EC%83%81%EC%B2%98%EB%A6%AC"><span class="nav-number">1.</span> <span class="nav-text">영상처리</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenCV"><span class="nav-number">1.1.</span> <span class="nav-text">OpenCV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EmguCV"><span class="nav-number">1.2.</span> <span class="nav-text">EmguCV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FastCV"><span class="nav-number">1.3.</span> <span class="nav-text">FastCV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenGV"><span class="nav-number">1.4.</span> <span class="nav-text">OpenGV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCL"><span class="nav-number">1.5.</span> <span class="nav-text">PCL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Open3D"><span class="nav-number">1.6.</span> <span class="nav-text">Open3D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GML-Camera-Calibration-Toolbox"><span class="nav-number">1.7.</span> <span class="nav-text">GML Camera Calibration Toolbox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-camera-calibration"><span class="nav-number">1.8.</span> <span class="nav-text">Android camera calibration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#COLMAP"><span class="nav-number">1.9.</span> <span class="nav-text">COLMAP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FFmpeg"><span class="nav-number">1.10.</span> <span class="nav-text">FFmpeg</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenMVS"><span class="nav-number">1.11.</span> <span class="nav-text">OpenMVS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenMVG"><span class="nav-number">1.12.</span> <span class="nav-text">OpenMVG</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenSfM"><span class="nav-number">1.13.</span> <span class="nav-text">OpenSfM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Meshroom"><span class="nav-number">1.14.</span> <span class="nav-text">Meshroom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM-Compute-Library"><span class="nav-number">1.15.</span> <span class="nav-text">ARM Compute Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vilib"><span class="nav-number">1.16.</span> <span class="nav-text">vilib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REMODE"><span class="nav-number">1.17.</span> <span class="nav-text">REMODE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deprecated%E2%80%A6"><span class="nav-number">1.18.</span> <span class="nav-text">Deprecated…</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%88%98%ED%95%99-%EC%B5%9C%EC%A0%81%ED%99%94"><span class="nav-number">2.</span> <span class="nav-text">수학 &#x2F; 최적화</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Eigen"><span class="nav-number">2.1.</span> <span class="nav-text">Eigen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BLAS-ATLAS-LAPACK"><span class="nav-number">2.2.</span> <span class="nav-text">BLAS + ATLAS + LAPACK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ceres-solver"><span class="nav-number">2.3.</span> <span class="nav-text">Ceres-solver</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g2o"><span class="nav-number">2.4.</span> <span class="nav-text">g2o</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GTSAM"><span class="nav-number">2.5.</span> <span class="nav-text">GTSAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SE-Sync"><span class="nav-number">2.6.</span> <span class="nav-text">SE-Sync</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sophus"><span class="nav-number">2.7.</span> <span class="nav-text">Sophus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manif"><span class="nav-number">2.8.</span> <span class="nav-text">Manif</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%94%A5%EB%9F%AC%EB%8B%9D"><span class="nav-number">3.</span> <span class="nav-text">딥러닝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TensorFlow-PyTorch-MxNet"><span class="nav-number">3.1.</span> <span class="nav-text">TensorFlow &#x2F; PyTorch &#x2F; MxNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Detectron-2"><span class="nav-number">3.2.</span> <span class="nav-text">Detectron 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DarkNet"><span class="nav-number">3.3.</span> <span class="nav-text">DarkNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DLib"><span class="nav-number">3.4.</span> <span class="nav-text">DLib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DBoW2-DBoW3-FBoW"><span class="nav-number">3.5.</span> <span class="nav-text">DBoW2 &#x2F; DBoW3 &#x2F; FBoW</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SNPE-SDK"><span class="nav-number">3.6.</span> <span class="nav-text">SNPE SDK</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%8B%9C%EB%AE%AC%EB%A0%88%EC%9D%B4%EC%85%98"><span class="nav-number">4.</span> <span class="nav-text">시뮬레이션</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CARLA"><span class="nav-number">4.1.</span> <span class="nav-text">CARLA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Habitat-Sim-Replica"><span class="nav-number">4.2.</span> <span class="nav-text">Habitat-Sim + Replica</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AirSim"><span class="nav-number">4.3.</span> <span class="nav-text">AirSim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NVIDIA-Omniverse-Isaac-Sim"><span class="nav-number">4.4.</span> <span class="nav-text">NVIDIA Omniverse &#x2F; Isaac Sim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gazebo"><span class="nav-number">4.5.</span> <span class="nav-text">Gazebo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B7%B8%EB%9E%98%ED%94%BD%EC%8A%A4-%EB%A0%8C%EB%8D%94%EB%A7%81"><span class="nav-number">5.</span> <span class="nav-text">그래픽스 &#x2F; 렌더링</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenGL"><span class="nav-number">5.1.</span> <span class="nav-text">OpenGL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vulkan"><span class="nav-number">5.2.</span> <span class="nav-text">Vulkan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Metal"><span class="nav-number">5.3.</span> <span class="nav-text">Metal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Qt"><span class="nav-number">5.4.</span> <span class="nav-text">Qt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filament"><span class="nav-number">5.5.</span> <span class="nav-text">Filament</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pangolin"><span class="nav-number">5.6.</span> <span class="nav-text">Pangolin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rviz"><span class="nav-number">5.7.</span> <span class="nav-text">rviz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ogre-GODOT-Hazel-VTK-ITK"><span class="nav-number">5.8.</span> <span class="nav-text">Ogre, GODOT, Hazel, VTK, ITK</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%86%B5%EC%8B%A0"><span class="nav-number">6.</span> <span class="nav-text">통신</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gRPC"><span class="nav-number">6.1.</span> <span class="nav-text">gRPC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpcLib"><span class="nav-number">6.2.</span> <span class="nav-text">rpcLib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lcm"><span class="nav-number">6.3.</span> <span class="nav-text">lcm</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220108-slam-libraries/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SLAM 개발에 유용한 라이브러리
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-08 15:10:39" itemprop="dateCreated datePublished" datetime="2022-01-08T15:10:39+09:00">2022-01-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>C++ 개발에 유용한 라이브러리들은 <a href="www.cv-learn.com/20220108-slam-libraries/">여기</a>를 봐주세요!</p>
+</blockquote>
+<blockquote>
+<p>라이브러리마다 <strong>3줄 요약 + 링크</strong>를 남깁니다.</p>
+</blockquote>
+<h2 id="영상처리"><a href="#영상처리" class="headerlink" title="영상처리"></a>영상처리</h2><h3 id="OpenCV"><a href="#OpenCV" class="headerlink" title="OpenCV"></a>OpenCV</h3><blockquote>
+<p>제일 많이 사용되는 영상처리 라이브러리!<br>왠만한 플랫폼에 적용 가능 + 왠만한 영상 알고리즘 성능의 베이스라인<br>개인적으로 생각하는 SLAM 개발자의 필수 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuY3Yub3JnLw==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW5jdi9vcGVuY3Y=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="EmguCV"><a href="#EmguCV" class="headerlink" title="EmguCV"></a>EmguCV</h3><blockquote>
+<p>OpenCV의 C# 버전<br>C# 유니티를 쓰면서 필요하다면 쓸 수 있겠지만, 개인적으로는 C++ 모듈로 개발한 다음에 export하는 것을 추천<br>블로그 글 순서 상 여기에 적었지만, 사실 그렇게 추천하는 라이브러리는 아님</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2VtZ3Vjdi9lbWd1Y3Y=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="FastCV"><a href="#FastCV" class="headerlink" title="FastCV"></a>FastCV</h3><blockquote>
+<p>ARM 코어 + Snapdragon Mobile CPU에서 가속이 잘 되도록 만든 컴퓨터 비전 라이브러리<br>모바일 전용 영상처리가 필요할 때 좋을 듯</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIucXVhbGNvbW0uY29tL3NvZnR3YXJlL2Zhc3Rjdi1zZGs=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIucXVhbGNvbW0uY29tL3NpdGVzL2RlZmF1bHQvZmlsZXMvZG9jcy9mYXN0Y3YvYXBpL2luZGV4Lmh0bWw=">API doc<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="OpenGV"><a href="#OpenGV" class="headerlink" title="OpenGV"></a>OpenGV</h3><blockquote>
+<p>3D geometric vision을 위한 minimal / non-minimal solver 알고리즘들을 모아놓은 라이브러리<br>EPnP, P3P와 같은 알고리즘 구현체가 상당히 좋음</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sYXVyZW50a25laXAuZ2l0aHViLmlvL29wZW5ndi8=">웹사이트 / API doc<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9mdXJnYWxlcC5naXRodWIuaW8vYmliL2tuZWlwX2ljcmExNC5wZGY=">논문: Kneip 2014 - OpenGV: A Unified and Generalized Approach to Real-Time Calibrated Geometric Vision<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="PCL"><a href="#PCL" class="headerlink" title="PCL"></a>PCL</h3><blockquote>
+<p>포인트 클라우드 프로세싱 라이브러리<br>LiDAR SLAM, RGB-D SLAM을 한다면 필수로 사용하는 라이브러리<br>OpenCV에 더불어 사용할 수 있으면 매우 도움이 됨</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wb2ludGNsb3Vkcy5vcmcv">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BvaW50Q2xvdWRMaWJyYXJ5L3BjbA==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Open3D"><a href="#Open3D" class="headerlink" title="Open3D"></a>Open3D</h3><blockquote>
+<p>PCL을 위협하는 최신 라이브러리<br>하지만 아직 첫번째 메이저 릴리즈가 진행되지 않았음 (i.e. 조금 불안정할수도?)<br>딥러닝 기능들과도 밀접한 연관을 가지고 있기 때문에, 최신 연구를 한다면 강력하게 추천</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5vcGVuM2Qub3JnLw==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lzbC1vcmcvT3BlbjNE">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="GML-Camera-Calibration-Toolbox"><a href="#GML-Camera-Calibration-Toolbox" class="headerlink" title="GML Camera Calibration Toolbox"></a>GML Camera Calibration Toolbox</h3><blockquote>
+<p>쓰기 쉬운 카메라 캘리브레이션 앱<br>Camera coefficient를 4개까지 계산할 수 있다.<br>스마트폰 카메라처럼 화각이 넓은 카메라를 쓴다면 OpenCV 카메라 캘리브레이션을 추천한다</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cDovL2dyYXBoaWNzLmNzLm1zdS5ydS9lbi9ub2RlLzkwOQ==">웹사이트 (요즘 좀좀 링크가 다운되는듯?)<i class="fa fa-external-link-alt"></i></span></li>
+<li><a href="./GML_CameraCalibrationInstall_0.75.exe.zip">Windows용 파일 다운로드</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Android-camera-calibration"><a href="#Android-camera-calibration" class="headerlink" title="Android camera calibration"></a>Android camera calibration</h3><blockquote>
+<p>안드로이드 모바일에서 카메라 캘리브레이션 하는 앱<br>OpenCV3와 Camera2 API를 이용함</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JwbmcvYW5kcm9pZC1jYW1lcmEtY2FsaWJyYXRpb24=">GitHub 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="COLMAP"><a href="#COLMAP" class="headerlink" title="COLMAP"></a>COLMAP</h3><blockquote>
+<p>Structure-from-Motion / Multi-View Stereo 라이브러리<br>3D reconstruction 또는 Visual localization을 연구하려면 필수</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jb2xtYXAuZ2l0aHViLmlvLw==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NvbG1hcC9jb2xtYXA=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="FFmpeg"><a href="#FFmpeg" class="headerlink" title="FFmpeg"></a>FFmpeg</h3><blockquote>
+<p>동영상 처리 라이브러리<br>OpenCV에 포함시켜 빌드 할 수 있음 (이 방법이 더 쓰기 쉬움…)</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZmZtcGVnLm9yZy8=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="OpenMVS"><a href="#OpenMVS" class="headerlink" title="OpenMVS"></a>OpenMVS</h3><blockquote>
+<p>COLMAP이나 OpenMVG가 하지 못하는 full surface reconstruction을 수행하는 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NkY3NlYWNhdmUvb3Blbk1WUw==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="OpenMVG"><a href="#OpenMVG" class="headerlink" title="OpenMVG"></a>OpenMVG</h3><blockquote>
+<p>COLMAP 과 비슷한 용도의 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW5NVkcvb3Blbk1WRw==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="OpenSfM"><a href="#OpenSfM" class="headerlink" title="OpenSfM"></a>OpenSfM</h3><blockquote>
+<p>Mapillary에서 만든 Python 기반 Structure-from-Motion 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hcGlsbGFyeS9PcGVuU2ZN">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Meshroom"><a href="#Meshroom" class="headerlink" title="Meshroom"></a>Meshroom</h3><blockquote>
+<p>Point cloud의 시각화하여 후처리 및= 분석을 할 수 있는 프로그램.</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hbGljZXZpc2lvbi5vcmcvI21lc2hyb29t">웹사이트<i class="fa fa-external-link-alt"></i></span> </li>
+</ul>
+</li>
+</ul>
+<h3 id="ARM-Compute-Library"><a href="#ARM-Compute-Library" class="headerlink" title="ARM Compute Library"></a>ARM Compute Library</h3><blockquote>
+<p>ARM CPU/GPU코어에서 빠른 딥러닝 연산을 위한 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0FSTS1zb2Z0d2FyZS9Db21wdXRlTGlicmFyeQ==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="vilib"><a href="#vilib" class="headerlink" title="vilib"></a>vilib</h3><blockquote>
+<p>VIO 프론트엔드를 CUDA 가속 시킨 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3V6aC1ycGcvdmlsaWI=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="REMODE"><a href="#REMODE" class="headerlink" title="REMODE"></a>REMODE</h3><blockquote>
+<p>Probabilistic dense map을 생성해서 sparse -&gt; dense point cloud를 만드는 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3V6aC1ycGcvcnBnX29wZW5fcmVtb2Rl">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Deprecated…"><a href="#Deprecated…" class="headerlink" title="Deprecated…"></a>Deprecated…</h3><ul>
+<li>CVD</li>
+<li>Metaio SDK</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="수학-최적화"><a href="#수학-최적화" class="headerlink" title="수학 / 최적화"></a>수학 / 최적화</h2><h3 id="Eigen"><a href="#Eigen" class="headerlink" title="Eigen"></a>Eigen</h3><blockquote>
+<p>가장 많이 사용되는 선형대수 라이브러리<br>3D geometric vision을 한다면 거의 필수적으로 사용하는 라이브러리<br>로우레벨 알고리즘을 직접 구현한다면 거의 필수적으로 사용하는 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9laWdlbi50dXhmYW1pbHkub3JnL2luZGV4LnBocD90aXRsZT1NYWluX1BhZ2U=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li>[GitLab]</li>
+<li><a href="www.cv-learn.com/20220108-eigen-cheatsheet/">Cheat sheet</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="BLAS-ATLAS-LAPACK"><a href="#BLAS-ATLAS-LAPACK" class="headerlink" title="BLAS + ATLAS + LAPACK"></a>BLAS + ATLAS + LAPACK</h3><blockquote>
+<p>많은 선형대수 라이브러리의 백엔드로 사용되는 라이브러리<br>… 정말로 로우레벨로 내려갈게 아니라면 사용할 일 없는 라이브러리. 지식 채움 용도로만 사용하는 것을 추천.<br>Fotran으로 작성되어있고, 왠만하면 C래퍼로 된 라이브러리를 사용하는편.</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5uZXRsaWIub3JnL2JsYXMv">BLAS 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5uZXRsaWIub3JnL2xhcGFjay8=">LAPACK 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Ceres-solver"><a href="#Ceres-solver" class="headerlink" title="Ceres-solver"></a>Ceres-solver</h3><blockquote>
+<p>비선형 최적화 라이브러리<br>g2o, GTSAM과 더불어 가장 많이 사용되는 SLAM 백엔드 라이브러리<br>커스텀 cost function을 짤 수 있는게 가장 큰 장점! 초심자부터 고수까지 쓰기 좋음.</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cDovL2NlcmVzLXNvbHZlci5vcmcvaW5kZXguaHRtbA==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NlcmVzLXNvbHZlci9jZXJlcy1zb2x2ZXIv">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="g2o"><a href="#g2o" class="headerlink" title="g2o"></a>g2o</h3><blockquote>
+<p>Graph optimization 라이브러리<br>SLAM 백엔드로 사용하기에 난이도가 낮지만, 성능이 다른 라이브러리에 비해 낮은 편</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1JhaW5lckt1ZW1tZXJsZS9nMm8=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="GTSAM"><a href="#GTSAM" class="headerlink" title="GTSAM"></a>GTSAM</h3><blockquote>
+<p>Factor graph 기반 로보틱스 센서퓨전 라이브러리<br>SLAM 백엔드로 쓰기에 아주 좋은 라이브러리 - 특히나 IMU를 사용한다면 Pre-integration 알고리즘이 이미 들어가있음</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ndHNhbS5vcmcv">웹페이지<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2JvcmdsYWIvZ3RzYW0=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="SE-Sync"><a href="#SE-Sync" class="headerlink" title="SE-Sync"></a>SE-Sync</h3><blockquote>
+<p>비교적 최근에 공개된 SLAM 백엔드 라이브러리<br>Global minimum을 찾을 수 있는 최적화 알고리즘을 사용한다고 함</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkLW0tcm9zZW4vU0UtU3luYw==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Sophus"><a href="#Sophus" class="headerlink" title="Sophus"></a>Sophus</h3><blockquote>
+<p>최적화를 위한 Lie algebra / Lie group 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N0cmFzZGF0L1NvcGh1cw==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Manif"><a href="#Manif" class="headerlink" title="Manif"></a>Manif</h3><blockquote>
+<p>비교적 최근에 나온 최적화를 위한 Lie 이론 알고리즘 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FydGl2aXMvbWFuaWY=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="딥러닝"><a href="#딥러닝" class="headerlink" title="딥러닝"></a>딥러닝</h2><h3 id="TensorFlow-PyTorch-MxNet"><a href="#TensorFlow-PyTorch-MxNet" class="headerlink" title="TensorFlow / PyTorch / MxNet"></a>TensorFlow / PyTorch / MxNet</h3><blockquote>
+<p>딥러닝 필수 라이브러리<br>C++ API도 있음</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudGVuc29yZmxvdy5vcmcvP2hsPWtv">TensorFlow 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9weXRvcmNoLm9yZy8=">PyTorch 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9teG5ldC5hcGFjaGUub3JnL3ZlcnNpb25zLzEuOS4wLw==">mxnet 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Detectron-2"><a href="#Detectron-2" class="headerlink" title="Detectron 2"></a>Detectron 2</h3><blockquote>
+<p>General object detection, segmentation, pose estimation 및 기타 딥러닝 기반 비전 태스크 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rcmVzZWFyY2gvZGV0ZWN0cm9uMg==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="DarkNet"><a href="#DarkNet" class="headerlink" title="DarkNet"></a>DarkNet</h3><blockquote>
+<p>C와 CUDA로 작성되어있는 딥러닝 라이브러리<br>대표적인 알고리즘으로는 YOLO가 있음</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wanJlZGRpZS5jb20vZGFya25ldC8=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BqcmVkZGllL2RhcmtuZXQ=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="DLib"><a href="#DLib" class="headerlink" title="DLib"></a>DLib</h3><blockquote>
+<p>C++ 머신러닝 라이브러리<br>SVM와 같은 고전 머신러닝 알고리즘 사용 가능<br>Face landmark detection과 같은 딥러닝 기능도 사용 가능</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhdmlza2luZy9kbGli">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="DBoW2-DBoW3-FBoW"><a href="#DBoW2-DBoW3-FBoW" class="headerlink" title="DBoW2 / DBoW3 / FBoW"></a>DBoW2 / DBoW3 / FBoW</h3><blockquote>
+<p>DBoW2 - ORB-SLAM에서 Loop closure detection을 위해 사용하는 라이브러리<br>DBoW3 - DBoW2를 개선시켰다고 주장하는 라이브러리<br>FBoW - DBoW3에 하드웨어 가속을 적용한 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RvcmlhbjNkL0RCb1cy">DBoW2 GitHub<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jtc2FsaW5hcy9EQm93Mw==">DBoW3 GitHub<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jtc2FsaW5hcy9mYm93">FBoW GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="SNPE-SDK"><a href="#SNPE-SDK" class="headerlink" title="SNPE SDK"></a>SNPE SDK</h3><blockquote>
+<p>Qualcomm Snapdragon 칩에서 빠르게 딥러닝 기능을 작동시킬 수 있는 라이브러리 - Snapdragon CPU, Adreno GPU, Hexagon DSP<br>Caffe, Caffe2, ONNX, TensorFlow 모델을 Snapdragon에서 가속시킬 수 있는 형태로 변환 가능</p>
+</blockquote>
+<ul>
+<li><p>Snapdragon Neural Processing Engine</p>
+</li>
+<li><p>링크</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIucXVhbGNvbW0uY29tL3NvZnR3YXJlL3F1YWxjb21tLW5ldXJhbC1wcm9jZXNzaW5nLXNkaw==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIucXVhbGNvbW0uY29tL3NpdGVzL2RlZmF1bHQvZmlsZXMvZG9jcy9zbnBlL292ZXJ2aWV3Lmh0bWw=">Docs<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="시뮬레이션"><a href="#시뮬레이션" class="headerlink" title="시뮬레이션"></a>시뮬레이션</h2><h3 id="CARLA"><a href="#CARLA" class="headerlink" title="CARLA"></a>CARLA</h3><blockquote>
+<p>가장 유명한 자율주행 시나리오 시뮬레이터</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cDovL2NhcmxhLm9yZy8=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NhcmxhLXNpbXVsYXRvci9jYXJsYQ==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Habitat-Sim-Replica"><a href="#Habitat-Sim-Replica" class="headerlink" title="Habitat-Sim + Replica"></a>Habitat-Sim + Replica</h3><blockquote>
+<p>인도어 환경에서 다양한 비전/언어 태스크를 수행할 수 있도록 만들어진 시뮬레이터</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9haWhhYml0YXQub3JnLw==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY2Vib29rcmVzZWFyY2gvaGFiaXRhdC1zaW0=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="AirSim"><a href="#AirSim" class="headerlink" title="AirSim"></a>AirSim</h3><ul>
+<li><p>Unity / Unreal Engine의 플러그인으로써, 게임 엔진 속 세상에 자동차/드론을 사용하는 시뮬레이터</p>
+</li>
+<li><p>링크</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9taWNyb3NvZnQuZ2l0aHViLmlvL0FpclNpbS8=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pY3Jvc29mdC9BaXJTaW0=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="NVIDIA-Omniverse-Isaac-Sim"><a href="#NVIDIA-Omniverse-Isaac-Sim" class="headerlink" title="NVIDIA Omniverse / Isaac Sim"></a>NVIDIA Omniverse / Isaac Sim</h3><blockquote>
+<p>최근 NVIDIA에서 공개한 Omniverse 그래픽 엔진 + ISAAC 로보틱스 시뮬레이터</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubnZpZGlhLmNvbS9pc2FhYy1zaW0=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Gazebo"><a href="#Gazebo" class="headerlink" title="Gazebo"></a>Gazebo</h3><blockquote>
+<p>ROS에서 많이 사용하는 시뮬레이터<br>최신 시뮬레이터들에 비해 그래픽은 많이 부족한 편</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cDovL2dhemVib3NpbS5vcmcv">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29zcmYvZ2F6ZWJv">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h2 id="그래픽스-렌더링"><a href="#그래픽스-렌더링" class="headerlink" title="그래픽스 / 렌더링"></a>그래픽스 / 렌더링</h2><h3 id="OpenGL"><a href="#OpenGL" class="headerlink" title="OpenGL"></a>OpenGL</h3><blockquote>
+<p>그래픽스 렌더링을 위해 가장 많이 사용되는 API<br>수많은 엔진들이 OpenGL 기반으로 되어있음</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybm9wZW5nbC5jb20v">OpenGL 공부 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Vulkan"><a href="#Vulkan" class="headerlink" title="Vulkan"></a>Vulkan</h3><blockquote>
+<p>크로스 컴파일이 가능한 그래픽스 API<br>OpenGL에 비해 훨씬 어렵지만, 그만큼 컨트롤 할 수 있는 부분도 많다고 한다.</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Nhc2NoYVdpbGxlbXMvVnVsa2Fu">Vulkan 공부 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Metal"><a href="#Metal" class="headerlink" title="Metal"></a>Metal</h3><blockquote>
+<p>Apple 제품 및 맥북에서 사용 가능한 그래픽스 API</p>
+</blockquote>
+<h3 id="Qt"><a href="#Qt" class="headerlink" title="Qt"></a>Qt</h3><blockquote>
+<p>크로스 컴파일이 가능한 GUI 앱 개발 프레임워크<br>OpenGL의 난이도에 크로스 컴파일 기능이 들어간 정도</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucXQuaW8v">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Filament"><a href="#Filament" class="headerlink" title="Filament"></a>Filament</h3><blockquote>
+<p>크로스 컴파일이 가능한 물리 렌더링 엔진<br>OpenGL을 할 수 있다면 이 라이브러리를 적극 추천함</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvb2dsZS9maWxhbWVudA==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Pangolin"><a href="#Pangolin" class="headerlink" title="Pangolin"></a>Pangolin</h3><blockquote>
+<p>오픈소스 SLAM에서 많이 사용하는 3D 시각화 라이브러리<br>성능이 그렇게 좋은 편은 아니지만, OpenCV나 OpenGL을 알면 쉽게 쓸 수 있도록 되어있다</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N0ZXZlbmxvdmVncm92ZS9QYW5nb2xpbg==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="rviz"><a href="#rviz" class="headerlink" title="rviz"></a>rviz</h3><blockquote>
+<p>ROS에서 많이 사용되는 3D 시각화 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cDovL3dpa2kucm9zLm9yZy9ydml6">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jvcy12aXN1YWxpemF0aW9uL3J2aXo=">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="Ogre-GODOT-Hazel-VTK-ITK"><a href="#Ogre-GODOT-Hazel-VTK-ITK" class="headerlink" title="Ogre, GODOT, Hazel, VTK, ITK"></a>Ogre, GODOT, Hazel, VTK, ITK</h3><blockquote>
+<p>가벼운 3D 게임 / 렌더링 엔진</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cub2dyZTNkLm9yZy8=">Ogre 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9nb2RvdGVuZ2luZS5vcmcv">GODOT 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1RoZUNoZXJuby9IYXplbA==">Hazel 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly92dGsub3JnLw==">VTK 웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h2 id="통신"><a href="#통신" class="headerlink" title="통신"></a>통신</h2><h3 id="gRPC"><a href="#gRPC" class="headerlink" title="gRPC"></a>gRPC</h3><blockquote>
+<p>고성능 RPC 프레임워크</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ncnBjLmlvLw==">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="rpcLib"><a href="#rpcLib" class="headerlink" title="rpcLib"></a>rpcLib</h3><blockquote>
+<p>클라이언트~서버 간의 rpc 통신을 위한 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3JwY2xpYi9ycGNsaWI=">웹사이트<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h3 id="lcm"><a href="#lcm" class="headerlink" title="lcm"></a>lcm</h3><blockquote>
+<p>가벼운 메세지 통신 및 data marshalling 라이브러리</p>
+</blockquote>
+<ul>
+<li>링크<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xjbS1wcm9qL2xjbQ==">GitHub<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220108-cvpr14-visual-slam-tutorial/" rel="bookmark">CVPR 2014 Visual SLAM Tutorial 자료들</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220322-is-slam-solved/" rel="bookmark">Is SLAM solved? 고수들에게 물어본다</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210408-slamantic-blog/" rel="bookmark">SLAMANTIC – Leveraging semantics to improve VSLAM in dynamic environments (NAVER LABS Europe)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20211201-lidar-slam/" rel="bookmark">LiDAR SLAM 논문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20211231-slam-researcher-follow/" rel="bookmark">팔로우 하기 좋은 SLAM 연구자 링크</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PCL/" rel="tag"># PCL</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual SLAM</a>
+              <a href="/tags/LiDAR-SLAM/" rel="tag"># LiDAR SLAM</a>
+              <a href="/tags/Tutorial/" rel="tag"># Tutorial</a>
+              <a href="/tags/Eigen/" rel="tag"># Eigen</a>
+              <a href="/tags/OpenCV/" rel="tag"># OpenCV</a>
+              <a href="/tags/Open3D/" rel="tag"># Open3D</a>
+              <a href="/tags/COLMAP/" rel="tag"># COLMAP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220108-delete-folder/" rel="prev" title="폴더 지우기 - os.rmdir, os.system, shutil.rmtree">
+                  <i class="fa fa-chevron-left"></i> 폴더 지우기 - os.rmdir, os.system, shutil.rmtree
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220108-cpp-libraries/" rel="next" title="C++ 개발에 유용한 라이브러리">
+                  C++ 개발에 유용한 라이브러리 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

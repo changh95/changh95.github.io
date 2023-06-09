@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Sebastian Thrun과 Jose Neira에게 물어봅니다">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Is SLAM solved? 고수들에게 물어본다">
+<meta property="og:url" content="https://changh95.github.io/20220322-is-slam-solved/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Sebastian Thrun과 Jose Neira에게 물어봅니다">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-22T02:07:26.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.467Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="Visual SLAM">
+<meta property="article:tag" content="LiDAR SLAM">
+<meta property="article:tag" content="Sebastian Thrun">
+<meta property="article:tag" content="Jose Neira">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220322-is-slam-solved/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Is SLAM solved? 고수들에게 물어본다 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%9D%B8%ED%84%B0%EB%B7%B0-%EC%A7%84%ED%96%89-%EB%B0%A9%EC%8B%9D"><span class="nav-number">1.</span> <span class="nav-text">인터뷰 진행 방식</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM-%EC%9D%B4-%EB%AC%B8%EC%A0%9C%EB%8A%94-%EB%8B%A4-%ED%92%80%EB%A6%B0%EA%B1%B4%EA%B0%80"><span class="nav-number">2.</span> <span class="nav-text">SLAM. 이 문제는 다 풀린건가?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%A7%80%EB%82%9C-20%EB%85%84%EA%B0%84%EC%9D%98-%EC%97%B0%EA%B5%AC%EB%A5%BC-%EB%B4%A4%EC%9D%84-%EB%95%8C-i-e-1990-2010-%EC%9A%B0%EB%A6%AC%EB%8A%94-%EC%A2%8B%EC%9D%80-%EC%97%B0%EA%B5%AC%EB%A5%BC-%ED%95%98%EA%B3%A0-%EC%9E%88%EB%8A%94%EA%B0%80"><span class="nav-number">3.</span> <span class="nav-text">지난 20년간의 연구를 봤을 때 (i.e. 1990~2010), 우리는 좋은 연구를 하고 있는가?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%AA%A8%EC%85%98-%ED%94%8C%EB%9E%98%EB%8B%9D-%EB%B6%84%EC%95%BC%EC%97%90%EC%84%9C%EB%8F%84-%EB%B9%84%EC%8A%B7%ED%95%9C-%ED%8A%B8%EB%A0%8C%EB%93%9C%EA%B0%80-%EC%9E%88%EB%8B%A4-i-e-%ED%8A%B9%EC%A0%95-%EC%97%B0%EA%B5%AC%EB%B6%84%EC%95%BC%EC%97%90%EB%A7%8C-%EC%A7%91%EC%A4%91%ED%95%9C%EB%8B%A4-%EC%9D%B4%EB%9F%B0%EA%B2%8C-AI-science-%EB%B6%84%EC%95%BC%EC%97%90%EC%84%9C-%EC%9E%90%EC%A3%BC-%EB%82%98%ED%83%80%EB%82%98%EB%8A%94-%EA%B2%83%EC%9D%B8%EA%B0%80"><span class="nav-number">4.</span> <span class="nav-text">모션 플래닝 분야에서도 비슷한 트렌드가 있다 (i.e. 특정 연구분야에만 집중한다). 이런게 AI&#x2F;science 분야에서 자주 나타나는 것인가?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Big-O-notation%EC%9D%B4-SLAM-%EC%97%B0%EA%B5%AC%EC%97%90-%EC%98%81%ED%96%A5%EC%9D%84-%EC%A4%AC%EC%9D%84-%EA%B2%83%EC%9D%B4%EB%9D%BC%EA%B3%A0-%EC%83%9D%EA%B0%81%ED%95%98%EB%8A%94%EA%B0%80"><span class="nav-number">5.</span> <span class="nav-text">Big-O-notation이 SLAM 연구에 영향을 줬을 것이라고 생각하는가?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%88%98%EC%8B%9D%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%84%9C-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%92%80%EB%A0%A4%EA%B3%A0-%ED%95%98%EB%8A%94-%EA%B2%83%EA%B3%BC-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%92%80%EB%A9%B4%EC%84%9C-%EC%88%98%EC%8B%9D%EC%9D%84-%EB%B0%9C%EA%B2%AC%ED%95%98%EA%B2%8C-%EB%90%98%EB%8A%94-%EA%B2%83-%EC%96%B4%EB%96%A4-%EA%B2%83%EC%9D%B4-%EB%8D%94-%EC%A4%91%EC%9A%94%ED%95%A0%EA%B9%8C"><span class="nav-number">6.</span> <span class="nav-text">수식을 만들어서 문제를 풀려고 하는 것과, 문제를 풀면서 수식을 발견하게 되는 것. 어떤 것이 더 중요할까?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Street-View%EC%97%90%EB%8A%94-SLAM%EC%9D%B4-%EB%93%A4%EC%96%B4%EA%B0%80%EC%9E%88%EB%8A%94%EC%A7%80-Thrun-%ED%83%80%EA%B2%9F-%EC%A7%88%EB%AC%B8"><span class="nav-number">7.</span> <span class="nav-text">Google Street View에는 SLAM이 들어가있는지? (Thrun 타겟 질문)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Real-world%EC%97%90%EC%84%9C-%EC%93%B8-%EC%88%98-%EC%9E%88%EB%8A%94-SLAM%EC%9D%98-%EB%8B%A4%EB%A5%B8-%EC%98%88%EC%A0%9C%EA%B0%80-%EC%9E%88%EB%82%98"><span class="nav-number">8.</span> <span class="nav-text">Real-world에서 쓸 수 있는 SLAM의 다른 예제가 있나?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM%EC%9D%98-%ED%8A%B8%EB%A0%8C%EB%93%9C%EB%8A%94-%EC%A0%90%EC%A0%90-Visual-SLAM%EC%9D%B4-%EB%90%98%EA%B3%A0-%EC%9E%88%EB%8B%A4-%EA%B7%B8-%EC%A4%91-bundle-adjustment%EB%82%98-structure-from-motion%EC%9D%B4-%EC%A3%BC%EB%AA%A9%EB%B0%9B%EA%B3%A0-%EC%9E%88%EB%8B%A4-SLAM%EC%9D%B4-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%B9%84%EC%A0%BC-%EB%B6%84%EC%95%BC%EC%97%90-%EC%96%B4%EB%96%A4-%EA%B8%B0%EC%97%AC%EB%A5%BC-%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C-Neira-%ED%83%80%EA%B9%83-%EC%A7%88%EB%AC%B8"><span class="nav-number">9.</span> <span class="nav-text">SLAM의 트렌드는 점점 Visual-SLAM이 되고 있다. 그 중 bundle-adjustment나 structure-from-motion이 주목받고 있다. SLAM이 컴퓨터 비젼 분야에 어떤 기여를 할 수 있을까? (Neira 타깃 질문)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM-%EB%B6%84%EC%95%BC%EA%B0%80-AI-%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%EC%97%90-%EC%96%B4%EB%96%A4-%EB%A9%94%EC%84%B8%EC%A7%80%EB%A5%BC-%EC%A4%84-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C"><span class="nav-number">10.</span> <span class="nav-text">SLAM 분야가 AI 커뮤니티에 어떤 메세지를 줄 수 있을까?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM%EC%9D%98-%EB%AF%B8%EB%9E%98%EB%8A%94-%EC%96%B4%EB%96%A4-%EB%AA%A8%EC%8A%B5%EC%9D%BC%EA%B9%8C"><span class="nav-number">11.</span> <span class="nav-text">SLAM의 미래는 어떤 모습일까?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%B6%9C%EC%B2%98"><span class="nav-number">12.</span> <span class="nav-text">출처</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220322-is-slam-solved/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Is SLAM solved? 고수들에게 물어본다
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-22 11:07:26" itemprop="dateCreated datePublished" datetime="2022-03-22T11:07:26+09:00">2022-03-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="인터뷰-진행-방식"><a href="#인터뷰-진행-방식" class="headerlink" title="인터뷰 진행 방식"></a>인터뷰 진행 방식</h1><p>진행일: <strong>2010년</strong> (꽤 오래된 자료이긴 하다)</p>
+<p>인터뷰 참여자:</p>
+<ul>
+<li>Udo Frese (인터뷰어)</li>
+<li>Sebastian Thrun</li>
+<li>Jose Neira</li>
+</ul>
+<h1 id="SLAM-이-문제는-다-풀린건가"><a href="#SLAM-이-문제는-다-풀린건가" class="headerlink" title="SLAM. 이 문제는 다 풀린건가?"></a>SLAM. 이 문제는 다 풀린건가?</h1><p>Thrun:</p>
+<ul>
+<li><strong>정적인 환경에서는 풀렸다</strong>.<ul>
+<li>이론적으로도 깊게 이해하고 있고, scale-up 하는 방법도 있다.</li>
+</ul>
+</li>
+<li><strong>동적인 환경에서는 풀리지 않았다</strong>.<ul>
+<li>정적인 물체, 동적인 물체, 동적 움직임이 가능하지만 정지해있는 물체를 구분할 수 없다.</li>
+<li>Semantic understanding을 할 수 있어야한다.</li>
+</ul>
+</li>
+</ul>
+<p>Neira:</p>
+<ul>
+<li>“처음보는 환경에서 센서만 가지고 주변 환경에 대한 모델을 추론하고 현재 위치를 추론할 수 있는가?” -&gt; 할 수 있다.</li>
+<li>하지만 그 환경에…<ul>
+<li>동적인 물체가 있는가?</li>
+<li>동적인 물체를 무시하고 주변 환경을 모델링 할 수 있는가?</li>
+<li>엄청나게 큰 환경에서 실시간으로 작동할 수 있는가?</li>
+<li>환경의 변화를 인지하고 업데이트 할 수 있는가?</li>
+<li>Geometric한 정보를 뛰어넘어 Semantic한 정보도 함께 모델링 할 수 있는가?</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="지난-20년간의-연구를-봤을-때-i-e-1990-2010-우리는-좋은-연구를-하고-있는가"><a href="#지난-20년간의-연구를-봤을-때-i-e-1990-2010-우리는-좋은-연구를-하고-있는가" class="headerlink" title="지난 20년간의 연구를 봤을 때 (i.e. 1990~2010), 우리는 좋은 연구를 하고 있는가?"></a>지난 20년간의 연구를 봤을 때 (i.e. 1990~2010), 우리는 좋은 연구를 하고 있는가?</h1><p>Thrun:</p>
+<ul>
+<li>잘 하고 있는 것 같다. 하지만 너무 특정 문제에 집중하는 것 같다.<ul>
+<li><strong>아무도 GPS를 쓰려고 하지 않는다</strong>.</li>
+<li><strong>Real-world에서는 GPS가 꼭 필요할텐데</strong> 말이다.</li>
+</ul>
+</li>
+</ul>
+<p>Neira:</p>
+<ul>
+<li>GPS를 쓰는게 이론적으로 매력적이지 않아서 연구가 많이 되지 않는 것 같다.</li>
+<li>논문을 낼 때, 새로운 이론이 아무래도 단순 구현 방식보다 더 매력적이기 마련이다.</li>
+<li>그러다보니 Real-world 문제를 해결하는 것에서 점점 멀어지는 것 같다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="모션-플래닝-분야에서도-비슷한-트렌드가-있다-i-e-특정-연구분야에만-집중한다-이런게-AI-science-분야에서-자주-나타나는-것인가"><a href="#모션-플래닝-분야에서도-비슷한-트렌드가-있다-i-e-특정-연구분야에만-집중한다-이런게-AI-science-분야에서-자주-나타나는-것인가" class="headerlink" title="모션 플래닝 분야에서도 비슷한 트렌드가 있다 (i.e. 특정 연구분야에만 집중한다). 이런게 AI/science 분야에서 자주 나타나는 것인가?"></a>모션 플래닝 분야에서도 비슷한 트렌드가 있다 (i.e. 특정 연구분야에만 집중한다). 이런게 AI/science 분야에서 자주 나타나는 것인가?</h1><p>Thrun:</p>
+<ul>
+<li>종종 특정 분야에 집중하다보면 ‘큰 그림’을 보지 못하면서 쓸려가는 경우가 있다. SLAM도 마찬가지다.</li>
+<li><strong>우리의 목표는 로봇을 통해 세상에 이익을 가져와야하는 것</strong>이며, SLAM은 그 컴포넌트 중 하나라는걸 잊지 말아야한다.</li>
+</ul>
+<p>Neira:</p>
+<ul>
+<li>Academia의 한계인 것 같다.<ul>
+<li>연구자들의 성과는 논문을 낸 수와, 그 논문들의 피인용수가 중요하다.</li>
+<li>2자리 수의 피인용수가 나지 않는 논문은 의미가 없다고 생각하는 문화가 이런 한계를 만들어내는 것 같다.</li>
+<li>이 때문에 <strong>연구자들이 빠르고 간단하게 피인용수를 얻어낼 수 있는 논문에 집중하게 되고, 사회에 임팩트를 줄 수 있는 논문과는 멀어지는 것</strong> 같다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="Big-O-notation이-SLAM-연구에-영향을-줬을-것이라고-생각하는가"><a href="#Big-O-notation이-SLAM-연구에-영향을-줬을-것이라고-생각하는가" class="headerlink" title="Big-O-notation이 SLAM 연구에 영향을 줬을 것이라고 생각하는가?"></a>Big-O-notation이 SLAM 연구에 영향을 줬을 것이라고 생각하는가?</h1><p>Thrun:</p>
+<ul>
+<li>그렇게 생각하지 않는다.</li>
+<li>이전 연구를 개선하는 방향 vs 큰 그림을 그리는 방향. 이 둘 사이에서 항상 딜레마가 있는 것 같다.</li>
+<li>Computational complexity는 SLAM에서 그렇게 크게 중요하게 보는 것 같지 않다. FastSLAM이나 GraphSLAM이 훨씬 더 효율적임에도 말이다.</li>
+</ul>
+<p>Neira:</p>
+<ul>
+<li>지난 연구들을 보면 SLAM 알고리즘들의 효율성에 대해 집중하는 경우가 많은 것 같다.</li>
+<li>하지만 그에 비해 robustness에는 충분히 집중하지 않은 것 같다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="수식을-만들어서-문제를-풀려고-하는-것과-문제를-풀면서-수식을-발견하게-되는-것-어떤-것이-더-중요할까"><a href="#수식을-만들어서-문제를-풀려고-하는-것과-문제를-풀면서-수식을-발견하게-되는-것-어떤-것이-더-중요할까" class="headerlink" title="수식을 만들어서 문제를 풀려고 하는 것과, 문제를 풀면서 수식을 발견하게 되는 것. 어떤 것이 더 중요할까?"></a>수식을 만들어서 문제를 풀려고 하는 것과, 문제를 풀면서 수식을 발견하게 되는 것. 어떤 것이 더 중요할까?</h1><p>Thrun:</p>
+<ul>
+<li>무엇이 되었던지 사회에 줄 수 있는 임팩트를 생각해야한다.</li>
+<li>이분법으로 생각하는 것 보다 이게 더 중요하다.</li>
+<li>이론이 더 중요할 때도 있고, 구현이 더 중요할 때도 있다.</li>
+</ul>
+<p>Neira:</p>
+<ul>
+<li>‘좋은 이론보다 더 practical한 것은 없다’ 라고 한다.</li>
+<li>이론이던, 구현이던, 둘 다 중요하니 언제든지 어떤 방법으로도 도전해보는게 중요하다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="Google-Street-View에는-SLAM이-들어가있는지-Thrun-타겟-질문"><a href="#Google-Street-View에는-SLAM이-들어가있는지-Thrun-타겟-질문" class="headerlink" title="Google Street View에는 SLAM이 들어가있는지? (Thrun 타겟 질문)"></a>Google Street View에는 SLAM이 들어가있는지? (Thrun 타겟 질문)</h1><p>Thrun:</p>
+<ul>
+<li>조금 들어있다.</li>
+<li>카메라와 라이다를 써서 포즈를 추정한다.</li>
+<li>그 외로 GPS와 IMU 내비게이션도 사용한다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="Real-world에서-쓸-수-있는-SLAM의-다른-예제가-있나"><a href="#Real-world에서-쓸-수-있는-SLAM의-다른-예제가-있나" class="headerlink" title="Real-world에서 쓸 수 있는 SLAM의 다른 예제가 있나?"></a>Real-world에서 쓸 수 있는 SLAM의 다른 예제가 있나?</h1><p>Thrun:</p>
+<ul>
+<li><strong>Transportation</strong>은 엄청 큰 시장이다.</li>
+<li><strong>해저 구조를 탐색</strong>하거나, <strong>산업/공장들을 맵핑</strong>해서 온실가스 맵핑을 하는 것도 좋다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="SLAM의-트렌드는-점점-Visual-SLAM이-되고-있다-그-중-bundle-adjustment나-structure-from-motion이-주목받고-있다-SLAM이-컴퓨터-비젼-분야에-어떤-기여를-할-수-있을까-Neira-타깃-질문"><a href="#SLAM의-트렌드는-점점-Visual-SLAM이-되고-있다-그-중-bundle-adjustment나-structure-from-motion이-주목받고-있다-SLAM이-컴퓨터-비젼-분야에-어떤-기여를-할-수-있을까-Neira-타깃-질문" class="headerlink" title="SLAM의 트렌드는 점점 Visual-SLAM이 되고 있다. 그 중 bundle-adjustment나 structure-from-motion이 주목받고 있다. SLAM이 컴퓨터 비젼 분야에 어떤 기여를 할 수 있을까? (Neira 타깃 질문)"></a>SLAM의 트렌드는 점점 Visual-SLAM이 되고 있다. 그 중 bundle-adjustment나 structure-from-motion이 주목받고 있다. SLAM이 컴퓨터 비젼 분야에 어떤 기여를 할 수 있을까? (Neira 타깃 질문)</h1><p>Neira:</p>
+<ul>
+<li>디지털 카메라가 빠르고, 작고, 저렴해지고 있다.</li>
+<li>Scale 정보가 없다는 점이 연구적인 목적에서 문제를 흥미롭게 만든다.</li>
+<li>컴퓨터 비젼에서 풀려고 하는 문제들은 efficiency에 대해 집중하는 경우가 많이 없다. 그에 비해 visual-SLAM 연구자들은 efficiency에 많이 집중하기 때문에, 이 부분에서 기여를 할 수 있을 것이다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="SLAM-분야가-AI-커뮤니티에-어떤-메세지를-줄-수-있을까"><a href="#SLAM-분야가-AI-커뮤니티에-어떤-메세지를-줄-수-있을까" class="headerlink" title="SLAM 분야가 AI 커뮤니티에 어떤 메세지를 줄 수 있을까?"></a>SLAM 분야가 AI 커뮤니티에 어떤 메세지를 줄 수 있을까?</h1><p>Thrun:</p>
+<ul>
+<li>우리 겁나 어려운 문제 풀었다! 멋지지??!!</li>
+</ul>
+<p>Neira:</p>
+<ul>
+<li>로보틱스는 AI를 실제 세상으로 끌어오기 아주 좋은 필드다.</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="SLAM의-미래는-어떤-모습일까"><a href="#SLAM의-미래는-어떤-모습일까" class="headerlink" title="SLAM의 미래는 어떤 모습일까?"></a>SLAM의 미래는 어떤 모습일까?</h1><p>Thrun:</p>
+<ul>
+<li>미래에는 SLAM 연구들이 실제 세상에 많은 임팩트를 줄 수 있으면 좋겠다.<ul>
+<li>나도 얼마전부터 논문을 적기보다는 수백/수천만명의 삶을 개선시킬 수 있는 실제 시스템을 만드는데에 집중하고 있다.</li>
+</ul>
+</li>
+<li>SLAM 연구 분야의 최전선을 달리는 몇몇 리더들이 너무 특정 문제에만 집중하는 것 같아서 아쉽다.</li>
+</ul>
+<p>Neira:</p>
+<ul>
+<li>SLAM 기술에 대한 기대치와 꿈을 더 높게 잡으면, 더이상 특정 분야에만 집중하지 않게 되지 않을까?</li>
+<li>좀 더 general하고 complex한 문제에 집중해야한다.</li>
+</ul>
+<h1 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2VtYW50aWNzY2hvbGFyLm9yZy9wYXBlci9JbnRlcnZpZXclM0EtSXMtU0xBTS1Tb2x2ZWQtRnJlc2UvMzhlMDdmOTU1NTExZTVlZWExYzNiZGUzMzZjN2E2MTRmMGFhN2VlMQ==">링크<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220108-slam-libraries/" rel="bookmark">SLAM 개발에 유용한 라이브러리</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210408-slamantic-blog/" rel="bookmark">SLAMANTIC – Leveraging semantics to improve VSLAM in dynamic environments (NAVER LABS Europe)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20211201-lidar-slam/" rel="bookmark">LiDAR SLAM 논문 리스트</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual SLAM</a>
+              <a href="/tags/LiDAR-SLAM/" rel="tag"># LiDAR SLAM</a>
+              <a href="/tags/Sebastian-Thrun/" rel="tag"># Sebastian Thrun</a>
+              <a href="/tags/Jose-Neira/" rel="tag"># Jose Neira</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220319-stanford-convex-optimization/" rel="prev" title="EE3564A/B - Convex Optimization - Stephen Boyd 강의 레퍼런스 (Stanford)">
+                  <i class="fa fa-chevron-left"></i> EE3564A/B - Convex Optimization - Stephen Boyd 강의 레퍼런스 (Stanford)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220324-clean-coders-tdd/" rel="next" title="Clean Coders 책 챕터 5 - Test Driven Development">
+                  Clean Coders 책 챕터 5 - Test Driven Development <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

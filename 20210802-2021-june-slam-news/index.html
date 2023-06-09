@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="2021년 6월 SLAM 논문 소식을 정리했습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021년 6월 SLAM 뉴스">
+<meta property="og:url" content="https://changh95.github.io/20210802-2021-june-slam-news/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="2021년 6월 SLAM 논문 소식을 정리했습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-28T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.975Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="논문 소식">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210802-2021-june-slam-news/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>2021년 6월 SLAM 뉴스 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9D%B4%EB%B2%88-%EB%8B%AC-%EB%82%B4%EA%B0%80-%EA%B4%80%EC%8B%AC%EA%B0%80%EC%A7%80%EB%8A%94-%EB%85%BC%EB%AC%B8%EB%93%A4-%ED%82%A4%EB%85%B8%ED%8A%B8-%EB%9E%9C%EB%93%9C%EB%A7%88%ED%81%AC-%EA%B8%89"><span class="nav-number">1.</span> <span class="nav-text">이번 달 내가 관심가지는 논문들 (키노트&#x2F;랜드마크 급)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B7%B8-%EC%99%B8"><span class="nav-number">2.</span> <span class="nav-text">그 외</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210802-2021-june-slam-news/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2021년 6월 SLAM 뉴스
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-06-28 20:38:19" itemprop="dateCreated datePublished" datetime="2021-06-28T20:38:19+09:00">2021-06-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EC%9B%94%EA%B0%84-SLAM-%EB%89%B4%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">월간 SLAM 뉴스</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>논문 이름 누르면 자세한 정보가 열립니다!</p>
+<h2 id="이번-달-내가-관심가지는-논문들-키노트-랜드마크-급"><a href="#이번-달-내가-관심가지는-논문들-키노트-랜드마크-급" class="headerlink" title="이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)"></a>이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)</h2><details>
+  <summary> Superquadric Object Representation for Optimization-based Semantic SLAM </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cucmVzZWFyY2gtY29sbGVjdGlvbi5ldGh6LmNoL2JpdHN0cmVhbS9oYW5kbGUvMjAuNTAwLjExODUwLzQ4NzUyNy8xL2FzbGRvY18yMDIxX2Z0c2Nob3BwX3N1cGVyX3F1YWRyaWNzLnBkZg==">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> RoadMap: A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDYuMDI1MjcucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> The 2021 Image Similarity Dataset and Challenge </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDYuMDk2NzIucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> TAG-Reg: Iterative Accurate Global Registration Algorithm  </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MjgzMDM=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> RISE: Real-Time Iteration Scheme for Estimation applied to Visual-Inertial Odometry </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL2NvcGxhbmQudWRlbC5lZHUvfmdodWFuZy9pY3JhMjEtdmlucy13b3Jrc2hvcC9wYXBlcnMvMDItRm9laG5fUklTRS1JQ1JBV1MtVklOUy5wZGY=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Crowd-SLAM: Visual SLAM Towards Crowded Environments using Object Detection
+ </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczEwODQ2LTAyMS0wMTQxNC0x">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> DETReg: Unsupervised Pretraining with Region Priors for Object Detection </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDYuMDQ1NTAucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> ORB-SLAM2S: A Fast ORB-SLAM2 System with Sparse Optical Flow Tracking </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MzU5MTU=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><details>
+  <summary> A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sYW1vci5mZXIuaHIvaW1hZ2VzLzUwMDM2NjA3LzIwMjEtYWp1cmljLWNvbXBhcmlzb24tbWlwcm8ucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+<li><a href="https://changh95.github.io/20210607-solver-comp/?highlight=juric">리뷰 글</a><ul>
+<li>SE-Sync 최고! GTSAM~Ceres 성능 또이또이! g2o는 쓰기 쉬움!</li>
+</ul>
+</li>
+</ul>
+</details>
+
+<details>
+  <summary> Absolute Scale Estimation Approach for Monocular Visual Odometry </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9yZXNlYXJjaC5sYXRpbnhpbmFpLm9yZy9wYXBlcnMvY3Zwci8yMDIxL3BkZi81OF9DYW1lcmFSZWFkeV81OC5wZGY=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Relative scale estimation approach for monocular visual odometry </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9yZXNlYXJjaC5sYXRpbnhpbmFpLm9yZy9wYXBlcnMvY3Zwci8yMDIxL3BkZi81OV9DYW1lcmFSZWFkeV81OS5wZGY=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Improving Inertial Navigation Accuracy with Bias Modeling </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9jaGFwdGVyLzEwLjEwMDcvOTc4LTMtMDMwLTY0MTUxLTFfMTM=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Recalibrating the KITTI Dataset Camera Setup for Improved Odometry Accuracy</summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sYW1vci5mZXIuaHIvaW1hZ2VzLzUwMDM2NjA3LzIwMjEtY3Zpc2ljLWtpdHRpY2FsLWVjbXIucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> luvHarris: A Practical Corner Detector for Event-cameras </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMTE0NDMucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> A fast instance segmentation with one-stage multi-task deep neural network for autonomous driving </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2NpZW5jZWRpcmVjdC5jb20vc2NpZW5jZS9hcnRpY2xlL2Ficy9waWkvUzAwNDU3OTA2MjEwMDE5MjA=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Dynamic RGB-D SLAM Based on Static Probability and Observation Number
+ </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0NTk2MDQ=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Differentiable SLAM-net: Learning Particle SLAM for Visual Navigation </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMDc1OTMucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Pyramid Feature Attention Network for Monocular Depth Prediction </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0Mjg0NDY=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Scene Coordinate Regression Network With Global Context-Guided Spatial Feature Transformation for Visual Relocalization  </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0Mzc2OTk=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> ATVIO: Attention Guided Visual-Inertial Odometry </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MTM5MTI=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Globally Optimal Consensus Maximization for Relative Pose Estimation With Known Gravity Direction  </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0NDc5ODQ=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> A nonlinear optimization-based monocular dense mapping system of visual-inertial odometry  </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2NpZW5jZWRpcmVjdC5jb20vc2NpZW5jZS9hcnRpY2xlL2Ficy9waWkvUzAyNjMyMjQxMjEwMDUxMjE=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> A Robust Optical Flow Tracking Method Based On Prediction Model for Visual-Inertial Odometry </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0Mjk5Mjc=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Assessment of Map Construction in vSLAM </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0Mzg4ODQ=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Spatial semantic graph enhanced monocular SLAM System </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vbmxpbmVsaWJyYXJ5LndpbGV5LmNvbS9kb2kvYWJzLzEwLjEwMDIvY2F2LjIwMjU=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Scale-Adaptive ICP </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2NpZW5jZWRpcmVjdC5jb20vc2NpZW5jZS9hcnRpY2xlL2Ficy9waWkvUzE1MjQwNzAzMjEwMDAxODc=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Robust registration algorithm based on rational quadratic kernel for point sets with outliers and noise </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczExMDQyLTAyMS0xMDg1MS14">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> A Robust Optical Flow Tracking Method Based On Prediction Model for Visual-Inertial Odometry  </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0Mjk5Mjc=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> A Fast Vision-inertial Odometer Based on Line Midpoint Descriptor  </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5pamFjLm5ldC9jbi9hcnRpY2xlL2RvaS8xMC4xMDA3L3MxMTYzMy0wMjEtMTMwMy0y">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> A Visual SLAM Image Mismatching Filter Algorithm Based on Progressive Aample Consensus
+ </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0NDA1NjI=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Robust Sensor Fusion with Pairwise Dynamic Covariance Scaling
+for Localization in Urban Areas </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pcmFwLmthaXN0LmFjLmtyL3B1YmxpY2F0aW9ucy95amtpbS0yMDIxLXVyLnBkZg==">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+<li>김아영 교수님!</li>
+</ul>
+</details>
+
+<details>
+  <summary> Single Image Depth Prediction with Wavelet Decomposition </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDYuMDIwMjIucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> State of the Art in Vision-Based Localization Techniques for Autonomous Navigation Systems </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL3N0YW1wL3N0YW1wLmpzcD9hcm51bWJlcj05NDM4NzA4">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Automatic Hyper-Parameter Tuning for Black-box LiDAR Odometry </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zdGFmZi5haXN0LmdvLmpwL2sua29pZGUvYXNzZXRzL3BkZi9pY3JhMjAyMS5wZGY=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Radar Odometry Combining Probabilistic Estimation and Unsupervised Feature Learning </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMTQxNTIucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> MAOMaps: A Photo-Realistic Benchmark For vSLAM and Map Merging Quality Assessment </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMTQ5OTQucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Quantized Self-supervised Local Feature for Real-time Robot Indirect VSLAM  </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0NDQ3Nzc=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+<details>
+  <summary> Moving SLAM: Fully Unsupervised Deep Learning in Non-Rigid Scenes </summary>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMDIxOTUucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</details>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210329-mar-2021-slam-news/" rel="bookmark">2021년 3월 SLAM 뉴스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-2021-january-slam-news/" rel="bookmark">2021년 1월 SLAM 뉴스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210213-february-slam-news/" rel="bookmark">2021년 2월 SLAM 뉴스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210728-2021-july-slam-news/" rel="bookmark">2021년 7월 SLAM 뉴스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210804-2021-may-slam-news/" rel="bookmark">2021년 5월 SLAM 뉴스</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/%EB%85%BC%EB%AC%B8-%EC%86%8C%EC%8B%9D/" rel="tag"># 논문 소식</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210628-MS-rust/" rel="prev" title="MS - Beginner's Series to Rust">
+                  <i class="fa fa-chevron-left"></i> MS - Beginner's Series to Rust
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210629-guitar-overdrive/" rel="next" title="기타 이펙터 - 관심있는 오버드라이브">
+                  기타 이펙터 - 관심있는 오버드라이브 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

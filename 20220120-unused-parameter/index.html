@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Unused parameter 경고는 잠시 조용히 있어">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unused parameter 경고 잠재우기">
+<meta property="og:url" content="https://changh95.github.io/20220120-unused-parameter/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Unused parameter 경고는 잠시 조용히 있어">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-21T00:04:39.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.203Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220120-unused-parameter/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Unused parameter 경고 잠재우기 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unused-parameter-warning"><span class="nav-number">1.</span> <span class="nav-text">Unused parameter warning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLDR"><span class="nav-number">2.</span> <span class="nav-text">TLDR;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%93%B0%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4"><span class="nav-number">3.</span> <span class="nav-text">쓰면 안되는 방법들</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wno-unused-parameter-%ED%94%8C%EB%9E%98%EA%B7%B8-%EC%93%B0%EC%A7%80%EB%A7%88%EC%84%B8%EC%9A%94"><span class="nav-number">3.1.</span> <span class="nav-text">-Wno-unused-parameter 플래그 쓰지마세요</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#void-cast-%ED%95%98%EC%A7%80%EB%A7%88%EC%84%B8%EC%9A%94"><span class="nav-number">3.2.</span> <span class="nav-text">void cast 하지마세요</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ignore-%ED%95%A8%EC%88%98%EB%82%98-%EB%A7%A4%ED%81%AC%EB%A1%9C-%EC%A7%80%EC%A0%95-%ED%95%98%EC%A7%80%EB%A7%88%EC%84%B8%EC%9A%94"><span class="nav-number">3.3.</span> <span class="nav-text">ignore 함수나 매크로 지정 하지마세요</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A0%81%EB%8B%B9%ED%9E%88-%EC%8D%A8%EC%A4%84%EB%A7%8C%ED%95%9C-%EB%B0%A9%EB%B2%95%EB%93%A4"><span class="nav-number">4.</span> <span class="nav-text">적당히 써줄만한 방법들</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#attribute-unused"><span class="nav-number">4.1.</span> <span class="nav-text">attribute((unused))</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%B3%80%EC%88%98-%EC%A3%BC%EC%84%9D%EC%B2%98%EB%A6%AC"><span class="nav-number">4.2.</span> <span class="nav-text">변수 주석처리</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-ignore"><span class="nav-number">4.3.</span> <span class="nav-text">std::ignore</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B6%94%EC%B2%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4"><span class="nav-number">5.</span> <span class="nav-text">추천하는 방법들</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-17%EC%9D%98-maybe-unused-attribute"><span class="nav-number">5.1.</span> <span class="nav-text">C++17의 [[maybe_unused]] attribute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#boost-ignore-unused"><span class="nav-number">5.2.</span> <span class="nav-text">boost::ignore_unused()</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220120-unused-parameter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Unused parameter 경고 잠재우기
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-21 09:04:39" itemprop="dateCreated datePublished" datetime="2022-01-21T09:04:39+09:00">2022-01-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Unused-parameter-warning"><a href="#Unused-parameter-warning" class="headerlink" title="Unused parameter warning"></a>Unused parameter warning</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjIwMTE1LXNhZmVyLWMv">더 안전하게 C++ 코드를 작성하는법<i class="fa fa-external-link-alt"></i></span> 글에 나왔던 것 처럼 <code>-Wall</code> 플래그를 사용해서 빌드를 할 때, <strong>함수 인자로 받은 변수를 함수에서 사용하지 않을 경우 경고</strong>가 나타나게 됩니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In file included from /home/hyunggi/c++/directory/sample_code.cpp:10:</span><br><span class="line">/hyunggi/c++/directory/sample_code.hpp: In member function ‘virtual bool someClass::someNamespace::someFunction(const std::string&amp;)’:</span><br><span class="line">/hyunggi/c++/directory/sample_code.hpp:30:53: error: unused parameter ‘slam_is_awesome’ [-Werror=unused-parameter]</span><br><span class="line">   30 |   virtual bool someFunction(const std::string&amp; slam_is_awesome)</span><br><span class="line">      |                                  ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~</span><br><span class="line">cc1plus: all warnings being treated as errors</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<p>이 경고의 의미는 아래와 같습니다.</p>
+<blockquote>
+<p>함수에서 쓰겠다고 인자를 받았는데, 왜 안써? 너 이거 쓰는거 까먹은거 아냐?? 변수명 잘못쓴거 아냐??? 아니 <strong>그럴꺼면 인자로 왜 받은거야????</strong></p>
+</blockquote>
+<p> </p>
+<p>인자로 받은건 꼭 써줘야합니다. 그게 안전한 프로그램입니다.</p>
+<p>하지만 레거시 코드를 리팩토링 할 때는 막 함수 몇백개에서 이러한 경고가 나타나는 경우가 있습니다.</p>
+<p>함수 하나씩 리팩토링을 하며 해결해나가고 싶은데, <code>-Werror</code> 플래그 때문에 빌드 자체가 안되기도 합니다.</p>
+<p><code>-Werror</code>를 끄고 싶은 마음도 들지만, 그러면 수많은 warning이 있을 때 진짜 크리티컬한 warning을 못보게 되지 않을까 걱정이 됩니다.</p>
+<p>이번 글에서는 이런 <strong>unused parameter warning을 잠시동안 해제하는 방법</strong>에 대해 알아봅니다.</p>
+<p> </p>
+<h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
+<li>C++17 이상이라면 <strong><code>[[maybe_unused]]</code></strong> 씁시다</li>
+<li>C++17보다 낮은 스탠다드를 쓰지만 Boost 프레임워크를 쓴다면 **<code>boost::ignore_unused()</code>**를 씁시다</li>
+<li><strong>왠만하면 처음부터 잘 짭시다</strong></li>
+<li>여의치 않는다면 <code>std::ignore</code>를 써서 표시해두고, 빠르게 리팩토링해서 경고가 안나게 합시다</li>
+<li><strong>경고는 절대 끄지 맙시다</strong> =.=</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="쓰면-안되는-방법들"><a href="#쓰면-안되는-방법들" class="headerlink" title="쓰면 안되는 방법들"></a>쓰면 안되는 방법들</h2><p>우선 <strong>쓰지 말아야 할 방법</strong>들에 대해 먼저 알아봅시다.</p>
+<p> </p>
+<h3 id="Wno-unused-parameter-플래그-쓰지마세요"><a href="#Wno-unused-parameter-플래그-쓰지마세요" class="headerlink" title="-Wno-unused-parameter 플래그 쓰지마세요"></a><code>-Wno-unused-parameter</code> 플래그 쓰지마세요</h3><p>컴파일러 경고 자체를 꺼버리는 방법입니다.</p>
+<p>감히 제가 뭔데 컴파일러를 무시할까요… 컴파일러 경고는 끄는게 아닙니다.</p>
+<p>절대 쓰지 맙시다.</p>
+<p> </p>
+<h3 id="void-cast-하지마세요"><a href="#void-cast-하지마세요" class="headerlink" title="void cast 하지마세요"></a>void cast 하지마세요</h3><p>아래 방법과 같은 방식으로, void로 사용하지 않은 변수를 캐스팅하는 겁니다.</p>
+<p>void casting은 전혀 아무런 의미도 가지지 않지만, 적어도 변수에 어떠한 액션을 취했기 때문에 컴파일러 경고가 사라지게 됩니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    (<span class="keyword">void</span>)(unused_parameter); <span class="comment">// 또는 static_cast&lt;void&gt;(unused_parameter);</span></span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>근데 아니 아무 죄도 없는 변수는 왜 공허로 보냅니까?</p>
+<p><strong>void casting의 목적은 컴파일러 경고를 끄기 위함이 아닙니다.</strong></p>
+<p>그렇다고 주석으로 ‘컴파일러 경고를 끄기 위해 사용함’ 이라고 적는건 더 이상합니다.</p>
+<p>이럴거면 차라리 함수를 제대로 리팩토링 해줍시다.</p>
+<p> </p>
+<h3 id="ignore-함수나-매크로-지정-하지마세요"><a href="#ignore-함수나-매크로-지정-하지마세요" class="headerlink" title="ignore 함수나 매크로 지정 하지마세요"></a>ignore 함수나 매크로 지정 하지마세요</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UNUSED(x) (void)(x)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ignore_unused</span><span class="params">(T &amp;&amp;)</span></span></span><br><span class="line"><span class="function"></span>{ }</span><br><span class="line"></span><br><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    UNUSED(unused_parameter); <span class="comment">// 매크로 방법</span></span><br><span class="line">    ignore_unused(unused_parameter); <span class="comment">// 함수 방법</span></span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>void cast 방식보다는 낫지만, C++ 에서 이런 매크로 사용하지 맙시다.</p>
+<p>매크로는 C++ 코드가 C 코드 처럼 보이게 만듭니다.</p>
+<p>함수로 만들면 그래도 가독성은 좀더 좋아지지만… 똑같습니다.</p>
+<p> </p>
+<hr>
+<h2 id="적당히-써줄만한-방법들"><a href="#적당히-써줄만한-방법들" class="headerlink" title="적당히 써줄만한 방법들"></a>적당히 써줄만한 방법들</h2><p>그래도 봐줄만한 방법들을 소개합니다.</p>
+<p> </p>
+<h3 id="attribute-unused"><a href="#attribute-unused" class="headerlink" title="attribute((unused))"></a><strong>attribute</strong>((unused))</h3><p><strong>gcc/clang에서 정의한 ‘사용하지 않는 인자’ attribute를 사용</strong>하는 방법입니다.</p>
+<p>gcc와 clang에서 사용하는건 저희도 써도 괜찮지 않을까 생각합니다.</p>
+<p>단점이라면 함수 인자 리스트가 좀 길어집니다.</p>
+<p>하지만 적당히 정상적으로 코드를 짰다면 (i.e. unused parameter가 2개 이상이 아니라면), 함수 인자 리스트가 그렇게 길어질리가 없습니다.</p>
+<p>Unused parameter가 2개 이상이라면, 그냥 함수 자체를 다시 짜시죠…</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, __attribute__((unused)) T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="변수-주석처리"><a href="#변수-주석처리" class="headerlink" title="변수 주석처리"></a>변수 주석처리</h3><p>좀 애매한 방법이지만 작동하는 방법입니다.</p>
+<p>하지만 IDE에서 검색해서 리팩토링하기 어렵기 때문에 추천하지 않습니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, T <span class="comment">/*unused_parameter*/</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="std-ignore"><a href="#std-ignore" class="headerlink" title="std::ignore"></a>std::ignore</h3><p><code>std::ignore</code>는 원래 <span class="exturl" data-url="aHR0cHM6Ly9lbi5jcHByZWZlcmVuY2UuY29tL3cvY3BwL3V0aWxpdHkvdHVwbGU=">std::tuple<i class="fa fa-external-link-alt"></i></span>을 쓸 때 특정 변수를 무시하도록 만든 헬퍼 기능입니다.</p>
+<p>근데 그냥 변수에도 쓸 수 있습니다.</p>
+<p>그냥 변수에서 쓰라고 만든 기능은 아니지만, <code>std::ignore</code>라는 이름답게 <strong>개발자들이 읽을 때 ‘아 이 변수는 무시하라고 만든거구나’ 라고 이해할 수 있습니다</strong>. </p>
+<p>이런 면에서는 void cast보다 훨씬 좋다고 생각합니다.</p>
+<p>나중에 리팩토링할 때 <code>std::ignore</code>를 찾아서 고칠수도 있습니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">std</span>::ignore = unused_parameter;</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<hr>
+<h2 id="추천하는-방법들"><a href="#추천하는-방법들" class="headerlink" title="추천하는 방법들"></a>추천하는 방법들</h2><p>제일 좋은 방법들이라고 생각합니다.</p>
+<p> </p>
+<h3 id="C-17의-maybe-unused-attribute"><a href="#C-17의-maybe-unused-attribute" class="headerlink" title="C++17의 [[maybe_unused]] attribute"></a>C++17의 [[maybe_unused]] attribute</h3><p><strong>‘이 변수는 아마 안쓸수도?’</strong></p>
+<p><strong>제일 좋은 방법</strong>입니다.</p>
+<p>컴파일러도, 나도, 내 동료들도, 모두가 바로 이해하는 방법입니다.</p>
+<p>단점이라면 C++17을 요구합니다. 현재 자율주행 쪽 C++ 프로그래밍 규제로 C++11에서 작업하는데, 이거 못써서 미칠 노릇입니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, [[maybe_unused]] T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<h3 id="boost-ignore-unused"><a href="#boost-ignore-unused" class="headerlink" title="boost::ignore_unused()"></a>boost::ignore_unused()</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjIwMTA2LWJvb3N0LXZzLWFic2VpbC8/aGlnaGxpZ2h0PWJvb3N0">Boost 프레임워크<i class="fa fa-external-link-alt"></i></span>를 쓴다면 고려해볼만한 방법입니다.</p>
+<p>C++11등에서 작업하는데 C++17/20의 기능을 불러오기 위해 Boost 프레임워크를 쓰는 경우가 있습니다.</p>
+<p><code>boost::ignore_unused()</code>는 boost의 내장함수이며, <strong>좋은 함수 이름으로 unused parameter를 무시</strong>할 수 있게 해줍니다.</p>
+<p>이거도 나중에 <code>boost::ignore_unused</code>로 찾아서 리팩토링 해주기 좋습니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"boost/core/ignore_unused.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    boost::ignore_unused(unused_paramter);</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220120-static-vs-shared-libs/" rel="prev" title="Static lib vs Shared lib (.lib vs .dll)">
+                  <i class="fa fa-chevron-left"></i> Static lib vs Shared lib (.lib vs .dll)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220121-open3d-build-story/" rel="next" title="Open3D 빌드했는데 라이브러리가 너무 크네 어쩌지">
+                  Open3D 빌드했는데 라이브러리가 너무 크네 어쩌지 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

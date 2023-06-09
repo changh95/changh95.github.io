@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="논문을 리뷰하면서 고급 semantic SLAM을 구현하는데에 필요한 점에 대해 제 의견을 더해 적어봅니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
+<meta property="og:url" content="https://changh95.github.io/20230215-rosen-2021/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="논문을 리뷰하면서 고급 semantic SLAM을 구현하는데에 필요한 점에 대해 제 의견을 더해 적어봅니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.png">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/slam_pp.png">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/nodeslam.png">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/kimera.png">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/niceslam.png">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/lmnav.png">
+<meta property="article:published_time" content="2023-02-17T07:50:21.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.727Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Semantic SLAM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20230215-rosen-2021/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">시작하기 전…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Global-representation%EC%9D%80-%EC%96%B4%EB%96%A4-%ED%98%95%ED%83%9C%EA%B0%80-%EC%A0%81%ED%95%A9%ED%95%9C%EA%B0%80"><span class="nav-number">2.</span> <span class="nav-text">Global representation은 어떤 형태가 적합한가?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Geometric-representation"><span class="nav-number">3.</span> <span class="nav-text">Geometric representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semantic-%EC%A0%95%EB%B3%B4%EC%99%80-geometry-%EC%A0%95%EB%B3%B4%EC%9D%98-%EC%A1%B0%ED%95%A9"><span class="nav-number">4.</span> <span class="nav-text">Semantic 정보와 geometry 정보의 조합</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semantic-map-representation"><span class="nav-number">5.</span> <span class="nav-text">Semantic map representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%84%B8%EC%83%81%EC%9D%80-%EC%A0%88%EB%8C%80-%EA%B0%80%EB%A7%8C%ED%9E%88-%EC%9E%88%EC%A7%80-%EC%95%8A%EC%95%84-Static-vs-dynamic-vs-semistatic-vs-deformable-world"><span class="nav-number">6.</span> <span class="nav-text">세상은 절대 가만히 있지 않아 (Static vs dynamic vs semistatic vs deformable world)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hierarchical-representation"><span class="nav-number">7.</span> <span class="nav-text">Hierarchical representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%94%A5%EB%9F%AC%EB%8B%9D-%EC%A4%91%EC%8B%AC%EC%9D%98-representation"><span class="nav-number">8.</span> <span class="nav-text">딥러닝 중심의 representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%95%9E%EC%9C%BC%EB%A1%9C-%EC%97%B0%EA%B5%AC%ED%95%A0-%EA%B1%B0%EB%A6%AC%EB%8A%94-%EC%96%B4%EB%96%A4-%EA%B2%83%EB%93%A4%EC%9D%B4-%EC%9E%88%EB%8A%94%EA%B0%80-%EC%A0%95%EB%A6%AC"><span class="nav-number">9.</span> <span class="nav-text">앞으로 연구할 거리는 어떤 것들이 있는가? + 정리</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20230215-rosen-2021/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-17 16:50:21" itemprop="dateCreated datePublished" datetime="2023-02-17T16:50:21+09:00">2023-02-17</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjMwMjE0LXJvc2VuLTIwMjEv">Part 1 - SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping<i class="fa fa-external-link-alt"></i></span>을 먼저 읽으시면 좋습니다.</p>
+<p> </p>
+<hr>
+<h1 id="Global-representation은-어떤-형태가-적합한가"><a href="#Global-representation은-어떤-형태가-적합한가" class="headerlink" title="Global representation은 어떤 형태가 적합한가?"></a>Global representation은 어떤 형태가 적합한가?</h1><p>현재까지 Point cloud, Occupancy grid map, Mesh, Voxel, surface map 등등 다양한 형태의 global representation을 사용하는 SLAM들이 있었다.</p>
+<p>SLAM을 다루는 환경은 정말 다양하다. </p>
+<ul>
+<li>공간의 크기: 작은 공간에서 큰 공간. </li>
+<li>센서의 종류: 하나의 센서에서부터 여러개의 이종센서를 사용하는 플랫폼.</li>
+<li>컴퓨팅 리소스: 마이크로 로봇에서부터 클라우드 서버 스케일의 컴퓨팅 리소스.</li>
+<li>공간의 종류: 정적인 공간에서부터 자세/형태가 모두 동적인 물체가 있는 공간.</li>
+<li>다른 알고리즘으로 인한 제약조건: SLAM 이전에 버추얼 센서로써 인지 알고리즘이 돌고 있는지, SLAM 이후에 플래닝 및 기타 판단을 위해 SLAM 지도의 형태가 정해져야하는지. </li>
+</ul>
+<p>위와 같이 다양한 환경이 있고, 이러한 환경에서 정확하고, 빠르고, robust하게 돌기 위해서는 다양한 알고리즘을 조합해야하며 이로 인해 <strong>다양한 표현법이 있을 수 밖에 없다</strong> (또는, 다양한 표현법이 있을 수 밖에 없었다).</p>
+<p>그리고 <strong>시장의 기대치는 빠르게 높아져가고 있다</strong>. 이제 로봇에서 정적인 공간에 대해 geomtric map을 만들고 위치추정을 하는 기능은 SLAM 알고리즘으로써 가장 기본중의 기본으로 인식된다. 컴퓨팅 보드와 센서의 성능도 날이 갈 수록 발전하고 있기 때문에, 다양한 이종 센서들을 조합해 물체를 인식한다던가, 딥러닝 정보까지 섞는다던가, 동적인 환경에서도 잘 동작한다거나, 변화하는 환경에서도 동작하고, 경로 계획까지 잘 이어지는게 최근 시장이 기대하는 수준이다.</p>
+<p>최근에는 semantic perception 정보까지 섞어서 플랫폼이 공간과 상호작용을 할 수 있는 수준까지 깊게 이해하게 만드는 수준인 ‘spatial AI’라는 키워드도 떠오르고 있다.</p>
+<p>그렇다면 <strong>가장 효율적인 representation은 무엇인가?</strong> 가장 안정적이고(reliable), 가장 강인하고(robust), 가장 확실한(certifiable)하며 정확하고(accurate) 가벼운(light-weight) representation은 무엇일까?</p>
+<p> </p>
+<hr>
+<h1 id="Geometric-representation"><a href="#Geometric-representation" class="headerlink" title="Geometric representation"></a>Geometric representation</h1><p>우선 기하학적인 표현법부터 알아보자.</p>
+<p>VSLAM에서는 주로 SIFT, SURF, ORB와 같은 sparse feature를 모아 <strong>sparse map</strong>을 만들었다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MTAuMDY0NzU=">ORB-SLAM<i class="fa fa-external-link-alt"></i></span> 처럼 keypoint+descriptor 조합을 사용할 수도 있고, <span class="exturl" data-url="aHR0cHM6Ly9qYWtvYmVuZ2VsLmdpdGh1Yi5pby9wZGYvRFNPLnBkZg==">DSO<i class="fa fa-external-link-alt"></i></span>처럼 굳이 그런 조합을 사용하지 않는 방법도 있다. Sparse map은 3D 공간에서 위치 추정을 하는데에는 성공적이나, 물체가 위치한 공간과 아닌 공간을(occupied space) 구분하는데에 있어서는 상당히 취약하기 떄문에 path planning이나 collision-free path 생성에는 좋은 방법이 아니였다.</p>
+<p>이를 타파하기 위해 <strong>dense representation</strong>을 사용해 occupied space를 표현하기 시작했다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MTEuMDM2MzE=">Voxblox<i class="fa fa-external-link-alt"></i></span> 처럼 Occupancy grid map / volumentric map을 사용하거나, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDEuMDY4OTQ=">Kimera<i class="fa fa-external-link-alt"></i></span>처럼 mesh를, <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jLmljLmFjLnVrL35hamQvUHVibGljYXRpb25zL25ld2NvbWJlX2V0YWxfaWNjdjIwMTEucGRm">DTAM<i class="fa fa-external-link-alt"></i></span>처럼 dense point cloud를, <span class="exturl" data-url="aHR0cDovL3d3dy5yb2JvdGljc3Byb2NlZWRpbmdzLm9yZy9yc3MxMS9wMDEucGRm">ElasticFusion<i class="fa fa-external-link-alt"></i></span>이나 <span class="exturl" data-url="aHR0cHM6Ly93d3cubWljcm9zb2Z0LmNvbS9lbi11cy9yZXNlYXJjaC93cC1jb250ZW50L3VwbG9hZHMvMjAxNi8wMi9pc21hcjIwMTEucGRm">KinectFusion<i class="fa fa-external-link-alt"></i></span>처럼 truncated signed distance function map(TSDF) 같은 것들이 이와 같은 예시이다. </p>
+<p>각각의 장점과 단점들이 있지만, 모든 representation을 꿰뚫는 단점들이 있다.</p>
+<ol>
+<li>Geometry만으로는 공간의 특성을 이해할 수 없다. <strong>물체의 색깔</strong>, <strong>촉감</strong>, <strong>무게</strong> 와 같은 정보는 <strong>기하적인 특성만으로는 알 수 없는 것</strong>들이다.</li>
+<li>공간의 특성을 넘어서는 다양한 공간과의 상호작용에서 나타는 정보도 표현할 수 없다. <strong>소리</strong>, <strong>온도</strong> 같은 것들이다.</li>
+<li><strong>자연스러운 인간-로봇 상호작용(human-robot interaction)이 불가능</strong>하다. 사람은 ‘탁자 위에 컵이 있구나’ 라고 표현하는데에 비해, 로봇의 geometric representation은 pose와 coordinate로 표현할 것이다. 사람과 로봇이 자연스럽게 소통하기 위해서는 인간의 소통방식에 입건한 semantic descriptor가 필요한데, geometric representation에는 이것이 없다.</li>
+<li>Localization을 넘어서는 작업에는 큰 도움이 되지 않는다. </li>
+</ol>
+<p> </p>
+<hr>
+<h1 id="Semantic-정보와-geometry-정보의-조합"><a href="#Semantic-정보와-geometry-정보의-조합" class="headerlink" title="Semantic 정보와 geometry 정보의 조합"></a>Semantic 정보와 geometry 정보의 조합</h1><img src="/20230215-rosen-2021/bowman.png" class="" title="bowman">
+
+<p>2015년 이후 부터 SLAM 커뮤니티에서도 머신러닝 기반의 퍼셉션 모델에 관심을 가지기 시작했다. Object detection이라던지, place recognition 등을 통해서 좀 더 높은 수준의 플래닝 및 액션을 꾀하는 연구가 진행이 되었다. 좀 더 설명하자면, 거실에서 침실로 로봇을 이동해야한다는 task가 있다면 2015년 이전에는 거실의 coordinate에서 침실의 coordinate로 이동하기 위해 occupancy grid map에서 최적경로를 계산했을텐데, 2015년 이후에는 거실을 어떻게 인지하고 침실을 어떻게 인지할지에 대한 연구로 방향을 틀었다는 것이다.</p>
+<p>이러한 연구는 결국 <strong>Semantic map</strong>에 대한 개념을 만들었다. Semantic map은 단순히 object와 place에 대한 정보만 가지면 되었기 떄문에, geometric map 보다 <strong>훨씬 더 적은 메모리와 계산량을 소모한다는 장점</strong>도 알게 되었다. 그리고 <strong>로봇이 만든 지도를 사람이 이전보다 훨씬 더 쉽게 이해할 수 있다는 장점</strong>도 알게 되었다.</p>
+<p>하지만 <strong>semantic 정보를 어떻게 조합해야하는지에 대한 정해진 룰이 없었다</strong>. 현재까지도 몇가지 제안된 방법은 있다만, de-facto로 정해진 방법이 없다. 지금까지 정해진건 단 하나 - SLAM 이전에 <strong>머신러닝 기반 perception 모델을 돌리고, 그 결과를 마치 버추얼 센서처럼 사용</strong>하자는 것만 있다.</p>
+<p>하지만 Semantic 정보를 추출하는 object detection이나 semantic segmentation 모델을 버추얼 센서처럼 사용하는건 <strong>생각보다 쉽지 않다</strong>. 두가지 이유가 있다. 첫번째로는 <strong>도메인이 살짝만 달라져도 모델 추론이 완전히 망가진다던지, 아무리봐도 터질일이 없어보이는 경우에도 터지는 경우가 많다</strong>. 이 때문에 모델 추론 결과의 uncertainty를 함께 추론하는 연구도 진행되고 있다. 두번째로는 <strong>object category는 개별적으로(discrete)하게 분류가 되는데, 이것이 SLAM 추론 내부에서 나타나는 continuous geometry와 엮을 때 굉장히 어려워진다는 것</strong>이다. Joint discrete-continuous estimation은 종종 굉장히 큰 문제 (i.e. combinatorially large state spaces)를 만든다.</p>
+<p>Latent semantic class와 geomtric landmark를 동시에 추정 (i.e. joint estimation)을 하는 기본적인 수식은 아래와 같다. Y는 semantic 정보를 포함한 모든 measurement, X는 로봇 포즈, L은 landmark를 의미한다. 여기서 새롭게 중요하게 되는 정보가 D 인데, D는 Y와 L 사이의 <strong>data association</strong>을 의미한다. Semantic class는 continuous하지 않고 discrete한 성질을 띄는데 (i.e. 카테고리 형 분류), 이는 data association을 할 때의 discrete inference한 성질과 잘 맞기 때문에 궁합이 좋다고 볼 수 있다.</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.032ex" xmlns="http://www.w3.org/2000/svg" width="32.816ex" height="4.308ex" role="img" focusable="false" viewBox="0 -1006 14504.7 1904.1"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(277.3, 212)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g><g data-mml-node="mo" transform="translate(852, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(1296.7, 0)"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(118.3, 212)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g><g data-mml-node="mo" transform="translate(1977.7, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(2422.3, 0)"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g><g data-mml-node="mo" transform="translate(219.6, 212)"><path data-c="5E" d="M112 560L249 694L257 686Q387 562 387 560L361 531Q359 532 303 581L250 627L195 580Q182 569 169 557T148 538L140 532Q138 530 125 546L112 560Z"></path></g></g></g><g data-mml-node="mo" transform="translate(3528.1, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mi" transform="translate(4583.9, 0)"><path data-c="61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z"></path><path data-c="72" d="M36 46H50Q89 46 97 60V68Q97 77 97 91T98 122T98 161T98 203Q98 234 98 269T98 328L97 351Q94 370 83 376T38 385H20V408Q20 431 22 431L32 432Q42 433 60 434T96 436Q112 437 131 438T160 441T171 442H174V373Q213 441 271 441H277Q322 441 343 419T364 373Q364 352 351 337T313 322Q288 322 276 338T263 372Q263 381 265 388T270 400T273 405Q271 407 250 401Q234 393 226 386Q179 341 179 207V154Q179 141 179 127T179 101T180 81T180 66V61Q181 59 183 57T188 54T193 51T200 49T207 48T216 47T225 47T235 46T245 46H276V0H267Q249 3 140 3Q37 3 28 0H20V46H36Z" transform="translate(500, 0)"></path><path data-c="67" d="M329 409Q373 453 429 453Q459 453 472 434T485 396Q485 382 476 371T449 360Q416 360 412 390Q410 404 415 411Q415 412 416 414V415Q388 412 363 393Q355 388 355 386Q355 385 359 381T368 369T379 351T388 325T392 292Q392 230 343 187T222 143Q172 143 123 171Q112 153 112 133Q112 98 138 81Q147 75 155 75T227 73Q311 72 335 67Q396 58 431 26Q470 -13 470 -72Q470 -139 392 -175Q332 -206 250 -206Q167 -206 107 -175Q29 -140 29 -75Q29 -39 50 -15T92 18L103 24Q67 55 67 108Q67 155 96 193Q52 237 52 292Q52 355 102 398T223 442Q274 442 318 416L329 409ZM299 343Q294 371 273 387T221 404Q192 404 171 388T145 343Q142 326 142 292Q142 248 149 227T179 192Q196 182 222 182Q244 182 260 189T283 207T294 227T299 242Q302 258 302 292T299 343ZM403 -75Q403 -50 389 -34T348 -11T299 -2T245 0H218Q151 0 138 -6Q118 -15 107 -34T95 -74Q95 -84 101 -97T122 -127T170 -155T250 -167Q319 -167 361 -139T403 -75Z" transform="translate(892, 0)"></path></g><g data-mml-node="mo" transform="translate(5975.9, 0)"><path data-c="2061" d=""></path></g><g data-mml-node="munder" transform="translate(6142.6, 0)"><g data-mml-node="mo" transform="translate(100.8, 0)"><path data-c="6D" d="M41 46H55Q94 46 102 60V68Q102 77 102 91T102 122T103 161T103 203Q103 234 103 269T102 328V351Q99 370 88 376T43 385H25V408Q25 431 27 431L37 432Q47 433 65 434T102 436Q119 437 138 438T167 441T178 442H181V402Q181 364 182 364T187 369T199 384T218 402T247 421T285 437Q305 442 336 442Q351 442 364 440T387 434T406 426T421 417T432 406T441 395T448 384T452 374T455 366L457 361L460 365Q463 369 466 373T475 384T488 397T503 410T523 422T546 432T572 439T603 442Q729 442 740 329Q741 322 741 190V104Q741 66 743 59T754 49Q775 46 803 46H819V0H811L788 1Q764 2 737 2T699 3Q596 3 587 0H579V46H595Q656 46 656 62Q657 64 657 200Q656 335 655 343Q649 371 635 385T611 402T585 404Q540 404 506 370Q479 343 472 315T464 232V168V108Q464 78 465 68T468 55T477 49Q498 46 526 46H542V0H534L510 1Q487 2 460 2T422 3Q319 3 310 0H302V46H318Q379 46 379 62Q380 64 380 200Q379 335 378 343Q372 371 358 385T334 402T308 404Q263 404 229 370Q202 343 195 315T187 232V168V108Q187 78 188 68T191 55T200 49Q221 46 249 46H265V0H257L234 1Q210 2 183 2T145 3Q42 3 33 0H25V46H41Z"></path><path data-c="61" d="M137 305T115 305T78 320T63 359Q63 394 97 421T218 448Q291 448 336 416T396 340Q401 326 401 309T402 194V124Q402 76 407 58T428 40Q443 40 448 56T453 109V145H493V106Q492 66 490 59Q481 29 455 12T400 -6T353 12T329 54V58L327 55Q325 52 322 49T314 40T302 29T287 17T269 6T247 -2T221 -8T190 -11Q130 -11 82 20T34 107Q34 128 41 147T68 188T116 225T194 253T304 268H318V290Q318 324 312 340Q290 411 215 411Q197 411 181 410T156 406T148 403Q170 388 170 359Q170 334 154 320ZM126 106Q126 75 150 51T209 26Q247 26 276 49T315 109Q317 116 318 175Q318 233 317 233Q309 233 296 232T251 223T193 203T147 166T126 106Z" transform="translate(833, 0)"></path><path data-c="78" d="M201 0Q189 3 102 3Q26 3 17 0H11V46H25Q48 47 67 52T96 61T121 78T139 96T160 122T180 150L226 210L168 288Q159 301 149 315T133 336T122 351T113 363T107 370T100 376T94 379T88 381T80 383Q74 383 44 385H16V431H23Q59 429 126 429Q219 429 229 431H237V385Q201 381 201 369Q201 367 211 353T239 315T268 274L272 270L297 304Q329 345 329 358Q329 364 327 369T322 376T317 380T310 384L307 385H302V431H309Q324 428 408 428Q487 428 493 431H499V385H492Q443 385 411 368Q394 360 377 341T312 257L296 236L358 151Q424 61 429 57T446 50Q464 46 499 46H516V0H510H502Q494 1 482 1T457 2T432 2T414 3Q403 3 377 3T327 1L304 0H295V46H298Q309 46 320 51T331 63Q331 65 291 120L250 175Q249 174 219 133T185 88Q181 83 181 74Q181 63 188 55T206 46Q208 46 208 23V0H201Z" transform="translate(1333, 0)"></path></g><g data-mml-node="TeXAtom" transform="translate(0, -661) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(852, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(1130, 0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(1811, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(2089, 0)"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g></g></g><g data-mml-node="mi" transform="translate(8371.9, 0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mo" transform="translate(8874.9, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(9263.9, 0)"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(10115.9, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(10560.5, 0)"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="mo" transform="translate(11241.5, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="mi" transform="translate(11686.2, 0)"><path data-c="1D437" d="M287 628Q287 635 230 637Q207 637 200 638T193 647Q193 655 197 667T204 682Q206 683 403 683Q570 682 590 682T630 676Q702 659 752 597T803 431Q803 275 696 151T444 3L430 1L236 0H125H72Q48 0 41 2T33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM703 469Q703 507 692 537T666 584T629 613T590 629T555 636Q553 636 541 636T512 636T479 637H436Q392 637 386 627Q384 623 313 339T242 52Q242 48 253 48T330 47Q335 47 349 47T373 46Q499 46 581 128Q617 164 640 212T683 339T703 469Z"></path></g><g data-mml-node="mo" transform="translate(12792, 0)"><path data-c="2223" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(13347.7, 0)"><g data-mml-node="mover"><g data-mml-node="mi"><path data-c="1D44C" d="M66 637Q54 637 49 637T39 638T32 641T30 647T33 664T42 682Q44 683 56 683Q104 680 165 680Q288 680 306 683H316Q322 677 322 674T320 656Q316 643 310 637H298Q242 637 242 624Q242 619 292 477T343 333L346 336Q350 340 358 349T379 373T411 410T454 461Q546 568 561 587T577 618Q577 634 545 637Q528 637 528 647Q528 649 530 661Q533 676 535 679T549 683Q551 683 578 682T657 680Q684 680 713 681T746 682Q763 682 763 673Q763 669 760 657T755 643Q753 637 734 637Q662 632 617 587Q608 578 477 424L348 273L322 169Q295 62 295 57Q295 46 363 46Q379 46 384 45T390 35Q390 33 388 23Q384 6 382 4T366 1Q361 1 324 1T232 2Q170 2 138 2T102 1Q84 1 84 9Q84 14 87 24Q88 27 89 30T90 35T91 39T93 42T96 44T101 45T107 45T116 46T129 46Q168 47 180 50T198 63Q201 68 227 171L252 274L129 623Q128 624 127 625T125 627T122 629T118 631T113 633T105 634T96 635T83 636T66 637Z"></path></g><g data-mml-node="mo" transform="translate(268, 528)"><path data-c="7E" d="M179 251Q164 251 151 245T131 234T111 215L97 227L83 238Q83 239 95 253T121 283T142 304Q165 318 187 318T253 300T320 282Q335 282 348 288T368 299T388 318L402 306L416 295Q375 236 344 222Q330 215 313 215Q292 215 248 233T179 251Z"></path></g></g></g><g data-mml-node="mo" transform="translate(14115.7, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container></p>
+<p>위와 같은 문제 정의에 맞춰 여러가지 연구가 진행이 되었다. <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2lzLnVwZW5uLmVkdS9+a29zdGFzL215cHViLmRpci9ib3dtYW4xN2ljcmEucGRm">Bowman 2017 - Probabilistic data association for semantic SLAM<i class="fa fa-external-link-alt"></i></span> 연구에서는 expectation maximization (EM) 방식으로 semantic/geometric 동시 최적화를 진행한다. 두 단계로 이뤄져있는데, 첫번째 단계에서는 semantic class와 geometry 사이의 data association의 확률을 전부 고정해놓고 우선적으로 pose graph optimziation만 진행을 하고, 두번째 단계에서는 로봇 포즈와 랜드마크를 고정한 상태에서 새롭게 semantic/geometric data association을 최적화하는 것이다. 이렇게 함으로써 locall optimal solution에 다다를 수 있다. <span class="exturl" data-url="aHR0cHM6Ly93d3cueWFzaXJsYXRpZi5pbmZvL21vdmluZ3NlbnNvcnMvY2FtZXJhUmVhZHkvcGFwZXIwOS5wZGY=">Sunderhauf 2015 - SLAM-quo vadis? in support of object oriented and semantic SLAM<i class="fa fa-external-link-alt"></i></span> 연구에서는 semantic label의 확률을 최적화 하기도 했고, <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzg3OTQyNDQ=">Doherty 2019 - Multimodal semantic SLAM with probabilistic data association<i class="fa fa-external-link-alt"></i></span>에서는 여러 센서로부터 들어오는 센서 정보를 mixture representation으로, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDkuMTEyMTM=">Doherty 2020 - Probabilistic data association with mixture models for robust semantic SLAM<i class="fa fa-external-link-alt"></i></span>에서는 단일 센서로부터 들어오는 센서 정보도 mixture representation으로 다루며 max-mixture 방식을 통해 continuous manifold를 구축하고 최적화를 통해 가장 높은 확률의 data association을 이루는 방법을 소개한다. 위 방법과는 다른 결로 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDQ0MjMucGRm">Bernreiter 2019 - Multiple hypothesis semantic mapping for robust data association<i class="fa fa-external-link-alt"></i></span> 연구에서는 여러 가능성을 동시에 트랙킹하며 combinatorial하게 가장 좋은 방식을 찾는 multiple hypothesis tracking 기법을 사용하기도 한다.</p>
+<p> </p>
+<hr>
+<h1 id="Semantic-map-representation"><a href="#Semantic-map-representation" class="headerlink" title="Semantic map representation"></a>Semantic map representation</h1><p>Semantic map을 만드는 방법에는 어떤 것들이 있을까? <strong>가장 쉬운 방법은 기존에 사용하는 geometric map (e.g. point cloud, mesh)에 semantic label을 추가하는 방법</strong>이다. 실제로 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MDkuMDUxMzA=">SemanticFusion<i class="fa fa-external-link-alt"></i></span>에서는 dense map에 semantic label을 넣고, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDEuMDY4OTQ=">Kimera<i class="fa fa-external-link-alt"></i></span>에서는 mesh에 semantic label을 넣어 semantic mesh를 만들어낸다.</p>
+<img src="/20230215-rosen-2021/slam_pp.png" class="" title="slam_plus_plus">
+
+<p>2010년 초반에는 object-level SLAM도 꽤 많이 연구가 되었다. Object-level SLAM이란 map을 구성하는 요소가 object밖에 없는 경우를 말한다. <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jLmljLmFjLnVrL35hamQvUHVibGljYXRpb25zL3NhbGFzLW1vcmVub19ldGFsX2N2cHIyMDEzLnBkZg==">SLAM++<i class="fa fa-external-link-alt"></i></span>가 대표적인 예시이다. Object 단위로 map을 만든다는건, object를 인식할 수 있어야한다는 것인데, SLAM++가 나왔을 2013년에는 아직 뉴럴넷 기반의 3D object detection이 안정적이지 못했기 때문에, prior shape에 대해 fitting 작업이 주로 진행되었다. 하지만 이후 뉴럴넷 기반의 2D object detection을 거쳐 3D object detection, shape estimation, pose estimation 관련 기법이 많이 연구되면서, 차차 이 기술들을 사용하는 방향으로 트렌드가 바뀌고 있다.</p>
+<img src="/20230215-rosen-2021/nodeslam.png" class="" title="nodeslam">
+
+<p>Object 기반 map을 만들때, 가장 쉽게 만드는 방법은 object를 하나의 semantic label이 붙어있는 point landmark로써 다루는 것이다. 하지만 이러한 경우에는 object의 방향이나 경계를 알 수 없기 때문에, 이러한 정보를 담기 위한 다양한 representation이 나오고 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDQuMDQwMTE=">Nicholson 2018 - QuadricSLAM: Dual Quadrics from Object Detections as Landmarks in Object-oriented SLAM<i class="fa fa-external-link-alt"></i></span>이나 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDkuMDk2Mjc=">Superquadric Object Representation for Optimization-based Semantic SLAM<i class="fa fa-external-link-alt"></i></span>과 연구에서는 object를 dual-quadric 형태에 넣음으로써 방향성을 가진 공간으로 다룬다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDYuMDA1NTc=">CubeSLAM<i class="fa fa-external-link-alt"></i></span>에서는 object를 3D object detection의 결과인 3D bounding box로 다루기도 한다. 조금 더 나아가 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDQuMDQ0ODV2Mg==">NodeSLAM: Neural Object Descriptors for Multi-View Shape Reconstruction<i class="fa fa-external-link-alt"></i></span>에서는 뉴럴넷으로 학습한 object descriptor를 기반으로 semantic label을 표현하며, shape과 pose (i.e. geometric)에 대한 부분은 SLAM 기반 최적화를 통해 계산하는 알고리즘을 사용한다.</p>
+<p> </p>
+<hr>
+<h1 id="세상은-절대-가만히-있지-않아-Static-vs-dynamic-vs-semistatic-vs-deformable-world"><a href="#세상은-절대-가만히-있지-않아-Static-vs-dynamic-vs-semistatic-vs-deformable-world" class="headerlink" title="세상은 절대 가만히 있지 않아 (Static vs dynamic vs semistatic vs deformable world)"></a>세상은 절대 가만히 있지 않아 (Static vs dynamic vs semistatic vs deformable world)</h1><p>SLAM의 기본 전제 중 하나는 ‘<strong>세상은 고정되어있다</strong>‘ (i.e. <strong>static world</strong>) 이다. 이러한 전제 하에 SLAM 알고리즘은 엄청난 발전을 이뤘지만, 실제로 SLAM을 돌리려고 하는 환경에서는 환경이 고정되어있지 않은 경우가 생각보다 많다. 지금까지의 SLAM은 <strong>움직이는 물체가 있는 경우 아예 그냥 없는 물체 취급을 하며 계산에서 제외해버리는 경우가 많았다</strong>. 그렇게 해야지 고정된 물체에 대한 계산을 할 때 outlier 처리를 할 수 있기 때문이다. 하지만 최근 연구에서는 움직이는 객체를 인지하고, 그들만의 <strong>dynamics를 측정해서 시간이 지남에 따라 변화하는 공간 (spatio-temporal) 정보를 측정</strong>하려는 시도가 이뤄지고 있다.</p>
+<p>고정된 세상이라는 전제에서 가장 중요한 문제는 ‘<strong>움직인것은 나인가? 아니면 세상인가?</strong>‘를 알아내는 것이다. 실제로 세상은 고정되어있는데 로봇이 움직인 것이나, 로봇은 가만히 있는데 세상이 움직인것이나, 로봇의 입장에서는 둘 다 똑같이 보인다 (물론 proprioceptive sensor를 부착하면 풀리는 문제이긴 하지만 말이다). 안정적인 SLAM은 이러한 기하학적 모호함을 해결할 수 있어야할 뿐 더러, 혹시나 모호함 때문에 잘못 추정해도 문제를 발견하면 문제가 없는 상황으로 롤백을 한 후에 다시 제대로 계산을 할 수 있어야한다. 그리고 최대한 잘못 계산하는 것을 줄이기 위해 한번에 잘 계산하는 기능도 필요한데, 이 부분은 Part 1 글에서 설명했던 certifiable algorithm으로 다시 이어진다.</p>
+<p>이제 세상이 고정되어있지 않다고 해보자. 세상이 부분적으로만 고정되어있다 - 예를 들어서, 바닥과 건물은 고정되어있고, 사람들은 걸어다니고, 자동차가 굴러다니며, 내 자동차도 굴러다닌다. 이 때 부터는 ‘고정된 물체’와 ‘움직이는 물체’와 ‘나’를 분리시키는 <strong>dynamic SLAM</strong>을 해야한다. <strong>동적 물체는 정적 환경과 분리되서 인식</strong>이 되야하는데, 이를 위해 semantic 정보를 사용하는 경우가 많다. 주로 ‘아마 이런 클래스는 움직일 확률이 높아’ 라는 방식으로 사람, 자전거, 자동차 등을 정적 환경과 분리해서 트랙킹 하기도 한다. 최신 연구들은 이러한 동적 물체들의 속도까지 추정하려는 연구가 진행되고 있다.</p>
+<p>이제 세상이 조금씩 변화한다고 해보자. <strong>봄여름가을겨울이 지나면서 가로수의 잎이 떨어지고</strong>, 바닥에 쌓이고, 눈이 쌓이고… 뒤에는 건물이 무너지고 새로 지어지고 있다고 해보자. 실내의 환경이라면 <strong>가구의 위치를 옮기는 것</strong>도 포함될 수 있다. 이러한 <strong>시간에 따른 정적 환경의 변화는 다른 시간대에서 동일한 공간을 재관찰해야지만 검출</strong>할 수 있다. 시간에 따라 지도가 변화한다는건, SLAM으로 만드는 지도에 대한 representation도 변화할 수 있어야만 (i.e. 업데이트가 가능해야) 한다는 것이다. 그렇다면 <strong>지도를 생성할 때 어떤 방식으로 생성해야할 것인가?</strong> <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzc0ODcyMzc=">Rosen 2016 - Towards lifelong feature-based mapping in semi-static environments<i class="fa fa-external-link-alt"></i></span>에서는 map point가 지속적으로 존재하는지에 대해 질문하는 bayesian framework를 제안한다. <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzc4Nzg2ODA=">Krajnik 2017 - Fremen:Frequency map enhancement for long-term mobile robot autonomy in changing environments<i class="fa fa-external-link-alt"></i></span>에서는 지도 속에서 변화할 확률이 높은 부분을 Fourier analysis로 검출하는 방법도 제안한다. <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzg1NDI3NTM=">Bore 2018 - Detection and tracking of general movable objects in large three-dimensional maps<i class="fa fa-external-link-alt"></i></span>에서는 particle filter를 이용해서 object들의 dynamics를 트랙킹하는 방법을 제안한다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDYuMTA4MDc=">Zeng 2020 - Semantic linking maps for active visual object search<i class="fa fa-external-link-alt"></i></span>에서는 landmark들 간의 semantic 정보에 대해 probabilistic spatial coupling이 가능한 semantic linking map 표현법을 제안한다. 이렇게 다양한 방법을 통해 환경 변화에 대한 연구가 진행이 되고 있는데, 이는 3D HD-Map을 이용해 주행하는 자율주행 차와 같이 안전 문제가 엮일 때 굉장히 중요한 문제가 된다.</p>
+<p>이제 세상의 형태가 실시간으로 바뀐다고 해보자. <strong>Deformable environment</strong>는 환경이 말랑말랑하다는 전제를 가지고 있다. 아쉽게도 SLAM 분야에서 이 분야에 대한 연구는 그렇게 많이 진행되고 있지 않다. <span class="exturl" data-url="aHR0cHM6Ly9ncmFpbC5jcy53YXNoaW5ndG9uLmVkdS9wcm9qZWN0cy9keW5hbWljZnVzaW9uL3BhcGVycy9EeW5hbWljRnVzaW9uLnBkZg==">DynamicFusion<i class="fa fa-external-link-alt"></i></span> 같은 경우에는 RGB-D 카메라를 이용해서 deformable한 물체의 형태를 dense reconstruction하는 방법을 제안한다. 이 분야의 연구는 주로 의료 쪽 연구에서 하는 경우가 많은데, 예를 들어서 <span class="exturl" data-url="aHR0cHM6Ly9wdWJtZWQubmNiaS5ubG0ubmloLmdvdi8yMDg3OTM1Mi8=">사람의 심장이 두근두근 뛸 때 dense reconstruction을 하면서 형태를 추정하고 카메라의 위치를 추정하는 연구<i class="fa fa-external-link-alt"></i></span>가 있다. 보통 이런 연구에서는 motion 추정을 할 때 기본적인 model이 있어서 (e.g. 사람의 심장은 반복적인 모션 - cyclic motion을 하기 때문에, 이것을 잘 관찰해서 모델로 만들면 t-1, t, t+1 시점에서 어떤 움직임을 할지 추론할 수 있다), 이를 기반으로 형태 추정도 가능하다.</p>
+<p> </p>
+<hr>
+<h1 id="Hierarchical-representation"><a href="#Hierarchical-representation" class="headerlink" title="Hierarchical representation"></a>Hierarchical representation</h1><img src="/20230215-rosen-2021/kimera.png" class="" title="kimera">
+
+<p>기본적으로 SLAM을 돌리면 point cloud나 occupancy grid map이 나온다. Point cloud에서 모든 point는 동일한 중요성을 가지고, occupancy grid map에서 모든 grid cell은 동일한 중요성을 가진다. Point landmark가 1천만개가 쌓여도, 이 중 navigation에 중요한 point landmark가 어떤건지 알 수 없다. 이게 기본적인 SLAM이 가지는 문제 중 하나였다.</p>
+<p>Navigation을 위해 중요한 정보만을 추출해야한다. 이를 위해 <strong>abstraction(추상화)**과 **hierarchy(계층구조)</strong> 개념이 생겼다. 예를 들어, 특정 부분의 point landmark들은 책상을 의미한다, 바닥을 의미한다, 벽을 의미한다, 소파를 의미한다, 이런것들로 추상화를 할 수 있다. 그리고 책상,바닥,벽,소파가 모여서 거실을 의미한다 -&gt; 거실과 화장실과 몇개의 방이 모여 하나의 층을 의미한다 -&gt; 여러 층이 모여 건물을 의미한다, 이런 것들로 계층 구조를 가질 수 있다. 이렇게 <strong>추상화와 계층구조를 통해 SLAM mapping의 확장성과 효율성이 극대화</strong> 된다. 주로 이런 구조를 spatial-semantic hierarchy라고 한다.</p>
+<p>Spatial-semantic hierarchy는 사실 현대적인 SLAM 구성이 생기기 이전 - 즉 고전 로봇 맵핑에서 사용되던 <strong>topology model</strong>과 굉장히 유사하다. Topology model을 빠르게 이해하려면 자동차 내비게이션 지도를 생각하면 된다 - ‘다음 교차로에서 좌회전하세요. 그후 직진하다가 다음 교차로에서 우회전하세요’ 같이 metric한 개념이 없이 연결성에 대한 구조만 가지고 지도를 표현하는 방법이다. Topology model의 정확도는 로봇의 판단 과정에 (decision making, planning) 있어서 아주 중요한 역할을 하는데, 예를 들어 내비게이션에서 좌회전/우회전을 잘못하면 삥 돌아가는 것과 같은 효과를 낼 수 있다. Topological model은 <strong>강력하게 abstraction에만 초점을 둔 방법</strong>이라고 볼 수 있지만, <strong>엄청나게 가벼운 representation</strong>이라는 특징을 가지게 되었고 이러한 특징은 <strong>planning과 decision making에 엄청난 도움</strong>을 준다. 조금 더 개선 시킨 방법으로는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MDkuMDgxNTU=">Mu 2016 - Information-based active SLAM via topological feature graphs<i class="fa fa-external-link-alt"></i></span>에서 사용한 topological feature graph는 geometric landmark와 topology를 결합한 형태인데, graph의 vertex는 geometric feature를 의미하고 edge가 obstacle을 의미하는 방법을 사용한다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMTQzNjg=">Stein 2020 - Enabling topological planning with monocular vision<i class="fa fa-external-link-alt"></i></span>에서는 점점 topology graph를 강화시켜 planning task에 적합하게 만드는 방식을 제안하며, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDUuMTIyNTY=">Chaplot 2020 - Neural topological SLAM for visual navigation<i class="fa fa-external-link-alt"></i></span> 논문에서는 vertex는 location을 저장하고 edge에는 traversability를 저장하는 방법으로 topological graph 기법의 정점(?)을 찍었다. </p>
+<p>Abstraction과 hierarchy를 동시에 취한 representation인 <strong>scene graph</strong>는 geometric한 성질과 topological한 성질을 모두 가지고 있다. 이 때문에 전체적으로 topology-only model보다는 훨씬 무겁지만, <strong>planning에 있어서는 topology를, localization에 있어서는 geometry를 이용할 수 있다는 장점</strong>이 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDIuMDYyODk=">Rosinol 2020 - 3D dynamic scene graph: Actionable spatial perception wiht places, objects, and humans<i class="fa fa-external-link-alt"></i></span>나 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMDI1Mjc=">Armeni 2019 - 3d scene graph: A structure for unified semantics, 3d space, and camera<i class="fa fa-external-link-alt"></i></span> 논문은 geometric-&gt;object-&gt;places 와 같이 여러개의 spatial/semantic layer를 통해 abstraction과 hierarchy를 구현하고, 적절한 object class에 맞춰서 dynamics 정보까지 갖춤으로써 scene graph를 구성한다.</p>
+<p> </p>
+<hr>
+<h1 id="딥러닝-중심의-representation"><a href="#딥러닝-중심의-representation" class="headerlink" title="딥러닝 중심의 representation"></a>딥러닝 중심의 representation</h1><p>대부분의 semantic SLAM을 보면, 뉴럴넷의 결과를 그대로 믿고 받아쓰는 경우가 많다. 멀티뷰 데이터를 누적하다보면 조금씩 오차가 생길텐데, 그정도는 SLAM backend가 어느정도 보정을 해줄거라는 희망을 가지고 하는 것이다. 근데 사실 이건 소위 ‘블랙박스’, ‘될때까지 튜닝하기’, ‘잘 되길 기도하기’ 방법과 다를 바가 없다. 진정 하나의 perception 시스템으로써 동작하길 바란다면, 로봇 네비게이션을 하는 그 순간에도 새로운 파라미터를 학습해서 개선한다던가, 또는 뉴럴넷의 결과가 보정되야하지 않을까? SLAM이 인식하는 scene geometry와 robot motion을 기반으로 뉴럴넷을 학습할 수도 있을 것이다.</p>
+<p>실제로 SLAM의 결과를 뉴럴넷 학습에 사용하기도 한다. <strong>Self-supervised learning</strong> 기법은 뉴럴넷을 학습에 사용되는 데이터에서 추가적인 정보를 구해내고 그것을 ground truth label 및 학습에 도움되는 auxiliary data로 사용함으로써 학습을 진전시키는 방법이다. SLAM으로 추정한 global representation은 충분히 다양한 뉴럴넷 네트워크를 학습하는데에 필요한 데이터로써 사용될 수 있다.</p>
+<p>딥러닝 모델로써 scene에 대한 coarse한 정보를 제공하고, SLAM이 이를 받아 최적화함으로써 기존의 뉴럴넷 결과보다 더욱 좋은 결과를 이끌어낼 수도 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDMuMDY0ODI=">SceneCode<i class="fa fa-external-link-alt"></i></span>와 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDQuMDQ0ODU=">NodeSLAM<i class="fa fa-external-link-alt"></i></span>에서는 object들의 성질을 variational auto-encoder를 사용해서 압축한 vector의 값들에 대해 SLAM 최적화를 함으로써 reconstruction을 수행한다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDEuMDUwNDk=">DeepFactors<i class="fa fa-external-link-alt"></i></span>에서는 depth map을 압축해서 SLAM 최적화 시 depth map 최적화도 함께 수행한다.</p>
+<img src="/20230215-rosen-2021/niceslam.png" class="" title="niceslam">
+
+<p>뉴럴넷이 backpropagation을 수행하며 내부 파라미터 최적화를 하듯이, SLAM의 backend를 differentiable하게 만들려고 하는 시도도 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMTA2NzI=">GradSLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDYuMDQ4MDc=">BANet<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDguMTA4Njk=">DROID-SLAM<i class="fa fa-external-link-alt"></i></span>과 같이 SLAM 전체를 differentiable하게 만들려고 하는 시스템부터, 최근에는 NeRF도 함께 사용하는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIyMTAuMTM2NDE=">NeRF-SLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDMuMTIzNTI=">iMAP<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIzMDIuMDE4Mzg=">vMAP<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMTIuMTIxMzA=">NICE-SLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIzMDIuMDM1OTQ=">NICER-SLAM<i class="fa fa-external-link-alt"></i></span> 등이 있다 (NeRF 관련 논문들은 이 글이 참조하고 있는 논문인 Rosen 2021에는 없다. 이 논문이 나오고 나서 공개된 논문이기 때문).</p>
+<img src="/20230215-rosen-2021/lmnav.png" class="" title="lmnav">
+
+<p>마지막으로 완전 다른 노선으로 가고 있는 연구도 있다. 바로 <strong>SLAM도, 지도도 필요 없이 navigation 자체를 학습하는 방법</strong>이다 (이 글을 적고있는 저자의 마음은 찢어집니다… 슬램 소중해…). 센서 값을 인풋으로 받아 단일 네트워크를 거쳐 아웃풋으로 navigation의 결과를 내는 <strong>End-to-end learning</strong> 기법이다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDYuMDk1MjA=">Zhang 2017 - NeuralSLAM: Learning to explore with external memory<i class="fa fa-external-link-alt"></i></span>는 그래도 occupancy map을 사용해서 navigation을 하지만, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDQuMDAxNjg=">Mirowski 2018 - Learning to navigate in cities without a map<i class="fa fa-external-link-alt"></i></span> 연구에서는 아예 지도 자체를 없애버렸다. 위에서 이야기했던 Neural topological SLAM 연구도 사실 지도 없이 navigation을 하는 연구이다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIyMDcuMDQ0Mjk=">LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, Vision, and Action<i class="fa fa-external-link-alt"></i></span>에서는 vision-language model을 이용해서 language prompt로 action 커맨드로 받고, visual observation으로 topological 정보만 인식해 navigation을 하는 연구도 있다.</p>
+<p> </p>
+<hr>
+<h1 id="앞으로-연구할-거리는-어떤-것들이-있는가-정리"><a href="#앞으로-연구할-거리는-어떤-것들이-있는가-정리" class="headerlink" title="앞으로 연구할 거리는 어떤 것들이 있는가? + 정리"></a>앞으로 연구할 거리는 어떤 것들이 있는가? + 정리</h1><p>다양한 환경에서 SLAM을 운용하기 위해서는 다양한 센서들이 필요하다. 여러 센서를 조합했을 때 범용적으로 사용할 수 있는 representation이 있을텐데, 기존의 카메라, 라이다, IMU, 소나를 넘어서 이벤트 카메라, 라이트필드 카메라, 압력/토크 센서를 함께 표현할 수 있는 representation이 필요하다.</p>
+<p>더욱 다양한 환경을 표현할 수 있는 hierarchical representation도 필요하다. 기존 골자를 잡아두고 환경에 따라 변화할 수 있는 flexibility가 있는 것이 좋을 것이다. 그리고 다양한 환경에 있을 수 있는 개념들에 대한 abstraction이 필요하다.</p>
+<p>Data-driven 방식이 발전하면서 semantic 정보를 얻어내는 방식도 model fitting에서 뉴럴네트워크로 바뀌었듯이, 다른 정보들도 뉴럴네트워크로 충분히 얻어낼 수 있을 것이다. 그렇다면 어떤 정보들을 뉴럴넷으로 학습해야할까? 어떤 정보들을 prior로 사용해야할까? 물론 환경에 따라서 무엇을 학습할지는 task-dependent하겠다.</p>
+<p>Geometric representation과 topological representation 사이를 자유롭게 오갈 수 있는 방법도 필요하다. 우리가 로봇을 서울에서 뉴욕으로 보내려면 어떤 representation을 사용해야할까? 아마 topological하게 플래닝을 하다가, 어느 순간에는 geometric하게 바뀌어야할 것이다. 이렇게 적절한 시기에 topological constraint와 geometric constraint를 섞을 수 있는 건 navigation에 있어서 큰 도움이 될 것이다. 하지만 geometric model은 메모리를 엄청나게 많이 잡아먹기 때문에, 이를 효율적으로 저장할 방법에 대해 깊게 고민해야한다.</p>
+<p>Semantic 정보를 추출할 때 뉴럴네트워크로도 추출하지만, low-level feature를 합성해서 상위단의 개념으로 취합할 수 있다. 예를 들어, ‘바닥+벽+천장을’ 합성하면 ‘방’이 나올 수 있을 것이다. ‘4개의 다리 + 상판’을 취합하면 ‘책상’이 나올 수도 있다. 이렇게 다양한 shape과 appearance를 가지고 있는 물체들에 대해 semantic 정보를 추출해내는 방법에 깊게 고민해야한다.</p>
+<p>결국 답은 3개의 키워드로 모인다.</p>
+<ul>
+<li>Long-term autonomy를 어떻게 달성할 것인가?<ul>
+<li>어떻게 해야 SLAM이 실제 세상에서 안정적으로 작동할것인가?</li>
+</ul>
+</li>
+<li>Lifelong map learning을 어떻게 달성할 것인가?<ul>
+<li>시간이 지나면서 mapping 정확도가 계속 개선되는 시스템을 만들 수 있는가?</li>
+<li>변화하는 환경에도 적응하는 시스템을 만들 수 있는가?</li>
+</ul>
+</li>
+<li>SLAM과 딥러닝을 어떻게 잘 섞을 것인가?<ul>
+<li>기존의 model-based state estimation의 장점을 취하면서, 새로운 semantic representation을 적절하게 섞을 수 있는가?</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230218-qin-2020-avpslam/" rel="bookmark">Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230218-qin-2021-roadmap/" rel="bookmark">Qin 2021 - RoadMap - A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230329-rosinol-2021-kimera-3d-dgs/" rel="bookmark">Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Semantic-SLAM/" rel="tag"># Semantic SLAM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230214-rosen-2021/" rel="prev" title="SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
+                  <i class="fa fa-chevron-left"></i> SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20230218-qin-2020-avpslam/" rel="next" title="Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot">
+                  Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

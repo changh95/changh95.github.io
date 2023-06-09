@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="RANSAC에 대해 알아봅니다">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Robust estimation 시리즈 (1) - RANSAC이란?">
+<meta property="og:url" content="https://changh95.github.io/20210716-outlier-1/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="RANSAC에 대해 알아봅니다">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%201.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%202.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%203.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%204.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%206.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%207.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%208.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%205.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%209.png">
+<meta property="article:published_time" content="2021-07-16T09:50:58.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.967Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="RANSAC">
+<meta property="article:tag" content="Outlier rejection">
+<meta property="article:tag" content="Robust estimation">
+<meta property="article:tag" content="M-Estimator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210716-outlier-1/Untitled.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210716-outlier-1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Robust estimation 시리즈 (1) - RANSAC이란? | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%85%BC%EB%AC%B8-%EC%86%8C%EA%B0%9C"><span class="nav-number">1.</span> <span class="nav-text">논문 소개</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RANSAC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0"><span class="nav-number">2.</span> <span class="nav-text">RANSAC 알고리즘 이해하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B0%84%EB%8B%A8%ED%95%9C-Linear-regression-%EC%98%88%EC%8B%9C"><span class="nav-number">2.1.</span> <span class="nav-text">간단한 Linear regression 예시</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%B9%84%EC%A0%84-%EC%98%88%EC%8B%9C"><span class="nav-number">2.2.</span> <span class="nav-text">컴퓨터 비전 예시</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RANSAC%EC%9D%98-%EC%BD%94%EB%93%9C"><span class="nav-number">3.</span> <span class="nav-text">RANSAC의 코드</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210716-outlier-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Robust estimation 시리즈 (1) - RANSAC이란?
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-16 18:50:58" itemprop="dateCreated datePublished" datetime="2021-07-16T18:50:58+09:00">2021-07-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/Robust-estimation-%EC%8B%9C%EB%A6%AC%EC%A6%88/" itemprop="url" rel="index"><span itemprop="name">Robust estimation 시리즈</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="논문-소개"><a href="#논문-소개" class="headerlink" title="논문 소개"></a>논문 소개</h2><p>RANSAC은 <strong>1981년에 Fischler와 Bolles가 제안한 Model fitting 방법론</strong>이다. RANSAC의 이름은 RANdom SAmple Consensus를 줄여서 만들어졌다. 논문이 처음 제안했던 방법도 컴퓨터 비전 분야에서의 사용 방법을 제안하였지만, 크게 주목을 받지 못하다가 2004년 Nister가 제안하는 이미지 프레임간 relative motion을 robust하게 찾아내는 5-point algorithm + RANSAC 프레임워크를 통해 주목을 받게 되었다.</p>
+<p>그 후, 많은 양의 데이터로부터 outlier를 거르고 model fitting을 하는 방식으로 RANSAC이 많이 사용되고 있다. <strong>Fundamental matrix, Essential matrix, Homography, PnP, Rigid point cloud estimation</strong> 등등에서 사용된다.</p>
+<p><a href="./Fischler_Bolles_1981_-_Random_Sample_Consensus_-_A_Paradigm_for_Model_Fitting_with_Applications_to_Image_Analysis_and_Automated_Cartography.pdf">오리지널 논문 링크: Fischler 1981 - Random Sample Consensus: A Paradigm for Model Fitting with Applications to Image Analysis and Automated Cartography</a></p>
+<p> </p>
+<hr>
+<h2 id="RANSAC-알고리즘-이해하기"><a href="#RANSAC-알고리즘-이해하기" class="headerlink" title="RANSAC 알고리즘 이해하기"></a>RANSAC 알고리즘 이해하기</h2><blockquote>
+<p>RANSAC의 알고리즘을 사실 굉장히 간단하다.</p>
+</blockquote>
+<p> </p>
+<h3 id="간단한-Linear-regression-예시"><a href="#간단한-Linear-regression-예시" class="headerlink" title="간단한 Linear regression 예시"></a>간단한 Linear regression 예시</h3><p>우선 간단하게 Linear regression으로 예시를 들어보자. Linear regression이 무엇인지 잘 모르겠다면, 어떤 점들이 흩뿌려져 있고, 그 점들의 중앙을 가장 잘 통과하는 라인이 어떤 라인인지 찾는 것이라고 보면 된다.</p>
+<p>RANSAC에서는 우선 제일 먼저 <strong>Minimal set 크기의 무작위 데이터 샘플링과 함께 시작</strong>한다. Minimal set 데이터, 우리가 만들고 싶어하는 모델을 만드는데 필요한 최소한의 데이터 갯수를 의미한다. Linear regression에서는 ‘선’ 이라는 모델을 만들려고 하니까, ‘점’ 두개가 필요하겠다. 이번 예시에서는 점 하나는 무조건 그래프의 (0,0)으로 고정시켜서 문제를 간단하게 만들기로 한다.</p>
+<p>무작위로 데이터를 뽑은 결과, 오른쪽 아래 있는 데이터가 뽑혔다. 이 데이터와 (0,0)에 고정된 위치를 이어서 ‘선’을 그렸다. 이때 우리는 <strong>이 데이터를 inlier라고 가정</strong>한다. 기존의 RANSAC 방법을 그대로 따르면 이 선 위에 올라가는 다른 데이터의 수를 고르면 된다. 하지만 로보틱스 기술 특성상, 모든 센서에는 노이즈가 포함되기 때문에, 이 선 위에 곧바로 올라가는 데이터는 거의 없을 것이다. 그러므로 <strong>어느정도 데이터에 여지를 줘서, <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex" xmlns="http://www.w3.org/2000/svg" width="1.005ex" height="1.645ex" role="img" focusable="false" viewBox="0 -717 444 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D6FF" d="M195 609Q195 656 227 686T302 717Q319 716 351 709T407 697T433 690Q451 682 451 662Q451 644 438 628T403 612Q382 612 348 641T288 671T249 657T235 628Q235 584 334 463Q401 379 401 292Q401 169 340 80T205 -10H198Q127 -10 83 36T36 153Q36 286 151 382Q191 413 252 434Q252 435 245 449T230 481T214 521T201 566T195 609ZM112 130Q112 83 136 55T204 27Q233 27 256 51T291 111T309 178T316 232Q316 267 309 298T295 344T269 400L259 396Q215 381 183 342T137 256T118 179T112 130Z"></path></g></g></g></svg></mjx-container> 만큼의 거리 안에 들어오는 데이터의 수를 센다.</strong> 3개의 데이터가 이 공간에서 발견되었다.</p>
+<p>그러면 노트에다가 <strong>‘현재까지 가장 잘 나온 모델은…  1. 샘플링 된 데이터 (i.e. 모델 파라미터로 쓰인 데이터), 2. inlier의 수’를 기록</strong>한다. </p>
+<img src="/20210716-outlier-1/Untitled.png" class="" title="asdf">
+<blockquote>
+<p>Attempt 1 - 3개의 inlier가 발견됨.</p>
+</blockquote>
+<p>이 후, <strong>다른 데이터를 다시 무작위 샘플링</strong>하고, 아까와 같이 모델 (i.e. ‘선’)을 그린 다음에, <strong><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex" xmlns="http://www.w3.org/2000/svg" width="1.005ex" height="1.645ex" role="img" focusable="false" viewBox="0 -717 444 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D6FF" d="M195 609Q195 656 227 686T302 717Q319 716 351 709T407 697T433 690Q451 682 451 662Q451 644 438 628T403 612Q382 612 348 641T288 671T249 657T235 628Q235 584 334 463Q401 379 401 292Q401 169 340 80T205 -10H198Q127 -10 83 36T36 153Q36 286 151 382Q191 413 252 434Q252 435 245 449T230 481T214 521T201 566T195 609ZM112 130Q112 83 136 55T204 27Q233 27 256 51T291 111T309 178T316 232Q316 267 309 298T295 344T269 400L259 396Q215 381 183 342T137 256T118 179T112 130Z"></path></g></g></g></svg></mjx-container> 만큼의 공간 안에서 데이터의 수를 센다</strong>. 이때, <strong>새로 센 inlier의 수가 이전에 찾은 inlier의 수 보다 많으면, ‘현재까지 제일 잘 나온 모델’의 정보에서 이전의 기록을 삭제하고 새 데이터로 덮어씌운다</strong>.</p>
+<img src="/20210716-outlier-1/Untitled%201.png" class="" title="asdfasdf">
+<blockquote>
+<p>Attempt 2 - 6개의 inlier가 발견됨. Attempt 1의 3개 inlier보다 많으므로, Attempt 2가 ‘현재까지 제일 잘 나온 모델’이 된다.</p>
+</blockquote>
+<p>이 작업을 계속해서 반복하다보면, ‘<strong>가장 많은 inlier를 가진 모델</strong>‘을 계산할 수 있다.</p>
+<p>논문에서도 보여주듯이, <strong>수학적으로도 몇번의 샘플을 돌려야 가장 좋은 모델을 찾을 수 있는지에 대한 수식</strong>이 있다.</p>
+<p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -2.172ex" xmlns="http://www.w3.org/2000/svg" width="22.106ex" height="5.475ex" role="img" focusable="false" viewBox="0 -1460 9770.7 2420"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g><g data-mml-node="mo" transform="translate(981.8, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mfrac" transform="translate(2037.6, 0)"><g data-mml-node="mrow" transform="translate(1725.9, 710)"><g data-mml-node="mi"><path data-c="6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"></path><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z" transform="translate(278, 0)"></path><path data-c="67" d="M329 409Q373 453 429 453Q459 453 472 434T485 396Q485 382 476 371T449 360Q416 360 412 390Q410 404 415 411Q415 412 416 414V415Q388 412 363 393Q355 388 355 386Q355 385 359 381T368 369T379 351T388 325T392 292Q392 230 343 187T222 143Q172 143 123 171Q112 153 112 133Q112 98 138 81Q147 75 155 75T227 73Q311 72 335 67Q396 58 431 26Q470 -13 470 -72Q470 -139 392 -175Q332 -206 250 -206Q167 -206 107 -175Q29 -140 29 -75Q29 -39 50 -15T92 18L103 24Q67 55 67 108Q67 155 96 193Q52 237 52 292Q52 355 102 398T223 442Q274 442 318 416L329 409ZM299 343Q294 371 273 387T221 404Q192 404 171 388T145 343Q142 326 142 292Q142 248 149 227T179 192Q196 182 222 182Q244 182 260 189T283 207T294 227T299 242Q302 258 302 292T299 343ZM403 -75Q403 -50 389 -34T348 -11T299 -2T245 0H218Q151 0 138 -6Q118 -15 107 -34T95 -74Q95 -84 101 -97T122 -127T170 -155T250 -167Q319 -167 361 -139T403 -75Z" transform="translate(778, 0)"></path></g><g data-mml-node="mo" transform="translate(1278, 0)"><path data-c="2061" d=""></path></g><g data-mml-node="mo" transform="translate(1278, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(1667, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(2389.2, 0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(3389.4, 0)"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mo" transform="translate(3892.4, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="mrow" transform="translate(220, -710)"><g data-mml-node="mi"><path data-c="6C" d="M42 46H56Q95 46 103 60V68Q103 77 103 91T103 124T104 167T104 217T104 272T104 329Q104 366 104 407T104 482T104 542T103 586T103 603Q100 622 89 628T44 637H26V660Q26 683 28 683L38 684Q48 685 67 686T104 688Q121 689 141 690T171 693T182 694H185V379Q185 62 186 60Q190 52 198 49Q219 46 247 46H263V0H255L232 1Q209 2 183 2T145 3T107 3T57 1L34 0H26V46H42Z"></path><path data-c="6F" d="M28 214Q28 309 93 378T250 448Q340 448 405 380T471 215Q471 120 407 55T250 -10Q153 -10 91 57T28 214ZM250 30Q372 30 372 193V225V250Q372 272 371 288T364 326T348 362T317 390T268 410Q263 411 252 411Q222 411 195 399Q152 377 139 338T126 246V226Q126 130 145 91Q177 30 250 30Z" transform="translate(278, 0)"></path><path data-c="67" d="M329 409Q373 453 429 453Q459 453 472 434T485 396Q485 382 476 371T449 360Q416 360 412 390Q410 404 415 411Q415 412 416 414V415Q388 412 363 393Q355 388 355 386Q355 385 359 381T368 369T379 351T388 325T392 292Q392 230 343 187T222 143Q172 143 123 171Q112 153 112 133Q112 98 138 81Q147 75 155 75T227 73Q311 72 335 67Q396 58 431 26Q470 -13 470 -72Q470 -139 392 -175Q332 -206 250 -206Q167 -206 107 -175Q29 -140 29 -75Q29 -39 50 -15T92 18L103 24Q67 55 67 108Q67 155 96 193Q52 237 52 292Q52 355 102 398T223 442Q274 442 318 416L329 409ZM299 343Q294 371 273 387T221 404Q192 404 171 388T145 343Q142 326 142 292Q142 248 149 227T179 192Q196 182 222 182Q244 182 260 189T283 207T294 227T299 242Q302 258 302 292T299 343ZM403 -75Q403 -50 389 -34T348 -11T299 -2T245 0H218Q151 0 138 -6Q118 -15 107 -34T95 -74Q95 -84 101 -97T122 -127T170 -155T250 -167Q319 -167 361 -139T403 -75Z" transform="translate(778, 0)"></path></g><g data-mml-node="mo" transform="translate(1278, 0)"><path data-c="2061" d=""></path></g><g data-mml-node="mrow" transform="translate(1444.7, 0)"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(389, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(1111.2, 0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mo" transform="translate(2111.4, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mn" transform="translate(2500.4, 0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(3222.7, 0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(4222.9, 0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="msup" transform="translate(4688.9, 0)"><g data-mml-node="mo"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g><g data-mml-node="TeXAtom" transform="translate(389, 289) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g><g data-mml-node="mo" transform="translate(5459.5, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g><rect width="7493.2" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></p>
+<ul>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.593ex" height="1.532ex" role="img" focusable="false" viewBox="0 -677 704 677"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D447" d="M40 437Q21 437 21 445Q21 450 37 501T71 602L88 651Q93 669 101 677H569H659Q691 677 697 676T704 667Q704 661 687 553T668 444Q668 437 649 437Q640 437 637 437T631 442L629 445Q629 451 635 490T641 551Q641 586 628 604T573 629Q568 630 515 631Q469 631 457 630T439 622Q438 621 368 343T298 60Q298 48 386 46Q418 46 427 45T436 36Q436 31 433 22Q429 4 424 1L422 0Q419 0 415 0Q410 0 363 1T228 2Q99 2 64 0H49Q43 6 43 9T45 27Q49 40 55 46H83H94Q174 46 189 55Q190 56 191 56Q196 59 201 76T241 233Q258 301 269 344Q339 619 339 625Q339 630 310 630H279Q212 630 191 624Q146 614 121 583T67 467Q60 445 57 441T43 437H40Z"></path></g></g></g></svg></mjx-container> 는 샘플링의 횟수</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.439ex" xmlns="http://www.w3.org/2000/svg" width="1.138ex" height="1.439ex" role="img" focusable="false" viewBox="0 -442 503 636"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g></g></g></svg></mjx-container> 는 우리가 고른 데이터가 inlier일 확률</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex" xmlns="http://www.w3.org/2000/svg" width="1.054ex" height="1.025ex" role="img" focusable="false" viewBox="0 -442 466 453"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g></g></g></svg></mjx-container> 는 전체 데이터의 inlier : outlier 비율</li>
+<li><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex" xmlns="http://www.w3.org/2000/svg" width="1.061ex" height="1.023ex" role="img" focusable="false" viewBox="0 -442 469 452"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g></g></g></svg></mjx-container> 는 minimal set을 고르기 위한 데이터의 갯수</li>
+</ul>
+<p>이 식은 두가지 방법으로 사용할 수 있다.</p>
+<ol>
+<li>Inlier를 얻어내고 싶은 확률을 설정해서, 샘플링의 횟수를 알아내기</li>
+<li>샘플링의 횟수를 설정해서, Inlier를 얻어낼 확률을 설정하기.</li>
+</ol>
+<p>정확도를 위해서는 전자를, Real-time 환경에서의 속도 안정성을 위해서는 후자를 선택하면 된다.</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.699ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 751 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></g></g></g></svg></mjx-container>를 대략 <strong>95% 또는 98%가 나올 수 있게 샘플링의 수를 맞춰두면</strong>, 왠만하면 실패하지 않고 잘 추정해내는 것을 볼 수 있다.</p>
+<p> </p>
+<h3 id="컴퓨터-비전-예시"><a href="#컴퓨터-비전-예시" class="headerlink" title="컴퓨터 비전 예시"></a>컴퓨터 비전 예시</h3><p>이제 컴퓨터 비전에 RANSAC을 적용해본 예시를 들어본다.</p>
+<p><strong>Homography matrix</strong>를 구하기 위해서는, 두개의 이미지에서 공유하는 4쌍의 feature pair가 필요하다. 이 때 각각의 feature pair는 삼각측량을 했을 때 3D point를 구상해야하므로 총 4개의 3D point가 생기는데, 이 4개의 3D point 들은 하나의 plane 위에 있어야한다. 여기서 <strong>Homography matrix를 사용하면 하나의 이미지 위 4개의 feature들의 위치를 다른 이미지 위 4개의 feature들의 위치를 알 수 있다</strong>. 또, 여기서는 사용하지 않지만 이 homography matrix를 SVD 등을 통해 decompose하면 Rotation가 Translation을 얻을 수 있다.</p>
+<p>Homography matrix를 구하기 위해서는, 계산에 들어가는 feature pair에 outlier가 없다는 것이 전제이다.</p>
+<img src="/20210716-outlier-1/Untitled%202.png" class="" title="asdfsdf">
+<blockquote>
+<p>Homography 의 원리. 4쌍의 correspondence가 만드는 plane 위의 4개의 3D point.</p>
+</blockquote>
+<p>두개의 이미지 사이의 homography를 구해보기로 하자. 두개의 이미지를 준비했고, 양쪽 이미지에서 feature detection 및 descriptor 추출을 했다. FLANN을 사용해서 descriptor matching을 했고, 총 100개의 feature matching이 만들어졌다. 하지만, 이들 중 분명 몇개는 잘못된 feature matching이 있을 것이며, 이런 feature pair가 homography 계산에 들어가면 완전히 잘못된 결과가 나올 것이다.</p>
+<img src="/20210716-outlier-1/Untitled%203.png" class="" title="aaasdf">
+<blockquote>
+<p>5-point algorithm을 위해 두 이미지에서 feature를 미리 뽑아놓음</p>
+</blockquote>
+<p>사실 RANSAC을 쓰지 않고도 homography 계산을 하는 방법은 있다. 100개의 피쳐매칭 중 어떤 피쳐매칭을 써야할지 모르겠을 때는, 존재하는 모든 경우의 수를 전부 계산한 후 가장 에러가 적은 방식을 고르는 것도 한가지 방법이다. 하지만 이 방법은 너무 오래 걸리기 때문에 실시간 컴퓨터 비전에서 돌리기에는 적절한 방법이 아니다.</p>
+<img src="/20210716-outlier-1/Untitled%204.png" class="" title="asdfasdf">
+<blockquote>
+<p>존재하는 모든 경우의 수를 전부 계산하는 것도 하나의 방법이지만 너무 오래걸린다.</p>
+</blockquote>
+<p>그러므로, 우리는 RANSAC을 사용해 볼 것이다. <strong>우선, 랜덤하게 minimal set 데이터를 (i.e. feature pair 4개를) 고른다.</strong> 그리고, <strong>이 데이터로 모델 추정을 한다 (i.e. Homography 계산을 한다)</strong>.</p>
+<img src="/20210716-outlier-1/Untitled%206.png" class="" title="asdfasdf">
+<blockquote>
+<p>Random sampling</p>
+</blockquote>
+<p>Homography matrix가 나왔으니, Image 1에 있는 feature들의 위치에 해당 homography matrix를 곱해주면, image 2에서 해당 feature들이 어디에서 보일지 예측할 수 있다. Image 1에 보이는 100개의 feature들의 위치에 homography matrix를 전부 곱해줘서, image 2에서 어디에 나올지 예상 위치를 찾는다.</p>
+<img src="/20210716-outlier-1/Untitled%207.png" class="" title="asdjkhfl">
+<blockquote>
+<p>Image 1의 feature 위치에 Homography를 곱하면 Image 2의 feature 위치를 알 수 있다.</p>
+</blockquote>
+<p>그리고 그 <strong>예상되는 위치와 실제 feature matching이 된 위치의 차이를 (i.e. residual) 구한다</strong>. 이 때, 각각의 feature 위치마다의 에러 값을 residual <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.685ex" height="1.357ex" role="img" focusable="false" viewBox="0 -442 745 599.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(451, -150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>로 고려하며, SSE를 이용할 경우 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.598ex" height="2.244ex" role="img" focusable="false" viewBox="0 -833.9 1148.5 991.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(451, -150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g><g data-mml-node="mn" transform="translate(745, 363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container> 을 계산한다. </p>
+<img src="/20210716-outlier-1/Untitled%208.png" class="" title="asjdklf">
+
+<p>또, <strong>설계자의 취향에 따라 특정 threshold 미만의 residual 값은 무시하는 방법</strong>도 있다. 이는 센서 noise 값을 고려해서 noise 제거와 outlier 제거를 명확히 구분하는 방법 중 하나이다. 이 residual 값들을 전부 더해서 SSE 값을 구하고, **’현재까지 가장 좋은 모델 값’**으로 저장한다.</p>
+<img src="/20210716-outlier-1/Untitled%205.png" class="" title="asjdklf">
+
+<p>‘현재까지 가장 좋은 모델 값’에 대한 업데이트가 끝나면, <strong>다시 랜덤하게 또 샘플링을 한 후, 위의 과정을 반복한다.</strong></p>
+<img src="/20210716-outlier-1/Untitled%209.png" class="" title="akjsdlfasdf">
+<blockquote>
+<p>Random sampling</p>
+</blockquote>
+<p>반복하는 과정에서 좋은 모델이 나오면 SSE의 값이 적을 것이다. <strong>현재의 모델이 이전의 모델보다 SSE가 작을 경우, 이전의 모델은 잊어버리고 현재의 모델로 ‘현재까지 가장 좋은 모델 값’을 덮어씌운다.</strong> </p>
+
+<blockquote>
+<p>좋은 모델이 추정된 경우 (i.e. outlier가 없이 추정된 경우), residual이 작게 나오고 SSE가 작게 나온다.</p>
+</blockquote>
+<p><strong>RANSAC이 끝나는 조건</strong>은 여러가지 방법이 있지만, 많이 쓰이는 방법은 아래와 같다.</p>
+<ol>
+<li>정해놓은 iteration 수가 전부 돌았을 때 (e.g. 100번의 iteration을 돌라고 설계했고, 100번을 다 돌았을 때)</li>
+<li>정해놓은 residual threshold보다 더 낮은 에러가 나왔을 때 (e.g. pixel RMSE가 2.0 미만이면 iteration을 중단)</li>
+</ol>
+<p>하지만 1번과 2번 방법 둘 다 장단점이 있다.</p>
+<p>1번의 경우, 운이 좋아서 RANSAC 초반에 좋은 모델을 찾게 되어도 무조건 정해놓은 iteration이 다 돌 때 까지 계산을 돌려야한다. 즉, early-termination이 불가능하고, 쓸데없는 계산을 하게 된다.</p>
+<p>2번의 경우, 운이 좋아서 RANSAC 초반에 좋은 모델을 찾게 되면 RANSAC을 빨리 종료할 수 있다. 하지만 outlier들끼리의 패턴 (i.e. local minima)에 빠지게 되면 헤어나올 방법이 없다.</p>
+<p>어쨌든 끝나면서</p>
+<ul>
+<li><strong>Model과 Model을 이루는 inlier 데이터 (i.e. Outlier가 제거된 모델 + 데이터)</strong></li>
+<li><strong>Sum of Squared Error (SSE) 값</strong></li>
+</ul>
+<p>을 가지고 끝난다.</p>
+<p> </p>
+<hr>
+<h2 id="RANSAC의-코드"><a href="#RANSAC의-코드" class="headerlink" title="RANSAC의 코드"></a>RANSAC의 코드</h2><p>RANSAC의 알고리즘은 사실 이렇게 간단하지만, 의외로 RANSAC을 직접 짜서 쓰시는 분들을 주변에서 보기 힘들다. 이는 사실 코드를 구현하시는 분들 중에서 스크래치로 시작하시는 분들보다, 이미 잘 만들어진 라이브러리에서 가져와서 변형하시는 분들이 많은데, <strong>유명한 OpenCV나 PCL 등에는 딱 RANSAC() 이라는 함수가 없다</strong>. OpenCV에서 구현된 방식은 Fundamental Matrix 를 구하는 함수 내부에 RANSAC이 들어가있거나, solvePnPRANSAC() 같이 특정 목적을 가진 함수 내부에 구현이 되어있다.</p>
+<p>그도 그럴만한게 RANSAC의 경우, model fitting 프레임워크로 봐야지, 실질적인 내부 계산은 우리가 어떤 계산을 하고 싶냐에 따라 달라지기 때문에, template class로 놔두는게 맞다고 본다. 하지만 OpenCV와 같은 오픈소스 라이브러리에서 template class로 구현하면 C나 Python, Java, javascript 등 해당 라이브러리가 지원하는 다른 언어에서의 함수 이름의 통일성이라던지가 어려워진다. 그리고 무엇보다 접근성이 많이 떨어지기 때문에, 지금까지 RANSAC을 자주 사용하는 함수 내부에 심어놓은 것으로 보인다.</p>
+<p>하지만 이번 GSoC 2020을 통해서 RANSAC이 따로 떨어져 나올 수 있는 가능성이 보였다.</p>
+<p>아래는 내가 RANSAC template class를 구현한다면 어떻게 만들지 간단하게 만들어본 디자인이다.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A rough design of RANSAC template class</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> Precision, <span class="keyword">typename</span> MODEL&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RANSAC</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// constructor</span></span><br><span class="line">	RANSAC(MODEL&amp; model)</span><br><span class="line">	{</span><br><span class="line">		mMinimalSet = MODEL.minimalSet();</span><br><span class="line">		mMaxIteration = <span class="number">100</span>; <span class="comment">// user-defined</span></span><br><span class="line">		mModel = model;</span><br><span class="line">		mResidualThreshold = <span class="keyword">static_cast</span>&lt;Precision&gt;(<span class="number">3</span>);</span><br><span class="line">		mModelThreshold = <span class="keyword">static_cast</span>&lt;Precision&gt;(<span class="number">2</span>);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// run</span></span><br><span class="line">	<span class="function">MODEL <span class="title">run</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>{</span><br><span class="line">		<span class="built_in">std</span>::random_device randDev;</span><br><span class="line">		<span class="function"><span class="built_in">std</span>::mt19937 <span class="title">mtGenerator</span><span class="params">(randDev())</span></span>;</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">int32_t</span> iterNum = <span class="number">0</span>;		</span><br><span class="line"></span><br><span class="line">		<span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line">		{</span><br><span class="line">			<span class="comment">// Terminate when max iteration is reached</span></span><br><span class="line">			<span class="keyword">if</span> (iterNum == mMaxIteration)</span><br><span class="line">				<span class="keyword">return</span> mModel;</span><br><span class="line"></span><br><span class="line">			<span class="keyword">if</span> (iterate(mtGenerator));</span><br><span class="line">			{</span><br><span class="line">				<span class="keyword">if</span> (mModel.residual &lt; mModelTreshold)</span><br><span class="line">					<span class="keyword">return</span> mModel;</span><br><span class="line">			}</span><br><span class="line"></span><br><span class="line">			iterNum++;</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">iterate</span><span class="params">(<span class="built_in">std</span>::mt19937 randNum)</span></span></span><br><span class="line"><span class="function">	</span>{</span><br><span class="line">		<span class="comment">// Calculate residual based on random selection of data points. </span></span><br><span class="line">    <span class="comment">// Also somehow saves model params in model.</span></span><br><span class="line">		<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Precision&gt; residuals =	mModel.run(randNum); 		</span><br><span class="line">		</span><br><span class="line">		Precision sumResidual = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Residual thresholding - ignoring low residuals</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; res : residuals )</span><br><span class="line">		{</span><br><span class="line">			res = res &lt; mDataResidualThreshold? <span class="number">0</span> : res;</span><br><span class="line">			sumResidual += res;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Update best model if residual is low</span></span><br><span class="line">		<span class="keyword">if</span>(sumResidual &lt; mBestModelRes)</span><br><span class="line">		{</span><br><span class="line">			mModel.saveResidualSum(sumResidual);</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	}</span><br><span class="line">	</span><br><span class="line">	MODEL mModel;</span><br><span class="line">	<span class="keyword">int32_t</span> mMinimalSet = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int32_t</span> mMaxIteration = <span class="number">0</span>;</span><br><span class="line">	Precision mBestModelRes = <span class="number">0</span>;</span><br><span class="line">	Precision mDataResidualThreshold = <span class="number">0</span>;</span><br><span class="line">	Precision mModelThreshold = <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210716-outlier-0/" rel="bookmark">Robust estimation 시리즈 (0) - Outlier란?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210313-ransac/" rel="bookmark">RANSAC이란? Robust-estimator란? M-estimator란?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/RANSAC/" rel="tag"># RANSAC</a>
+              <a href="/tags/Outlier-rejection/" rel="tag"># Outlier rejection</a>
+              <a href="/tags/Robust-estimation/" rel="tag"># Robust estimation</a>
+              <a href="/tags/M-Estimator/" rel="tag"># M-Estimator</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210716-outlier-0/" rel="prev" title="Robust estimation 시리즈 (0) - Outlier란?">
+                  <i class="fa fa-chevron-left"></i> Robust estimation 시리즈 (0) - Outlier란?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210719-icra-vins-stefan-leutenegger/" rel="next" title="ICRA 2021 - Visual-Inertial SLAM and Spatial AI for Mobile Robotics (Prof. Stefan Leutenegger)">
+                  ICRA 2021 - Visual-Inertial SLAM and Spatial AI for Mobile Robotics (Prof. Stefan Leutenegger) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

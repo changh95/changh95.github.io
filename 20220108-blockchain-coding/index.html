@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Blockchain 공부 시작!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(0) - Introduction to blockchain (비트코인, 이더리움, 오라클, 블록체인, DAO)">
+<meta property="og:url" content="https://changh95.github.io/20220108-blockchain-coding/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Blockchain 공부 시작!">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-08T12:26:58.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.191Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Blockchain">
+<meta property="article:tag" content="Smart contract">
+<meta property="article:tag" content="Bitcoin">
+<meta property="article:tag" content="Ethereum">
+<meta property="article:tag" content="DAO">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="DeFi">
+<meta property="article:tag" content="Solidity">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220108-blockchain-coding/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>(0) - Introduction to blockchain (비트코인, 이더리움, 오라클, 블록체인, DAO) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%98%81%EC%83%81-%EB%A7%81%ED%81%AC"><span class="nav-number">1.</span> <span class="nav-text">영상 링크</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8"><span class="nav-number">2.</span> <span class="nav-text">비트코인</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9D%B4%EB%8D%94%EB%A6%AC%EC%9B%80"><span class="nav-number">3.</span> <span class="nav-text">이더리움</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Oracles-amp-Hybrid-smart-contract"><span class="nav-number">4.</span> <span class="nav-text">Oracles &amp; Hybrid smart contract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Features-of-blockchain"><span class="nav-number">5.</span> <span class="nav-text">Features of blockchain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Decentralized"><span class="nav-number">5.1.</span> <span class="nav-text">Decentralized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transparency-amp-Flexibility"><span class="nav-number">5.2.</span> <span class="nav-text">Transparency &amp; Flexibility</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Speed-amp-Efficiency"><span class="nav-number">5.3.</span> <span class="nav-text">Speed &amp; Efficiency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Security-amp-Immutability"><span class="nav-number">5.4.</span> <span class="nav-text">Security &amp; Immutability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Removal-of-counterparty-risk"><span class="nav-number">5.5.</span> <span class="nav-text">Removal of counterparty risk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Trust-minimized-agreement"><span class="nav-number">5.6.</span> <span class="nav-text">Trust minimized agreement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DAO"><span class="nav-number">6.</span> <span class="nav-text">DAO</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220108-blockchain-coding/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (0) - Introduction to blockchain (비트코인, 이더리움, 오라클, 블록체인, DAO)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-08 21:26:58" itemprop="dateCreated datePublished" datetime="2022-01-08T21:26:58+09:00">2022-01-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-1-Software-Engineering/" itemprop="url" rel="index"><span itemprop="name">2.1 Software Engineering</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-1-Software-Engineering/Solidity-Blockchain-and-Smart-Contract-%EA%B0%95%EC%9D%98-%EC%A0%95%EB%A6%AC/" itemprop="url" rel="index"><span itemprop="name">Solidity, Blockchain, and Smart Contract 강의 정리</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="영상-링크"><a href="#영상-링크" class="headerlink" title="영상 링크"></a>영상 링크</h2><div class="video-container"><iframe src="https://www.youtube.com/embed/M576WGiDBdQ" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p> </p>
+<hr>
+<h2 id="비트코인"><a href="#비트코인" class="headerlink" title="비트코인"></a>비트코인</h2><ul>
+<li>비트코인은 블록체인을 사용한다<ul>
+<li>Satoshi Nakamoto가 만들었다<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9iaXRjb2luLm9yZy9iaXRjb2luLnBkZg==">BitCoin whitepaper 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li><strong>탈중앙화된 네트워크에서 거래</strong>를 할 수 있다</li>
+<li>Cryptography로 작동한다</li>
+<li>‘디지털 금’이라고도 불린다<ul>
+<li>실제 금과 비슷하게 <strong>한정된 수량</strong>만이 존재하며, 거래를 할 수 있기 떄문이다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="이더리움"><a href="#이더리움" class="headerlink" title="이더리움"></a>이더리움</h2><ul>
+<li>이더리움도 블록체인을 사용한다<ul>
+<li>Vitalik Buterin이 만들었다 (2015)<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ldGhlcmV1bS5vcmcvZW4vd2hpdGVwYXBlci8=">Ethereum whitepaper 링크<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>비트코인과 동일한 인프라를 가지고 있지만, 다른 추가된 기능이 있다.<ul>
+<li><strong>비트코인의 구조에 smart contract를 추가할 수 있게 만든 점</strong>이다.<ul>
+<li>이를 통해 **탈중앙화된 앱 (i.e. dApp)**이나 **탈중앙화 된 조직 (i.e. DAO)**를 만들 수 있다.<ul>
+<li>이 방식은 1994년에 Nick Sazbo가 만든 아이디어이다</li>
+</ul>
+</li>
+<li>깊게 따지고 보면 비트코인에도 이 기능이 있지만, 이더리움 만큼 완성된 기능은 아니다.<ul>
+<li>비트코인은 Asset이라는 점에 중점을 둔 기능이고, <strong>이더리움은 Asset + 앱개발 utility에 중점</strong>을 둔 것이라고 보면 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Oracles-amp-Hybrid-smart-contract"><a href="#Oracles-amp-Hybrid-smart-contract" class="headerlink" title="Oracles & Hybrid smart contract"></a>Oracles &amp; Hybrid smart contract</h2><blockquote>
+<p>Blockchain oracle과 oracle problem에 대한 문서 (<span class="exturl" data-url="aHR0cHM6Ly9lbmN5Y2xvcGVkaWEucHViLzM3MTg=">링크<i class="fa fa-external-link-alt"></i></span>)</p>
+</blockquote>
+<ul>
+<li><strong>Oracle</strong>은 블록체인 <strong>바깥에 있는 실제 세상의 정보를 체인으로 가져오는 시스템</strong>이다.<ul>
+<li>Smart contract 시스템이 실제 세상의 정보를 사용하는 경우에는 (e.g. 날씨, 주식 가격, 뉴스), 외부 정보를 끌어오는 시스템이 필요하다.<ul>
+<li>이러한 외부 정보는 탈중앙화된 시스템에서 온 것이 아니다.</li>
+</ul>
+</li>
+<li>블록체인은 탈중앙화 된 계산 방식을 사용하여 신뢰를 구축한다<ul>
+<li>체인 내부의 정보로만 계산하면 안전하다.</li>
+<li>체인 외부의 정보 (i.e. Oracle 정보)는 탈중앙화되어있지 않기 때문에 위험하다<ul>
+<li>이러한 외부 정보는 ‘근원’을 믿을 수 없다. 해킹당하거나 한다면?<ul>
+<li>i.e. <strong>Oracle problem</strong></li>
+</ul>
+</li>
+<li>체인 외부의 정보도 탈중앙화 할 수 있는가?<ul>
+<li>탈중앙화된 체인 로직과 탈중앙화 되지 않은 외부정보 사이에 layer를 둠으로써 이 둘을 연결할 수 있다.<ul>
+<li>i.e. <strong>Hybrid smart contract</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Features-of-blockchain"><a href="#Features-of-blockchain" class="headerlink" title="Features of blockchain"></a>Features of blockchain</h2><h3 id="Decentralized"><a href="#Decentralized" class="headerlink" title="Decentralized"></a>Decentralized</h3><ul>
+<li>Decentralized<ul>
+<li>단일 객체가 데이터를 통제하지 않는다</li>
+<li>대신, 수많은 node operator가 소프트웨어를 통해 연결되어있다</li>
+</ul>
+</li>
+<li>Benefits<ul>
+<li>단일 객체가 우리의 결정에 개입하지 못한다<ul>
+<li>은행은 우리 계좌를 마음대로 정지시킬 수 있다</li>
+<li>주식 거래 앱이 특정 주식을 매수/매도 하는데에 제약을 걸면? (e.g. Robinhood Gamestop 사태)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Transparency-amp-Flexibility"><a href="#Transparency-amp-Flexibility" class="headerlink" title="Transparency & Flexibility"></a>Transparency &amp; Flexibility</h3><ul>
+<li>Transparency<ul>
+<li>모두가 똑같은 규칙을 지킨다</li>
+<li>모든 거래내역을 확인할 수 있다<ul>
+<li>내가 모르는 어떤 불공정 거래가 나타날 수 없다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Speed-amp-Efficiency"><a href="#Speed-amp-Efficiency" class="headerlink" title="Speed & Efficiency"></a>Speed &amp; Efficiency</h3><ul>
+<li>Speed<ul>
+<li>은행 업무처리는 느리다<ul>
+<li>주식 매수/매도 신청을 넣고 적용되는데 까지 꽤 걸린다</li>
+</ul>
+</li>
+<li>체인에서는 곧바로 된다</li>
+</ul>
+</li>
+</ul>
+<h3 id="Security-amp-Immutability"><a href="#Security-amp-Immutability" class="headerlink" title="Security & Immutability"></a>Security &amp; Immutability</h3><ul>
+<li>Immutabiliity<ul>
+<li>블록체인 데이터를 corrupt 시키는 것은 어렵다</li>
+<li>모든 node가 꺼지기 전 까지 체인은 살아있다</li>
+</ul>
+</li>
+</ul>
+<h3 id="Removal-of-counterparty-risk"><a href="#Removal-of-counterparty-risk" class="headerlink" title="Removal of counterparty risk"></a>Removal of counterparty risk</h3><ul>
+<li>Counterparty risk<ul>
+<li>중앙화된 객체의 목적은 보통 우리의 목적과 다르다<ul>
+<li>e.g. 보험사와 나의 관계<ul>
+<li>나는 보험사에게 매달 100달러씩 내며, 사고 시 보험사는 내 사고에 대한 비용을 지불한다</li>
+<li>내 목적은 안전이지만, 보험사의 목적은 수익창출이다</li>
+<li>사고가 나더라도 보험사는 계약 내의 허점을 찾아 지출을 최소한으로 줄이려고 할 것이다</li>
+<li>이 때, 계약의 내용은 보험사가 만들기 때문에 (i.e. 보험사 상품), 나는 항상 불리한 위치에 서게 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Trust-minimized-agreement"><a href="#Trust-minimized-agreement" class="headerlink" title="Trust minimized agreement"></a>Trust minimized agreement</h3><ul>
+<li>Trust<ul>
+<li>기반이 없는 신뢰 (e.g. 브랜드 이름값)에 기대는 것이 아닌, 수식적으로 사전정의된 계약을 사용할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="DAO"><a href="#DAO" class="headerlink" title="DAO"></a>DAO</h2><ul>
+<li>DAO<ul>
+<li>고객에게 블록체인 기반 서비스를 제공하여 신뢰를 구축하는 (i.e. trustless) 기업</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220108-blockchain-coding2/" rel="bookmark">(1) Metamask 지갑 설정 + 테스트서버 Faucet + Gas비</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220109-blockchain-coding-3/" rel="bookmark">(2) Blockchain visual demo (Anders Brown)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220109-blockchain-coding-4/" rel="bookmark">Solidity programming</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220110-solidity-tutorial-website/" rel="bookmark">Solidity 공부하기 좋은 예제</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220309-nft-my-thoughts/" rel="bookmark">현재 NFT 시장에 대한 내 생각</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Blockchain/" rel="tag"># Blockchain</a>
+              <a href="/tags/Smart-contract/" rel="tag"># Smart contract</a>
+              <a href="/tags/Bitcoin/" rel="tag"># Bitcoin</a>
+              <a href="/tags/Ethereum/" rel="tag"># Ethereum</a>
+              <a href="/tags/DAO/" rel="tag"># DAO</a>
+              <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+              <a href="/tags/DeFi/" rel="tag"># DeFi</a>
+              <a href="/tags/Solidity/" rel="tag"># Solidity</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220108-eigen-cheatsheet/" rel="prev" title="Eigen Cheat sheet 레퍼런스">
+                  <i class="fa fa-chevron-left"></i> Eigen Cheat sheet 레퍼런스
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220108-blockchain-coding2/" rel="next" title="(1) Metamask 지갑 설정 + 테스트서버 Faucet + Gas비">
+                  (1) Metamask 지갑 설정 + 테스트서버 Faucet + Gas비 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

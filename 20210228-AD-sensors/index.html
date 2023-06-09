@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Camera, LiDAR, RADAR, Ultrasonic, IMU, GNSS, Wheel encoder 등 센서들의 특징과 장단점에 대해 설명">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLAM에서 사용할 수 있는 센서의 종류">
+<meta property="og:url" content="https://changh95.github.io/20210228-AD-sensors/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Camera, LiDAR, RADAR, Ultrasonic, IMU, GNSS, Wheel encoder 등 센서들의 특징과 장단점에 대해 설명">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/imu.png">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/wheel.png">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/gnss.png">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/lidar.png">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/lidar_multipath.png">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/radar.jpg">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/camera.png">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/mic.png">
+<meta property="og:image" content="https://changh95.github.io/20210228-AD-sensors/bayes.png">
+<meta property="article:published_time" content="2021-02-28T14:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.839Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Sensors">
+<meta property="article:tag" content="Camera">
+<meta property="article:tag" content="LiDAR">
+<meta property="article:tag" content="RADAR">
+<meta property="article:tag" content="Ultrasonic">
+<meta property="article:tag" content="IMU">
+<meta property="article:tag" content="GPS">
+<meta property="article:tag" content="GNSS">
+<meta property="article:tag" content="Tightly-coupled">
+<meta property="article:tag" content="Loosely-coupled">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210228-AD-sensors/imu.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210228-AD-sensors/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>SLAM에서 사용할 수 있는 센서의 종류 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%98%88%EC%83%81-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8"><span class="nav-number">1.</span> <span class="nav-text">예상 면접 질문:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%8B%B5"><span class="nav-number">2.</span> <span class="nav-text">답</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%84%BC%EC%84%9C%EC%9D%98-%EC%A2%85%EB%A5%98"><span class="nav-number">2.1.</span> <span class="nav-text">센서의 종류</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Preprioceptive-sensor-%EC%84%A4%EB%AA%85"><span class="nav-number">2.2.</span> <span class="nav-text">Preprioceptive sensor 설명</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IMU-Inertial-measurement-units"><span class="nav-number">2.2.1.</span> <span class="nav-text">IMU - Inertial measurement units</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wheel-encoder"><span class="nav-number">2.2.2.</span> <span class="nav-text">Wheel encoder</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exteroceptive-%EC%84%BC%EC%84%9C-%EC%A2%85%EB%A5%98"><span class="nav-number">2.3.</span> <span class="nav-text">Exteroceptive 센서 종류</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GNSS-Global-navigation-satellite-system"><span class="nav-number">2.3.1.</span> <span class="nav-text">GNSS - Global navigation satellite system</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LiDAR-Light-detection-and-ranging-sensors"><span class="nav-number">2.3.2.</span> <span class="nav-text">LiDAR - Light detection and ranging sensors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RADAR-Radio-detection-and-ranging-sensor"><span class="nav-number">2.3.3.</span> <span class="nav-text">RADAR - Radio detection and ranging sensor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ultrasound"><span class="nav-number">2.3.4.</span> <span class="nav-text">Ultrasound</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Camera"><span class="nav-number">2.3.5.</span> <span class="nav-text">Camera</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Microphones"><span class="nav-number">2.3.6.</span> <span class="nav-text">Microphones</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%84%BC%EC%84%9C%EB%A5%BC-%EC%84%9E%EB%8A%94-%EB%B0%A9%EB%B2%95"><span class="nav-number">2.4.</span> <span class="nav-text">센서를 섞는 방법</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210228-AD-sensors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SLAM에서 사용할 수 있는 센서의 종류
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-28 23:38:19" itemprop="dateCreated datePublished" datetime="2021-02-28T23:38:19+09:00">2021-02-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/50%EA%B0%80%EC%A7%80-CV-SLAM-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%93%A4/" itemprop="url" rel="index"><span itemprop="name">50가지 CV/SLAM 기술면접 질문들</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>모바일로 글을 보신다면 ‘데스크탑 버전으로 보기’를 누르시면 좀 더 보기 쉽습니다</p>
+</blockquote>
+<h1 id="예상-면접-질문"><a href="#예상-면접-질문" class="headerlink" title="예상 면접 질문:"></a>예상 면접 질문:</h1><ol>
+<li>자율주행 (또는 드론, 또는 VR/AR)에서 쓸 수 있는 센서에는 어떤게 있을까요?</li>
+<li>다양한 센서의 값들을 어떻게 섞을 수 있나요?</li>
+<li>Camera와 LiDAR의 차이점을 설명해주세요.</li>
+</ol>
+<br>
+
+<hr>
+<h1 id="답"><a href="#답" class="headerlink" title="답"></a>답</h1><h2 id="센서의-종류"><a href="#센서의-종류" class="headerlink" title="센서의 종류"></a>센서의 종류</h2><ul>
+<li>Preprioceptive sensors: 주변 환경의 상태와 관련없이 로봇 자기 자신의 state 값을 읽을 수 있는 센서<ul>
+<li>IMU, Wheel encoder</li>
+</ul>
+</li>
+<li>Exteroceptive sensors: 주변 환경에 대한 상태를 읽는 센서<ul>
+<li>GNSS, Camera, LiDAR, RADAR, Ultrasonic</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<hr>
+<h2 id="Preprioceptive-sensor-설명"><a href="#Preprioceptive-sensor-설명" class="headerlink" title="Preprioceptive sensor 설명"></a>Preprioceptive sensor 설명</h2><h3 id="IMU-Inertial-measurement-units"><a href="#IMU-Inertial-measurement-units" class="headerlink" title="IMU - Inertial measurement units"></a>IMU - Inertial measurement units</h3><ul>
+<li>Linear accelerator (선형가속도 측정) 와 Angular gyroscope (각속도 측정)를 포함하는 센서</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTWFzcy1zcHJpbmctZGFtcGVyX21vZGVs">Spring-damper system<i class="fa fa-external-link-alt"></i></span>의 원리를 이용하여 만든 시스템.<ul>
+<li>소형화를 위해 실제로 spring-damper 를 사용하는건 아님<ul>
+<li>Optical system - 차량용 IMU</li>
+<li>MEMS - 칩기반 IMU (스마트폰 탑재)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>장점:<ul>
+<li>저렴한 consumer grade 제품</li>
+<li>높은 sensitivity</li>
+<li>높은 FPS (100Hz, 200Hz, 400Hz, 800Hz 제품 등 다양하게 있음)</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>시간이 지남에 따라 bias에 의한 drift가 생김<ul>
+<li>이러한 drift를 해소하기 위해 camera나 LiDAR를 함께 사용해서 drift 보정을 수행함.</li>
+</ul>
+</li>
+<li>높은 정확도 + 낮은 drift를 가진 tactical grade IMU는 엄청 비쌈<ul>
+<li>이런 IMU는 1시간에 1도 미만의 drift를 가짐.</li>
+<li>하지만 가격이 억대임 ㄷㄷ </li>
+</ul>
+</li>
+<li>낮은 가격의 consumer grade는 에러가 높고 drift도 높음.</li>
+</ul>
+</li>
+</ul>
+<img src="/20210228-AD-sensors/imu.png" class="" title="imu">
+
+<br>
+
+<hr>
+<h3 id="Wheel-encoder"><a href="#Wheel-encoder" class="headerlink" title="Wheel encoder"></a>Wheel encoder</h3><ul>
+<li>바퀴의 회전량을 (RPM)과 이동량을 (바퀴의 회전량 * 바퀴의 둘레) 측정하는 센서<ul>
+<li>brush, optical, magentic, inductive, capacitative… 만드는 방법은 여러가지임</li>
+</ul>
+</li>
+<li>장점:<ul>
+<li>센서가 쌈</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>Drift에 약함</li>
+<li>바퀴가 헛도는 경우 잘못된 센서 값이 생길 수 있음</li>
+<li>(바퀴의 회전량 x 바퀴의 둘레) 를 계산할때… 바퀴의 둘레가 사실 주행 중 자주 바뀜<ul>
+<li>마찰열로 인해 타이어 팽창</li>
+<li>바람빠짐 등등</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20210228-AD-sensors/wheel.png" class="" title="wheel">
+
+<br>
+
+<hr>
+<h2 id="Exteroceptive-센서-종류"><a href="#Exteroceptive-센서-종류" class="headerlink" title="Exteroceptive 센서 종류"></a>Exteroceptive 센서 종류</h2><h3 id="GNSS-Global-navigation-satellite-system"><a href="#GNSS-Global-navigation-satellite-system" class="headerlink" title="GNSS - Global navigation satellite system"></a>GNSS - Global navigation satellite system</h3><ul>
+<li>비콘 기반의 위치추정 센서.<ul>
+<li>보통 1. 위치추정, 2. 루트 플래닝 작업에서 많이 사용함.</li>
+<li>다수의 비콘에 대한 통신 시간에 대한 차이를 (i.e. time delays) 이용하여 비콘-로봇의 거리 값을 구하고, 삼각측량을 통해서 localization 수행.</li>
+</ul>
+</li>
+<li>GPS (US), GLONASS (Russia), BeiDou (China), Gallileo (Europe) 등 각각의 나라/대륙에서 관리하는 시스템이 있음.</li>
+<li>장점:<ul>
+<li>싸고 구하기 쉬움</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>부정확함 (10~20m 정도의 위치 오차)<ul>
+<li>Camera나 LiDAR를 사용해서 drift 보정을 하기도 함.</li>
+</ul>
+</li>
+<li>RTK-GPS, DGPS, AGPS 등을 이용하면 오차가 cm 단위로 내려오면서 훨씬 정확해지나, 가격도 굉장히 높아짐</li>
+<li>고층빌딩 사이에서 <span class="exturl" data-url="aHR0cHM6Ly9hcmd1c3RyYWNraW5nLnplbmRlc2suY29tL2hjL2VuLXVzL2FydGljbGVzLzMzMzc1NzAzNzY5Ni1HUFMtQWNjdXJhY3ktQm91bmNpbmctTXVsdGlwYXRoLQ==">multi-path 문제<i class="fa fa-external-link-alt"></i></span>로 인해 오차가 생길 수 있음</li>
+<li>실내/지하에서는 신호를 아예 받을 수 없음<ul>
+<li>이런 경우에는 카메라나 라이다를 사용한 map 기반 localization을 수행해야함.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20210228-AD-sensors/gnss.png" class="" title="gnss">
+
+<br>
+
+<hr>
+<h3 id="LiDAR-Light-detection-and-ranging-sensors"><a href="#LiDAR-Light-detection-and-ranging-sensors" class="headerlink" title="LiDAR - Light detection and ranging sensors"></a>LiDAR - Light detection and ranging sensors</h3><ul>
+<li>적외선 레이저를 쏘아 반사되어 돌아오는 시간을 측량하여 거리를 잴 수 있는 센서<ul>
+<li>시간을 측량하는데에는 3가지 방식이 있음;<ul>
+<li>Pulse를 이용한 Time-of-flight</li>
+<li>Phase shift</li>
+<li>Frequency modulation</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3D point cloud 형태로 데이터를 받기 때문에, 주변환경의 3D 구조를 바로 알 수 있음.<ul>
+<li>Point cloud 를 얻는데에 2가지 방식이 있음:<ul>
+<li>Scanning LiDAR (Rolling shutter 방식과 유사함)<ul>
+<li>Mechanical Scanning<ul>
+<li>Macro-mechanical</li>
+<li>Micro-motio</li>
+<li>Prisms</li>
+</ul>
+</li>
+<li>Solid State Scanning<ul>
+<li>MEMS</li>
+<li>Electro-optical</li>
+<li>Optical phased array</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Flash LiDAR (Global shutter 방식과 유사함)</li>
+</ul>
+</li>
+<li>(LiDAR 공부하기 좋은 자료 <span class="exturl" data-url="aHR0cHM6Ly93d3cudGkuY29tL2xpdC9tbC9zbHlwNjY1L3NseXA2NjUucGRmP3RzPTE2MTAxODM4Nzk0MDY=">#1<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cDovL3d3dy5lcG5jLmNvLmtyL25ld3MvYXJ0aWNsZVZpZXcuaHRtbD9pZHhubz04MjA5OQ==">#2<i class="fa fa-external-link-alt"></i></span>)</li>
+</ul>
+</li>
+<li>장점:<ul>
+<li>센서가 추정한 3D 구조가 타 센서에 비해 훨씬 정확한 편임.</li>
+<li>센서마다 다르지만, 자율주행용 LiDAR의 경우 ~100m 정도 거리까지 커버가 가능함.</li>
+<li>특정 적외선 파장을 사용하기 때문에 빛의 파장 간섭등이 잘 일어나지 않음<ul>
+<li>(동일한 device를 여러곳에서 사용하는 경우 제외)</li>
+</ul>
+</li>
+<li>Reflectance (i.e. 쏜 레이저와 돌아온 레이저의 신호 세기를 비교하여 반사량을 계산 가능) <ul>
+<li>reflectance를 이용하여 자율주행에서는 차선이나 횡단보도 패턴을 읽을 수도 있음</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>비쌈 (~몇천만원 단위)<ul>
+<li>물론 가격은 지속적으로 낮아지고 있지만, 아직 카메라, RADAR, Ultrasonic 센서에 비해 비쌈.</li>
+</ul>
+</li>
+<li>Resolution의 한계<ul>
+<li>LiDAR 이미징 센서는 아직 카메라와 비교하였을 때 센서 resolution이 많이 부족함.</li>
+</ul>
+</li>
+<li>날씨 영향을 받음<ul>
+<li>눈이 오거나 비가 올때 레이저가 눈/비에 막히기 때문에 작동하기 어려움</li>
+</ul>
+</li>
+<li>Solid-state의 경우 360도 방향을 커버하기 위해 여러개의 센서가 필요함</li>
+</ul>
+</li>
+</ul>
+<img src="/20210228-AD-sensors/lidar.png" class="" title="lidar">
+<img src="/20210228-AD-sensors/lidar_multipath.png" class="" title="multipath">
+
+<br>
+
+<hr>
+<h3 id="RADAR-Radio-detection-and-ranging-sensor"><a href="#RADAR-Radio-detection-and-ranging-sensor" class="headerlink" title="RADAR - Radio detection and ranging sensor"></a>RADAR - Radio detection and ranging sensor</h3><ul>
+<li>전파 (raidiowave)를 이용해서 주변 환경에 반사되어 돌아오는 전파를 측정하여 radial 거리를 재는 센서.<ul>
+<li>돌아오는 전파의 각도 + 돌아오는데 걸리는 시간을 이용해서 주변 환경에 대한 거리를 추정할 수 있음.</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG9wcGxlcl9lZmZlY3Q=">Doppler 효과<i class="fa fa-external-link-alt"></i></span>를 이용해서 물체의 속도를 측정 가능.</li>
+<li>전파의 종류를 바꿈으로써 near-range와 long-range를 정할 수 있음.</li>
+</ul>
+</li>
+<li>장점:<ul>
+<li>날씨의 영향을 잘 받지 않음</li>
+<li>타 센서에서 얻지 못하는 ‘속도’ 값을 얻을 수 있음.</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>작은 물체들은 detection에 실패할 수 있음</li>
+<li>LiDAR보다 resolution이 낮음</li>
+<li>주변에 벽이나 바닥에 대해 multipath 문제가 있을 수 있음</li>
+</ul>
+</li>
+</ul>
+<img src="/20210228-AD-sensors/radar.jpg" class="" title="Radar">
+
+<br>
+
+<hr>
+<h3 id="Ultrasound"><a href="#Ultrasound" class="headerlink" title="Ultrasound"></a>Ultrasound</h3><ul>
+<li>RADAR와 작동방식이 거의 동일하나, 초음파를 이용함.</li>
+<li>장점:<ul>
+<li>저렴함</li>
+<li>Near-range에서 잘 작동함</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>Geometry를 잘 추정하는 편은 아님.<ul>
+<li>다중 센서를 이용해서 geometry 추정을 할 수는 있지만… 좋은 편은 아님.</li>
+</ul>
+</li>
+<li>노이즈가 많음</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<hr>
+<h3 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a>Camera</h3><ul>
+<li>이미징 센서를 통해 빛의 정보를 받아드리고, RGB 패턴에 대해 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRGVtb3NhaWNpbmc=">debayering<i class="fa fa-external-link-alt"></i></span>을 통해 이미지를 만듬.</li>
+<li>필터를 사용하지 않으면 Monochrome 카메라, 또는 RGB가 아닌 다른 특정 파장으로 특수 카메라 (e.g. 열화상 카메라, 적외선 카메라)를 만들 수 있음.</li>
+<li>장점:<ul>
+<li>사람이 보는 시야와 가장 유사한 데이터를 뽑음</li>
+<li>저렴한 센서임에도 texture가 충만한 dense한 정보를 가짐.</li>
+<li>FPS가 높은 편 (30fps, 60fps)</li>
+<li>렌즈를 바꿈으로써 시야각을 바꿀 수 있음</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>Depth 정보가 없음<ul>
+<li>Stereovision을 통해 Depth를 구현할 수 있지만, 계산량이 적지 않음</li>
+</ul>
+</li>
+<li>조명에 대한 영향을 많이 받음<ul>
+<li>어두운 곳에서는 좋은 데이터가 많이 안들어옴</li>
+<li>너무 밝거나 빛반사가 카메라에 바로 오는 경우 작동하지 않을 수 있음.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20210228-AD-sensors/camera.png" class="" title="camera">
+
+<br>
+
+<hr>
+<h3 id="Microphones"><a href="#Microphones" class="headerlink" title="Microphones"></a>Microphones</h3><ul>
+<li>공기의 진동을 transducer를 통해 전기 신호로 변환시켜 소리를 읽는 센서.</li>
+<li>여러개의 마이크 신호를 조합하여 소리의 근원에 대한 위치 및 방향을 계산할 수 있음.</li>
+<li>장점:<ul>
+<li>유일하게 소리에 대한 정보를 사용하는 센서</li>
+<li>가격이 저렴함</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>Geometry가 부정확함</li>
+<li>잡음이 심함</li>
+</ul>
+</li>
+</ul>
+<img src="/20210228-AD-sensors/mic.png" class="" title="mic">
+
+<br>
+
+<hr>
+<h2 id="센서를-섞는-방법"><a href="#센서를-섞는-방법" class="headerlink" title="센서를 섞는 방법"></a>센서를 섞는 방법</h2><p>센서 값을 섞는다는 것은, 다양한 센서 값들을 기반으로 ‘로봇과 주변 환경의 state를 추정’하는 작업이다.<br>이는 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTWF4aW11bV9hX3Bvc3RlcmlvcmlfZXN0aW1hdGlvbg==">Maximum-a-Posteriori estimation<i class="fa fa-external-link-alt"></i></span>과 유사하다.<br>MAP는 optimisation 방식으로 (e.g. least squares optimisation, bundle adjustment) 풀 수도 있고, filter 방식으로도 (e.g. Kalman filter, Particle filter) 풀 수 있다.</p>
+<img src="/20210228-AD-sensors/bayes.png" class="" title="Bayes">
+
+<p>Maximum-a-posteriori estimation을 진행하는데에는 Tightly-coupled 방식과 Loosely-coupled 방식이 있다.<br>Tightly-coupled vs Loosely-coupled 방식에 대해 이야기가 많지만, 두 방식 중 어떤 방식이 항상 더 좋다라고 단정할 수 없다.</p>
+<p>Tightly-coupled 방식과 loosely-coupled 방식의 차이는 <a href="https://changh95.github.io/20210816-tightly-loosely-coupled/">다음 글</a>에서 소개한다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210816-tightly-loosely-coupled/" rel="bookmark">Tightly-coupled vs Loosely-coupled 방식</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Sensors/" rel="tag"># Sensors</a>
+              <a href="/tags/Camera/" rel="tag"># Camera</a>
+              <a href="/tags/LiDAR/" rel="tag"># LiDAR</a>
+              <a href="/tags/RADAR/" rel="tag"># RADAR</a>
+              <a href="/tags/Ultrasonic/" rel="tag"># Ultrasonic</a>
+              <a href="/tags/IMU/" rel="tag"># IMU</a>
+              <a href="/tags/GPS/" rel="tag"># GPS</a>
+              <a href="/tags/GNSS/" rel="tag"># GNSS</a>
+              <a href="/tags/Tightly-coupled/" rel="tag"># Tightly-coupled</a>
+              <a href="/tags/Loosely-coupled/" rel="tag"># Loosely-coupled</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210222-mono-stereo-rgbd/" rel="prev" title="Monocular, Stereo, RGB-D SLAM의 비교">
+                  <i class="fa fa-chevron-left"></i> Monocular, Stereo, RGB-D SLAM의 비교
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210313-ransac/" rel="next" title="RANSAC이란? Robust-estimator란? M-estimator란?">
+                  RANSAC이란? Robust-estimator란? M-estimator란? <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

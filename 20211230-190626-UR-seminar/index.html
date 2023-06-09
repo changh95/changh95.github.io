@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="2019년 6월 26일 진행된 Universal Robotics 세미나 내용 정리. Cobot 시장과 사용성에 대한 세미나">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019.06.26 Universal Robotics 세미나">
+<meta property="og:url" content="https://changh95.github.io/20211230-190626-UR-seminar/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="2019년 6월 26일 진행된 Universal Robotics 세미나 내용 정리. Cobot 시장과 사용성에 대한 세미나">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/Untitled.png">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_154227.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_154834.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_142707.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_141515.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/grippers.png">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_171435.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_171028.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_171622.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/2.gif">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/3.gif">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/20190625_171904.jpg">
+<meta property="og:image" content="https://changh95.github.io/20211230-190626-UR-seminar/1.gif">
+<meta property="article:published_time" content="2021-12-30T11:14:31.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.987Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="Seminar">
+<meta property="article:tag" content="Cobot">
+<meta property="article:tag" content="Universal Robotics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20211230-190626-UR-seminar/Untitled.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20211230-190626-UR-seminar/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>2019.06.26 Universal Robotics 세미나 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Universal-Robotics-%ED%9A%8C%EC%82%AC%EB%8A%94"><span class="nav-number">1.</span> <span class="nav-text">Universal Robotics 회사는?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B2%AB%EB%B2%88%EC%A7%B8-%EB%B0%9C%ED%91%9C-Universal-Robotics"><span class="nav-number">2.</span> <span class="nav-text">첫번째 발표: Universal Robotics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%ED%98%84%EC%9E%AC-%EC%A0%9C%EC%A1%B0%EC%97%85-%EC%83%9D%ED%83%9C%EA%B3%84%EC%9D%98-%EB%AC%B8%EC%A0%9C"><span class="nav-number">2.1.</span> <span class="nav-text">현재 제조업 생태계의 문제</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%97%85%EC%B2%B4%EA%B0%80-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%8A%94-%ED%98%84%EC%9E%AC-%EC%97%85%EA%B3%84-%EC%83%81%ED%99%A9-%EC%9E%90%EB%8F%99%ED%99%94%EB%A7%8C%EC%9D%B4-%EC%A0%95%EB%8B%B5%EC%9D%B8%EA%B0%80"><span class="nav-number">2.2.</span> <span class="nav-text">업체가 바라보는 현재 업계 상황 (자동화만이 정답인가?)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cobot%EC%9C%BC%EB%A1%9C-%EC%9D%B4-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%92%80-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C"><span class="nav-number">3.</span> <span class="nav-text">Cobot으로 이 문제를 풀 수 있을까?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%ED%98%91%EB%8F%99%EB%A1%9C%EB%B4%87-%EC%8B%9C%EC%9E%A5%EC%9D%80-%EC%A0%90%EC%A0%90-%ED%81%AC%EA%B3%A0-%EC%9E%88%EB%8B%A4"><span class="nav-number">3.1.</span> <span class="nav-text">협동로봇 시장은 점점 크고 있다</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%91%90%EB%B2%88%EC%A7%B8-%EB%B0%9C%ED%91%9C-Universal-Robotics"><span class="nav-number">4.</span> <span class="nav-text">두번째 발표: Universal Robotics+</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UR-%EB%9E%80"><span class="nav-number">4.1.</span> <span class="nav-text">UR+란?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%8B%A4%EC%82%AC%EC%9A%A9-%EC%BC%80%EC%9D%B4%EC%8A%A4"><span class="nav-number">4.2.</span> <span class="nav-text">실사용 케이스</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%84%B8%EB%B2%88%EC%A7%B8-%EB%B0%9C%ED%91%9C-Onrobot"><span class="nav-number">5.</span> <span class="nav-text">세번째 발표: Onrobot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Onrobot%EC%9D%B4-%ED%8C%90%EB%A7%A4%ED%95%98%EB%8A%94-%EA%B7%B8%EB%A6%AC%ED%8D%BC-%EC%A0%9C%ED%92%88%EB%93%A4"><span class="nav-number">5.1.</span> <span class="nav-text">Onrobot이 판매하는 그리퍼 제품들</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%96%B4%EB%96%A4-%EC%9E%91%EC%97%85%EB%93%A4%EC%97%90%EC%84%9C-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C"><span class="nav-number">5.2.</span> <span class="nav-text">어떤 작업들에서 사용할 수 있을까?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%84%A4%EB%B2%88%EC%A7%B8-%EB%B0%9C%ED%91%9C-Pickit"><span class="nav-number">6.</span> <span class="nav-text">네번째 발표: Pickit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%A0%9C%EC%A1%B0%EC%97%85%EC%97%90%EC%84%9C%EC%9D%98-%EB%B9%84%EC%A0%84-%EC%86%94%EB%A3%A8%EC%85%98%EC%9D%B4%EB%9E%80"><span class="nav-number">6.1.</span> <span class="nav-text">제조업에서의 비전 솔루션이란?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bin-picking-%EC%9E%90%EB%8F%99%ED%99%94-%EC%86%94%EB%A3%A8%EC%85%98"><span class="nav-number">6.2.</span> <span class="nav-text">Bin-picking 자동화 솔루션</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%8B%9C%EC%97%B0-%EC%98%81%EC%83%81"><span class="nav-number">6.3.</span> <span class="nav-text">시연 영상</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B7%B8-%EC%99%B8-%ED%98%84%EC%9E%A5-%EB%8D%B0%EB%AA%A8-%ED%8C%8C%ED%8A%B8%EB%84%88%EC%82%AC"><span class="nav-number">7.</span> <span class="nav-text">그 외 현장 데모 파트너사</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROBOTIS"><span class="nav-number">7.1.</span> <span class="nav-text">ROBOTIS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SKF"><span class="nav-number">7.2.</span> <span class="nav-text">SKF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Syscon-Engineering"><span class="nav-number">7.3.</span> <span class="nav-text">Syscon Engineering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pickit"><span class="nav-number">7.4.</span> <span class="nav-text">Pickit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Onrobot"><span class="nav-number">7.5.</span> <span class="nav-text">Onrobot</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20211230-190626-UR-seminar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2019.06.26 Universal Robotics 세미나
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-30 20:14:31" itemprop="dateCreated datePublished" datetime="2021-12-30T20:14:31+09:00">2021-12-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-4-Robotics/" itemprop="url" rel="index"><span itemprop="name">1.4 Robotics</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-4-Robotics/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Universal-Robotics-회사는"><a href="#Universal-Robotics-회사는" class="headerlink" title="Universal Robotics 회사는?"></a>Universal Robotics 회사는?</h2><p><a href="(https://www.universal-robots.com/)"><strong>Universal Robotics</strong></a>는 산업용 / 연구용 로봇 플랫폼을 제작하는 기업이다. UR에서 제작하는 로봇은 생산성 증대를 위한 협동형 로봇 (cobot) 플랫폼에 중점을 두고 있다.</p>
+<p><strong>Cobot</strong>은 사람과 로봇의 협동을 통해 더욱 자연스럽고 효율적인 작업을 유도하는데에 목표를 두는데, 이를 위해서는 섬세한 기동 및 안전에 유의해야한다.</p>
+<p>UR의 파트너사들은 UR 플랫폼과 함께 사용할 수 있는 부품 (e.g. end-effector, vision sensor), 또는 UR 플랫폼을 이용한 솔루션 개발에 중점을 두고 있다.</p>
+<img src="/20211230-190626-UR-seminar/Untitled.png" class="" title="UR robot">
+
+<p> </p>
+<hr>
+<h2 id="첫번째-발표-Universal-Robotics"><a href="#첫번째-발표-Universal-Robotics" class="headerlink" title="첫번째 발표: Universal Robotics"></a>첫번째 발표: Universal Robotics</h2><h3 id="현재-제조업-생태계의-문제"><a href="#현재-제조업-생태계의-문제" class="headerlink" title="현재 제조업 생태계의 문제"></a>현재 제조업 생태계의 문제</h3><ul>
+<li>불안정한 정치/경제적 상황이 야기하는 문제<ul>
+<li>국내 투자 감소 및 국내 기업의 해외진출 선호</li>
+</ul>
+</li>
+<li>생산가능 인구의 저하<ul>
+<li>고령화, 저출산</li>
+</ul>
+</li>
+</ul>
+<img src="/20211230-190626-UR-seminar/20190625_154227.jpg" class="" title="국내투자 감소 및 해외진출 선호">
+
+<p> </p>
+<h3 id="업체가-바라보는-현재-업계-상황-자동화만이-정답인가"><a href="#업체가-바라보는-현재-업계-상황-자동화만이-정답인가" class="headerlink" title="업체가 바라보는 현재 업계 상황 (자동화만이 정답인가?)"></a>업체가 바라보는 현재 업계 상황 (자동화만이 정답인가?)</h3><ul>
+<li>시장이 제조업에게 요구하는 사항들:<ul>
+<li>다품종 소량생산</li>
+<li>원가절감+품질향상</li>
+<li>생산성 증대</li>
+<li>운용자금 및 원가상승</li>
+</ul>
+</li>
+</ul>
+<p>위와 같은 요구사항을 맞추기 위해 많은 기업들이 <strong>‘자동화’전략</strong>을 선택한다. 자동화를 통해 생산성 증대와 가격효율성 증대를 얻기 위함이다. </p>
+<p>미래에 대해 대비하기위해 여러가지 변화가 요구되는데, <strong>생산성 향상을 위해 무인화만이 정말 정답일까?</strong></p>
+<p>정답은 ‘<strong>NO</strong>‘이다. Tesla의 case-study를 보았을 때, 공장 전체를 자동화하려는 시도를 했지만 실패하고 결국 인력을 다시 고용해야했다. (Elon Musk - “사람의 가치를 과소평가하였다. 테슬라 공장을 완전 자동화하려고 했던 것은 실수였다”)</p>
+<p> </p>
+<h2 id="Cobot으로-이-문제를-풀-수-있을까"><a href="#Cobot으로-이-문제를-풀-수-있을까" class="headerlink" title="Cobot으로 이 문제를 풀 수 있을까?"></a>Cobot으로 이 문제를 풀 수 있을까?</h2><ul>
+<li>MIT 실험 / 모라벡의 역설 (생산성 향상)<ul>
+<li>사람이 가진 능력:  창의력, 적응력, 증흥성</li>
+<li>로봇이 가진 능력: 반복성,정화성, 참을성</li>
+<li>둘이 협업할때 85% 더효율적이다. 통계자료가 있음.</li>
+</ul>
+</li>
+</ul>
+<img src="/20211230-190626-UR-seminar/20190625_154834.jpg" class="" title="Cobot과 협업할 때 80% 더 생산적">
+
+<ul>
+<li>UR은 Cobot을 통해 다음과 같은 효과를 추구한다.<ul>
+<li>제조현장에 유연성을 가져오자! </li>
+<li>Universal Robot은 Human Empowerment를 추구한다! </li>
+<li>로봇을 사람의 생상성 향상을 위한 도구로 만들자!</li>
+</ul>
+</li>
+<li>유연성 + 생산력 증대를 위한 제조현장의 변화:<ul>
+<li>고정형 설비에서→ 이동 설치형 설비로</li>
+<li>사람과 로봇을 분리하던 방법에서 → 사람과 로봇이 <strong>협업하는 공간으로</strong></li>
+<li>단순반복작업에서 → 다양한 작업들로</li>
+<li>장기 투자회수 방식에서 → <strong>단기 투자회수 방식으로</strong></li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<img src="/20211230-190626-UR-seminar/20190625_142707.jpg" class="" title="Cobot 시장">
+
+<h3 id="협동로봇-시장은-점점-크고-있다"><a href="#협동로봇-시장은-점점-크고-있다" class="headerlink" title="협동로봇 시장은 점점 크고 있다"></a>협동로봇 시장은 점점 크고 있다</h3><p>앞으로도 계속 클 것이다.</p>
+<img src="/20211230-190626-UR-seminar/20190625_141515.jpg" class="" title="Cobot 시장">
+
+<p> </p>
+<hr>
+<h2 id="두번째-발표-Universal-Robotics"><a href="#두번째-발표-Universal-Robotics" class="headerlink" title="두번째 발표: Universal Robotics+"></a>두번째 발표: Universal Robotics+</h2><h3 id="UR-란"><a href="#UR-란" class="headerlink" title="UR+란?"></a>UR+란?</h3><ul>
+<li>엔드이펙터, 비전, 악세서리, 소프트웨어 회사들과 협업해서 만드는 솔루션</li>
+<li>기존 UR 로봇의 빠른설치+사용과 설계고민 해결이라는 장점을 추가된 솔루션으로 더욱 이끌어냄.</li>
+</ul>
+<h3 id="실사용-케이스"><a href="#실사용-케이스" class="headerlink" title="실사용 케이스"></a>실사용 케이스</h3><ul>
+<li>사용 케이스:<ul>
+<li>현대고주파열처리</li>
+<li>Paradigm electronics</li>
+<li>Continental</li>
+<li>Orkla foods</li>
+<li>x-ray, 용접, 샌딩, 컷팅, 빈픽킹,</li>
+</ul>
+</li>
+<li>Digital Twin:<ul>
+<li>기존 UR 로봇과 OPC 통신이 가능 (RocketFarm)</li>
+<li>로봇이 움직이면, 3D 툴에서 로봇도 같이 움직임. 반대로, 3D 툴에서 움직이면, 로봇도 같이 움직임. <ul>
+<li>스마트 팩토리 컨셉에 비교적 쉽게 접근 가능.</li>
+<li>티치 펜던트 없이, ROS 인터페이스로도 사용 가능함. 3D 툴과 ROS를 연동시킬 수 있을지도?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="세번째-발표-Onrobot"><a href="#세번째-발표-Onrobot" class="headerlink" title="세번째 발표: Onrobot"></a>세번째 발표: Onrobot</h2><h3 id="Onrobot이-판매하는-그리퍼-제품들"><a href="#Onrobot이-판매하는-그리퍼-제품들" class="headerlink" title="Onrobot이 판매하는 그리퍼 제품들"></a>Onrobot이 판매하는 그리퍼 제품들</h3><img src="/20211230-190626-UR-seminar/grippers.png" class="" title="Onrobot grippers">
+
+<h3 id="어떤-작업들에서-사용할-수-있을까"><a href="#어떤-작업들에서-사용할-수-있을까" class="headerlink" title="어떤 작업들에서 사용할 수 있을까?"></a>어떤 작업들에서 사용할 수 있을까?</h3><ul>
+<li>포장/팔레트 작업</li>
+<li>픽앤플레이스 (컨베이어에서 내리기)</li>
+<li>머신텐딩 (기계 다루기)</li>
+<li>조립</li>
+<li>표면마감 (디버링 그라인딩 폴리싱)</li>
+<li>품질시험 및 검사 (정밀도 일관성)</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="네번째-발표-Pickit"><a href="#네번째-발표-Pickit" class="headerlink" title="네번째 발표: Pickit"></a>네번째 발표: Pickit</h2><h3 id="제조업에서의-비전-솔루션이란"><a href="#제조업에서의-비전-솔루션이란" class="headerlink" title="제조업에서의 비전 솔루션이란?"></a>제조업에서의 비전 솔루션이란?</h3><ul>
+<li>6자유도로 움직이는 로봇은 산업기술에 필수다!<ul>
+<li>근데 그 로봇들에 눈이 달려있지 않아서 우리가 원하는 작업을 완벽하게 구현하기 어렵다.</li>
+</ul>
+</li>
+<li>픽킷은 3D비전을 이용해서 로봇에 눈을 달아준다.<ul>
+<li>2D 비전만으로는 Bin-picking과 같이 어려운 작업은 할 수 없다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20211230-190626-UR-seminar/20190625_171435.jpg" class="" title="bin-picking">
+
+<ul>
+<li>비전 기반 로봇 자동화 시스템이 창출하는 세가지 가치<ul>
+<li>유연성 (Pickit의 경우 그리퍼 5개 + 3D 비전. 비전이 있기 때문에 5개의 그리퍼를 자유롭게 사용 가능.)</li>
+<li>생산성</li>
+<li>효율성</li>
+</ul>
+</li>
+</ul>
+<img src="/20211230-190626-UR-seminar/20190625_171028.jpg" class="" title="cycle-time / flexibility trade off">
+
+<h3 id="Bin-picking-자동화-솔루션"><a href="#Bin-picking-자동화-솔루션" class="headerlink" title="Bin-picking 자동화 솔루션"></a>Bin-picking 자동화 솔루션</h3><ul>
+<li>노동력의 38%가 빈에서 기계로 물체를 이동시키는 머신로딩 작업에 사용된다.</li>
+<li>기계가 멈춤으로 인해 발생하는 손실이 사람의 인건비보다 비싸다.<ul>
+<li>하지만 사람이 하는 머신로딩 작업의 기회비용은 얼마나 될까?</li>
+</ul>
+</li>
+<li>셋업하기 쉽고, 사용하기 쉽고, 잘 작동하는 시스템이 있으면 완전 대체가 가능하다.</li>
+</ul>
+<img src="/20211230-190626-UR-seminar/20190625_171622.jpg" class="" title="Bin-picking automation">
+
+<h3 id="시연-영상"><a href="#시연-영상" class="headerlink" title="시연 영상"></a>시연 영상</h3><blockquote>
+<p>Pickit사의 구조광 비전 센서를 이용한 Bin-picking 자동화 솔루션 시연 장면.</p>
+</blockquote>
+<img src="/20211230-190626-UR-seminar/2.gif" class="" title="Bin-picking automation">
+
+<blockquote>
+<p>Pickit 사의 Bin-picking 자동화 솔루션의 소프트웨어 소개 장면</p>
+</blockquote>
+<img src="/20211230-190626-UR-seminar/3.gif" class="" title="Bin-picking automation">
+
+<img src="/20211230-190626-UR-seminar/20190625_171904.jpg" class="" title="Bin-picking automation">
+
+<p> </p>
+<hr>
+<h2 id="그-외-현장-데모-파트너사"><a href="#그-외-현장-데모-파트너사" class="headerlink" title="그 외 현장 데모 파트너사"></a>그 외 현장 데모 파트너사</h2><h3 id="ROBOTIS"><a href="#ROBOTIS" class="headerlink" title="ROBOTIS"></a>ROBOTIS</h3><ul>
+<li>국산 그리퍼<img src="/20211230-190626-UR-seminar/1.gif" class="" title="Robotics gripper">
+
+</li>
+</ul>
+<h3 id="SKF"><a href="#SKF" class="headerlink" title="SKF"></a>SKF</h3><ul>
+<li>Linearised stage for UR robot<div class="video-container"><iframe src="https://www.youtube.com/embed/VytTqE_ODmg" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+</li>
+</ul>
+<h3 id="Syscon-Engineering"><a href="#Syscon-Engineering" class="headerlink" title="Syscon Engineering"></a>Syscon Engineering</h3><ul>
+<li>UR 로봇이 탑재 가능한 + 팔렛트 이송 자율주행 AMR Autocon System<div class="video-container"><iframe src="https://www.youtube.com/embed/Hak8-Ugo4wI" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+</li>
+</ul>
+<h3 id="Pickit"><a href="#Pickit" class="headerlink" title="Pickit"></a>Pickit</h3><ul>
+<li>빈픽킹용 3D 비전<div class="video-container"><iframe src="https://www.youtube.com/embed/vir5D6Y_OcI" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+</li>
+</ul>
+<h3 id="Onrobot"><a href="#Onrobot" class="headerlink" title="Onrobot"></a>Onrobot</h3><ul>
+<li>여러가지 종류의 그리퍼<div class="video-container"><iframe src="https://www.youtube.com/embed/_kSW_yB6WZ0" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201211-dont-compute-twice/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (8) - 두번 계산하지 마세요! (당연하게도)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201212-2d-matrix-iteration/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (9) - 이미지 속 픽셀 계산 빨리 하는 방법 (또는 2D matrix 계산 빨리 하는 방법)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201215-case-study-pcl/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (11) - PCL 라이브러리 최적화</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210327-RFSC-Kim-The-Age-of-Robot-Exploration/" rel="bookmark">로봇미래전략컨퍼런스 2021 - 로봇 대항해 시대 (김상배 교수님 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210530-icra-2021/" rel="bookmark">ICRA 2021 튜토리얼 / 워크샵 리스트</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+              <a href="/tags/Seminar/" rel="tag"># Seminar</a>
+              <a href="/tags/Cobot/" rel="tag"># Cobot</a>
+              <a href="/tags/Universal-Robotics/" rel="tag"># Universal Robotics</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20211207-rust-start-0/" rel="prev" title="Rust 설치 + Hello World + Hello Cargo">
+                  <i class="fa fa-chevron-left"></i> Rust 설치 + Hello World + Hello Cargo
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20211231-deep-learning-ai-news/" rel="next" title="최신 딥러닝 / 로보틱스 뉴스를 따라잡는 방법">
+                  최신 딥러닝 / 로보틱스 뉴스를 따라잡는 방법 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

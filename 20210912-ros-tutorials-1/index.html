@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Docker에서 ROS 돌리는 방법 소개">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(ROS 삽질기 - 0) Docker 환경에서 ROS 돌리기">
+<meta property="og:url" content="https://changh95.github.io/20210912-ros-tutorials-1/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Docker에서 ROS 돌리는 방법 소개">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210912-ros-tutorials-1/tmux.png">
+<meta property="og:image" content="https://changh95.github.io/20210912-ros-tutorials-1/ros.png">
+<meta property="article:published_time" content="2021-09-12T12:58:51.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.987Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="ROS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210912-ros-tutorials-1/tmux.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210912-ros-tutorials-1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>(ROS 삽질기 - 0) Docker 환경에서 ROS 돌리기 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%99%9C-Docker%EC%97%90%EC%84%9C-ROS%EB%A5%BC-%EB%8F%8C%EB%A6%AC%EB%8A%94%EA%B0%80"><span class="nav-number">1.</span> <span class="nav-text">왜 Docker에서 ROS를 돌리는가?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-ROS%EB%A5%BC-%EC%93%B8-%EB%95%8C-%EA%B3%A0%EB%A0%A4%ED%95%B4%EC%95%BC%ED%95%98%EB%8A%94-%EC%A0%90"><span class="nav-number">2.</span> <span class="nav-text">Docker + ROS를 쓸 때 고려해야하는 점</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tmux"><span class="nav-number">3.</span> <span class="nav-text">tmux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#tmux-%EC%84%A4%EC%B9%98"><span class="nav-number">3.1.</span> <span class="nav-text">tmux 설치</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tmux-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%84%9C-%ED%84%B0%EB%AF%B8%EB%84%90-%EC%AA%BC%EA%B0%9C%EA%B8%B0"><span class="nav-number">3.2.</span> <span class="nav-text">tmux 사용해서 터미널 쪼개기</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#X11-%ED%8F%AC%EC%9B%8C%EB%94%A9-%ED%99%98%EA%B2%BD-%EC%A4%80%EB%B9%84%ED%95%98%EA%B8%B0"><span class="nav-number">4.</span> <span class="nav-text">X11 포워딩 환경 준비하기</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-%EC%84%A4%EC%B9%98"><span class="nav-number">5.</span> <span class="nav-text">Docker 설치</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OSRF-ROS-Docker-%EC%9D%B4%EB%AF%B8%EC%A7%80"><span class="nav-number">6.</span> <span class="nav-text">OSRF ROS Docker 이미지</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%95%A1%EA%B2%A8%EC%98%A4%EA%B8%B0"><span class="nav-number">6.1.</span> <span class="nav-text">이미지 땡겨오기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROS-%ED%99%98%EA%B2%BD-%ED%99%9C%EC%84%B1%ED%99%94-roscore-%EC%8B%A4%ED%96%89"><span class="nav-number">6.2.</span> <span class="nav-text">ROS 환경 활성화 + roscore 실행</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TurtleSim%EC%9D%84-%ED%86%B5%ED%95%B4-GUI-%EC%95%B1-%EB%A0%8C%EB%8D%94%EB%A7%81-%ED%99%95%EC%9D%B8"><span class="nav-number">7.</span> <span class="nav-text">TurtleSim을 통해 GUI 앱 렌더링 확인</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#X11-%ED%8F%AC%EC%9B%8C%EB%94%A9-%EC%97%B4%EC%96%B4%EC%A3%BC%EA%B8%B0"><span class="nav-number">7.1.</span> <span class="nav-text">X11 포워딩 열어주기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%83%88-%ED%84%B0%EB%AF%B8%EB%84%90-%EC%97%B4%EA%B8%B0"><span class="nav-number">7.2.</span> <span class="nav-text">새 터미널 열기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TurtleSim-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0"><span class="nav-number">7.3.</span> <span class="nav-text">TurtleSim 설치하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B2%B0%EA%B3%BC-%ED%99%95%EC%9D%B8"><span class="nav-number">7.4.</span> <span class="nav-text">결과 확인</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210912-ros-tutorials-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (ROS 삽질기 - 0) Docker 환경에서 ROS 돌리기
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-12 21:58:51" itemprop="dateCreated datePublished" datetime="2021-09-12T21:58:51+09:00">2021-09-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-1-Software-Engineering/" itemprop="url" rel="index"><span itemprop="name">2.1 Software Engineering</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="왜-Docker에서-ROS를-돌리는가"><a href="#왜-Docker에서-ROS를-돌리는가" class="headerlink" title="왜 Docker에서 ROS를 돌리는가?"></a>왜 Docker에서 ROS를 돌리는가?</h2><ul>
+<li>(적어도 내가 알기로는) ROS는 시스템에 설치되어야하는 소프트웨어이다.</li>
+<li>SLAM을 공부하면서 여러 오픈소스 SLAM들을 돌려보게 되는데, 이 <strong>SLAM 알고리즘들이 공개된 시기에 따라 ROS 디펜던시의 버전이 다르다</strong><ul>
+<li>Ubuntu 14.04 + ROS Indigo</li>
+<li>Ubuntu 16.04 + ROS Kinetic</li>
+<li>Ubuntu 18.04 + ROS Melodic</li>
+<li>Ubuntu 20.04 + ROS Noetic</li>
+</ul>
+</li>
+<li>당연히 ROS 버전들끼리 충돌이 난다.<ul>
+<li>추가로, OpenCV와 Eigen과 같은 라이브러리들의 버전들도 충돌날것이다.</li>
+<li>이럴 때는 <strong>각각의 알고리즘마다 독립된 가상환경을 만들어두면 좋다</strong></li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Docker-ROS를-쓸-때-고려해야하는-점"><a href="#Docker-ROS를-쓸-때-고려해야하는-점" class="headerlink" title="Docker + ROS를 쓸 때 고려해야하는 점"></a>Docker + ROS를 쓸 때 고려해야하는 점</h2><ul>
+<li>Docker를 통해 개발을 할 때는 <strong>원격 코드 접근</strong>이 필요하다<ul>
+<li>이는 SSH나 VSCode의 Docker extension을 사용해서 디버깅을 할 수 있다. </li>
+</ul>
+</li>
+<li>ROS를 사용할 때 <strong>GUI로 결과를 보는 경우</strong>가 많다<ul>
+<li>VNC, X11, WayLand 등으로 시각화된 결과물을 보여줄 수 있다.</li>
+</ul>
+</li>
+<li>rosrun 기반으로 돌릴 때는 <strong>여러 터미널</strong>을 열 수 있어야한다.<ul>
+<li>tmux, terminator 등으로 하나의 컨테이너에 여러 bash 터미널을 접근해야한다.<ul>
+<li>(아니면 그냥 터미널 많이 열어도 되구…)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="tmux"><a href="#tmux" class="headerlink" title="tmux"></a>tmux</h2><blockquote>
+<p>tmux를 좀 더 쉽게 쓰고 싶으면 필자가 이전에 적은 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwMzI2LXRtdXgv">tmux 글<i class="fa fa-external-link-alt"></i></span>을 참조하면 좋다.</p>
+</blockquote>
+<h3 id="tmux-설치"><a href="#tmux-설치" class="headerlink" title="tmux 설치"></a>tmux 설치</h3><p>tmux는 여러개의 터미널을 하나의 윈도우에 띄울 수 있는 유용한 툴이다.</p>
+<p>아래의 커맨드를 사용해서 tmux를 설치한다</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install tmux</span><br></pre></td></tr></table></figure>
+
+<h3 id="tmux-사용해서-터미널-쪼개기"><a href="#tmux-사용해서-터미널-쪼개기" class="headerlink" title="tmux 사용해서 터미널 쪼개기"></a>tmux 사용해서 터미널 쪼개기</h3><p>설치가 끝나면 터미널에서 <code>tmux</code> 커맨드를 입력하여 tmux를 실행한다.<br>이후 <code>ctrl + b</code>를 누르고 <code>"</code>를 누르면 하나의 터미널이 위/아래로 쪼개지고, <code>ctrl + b</code>를 누른 후 <code>%</code>를 누르면 하나의 터미널이 좌/우로 쪼개진다.</p>
+<p>터미널을 옮겨다니려면 <code>ctrl + b</code>를 누르고 화살표 키를 눌러서 움직일 수 있다.</p>
+<p>위/아래와 좌/우를 한번씩 쪼개면 아래의 사진처럼 큰 윈도우가 4개로 쪼개진다.</p>
+<img src="/20210912-ros-tutorials-1/tmux.png" class="" title="tmux">
+
+<p> </p>
+<hr>
+<h2 id="X11-포워딩-환경-준비하기"><a href="#X11-포워딩-환경-준비하기" class="headerlink" title="X11 포워딩 환경 준비하기"></a>X11 포워딩 환경 준비하기</h2><p>필자의 PC 환경은 Nvidia GPU를 사용하는 PC로, GPU 드라이버는 기본 Ubuntu 20.04가 잡아준 것을 사용하고있다.</p>
+<p>우선 호스트 PC 환경에서 다음과 같은 커맨드를 사용해서 Ubuntu GUI 패키지를 설치해준다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install xorg xrdp xserver-xorg mesa-utils xauth gdm3</span><br></pre></td></tr></table></figure>
+
+<p> </p>
+<hr>
+<h2 id="Docker-설치"><a href="#Docker-설치" class="headerlink" title="Docker 설치"></a>Docker 설치</h2><p>Docker 설치에 관한 부분은 필자가 이전에 적은 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwODA4LWRvY2tlci1mb3Itc2xhbS8=">Docker 글<i class="fa fa-external-link-alt"></i></span>을 참조하면 좋다.</p>
+<p> </p>
+<hr>
+<h2 id="OSRF-ROS-Docker-이미지"><a href="#OSRF-ROS-Docker-이미지" class="headerlink" title="OSRF ROS Docker 이미지"></a>OSRF ROS Docker 이미지</h2><h3 id="이미지-땡겨오기"><a href="#이미지-땡겨오기" class="headerlink" title="이미지 땡겨오기"></a>이미지 땡겨오기</h3><p>이번 글에서는 우선 빠르게 결과를 보기 위해, Open Source Robotics Foundation (이하 OSRF)에서 제작한 ROS docker 이미지를 사용한다.</p>
+<p>Base ubuntu 이미지에 ROS를 직접 설치할 수도 있지만, 이 방식은 다음 글에서 설명하도록 한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;DISTRO&gt;는 원하는대로 바꿀 수 있다. indigo / kinetic / melodic / noetic 등등...</span></span><br><span class="line">docker run -it \</span><br><span class="line">    --env=<span class="string">"DISPLAY"</span> \</span><br><span class="line">    --env=<span class="string">"QT_X11_NO_MITSHM=1"</span> \</span><br><span class="line">    --volume=<span class="string">"/tmp/.X11-unix:/tmp/.X11-unix:rw"</span> \</span><br><span class="line">    osrf/ros:&lt;DISTRO&gt;-desktop-full</span><br><span class="line"><span class="built_in">export</span> containerId=$(docker ps -l -q)</span><br></pre></td></tr></table></figure>
+
+<h3 id="ROS-환경-활성화-roscore-실행"><a href="#ROS-환경-활성화-roscore-실행" class="headerlink" title="ROS 환경 활성화 + roscore 실행"></a>ROS 환경 활성화 + roscore 실행</h3><p>이 커맨드를 입력하고나면 DockerHub로부터 해당 Distro의 ROS가 포함된 Docker 이미지를 다운받고 컨테이너를 생성한 후 실행한다.</p>
+<p>실행된 컨테이너에서 <code>source /opt/ros/&lt;DISTRO&gt;/setup.bash</code>를 통해 ROS 환경을 읽어준 후, <code>printenv | grep ROS</code>를 사용해서 정확하게 환경이 읽혔는지 확인한다.</p>
+<p>ROS 환경이 잘 읽힌게 확인이 되면 <code>roscore</code> 커맨드를 통해 ros 서버를 실행시킨다.</p>
+<p> </p>
+<hr>
+<h2 id="TurtleSim을-통해-GUI-앱-렌더링-확인"><a href="#TurtleSim을-통해-GUI-앱-렌더링-확인" class="headerlink" title="TurtleSim을 통해 GUI 앱 렌더링 확인"></a>TurtleSim을 통해 GUI 앱 렌더링 확인</h2><h3 id="X11-포워딩-열어주기"><a href="#X11-포워딩-열어주기" class="headerlink" title="X11 포워딩 열어주기"></a>X11 포워딩 열어주기</h3><p>tmux 기능을 이용해서 새로운 터미널로 옮긴다 (i.e.<code>ctrl + b</code> + <code>-&gt;</code>).</p>
+<p>Host PC에서 X11 포워딩을 열어주기 위해 <code>xhost +loal:root</code> 커맨드를 입력해서 포워딩을 열어준다.</p>
+<h3 id="새-터미널-열기"><a href="#새-터미널-열기" class="headerlink" title="새 터미널 열기"></a>새 터미널 열기</h3><p><code>docker ps -a</code>를 통해 ROS Docker 컨테이너의 이름을 알아낸다. 이 이름을 <container_name>이라고 하겠다.</container_name></p>
+<p><code>docker exec -it &lt;CONTAINER_NAME&gt; bash</code> 커맨드를 통해 해당 컨테이너에서 터미널을 열 수 있다.</p>
+<p>우선 가장 먼저 <code>source /opt/ros/&lt;DISTRO&gt;/setup.bash</code>를 통해 ROS 환경을 읽어주고, <code>printenv | grep ROS</code>를 사용해서 정확하게 환경이 읽혔는지 확인한다.</p>
+<h3 id="TurtleSim-설치하기"><a href="#TurtleSim-설치하기" class="headerlink" title="TurtleSim 설치하기"></a>TurtleSim 설치하기</h3><p>TurtleSim을 바로 돌리면 좋겠지만, 이 컨테이너에는 아직 turtlesim이 없으므로 아래 커맨드를 통해 직접 설치해줘야한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install ros-&lt;DISTRO&gt;-ros-tutorials</span><br></pre></td></tr></table></figure>
+
+<p>이후, <code>rosrun turtlesim turtlesim_node</code> 커맨드를 통해 Turtlesim을 실행시키면 GUI 앱이 렌더링 될 것이다.</p>
+<p>다시 한번 tmux 기능을 이용해서 새로운 터미널로 옮긴다.</p>
+<p><code>docker exec -it &lt;CONTAINER_NAME&gt; bash</code> 커맨드를 이용해 새 터미널을 열어주고, 다시 <code>source /opt/ros/&lt;DISTRO&gt;/setup.bash</code> 커맨드를 이용해서 ROS 환경을 읽어준다.</p>
+<p>이후 <code>rosrun turtlesim teleop_key</code> 커맨드를 이용해서 TurtleSim의 거북이를 움직일 수 있는 node를 실행시킨다.</p>
+<p>이제 방향키를 움직여서 거북이가 움직이는 것을 볼 수 있다.</p>
+<h3 id="결과-확인"><a href="#결과-확인" class="headerlink" title="결과 확인"></a>결과 확인</h3><img src="/20210912-ros-tutorials-1/ros.png" class="" title="ros">
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210808-docker-for-slam/" rel="bookmark">SLAMOps를 위한 첫걸음 - Docker + CI</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/ROS/" rel="tag"># ROS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210910-2021-september-slam-news/" rel="prev" title="2021년 9월 SLAM 뉴스">
+                  <i class="fa fa-chevron-left"></i> 2021년 9월 SLAM 뉴스
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210925-cpp-best-practices/" rel="next" title="C++ Best Practices (0) - 시작하면서...">
+                  C++ Best Practices (0) - 시작하면서... <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

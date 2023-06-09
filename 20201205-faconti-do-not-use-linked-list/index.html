@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;I have learnt linked-lists at university, should I use them?&quot; Nooope.&quot;을 적당히 번역했습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (2) - Linked List 쓰지 마세요!">
+<meta property="og:url" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;I have learnt linked-lists at university, should I use them?&quot; Nooope.&quot;을 적당히 번역했습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/linked_list.png">
+<meta property="og:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/realsense.png">
+<meta property="article:published_time" content="2020-12-05T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.827Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="Optimisation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/linked_list.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (2) - Linked List 쓰지 마세요! | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#std-list%EB%A5%BC-%EC%93%B0%EA%B3%A0-%EA%B3%84%EC%8B%A0%EB%8B%A4%EB%A9%B4-%EB%8B%B9%EC%9E%A5-%EA%B7%B8%EB%A7%8C%EB%91%90%EC%84%B8%EC%9A%94"><span class="nav-number">1.</span> <span class="nav-text">std::list를 쓰고 계신다면, 당장 그만두세요.</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%8B%A4%EC%A0%9C%EB%A1%9C-%EC%93%B0%EC%9D%B8-%EC%98%88%EC%8B%9C-Intel-RealSense-%EC%B9%B4%EB%A9%94%EB%9D%BC-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84%EC%9D%98-%EC%84%B1%EB%8A%A5-%EB%81%8C%EC%96%B4%EC%98%AC%EB%A6%AC%EA%B8%B0"><span class="nav-number">1.1.</span> <span class="nav-text">실제로 쓰인 예시: Intel RealSense 카메라 드라이버의 성능 끌어올리기</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%97%AD%EC%9E%90-%EC%B6%94%EA%B0%80-%EB%82%B4%EC%9A%A9"><span class="nav-number">1.2.</span> <span class="nav-text">역자 추가 내용</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (2) - Linked List 쓰지 마세요!
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-05 20:38:19" itemprop="dateCreated datePublished" datetime="2020-12-05T20:38:19+09:00">2020-12-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%B9%84%EC%A0%84%EC%9D%84-%EC%9C%84%ED%95%9C-C-%EC%B5%9C%EC%A0%81%ED%99%94-%EC%8B%9C%EB%A6%AC%EC%A6%88/" itemprop="url" rel="index"><span itemprop="name">실시간 컴퓨터 비전을 위한 C++ 최적화 시리즈</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “I have learnt linked-lists at university, should I use them?” Nooope.”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9ub19saXN0cy8=">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
+<p>역자 코멘트: 원작자의 요청으로 최대한 원글의 뉘앙스를 그대로 옮겨왔습니다. 저는 <code>std::list</code>가 글에서 표현하는 것 처럼 쓸모없다고 생각하지는 않습니다. 그랬다면 이미 C++ 언어에서 사라졌겠지요 ㅎㅎ… 적시적기에 사용한다면 <code>std::list</code> 역시 타 자료구조보다 좋은 성능을 내겠습니다. 하지만, 실시간 컴퓨터 비전의 용도에서 그런 상황이 자주 나타나지 않는 점에도 동의합니다. 이 점 유의하시고 읽어주시길 부탁드립니다 :)</p>
+<br>
+
+<h1 id="std-list를-쓰고-계신다면-당장-그만두세요"><a href="#std-list를-쓰고-계신다면-당장-그만두세요" class="headerlink" title="std::list를 쓰고 계신다면, 당장 그만두세요."></a><code>std::list</code>를 쓰고 계신다면, 당장 그만두세요.</h1><hr>
+<img src="/20201205-faconti-do-not-use-linked-list/linked_list.png" class="" title="Linked List를 왜 씁니까?">
+
+<p>사실 linked list의 효율성에 대한 벤치마크는 이미 이전에도 다른 사람들이 많이 했었습니다. 제가 똑같은 벤치마크를 다시 돌릴 필요는 없다고 봅니다.</p>
+<ul>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9iYXB0aXN0ZS13aWNodC5jb20vcG9zdHMvMjAxMi8xMS9jcHAtYmVuY2htYXJrLXZlY3Rvci12cy1saXN0Lmh0bWw=">std::vector vs std::list benchmark<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li>(역자 코멘트: 위의 링크는 잘못 첨부된 그래프가 몇개 포함되어있습니다. 가장 중요한 random remove 관련 그래프가 잘못 올라와있더라구요. 그러니 정확한 벤치마크 결과를 위해서는 위 링크보다는 여기 링크: <span class="exturl" data-url="aHR0cHM6Ly9iYXB0aXN0ZS13aWNodC5jb20vcG9zdHMvMjAxMi8xMi9jcHAtYmVuY2htYXJrLXZlY3Rvci1saXN0LWRlcXVlLmh0bWw=">C++ benchmark – std::vector VS std::list VS std::deque<i class="fa fa-external-link-alt"></i></span>를 참조하시길 바랍니다.)</li>
+</ul>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly9pc29jcHAub3JnL2Jsb2cvMjAxNC8wNi9zdHJvdXN0cnVwLWxpc3Rz">Are lists evil? Bjarne Stroustrup<i class="fa fa-external-link-alt"></i></span></p>
+<ul>
+<li>(역자 코멘트: 이 링크 내용을 읽어보시면 C++의 창시자인 Bjarne Stroustrup는 list가 완전 잘못된건 아니라고 하고 있습니다. 정확하게 이해하고 쓰면 list도 다른 자료구조보다 좋은 성능을 낼 수 있습니다.)</li>
+</ul>
+</li>
+<li><p><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1ZUXM2SUMtdmdtbw==">Video from Bjarne Stroustrup keynote<i class="fa fa-external-link-alt"></i></span></p>
+</li>
+</ul>
+<p>“그래도 내 경우에는 무조건 linked list를 써야할 것 같은데?” 라고 생각하실 수도 있는데, <strong>장담하건데 linked list 안 쓰셔도 됩니다</strong>.</p>
+<p>STL 자료구조에는 이미 <code>std::list</code> 보다 훨씬 더 훌륭한 자료구조가 있습니다. <a target="_blank" rel="noopener" href="https://es.cppreference.com/w/cpp/container/deque"><code>std::deque&lt;&gt;</code></a> 라는 친구가 99%의 경우 당신의 문제를 해결해줄 겁니다.</p>
+<p>아니면, 우리의 영원한 친구 <code>std::vector</code>가 해결해줄 수도 있죠. 종종 <code>std::vector</code>는 list보다 더 효율적이게 작동합니다.</p>
+<p>나는 너무 힙하고 멋져야하고 남들보다 뛰어나야하니 <code>std::vector</code>나 <code>std::deque</code> 같은건 절대로 쓸 수 없다, 라고 하신다면 <span class="exturl" data-url="aHR0cHM6Ly9wbGZsaWIub3JnL2NvbG9ueS5odG0=">plf::colony<i class="fa fa-external-link-alt"></i></span>를 보시는걸 추천드려요.</p>
+<p><strong><em>근데 진짜로, 그냥 <code>std::vector</code>나 <code>std::deque</code> 쓰세요.</em></strong></p>
+ <br>
+
+<h2 id="실제로-쓰인-예시-Intel-RealSense-카메라-드라이버의-성능-끌어올리기"><a href="#실제로-쓰인-예시-Intel-RealSense-카메라-드라이버의-성능-끌어올리기" class="headerlink" title="실제로 쓰인 예시: Intel RealSense 카메라 드라이버의 성능 끌어올리기"></a>실제로 쓰인 예시: Intel RealSense 카메라 드라이버의 성능 끌어올리기</h2><hr>
+<p>제가 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ludGVsUmVhbFNlbnNl">Intel RealSense<i class="fa fa-external-link-alt"></i></span> 코드에 컨트리뷰트 했던 Pull Request에 대해 얘기해보려고 합니다.</p>
+<img src="/20201205-faconti-do-not-use-linked-list/realsense.png" class="" title="영롱한 RealSense">
+
+<p>대체 무슨 생각으로 그랬는지는 모르겠지만, RealSense의 코드에서는 <code>std::list&lt;&gt;</code>를 쓰고 있었습니다. Intel에서 왜 아직도 이런걸 쓰고 있었는지 정말 이해가 안되네요.</p>
+<p><strong><em>농담입니다, 인텔 개발자들 사랑해요 알러뷰!</em></strong></p>
+<p>여기 제가 건의했던 PR의 링크입니다. <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ludGVsUmVhbFNlbnNlL3JlYWxzZW5zZS1yb3MvcHVsbC8xMDk3">Considerable CPU saving in BaseRealSenseNode::publishPointCloud()<i class="fa fa-external-link-alt"></i></span></p>
+<p>요약하자면, 이 PR은 간단한 내용 2개를 수정했습니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 여기 매 카메라 프레임마다 생성되는 list가 있습니다.</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">unsigned</span>&gt; valid_indices;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 이 list를 vector로 바꿨습니다. 이 vector는 class member로써, 사용 전에 clear됩니다.</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span>&gt; _valid_indices;</span><br></pre></td></tr></table></figure>
+
+<p>추가로, 매 프레임마다 <code>sensor_msgs::PointCloud2 msg_pointcloud</code>라는 큰 오브젝트가 생성됬습니다. 이 큰 오브젝트를 class member로 변환되어 재사용함으로써 더 빨라졌지요.</p>
+<p>이렇게 수정해줌으로써, 약 20~30% 정도의 속도를 향상시켰습니다.</p>
+<p>코드 몇줄 바꿔서 이 정도 속도 향상을 얻는건 엄청난거죠.</p>
+<hr>
+<h2 id="역자-추가-내용"><a href="#역자-추가-내용" class="headerlink" title="역자 추가 내용"></a>역자 추가 내용</h2><p><span class="exturl" data-url="aHR0cHM6Ly9iYXB0aXN0ZS13aWNodC5jb20vcG9zdHMvMjAxMi8xMi9jcHAtYmVuY2htYXJrLXZlY3Rvci1saXN0LWRlcXVlLmh0bWw=">C++ benchmark – std::vector VS std::list VS std::deque<i class="fa fa-external-link-alt"></i></span> 링크를 보시면 다음과 같은 내용이 나옵니다.</p>
+<ul>
+<li>대부분의 경우, <code>std::vector</code>와 <code>std::deque</code>가 <code>std::list</code>에 비해 더 빠르다.</li>
+<li><code>std::list</code>가 <code>std::vector</code>와 <code>std::deque</code>에 비해 더 빠른 경우는 아래와 같다.<ul>
+<li>Random insert (중간에 새 element를 insert) 작업에서, insert 되는 객체의 크기가 큰 경우</li>
+<li>Random insert (중간에 새 element를 insert) 작업에서, insert 되는 객체가 non-trivial인 경우</li>
+<li>Random remove (중간에 element를 erase) 작업</li>
+<li>push_front (최앞단에 새 element를 insert) 작업 </li>
+<li>sort 작업에서, element 객체가 큰 경우</li>
+</ul>
+</li>
+</ul>
+<p>즉, 위와 같은 작업에서는 <code>std::list</code>를 써야하는 것이 맞으며, 이는 원글이 주장하는 내용과 다릅니다.</p>
+<p>원글이 <code>std::list</code>를 쓸 필요가 없다고 주장한 부분은, 아무래도 <strong><em>위와 같은 경우가 실시간 컴퓨터 비전에서 자주 나타나지 않는 상황</em></strong>이기에 그런 것 같습니다.</p>
+<p>우선적으로, 실시간 컴퓨터 비전에서는 센서로부터 오는 데이터를 순차적으로 저장하는 경우가 많기 때문에, ‘중간에 새 element를 insert’ 하는 경우가 많이 없습니다. </p>
+<p>또, 새 데이터가 들어오면 가장 뒷단에 저장하는 경우가 많기 때문에, <code>push_front()</code> 같은 작업도 자주 나타나지 않죠.</p>
+<p>‘중간에서 element를 erase’하는 작업도 보통 잘 나타나지 않습니다. Raw 센서 데이터에서 ‘최대 정확도를 낼 수 있는 최소한의 데이터’만 남기는 것이 메모리와 계산량의 효율성에 큰 영향을 줍니다. 그렇기에 Raw 데이터에서 전처리를 통해 남는 데이터가 많지 않습니다. 보통 기존의 컨테이너에서 element를 지우기보다는 새로운 컨테이너에 전처리를 통과한 데이터를 저장하고, raw 데이터는 지우는 방식을 사용합니다.</p>
+<p>Sort는 자주 사용되는 기법이지만, 경우에 따라서 비교해야하는 element 객체가 크거나 작을 수 있습니다. 여기에 있어서 많은 기법들이 element 객체를 직접 비교하는게 아닌, 어떠한 distance metric을 사용하여 비교합니다. L2 Norm, Hamming distance 등이 있습니다. 예시로, Visual feature matching을 위해 descriptor distance를 구하는데, 각각의 descriptor를 직접 비교하는 것이 아닌 floating distance / hamming distance 등으로 metric distance값을 계산하여, 매치의 정확도 값을 따로 저장하고, 그 정확도를 기점으로 sort하는 경우가 많습니다. </p>
+<p>하지만 컴퓨터 비전 쪽 계산에는 정말로 다양한 방식으로 계산을 하고 데이터를 저장해야합니다. 제가 생각하지 못한 부분에서 위와 같은 경우가 나타날 수 있고, 그런 경우에는 <code>std::list</code>가 진가를 보여줄 수 있는 부분이 있을 것이라고 생각합니다. 이 글을 읽으시는 분들께는 <code>std::list</code>를 사용하실 때 <code>std::list</code>, <code>std::vector</code>, <code>std::deque</code> 중 어떤 컨테이너를 사용하는게 더 효율적일지 한번 더 고려하실 수 있는 기회가 되길 바랍니다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201205-faconti-use-vector-reserve/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201206-do-you-need-map/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201208-small-vector-optimisation/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (4) - 사이즈가 작은 vector를 쓸 때...</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201209-strings-are-almost-vectors/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (5) - String은 vector처럼 써야합니다</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/Optimisation/" rel="tag"># Optimisation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20201205-faconti-use-vector-reserve/" rel="prev" title="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요!">
+                  <i class="fa fa-chevron-left"></i> (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요!
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20201206-do-you-need-map/" rel="next" title="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요?">
+                  (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요? <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

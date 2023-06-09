@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Ubuntu를 밀 때마다 까먹어서 새로 적는 파티션 설치 방법">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 파티션 설정하기">
+<meta property="og:url" content="https://changh95.github.io/20230213-ubuntu-partition/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Ubuntu를 밀 때마다 까먹어서 새로 적는 파티션 설치 방법">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-02-13T05:48:45.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.719Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20230213-ubuntu-partition/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Ubuntu 파티션 설정하기 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95"><span class="nav-number">1.</span> <span class="nav-text">설치 방법</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#swap-%EB%A9%94%EB%AA%A8%EB%A6%AC"><span class="nav-number">1.1.</span> <span class="nav-text">swap 메모리</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EFI-%ED%8C%8C%ED%8B%B0%EC%85%98"><span class="nav-number">1.2.</span> <span class="nav-text">EFI 파티션</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#root-%ED%8C%8C%ED%8B%B0%EC%85%98"><span class="nav-number">1.3.</span> <span class="nav-text">root 파티션</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#root-%ED%8C%8C%ED%8B%B0%EC%85%98%EA%B3%BC-home-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%80-%EB%82%98%EB%88%84%EB%8A%94%EA%B1%B0%EB%9D%BC%EA%B3%A0-%EB%93%A4%EC%97%88%EB%8A%94%EB%8D%B0"><span class="nav-number">1.4.</span> <span class="nav-text">root 파티션과 home 파티션은 나누는거라고 들었는데?</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20230213-ubuntu-partition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ubuntu 파티션 설정하기
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-13 14:48:45" itemprop="dateCreated datePublished" datetime="2023-02-13T14:48:45+09:00">2023-02-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-8-Ubuntu-Linux/" itemprop="url" rel="index"><span itemprop="name">2.8 Ubuntu Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="설치-방법"><a href="#설치-방법" class="headerlink" title="설치 방법"></a>설치 방법</h1><p>설치를 할 때는 항상 ‘Something else’ 옵션으로 들어가서 내가 원하는 디스크 할당을 한다.</p>
+<p>내가 사용하고 싶은 디스크 공간을 우선 확보한다. 약 1TB가 확보되었다고 해보자.</p>
+<h2 id="swap-메모리"><a href="#swap-메모리" class="headerlink" title="swap 메모리"></a>swap 메모리</h2><p>가장 먼저 설정해야할 것은 swap 메모리이다. swap 메모리는 DRAM 크기의 2-3배를 잡는다. 내 DRAM이 32GB라면, swap 메모리는 64GB 정도를 잡으면 적당하다. swap 메모리를 생성할 때는 Primary 파티션으로 가장 앞단에 생성한다. </p>
+<p>swap 메모리는 시스템이 연산중인 정보들이 DRAM 용량의 한계를 넘어설 때 SSD에 잠시 저장을 하는 기능이다. 의외로 C++ 프로그램 병렬빌드를 할 때 메모리에 올려야할 정보량이 DRAM의 크기를 넘어서는 경우가 많은데, 이 때 넘쳐나는 정보를 swap 메모리에 엄청나게 빠른 주기로 접근하며 읽고 쓰게 된다. DRAM에 읽고 쓰는 속도보다 SSD에 읽고 쓰는 속도가 훨씬 느리기 때문에, 최대한 SSD에서 정보를 빨리 읽고 쓰게 해줘야 전체적인 성능이 올라가게 된다. 이러한 이유로 swap 메모리는 모든 메모리의 최앞단에 있어야하는데, 이는 메모리가 뒷단에 위치할 수록 접근 시 속도가 느려지기 때문이다.</p>
+<h2 id="EFI-파티션"><a href="#EFI-파티션" class="headerlink" title="EFI 파티션"></a>EFI 파티션</h2><p>다음은 EFI 파티션을 설정한다. 500MB 정도를 주고 설정한다. 부팅할 때 필요한 것이다.</p>
+<h2 id="root-파티션"><a href="#root-파티션" class="headerlink" title="root 파티션"></a>root 파티션</h2><p>나머지 메모리는 전부 root 파티션에 할당한다. 이게 진짜 내가 쓸 수 있는 메모리이다.</p>
+<p> </p>
+<hr>
+<h2 id="root-파티션과-home-파티션은-나누는거라고-들었는데"><a href="#root-파티션과-home-파티션은-나누는거라고-들었는데" class="headerlink" title="root 파티션과 home 파티션은 나누는거라고 들었는데?"></a>root 파티션과 home 파티션은 나누는거라고 들었는데?</h2><p>안 나눠도 된다.</p>
+<p>두개를 나눠놓았을 때의 장점은 ‘또 다시 밀 때 OS/시스템만 밀 수 있다’ 이다. 예를 들어, Ubuntu 20.04를 사용하다가 Ubuntu 22.04로 업그레이드 하고 싶다면, root 파티션만 지우고 home 파티션을 그대로 놔둘 수 있다. 그러면 home 파티션에 있는 사용자의 파일은 그대로 보존되고, OS가 있는 root만 업그레이드 된다.</p>
+<p>근데 우리는 C++을 다룬다. OS가 바뀌게 되면, 아랫단에 있는 라이브러리의 위치 및 버전이 전부 바뀌게 된다. 잘 도는 경우도 있고, 안도는 경우도 있다. 근데 문제는 뭐가 돌고 뭐가 안돌지 모른다. 결국 다시 다 빌드 해봐야하는거다.</p>
+<p>root 파티션만 지정했을 때 장점은 다음과 같다. 1. ‘root / home 파티션에 뭐를 어디에 설치할지 고민할 필요 없이 그냥 다 편하게 깔고, 바로 작업을 시작할 수 있다’, 2. ‘한번에 다 밀고 새로 깔기 편하다’.</p>
+<p>두개를 나눠놓았을 때의 단점은 다음과 같다. 1. ‘OS 업그레이드를 할 때 USB를 꽂고 파티션을 직접 지정해서 재-마운트 시킬 수 있을 정도의 리눅스 고수여야한다’, 2. ‘root는 몇GB, 홈은 몇GB를 줘야할지 적당한 기준이 없다’, 3. ‘뭐 하나 꼬이면 결국 다 밀고 다 새로 깔아야한다’.</p>
+<p>어차피 OS를 민다는건 태초마을에서 새 출발 하는게 아닌가? 그냥 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1P3RhYj1yZXBvc2l0b3JpZXM=">새 환경 빌드 스크립트<i class="fa fa-external-link-alt"></i></span> 같은거 만들어놓고, 돌리는 동안 그날 일을 뭐할지 플래닝하거나 논문 읽고 있는게 편할 수도 있겠다.</p>
+<p>용량을 잘 관리하고 싶다면 root/home을 나누는것도 효율적인 방법이다. 실제로 서버 관리를 하는 사람이거나 임베디드 플릿 관리를 하는 사람이라면 이렇게 해야할 것이다. 하지만 단순히 데스크탑 워크스테이션에서 실험돌리다가 우분투 뻑나면 밀고 새로 깔면 되는 사람이라면, 이런걸 고민할 필요가 없다. ‘SSD 용량이 작아서 어쩔 수 없이 나눠야한다’ 같은 상황이라면, 조금 막말처럼 보일 수 있겠지만 이런 문제를 고민하기보다는 빠르게 10만원 더 들여서 1TB 더 큰 용량의 SSD를 구입하고 더 중요한 문제를 푸는게 이득일 것 같다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230321-ccmake/" rel="bookmark">Ubuntu에서 cmake gui 사용하는 방법 (ccmake, cmake-curses-gui)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230325-xvfb/" rel="bookmark">디스플레이 없이 OpenGL 및 X11 렌더링 하는 방법</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230115-2022-retro/" rel="prev" title="2022년 회고">
+                  <i class="fa fa-chevron-left"></i> 2022년 회고
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20230214-sensor-calibration/" rel="next" title="자율주행 차량을 위한 센서 캘리브레이션 기법">
+                  자율주행 차량을 위한 센서 캘리브레이션 기법 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

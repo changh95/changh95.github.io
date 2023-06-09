@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Modern Cmake - An introduction 영상을 보고 공부한 노트입니다">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern CMake">
+<meta property="og:url" content="https://changh95.github.io/20210105-modern-cmake/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Modern Cmake - An introduction 영상을 보고 공부한 노트입니다">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/cmake_run.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/ninja_run.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/target_link_libraries.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string1.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string2.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string3.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/list1.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/list2.png">
+<meta property="article:published_time" content="2021-01-05T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="CMake">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210105-modern-cmake/cmake_run.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210105-modern-cmake/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Modern CMake | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B0%80%EC%9E%A5-%EC%89%AC%EC%9A%B4-%EC%9D%B8%ED%8A%B8%EB%A1%9C"><span class="nav-number">1.</span> <span class="nav-text">가장 쉬운 인트로</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Executable-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EB%A7%8C%EB%93%A4%EA%B8%B0"><span class="nav-number">1.1.</span> <span class="nav-text">Executable 프로그램 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmake-%EC%BB%A4%EB%A7%A8%EB%93%9C-amp-ninja-%EC%BB%A4%EB%A7%A8%EB%93%9C-%EC%84%A4%EB%AA%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">cmake 커맨드 &amp; ninja 커맨드 설명</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add-executable%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">add_executable에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Library-%EB%A7%8C%EB%93%A4%EA%B8%B0"><span class="nav-number">1.2.</span> <span class="nav-text">Library 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-library%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">add_library에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Executable%EC%97%90-Library-%EB%A7%81%ED%81%AC%ED%95%98%EA%B8%B0"><span class="nav-number">1.3.</span> <span class="nav-text">Executable에 Library 링크하기.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#target-link-libraries%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">target_link_libraries에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%8C%8C%EC%9D%BC-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EC%B6%94%EA%B0%80"><span class="nav-number">1.4.</span> <span class="nav-text">파일&#x2F;디렉토리 추가</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-subdirectory%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.4.1.</span> <span class="nav-text">add_subdirectory에 사용 가능한 옵션</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.4.2.</span> <span class="nav-text">include에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake-%EB%94%94%EB%B2%84%EA%B9%85%ED%95%98%EA%B8%B0"><span class="nav-number">1.5.</span> <span class="nav-text">CMake 디버깅하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%94%94%EB%B2%84%EA%B9%85-%EC%98%88%EC%8B%9C"><span class="nav-number">1.5.1.</span> <span class="nav-text">간단한 디버깅 예시</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#message-mode%EB%A5%BC-variable%EB%A1%9C-%EC%84%A0%EC%96%B8%ED%95%98%EA%B8%B0"><span class="nav-number">1.5.2.</span> <span class="nav-text">message mode를 variable로 선언하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMake%EC%9D%98-%EB%AA%A8%EB%93%A0-message-%EB%B3%B4%EA%B8%B0"><span class="nav-number">1.5.3.</span> <span class="nav-text">CMake의 모든 message 보기</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variables"><span class="nav-number">2.</span> <span class="nav-text">Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.1.</span> <span class="nav-text">Variables 사용하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%82%AC%EC%9A%A9-%EC%98%88%EC%8B%9C"><span class="nav-number">2.1.1.</span> <span class="nav-text">사용 예시</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B0%99%EC%9D%80-%EC%9D%B4%EB%A6%84%EC%9D%98-variable%EB%93%A4"><span class="nav-number">2.1.2.</span> <span class="nav-text">같은 이름의 variable들</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set%EC%97%90-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%98%B5%EC%85%98"><span class="nav-number">2.1.3.</span> <span class="nav-text">set에 사용할 수 있는 옵션</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-variable%EC%9D%98-%ED%8A%B9%EC%A7%95"><span class="nav-number">2.1.4.</span> <span class="nav-text">Cache variable의 특징</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMakeCache-txt%EC%9D%98-%ED%8A%B9%EC%A7%95"><span class="nav-number">2.1.5.</span> <span class="nav-text">CMakeCache.txt의 특징</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8B%A4%EC%96%91%ED%95%9C-variable-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.2.</span> <span class="nav-text">다양한 variable 사용하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">String 사용하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.2.2.</span> <span class="nav-text">List 사용하기</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Control-flow"><span class="nav-number">3.</span> <span class="nav-text">Control flow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Control-flow-%ED%95%A8%EC%88%98"><span class="nav-number">3.1.</span> <span class="nav-text">Control flow 함수</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if%EB%AC%B8"><span class="nav-number">3.2.</span> <span class="nav-text">if문</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210105-modern-cmake/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Modern CMake
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-05 20:38:19" itemprop="dateCreated datePublished" datetime="2021-01-05T20:38:19+09:00">2021-01-05</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Joshua Lospinoso의 ‘<span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9iRGRrSnUtblZUbw==">Modern Cmake: An introduction<i class="fa fa-external-link-alt"></i></span>‘ 영상을 보고 공부한 노트입니다.<br>추천하는 책은 ‘<span class="exturl" data-url="aHR0cHM6Ly9jcmFzY2l0LmNvbS9wcm9mZXNzaW9uYWwtY21ha2Uv">Professional CMake: A Practical Guide<i class="fa fa-external-link-alt"></i></span>‘</p>
+<hr>
+<h1 id="가장-쉬운-인트로"><a href="#가장-쉬운-인트로" class="headerlink" title="가장 쉬운 인트로"></a>가장 쉬운 인트로</h1><h2 id="Executable-프로그램-만들기"><a href="#Executable-프로그램-만들기" class="headerlink" title="Executable 프로그램 만들기"></a>Executable 프로그램 만들기</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, world!\n"</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 형태의 .cpp 파일이 있다고 해보자.<br>우리는 이 파일을 기반으로 binary executable이나 library를 만들고싶다.<br>이를 위해 우리는 CMake를 사용한다.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.15</span>)</span><br><span class="line"><span class="keyword">project</span>(HelloWorld)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(App main.cpp)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>CMake 버전은 3.xx 이후로 사용한다면 어떤걸 사용하던지 크게 상관없다.</li>
+<li>하나의 <code>CMakeLists.txt</code>는 단 1개의 project만 설정할 수 있다.<ul>
+<li>그 안에서 여러개의 library와 executable (i.e. binary 프로그램)을 생성할 수 있다.</li>
+<li>위의 예시는 <code>main.cpp</code>라는 소스파일을 사용해서 <code>App</code>이라는 binary 프로그램을 만드는 것이다.</li>
+</ul>
+</li>
+<li>여기서 <code>App</code>에 해당하는 것을 target이라고 한다.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ls -1</span><br><span class="line">   CMakeLists.txt</span><br><span class="line">   main.cpp</span><br><span class="line">$ mkdir build &amp;&amp; <span class="built_in">cd</span> build/</span><br><span class="line">$ cmake .. -GNinja</span><br><span class="line">$ ninja</span><br><span class="line">$ ./App</span><br><span class="line">Hello, world!</span><br></pre></td></tr></table></figure>
+
+<p>터미널에서 다음과 같은 커맨드를 사용하면 프로젝트를 생성하고 실행할 수 있다.<br><code>-GNinja</code> 라는 generator flag는 추후에 기술한다.<br>ninja 대신 make를 사용해도 된다 (Lospinoso는 ninja를 더 좋아한다고 한다).</p>
+<br>
+
+<h3 id="cmake-커맨드-amp-ninja-커맨드-설명"><a href="#cmake-커맨드-amp-ninja-커맨드-설명" class="headerlink" title="cmake 커맨드 & ninja 커맨드 설명"></a>cmake 커맨드 &amp; ninja 커맨드 설명</h3><img src="/20210105-modern-cmake/cmake_run.png" class="" title="CMake run">
+
+<p><code>cmake .. -GNinja</code> 커맨드를 실행했을 때, 위와 같은 파일들이 생성된다.<br>이 중 제일 중요한 것은 <code>CMakeCache.txt</code>인데, 이 파일 안에 빌드에 필요한 캐쉬 값들이 저장된다.</p>
+<img src="/20210105-modern-cmake/ninja_run.png" class="" title="ninja run">
+
+<p>이 후 <code>ninja</code> 커맨드를 실행하면 빌드를 위해 ninja 패키지가 사용하는 intermediate object와 log, dependency 등이 생성된다.<br>그리고 제일 중요한 빌드의 결과물인 <code>build/App</code> executable이 생성된다.</p>
+<br>
+
+<h3 id="add-executable에-사용-가능한-옵션"><a href="#add-executable에-사용-가능한-옵션" class="headerlink" title="add_executable에 사용 가능한 옵션"></a>add_executable에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span> (&lt;name&gt; [WIN32] [MACOSX_BUNDLE]</span><br><span class="line">                [EXCLUDE_FROM_ALL]</span><br><span class="line">                [source1] [source2 ...])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&lt;name&gt;</code>은 executable의 이름<ul>
+<li>Globally unique 해야함</li>
+</ul>
+</li>
+<li><code>WIN32</code>와 <code>MACOSX_BUNDLE</code>은 OS에 따른 빌드 방식 선언</li>
+<li><code>EXCLUDE_FROM_ALL</code>은 <code>make all</code>과 같은 상위레벨 빌드 명령에서 이 target 빌드를 제외하는 플래그</li>
+<li> 헤더 파일은 보통 자동으로 찾아지고, cpp 소스파일만 넣어준다.</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_EXECUTABLE_SUFFIX .bin)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Windows에서 target은 <code>App.exe</code>로 나온다</li>
+<li>Linux에서 target은 suffix가 없이 <code>App</code>으로 나온다.</li>
+<li>이러한 셋팅은 위 <code>set</code> 명령어로 오버라이드 할 수 있다.<ul>
+<li>위의 예제로는 <code>App.bin</code>이 나오게 된다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="Library-만들기"><a href="#Library-만들기" class="headerlink" title="Library 만들기"></a>Library 만들기</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(Cat cat.cpp)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Executable을 만드는 방식과 비슷하다.</li>
+<li><code>Cat</code>이 target이고, <code>cat.cpp</code>는 소스파일이다.</li>
+</ul>
+<br>
+
+<h3 id="add-library에-사용-가능한-옵션"><a href="#add-library에-사용-가능한-옵션" class="headerlink" title="add_library에 사용 가능한 옵션"></a>add_library에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(&lt;name&gt; [STATIC | SHARED | MODULE | OBJECT]</span><br><span class="line">            [EXCLUDE_FROM_ALL]</span><br><span class="line">            [source1] [source2 ...])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>STATIC</code>이나 <code>SHARED</code> library를 고를 수 있다.</li>
+<li>필요에 따라 <code>MODULE</code> (i.e. plug-in) 라이브러리를 만들 수도 있다.<ul>
+<li>C++20의 ‘module’과는 다르다.</li>
+<li>보통 Mac에서 사용하는 것 같다.</li>
+</ul>
+</li>
+<li>Library type 정보를 넣지 않으면, <code>BUILD_SHARED_LIBS</code>라는 boolean variable에 저장된 정보로 static 또는 shared를 결정한다.</li>
+</ul>
+<hr>
+<h2 id="Executable에-Library-링크하기"><a href="#Executable에-Library-링크하기" class="headerlink" title="Executable에 Library 링크하기."></a>Executable에 Library 링크하기.</h2><p><code>App</code>이 <code>Cat</code> 라이브러리를 사용한다면…</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(App PUBLIC Cat)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>PUBLIC</code>은 <code>Cat</code> 라이브러리가 사용하는 모든 symbol이 App에서 노출된다는 것이다.<ul>
+<li><code>PRIVATE</code>, <code>INTERFACE</code> 등도 있다. 추후에 기술한다.</li>
+</ul>
+</li>
+<li><code>target_link_libraries</code> 명령어는 target이 생성된 후에 사용되어야한다.<ul>
+<li><code>App</code>과 <code>Cat</code>이 만들어진 다음에 쓸 수 있다는 뜻이다.</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h3 id="target-link-libraries에-사용-가능한-옵션"><a href="#target-link-libraries에-사용-가능한-옵션" class="headerlink" title="target_link_libraries에 사용 가능한 옵션"></a>target_link_libraries에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(&lt;<span class="keyword">target</span>&gt;</span><br><span class="line">                      &lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt; ...</span><br><span class="line">                      [&lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt; ...] ...)                      </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>동시에 다수의 라이브러리를 링크할 수 있다.<ul>
+<li>라이브러리마다 각각의 방식으로 링크할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20210105-modern-cmake/target_link_libraries.png" class="" title="target_link_libraries">
+
+<p>큰 프로젝트에서는 위와 같은 구조도 만들 수 있다.</p>
+<hr>
+<h2 id="파일-디렉토리-추가"><a href="#파일-디렉토리-추가" class="headerlink" title="파일/디렉토리 추가"></a>파일/디렉토리 추가</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(dir1)</span><br><span class="line"><span class="keyword">include</span>(dir2/HelperScript.cmake)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Directory를 추가하고 싶을 때는 보통 <code>add_subdirectory</code> 명령어를 사용한다.</li>
+<li>CMake script를 직접 추가하고 싶을 때는 <code>include</code> 명령어를 사용한다.</li>
+</ul>
+<br>
+
+<h3 id="add-subdirectory에-사용-가능한-옵션"><a href="#add-subdirectory에-사용-가능한-옵션" class="headerlink" title="add_subdirectory에 사용 가능한 옵션"></a>add_subdirectory에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(source_dir [binary_dir] [EXCLUDE_FROM_ALL])</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>binary_dir</code>은 보통 잘 안쓰인다. 정말 필요한 경우가 아닌 경우에는 추천 안한다.</li>
+</ul>
+<br>
+
+<h3 id="include에-사용-가능한-옵션"><a href="#include에-사용-가능한-옵션" class="headerlink" title="include에 사용 가능한 옵션"></a>include에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(&lt;<span class="keyword">file</span>|module&gt; [OPTIONAL] [RESULT_VARIABLE &lt;var&gt;] [NO_POLICY_SCOPE]) </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>OPTIONAL</code>이 있다면, 파일이나 모듈을 찾지 못했을 때 에러를 반환하지 않는다.</li>
+<li><code>RESULT_VARIABLE</code>은 파일을 찾으면 full filename을 주고, 못찾으면 NOTFOUND를 준다.</li>
+<li><code>NO_POLICY_SCOPE</code>는 외부 파일에서 CMake policy를 사용하고 싶을 때 사용한다.</li>
+</ul>
+<hr>
+<h2 id="CMake-디버깅하기"><a href="#CMake-디버깅하기" class="headerlink" title="CMake 디버깅하기"></a>CMake 디버깅하기</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>([&lt;mode&gt;] <span class="string">"message text"</span> ...)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>message</code>에 <code>&lt;mode&gt;</code> 파라미터를 설정함으로써 다양한 디버깅을 할 수 있다.</li>
+<li>사용 가능한 <code>&lt;mode&gt;</code> 파라미터에는<code>TRACE</code>, <code>DEBUG</code>, <code>VERBOSE</code>, <code>STATUS</code>, <code>NOTICE</code>, <code>DEPRECATION</code>, <code>AUTHOR_WARNING</code>, <code>WARNING</code>, <code>SEND_ERROR</code>, <code>FATAL_ERROR</code>가 있다.<ul>
+<li>이 중에 가장 많이 사용하는 것은 <code>STATUS</code>와 <code>FATAL_ERROR</code>이다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="간단한-디버깅-예시"><a href="#간단한-디버깅-예시" class="headerlink" title="간단한 디버깅 예시"></a>간단한 디버깅 예시</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(STATUS a)</span><br><span class="line"><span class="keyword">message</span>(ERROR b)</span><br><span class="line"><span class="keyword">message</span>(FATAL_ERROR c)</span><br><span class="line"><span class="keyword">message</span>(STATUS a)</span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 CMakeLists.txt를 작성했다면,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cmake -GNinja ..</span><br><span class="line">...</span><br><span class="line">-- a</span><br><span class="line">ERRORb</span><br><span class="line">CMake Error at CMakeLists.txt:5 (message):</span><br><span class="line"> c</span><br><span class="line"> -- Configuring incomplete, errors occured!</span><br></pre></td></tr></table></figure>
+
+<p>이런 결과가 나온다.<br><code>ERRORb</code>가 나온 이유는, <code>ERROR</code>는 <code>message</code>가 사용할 수 있는 <code>&lt;mode&gt;</code>가 아니기 때문에 string으로 취급되기 때문이다.</p>
+<h3 id="message-mode를-variable로-선언하기"><a href="#message-mode를-variable로-선언하기" class="headerlink" title="message mode를 variable로 선언하기"></a>message mode를 variable로 선언하기</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MODE TRACE CACHE <span class="keyword">STRING</span> <span class="string">"Message mode/level"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="variable">${MODE}</span> <span class="string">"message(${MODE})"</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Cache variable을 통해 mode 값을 조정할 수 있다.<ul>
+<li>Cache variable에 대해서는 추후에 설명한다.</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cmake .. -GNinja -DMODE:STRING=STATUS</span><br><span class="line">-- message(STATUS)</span><br><span class="line">$ cmake .. -GNinja -DMODE:STRING=NOTICE</span><br><span class="line">message(NOTICE)</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMake의-모든-message-보기"><a href="#CMake의-모든-message-보기" class="headerlink" title="CMake의 모든 message 보기"></a>CMake의 모든 message 보기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --log-level=TRACE ...</span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 방식으로 cmake를 돌렸을 때, 리눅스 환경에서는</p>
+<ul>
+<li><code>STATUS</code>는 stdout으로</li>
+<li><code>NOTICE</code>는 stderr로 출력된다.<ul>
+<li>cmake-gui를 쓴 경우에는 빨간색으로 출력된다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><h2 id="Variables-사용하기"><a href="#Variables-사용하기" class="headerlink" title="Variables 사용하기"></a>Variables 사용하기</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(NormalVariable <span class="string">"A normal variable"</span>)</span><br><span class="line"><span class="keyword">set</span>(CacheVariable <span class="string">"A cache variable"</span> CACHE <span class="keyword">STRING</span> <span class="string">"Some description"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>CMake에서 쓸 수 있는 variable에는 두가지가 있다.</p>
+<ul>
+<li>보통의 variable<ul>
+<li>CMakeLists 내부에서만 사용 가능</li>
+</ul>
+</li>
+<li>Cache variable<ul>
+<li>Project 외부에서 선언 가능함 (e.g. terminal에서…) </li>
+</ul>
+</li>
+</ul>
+<h3 id="사용-예시"><a href="#사용-예시" class="headerlink" title="사용 예시"></a>사용 예시</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- NormalVariable = A normal variable</span><br><span class="line">-- CacheVariable = A cache variable</span><br></pre></td></tr></table></figure>
+
+<p>실제로 돌렸을 때는 위와 같이 나온다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ grep -IrE <span class="string">"Variable"</span> -C1 CMakeCache.txt</span><br><span class="line">CMakeCache.txt-//Some description</span><br><span class="line">CMakeCache.txt:CacheVariable:STRING=A cache variable</span><br><span class="line">CMakeCache.txt-</span><br></pre></td></tr></table></figure>
+
+<p>Cache variable만 <code>CmakeCache.txt</code>에 저장된다.</p>
+<h3 id="같은-이름의-variable들"><a href="#같은-이름의-variable들" class="headerlink" title="같은 이름의 variable들"></a>같은 이름의 variable들</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(Variable <span class="string">"A normal variable"</span>)</span><br><span class="line"><span class="keyword">set</span>(Variable <span class="string">"A cache variable"</span> CACHE <span class="keyword">STRING</span> <span class="string">"Conflicts"</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"CacheVariable = ${CacheVariable})</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if (Variable STREQUAL "</span>A cache variable<span class="string">")</span></span><br><span class="line"><span class="string">    message(STATUS "</span>Variable (<span class="variable">${Variable}</span>) is Cache<span class="string">")</span></span><br><span class="line"><span class="string">else()</span></span><br><span class="line"><span class="string">    message(STATUS "</span>Variable (<span class="variable">${Variable}</span>) is Normal<span class="string">")</span></span><br><span class="line"><span class="string">endif()</span></span><br></pre></td></tr></table></figure>
+
+<p>위와 같은 형태로 CMakeList를 만들었다고 해보자.<br>동일한 이름의 normal variable과 cache variable을 만들었다.</p>
+<p>이 경우 작동은 하지만, 아래와 같은 참사가 나타난다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = A cache variable</span><br><span class="line">-- Variable (A cache variable) is Cache</span><br><span class="line"></span><br><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = A cache variable</span><br><span class="line">-- Variable (A normal variable) is Normal</span><br></pre></td></tr></table></figure>
+
+<p>처음 돌렸을 때는 Cache variable이고,<br>두번째 돌렸을 때는 Normal variable로 나온다.</p>
+<p>위와 같은 방식을 쓰지 말자!<br>스크립트를 돌릴 때 마다 매번 같은 결과가 나오는 좋은 스크립트를 짜도록 하자.</p>
+<h3 id="set에-사용할-수-있는-옵션"><a href="#set에-사용할-수-있는-옵션" class="headerlink" title="set에 사용할 수 있는 옵션"></a>set에 사용할 수 있는 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set a normal variable</span></span><br><span class="line"><span class="keyword">set</span>(&lt;variable&gt; &lt;value&gt;... [PARENT_SCOPE])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set a cache variale (cache entry)</span></span><br><span class="line"><span class="keyword">set</span>(&lt;variable&gt; &lt;value&gt;... CACHE &lt;type&gt; &lt;docstring&gt; [FORCE])</span><br><span class="line"><span class="comment"># (Where &lt;type&gt; is one of BOOL, FILEPATH, PATH, STRING, or INTERNAL)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Set an environment variable directly</span></span><br><span class="line"><span class="keyword">set</span>(ENV{&lt;variable&gt;} [&lt;value&gt;])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Cache-variable의-특징"><a href="#Cache-variable의-특징" class="headerlink" title="Cache variable의 특징"></a>Cache variable의 특징</h3><p>Cache variable은 한번 만들고나면 <code>CMakeLists.txt</code>를 통해서 수정이 불가능하다.<br>왜냐하면 Cache variable 정보가 이미 <code>CMakeCache.txt</code>에 저장이 되어버렸기 때문에, 해당 파일을 수정하거나 지우지 않는 이상 cache variable 정보에 접근할 수 없다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ cmake .. -DCacheVariable:STRING=<span class="string">"Permanent override"</span></span><br><span class="line">-- CacheVariable = Permanent override</span><br><span class="line"></span><br><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = Permanent override</span><br><span class="line"></span><br><span class="line">$ rm CMakeCache.txt</span><br><span class="line"></span><br><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = A cache variable</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMakeCache-txt의-특징"><a href="#CMakeCache-txt의-특징" class="headerlink" title="CMakeCache.txt의 특징"></a>CMakeCache.txt의 특징</h3><p><code>CMakeCache.txt</code> 파일은 최상위 빌드 디렉토리에 있으며, 빌드에 대한 모든 정보를 담고 있다.</p>
+<p>이 파일을 새로 만들거나 수정한다면, <code>configure</code>나 <code>generate</code>를 할 때 모든 <code>CMakeLists.txt</code> 파일이 다시 처리되어야한다.</p>
+<hr>
+<h2 id="다양한-variable-사용하기"><a href="#다양한-variable-사용하기" class="headerlink" title="다양한 variable 사용하기"></a>다양한 variable 사용하기</h2><ul>
+<li>Variable의 종류에는 string, list, boolean이 있다.<ul>
+<li>List는 string들이 <code>;</code>로 분리되어있는 형태이다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="String-사용하기"><a href="#String-사용하기" class="headerlink" title="String 사용하기"></a>String 사용하기</h3><img src="/20210105-modern-cmake/string1.png" class="" title="string1">
+
+<img src="/20210105-modern-cmake/string2.png" class="" title="string2">
+
+<img src="/20210105-modern-cmake/string3.png" class="" title="string3">
+
+<h3 id="List-사용하기"><a href="#List-사용하기" class="headerlink" title="List 사용하기"></a>List 사용하기</h3><img src="/20210105-modern-cmake/list1.png" class="" title="list1">
+
+<img src="/20210105-modern-cmake/list2.png" class="" title="list2">
+
+<hr>
+<h1 id="Control-flow"><a href="#Control-flow" class="headerlink" title="Control flow"></a>Control flow</h1><p>CMake에 control flow 함수는 많지 않다.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (A)</span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<p><code>x(...)</code>라는 control flow 함수가 있다면,<br>그 함수는 끝날 때 <code>endx()</code>로 끝나게 된다.</p>
+<h2 id="Control-flow-함수"><a href="#Control-flow-함수" class="headerlink" title="Control flow 함수"></a>Control flow 함수</h2><ul>
+<li><code>if()</code> ; <code>else()</code> ; <code>elseif()</code> ; <code>endif()</code></li>
+<li><code>while()</code> ; <code>endwhile()</code></li>
+<li><code>foreach()</code> ; <code>endforeach()</code></li>
+<li><code>function()</code> ; <code>endfunction()</code></li>
+<li><code>macro()</code>; <code>endmacro()</code></li>
+<li><code>break()</code> ; <code>continue()</code> - 루프 컨트롤</li>
+</ul>
+<h2 id="if문"><a href="#if문" class="headerlink" title="if문"></a>if문</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(&lt;condition&gt;)</span><br><span class="line">    &lt;commands&gt;</span><br><span class="line"><span class="keyword">elseif</span>(&lt;condition&gt;)</span><br><span class="line">    &lt;commands&gt;</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    &lt;commands&gt;</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>리턴 타입은 <ul>
+<li>True: 1, ON, YES, TRUE, Y, 또는 non-zero number</li>
+<li>False: 0, OFF, NO, FALSE, N, IGNORE, NOTFOUND, 빈 스트링</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>이 강의는 전체적인 그림이 잘 잡히지 않는다.<br>좀 더 쉬운 CMake 강의를 보고 돌아오는걸로…</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/CMake/" rel="tag"># CMake</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210330-why-cpp/" rel="prev" title="C++을 배워야하는 이유">
+                  <i class="fa fa-chevron-left"></i> C++을 배워야하는 이유
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210107-pipenv/" rel="next" title="pipenv 공부">
+                  pipenv 공부 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="센서 사이즈의 변화에 따른 이미지 속 변화에 대해 알아봅니다. 흔히 이야기하는 &#39;판형이 깡패&#39;의 의미도 알아봅니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="카메라 센서 사이즈의 영향">
+<meta property="og:url" content="https://changh95.github.io/20210116-sensor-size/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="센서 사이즈의 변화에 따른 이미지 속 변화에 대해 알아봅니다. 흔히 이야기하는 &#39;판형이 깡패&#39;의 의미도 알아봅니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%201.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%202.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%203.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%204.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%205.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%206.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%207.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%208.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%209.png">
+<meta property="og:image" content="https://changh95.github.io/20210116-sensor-size/Untitled%2010.png">
+<meta property="article:published_time" content="2021-01-16T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Camera">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210116-sensor-size/Untitled.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210116-sensor-size/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>카메라 센서 사이즈의 영향 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%B9%B4%EB%A9%94%EB%9D%BC-%EC%84%BC%EC%84%9C%EB%9E%80"><span class="nav-number">1.</span> <span class="nav-text">카메라 센서란?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%B9%B4%EB%A9%94%EB%9D%BC-%EC%84%BC%EC%84%9C-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%A2%85%EB%A5%98"><span class="nav-number">2.</span> <span class="nav-text">카메라 센서 사이즈 종류</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%95%B4%EC%83%81%EB%8F%84%EC%99%80%EC%9D%98-%EA%B4%80%EA%B3%84"><span class="nav-number">3.</span> <span class="nav-text">해상도와의 관계</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%82%AC%EC%A7%84-%ED%81%AC%EA%B8%B0%EC%99%80%EC%9D%98-%EA%B4%80%EA%B3%84"><span class="nav-number">4.</span> <span class="nav-text">사진 크기와의 관계</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%85%B8%EC%9D%B4%EC%A6%88%EC%99%80-Dynamic-Range%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B4%80%EA%B3%84"><span class="nav-number">5.</span> <span class="nav-text">이미지 노이즈와 Dynamic Range에 대한 관계</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%82%AC%EC%A7%84-%EC%B0%8D%EB%8A%94-%EC%86%8D%EB%8F%84%EC%99%80-ISO%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B4%80%EA%B3%84"><span class="nav-number">6.</span> <span class="nav-text">사진 찍는 속도와 ISO에 대한 관계</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%9C%B4%EB%8C%80%EC%9A%A9%EC%84%B1%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B4%80%EA%B3%84"><span class="nav-number">7.</span> <span class="nav-text">휴대용성에 대한 관계</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%A0%95%EB%A6%AC"><span class="nav-number">8.</span> <span class="nav-text">정리</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%82%AC%EC%A7%84-%EC%B6%9C%EC%B2%98-%EB%B0%8F-%EC%A0%95%EB%B3%B4-%EC%B6%9C%EC%B2%98-%EB%A7%81%ED%81%AC"><span class="nav-number">8.0.1.</span> <span class="nav-text">사진 출처 및 정보 출처 링크</span></a></li></ol></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210116-sensor-size/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          카메라 센서 사이즈의 영향
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-16 20:38:19" itemprop="dateCreated datePublished" datetime="2021-01-16T20:38:19+09:00">2021-01-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/" itemprop="url" rel="index"><span itemprop="name">1.3 Computer Vision & Imaging</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-3-Computer-Vision-Imaging/%EC%B9%B4%EB%A9%94%EB%9D%BC-%EA%B8%B0%EC%B4%88-%EC%8B%9C%EB%A6%AC%EC%A6%88/" itemprop="url" rel="index"><span itemprop="name">카메라 기초 시리즈</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="카메라-센서란"><a href="#카메라-센서란" class="headerlink" title="카메라 센서란?"></a>카메라 센서란?</h1><p>통상적으로 카메라 센서는 카메라 내부 이미징 센서를 뜻한다.<br>이미징 센서는 빛을 받아드려 전자신호로 바꾸는 역할을 하는데, CMOS 와 CCD 타입이 있다.</p>
+<hr>
+<h1 id="카메라-센서-사이즈-종류"><a href="#카메라-센서-사이즈-종류" class="headerlink" title="카메라 센서 사이즈 종류"></a>카메라 센서 사이즈 종류</h1><img src="/20210116-sensor-size/Untitled.png" class="" title="Sensor sizes">
+
+<p>카메라 센서 사이즈에는 굉장히 많은 종류가 있다</p>
+<p>위 이미지는 <strong>센서 사이즈 가이드라인</strong>이다. 많은 센서 제품들이 저 가이드라인을 따라 디자인 되지만, 사실 꼭 저 사이즈를 따르라는 법은 없다. 실제로 가이드라인을 따른 줄 알았던 센서를 직접 재봤을 때 사이즈가 가이드라인과 다를 때도 있다. 이런 경우에는 대부분 inch 단위의 사이즈 가이드라인을 정확히 따른게 아닌, mm로 개발을 마치고 나서 가장 가까운 inch 사이즈에 맞춰서 1/xx inch 센서로 표기한 경우이다. </p>
+<ul>
+<li>아이폰 XS, 갤럭시 10에 들어간 센서 사이즈는 1/2.5” 이다.</li>
+<li>FLIR사의 BlackFly 시리즈에서 아무거나 골라본 카메라에는 1/2.9” 사이즈를 쓴다고 한다.</li>
+<li>들고다니기 좋은 여행용 카메라에는 1” 센서가 자주 쓰인다.<ul>
+<li>카메라 커뮤니티에서는 1” 센서가 가장 무게/시간/가격/성능에 대한 최적화가 잘 되어있는 센서라고 알려져있다.</li>
+</ul>
+</li>
+<li>1”부터 APS-C 급 까지 진지한 취미용 카메라 취급을 받는다.</li>
+<li>프로페셔널 이미징에는 Full Frame 카메라가 필요하다고 한다.</li>
+</ul>
+<p>이와 같이 여러 용도로 카메라 센서 사이즈가 나뉘고, 오른쪽 이미지를 보면 이 카메라 센서들마다 실제로 사이즈가 많이 차이나는 것을 볼 수 있다.</p>
+<hr>
+<h1 id="해상도와의-관계"><a href="#해상도와의-관계" class="headerlink" title="해상도와의 관계"></a>해상도와의 관계</h1><img src="/20210116-sensor-size/Untitled%201.png" class="" title="Resolutions">
+
+<p>해상도는 카메라 센서를 얼마나 잘게 쪼개서 많은 픽셀을 만들 수 있는가에 대한 척도이다.<br>FullHD (1920 x 1080) 해상도의 경우, 이미징 센서 위에 가로로 1920개의 픽셀을 얹고, 세로로 1080개의 픽셀을 얹은것이다.<br>이 픽셀 하나하나가 0에서 255의 밝기 값을 가지고 픽셀들을 전부 다 같이 붙혀놓았을 때 이미지가 완성이 된다.</p>
+<p>이 뜻은 큰 카메라 센서든 작은 카메라 센서든 똑같은 grid로 쪼개면 모두 같은 해상도를 가진다는 것이다.<br>예를 들어 Full Frame도 1920 x 1080으로 쪼갤 수 있고, 1/3.2”도 1920 x 1080으로 쪼갤 수 있다.<br>이 때문에 <strong>해상도와 카메라 센서 사이즈는 설계 상 관계가 없다</strong>.</p>
+<p>하지만 그렇다고해서 해상도와 센서 사이즈의 성능 상 관계가 없다는 것은 아니다.<br>좋은 이미지를 찍기 위해서는 이미징 센서의 해상도와 사이즈의 <strong>성능/가격 상의 관계</strong>를 잘 이해하고, 이에 맞는 센서 구성을 선택해야한다.</p>
+<p>해상도는 사진 속 공간에 대한 정보가 얼마나 오밀조밀한지 표현하는 척도가 된다.<br>해상도가 낮다면, 예를 들어 하나의 사진을 10개의 픽셀로만 표현하려고 하면, 단순히 10개의 블록 색상으로 표현해야하기 때문에 사진이 무엇을 의미하는지 알기 어렵다.<br>반대로 해상도가 높다면, 예를 들어 FullHD 라면 1920 x 1080개의 블록 색상으로 사진을 표현할 수 있고, 이는 꽤 정확한 이미지를 얻어낼 수 있다.<br><strong>이미지 해상도가 높으면, 더 미세하게 공간을 표현할 수 있다.</strong> </p>
+<p>하지만 높은 해상도는 더 잘게 쪼갠 이미지 센서를 뜻한다.<br>이미지 센서를 작은 픽셀로 쪼갰다면 각각의 픽셀은 작은 면적을 가지게 되는데, 빛을 받을 수 있는 면적이 작기 때문에 받을 수 있는 빛의 신호가 작게 된다.<br>작은 신호를 읽기 위하여 우리는 이 신호를 증폭시키는데, 이 때 고정적으로 들어오는 전자기적 신호 역시 함께 증폭이 되면서 <strong>높은 해상도의 센서에는 대체적으로 높은 노이즈가 측정된다</strong>.</p>
+<p>그러면 카메라 센서 사이즈는 어떠한가?<br>카메라 센서가 크면 보통 빛을 받을 수 있는 면적이 더 커진다.<br>이 때문에 카메라에는 이미지 노이즈가 적고, 더 큰 dynamic range를 가지게 된다 (Dynamic range에 대해서는 추후 글에서 더 소개한다).<br>이 때문에 <strong>카메라 센서 사이즈가 더 크면 어두운 곳에서 촬영을 할 수가 있고, 또 이미지 노이즈가 적어지기 때문에 더 좋은 이미지를 얻어낼 수 있다고 볼 수 있다</strong>.</p>
+<p>그러면 큰 이미지 센서에 높은 해상도를 쓰면 장땡 아닌가?<br>큰 센서에서는 픽셀을 잘게 쪼개도, 작은 센서에서 쪼갠거보다는 픽셀이 몇배나 클 것이다.<br>그만큼 노이즈도 적게 나올 것이니, 큰 이미지 센서 + 높은 해상도 조합을 사용하면 깔끔한 이미지가 나오게 된다.<br>하지만, 카메라 제조 공정을 생각했을 때… 큰 이미지 센서는 더 많은 반도체 wafer의 면적을 가져가는거고, 높은 해상도를 제조하는 공정 역시 비싸기 때문에…<br>*<em>큰 이미지 센서 + 높은 해상도의 조합은 상당히 비싸다**</em></p>
+<p>작은 센서에 높은 해상도를 만드는게 더욱 정밀 작업처럼 보여서 비싸보일 수 있으나, 실제로는 큰 이미지 센서가 더욱 비싸다.<br>그 이유는, wafer에서 작은 이미지 센서를 100개 제작하고 그 중 5개가 실패했을때의 나오는 손실비용과, wafer에서 큰 이미지 센서 10개를 제작하고 그 중 5개가 실패했을때의 나오는 손실비용은 wafer의 고정 가격으로부터 나온다.<br>공정의 가격보다 재료 + risk의 가격이 더 크다.</p>
+<hr>
+<h1 id="사진-크기와의-관계"><a href="#사진-크기와의-관계" class="headerlink" title="사진 크기와의 관계"></a>사진 크기와의 관계</h1><img src="/20210116-sensor-size/Untitled%202.png" class="" title="Image size">
+
+<p>같은 구성의 렌즈를 사용했다는 전제 하에, <strong>카메라 센서가 커진다면 담을 수 있는 사진의 크기도 커진다</strong>.<br>여기서 이야기하는 ‘사진의 크기’는 디지털 이미지 사이즈가 아니라 센서가 담을 수 있는 3D 공간의 크기이다.<br>디지털 이미지 사이즈는 작은 센서나 큰 센서나 같은 해상도를 가지고 있다면 똑같다.<br>다만 카메라 센서 사이즈에 맞춰서 3D 공간에서 온 빛을 받기 때문에, 큰 카메라 센서를 사용할 때는 더 큰 3D 공간의 형상을 사진에 담을 수 있다.</p>
+<p>“어, 근데 내 DSLR로 찍으나 스마트폰으로 찍으나 사진 안에 담기는 3D 공간은 비슷한 것 같은데??” 라고 물어보실 수 있다.<br>스마트폰 카메라 센서의 경우 1/2.5” 정도로 작기 때문에 실제로 빛을 받을 수 있는 공간은 매우 적은게 맞다.<br>(어떻게 연결할지는 나도 모르지만), 스마트폰 카메라와 DSLR 카메라가 같은 렌즈를 사용했다면, 당연히 DSLR 카메라가 더 넓은 공간을 사진에 담을 수 있다.<br>하지만, 실제로는 센서 사이즈에 맞춰서 알맞은 focal length를 가진 렌즈를 이용하기 때문에, 빛이 같은 각도로 들어올 수 있게 만듬으로써 같은 시야각을 유지할 수 있다.</p>
+<p>여기서 우리는 focal length를 이용함으로써 시야각을 다르게 바꿀 수 있다는 것을 알 수 있다.</p>
+<br>
+
+<img src="/20210116-sensor-size/Untitled%203.png" class="" title="lens">
+
+<p>그러면 이제 “다른 렌즈를 사용해서 시야각의 문제가 해결된다면, 굳이 큰 카메라 센서를 쓸 필요가 없는게 아니야?” 라고 물어보실 수 있다.<br>맞는 말이지만, 시야각이 넓은 렌즈를 사용할 때 보통 더 큰 distortion이 생긴다.<br>렌즈 distortion은 렌즈의 굴절에 따라 이미지 역시 구겨지는 현상을 뜻하는데, 보통 카메라 calibration을 통해서 보정처리를 함으로써 깔끔한 이미지로 펴낼 수 있으나, 렌즈의 외곽으로 갈 수록 (특히나 저렴한 렌즈는 더더욱) 이미지의 질이 급격하게 떨어진다.  </p>
+<p>아래 이미지를 보면, 이미지 중앙 부분은 깔끔하나, 외곽의 이미지의 질은 좋지 않은 것을 볼 수 있다.<br>작은 카메라 센서들은 큰 공간을 보기 위해 굴절률이 높은 렌즈를 사용해야하고, 이는 더 큰 이미지 질의 저하로 이어진다.<br>그에 비해 큰 카메라 센서는 굴절률이 그렇게까지 높은 렌즈를 사용하지 않아도 되기 때문에, 코너 부분에서 질이 떨어지는 정도이다.<br>큰 카메라 센서를 사용할때는 보통 이 코너 부분을 잘라내버려서 이쁜 이미지를 얻어낼 수 있는데, 작은 카메라 센서에서는 이 방법이 불가능하고 대신 이미지 전체에 보정처리를 해야한다.</p>
+<p>정리하면, <strong>카메라 센서가 크면 더 넓은 장면을 이미지로 담을 수 있지만, 렌즈로써 극복이 가능하다.</strong><br><strong>다만, 큰 카메라 센서의 경우에는 렌즈에 의한 이미지의 질 저하가 작은 카메라 센서보다 낮다</strong>.</p>
+<img src="/20210116-sensor-size/Untitled%204.png" class="" title="lens-2">
+<hr>
+<h1 id="이미지-노이즈와-Dynamic-Range에-대한-관계"><a href="#이미지-노이즈와-Dynamic-Range에-대한-관계" class="headerlink" title="이미지 노이즈와 Dynamic Range에 대한 관계"></a>이미지 노이즈와 Dynamic Range에 대한 관계</h1><img src="/20210116-sensor-size/Untitled%205.png" class="" title="Dynamic range">
+
+<p>카메라 센서가 크다면 빛을 받을 수 있는 면적이 커지기 때문에, 같은 시간동안 더 많은 양의 빛을 받을 수 있다.<br>위의 그래프를 본다면, 그래프의 오른쪽으로 가면 갈수록 더 많은 양의 signal, 즉 빛을 받을 수 있다는 것을 볼 수 있다.<br>또, 밑에 노이즈의 양은 항상 일정하게 있다는 것을 볼 수 있는데, 이는 빛→전자로 변환할 때 생기는 오류, 렌즈를 통하면서 생기는 빛의 변화, 센서 내부의 노이즈 등등 여러가지 노이즈 인자들을 간단하게 모델링 한 것이고, 그래프에서 처럼 무조건 일정하지는 않으나 꽤 작은 값이라는 것을 표현한 것이다.<br>이 그래프가 의미하는 것은, 카메라 센서가 커질 수록 Signal-to-Noise Ratio 가 커진다는 것이다.<br>SNR이 커진다는 것은 노이즈가 있음에도 불구하고 선명한 화질의 사진을 만들 수 있다는 것이고, <strong>큰 카메라 센서일수록 Signal은 많이 받지만 Noise는 일정하기 때문에 높은 SNR, 즉 선명한 사진을 만들 수 있다는 점을 말한다.</strong></p>
+<p>또 그래프에서 볼 수 있는 것은, 센서 사이즈마다 최대로 받을 수 있는 빛의 양이 정해진다는 것이다.<br>셔터 시간이 정해져있다면 센서의 면적이 넓은 편이 더 많은 빛을 받을 수 있고, 최대-최소 빛의 양을 정규화 한다고하면 <strong>큰 카메라 센서는 작은 카메라 센서에 비해 더 큰 빛의 양의 range를 가지게 된다.</strong><br>이 range를 보통 Dynamic range라고 칭하며, 더 큰 dynamic range를 가진 이미징 장비의 경우 high dynamic range imaging (HDR)이라고 한다.<br>Dynamic range가 작다면, 0-30의 intensity range에서 어두운 부분은 0, 1, 1, 1, 3, 2 … 이렇게 나오며, 0,1,2,3의 차이를 알기가 쉽지 않은데, HDR의 경우 0-3000의 intensity range의 경우는 어두운 부분이 0, 24, 46, 64, 38 등으로 차이가 극명하게 나기 때문에, 같은 어두운 부분이라도 더 디테일하게 표현이 가능하고, 밝기보정에 더 강건하다 (0-30과 0-3000은 임의로 잡은 숫자이다).<br>이 때문에, <strong>카메라 센서가 커질 수록, dynamic range는 더 커지며, 이를 통해 어두운 환경에서도 좋은 이미지를 얻을 수 있다.</strong></p>
+<img src="/20210116-sensor-size/Untitled%206.png" class="" title="Dynamic range - 2">
+
+<p>우측이 훨씬 잘보인다. 우측은 HDR!</p>
+<img src="/20210116-sensor-size/Untitled%207.png" class="" title="Dynamic range -3">
+
+<p>Dynamic range가 낮다면 찍기 어려울 사진이다.</p>
+<hr>
+<h1 id="사진-찍는-속도와-ISO에-대한-관계"><a href="#사진-찍는-속도와-ISO에-대한-관계" class="headerlink" title="사진 찍는 속도와 ISO에 대한 관계"></a>사진 찍는 속도와 ISO에 대한 관계</h1><p>카메라가 사진을 찍을 때, 우선적으로 내부 회로에서 센서에 빛을 담으라는 신호를 주고 셔터를 닫으면서 빛의 유입을 멈춘다.<br>더 이상 빛의 유입이 없을 때, 그때까지 모아온 신호를 전자화 시켜 사진을 reconstruct 한다.<br>큰 카메라 센서와 작은 카메라 센서가 있을 때, 셔터가 똑같은 속도로 내려온다면 큰 카메라 센서는 셔터가 이동해야할 거리가 작은 카메라 센서보다 길기 때문에, 셔터가 내려오는 속도가 같더라도 작은 카메라 센서의 셔터가 먼저 닫힐 것이다.<br>이 점은, 작은 카메라 센서가 더 빨리 사진을 찍을 수 있다 (셔터 시간이 적다)라고 생각할 수 있고, 이는 비디오 촬영 또는 초고속 비디오 촬영에 유용할 것이라고 생각할 수 있다.<br>하지만, <strong>실제로 초고속 비디오 촬영에는 큰 센서를 이용한다. 이유는 아래에서 확인한다.</strong></p>
+<p>사진을 더 빠르게 촬영하려고 셔터 스피드를 늘렸다고 해보자.<br>셔터 스피드가 빨라지면 그만큼 센서가 빛에 노출되는 시간이 적어지기 때문에 signal 약해지고, 이는 사진 전체를 어둡게 한다.<br>빠른 셔터 스피드로 밝은 이미지를 촬영하려면 signal을 늘려야 하는데, 물리적으로는 불가능하니까 전자 신호를 증폭시키면 된다.<br>이때 <strong>빛을 전자신호로 변환시킬 때 신호 증폭에 대한 계수를 ISO라고 한다</strong>. </p>
+<p>엄청나게 빠르게 사진을 찍으려고 하면 셔터 스피드를 엄청나게 빠르게 하여 부족해진 빛 만큼 ISO를 높혀 신호를 증폭시킬 수 있다.<br>또, aperture를 엄청 줄여서 depth 조정을 할 때 빛의 input이 많이 줄어드는데, 이때도 똑같은 방법으로 ISO를 높혀서 밝은 이미지를 얻을 수 있다.<br>다만 ISO를 높일 경우, signal에 기본적으로 내재되어있는 noise 값도 함께 증폭되며, 동시에 의미있는 signal의 range가 줄어들기 때문에 dynamic range가 줄어든다.<br>작은 카메라 센서는 SNR이 낮기 때문에 (전체 signal양 속 noise의 비율이 높기 때문에), ISO를 높히면 noise값도 빠르게 커진다.<br>그에 비해 큰 카메라 센서는 SNR이 높기 때문에, ISO를 높혀도 noise값이 차지하는 비율이 커지는 속도가 작은 카메라 센서보다 훨씬 느리다.<br>그러기에 <strong>큰 카메라 센서는 작은 카메라 센서보다 더 높은 ISO 한계를 가지고 있다</strong>는것을 알 수 있다. </p>
+<img src="/20210116-sensor-size/Untitled%208.png" class="" title="ISO">
+
+<p>(말 나온 김에 ISO와는 관계 없지만) 초고속 카메라에서 큰 센서를 이용하는 이유는 하나 더 있다.<br>초고속 촬영에는 높은 셔터 스피드와 높은 ISO 값을 가져야 하는데, 생각보다 이 ‘높은 셔터 스피드’를 구현하는게 쉽지 않다.<br>셔터는 소프트웨어가 아니라 기계적으로 움직이는 것이기 때문에, 정밀하고 빠르게 움직이기 위해서는 이를 다루는 장비 역시 복잡한 형태를 가지게 되고, 자연스럽게 크기가 커지게 된다.<br>또, 빠르게 이미지를 찍어내다보면 그 이미지 용량 역시 엄청나게 되는데, 이를 저장할 수 있는 메모리가 필요해지고, 또 내부 프로세서도 좋아져야 하며, 이걸 모두 감당하기 위한 파워도 좋아져야한다.<br>이 때문에 전체적으로 auxiliary circuit이 비대해지며, 카메라의 사이즈가 커진다.<br>그러기에 초고속 카메라는 어차피 소형화를 목적으로 한 것이 아니기에 큰 센서를 사용해도 무방하며, 또 큰 센서를 사용하면 ISO와 노이즈 문제를 해결할 수 있다.<br>또, <strong>초고속 카메라의 원래 목적에 대해서 생각을 하면 ‘빠른 것을 촬영해서 느리게 봄으로써 분석을 할 수 있다’라는 것인데, 분석을 위해서는 깨끗한 이미지가 필요하고 깨끗한 이미지를 위해서는 초고속 촬영 중 노이즈가 적은 큰 카메라 센서가 요구된다.</strong></p>
+<img src="/20210116-sensor-size/Untitled%209.png" class="" title="ISO-2">
+
+<p>낮은 ISO와 높은 ISO. 낮은 ISO는 빛을 받아드리는 동안 물체가 움직여서 blur가 나타날 수 있지만, 높은 ISO는 말 그대로 snapshot을 얻어낼 수 있다.</p>
+<p>정리하자면, <strong>큰 카메라 센서는 작은 카메라 센서보다 더 높은 ISO 값을 가지고 사진을 빠르게 촬영할 수 있으나, 기본적으로 같은 ISO 값에서는 작은 카메라 센서의 촬영속도가 더 빠르다</strong>.<br>특수 촬영효과를 노리고 ISO를 높힌게 아니라 촬영속도를 높히려고 ISO를 높힌것이라면, 큰 카메라 센서 vs 작은 카메라 센서에 대한 실험을 해보는 것도 좋을 것 같다. </p>
+<hr>
+<h1 id="휴대용성에-대한-관계"><a href="#휴대용성에-대한-관계" class="headerlink" title="휴대용성에 대한 관계"></a>휴대용성에 대한 관계</h1><p><strong>카메라 센서 사이즈가 커지면 당연히 그에 맞춰 센서의 무게도 늘어난다.</strong><br>또, 카메라 센서 사이즈에 맞춰서 렌즈도 같이 커지기 때문에 무게가 급격하게 더 많이 늘어난다.<br>Full-Frame 카메라의 경우 다행히도 가방에 넣어서 들고다닐 수 있는 정보이고, 1/3” 센서의 경우 들고다니는 카메라라기 보다는 정말 작은 센서라고 생각하고 들고다녀야한다.</p>
+<img src="/20210116-sensor-size/Untitled%2010.png" class="" title="Size">
+
+<p>1/3” 센서 크기의 HTC One 카메라와, Full Frame의 Canon 5D Mark II 카메라</p>
+<hr>
+<h1 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h1><p><strong>목적에 따라 카메라를 잘 선정하는 것이 중요하다.</strong> </p>
+<p>무게가 중요하다면 작은 카메라 센서, 좋은 이미지가 필요하다면 되도록이면 큰 이미지 센서를 찾겠지만, <strong>현재 해결하려는 연구의 목적과 end-consumer가 어떤 형태의 비전 시스템을 사용하는게 자연스러울지 생각하는 것도 중요하다.</strong> </p>
+<p>모바일 환경에서 비전 카메라가 필요하다면 당연히 모바일 카메라를 쓰는게 자연스러울 것이고, 별을 관측하는 카메라가 필요하다면 당연히 큰 이미지 센서를 찾는게 자연스러울 것이다. </p>
+<p>Trade-off가 필요한 카메라 세팅도 있는데, 예를 들어 SLAM 연구를 한다고 할 때는 좋은 이미지도 필요하지만 빠른 속도와 가벼운 카메라가 선호되기 때문에, 원하는 specification을 잘 추려내서 카메라를 선정하는 것이 필요하다. </p>
+<p>특수 카메라 시스템 (e.g. fibre imaging, spectroscopy)의 경우에는 HDR, 속도, 무게 등등이 고려대상이 아닐 수도 있으며, resolution만이 criteria가 된다거나, 또는 이미징 센서가 받을 수 있는 spectral band가 고려 대상일 수 있다. 이런 경우에는 원하는 specification을 만족하는 한, 작은 카메라를 쓰는게 아무래도 편할 것이다.</p>
+<hr>
+<h3 id="사진-출처-및-정보-출처-링크"><a href="#사진-출처-및-정보-출처-링크" class="headerlink" title="사진 출처 및 정보 출처 링크"></a>사진 출처 및 정보 출처 링크</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2FtYnJpZGdlaW5jb2xvdXIuY29tL3R1dG9yaWFscy9kaWdpdGFsLWNhbWVyYS1zZW5zb3Itc2l6ZS5odG0=">Digital Camera Sensor Sizes: How it Influences Your Photography<i class="fa fa-external-link-alt"></i></span></p>
+<p><a target="_blank" rel="noopener" href="https://newatlas.com/camera-sensor-size-guide/26684/"></a></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZGF2ZW1vcnJvd3Bob3RvZ3JhcGh5LmNvbS9jYW1lcmEtc2Vuc29yLXNpemUtZ3VpZGUjRHluYW1pY19SYW5nZV9JU09fU2Vuc29yX1NpemU=">Camera Sensor Size Photography Guide [Updated 2019]<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93YXRjaGd1YXJkdmlkZW8uY29tL3VsdHJhLXdpZGUtZHluYW1pYy1yYW5nZQ==">Ultra-Wide Dynamic Range - WatchGuard Video<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2VhcmJlc3QuY29tL2Jsb2cvaG93LXRvLzE3LXR5cGVzLW9mLWNvbW1vbi1zY3JlZW4tcmVzb2x1dGlvbnMtMjg4Mw==">17 types of common screen resolutions<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zbmFwc2hvdC5jYW5vbi1hc2lhLmNvbS9hcnRpY2xlL2VuL2xlc3Nvbi01LXdoYXQtaXMtaXNvLXNwZWVk">[Lesson 5] What is ISO Speed?<i class="fa fa-external-link-alt"></i></span> </p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210228-AD-sensors/" rel="bookmark">SLAM에서 사용할 수 있는 센서의 종류</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210329-motion-blur/" rel="bookmark">모션 블러란? 모션 블러를 없애는 방법은?</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Camera/" rel="tag"># Camera</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210115-qira/" rel="prev" title="QIRA 디버거">
+                  <i class="fa fa-chevron-left"></i> QIRA 디버거
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210120-slam-dunk-2/" rel="next" title="2020년 SLAM 이론 스터디 (SLAM DUNK Season 2) + 스터디 링크">
+                  2020년 SLAM 이론 스터디 (SLAM DUNK Season 2) + 스터디 링크 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

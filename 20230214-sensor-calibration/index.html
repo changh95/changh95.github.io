@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Puneeth Meruva의 Sensor calibration 영상 노트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="자율주행 차량을 위한 센서 캘리브레이션 기법">
+<meta property="og:url" content="https://changh95.github.io/20230214-sensor-calibration/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Puneeth Meruva의 Sensor calibration 영상 노트">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20230214-sensor-calibration/calib.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-sensor-calibration/calib2.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-sensor-calibration/stars.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-sensor-calibration/stars2.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-sensor-calibration/oem.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-sensor-calibration/bosch.png">
+<meta property="article:published_time" content="2023-02-14T05:48:45.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.723Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Calibration">
+<meta property="article:tag" content="Self-driving">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20230214-sensor-calibration/calib.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20230214-sensor-calibration/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>자율주행 차량을 위한 센서 캘리브레이션 기법 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98%EC%9D%B4-%EC%A4%91%EC%9A%94%ED%95%9C-%EC%9D%B4%EC%9C%A0"><span class="nav-number">1.</span> <span class="nav-text">캘리브레이션이 중요한 이유</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%A0%95%EB%B9%84%EC%86%8C%EC%97%90%EC%84%9C-ADAS-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"><span class="nav-number">2.</span> <span class="nav-text">정비소에서 ADAS 시스템 캘리브레이션 하는 방법</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98%EC%9D%98-%EC%A2%85%EB%A5%98"><span class="nav-number">3.</span> <span class="nav-text">캘리브레이션의 종류</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98-%EB%B0%A9%EB%B2%95%EC%9D%98-%EC%A2%85%EB%A5%98"><span class="nav-number">4.</span> <span class="nav-text">캘리브레이션 방법의 종류</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%8C%80%ED%95%99%EA%B5%90-%EC%97%B0%EA%B5%AC%EC%86%8C%EC%97%90%EC%84%9C-%EC%A7%84%ED%96%89%EC%A4%91%EC%9D%B8-%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98-%EB%B0%A9%EB%B2%95%EB%93%A4"><span class="nav-number">5.</span> <span class="nav-text">대학교 연구소에서 진행중인 캘리브레이션 방법들</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%86%A0%EB%A1%A0%ED%86%A0-%EB%8C%80%ED%95%99-STARS-Lab%EC%9D%98-%EC%85%80%ED%94%84-%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98"><span class="nav-number">5.1.</span> <span class="nav-text">토론토 대학 STARS Lab의 셀프 캘리브레이션</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%8A%A4%ED%83%A0%ED%8F%AC%EB%93%9C-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B9%99-%ED%8C%80"><span class="nav-number">5.2.</span> <span class="nav-text">스탠포드 드라이빙 팀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%82%98%EA%B3%A0%EC%95%BC-%EB%8C%80%ED%95%99-Takeda-%EB%9E%A9"><span class="nav-number">5.3.</span> <span class="nav-text">나고야 대학 Takeda 랩</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B8%B0%EC%97%85%EC%97%90%EC%84%9C-%EC%A7%84%ED%96%89%EC%A4%91%EC%9D%B8-%EC%BA%98%EB%A6%AC%EB%B8%8C%EB%A0%88%EC%9D%B4%EC%85%98-%EB%B0%A9%EB%B2%95%EB%93%A4"><span class="nav-number">6.</span> <span class="nav-text">기업에서 진행중인 캘리브레이션 방법들</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OEM"><span class="nav-number">6.1.</span> <span class="nav-text">OEM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AV-Fleet"><span class="nav-number">6.2.</span> <span class="nav-text">AV Fleet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%84%BC%EC%84%9C-%EC%A0%9C%EC%A1%B0%EC%97%85%EC%B2%B4"><span class="nav-number">6.3.</span> <span class="nav-text">센서 제조업체</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4-%EC%97%85%EC%B2%B4"><span class="nav-number">6.4.</span> <span class="nav-text">소프트웨어 업체</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%95%A0%ED%94%84%ED%84%B0%EB%A7%88%EC%BC%93-%EC%86%94%EB%A3%A8%EC%85%98"><span class="nav-number">6.5.</span> <span class="nav-text">애프터마켓 솔루션</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20230214-sensor-calibration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          자율주행 차량을 위한 센서 캘리브레이션 기법
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-02-14 14:48:45" itemprop="dateCreated datePublished" datetime="2023-02-14T14:48:45+09:00">2023-02-14</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-4-Robotics/" itemprop="url" rel="index"><span itemprop="name">1.4 Robotics</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/VPM7N6SqiEo" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<p> </p>
+<hr>
+<h1 id="캘리브레이션이-중요한-이유"><a href="#캘리브레이션이-중요한-이유" class="headerlink" title="캘리브레이션이 중요한 이유"></a>캘리브레이션이 중요한 이유</h1><p>ADAS와 같이 자동화된 퍼셉션 기능이 많아질 수록 캘리브레이션이 중요해진다. 자동차의 눈이 다른 곳을 향해있다던가 목표를 제대로 보지 못하고 있다면,차선변경이나 회피기동을 올바르게 하지 못할 수도 있다.</p>
+<p>센서의 상태는 항상 바뀔 수 있다. 진동이나 온도 변화로 바뀔 수도 있고, 사고가 나서 펜더가 휘어버린다던지 차체바디가 뒤틀림으로써 생기는 문제도 있을 수 있다. 차를 한번 사면 최소 몇년씩 타기 때문에, 차의 lifecycle 동안에는 센서의 상태가 틀어질 확률은 굉장히 높다. 그에 비해 아직 제조사들은 차에 센서를 탑재해서 full lifecycle을 겪어본 경험이 적기 때문에, 센서 캘리브레이션이 틀어졌을 때의 악효과에 대해 충분히 알지 못하며 공장 캘리브레이션 + 정비 시 캘리브레이션으로 충분하지 않을까라고 생각하는 편이다.</p>
+<p> </p>
+<hr>
+<h1 id="정비소에서-ADAS-시스템-캘리브레이션-하는-방법"><a href="#정비소에서-ADAS-시스템-캘리브레이션-하는-방법" class="headerlink" title="정비소에서 ADAS 시스템 캘리브레이션 하는 방법"></a>정비소에서 ADAS 시스템 캘리브레이션 하는 방법</h1><p>정비소에서 ADAS 시스템을 캘리브레이션 하는데에는 짧게는 15분에서 길게는 몇시간까지도 걸린다. 이 때, 정비소에는 캘리브레이션을 하기 위한 특수 장비와 차고가 있어야한다. 캘리브레이션을 하기 전 차는 완벽하게 정비가 되어있어야한다 - 수평이 잘 맞아야하고, 타이어 압력도 충분히 들어가야하며 트렁크도 비어있어야한다.</p>
+<p>캘리브레이션이 잘못 될 경우 운전자도 위험하지만 주변인도 위험해진다.</p>
+<p> </p>
+<hr>
+<h1 id="캘리브레이션의-종류"><a href="#캘리브레이션의-종류" class="headerlink" title="캘리브레이션의 종류"></a>캘리브레이션의 종류</h1><img src="/20230214-sensor-calibration/calib.png" class="" width="1"> 
+
+<ul>
+<li>Intrinsic : 센서의 내부 파라미터에 대한 캘리브레이션</li>
+<li>Extrinsic : 센서들 사이를 잇는 파라미터에 대한 캘리브레이션</li>
+<li>Temporal : 센서 데이터가 들어오는 타이밍/싱크를 맞추는 캘리브레이션</li>
+</ul>
+<p>왠만한 카메라나 라이다는 intrinsic 캘리브레이션을 쉽게 진행할 수 있다. 또, 대부분의 ADAS 시스템이 정확한 temporal 캘리브레이션이 필요하지 않은데, 왠만하면 대부분의 카메라/라이다 데이터는 가장 가까운 프레임끼리 엮어서 써도 적당히 결과가 잘 나오기 때문이다.</p>
+<p>하지만 Extrinsic은 진짜 정확해야한다.</p>
+<p> </p>
+<hr>
+<h1 id="캘리브레이션-방법의-종류"><a href="#캘리브레이션-방법의-종류" class="headerlink" title="캘리브레이션 방법의 종류"></a>캘리브레이션 방법의 종류</h1><img src="/20230214-sensor-calibration/calib2.png" class="" width="2">
+
+<p>Target 기반 캘리브레이션 방법은 target을 바라보는 여러개의 센서 데이터를 취합해서 reprojection error를 최소화하는 최적화 기법을 사용해 센서 파라미터를 추정한다. 다양한 종류의 센서가 이 타겟을 정확하게 바라볼 수 있는 (i.e. 체커보드의 코너를 검출하게 만드는) 방법을 찾는 것이 어렵기 때문에 난이도가 높다 - 라이다/레이더/초음파로 체커보드를 검출시키는 방법이라던가, 센서들 모두 field of view가 겹쳐야한다던가… 하지만 디버깅이 제일 쉽기 때문에 하나의 데이터셋만 가지고 센서 데이터를 골라 좋은 캘리 값을 얻는 것이 가능하기 때문에 제일 인기 있는 방법으로 꼽힌다.</p>
+<p>Ego-motion 기반 캘리브레이션 방법은 사전에 잘 만들어놓은 지도가 있을 때 센서들의 위치를 추정함으로써 (i.e. localization) 캘리브레이션을 진행하는 방식이다. 이 때, 위치추정 기법이 정확하게 수행될 수 있어야 좋은 캘리브레이션이 가능한데, 보통 위치추정 기법이 잘 동작하려면 6dof 방향으로 큰 모션이 있어야 가능하다 - 자동차의 경우 위/아래로 움직일 수가 없다. 그렇기 때문에 위아래로 움직일 수 있는 드론이나 소형 로봇에서만 사용하는 방법이다.</p>
+<p>Appearance 기반 캘리브레이션 방법은 여러 센서들에서 나타나는 intensity 정보를 기반으로 센서들간의 자세 차이를 구하는 방법이다. (영상에서 설명해주긴 하는데 명확하게 이해가 안된다)</p>
+<p> </p>
+<hr>
+<h1 id="대학교-연구소에서-진행중인-캘리브레이션-방법들"><a href="#대학교-연구소에서-진행중인-캘리브레이션-방법들" class="headerlink" title="대학교 연구소에서 진행중인 캘리브레이션 방법들"></a>대학교 연구소에서 진행중인 캘리브레이션 방법들</h1><h2 id="토론토-대학-STARS-Lab의-셀프-캘리브레이션"><a href="#토론토-대학-STARS-Lab의-셀프-캘리브레이션" class="headerlink" title="토론토 대학 STARS Lab의 셀프 캘리브레이션"></a>토론토 대학 STARS Lab의 셀프 캘리브레이션</h2><img src="/20230214-sensor-calibration/stars.png" class="" title="stars">
+
+<img src="/20230214-sensor-calibration/stars2.png" class="" title="stars2">
+
+<p>STARS Lab은 캘리브레이션 작업 자체가 사람이 하기에는 너무 정교하기 때문에, 실시간으로 센서들 사이의 셀프 캘리브레이션이 수행되어야한다고 믿고있다.</p>
+<p>Ground truth로 삼을 수 있는 센서를 하나 준비한 후, Figure 8을 돈다거나 또는 주변 환경에서 물체를 검출해서 (e.g. 신호등) 검출한 물체들을 align한다. 이를 통해 각각의 센서들을 align 시킬 수 있다.</p>
+<p>이 외로도 여러가지 캘리브레이션 연구를 수행중이다. 꽤나 관심가는 논문 중 하나는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE4MDkuMDM1NTQucGRm">Giamou 2020 - Certifiably Globally Optimal Extrinsic Calibration from Per-Sensor Egomotion<i class="fa fa-external-link-alt"></i></span> - <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3V0aWFzU1RBUlMvY2VydGlmaWFibGUtY2FsaWJyYXRpb24=">GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
+<p> </p>
+<h2 id="스탠포드-드라이빙-팀"><a href="#스탠포드-드라이빙-팀" class="headerlink" title="스탠포드 드라이빙 팀"></a>스탠포드 드라이빙 팀</h2><p>‘캘리브레이션이 잘 된 경우’와 ‘캘리브레이션이 잘 안된 경우’에 대한 error model을 사전에 학습함. 이를 통해 센서 캘리브레이션이 잘 안되었을 때 이를 인지할 수 있으며, 시간이 지날수록 틀어지는 캘리브레이션을 검출할 수 있음.</p>
+<p>Zoox의 CEO Jesse Levinson이 이 랩에서 박사 졸업을 했는데, 이 사람의 박사논문을 보면 상당 부분이 캘리브레이션 관련인 것을 알 수 있다. 이를 통해 아마도 Zoox는 캘리브레이션을 엄청 잘하지 않을까… 라는 생각도 한다.</p>
+<p> </p>
+<h2 id="나고야-대학-Takeda-랩"><a href="#나고야-대학-Takeda-랩" class="headerlink" title="나고야 대학 Takeda 랩"></a>나고야 대학 Takeda 랩</h2><p>‘어디서든 캘리브레이션을 할 수 있다’ (Any place, any time calibration)라는 생각은 잘못된 믿음이라고 생각하는 랩이다.</p>
+<p>Target 기반 캘리브레이션이 굉장히 잘 되기 때문에, 이를 더 사용하기 쉽게 만드는 점에 초점을 둔 랩이다. </p>
+<p> </p>
+<hr>
+<h1 id="기업에서-진행중인-캘리브레이션-방법들"><a href="#기업에서-진행중인-캘리브레이션-방법들" class="headerlink" title="기업에서 진행중인 캘리브레이션 방법들"></a>기업에서 진행중인 캘리브레이션 방법들</h1><h2 id="OEM"><a href="#OEM" class="headerlink" title="OEM"></a>OEM</h2><img src="/20230214-sensor-calibration/oem.png" class="" title="OEM">
+
+<p>차량 제조사들은 캘리브레이션 관련 여러 특허를 걸어뒀지만, 뭔가 새로운 캘리브레이션 방법론을 찾기보다는 편하게 target 기반 캘리를 할 수 있는 악세서리 개발 등에 초점을 뒀다. 이 방법들은 사실 그렇게 scalable하다고 볼 수 없으며, OEM만 이걸 쓸게 아니라 사실 애프터서비스 쪽에서도 필요한거기 때문에 잘 된거라고 볼 수 없고, 그렇기 때문에 크게 주목할 부분은 아니다.</p>
+<p> </p>
+<h2 id="AV-Fleet"><a href="#AV-Fleet" class="headerlink" title="AV Fleet"></a>AV Fleet</h2><p>Waymo 같이 fleet을 운영하는 곳에서는 캘리브레이션에 대해 연구를 하고 있지만, 실제로는 3rdParty 회사에게 위탁 캘리브레이션을 맡겨서 운영하고 있다. 왜냐하면 차량 한대를 캘리하는데 약 60분 정도 시간이 들고 이걸 매일 해야하는데, 이건 결국 유지보수 비용으로 나가기 때문에 소중한 연구 시간을 뺏길 수 없기 때문이다. 역으로 생각하면 3rdParty 업자들에게는 기회가 있다고 볼 수 있다.</p>
+<p> </p>
+<h2 id="센서-제조업체"><a href="#센서-제조업체" class="headerlink" title="센서 제조업체"></a>센서 제조업체</h2><p>AEye 라이다의 경우 자체 SDK를 통해 셀프 캘리브레이션을 수행하고 또 테크니션들에게 diagnostic을 줄 수 있는 기능이 있다.</p>
+<p>사실 차량회사들 입장에서는 캘리브레이션을 최대한 적게 수행하는게 이득이다. 정기적으로 캘리브레이션을 수행해야한다면 그만큼 고객은 불편함을 겪게 되는 것이기 때문에, 최대한 캘리브레이션이 필요하지 않은 센서들을 선호하게 된다.</p>
+<p>AEye는 이와 같은 점을 고려해서 정기적인 캘리가 필요한 Rotating lidar가 아닌 Solid state lidar로 변경했다. 단단한 케이스를 만들어서 진동과 온도 변화에 강하게 만들어 캘리를 덜 자주하게 만들 수 있다.</p>
+<p> </p>
+<h2 id="소프트웨어-업체"><a href="#소프트웨어-업체" class="headerlink" title="소프트웨어 업체"></a>소프트웨어 업체</h2><p>많은 AI 알고리즘들이 raw 센서 데이터를 인풋으로 받아 연산을 하는 경우가 많다. 이 때문에, 캘리브레이션 값이 정확하지 않으면 동작하지 않게 되는 경우도 있고, 캘리를 다시 할 경우 AI 알고리즘도 전부 학습을 다시해야하는 경우도 있다. 이러한 부분은 연구실에서는 문제가 되지 않을 수 있으나, 양산을 하기에는 큰 문제가 될 수 있다.</p>
+<p>영국 스타트업 <span class="exturl" data-url="aHR0cHM6Ly9sZ24uYWkv">LGN<i class="fa fa-external-link-alt"></i></span>은 raw 센서 값을 쓰기보다는 센서의 latent space를 인풋으로 받아서 사용하는 곳도 있다. 이 latent space는 캘리 값 변화로 인한 인풋 데이터의 변화에도 상당히 강인하며, 다양한 센서 조합을 사용하는데에도 유용하다. 또, raw 센서 데이터에 대한 redundancy로도 사용될 수 있다.</p>
+<p> </p>
+<h2 id="애프터마켓-솔루션"><a href="#애프터마켓-솔루션" class="headerlink" title="애프터마켓 솔루션"></a>애프터마켓 솔루션</h2><img src="/20230214-sensor-calibration/bosch.png" class="" title="bosch">
+
+<p>Bosch와 같은 곳에서는 캘리브레이션을 쉽게 할 수 있는 솔루션을 개발해서 판매하고 있다. 하지만 엄청 비싸다. 이런 부분에 대해 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJpZGdlc3RvbmUuY29tL3JlZ2lvbmFsL2FzaWFfcGFjaWZpYy8=">Bridgestone<i class="fa fa-external-link-alt"></i></span> 같은 3rdParty 회사들에서 기회를 보고 있다 (Bridgestone은 타이어 회사인데, 여러 정비소 지점을 가지고 있기 때문에 정비소마다 캘리툴을 배치하려는 노력을 하고 있다 - 캘리 정비소 시장을 먹겠다는 것).</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210119-autonomous-driving/" rel="bookmark">자율주행 자동차 만들기 - 2019년도 온라인 스터디 링크</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210120-slam-dunk-2/" rel="bookmark">2020년 SLAM 이론 스터디 (SLAM DUNK Season 2) + 스터디 링크</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210121-visual-slam-roadmap-beginner/" rel="bookmark">Visual-SLAM developer roadmap [1] - 컴퓨터 비전 입문</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210121-visual-slam-roadmap/" rel="bookmark">Visual-SLAM developer roadmap [0] - 로드맵 개요</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Calibration/" rel="tag"># Calibration</a>
+              <a href="/tags/Self-driving/" rel="tag"># Self-driving</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230213-ubuntu-partition/" rel="prev" title="Ubuntu 파티션 설정하기">
+                  <i class="fa fa-chevron-left"></i> Ubuntu 파티션 설정하기
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20230214-rosen-2021/" rel="next" title="SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
+                  SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

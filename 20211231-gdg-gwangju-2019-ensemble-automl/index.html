@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="GDG 광주 2019 - &quot;Ensemble &amp; AutoML (feat. 그들은 어떻게 문제를 풀고 있는가)&quot; (발표자 - 이종훈) 정리">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GDG 광주 2019 - 앙상블 &#x2F; AutoML (발표자 - 이종훈)">
+<meta property="og:url" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="GDG 광주 2019 - &quot;Ensemble &amp; AutoML (feat. 그들은 어떻게 문제를 풀고 있는가)&quot; (발표자 - 이종훈) 정리">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/48673F8D-40E7-4E01-B2E9-3749BFD4BFCB.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/84C6017B-121D-497E-A577-4542E8EA8197.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/6BA94029-7121-4711-AE3D-8E8262E83750.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/77B3AAA8-C654-4999-B518-ACD09A3959D5.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/AB58E03D-868D-4C3F-88A1-1AA171F9D03F.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/E955FB9B-B1A4-4EF8-BA71-3933638827DB.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/7B04D521-A6D0-457F-A59C-EB9468709930.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/4899BF51-668B-4584-A84C-D911E27DE8AF.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/5BC7BAA5-0AA4-4B69-A514-4AFD94FA1B10.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/2BDA7064-3F4C-4D73-AB2C-D771D02F292B.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/1549E85F-EDF5-43C2-A8A8-4A7130F1506E.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/2F968751-0739-4379-B08A-473C7676332D.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/128AE4DE-4EB6-4CAD-BE2A-87CEE66F8E63.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/95D6EB0E-A8B2-4342-BD17-4BF71576F45D.jpeg">
+<meta property="og:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/98C4D0E5-214D-4E71-B474-15FC2349C071.jpeg">
+<meta property="article:published_time" content="2021-12-30T16:36:31.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.163Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Deep learning">
+<meta property="article:tag" content="Ensemble">
+<meta property="article:tag" content="AutoML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/48673F8D-40E7-4E01-B2E9-3749BFD4BFCB.jpeg">
+
+
+<link rel="canonical" href="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>GDG 광주 2019 - 앙상블 / AutoML (발표자 - 이종훈) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9B%90%EB%B3%B8-%EB%B0%9C%ED%91%9C-%EC%9E%90%EB%A3%8C"><span class="nav-number">1.</span> <span class="nav-text">원본 발표 자료</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ensemble-AutoML%EC%9D%B4%EB%9E%80"><span class="nav-number">2.</span> <span class="nav-text">Ensemble &#x2F; AutoML이란?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%99%9C-%EC%8D%A8%EC%95%BC-%ED%95%98%EB%8A%94%EA%B0%80"><span class="nav-number">2.1.</span> <span class="nav-text">왜 써야 하는가?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ensemble-%EA%B8%B0%EB%B2%95%EB%93%A4-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D"><span class="nav-number">3.</span> <span class="nav-text">Ensemble 기법들 (머신러닝)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Voting"><span class="nav-number">3.1.</span> <span class="nav-text">Voting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bagging"><span class="nav-number">3.2.</span> <span class="nav-text">Bagging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boosting"><span class="nav-number">3.3.</span> <span class="nav-text">Boosting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stacking-amp-Blending"><span class="nav-number">3.4.</span> <span class="nav-text">Stacking &amp; Blending</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ensemble-%EA%B8%B0%EB%B2%95%EB%93%A4-%EB%94%A5%EB%9F%AC%EB%8B%9D"><span class="nav-number">4.</span> <span class="nav-text">Ensemble 기법들 (딥러닝)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EB%8B%A4%EC%96%91%ED%95%98%EA%B2%8C-%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"><span class="nav-number">4.1.</span> <span class="nav-text">데이터를 다양하게 하는 방법</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%AA%A8%EB%8D%B8%EC%9D%84-%EB%8B%A4%EC%96%91%ED%95%98%EA%B2%8C-%ED%95%98%EB%8A%94-%EA%B2%BD%EC%9A%B0"><span class="nav-number">4.2.</span> <span class="nav-text">모델을 다양하게 하는 경우</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EB%AA%A8%EB%8D%B8-%EC%A1%B0%ED%95%A9%EC%9D%84-%EB%8B%A4%EC%96%91%ED%95%98%EA%B2%8C-%ED%95%98%EB%8A%94-%EA%B2%BD%EC%9A%B0"><span class="nav-number">4.3.</span> <span class="nav-text">모델 조합을 다양하게 하는 경우</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Specializing-models"><span class="nav-number">4.4.</span> <span class="nav-text">Specializing models</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ensemble-%EC%A0%95%EB%A6%AC"><span class="nav-number">5.</span> <span class="nav-text">Ensemble 정리</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoML"><span class="nav-number">6.</span> <span class="nav-text">AutoML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoML-%EB%85%BC%EB%AC%B8"><span class="nav-number">7.</span> <span class="nav-text">AutoML 논문</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoML%EC%9D%98-%EB%AC%B8%EC%A0%9C%E2%80%A6"><span class="nav-number">8.</span> <span class="nav-text">AutoML의 문제…?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoML-%EC%A0%95%EB%A6%AC"><span class="nav-number">9.</span> <span class="nav-text">AutoML 정리</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GDG 광주 2019 - 앙상블 / AutoML (발표자 - 이종훈)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-31 01:36:31" itemprop="dateCreated datePublished" datetime="2021-12-31T01:36:31+09:00">2021-12-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">1.2 Machine Learning & Deep Learning</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="원본-발표-자료"><a href="#원본-발표-자료" class="headerlink" title="원본 발표 자료"></a>원본 발표 자료</h2><p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdvb2dsZS5jb20vcHJlc2VudGF0aW9uL2QvMWJ0cTZlQi1Gakp3WU1rTUR2UG9NY2ZGb1BidENUb08zX0ppRjJDR3g1UVkvcHJlc2VudD9zbGlkZT1pZC5nNWZiNzEzOTJmZl8yXzE5">[DLSS]08_AutoML<i class="fa fa-external-link-alt"></i></span></p>
+<p> </p>
+<hr>
+<h2 id="Ensemble-AutoML이란"><a href="#Ensemble-AutoML이란" class="headerlink" title="Ensemble / AutoML이란?"></a>Ensemble / AutoML이란?</h2><p>Ensemble - 여러 모델을 함께 사용한다.<br>AutoML - 여러 모델을 만들어서 최적의 모델을 자동으로 찾음.</p>
+<p>공통점:</p>
+<ul>
+<li>성능이 좋다</li>
+<li>현업과 대회에서 많이 사용된다</li>
+<li>여러 모델을 만든다.</li>
+</ul>
+<p>많은 사람들이 Ensemble이나 AutoML을 안써봤는데… 왜일까?</p>
+<p>의심가는 이유:</p>
+<ul>
+<li>GPU가 엄청 많이 필요할텐데… 그게 없어서…</li>
+<li>유명한 논문을 벤치마킹만 해도 잘 된다…? 굳이…? 왜 써야할지 몰라서…?</li>
+</ul>
+<h3 id="왜-써야-하는가"><a href="#왜-써야-하는가" class="headerlink" title="왜 써야 하는가?"></a>왜 써야 하는가?</h3><ul>
+<li>앙상블을 올바르게 쓰면 성능이 더 좋아서!<ul>
+<li>여기서 얘기하는 성능은 Accuracy뿐만이 아니다.</li>
+<li>Efficiency, Speed, Cost 등 전부 중요하다. 이걸 포괄적으로 봐서 ‘성능’ (performance)이라고 한다.</li>
+</ul>
+</li>
+</ul>
+<p>하나의 모델이 모든 경우에 대한 Rule을 만들 수 있는가? 이걸 할 수 있는 모든 경우의 데이터가 있는가?</p>
+<p>그렇게 하기 어렵기 때문에, 경우의 범위 또는 단위를 정해야하며, 그리고 처음 보는 경우에는 대처해야한다. 단일모델의 경우, 그 모델이 대처하지 못하는 경우를 마주하게 될 경우</p>
+<ul>
+<li>오류가 나거나</li>
+<li>그냥 아무거나 뱉거나</li>
+<li>모르겠다고 얘기하거나</li>
+<li>(거의 없지만) 알아서 상황에 맞는 정답을 찾는다.</li>
+</ul>
+<p>위의 케이스들을 딥러닝의 관점으로 보면 오버피팅(low bias high variance) / 언더피팅(high bias low variance)으로 볼 수 있다.</p>
+<p>최적의 해 (low bias / low variance)를 구하기 위해서 (언더피팅도 아니고 오버피팅도 아닌), Ensemble 기법들에 대해 알아본다.</p>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/48673F8D-40E7-4E01-B2E9-3749BFD4BFCB.jpeg" class="" title="ml_sdfdl">
+
+<p> </p>
+<hr>
+<h2 id="Ensemble-기법들-머신러닝"><a href="#Ensemble-기법들-머신러닝" class="headerlink" title="Ensemble 기법들 (머신러닝)"></a>Ensemble 기법들 (머신러닝)</h2><h3 id="Voting"><a href="#Voting" class="headerlink" title="Voting"></a>Voting</h3><ul>
+<li>분류에서는 voting, 회귀에서는 averaging이 기본.</li>
+<li>여러 모델들이 개, 개, 개, 개, 고양이, 고양이를 내뱉는다면, 개를 아웃풋으로 내는 방식. 물론 이에 대해서 여러가지 방식이 있다 (softmax probability output으로 한다던지…)</li>
+</ul>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/84C6017B-121D-497E-A577-4542E8EA8197.jpeg" class="" title="ml_sdfdl">
+
+<h3 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h3><ul>
+<li>Bagging = Bootstrap aggregating - 학습 데이터를 달리하여 여러 모델을 생성</li>
+<li>Variance를 낮춤으로써 overfitting을 방지 (일반화)</li>
+<li>딥러닝에서 잘 안 씀…</li>
+</ul>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/6BA94029-7121-4711-AE3D-8E8262E83750.jpeg" class="" title="ml_sdfdl">
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/77B3AAA8-C654-4999-B518-ACD09A3959D5.jpeg" class="" title="ml_sdfdl">
+
+<h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><ul>
+<li>머신러닝 쪽에서 상당히 성능이 좋다고 함… 테이블과 같이 정형화된 데이터에서.</li>
+<li>Bagging을 기본으로 하지만, 순차적으로 학습을 진행. 이 때, 이전 모델의 오답에 가중치를 부여 (boosting).</li>
+<li>오답을 잘 걸러냄! 근데… 이미지 등 과 같이 노이즈가 많이 섞인, outlier가 있는 데이터라면…? 그 outlier에 가중치를 많이 주기 때문에 에러가 나타남. 즉, 정확도가 높지만 outlier나 noise에 취약! (고로 딥러닝에 적합하지 않음)</li>
+<li>Adaboost, XGBoost, LightGBM, CatBoost</li>
+</ul>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/AB58E03D-868D-4C3F-88A1-1AA171F9D03F.jpeg" class="" title="ml_sdfdl">
+
+<h3 id="Stacking-amp-Blending"><a href="#Stacking-amp-Blending" class="headerlink" title="Stacking & Blending"></a>Stacking &amp; Blending</h3><ul>
+<li>Meta modelling (Meta Learning)!</li>
+<li>각 모델이 도출한 결과들을 또 다른 모델의 입력으로 사용. 보통 3층 4층 정도 쌓음.</li>
+<li>성능 향상이 크지만, 너무 무거운 경우가 많아 실제 사용이 어려움.</li>
+<li>StackNet</li>
+<li>리얼타임으로 안 도니까 기업들에서는 보통 안 쓰는 편이고… 쓴다면 좀 어려운 문제를 꼭 풀어야할때?</li>
+</ul>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/E955FB9B-B1A4-4EF8-BA71-3933638827DB.jpeg" class="" title="ml_sdfdl">
+
+<p> </p>
+<h2 id="Ensemble-기법들-딥러닝"><a href="#Ensemble-기법들-딥러닝" class="headerlink" title="Ensemble 기법들 (딥러닝)"></a>Ensemble 기법들 (딥러닝)</h2><h3 id="데이터를-다양하게-하는-방법"><a href="#데이터를-다양하게-하는-방법" class="headerlink" title="데이터를 다양하게 하는 방법"></a>데이터를 다양하게 하는 방법</h3><ul>
+<li>K-fold cross-validation ensemble</li>
+<li>Bootstrap aggregation ensemble (Bagging)</li>
+<li>BgN-Score and BsN-Score<ul>
+<li>…이렇게 있다고 하는데 학습에 시간이 많이 걸리고 무거워서 쓰기 어려움.</li>
+<li>또, Boosting방법이 overfitting을 부추김.</li>
+</ul>
+</li>
+</ul>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/7B04D521-A6D0-457F-A59C-EB9468709930.jpeg" class="" title="ml_sdfdl">
+
+<h3 id="모델을-다양하게-하는-경우"><a href="#모델을-다양하게-하는-경우" class="headerlink" title="모델을 다양하게 하는 경우"></a>모델을 다양하게 하는 경우</h3><ul>
+<li>딥러닝에서는 모델 아키텍처를 어설프게 바꿔서 앙상블을 하는거보다, 차라리 initial weight기법이나 optimisation기법을 다르게 해서 앙상블을 하는게 훨씬 좋음! (힌튼 교수 연구)</li>
+</ul>
+<ol>
+<li>“Snapshot Ensemble: Train 1, Get M for Free” 논문!<ul>
+<li>일부러 로컬 미니마에 빠트린 여러개의 경우 (여러개의 모델 파라미터)를 앙상블한다.</li>
+</ul>
+</li>
+</ol>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/4899BF51-668B-4584-A84C-D911E27DE8AF.jpeg" class="" title="ml_sdfdl">
+
+<ol start="2">
+<li>“SGDR: Stochastic Gradient Descent with Warm Restarts” 논문</li>
+</ol>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/5BC7BAA5-0AA4-4B69-A514-4AFD94FA1B10.jpeg" class="" title="ml_sdfdl">
+
+<ol start="3">
+<li>“Loss Surfaces, Mode Connectivity and Fast Ensembling of DNNs.” 논문</li>
+</ol>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/2BDA7064-3F4C-4D73-AB2C-D771D02F292B.jpeg" class="" title="ml_sdfdl">
+
+<h3 id="모델-조합을-다양하게-하는-경우"><a href="#모델-조합을-다양하게-하는-경우" class="headerlink" title="모델 조합을 다양하게 하는 경우"></a>모델 조합을 다양하게 하는 경우</h3><ol>
+<li>Knowledge Distillation - 힌튼 교수가 만든 기법인데, 모델에서 좋은 정보를 추출해서 다른 모델에 심자는 기법. 현재는 모델 경량화에 사용되고 있지만, 원래는 앙상블을 위해 만든 것이다.</li>
+</ol>
+<ul>
+<li>하나의 모델에서 좋은 정보를 추출해서 여러개의 훨씬 작은 모델들에 이식하고, 그 작은 모델들로 앙상블을 한다.</li>
+</ul>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/1549E85F-EDF5-43C2-A8A8-4A7130F1506E.jpeg" class="" title="ml_sdfdl">
+
+<ol start="2">
+<li>Weight의 평균값을 취함으로써 더 넓은 Optima와 Better Generalization을 얻을 수 있다.</li>
+</ol>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/2F968751-0739-4379-B08A-473C7676332D.jpeg" class="" title="ml_sdfdl">   
+
+<h3 id="Specializing-models"><a href="#Specializing-models" class="headerlink" title="Specializing models"></a>Specializing models</h3><ol>
+<li>A novel Image Classification Method with CNN-XGBoost Model<ul>
+<li>한때 유행했던 방법. 성능은 좋았는데, 너무 특정 케이스에만 적용됨.</li>
+</ul>
+</li>
+</ol>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/128AE4DE-4EB6-4CAD-BE2A-87CEE66F8E63.jpeg" class="" title="ml_sdfdl">
+
+<ol start="2">
+<li>Confidence multiple choice learning<ul>
+<li>특정 클래스만 찾는 모델 (e.g. 강아지만 찾는다던가… 고양이만 찾는다던가…)을 여러개를 학습을 시키고, 그 모델들을 앙상블함.</li>
+</ul>
+</li>
+</ol>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/95D6EB0E-A8B2-4342-BD17-4BF71576F45D.jpeg" class="" title="ml_sdfdl">
+
+<ol start="3">
+<li>Learning to specialize with knowledge distillation for Visual Question Answering<ul>
+<li>위의 방법들에 knowledge distillation을 적용함.</li>
+</ul>
+</li>
+</ol>
+<img src="/20211231-gdg-gwangju-2019-ensemble-automl/98C4D0E5-214D-4E71-B474-15FC2349C071.jpeg" class="" title="ml_sdfdl">
+
+<p> </p>
+<hr>
+<h2 id="Ensemble-정리"><a href="#Ensemble-정리" class="headerlink" title="Ensemble 정리"></a>Ensemble 정리</h2><ul>
+<li>무조건 좋은 방법은 존재하지 않는다!</li>
+<li>내 모델이 무엇을 요구하는지 알아라!<ul>
+<li>학습은 느려도 되는데 인퍼런스는 빨라야하는가?</li>
+<li>인퍼런스는 좀 느려도 되는데 학습이 빨라야하는가?</li>
+</ul>
+</li>
+<li>분석/설명이 어렵다는 얘기도 있는데, 이 또한 분석하기에 딸 ㅏ오히려 훨씬 데이터와 문제에 대해 해석하기 유리한 부분이 많다.</li>
+<li>Kaggle에서 winning solution의 대부분이 ensemble을 사용했기 때문에 해당 코드들을 보면서 공부하고 연습하자.</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="AutoML"><a href="#AutoML" class="headerlink" title="AutoML"></a>AutoML</h2><p>목적: Data Cleaning 부터 prediction까지 모두 자동화 하는 것이 목표.</p>
+<p>딥러닝을 하기 위한 최적의 모델은 무엇인가??</p>
+<p>2017년 Google에서 아이디어를 키노트 발표했다. 2년 전부터 얘네는 이걸 하고있다는거잖아! ㅠㅠㅋㅋ 구글 클라우드에서 API를 통해서 사용할 수 있다.</p>
+<p>AutoML의 성능은 진짜 좋다…?</p>
+<p>AutoML을 하려면 어떤 점을 고려해야할까?</p>
+<ul>
+<li>Search Space<ul>
+<li>선행지식을 사용하면 search space가 간소화되지만, 인간에 의한 bias가 발생</li>
+</ul>
+</li>
+<li>Search Strategy<ul>
+<li>Exploration-exploitation trade-off 이슈</li>
+</ul>
+</li>
+<li>Performance Estimation Strategy(Which objective function + How to calculate)<ul>
+<li>Cost를 줄이는 방향으로 발전중</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="AutoML-논문"><a href="#AutoML-논문" class="headerlink" title="AutoML 논문"></a>AutoML 논문</h2><p>AutoML의 타입:</p>
+<ul>
+<li>RL기반<ul>
+<li>NASRL, TNAS, ENAS, MNAS</li>
+</ul>
+</li>
+<li>Evolutionary Algorithms (EA):<ul>
+<li>TPOP, AmeobaNet</li>
+</ul>
+</li>
+<li>Bayesian Optimization (BO)<ul>
+<li>AutoKeras</li>
+</ul>
+</li>
+<li>Sequential Model-Based Optimization (SMBO)<ul>
+<li>PNAS</li>
+</ul>
+</li>
+<li>Gradient Descent (GD)<ul>
+<li>DARTS</li>
+</ul>
+</li>
+<li>NASRL 2016<ul>
+<li>NAS를 널리 알린 논문</li>
+<li>강화학습 기반의 아키텍처 최적화.</li>
+<li>근데 너무 오래 걸림! 800개의 GPU를 28일동안 해서 한게 CIFAR-10…<ul>
+<li>왜일까? 규칙성이 없이 너무 랜덤하게 서치함.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NASNet 2017<ul>
+<li>2016년 연구에서 search space를 줄임으로써 속도 개선.</li>
+<li>전체 네트워크를 다 디자인하는게 아니라, 셀 구조를 찾아서 쌓는 방식을 넣으면 어떨까?</li>
+</ul>
+</li>
+<li>NASRL에 transfer learning 개념을 도입해서 빠르게 학습할 수 있는 방법을 제안함.<ul>
+<li>NASRL은 28일 걸렸는데, 이건 4일 걸림! 800GPU로 4일 트레이닝도 엄청 긴데 ㅋㅋㅋ 여윽씨 구글스러운 연구</li>
+</ul>
+</li>
+<li>AdaNet 2017<ul>
+<li>깊이도 중요하지만, 두껍게 만드는것도 좋은 방법인 것 같아서, 앙상블 기법을 사용해봄.</li>
+<li>아직도 GPU가 많이 필요함.</li>
+</ul>
+</li>
+<li>ENAS 2018<ul>
+<li>아키텍처 서치에 필요한 시간을 획기적으로 줄임!</li>
+<li>GTX 1080Ti 1대로 16시간만에 아키텍처를 찾을 수 있음. 다만 NAS보다 성능이 약간 떨어짐.</li>
+<li>기존 방법의 문제점은, child model이 학습한 weight들을 완전히 버려버리기 때문. 얘네들이 weight를 공유해서 만들어보게하면 어떨까?</li>
+<li>Directed Acyclic Graph (DAG)구조를 써서 효율적으로 만듬. 이게 현재 구글 클라우드 AutoML에 들어간 거라고 함.</li>
+</ul>
+</li>
+<li>DARTS 2018<ul>
+<li>딥마인드와 CMU에서 개발.</li>
+<li>기존의 RNN구조를 사용하지 않음!</li>
+<li>ENAS구조를 따옴…? 기존의 딥러닝에서 학습하는 방법들을 적용할 수 있기 때문에, 장래가 제일 좋은 방법으로 보임.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="AutoML의-문제…"><a href="#AutoML의-문제…" class="headerlink" title="AutoML의 문제…?"></a>AutoML의 문제…?</h2><p>정확도를 높인 모델을 찾는건 이제 잘 한다!</p>
+<p>근데… efficiency를 찾는 모델을 찾진 않잖아? 속도가 빠른 모델을 찾을때는?</p>
+<p>목적에 따른 차이:</p>
+<ul>
+<li>Cost는 줄이고 speed를 높히기 위함 (모바일, 임베디드의 경우 quality를 손해봐서라도 이를 원할 때가 있음)</li>
+<li>Cost와 speed가 어느정도 정해져 있는 상태에서 성능을 올리기 위함 (한정된 자원에서 모델을 키워야 할 때)</li>
+<li>빠른 학습을 위함 (같은 리소스에서 더 많은 데이터를 학습하고 평가하기 위한 경우)</li>
+</ul>
+<p>그래서 Accuracy와 efficiency를 동시에 찾는 AutoML을 필요로 함!</p>
+<p>그래서 나온게:</p>
+<ul>
+<li>MNAS 2018<ul>
+<li>MobileNet, ShuffleNet을 만든 팀과, ENAS를 만든 팀이 합작</li>
+<li>Reward에 validation accuracy 뿐만이 아니라 latency (inference speed)도 포함함.<ul>
+<li>디텍션, segmentation등</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>EfficientNet 2019<ul>
+<li>MNAS의 저자들이 작성</li>
+<li>Accuracy와 efficiency를 둘 다 잡기 위한 model scaling 방법을 제안.</li>
+<li>대부분 Model Scaling을 위해 width, depth, image resolution을 늘려왔는데, 많은 경우 나머지 요소를 고정하고 하나의 요소에 대해 집중적으로 scaling을 함. EfficientNet에서는 이것을 균형있게 조정하려고 함.<ul>
+<li>성능이 빼앰 완전 좋다</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MixNet 2019<ul>
+<li>EfficientNet이 Macro-architecture에 대해 다뤘다면, 여기서는 micro-architecture에 대해 다룸.</li>
+<li>Depthwise convolution과 group kernel의 개념을 적절히 잘 조합.<ul>
+<li>최근에는 5x5를 3x3 두개로 쪼개기보다… 5x5로 하고 5x1과 1x5로 하는 depthwise separation을 하는게 더 좋다…? 으에엥</li>
+</ul>
+</li>
+<li>적절히 잘 섞으니까 성능이 더 좋아지더라! 7x7이나 9x9까지 키운것도 있음. 또, 모바일에서 아주 좋은 효과를 보임. 2019년 8월기준 현재 SOTA.</li>
+</ul>
+</li>
+<li>Randomly Wired Neural networks 2019 (페이스북)<ul>
+<li>NAS같은 network generator를 자동으로 만들자! (네트워크를 만드는 네트워크를 만드는 네트워크)</li>
+<li>뇌과학쪽에서 예전에 많이 나왔던 개념…?</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="AutoML-정리"><a href="#AutoML-정리" class="headerlink" title="AutoML 정리"></a>AutoML 정리</h2><ul>
+<li>AutoML은 생각보다 멀리 있지 않다. 종훈님 말씀으로는 내년부터 실제로 사람들이 쓰지 않을까?</li>
+<li>AutoML 자체를 연구하지 않더라도 이를 보고 공부하고 영감을 받을 수 있다.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20211231-deep-learning-ai-news/" rel="bookmark">최신 딥러닝 / 로보틱스 뉴스를 따라잡는 방법</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20211231-ml-vs-dl/" rel="bookmark">GDG 광주 2019 - 머신러닝 vs 딥러닝 개념 잡기 (발표자 - 이용이)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Deep-learning/" rel="tag"># Deep learning</a>
+              <a href="/tags/Ensemble/" rel="tag"># Ensemble</a>
+              <a href="/tags/AutoML/" rel="tag"># AutoML</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20211231-ml-vs-dl/" rel="prev" title="GDG 광주 2019 - 머신러닝 vs 딥러닝 개념 잡기 (발표자 - 이용이)">
+                  <i class="fa fa-chevron-left"></i> GDG 광주 2019 - 머신러닝 vs 딥러닝 개념 잡기 (발표자 - 이용이)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20211231-visual-slam-keyword/" rel="next" title="Visual-SLAM 키워드 리스트">
+                  Visual-SLAM 키워드 리스트 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

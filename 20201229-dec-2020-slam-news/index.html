@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="12월 SLAM 뉴우스~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020년 10~12월 SLAM 논문 소식">
+<meta property="og:url" content="https://changh95.github.io/20201229-dec-2020-slam-news/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="12월 SLAM 뉴우스~">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-29T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Deep SLAM">
+<meta property="article:tag" content="3D">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20201229-dec-2020-slam-news/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>2020년 10~12월 SLAM 논문 소식 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#10%EC%9B%94"><span class="nav-number">1.</span> <span class="nav-text">10월</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11%EC%9B%94"><span class="nav-number">2.</span> <span class="nav-text">11월</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12%EC%9B%94"><span class="nav-number">3.</span> <span class="nav-text">12월</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20201229-dec-2020-slam-news/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2020년 10~12월 SLAM 논문 소식
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-29 20:38:19" itemprop="dateCreated datePublished" datetime="2020-12-29T20:38:19+09:00">2020-12-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EC%9B%94%EA%B0%84-SLAM-%EB%89%B4%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">월간 SLAM 뉴스</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="10월"><a href="#10월" class="headerlink" title="10월"></a>10월</h1><br>
+
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMTAuMDc4MjA=">DynaSLAM II : Tightly-Coupled Multi-Object Tracking and SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>DynaSLAM 1편의 저자인 Berta Bescos, ORB-SLAM 3의 제 1저자인 Campos, ORB-SLAM 시리즈를 만든 랩실의 교수님인 Tardos 교수님의 새로운 작품.</li>
+<li>Object pose estimation + tracking과 SLAM을 joint optmisation으로 풀어냄.</li>
+<li>CubeSLAM과 비슷하지만 좀 더 발전된 approach인듯 <br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMDYzMjMucGRm">LM:Reloc<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Direct SLAM의 최강자인 Cremers 교수님, 그리고 최근 Deep Direct SLAM 연구를 이끌고 있는 Nan Yang과 Lukas von Stumberg의 연구</li>
+<li>Direct 방식으로도 visual localisation이 된다는 것을 증명.<ul>
+<li>곧 Direct 방식에서도 feature를 사용하지 않는 loop closure 방식이 나올 수도 있음.</li>
+</ul>
+</li>
+<li>이전의 GN-Net의 발전된 버전인듯<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMDc5MjkucGRm">Multi-Resolution 3D Mapping with Explicit Free Space Representation for Fast and Accurate Mobile Robot Motion Planning<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Imperial College London 소속의 Stefan Leutenegger와 Pablo Alcantarilla의 작품.<ul>
+<li>Leutenegger는 BRISK, OKVIS, ElasticFusion, SemanticFusion의 저자, Alcantrilla는 KAZE / AKAZE feature의 저자임.</li>
+</ul>
+</li>
+<li>SLAM을 이용한 Mapping에서 Free space를 정확하고 빠르게 모델링 할 수 있는 기법으로 보임. Map에서 정확한 경계를 표현하기 위해 공간을 Tree 구조로 쪼개서 정밀한 경계는 깊은 tree level로 들어간다. 이 부분을 multi-resolution occupancy mapping이라는 표현을 사용함.<ul>
+<li>이 외로 novelty가 더 있어보이지만 아직 깊게 읽어보지 못함.</li>
+</ul>
+</li>
+<li>ICL의 연구처럼 보이지만, 사실 SLAMCore의 연구라고 볼 수 있음.<ul>
+<li>Robot mapping + path planning을 효과적으로 할 수 있는 제품이 곧 SLAMCore의 제품에 실릴 것이라는 이야기.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZXBhdGVudHNvbmxpbmUuY29tL3kyMDIwLzAzMDI2MjguaHRtbA==">Method and System for Performing Simultaneous Localization and Mapping using Convolutional Image Transformation<i class="fa fa-external-link-alt"></i></span><ul>
+<li>MagicLeap의 새로운 특허. 당연히 DeTone과 Malisiewicz, Rabinovich의 이름이 들어갔다. </li>
+<li>MagicLeap에서 생각하고있는 SuperMaps의 아이디어를 담고있다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL3JwZy5pZmkudXpoLmNoL2RvY3MvM0RWMjBfSGlkYWxnby5wZGY=">Learning Monocular Dense Depth from Events<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Event하면 역시 Scaramuzza 교수님 작품이다.</li>
+<li>매번 새로운 기능이 추가되는 모습이 보기 좋다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMDk0MDkucGRm">SD-DefSLAM: Semi-Direct Monocular SLAM for Deformable and Intracorporeal Scenes<i class="fa fa-external-link-alt"></i></span><br>ORB-SLAM의 Tardos 교수님 + Montiel 교수님 랩실 작품<ul>
+<li>Deformable scene에서 SLAM + Dynamic object는 거를 수 있음</li>
+<li>수술 환경에서 SLAM을 하려는 연구는 관심을 가지는 사람의 수도 적고 어려운 환경이라 굉장히 희귀하다. Peter Mountney 이후로 오랜만에 보는 듯. <br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMDkzNzgucGRm">Freetures: Localization in Signed Distance Function Maps<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Microsoft와 ETH Zurich의 합작.<ul>
+<li>Delmerico, Nieto 등 참가했고, Roland Seigwart, Marc Pollefeys, Cesar Cadena 교수님도 참가하셨음.</li>
+</ul>
+</li>
+<li>3D dense map으로부터 localisation을 수행하는 방법을 제안함.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMDkyMzIucGRm">Elastic and Efficient LiDAR Reconstruction for Large-Scale Exploration Tasks<i class="fa fa-external-link-alt"></i></span><ul>
+<li>ICL의 Stefan Leutenegger 교수님 랩실의 작품.</li>
+<li>3D LiDAR를 이용해서 Large scale volumetric reconstruction을 수행함.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMTAwNTEucGRm">Tracking from Patterns: Learning Corresponding Patterns in Point Clouds for 3D Object Tracking<i class="fa fa-external-link-alt"></i></span><ul>
+<li>VINS-mono를 만든 HKUST의 Shaojie Shen과 Peiliang Li의 작품.</li>
+<li>SLAM은 아니지만… LiDAR 기반 3D object detection 파이프라인에 temporal tracking 기능을 추가함으로써 안정적인 트랙킹을 만듬.<br></li>
+</ul>
+</li>
+</ul>
+<br>
+
+<hr>
+<h1 id="11월"><a href="#11월" class="headerlink" title="11월"></a>11월</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZXBhdGVudHNvbmxpbmUuY29tL3kyMDIwLzAzMzQ4NDkuaHRtbA==">Relocalization systems and methods<i class="fa fa-external-link-alt"></i></span><ul>
+<li>MagicLeap에서 내놓은 Relocalization 알고리즘 특허. <ul>
+<li>10월에 내놓았던 특허에서 빈 부분을 채워주는 듯</li>
+</ul>
+</li>
+<li>인풋 이미지로부터 global feature를 CNN으로 embedding을 한 후, nearest neighbour로 가장 가까운 이미지를 찾아서 Relocalization하는 듯<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMTI0NTUucGRm">Primal-Dual Mesh Convolutional Neural Networks<i class="fa fa-external-link-alt"></i></span><ul>
+<li>MIT의 Luca Carlone 교수님과 Zurich의 Scamaruzza 교수님이 함께 발표.</li>
+<li>Mesh 데이터를 처리하는 새로운 CNN 알고리즘을 개발.<ul>
+<li>기존의 방식은 GNN 방식을 따라서 mesh를 그래프로 보며 처리했지만, mesh의 특성을 잘 반영하지 못했음.</li>
+<li>새로운 방식은 이전 방식이 잘 반영하지 못하던 mesh의 edge나 face도 사용 가능.  <br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTAuMTUyNjEucGRm">Deep Shells: Unsupervised Shape Correspondence with Optimal Transport<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Daniel Cremers 교수님이 참여… 근데 솔직히 왜 하신건지는 아직 잘 이해는 안감.</li>
+<li>3D representation 중에 shell이라는 방식이 있음.<ul>
+<li> 3D model이 deformable하게 변할 때, optimal transport 기법을 사용하여 shape correspondence를 맞추는 방식을 제안함.</li>
+</ul>
+</li>
+<li> 이 논문과 직접적인 관계는 없지만, SLAM 쪽에서도 3D representation 연구를 많이 하는 것 같음. 특히 딥러닝 3D representation은 하나의 class에서 다른 instance들로 differentiable하게 변환이 가능하기 때문에, SLAM의 입장에서는 joint optimisation이 가능해지는 것. <br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL3Jhcy5wYXBlcmNlcHQubmV0L2ltYWdlcy90ZW1wL0lST1MvZmlsZXMvMDk4OC5wZGY=">Accurate Mapping and Planning for Autonomous Racing<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Roland Siegwart 교수님 및 다수의 연구자가 참가한 연구임.</li>
+<li>유명한 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9GYktMRTd1YXI5WQ==">영상<i class="fa fa-external-link-alt"></i></span>.</li>
+<li>SLAM과 optimal path planning, control이 모두 들어가있음.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL3Jhcy5wYXBlcmNlcHQubmV0L2ltYWdlcy90ZW1wL0lST1MvZmlsZXMvMDM4Ni5wZGY=">Robot Navigation in Crowded Environments Using Deep Reinforcement Learning<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Roland Siegwart 교수님이 또…</li>
+<li>SLAM이 주가 되는 논문은 아니다. LiDAR odometry + scan 정보를 사용하지만, 논문의 메인 주제는 강화학습임.</li>
+<li>그래도 SLAM과 다른 모듈이 함께 사용될 수 있는걸 보여주니 여기 넣어봤음.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL3Jhcy5wYXBlcmNlcHQubmV0L2ltYWdlcy90ZW1wL0lST1MvZmlsZXMvMDM1OS5wZGY=">From Points to Planes - Adding Planar Constraints to Monocular SLAM Factor Graphs<i class="fa fa-external-link-alt"></i></span><ul>
+<li>자라고자 대학의 Javier Civera 교수님 랩실 연구</li>
+<li>Plane enforcement로 만들어낸 plane landmark를 Factor Graph optimisation에 사용함.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL3Jhcy5wYXBlcmNlcHQubmV0L2ltYWdlcy90ZW1wL0lST1MvZmlsZXMvMTg5MS5wZGY=">A Robust Multi-Stereo Visual-Inertial Odometry Pipeline<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Michael Kaess 교수님 랩실 작품.</li>
+<li>Stereo pair에서 검출되는 모든 landmark 정보와 camera pose를 jointly optimise한다고 함.</li>
+<li>1-point RANSAC 라는 기술을 쓰는데… 이게 뭘까…<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMDI2NTgucGRm">Compositional Scalable Object SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Kaess 교수님 랩실 작품.</li>
+<li>Object-level SLAM이 새로 나옴. <ul>
+<li>RGB-D 기반, semantic data association을 포함함. </li>
+<li>Large-scale indoor reconstruction에 사용 가능.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMDE5NzUucGRm">Rearrangement: A Challenge for Embodied AI<i class="fa fa-external-link-alt"></i></span><ul>
+<li>어벤저스 교수님 논문.<ul>
+<li>Dhruv Batra, Angel Chang, Sonia Chernova, Andrew Davison, Jia Deng, Vladlen Koltun, Sergey Levine, Jitendra Malik, Igor Mordatch, Roozbeh Mottaghi, Manolis Savva, Hao Su.</li>
+</ul>
+</li>
+<li>‘물체를 제자리에 돌려놓는 방법’에 대한 여러가지 방법을 함께 탐색하였다.<ul>
+<li>Geometric, language, Image, Experience가 중심 토픽이다.<ul>
+<li>Geometric - SLAM, 3D, Reconstruction, Planning</li>
+<li>Language - NLP, Image-language, Communication</li>
+<li>Image - Context undertanding, semantic understanding</li>
+<li>Experience - Reinforcement learning, Memory<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZXBhdGVudHNvbmxpbmUuY29tLzIwMjAwMzM0OTAyLnBkZg==">Providing Semantic-Augmented Artificial-Reality Experience<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Richard Newcombe가 있는 Facebook에서 내놓은 연구.</li>
+<li>Semantic AR를 수행하는 인프라 구조.<ul>
+<li>모바일 -&gt; 서버 -&gt; 제 3의 컴퓨팅 리소스를 거친다.</li>
+<li>Mesh를 만들어내는 과정이 필수적으로 들어간다. 아무래도 surface 정보를 이용한 interaction을 하려는 의도인 것 같다.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMDI1NzQucGRm">Learning Trajectories for Visual-Inertial System Calibration via Model-based Heuristic Deep Reinforcement Learning<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Roland Siegwart 교수님과 Cadena 교수님 및 다른 연구원들의 작품</li>
+<li>Visual-Inertial 시스템의 캘리브레이션은 굉장히 정확한 캘리브레이션을 요구함. 이 때, 캘리브레이션은 보통 캘리브레이션 타겟을 바라보면서 특정 움직임이 요구됨.<ul>
+<li>Model-based 강화학습 방식으로 캘리브레이션이 잘 되는 움직임을 학습함<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZXBhdGVudHNvbmxpbmUuY29tL3kyMDIwLzAzNDk3NjMuaHRtbA==">Semantic Fusion (특허)<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Facebook의 Richard Newcombe</li>
+<li>Semantic Fusion이라는 이름으로 특허를 냈다.<ul>
+<li>Imperial College의 Davison 교수님 랩실에서 한 그 SemanticFusion과는 다른 것 같다.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMDYuMDQyNTAucGRm">AdaLAM: Revisiting Handcrafted Outlier Detection<i class="fa fa-external-link-alt"></i></span><ul>
+<li>ETH Zurich의 Marc Pollefeys, Torsten Sattler, Viktor Larsson의 연구이다.</li>
+<li>Descriptor끼리 매칭할 때 nearest neighbour로 매칭하는 기존의 방식은 outlier가 너무 많이 생긴다.</li>
+<li>이 연구는 새로운 local affine motion verification과 sample-adaptive threshold를 사용한 hierarchical pipeline을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMDYxOTQucGRm">A Factor-Graph Approach for Optimization Problems with Dynamics Constraints<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Factor graph optmisation 연구의 대가인 Frank Dellaert 교수님 랩실의 연구이다.</li>
+<li>Dynamic factor graph라는 방법론을 제시한다. <ul>
+<li>SLAM에서 쓰일 것은 아니지만, 가능성이 아예 없지는 않다.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9jaGFwdGVyLzEwLjEwMDclMkY5NzgtMy0wMzAtNTg1NDItNl8zNg==">SceneCAD: Predicting Object Alignments and Layouts in RGB-D Scans<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Facebook의 Angela Dai와 Matthias Nießner의 연구이다.</li>
+<li>RGB-D로 스캔한 환경에서 1. object에 CAD model prior를 fit하고, 2. 동시에 layout + object pose를 jointly optmise한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMDcwNDQucGRm">Tactile SLAM: Real-time inference of shape and pose from planar pushing<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Michael Kaess 교수님… 왜 비전 안 하세요…</li>
+<li>비전 방식이 아닌, Force/torque 센서를 통해 얻는 센서 값으로 Shape guessing을 한다는 논문이다. SLAM에서도 전체 map은 모르지만 센서로 취득한 local map을 쌓아가면서 전체 map을 만드는 것 처럼, 똑같은 방식으로 force/torque 방식에 적용한 논문이다.</li>
+<li>SLAM…이라고 하긴 좀 그렇지만, 다른 방향으로도 새로운 방법론이 존재한다는걸 보기에는 좋은 예시이다.<br></li>
+</ul>
+</li>
+</ul>
+<br>
+
+<hr>
+<h1 id="12월"><a href="#12월" class="headerlink" title="12월"></a>12월</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMTE4MTQucGRm">MonoRec: Semi-Supervised Dense Reconstruction in Dynamic Environments from a Single Moving Camera<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Nan Yang, Lukas von Stumberg와 Cremers 교수님의 작품.</li>
+<li>Dynamic object는 photometric inconsistency를 이용한 mask module을 사용하여 움직이는 물체임을 인지함.<ul>
+<li>이를 이용해 Static / moving object에 대한 depth 를 정확하게 추정함.</li>
+<li>이 점이 기존의 MVS와 다른 점임.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL2ltcGFjdC5jaWlyYy5jdnV0LmN6L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzExL1N1bmVnYXJkM0RWMjAyMC5wZGY=">Deep LiDAR localization using optical flow sensor-map correspondences<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Torsten Sattler의 연구이다.</li>
+<li>딥러닝 기반 optical flow를 사용해서 LiDAR 기반 localization 방법을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuYW1pbmVyLmNuL3B1Yi81NzM2OTVlYzZlM2IxMjAyM2U1MDFkZGUvYS1yZXZpZXctb2YtcG9pbnQtY2xvdWQtcmVnaXN0cmF0aW9uLWFsZ29yaXRobXMtZm9yLW1vYmlsZS1yb2JvdGljcz9saW5rdG9jb21tZW50PXRydWU=">A Review of Point Cloud Registration Algorithms for Mobile Robotics<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Siegwart 교수님이 참여하신 리뷰 논문이다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vbmxpbmVsaWJyYXJ5LndpbGV5LmNvbS9kb2kvZnVsbC8xMC4xMDAyL3JvYi4yMjAwNw==">Towards automating construction tasks: Large‐scale object mapping, segmentation, and manipulation<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Margarita Chli라는 ETH Zurich의 조교수로 계신 분의 연구이다. 이전에 Roland Siegwart 교수님 랩실에서 Stefan Leutenegger랑 연구도 같이 한듯… 이번 연구로 처음 알게 되었다.</li>
+<li>Application 논문이다. 공사 현장에서 드론 스캔으로 map을 만든 후, 포크레인에 LiDAR를 달아서 map merge 및 localisation을 수행. 그 후 object들에 대한 semantic 정보를 추출한 다음에, path planning 및 제어를 사용하여 물체를 집어올리고 이동한다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMTE3MjQucGRm">Rotation-only bundle adjustment<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Seong Hun Lee와 Civera 교수님의 작품.</li>
+<li>Rotation만 최적화 하는 방법.<ul>
+<li>Position과 3d structure의 값이 부정확해도 잘 된다.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMTIzNjAucGRm">A Structure-Aware Method for Direct Pose Estimation<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Nathan Jacobs?라는 잘 모르는 분의 연구이다.</li>
+<li>CNN 기반 camera pose estimation 문제를 푸는데, direct방식과 indirect방식의 장점만을 가져와서 섞었다고 한다. Sota를 찍은건 아닌 것 같다.<ul>
+<li>Scene coordinate regression과 monocular depth estimation을 수행한다. 그 후 depth map을 camera intrinsic을 사용하여 3D scene coordinates로 만든 후, 3D-3D correspondence를 계산하여 pose regression을 한다고 한다.</li>
+<li>솔직히 좋은 연구 방향은 아닌 것 같다. Monocular depth estimation은 현재 단계에서는 sharp &amp; crisp하게 나오는 것이 아니라, general하게 나타나기 때문이다. Edge 쪽에서도 많이 뭉뜽그려진다. 하지만 논문 초반에 나오는 intro + related works가 읽기 좋다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDA1OTUucGRm">DeFMO: Deblurring and Shape Recovery of Fast Moving Objects<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Marc Pollefeys 교수님이 연구에 참여하셨다.</li>
+<li>보통 빠르게 움직이는 물체에는 이미지에서 blur가 진다. 이 연구에서는 이미지로부터 배경과 물체를 분리해낸 후, Temporal super-resolution을 물체가 움직이는 모습을 초고속 카메라가 깔끔하게 찍은 것 처럼 복원해준다.<ul>
+<li>이 때, 깔끔한 이미지의 representation도 얻어낼 수 있다.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDgyMTYucGRm">FMODetect: Robust Detection and Trajectory Estimation of Fast Moving Objects<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Pollefeys 교수님이 연구에 참여하셨다.</li>
+<li>DeFMO와 연관점이 많은 연구이다. 빠르게 움직이는 물체를 deblurring하고 trajectory를 딥러닝으로 복원해내는 연구이다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDg3MzAucGRm">Event-based Motion Segmentation with Spatio-Temporal Graph Cuts<i class="fa fa-external-link-alt"></i></span><ul>
+<li>VINS-mono의 Shaojie Shen의 연구이다.</li>
+<li>Event 카메라로 motion segmentation을 수행하는 방법을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL2ltcGFjdC5jaWlyYy5jdnV0LmN6L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIwLzExL1N0ZW5ib3JnM0RWMjAyMC5wZGY=">Using Image Sequences for Long-Term Visual Localization<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Torsten Sattler의 연구이다.</li>
+<li>기존의 Visual localization은 1개의 이미지를 맵 데이터와 비교해서 위치를 복원해냈다. 하지만 보통 실제 시나리오에서는 사진 1장이 아니라 이미지 시퀀스를 받는다.</li>
+<li>이번 연구는 사진 1장 대신 이미지 시퀀스를 사용함으로써 더 안정적이게 위치를 복원하는 방법을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMTE5NDYucGRm">Benchmarking Image Retrieval for Visual Localization<i class="fa fa-external-link-alt"></i></span><ul>
+<li>NAVER LABS의 Martin Humenberger, Gabriela Csurka, Yohann Cabon과 Torsten Sattler의 연구이다.</li>
+<li>다양한 Visual localization 방법들의 벤치마크 결과를 냈다.</li>
+<li>그리고 벤치마킹 툴인 Kapture를 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMTMxOTEucGRm">Appearance-Invariant 6-DoF Visual Localization using Generative Adversarial Networks<i class="fa fa-external-link-alt"></i></span><ul>
+<li>저자들이 누구일까…? 찾아도 안나온다. Shiguo Lian이라는 사람은 cryptography 관련 사람이 나오는데…</li>
+<li>Visual localization에서 사용되는 feature들은 invariant하지 않다는 점을 파고든다. 이를 위해 CycleGAN을 사용하여 만들어낸 다른 appearance를 가진 이미지들로 feature extraction 네트워크를 학습한다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDkxNjQucGRm">Point Transformer<i class="fa fa-external-link-alt"></i></span><ul>
+<li>옥스포드의 Philip Torr 교수님과 Intel Labs의 Vladlen Koltun의 연구.</li>
+<li>Transformer에서 사용되는 Self-attention을 포인트 클라우드 프로세싱에 쓸 수 있을까? 에 대한 답<ul>
+<li>Classification, Part segmentation, semantic segmentation 모두 잘 된다는 결과.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDMwMjMucGRm">Efficient Volumetric Mapping Using Depth Completion With Uncertainty for Robotic Navigation<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Stafan Leutenegger의 연구이다.</li>
+<li>RGB-D 맵핑을 할 때 free-space에 대한 depth는 항상 정확하게 추정하기 어려웠다. 이 연구에서는 딥러닝으로 추정한 uncertainty 값을 이용해 depth completion을 수행하고, free-space에 대한 맵핑의 속도와 퀄리티를 향상시켰다. <br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDMwODIucGRm">Quantifying Aleatoric and Epistemic Uncertainty Using Density Estimation in Latent Space<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Cadena, Siegwart, Van Gool, Tombari 교수님의 연구이다.</li>
+<li>최근 Deep-SLAM쪽에서 종종 uncertainty를 표현하기 위해 사용되는 aleatoric / epistemic uncertainty를 추정하는 새로운 방식을 제안한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMTA5ODgucGRm">Post-hoc Uncertainty Calibration for Domain Drift Scenarios<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Cremers 교수님이 연구에 참여하셨다.</li>
+<li>Deep learning classifer는 보통 training domain에서는 높은 정확도와 confidence score를 가지지만, 다른 domain으로 옮기면 confidence score가 급격하게 떨어진다.</li>
+<li>이 confidence score를 다시 올려주는 post-hoc uncertainty calibration 방법을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDE5MDkucGRm">Patch2Pix: Epipolar-Guided Pixel-Level Correspondences<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Torsten Sattler가 참여한 연구이다.</li>
+<li>최근 성공적이였던 딥러닝 기반 keypoint matching 방식을 계승하는 연구이다.<ul>
+<li>Patch-level match proposal을 추출한 후, epipolar geometry를 weakly-supervised 방식으로 학습한 네트워크를 통해서 refine하여 pixel-wise match 정보를 regress한다.</li>
+<li>이 과정에서 outlier는 자동으로 제거된다.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9jaGFwdGVyLzEwLjEwMDclMkY5NzgtMy0wMzAtNTg2MDEtMF8zNg==">CAD-Deform: Deformable Fitting of CAD Models to 3D Scans<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Matthias Nießner가 연구에 참여하였다.</li>
+<li>CAD-model 데이터를 3D scan 데이터에 deformable fitting을 통해 정확하게 alignment하는 방식을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMTQ3NDQucGRm">RfD-Net: Point Scene Understanding by Semantic Instance Reconstruction<i class="fa fa-external-link-alt"></i></span><ul>
+<li>이번 연구 역시 Matthias Nießner가 연구에 참여하였다.</li>
+<li>Raw point cloud로부터 jointly하게 object detection + dense object surface reconstruction을 수행하는 법을 제안한다. <br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDgxOTcucGRm">Seeing Behind Objects for 3D Multi-Object Tracking in RGB-D Sequences<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Matthias Nießner와 Facebook의 Angela Dai의 연구이다.</li>
+<li>RGB-D로 3d Detection을 한 후 지속적으로 tracking을 수행한다. 이 때, occlusion 등을 가려진 부분을 ‘hallucination’을 통해 채워넣어서 지속적으로 안정적이게 트랙킹한다.<ul>
+<li>이를 통해 object간의 occlusion이 있을때도 안정적이게 multi-object tracking을 수행하였다.<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50LzkyNzE4NzU=">Real-Time Temporal and Rotational Calibration of Heterogeneous Sensors Using Motion Correlation Analysis<i class="fa fa-external-link-alt"></i></span><ul>
+<li>VINS-mono의 저자인 Tong Qin과 Shaojie Shen의 연구이다.</li>
+<li>새로운 이종 센서간의 Temporal calibration 방식을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMTI0MzAucGRm">SOE-Net: A Self-Attention and Orientation Encoding Network for Point Cloud based Place Recognition<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Rui Wang과 Cremer 교수님의 작품이다.</li>
+<li>SOE-Net은 Point cloud 기반으로 place recognition을 할 때 필요한 local descriptor를 뽑는 방법과, large-scale point cloud based retrieval (i.e. long range)에 유용한 데이터를 추출하는 방법을 새롭게 제안한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMTMzODgucGRm">3DSNet: Unsupervised Shape-to-Shape 3D Style Transfer<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Roland Siegwart 교수님께서 연구에 참여하셨다.</li>
+<li>Object class 정보를 가지고 있는 point cloud와, 특정 style을 표현하는 point cloud가 있을 때, 기존의 style-transfer와 비슷하게 적용할 수 있다.</li>
+<li>이를 통해 동일 class지만 세부 모양이 다른 point cloud를 생성해내거나, 특정 이미징 디바이스의 point cloud 캡처 방식을 가져올 수 있다.<ul>
+<li>Class 내부에서 모양이 다른 point cloud들 간의 differentiable representation도 가지게 되는것이 아닌가…하고 생각이 든다. Shape + camera pose joint optimisation도 가능해지지 않을까?<br></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMDcyMzMucGRm">Stable View Synthesis<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Intel의 Vladlen Koltun의 작품이다.</li>
+<li>SLAM이 이미지들로부터 camera pose와 structure를 구해내는 작업이라면, view synthesis는 camera pose와 structure를 기반으로 photorealistic image를 만들어내는 작업이다.</li>
+<li>최근 SLAM쪽에서도 view synthesis에 대한 연구를 많이 진행하고 있는데, 이는 structure에 대한 representation을 구하기 아주 유용하기 때문이다.</li>
+<li>(또는, 부족한 정보를 view synthesis로 만들어서 채워넣을수도 있지 않을까?)<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMDMuMDg5MzQucGRm">NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Ren Ng? 이라는 교수님이 지도하신 것 같다.</li>
+<li>내용은 잘 이해가 되지 않았지만 View Synthesis에서 제일 좋은 성능을 뽑아낸다고 들었다. 굉장히 핫하다고… ㄷㄷ<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTEuMTQ3OTEucGRm">NeuralFusion: Online Depth Fusion in Latent Space<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Pollefeys 교수님이 연구에 참여하셨다.</li>
+<li>Depth map aggregation을 latent feature space에서 학습한다고 한다. 사실 깊게 이해는 잘 안된다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczExMjYzLTAyMC0wMTM5OS04">Reference Pose Generation for Long-term Visual Localization via Learned Features and View Synthesis<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Torsten Sattler와 Davide Scaramuzza 교수님의 작품이다.</li>
+<li>Visual Localization을 위해 reference pose를 만들 때는 SfM을 사용한다. 하지만 조명 변화가 생겼을 때는 local feature 매칭이 안되기 때문에 쓰기 어려워진다.</li>
+<li>이번 연구는 View synthesis를 통해 새로운 learned feature를 포함하는 reference pose 데이터를 만드는 semi-automated 방법을 소개한다.<br></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIwMTIuMDk3OTMucGRm">SceneFormer: Indoor Scene Generation with Transformers<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Matthias Nießner의 연구이다</li>
+<li>Indoor scene generation이라고 하는데… 아직 목적을 잘 모르겠다. 좀 더 읽어봐야곘다.<br></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Deep-SLAM/" rel="tag"># Deep SLAM</a>
+              <a href="/tags/3D/" rel="tag"># 3D</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20201228-cvpr2020-slam-yang/" rel="prev" title="CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)">
+                  <i class="fa fa-chevron-left"></i> CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20201231-retro/" rel="next" title="2020년 회고">
+                  2020년 회고 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

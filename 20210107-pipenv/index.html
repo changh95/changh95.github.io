@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="간단하게 파이썬 가상환경을 설정하기 위해 pipenv를 사용해보자!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pipenv 공부">
+<meta property="og:url" content="https://changh95.github.io/20210107-pipenv/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="간단하게 파이썬 가상환경을 설정하기 위해 pipenv를 사용해보자!">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210107-pipenv/activated2.png">
+<meta property="og:image" content="https://changh95.github.io/20210107-pipenv/pipfile.png">
+<meta property="og:image" content="https://changh95.github.io/20210107-pipenv/pipfile_lock.png">
+<meta property="article:published_time" content="2021-01-07T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="pipenv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210107-pipenv/activated2.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210107-pipenv/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>pipenv 공부 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pipenv-%EC%84%A4%EC%B9%98-%EA%B0%80%EC%83%81%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95"><span class="nav-number">1.</span> <span class="nav-text">pipenv 설치 + 가상환경 설정</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%8C%A8%ED%82%A4%EC%A7%80-%EC%84%A4%EC%B9%98"><span class="nav-number">2.</span> <span class="nav-text">패키지 설치</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B0%B0%ED%8F%AC-%EC%A4%80%EB%B9%84"><span class="nav-number">3.</span> <span class="nav-text">배포 준비</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210107-pipenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          pipenv 공부
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-07 20:38:19" itemprop="dateCreated datePublished" datetime="2021-01-07T20:38:19+09:00">2021-01-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-3-Python/" itemprop="url" rel="index"><span itemprop="name">2.3 Python</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>파이썬을 이용해서 실험 자동화 스크립트를 짜다가 이런 고민이 들었다.</p>
+<ul>
+<li><strong>Clean slate 파이썬 환경</strong>에서 코드를 돌려볼 수 있을까?</li>
+<li>전역 패키지 설정이 아닌, <strong>프로젝트마다 패키지 설정</strong>을 만들 수 있을까?</li>
+</ul>
+<p>주변인들로 추천받은건 Docker, Conda, pipenv가 있었다.</p>
+<p>Docker는 현재 우리 팀의 서버 상황때문에 사용하기 조금 껄끄러웠다.</p>
+<p>Conda는 두가지 셋팅이 있는데, Anaconda 셋팅으로 사용하기에는 용량이 너무 크고 (3gb), Miniconda 셋팅을 고려할 수 있었다.<br>하지만 팀원들이 파이썬에 익숙하지 않아서 ‘제 코드를 실행시키려면 conda라는 패키지를 깔아주세요~’라고 했을 때 별로 좋아하지 않을 가능성이 높았다.<br>무엇보다 conda의 주 목적은 scientific computing이지, 가상환경 설정이 아니였기 때문에… 다른 가상환경 패키지를 먼저 찾아보게 되었다.</p>
+<br>
+
+<p>그리고 약 30분 전, <code>pipenv</code>라는 패키지를 알게 되었다.</p>
+<p>pipenv 패키지는 </p>
+<ol>
+<li><strong>pip처럼 파이썬 패키지를 다운</strong>받고</li>
+<li><strong>가상환경을 관리</strong>할 수 있게 해준다.</li>
+</ol>
+<p>딱 내가 원하던거다!</p>
+<p>pipenv 이전에는 <code>virtualenv</code> 또는 <code>venv</code> 패키지를 통해서 가상환경을 만들고, 그 내부에서 <code>pip</code>을 사용해서 패키지를 다운로드 받았다고 한다.<br>하지만 파이썬 <strong>3.x 버전으로 넘어온 지금 시점에서는 pipenv가 훨씬 안전하고 편하다</strong>고 하니, pipenv를 사용해보기로 한다.</p>
+<hr>
+<h1 id="pipenv-설치-가상환경-설정"><a href="#pipenv-설치-가상환경-설정" class="headerlink" title="pipenv 설치 + 가상환경 설정"></a>pipenv 설치 + 가상환경 설정</h1><p>우선 clean state 리눅스에서는 python3는 있지만 pip3는 없다.<br>터미널에서 <code>sudo apt install python3-pip</code> 명령어를 통해 pip을 설치해준다.<br>그 후 다시 터미널에서 <code>pip3 install pipenv</code> 명령어를 통해 pipenv를 설치한다.</p>
+<p>pipenv가 설치되면, 터미널에서 <code>pipenv shell</code> 명령어를 통해 가상환경을 만들 수 있다.<br><code>pipenv shell</code> 명령어를 실행하면, 실행한 위치에서 <code>pipfile</code>이라는 파일이 만들어진다.<br>pipfile에는 이 가상환경 안에 존재하는 패키지들과 디펜던시 패키지들, 그리고 파이썬 버전이 표기된다.</p>
+<p>그리고 터미널을 보면 <code>(python_test) ...</code> 라는 형태가 보이는데, 이는 내가 현재 활성화된 ‘python_test’라는 가상환경 안에 있다는 것을 보여준다.<br>‘python_test’는 내가 <code>pipenv shell</code>을 실행한 경로의 폴더 이름이다!<br><strong>신기!</strong></p>
+<p>보통의 터미널에서 <code>python --version</code>을 실행하면 python2가 없기 때문에 이런 명령어가 나온다.<br>하지만 가상환경 안에서 동일한 명령어를 실행하면 자동으로 python3를 찾는다.<br>왜냐하면 이 가상환경 안에서 <code>python</code>은 우리의 전역설정인 python3 3.8.5이기 때문이다.</p>
+<img src="/20210107-pipenv/activated2.png" class="" title="activated2">
+
+
+<hr>
+<h1 id="패키지-설치"><a href="#패키지-설치" class="headerlink" title="패키지 설치"></a>패키지 설치</h1><p>가상환경이 켜진 상태에서는 <code>pipenv install ***</code> 명령어로 패키지를 설치할 수 있다.<br>예시로 나는 <code>pipenv install numpy</code>를 해봤다.<br>뱀 이모티콘이 나오면서 numpy가 설치되었다.</p>
+<p>pipfile이 업데이트가 되고, pipfile_lock이라는게 생긴다.</p>
+<p>pipfile에서 package 부분을 보면 <code>numpy = "*"</code>라는게 생겼다.<br><code>*</code>는 최신버전이라는 뜻이다.</p>
+<p>pipfile_lock에는 뭔가 복잡한게 생겼다.<br>대강 내부의 정보는 패키지의 버전 정보, 디펜던시 정보, 디펜던시의 디펜던시 정보가 있다.<br>pipfile_lock이 있으면 추후에 패키지가 업데이트되면서 내가 사용했던 버전들을 찾기 어려워질 때를 대비할 수 있다.</p>
+<img src="/20210107-pipenv/pipfile.png" class="" title="pipfile2">
+
+<img src="/20210107-pipenv/pipfile_lock.png" class="" title="pipfile_lock">
+
+<p>터미널에서 <code>pipenv lock -r</code> 명령어를 사용해서 pipfile_lock에 저장된 내용들을 확인할 수도 있다.</p>
+<p>패키지를 지우려면 <code>pipenv uninstall ***</code>를 하면 된다.</p>
+<p>배포할 때 필요하지 않은 패키지는 <code>pipenv install *** --dev</code> 명령어를 사용하면 된다.<br>이 경우 pipfile에서 ‘dev-packages’에 들어가게 된다.</p>
+<p>다른 프로젝트에서 <code>requirements.txt</code> 파일을 가져왔다면, <code>pipenv install -r ./requirements.txt</code> 명령어를 통해 필수 패키지를 한번에 설치할 수 있다.</p>
+<p>패키지들의 디펜던시 관계를 보고싶다면 <code>pipenv graph</code>를 사용하면 된다.</p>
+<hr>
+<h1 id="배포-준비"><a href="#배포-준비" class="headerlink" title="배포 준비"></a>배포 준비</h1><p>배포를 할 때는 pipfile에 적힌것 처럼 최신 버전 (i.e. <code>*</code>)를 사용하는게 아닌, 특정 버전을 명시해야한다.<br>그렇기 때문에 배포할 때 우리는 pipfile이 아닌 pipfile_lock을 사용한다.<br><code>pipenv lock</code> 명령어를 사용해서 pipfile_lock을 업데이트 시킬 수 있다.</p>
+<p>pipfile_lock으로부터 패키지 설치를 진행하기 위해서는 <code>pipenv install --ignore-pipfile</code> 명령어를 사용하면 된다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220108-delete-folder/" rel="bookmark">폴더 지우기 - os.rmdir, os.system, shutil.rmtree</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220108-jump-to-python-ebook/" rel="bookmark">점프투파이썬 Ebook 레퍼런스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230411-python3-debugging-tip/" rel="bookmark">Python 디버깅 빠르고 편하게 하기</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230609-python-like-rust/" rel="bookmark">Rust처럼 안전하게 Python 코드 작성하기</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/pipenv/" rel="tag"># pipenv</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210105-modern-cmake/" rel="prev" title="Modern CMake">
+                  <i class="fa fa-chevron-left"></i> Modern CMake
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210107-gcc-ffast-math/" rel="next" title="C++ 프로그램 속도를 빠르게 만들어주는 gcc 컴파일러 플래그">
+                  C++ 프로그램 속도를 빠르게 만들어주는 gcc 컴파일러 플래그 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

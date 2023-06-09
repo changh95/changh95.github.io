@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="빌드 플래그, 멀티 컴파일러, 유닛 테스트, 정적분석, MISRA와 같은 방법들에 대해 알아봅니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="더 안전하게 C++ 코드를 작성하는 법">
+<meta property="og:url" content="https://changh95.github.io/20220115-safer-c/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="빌드 플래그, 멀티 컴파일러, 유닛 테스트, 정적분석, MISRA와 같은 방법들에 대해 알아봅니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/result.png">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/clang.png">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/misra.png">
+<meta property="article:published_time" content="2022-01-15T14:34:06.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.203Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="STL">
+<meta property="article:tag" content="gcc">
+<meta property="article:tag" content="MISRA">
+<meta property="article:tag" content="clang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20220115-safer-c/result.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20220115-safer-c/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>더 안전하게 C++ 코드를 작성하는 법 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9D%B4-%EA%B8%80%EC%97%90%EC%84%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0%ED%95%98%EB%8A%94-%E2%80%98%EC%95%88%EC%A0%84%ED%95%9C-%EC%BD%94%EB%93%9C%E2%80%99%EC%9D%98-%EC%9D%98%EB%AF%B8"><span class="nav-number">1.</span> <span class="nav-text">이 글에서 이야기하는 ‘안전한 코드’의 의미</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B0%84%EB%8B%A8%EC%9A%94%EC%95%BD-TLDR"><span class="nav-number">2.</span> <span class="nav-text">간단요약 &#x2F; TLDR;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-%EC%A2%85%EB%A5%98%EB%8A%94-%EC%B5%9C%EC%86%8C-2%EA%B0%9C%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%84%B8%EC%9A%94"><span class="nav-number">3.</span> <span class="nav-text">컴파일러 종류는 최소 2개를 사용하세요</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%AA%A8%ED%98%B8%ED%95%9C-%EC%BD%94%EB%94%A9%EC%9D%84-%EA%B2%80%EC%88%98%ED%95%98%EB%8A%94-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-%ED%94%8C%EB%9E%98%EA%B7%B8%EB%A5%BC-%ED%99%9C%EC%84%B1%ED%99%94%ED%95%98%EC%84%B8%EC%9A%94"><span class="nav-number">4.</span> <span class="nav-text">모호한 코딩을 검수하는 컴파일러 플래그를 활성화하세요</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-test%EB%A5%BC-%EC%93%B0%EC%84%B8%EC%9A%94"><span class="nav-number">5.</span> <span class="nav-text">Unit test를 쓰세요</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A0%95%EC%A0%81%EB%B6%84%EC%84%9D-Static-analysis"><span class="nav-number">6.</span> <span class="nav-text">정적분석 (Static analysis)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8F%99%EC%A0%81%EB%B6%84%EC%84%9D-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%A3%BC%EC%86%8C-%EB%A9%94%EB%AA%A8%EB%A6%AC-leak-%EC%93%B0%EB%A0%88%EB%93%9C-%EA%B4%80%EB%A6%AC"><span class="nav-number">7.</span> <span class="nav-text">동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISRA"><span class="nav-number">8.</span> <span class="nav-text">MISRA</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20220115-safer-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          더 안전하게 C++ 코드를 작성하는 법
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-15 23:34:06" itemprop="dateCreated datePublished" datetime="2022-01-15T23:34:06+09:00">2022-01-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="이-글에서-이야기하는-‘안전한-코드’의-의미"><a href="#이-글에서-이야기하는-‘안전한-코드’의-의미" class="headerlink" title="이 글에서 이야기하는 ‘안전한 코드’의 의미"></a>이 글에서 이야기하는 ‘안전한 코드’의 의미</h2><blockquote>
+<p>적어도 빌드는 돼야지…<br>적어도 왕초보 실수는 없어야지…<br>적어도 돌리다가 터지진 않아야지…</p>
+</blockquote>
+<p>적어도 이게 ‘작동하는 코드’인가 에 대한 내용이 주가 됩니다.</p>
+<p>해킹 시도에 안전한지, 무적의 자율주행 알고리즘을 만든다던지와는 거리가 멉니다 ㅎㅎ</p>
+<p> </p>
+<h2 id="간단요약-TLDR"><a href="#간단요약-TLDR" class="headerlink" title="간단요약 / TLDR;"></a>간단요약 / TLDR;</h2><ul>
+<li>gcc/clang/MSVC 컴파일러 다 써서 빌드하세요</li>
+<li><code>-Wall -Werror -Wpedantic -Werror</code> 빌드 플래그 쓰세요</li>
+<li>유닛테스트 꼭 하세요</li>
+<li>clang-tidy나 cppcheck 꼭 쓰세요</li>
+<li>sanitizer 꼭 쓰세요</li>
+<li>MISRA 적용도 고려해보세요</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="컴파일러-종류는-최소-2개를-사용하세요"><a href="#컴파일러-종류는-최소-2개를-사용하세요" class="headerlink" title="컴파일러 종류는 최소 2개를 사용하세요"></a>컴파일러 종류는 최소 2개를 사용하세요</h2><p>PC에서 사용하는 C++ 컴파일러는 주로 3가지가 있습니다.</p>
+<ul>
+<li>Visual Studio에서 지원하는 MSVC</li>
+<li>Apple 진영이 많이 사용하는 Clang</li>
+<li>GNU/Linux 진영이 많이 사용하는 gcc</li>
+</ul>
+<p>저는 <strong>코드를 작성할 때 최소 2개의 컴파일러를 기준으로 빌드</strong>해보는 것을 추천합니다.</p>
+<p>각각의 컴파일러들마다 경고/에러를 걸러주는 기준도 조금씩 다르고, 성능도 꽤 다르기 때문입니다.</p>
+<p>우선 <strong>경고/에러</strong>에 대해서 이야기 해봅시다. gcc에서는 빌드가 잘 되는데, clang에서는 빌드가 안될 수도 있습니다. 이 경우에는 clang에서 경고/에러를 수정하면 보통 <strong>gcc/clang를 모두 통과하는 깔끔한 코드</strong>를 만들 수 있습니다. 왠만한 경우에서 컴파일러 두개 중 하나만 선택해야하는 경우는 없습니다.</p>
+<p>다음은 <strong>성능</strong>에 대한 부분입니다. gcc로 빌드한 결과가 MSVC보다 10% 더 빠르다고 해봅시다. <strong>동일한 작업을 수행하는데 더 빠른 결과를 내는 컴파일러를 쓰는게 더 좋은 선택</strong>일 겁니다. MSVC로만 빌드하고 있었다면 평생 얻지 못할 10% 성능개선입니다. 물론 이 부분은 코드의 안정성과는 거리가 먼 부분이긴 합니다.</p>
+<p>물론 멀티 컴파일러 빌드에도 단점은 있습니다. 컴파일러의 개수마다 빌드를 돌려야하기 때문에 오래걸린다는 점인데요, 이 부분은 CI 서버에 다중 agent를 둬서 MSVC, clang, gcc를 모두 한번에 빌드하고 성능을 측정하게 자동화해주면 되는 부분입니다. 나는 중저가용 노트북 하나로 모든걸 다 해야하고 내일 모레가 데드라인이다, 하시는 분들에게만 gcc 원툴 테크트리를 추천드립니다.</p>
+<p> </p>
+<hr>
+<h2 id="모호한-코딩을-검수하는-컴파일러-플래그를-활성화하세요"><a href="#모호한-코딩을-검수하는-컴파일러-플래그를-활성화하세요" class="headerlink" title="모호한 코딩을 검수하는 컴파일러 플래그를 활성화하세요"></a>모호한 코딩을 검수하는 컴파일러 플래그를 활성화하세요</h2><p>gcc/clang 컴파일러에는 다음과 같은 컴파일러 경고 플래그를 설정할 수 있습니다. 경고 플래그는 모두 <code>-W</code>로 시작합니다.</p>
+<ul>
+<li><code>-Wall</code></li>
+<li><code>-Wextra</code></li>
+<li><code>-Wpedantic</code></li>
+<li><code>-Werror</code></li>
+</ul>
+<p><code>-Wall</code>은 왠만한 모호한 코딩들을 잡아내는 경고 플래그들을 활성화합니다. 이 기능을 키는 것만 해도 꽤나 많은 이슈를 잡을 수 있습니다. ‘all’이라는 이름만 보면 모든 경고 플래그를 활성화하는 것 같지만, 실제로는 얼마 몇개 없습니다 (<span class="exturl" data-url="aHR0cHM6Ly9nY2MuZ251Lm9yZy9vbmxpbmVkb2NzL2djYy9XYXJuaW5nLU9wdGlvbnMuaHRtbA==">링크<i class="fa fa-external-link-alt"></i></span>).</p>
+<p>여기에 <code>-Wextra</code>를 써서 모호한 코딩들을 더 잡아주는 extra 플래그도 활성화합니다.</p>
+<p><code>-Wpedantic</code> 플래그도 활성화해줍니다. ISO C++에서 요구하는 사항들을 빡빡하게 걸러내주는 플래그입니다. 대충 어디어디 사전에 따르면 pedantic의 의미는 아래와 같습니다. 좋은 코드만 짤 수 있다면 좀 pedantic 하면 어떤가요 ㅎㅎ</p>
+<blockquote>
+<p>pedant는 형식주의와 정확성에 지나치게 관심이 있거나 과시하고 오만한 학습 표시를하는 사람입니다.</p>
+</blockquote>
+<p>마지막으로 <code>-Werror</code> 플래그를 활성화 해줍니다. 이러면 모든 ‘경고’는 ‘에러’가 됩니다. 즉, 이제 당신은 이 경고를 해결하기 전 까지 프로그램을 쓸 수 없습니다. 빨리 가서 경고를 다 고치십시오 후후</p>
+<blockquote>
+<p>MSVC에서도 비슷한 플래그들이 있습니다. 다만 저는 SLAM쟁이라 MSVC에는 큰 관심이 없으니 직접 찾아보시는걸 추천드립니다.</p>
+</blockquote>
+<p> </p>
+<hr>
+<h2 id="Unit-test를-쓰세요"><a href="#Unit-test를-쓰세요" class="headerlink" title="Unit test를 쓰세요"></a>Unit test를 쓰세요</h2><blockquote>
+<p>Unit test에 대해 알아보고, 직접 데모를 돌려보고 싶으시다면 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwOTI1LWNwcC1iZXN0LXByYWN0aWNlcy1hdXRvbWF0ZWQtdGVzdHMv">링크<i class="fa fa-external-link-alt"></i></span>를 따라가세요</p>
+</blockquote>
+<p>TDD 찬양론이 아니라는 점 우선 먼저 밝힙니다. 하지만 ‘그 코드 잘 작동해?’ 라고 물어봤을 때 ‘음 잘 몰라, 아마 그럴걸?’라는 답변을 듣고 반기는 프로그래머는 없을 겁니다.</p>
+<p>정말 정말 백보 물러나서 얘기하는건데, 적어도 하나의 테스트는 꼭 돌려주시길 바랍니다. 테스트도 안되고 도큐먼팅도 안된 코드를 사용해야하는 상황이 오면, 당신은 그날 저녁부터 이 상황으로부터 도망가기 위해 이직 준비를 시작하게 될겁니다. 그러다가 극심한 스트레스로 두통과 몸살이 동시에 와 침대에서 끙끙거리다가 ‘내 인생 왜 이 모양 이 꼴이냐’ 하며 눈물 한방울을 흘리게 될겁니다.</p>
+<p>정말 코드에 자신이 있으려면, 작성하신 모든 함수 하나하나마다 유닛테스트를 만들어서 ‘내 코드는 주어진 시나리오에서 잘 작동합니다’ 라고 얘기할 수 있도록 합시다.</p>
+<img src="/20220115-safer-c/result.png" class="" title="result">
+
+<p> </p>
+<hr>
+<h2 id="정적분석-Static-analysis"><a href="#정적분석-Static-analysis" class="headerlink" title="정적분석 (Static analysis)"></a>정적분석 (Static analysis)</h2><p>정적분석은 소스코드를 분석해서 좋지 않은 코드가 있으면 알려주는 툴입니다.</p>
+<p>Visual Studio에는 기본적으로 적용되어있는 기능이며, 위험한 코드를 짜게 되면 ‘이렇게 짜지 않을래?’하고 제안을 하는 친구입니다. VSCode에서는 이 기능이 자동으로 지원되지 않는데, 그러다보니 VSCode 유저들 중에 코드 퀄리티가 엉망이신 분들도 꽤 많습니다. 하지만 다 핑계입니다. <strong><code>clang-tidy</code> 익스텐션</strong> 받으면 곧바로 정적 분석이 돌아가기 때문입니다. CLion IDE를 사용하면 기본 적용되어있습니다.</p>
+<p>clang-tidy도 플래그를 추가로 적용해서 더 좋은 코드를 만들 수 있습니다. 아래는 제가 좋아하는 플래그들입니다.</p>
+<ul>
+<li>-*<ul>
+<li>기본 체크</li>
+</ul>
+</li>
+<li>bugprone-*<ul>
+<li>버그 잡이</li>
+</ul>
+</li>
+<li>clang-analyzer-*<ul>
+<li>버그 잡이 2</li>
+</ul>
+</li>
+<li>concurrency-*<ul>
+<li>동시성 프로그래밍 버그 잡이</li>
+</ul>
+</li>
+<li>cppcoreguidelines-*<ul>
+<li>C++ Core guideline 준수</li>
+</ul>
+</li>
+<li>hicpp-*<ul>
+<li>High integrity C++ 가이드라인 준수</li>
+</ul>
+</li>
+<li>linuxkernel-*<ul>
+<li>리눅스 커널에 맞는 코드 준수</li>
+</ul>
+</li>
+<li>modernize-*<ul>
+<li>모던 C++ 사용</li>
+</ul>
+</li>
+<li>openmp-*<ul>
+<li>OpenMP 사용 법 준수</li>
+</ul>
+</li>
+<li>performance-*<ul>
+<li>성능 향상 제안</li>
+</ul>
+</li>
+<li>portability-*<ul>
+<li>이식성 제안</li>
+</ul>
+</li>
+</ul>
+<p>이러한 체커도 하나만 쓰면 좀 아쉽습니다.</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhbm1hci9jcHBjaGVjay8=">CppCheck<i class="fa fa-external-link-alt"></i></span>라는 정적분석 툴도 좋으니, clang-tidy와 함께 돌립시다.</p>
+<p>아래는 clang-tidy를 돌렸을 때 나오는 코드 제안들의 예시입니다 (출처: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLndob2xldG9tYXRvLmNvbS8yMDIxLzAxLzA4L2EtYnJpZWYtaW50cm9kdWN0aW9uLXRvLWNsYW5nLXRpZHktYW5kLWl0cy1yb2xlLWluLXZpc3VhbC1hc3Npc3Qv">https://blog.wholetomato.com/2021/01/08/a-brief-introduction-to-clang-tidy-and-its-role-in-visual-assist/<i class="fa fa-external-link-alt"></i></span>)</p>
+<img src="/20220115-safer-c/clang.png" class="" title="clang">
+
+<p> </p>
+<hr>
+<h2 id="동적분석-메모리-주소-메모리-leak-쓰레드-관리"><a href="#동적분석-메모리-주소-메모리-leak-쓰레드-관리" class="headerlink" title="동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)"></a>동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)</h2><p>동적 분석은 실제로 코드가 돌아가면서 생기는 허점들을 잡아줄 수 있습니다.</p>
+<p>가장 대표적인건 1. <strong>메모리 주소</strong>, 2. <strong>메모리 leak</strong>, 3. <strong>쓰레드 관리</strong> 쪽 허점들입니다.</p>
+<p>Google에서 만든 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dvb2dsZS9zYW5pdGl6ZXJz">Sanitizer<i class="fa fa-external-link-alt"></i></span>가 있습니다. 뭘 써야할지 모르겠을 때는 그냥 다 적용합시다.</p>
+<p> </p>
+<hr>
+<h2 id="MISRA"><a href="#MISRA" class="headerlink" title="MISRA"></a>MISRA</h2><p>MISRA C++은 실제로 안전이 중요한 시스템에서 지켜져야하는 C++ 프로그래밍 가이드입니다.</p>
+<p>프로토타입 단계에서 필요한건 아니지만, 제품으로 만들려고 하면 꼭 거쳐야합니다. 어차피 거칠거면 처음부터 오토체커를 사용해서 잘 짜면 되지 않을까요?</p>
+<p>오토체커 방법은 두가지가 있습니다.</p>
+<p>첫번째는 <strong>CLion IDE에서 지원하는 오토체커</strong>를 사용하는겁니다. CLion에서는 정적분석 툴로 MISRA 오토체커가 들어가있습니다. 하지만 그렇게 막 좋은 편은 아닙니다. 2022년 1월 16일 기준으로, 211개 체크 중 65개만 구현이 되어있습니다. 구현 상황은 <span class="exturl" data-url="aHR0cHM6Ly95b3V0cmFjay5qZXRicmFpbnMuY29tL2FydGljbGVzL0NQUC1BLTE5MTQzMDY4Mj9fZ2E9Mi4xNTE2Mzg3NzguMjExMzM0NTA5NS4xNjQyMjUwNjAxLTIzMTMwODMwMi4xNjI1NjE2NTU0Jl9nbD0xKmJzYWtidypfZ2EqTWpNeE16QTRNekF5TGpFMk1qVTJNVFkxTlRRLipfZ2FfMFdRMlpGNVZHVCpNVFkwTWpJMk1UTTFNUzR4TGpFdU1UWTBNakkyTVRVeU1DNHc=">링크<i class="fa fa-external-link-alt"></i></span>에 잘 나와있습니다. 하지만 그래도 65개라도 돌아가는거 어디입니까 헛헛</p>
+<blockquote>
+<p>물론 이 방법을 사용하려면 CLion IDE를 써야합니다. 유료이긴 하지만 성능이 빵빵하니 개인적으로 추천하는 IDE입니다. 학생이시라면 교육용 라이센스로, 직장인이라면 회사에 사달라고 하세요. 개인 사용은 선택에 맡기겠습니다.</p>
+</blockquote>
+<p>두번째는 <strong>CppCheck 기반 오토체커</strong>를 쓰는겁니다. CppCheck는 clang-tidy와 같은 정적분석 툴인데, 이 안에도 MISRA 체커 기능이 있습니다. 대신 CLion에서 지원하는 것과는 다르게, 직접 MISRA 도큐먼트를 15 파운드 (약 3만원)으로 구매한 후 직접 설정해줘야하는게 매우 귀찮습니다.</p>
+<p>제 코드는 원래 경고/에러 없이 깔끔했습니다만, CLion의 MISRA 체커를 키니까 안전하지 않은 코드라고 호되게 혼나는 모습을 아래 사진에 담았습니다. 노란줄은 경고, 빨간줄은 에러인데, 211개의 체크를 다 거치면 얼마나 고쳐야할지 모르겠네요 허허</p>
+<img src="/20220115-safer-c/misra.png" class="" title="misra">
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210107-gcc-ffast-math/" rel="bookmark">C++ 프로그램 속도를 빠르게 만들어주는 gcc 컴파일러 플래그</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/STL/" rel="tag"># STL</a>
+              <a href="/tags/gcc/" rel="tag"># gcc</a>
+              <a href="/tags/MISRA/" rel="tag"># MISRA</a>
+              <a href="/tags/clang/" rel="tag"># clang</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20220115-libstdc-gpl/" rel="prev" title="아니 왜 C++ 언어가 GPL 라이센스지?? (libc++ / libstdc++)">
+                  <i class="fa fa-chevron-left"></i> 아니 왜 C++ 언어가 GPL 라이센스지?? (libc++ / libstdc++)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20220120-static-vs-shared-libs/" rel="next" title="Static lib vs Shared lib (.lib vs .dll)">
+                  Static lib vs Shared lib (.lib vs .dll) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

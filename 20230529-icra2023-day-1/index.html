@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Distributed Graph Algorithms 워크샵 참석기">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ICRA 2023 - Distributed graph algorithms 워크샵 (Day 1)">
+<meta property="og:url" content="https://changh95.github.io/20230529-icra2023-day-1/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Distributed Graph Algorithms 워크샵 참석기">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%204.59.43%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/IMG_0741.gif">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.07%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.19%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.27%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.43%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/IMG_0762.gif">
+<meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.52.54%20PM.png">
+<meta property="article:published_time" content="2023-05-29T05:48:45.000Z">
+<meta property="article:modified_time" content="2023-06-09T07:49:37.229Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="ICRA">
+<meta property="article:tag" content="Meta">
+<meta property="article:tag" content="Workshop">
+<meta property="article:tag" content="Distributed graph algorithms">
+<meta property="article:tag" content="Gaussian Belief Propagation">
+<meta property="article:tag" content="Planning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%204.59.43%20PM.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20230529-icra2023-day-1/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>ICRA 2023 - Distributed graph algorithms 워크샵 (Day 1) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Distributed-planning-for-Multi-quadrotor"><span class="nav-number">1.</span> <span class="nav-text">Distributed planning for Multi-quadrotor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Robotics-perception-in-search-for-effective-representations"><span class="nav-number">2.</span> <span class="nav-text">Robotics perception - in search for effective representations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Open-Problems-in-Machine-Perception-amp-Always-on-AI"><span class="nav-number">3.</span> <span class="nav-text">Open Problems in Machine Perception &amp; Always-on AI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Panel-discussion"><span class="nav-number">3.1.</span> <span class="nav-text">Panel discussion</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20230529-icra2023-day-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ICRA 2023 - Distributed graph algorithms 워크샵 (Day 1)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-05-29 14:48:45" itemprop="dateCreated datePublished" datetime="2023-05-29T14:48:45+09:00">2023-05-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 16:49:37" itemprop="dateModified" datetime="2023-06-09T16:49:37+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Distributed-planning-for-Multi-quadrotor"><a href="#Distributed-planning-for-Multi-quadrotor" class="headerlink" title="Distributed planning for Multi-quadrotor"></a>Distributed planning for Multi-quadrotor</h2><blockquote>
+<p>Angela Schoellig 교수님의 발표</p>
+</blockquote>
+<ul>
+<li>Distributed algorithm을 사용하는 이유는 무엇인가?<ul>
+<li>(Central 알고리즘은 하나의 성능 좋은 컴퓨터에서 모든 것을 계산하는 것, Distributed algorithm은 다수의 소형 컴퓨터들이 서로 소통을 하며 계산을 하는 것이다)</li>
+<li>시스템 적으로 scale up 하기가 쉽다. 시스템이 3개의 agent를 쓰나, 10개를 쓰나, 100개를 쓰나 알고리즘 자체는 똑같이 유지할 수 있다. </li>
+<li>Robustness를 높일 수 있다. (조금 약한 주장이긴 한데, distributed algorithm은 각가의 소형 컴퓨터에서 빠르게 계산을 함으로써, quadrotor motion에 문제가 생겼을 때 다시 빠르게 re-planning을 할 수 있기 때문에 robustness가 높아진다는 주장을 했다. Planning에서만 가능한 주장으로 보인다.)</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%204.59.43%20PM.png" class="" title="multirotor planning">
+
+<p>(사진 색깔이 왜 이러지…)</p>
+<ul>
+<li>교수님의 랩실에서는 순차적으로 아래와 같은 연구를 진행하셨다.<ul>
+<li>Offline central multi-agent path planning</li>
+<li>Offline distributed multi-agent path planning</li>
+<li>Online distributed multi-agent path planning</li>
+</ul>
+</li>
+<li>드론 하나가 다른 드론 위로 날아가게 되면, Downward force가 생기니까 trajectory가 꼬이지 않을까? Planning이 이거까지 고려하고 하는건지?</li>
+</ul>
+<img src="/20230529-icra2023-day-1/IMG_0741.gif" class="" title="distributed">
+
+<h2 id="Robotics-perception-in-search-for-effective-representations"><a href="#Robotics-perception-in-search-for-effective-representations" class="headerlink" title="Robotics perception - in search for effective representations"></a>Robotics perception - in search for effective representations</h2><blockquote>
+<p>Margarita Chli 교수님의 발표</p>
+</blockquote>
+<ul>
+<li><p>교수님 연구실에서 풀려고 하시는 연구</p>
+<ul>
+<li>High-fidelity SLAM</li>
+<li>Scene representations for interaction and path planning</li>
+<li>Multi-agent collaboration</li>
+</ul>
+</li>
+<li><p>Motion을 어떻게 표현하는게 가장 좋을까?: Continuous-time SLAM</p>
+<ul>
+<li>Continuous-time SLAM을 할 경우, 센서가 데이터를 asynchronous하게 취득해도 괜찮다.</li>
+<li>Motion trajectory는 Cubic B-spline으로 표현한다.</li>
+<li>Gaussian Belief Propagation을 통해 backend 를 풀어보려는 시도를 하고 있다.</li>
+</ul>
+</li>
+<li><p>Collaborative SLAM (CCM-SLAM, COVINS-G)</p>
+<ul>
+<li>CCM-SLAM: 여러 agent가 local BA를 통해 맵을 만들다가, 중앙 서버에서 map merging + global optimziation을 하는 것</li>
+<li>COVINS-G: Collaborative SLAM을 위한 백엔드 프레임워크?</li>
+</ul>
+</li>
+<li><p>Towards generic, decentralized SLAM…</p>
+<ul>
+<li>Map sharing<ul>
+<li>Ownership of local maps</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Distributed SLAM 시스템의 bottleneck은 무엇일까? 로봇을 100개-1000개를 쓰려고 한다면 어떤 bottleneck이 생길까?</p>
+<ul>
+<li>agent들마다 서로 통신을 해야하는데, 통신을 할 때 keyframe 같은 정보를 주고 받는다면 네트워크 bandwidth가 이걸 감당할 수 있어야한다.</li>
+<li>결국 가벼운 정보를 가지고 서로 통신을 해야한다는건데… 어떤 정보를 주고받아야 가벼울지 고민이 필요할 것 같다.</li>
+<li>Mobile agent들끼리의 통신이 bottleneck이 될 수 있다면, Distributed central server는 어떨까…?</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.07%20PM.png" class="" title="distributed1">
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.19%20PM.png" class="" title="distributed2">
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.27%20PM.png" class="" title="distributed3">
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.12.43%20PM.png" class="" title="distributed4">
+
+<p> </p>
+<h2 id="Open-Problems-in-Machine-Perception-amp-Always-on-AI"><a href="#Open-Problems-in-Machine-Perception-amp-Always-on-AI" class="headerlink" title="Open Problems in Machine Perception & Always-on AI"></a>Open Problems in Machine Perception &amp; Always-on AI</h2><blockquote>
+<p>Meta의 Richard Newcombe가 발표했다.</p>
+</blockquote>
+<img src="/20230529-icra2023-day-1/IMG_0762.gif" class="" title="meta-ai">
+
+<ul>
+<li>AI 기술이 많이 발전했지만, Context 정보가 없다. (Contextual AI)<ul>
+<li>All-day context = All-day wearable + Always-on machine perception<ul>
+<li>All-day wearable: Project ARIA (안경에 카메라. Ego-centric computer vision)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ChatGPT와 같이 인터넷 대화를 통해 얻어낸 reasoning은 굉장히 잘 된다.<ul>
+<li>하지만 실제 세상에서 Physical reality와 digital reality를 엮고 context 정보를 넣어주는 시스템이 없다.</li>
+<li>이 ‘context gap’을 채우기 위해서, wearable machine perception이 필요하다.<ul>
+<li>All-day wearable을 하기 위햇는 저전력 고성능의 디바이스가 필요하다.<ul>
+<li>2개의 SLAM용 카메라 (20FPS), 2개의 RGB 카메라 (25FPS), 2개의 gaze 카메라 (60FPS), gaze를 보기 위한 LED, 7개의 마이크2개의 IMU, GNSS</li>
+</ul>
+</li>
+<li>Project ARIA 디바이스를 받기 위해서는 <span class="exturl" data-url="aHR0cHM6Ly9hYm91dC5tZXRhLmNvbS91ay9yZWFsaXR5bGFicy9wcm9qZWN0YXJpYS8=">웹사이트<i class="fa fa-external-link-alt"></i></span>에 들어가서 요청을 하라고 한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day-1/Screenshot%202023-05-29%20at%205.52.54%20PM.png" class="" title="meta-ai2">
+
+<ul>
+<li>문제 1: What is the sufficient information needed from physical reality for Contextualized AI?<ul>
+<li>100 명이 ARIA를 쓰고 다니면 31 페타바이트가 필요하다,,<ul>
+<li>그렇기 때문에, 대충 적당한 데이터셋에서 학습해서 real-life에 deploy해서 잘될거라고 희망하는건 말이 되지 않는다.</li>
+</ul>
+</li>
+<li>Can state-estimation capture &amp; compress a day-in-the-life?</li>
+<li>Attributes:<ul>
+<li>Location - Where am I?</li>
+<li>Gaze - Where am I looking at?</li>
+<li>Voice - What am I saying?</li>
+<li>Kinematic state - Body pose</li>
+<li>Interaction - What am I interacting with?</li>
+<li>Object Index - What’s in my environment?</li>
+<li>…</li>
+<li>Other’s states</li>
+<li>위의 attribute에 대한 데이터를 저장한다면, raw data에 비해 훨씬 적은 양을 저장할 것이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>문제 2: ARIA의 무게는 70g, Power는 2.5Wh, Sensor module size 4mm^2이다.<ul>
+<li>&lt;30g, 1mm^2, 1.0Wh 정도가 되야한다.</li>
+<li>1.0Wh 를 10시간동안 실행하면서, 10%의 전력만 perception에 쓴다면 약 10mW가 필요하다.<ul>
+<li>LED 하나를 키는게 5mW 이다…</li>
+</ul>
+</li>
+<li>대충 데스크탑의 1만배 정도 더 적은 전력을 사용해야한다.</li>
+</ul>
+</li>
+<li>문제 3:<ul>
+<li>Resolution, Low oice, Continuous lens focusing, Field of view, No motion blur, HDR </li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h3 id="Panel-discussion"><a href="#Panel-discussion" class="headerlink" title="Panel discussion"></a>Panel discussion</h3><ul>
+<li><p>Q. Distributed algorithm을 할 때 어떤 레벨에서 distribution을 해야할지가 고민이 될 수 있다. SLAM을 모바일 디바이스에서 다 끝내고 odometry와 map 정보만 서로 통신을 하는 방법이 있는 반면에, 완전 초기의 센서 데이터도 서로 주고 받을 수 있을 것이다. 적당한 중간을 찾아야할텐데, 그 ‘적당한 중간’은 어디에 있을까?</p>
+<ul>
+<li>Richard Newcombe: 데이터의 흐름을 파악해서 최종 문제를 풀었을 때 minimum energy가 사용되는 방향으로 가야한다. 단순히 알고리즘을 푸는데에 필요한 에너지가 아니라, agent간의 통신에 필요한 에너지도 고려를 해야할 것이다.</li>
+<li>Magarita Chli: ‘적당한 중간’을 찾기는 꽤 어렵다. 왜냐하면 어떤 문제를 푸느냐에따라 optimal 에너지를 소비하는 distribution 레벨이 다를 것이기 때문이다. 특히나 환경이 바뀐다던지, 문제가 바뀐다던지, 상황이 바뀐다던지 할 경우 정보를 송신하는 쪽과 수신하는 쪽에서 내부 알고리즘에 대한 정보 요구조건이 달라질 경우, 최적 에너지 소비 조건이 달라질 가능성이 굉장히 높다. Distributed algorithm은 문제를 효율적이고 빠르게 풀 수 있게 해주는 방법론이지 솔루션 그 자체가 아니다. </li>
+</ul>
+</li>
+<li><p>Q. Distributed algorithm에는 안전 문제가 있는 것 같다. (Andrew Davision 교수님): 우리 랩실에서 낸 논문에 의하면, 여러개의 agent 중 하나가 고장나면 localisation의 경우 모든 agent의 정확도가 조금 떨어지고 끝날 것인데, planning의 경우 완전 큰일나게 될 수도 있다. 이는, 해커가 맘을 먹고 하나의 agent에서 다른 agent로 보내는 메세지들에 거짓말을 섞거나 또는 아무 메세지도 보내지 않는다면 (i.e. 존재하지 않는 척 한다면), 전체 시스템을 망가트릴 수 있다. 이 안전 문제를 해결하기 위해서는 어떻게 해야할까?</p>
+<ul>
+<li>Mustafa: Encrypted message를 사용하는건 어떨까?</li>
+<li>Richard Newcombe: Observation + consistency로 풀어야한다. 단순히 비밀번호 기반의 시스템이 아닌, 여러 agent가 observation을 통해 적절한 space-time 데이터가 나오는 경우 consistent하다고 판단하는 consensus 알고리즘이 필요하다.</li>
+<li>Frank Dellaert: 난 드립을 하나 치려고 하는데, Meta와 Twitter에서 fake news를 없애는 알고리즘을 써보는 것도 좋겠다.</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230529-icra2023-day1-posters/" rel="bookmark">ICRA 2023 - 포스터 (Day 1)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230530-icra2023-day2-poster/" rel="bookmark">ICRA 2023 - 포스터 (Day 2)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230531-icra2023-day3-poster/" rel="bookmark">ICRA 2023 - 포스터 (Day 3)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230531-icra2023-day4-poster/" rel="bookmark">ICRA 2023 - 포스터 (Day 4)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230602-icra2023-day5-poster/" rel="bookmark">ICRA 2023 - 포스터 (Day 5)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/ICRA/" rel="tag"># ICRA</a>
+              <a href="/tags/Meta/" rel="tag"># Meta</a>
+              <a href="/tags/Workshop/" rel="tag"># Workshop</a>
+              <a href="/tags/Distributed-graph-algorithms/" rel="tag"># Distributed graph algorithms</a>
+              <a href="/tags/Gaussian-Belief-Propagation/" rel="tag"># Gaussian Belief Propagation</a>
+              <a href="/tags/Planning/" rel="tag"># Planning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230529-icra2023-day1-posters/" rel="prev" title="ICRA 2023 - 포스터 (Day 1)">
+                  <i class="fa fa-chevron-left"></i> ICRA 2023 - 포스터 (Day 1)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20230529-icra2023-day-1-2/" rel="next" title="ICRA 2023 - Unconventional spatial representations Opportunities for robotics 워크샵 (Day 1)">
+                  ICRA 2023 - Unconventional spatial representations Opportunities for robotics 워크샵 (Day 1) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

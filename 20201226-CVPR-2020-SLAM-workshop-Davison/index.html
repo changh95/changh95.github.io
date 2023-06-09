@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Andrew Davison 교수님께서 발표해주신 From SLAM to Spatial AI 영상의 노트입니다. Andrew Davison">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)">
+<meta property="og:url" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Andrew Davison 교수님께서 발표해주신 From SLAM to Spatial AI 영상의 노트입니다. Andrew Davison">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/level_of_performance.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/gap.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/monoslam.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/denseslam.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/semanticfusion.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/computation_graph.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/codeslam.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/deepfactors.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/slamplusplus.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/map_hierarchy.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/morefusion.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/morefusion2.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/fusionplusplus.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/nodeslam.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/nodeslam_2.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/nodeslam_3.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/processors.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/ipu.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_memory.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_vis.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_spatial_ai.png">
+<meta property="og:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_graph.png">
+<meta property="article:published_time" content="2020-12-26T11:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Graphcore">
+<meta property="article:tag" content="IPU">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="MonoSLAM">
+<meta property="article:tag" content="DTAM">
+<meta property="article:tag" content="KinectFusion">
+<meta property="article:tag" content="ElasticFusion">
+<meta property="article:tag" content="SemanticFusion">
+<meta property="article:tag" content="CodeSLAM">
+<meta property="article:tag" content="SceneCode">
+<meta property="article:tag" content="DeepFactors">
+<meta property="article:tag" content="SLAM++">
+<meta property="article:tag" content="MoreFusion">
+<meta property="article:tag" content="Fusion++">
+<meta property="article:tag" content="NodeSLAM">
+<meta property="article:tag" content="FutureMapping">
+<meta property="article:tag" content="Graph processor">
+<meta property="article:tag" content="Andrew Davison">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/level_of_performance.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Visual-SLAM"><span class="nav-number">1.</span> <span class="nav-text">Visual-SLAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spatial-AI-Spatial-IA%EA%B0%80-%ED%92%80%EC%96%B4%EC%95%BC-%ED%95%A0-%EC%88%99%EC%A0%9C"><span class="nav-number">2.</span> <span class="nav-text">Spatial AI, Spatial IA가 풀어야 할 숙제</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spatial-AI%EA%B0%80-%ED%92%80%EC%96%B4%EC%95%BC-%ED%95%A0-%EC%88%99%EC%A0%9C"><span class="nav-number">2.1.</span> <span class="nav-text">Spatial AI가 풀어야 할 숙제</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spatial-IA%EA%B0%80-%ED%92%80%EC%96%B4%EC%95%BC-%ED%95%A0-%EC%88%99%EC%A0%9C"><span class="nav-number">2.2.</span> <span class="nav-text">Spatial IA가 풀어야 할 숙제</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM%EC%9D%98-%EC%97%AD%EC%82%AC%EC%99%80-%EB%B0%9C%EC%A0%84-%EB%B0%A9%ED%96%A5"><span class="nav-number">3.</span> <span class="nav-text">SLAM의 역사와 발전 방향</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-MonoSLAM"><span class="nav-number">3.1.</span> <span class="nav-text">1. MonoSLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dense-Direct-Visual-SLAM%EC%9D%98-%EC%8B%9C%EC%9E%91"><span class="nav-number">3.2.</span> <span class="nav-text">Dense &#x2F; Direct Visual SLAM의 시작</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DTAM"><span class="nav-number">3.3.</span> <span class="nav-text">DTAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KinectFusion"><span class="nav-number">3.4.</span> <span class="nav-text">KinectFusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ElasticFusion-SemanticFusion"><span class="nav-number">3.5.</span> <span class="nav-text">ElasticFusion, SemanticFusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-SLAM%EC%97%90-%ED%95%84%EC%9A%94%ED%95%9C-%EA%B3%84%EC%82%B0-%EC%84%A4%EA%B3%84%EB%8F%84"><span class="nav-number">3.6.</span> <span class="nav-text">Deep SLAM에 필요한 계산 설계도</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CodeSLAM-SceneCode-DeepFactors-%EB%94%A5%EB%9F%AC%EB%8B%9D-keyframe-%EC%A0%95%EB%B3%B4-%EC%95%95%EC%B6%95"><span class="nav-number">4.</span> <span class="nav-text">CodeSLAM, SceneCode, DeepFactors - 딥러닝 keyframe 정보 압축</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CodeSLAM"><span class="nav-number">4.1.</span> <span class="nav-text">CodeSLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SceneCode"><span class="nav-number">4.2.</span> <span class="nav-text">SceneCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DeepFactors"><span class="nav-number">4.3.</span> <span class="nav-text">DeepFactors</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM-Hierarchical-map-Live-Maps-Dynamic-scene-graph-MoreFusion-Fusion-NodeSLAM"><span class="nav-number">5.</span> <span class="nav-text">SLAM++, Hierarchical map (Live Maps, Dynamic scene graph), MoreFusion, Fusion++, NodeSLAM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SLAM"><span class="nav-number">5.1.</span> <span class="nav-text">SLAM++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MoreFusion"><span class="nav-number">5.2.</span> <span class="nav-text">MoreFusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fusion"><span class="nav-number">5.3.</span> <span class="nav-text">Fusion++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NodeSLAM"><span class="nav-number">5.4.</span> <span class="nav-text">NodeSLAM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4-%EA%B0%9C%EC%84%A0-Graphcore-IPU"><span class="nav-number">6.</span> <span class="nav-text">하드웨어 개선 - Graphcore IPU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B0%9C%ED%91%9C-%EC%A7%88%EB%AC%B8%EB%93%A4"><span class="nav-number">7.</span> <span class="nav-text">발표 질문들</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spatial-AI%EC%9D%98-%EC%84%A4%EA%B3%84-%EA%B7%B8%EB%9E%98%ED%94%84%EC%97%90%EB%8A%94-%EC%97%AC%EB%9F%AC-%EB%AA%A8%EB%93%88%EC%9D%B4-%EC%9E%88%EB%8A%94%EB%8D%B0-%EA%B7%B8%EC%A4%91-%ED%8A%B9%EB%B3%8B%ED%9E%88-%EB%B0%9C%EC%A0%84%EC%8B%9C%ED%82%A4%EA%B8%B0-%EC%96%B4%EB%A0%A4%EC%9A%B4-%EB%AA%A8%EB%93%88%EC%9D%B4-%EC%9E%88%EC%9D%84%EA%B9%8C%EC%9A%94"><span class="nav-number">7.1.</span> <span class="nav-text">Spatial AI의 설계 그래프에는 여러 모듈이 있는데, 그중 특볋히 발전시키기 어려운 모듈이 있을까요?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPU-%EC%B9%A9%EC%9D%B4-Long-term-SLAM%EC%9D%84-%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C%EC%9A%94"><span class="nav-number">7.2.</span> <span class="nav-text">IPU 칩이 Long-term SLAM을 할 수 있을까요?</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-26 20:38:19" itemprop="dateCreated datePublished" datetime="2020-12-26T20:38:19+09:00">2020-12-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="Visual-SLAM"><a href="#Visual-SLAM" class="headerlink" title="Visual-SLAM"></a>Visual-SLAM</h1><p>로봇, 드론, 모바일/스마트폰 AR 소프트웨어, VR/AR 헤드셋 등에서 Visual-SLAM을 사용한다.<br>이는 카메라가 작고 싸기 떄문에 제품화하기 좋기 때문이다.<br>또, 이미지를 통해 정말 다양한 기능을 이용할 수 있기 때문이다.</p>
+<p>Visual-SLAM을 사용하는 이유는 대부분 positioning 또는 어느정도의 sparse/semi-dense mapping을 수행하기 위해서이다.<br>sparse / semi-dense mapping을 넘어, dense / semantic mapping을 사용하는 제품들도 점차 나타나기 시작했다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/level_of_performance.png" class="" title="Levels of performance in SLAM">
+
+<p>Davison 교수님이 멤버로 계신 SLAMCORE라는 스타트업에서 정의한 SLAM 기술의 단계는 위와 같다.</p>
+<p>SLAM은 앞으로 Spatial AI의 일부로 들어갈 것이다.<br>Spatial AI는 컴퓨터 비전을 사용하여 실시간으로 디바이스가 주변 환경과 상호작용을 할 수 있게 해주는 AI 시스템이다. </p>
+<p>SLAM의 목적은 localization 한번 하는 것, mapping 한번 하는 것으로 끝나는게 아니다.<br>SLAM의 성능은 제품에 모듈로써 포함될 수 있는 정도가 되어야한다.<br>실시간으로 작동하고 인터랙션을 할 수 있는 데모를 볼 수 있어야한다.<br>직접 데모로 보여주던가, 제품을 내던가, 아니면 오픈소스 프로젝트로 오픈할 수 있어야한다.<br>논문에서 데이터셋을 이용한 벤치마크 성능을 보여주는 것 보다 이것이 더 중요하다.</p>
+<hr>
+<h1 id="Spatial-AI-Spatial-IA가-풀어야-할-숙제"><a href="#Spatial-AI-Spatial-IA가-풀어야-할-숙제" class="headerlink" title="Spatial AI, Spatial IA가 풀어야 할 숙제"></a>Spatial AI, Spatial IA가 풀어야 할 숙제</h1><h2 id="Spatial-AI가-풀어야-할-숙제"><a href="#Spatial-AI가-풀어야-할-숙제" class="headerlink" title="Spatial AI가 풀어야 할 숙제"></a>Spatial AI가 풀어야 할 숙제</h2><p>대량생산될 청소 로봇을 만든다고 생각해보자.<br>이 로봇은 복잡한 구조의 방과 물건들 사이에서 닦고 쓸줄 알아야한다.<br>이 로봇을 설계할 때, 우리는 이 로봇의 가격, 디자인, 크기, 안전, 소비전력 등을 고려해야한다.<br>그리고, 이 모든게 보통의 사용자가 쓸 수 있는 범위 안에 있어야한다.</p>
+<p>지금 SLAM의 단계로는 복잡한 구조의 방과 물건에서 정확하게 localization / mapping에서 어려울 수 있다.</p>
+<br>
+
+<h2 id="Spatial-IA가-풀어야-할-숙제"><a href="#Spatial-IA가-풀어야-할-숙제" class="headerlink" title="Spatial IA가 풀어야 할 숙제"></a>Spatial IA가 풀어야 할 숙제</h2><p>우선 Spatial IA는 Intelligence Augmentation을 줄인 말이다.<br>간단하게 생각하면 증강현실을 이용해서 주변 환경과 사물에 대해 인터랙션을 추가한 것이라고 볼 수 있다.</p>
+<p>증강현실 안경을 만든다고 생각해보자.<br>우선 이 안경의 크기는 보통의 안경과 같은 사이즈여야한다.<br>약 65g 정도의 무게를 가지고, 배터리는 하루종일 돌아갈 수 있어야한다.<br>동시에, 실시간으로 정확하게 정보를 증강시킬 수 있어야하며, 증강되는 정보는 주변 사물, 환경, 사람 등에 대한 정보를 모두 포함한다.</p>
+<p>지금 <span class="exturl" data-url="aHR0cHM6Ly93d3cubWljcm9zb2Z0LmNvbS9lbi11cy9ob2xvbGVucw==">MS 홀로렌즈<i class="fa fa-external-link-alt"></i></span> 정도면 사전에 등록해놓은 정보들을 실시간으로 증강시키고, 사람의 손과 눈 정보는 읽을 수 있다.<br>하지만 이 경우, 무게는 약 600g에 배터리는 몇시간 남짓하지 않고, 가격은 5백만원 대이다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/gap.png" class="" title="Product gap">
+
+<p>여기까지 생각하면 몇가지 질문이 생긴다.<br>어떻게 만들어야할까?<br>만들 수 있기는 한걸까?<br>만든다면 누가 만들것인가?</p>
+<p>물론 아직 아무도 만들어본 적이 없기 때문에, 어떻게 만드는지는 아무도 모른다.</p>
+<p>대학과 기업 연구실에서 많은 연구를 하고 있지만, Spatial AI까지의 길은 아직 멀고도 멀어보인다.<br>특히, Robustness와 Efficiency에서 많이 발전해야할 것 같다.</p>
+<br>
+
+<p>Davison 교수님께서 </p>
+<ol>
+<li>Spatial AI가 풀어야할 문제들과 </li>
+<li>이 문제를 다 풀어낸 Spatial AI의 모습은 어떨지<br>구상을 하시고 적으신 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE4MDMuMTEyODgucGRm">논문<i class="fa fa-external-link-alt"></i></span>이 있다.</li>
+</ol>
+<p>교수님이 구상하시는 Spatial AI의 특징을 두개만 꼽으면 아래와 같다.</p>
+<ol>
+<li>3D geometry의 정보를 내포하고 있는 어떠한 map에 대한 정보가 있어야한다.</li>
+<li>튜닝 파라미터의 수가 적어야한다 + 몇개의 파라미터를 변경하는 것으로 여러 도메인의 spatial AI를 넘나들 수 있어야한다 (e.g. 로봇 -&gt; AR).</li>
+</ol>
+<hr>
+<h1 id="SLAM의-역사와-발전-방향"><a href="#SLAM의-역사와-발전-방향" class="headerlink" title="SLAM의 역사와 발전 방향"></a>SLAM의 역사와 발전 방향</h1><p>SLAM이 미래에 어떻게 될지 보기 위해, 과거로부터 거슬러 올라가보자.</p>
+<h2 id="1-MonoSLAM"><a href="#1-MonoSLAM" class="headerlink" title="1. MonoSLAM"></a>1. MonoSLAM</h2><img src="/20201226-CVPR-2020-SLAM-workshop-Davison/monoslam.png" class="" title="MonoSLAM">
+
+<p>가장 초기의 SLAM으로 2003년에 만들어진 <span class="exturl" data-url="aHR0cHM6Ly93d3cucm9ib3RzLm94LmFjLnVrL0FjdGl2ZVZpc2lvbi9QdWJsaWNhdGlvbnMvZGF2aXNvbl9pY2N2MjAwMy9kYXZpc29uX2ljY3YyMDAzLnBkZg==">MonoSLAM<i class="fa fa-external-link-alt"></i></span>을 소개하셨다.<br>Hand-held 카메라를 사용해서 feature detection + tracking을 수행하고, Extended Kalman filter를 통해 camera pose와 map point의 위치를 jointly하게 계산해냈다.<br>2003년의 노트북으로 30FPS의 성능이 나왔고, 성공적으로 실시간 데모를 할 수 있었다.</p>
+<p>물론 단점도 있었다.</p>
+<ol>
+<li>feature의 수가 작았고, </li>
+<li>robust하지 않았다.</li>
+</ol>
+<p>그렇기에 feature가 많은 공간에서 천천히 움직여야만 작동했다.</p>
+<br>
+
+<hr>
+<h2 id="Dense-Direct-Visual-SLAM의-시작"><a href="#Dense-Direct-Visual-SLAM의-시작" class="headerlink" title="Dense / Direct Visual SLAM의 시작"></a>Dense / Direct Visual SLAM의 시작</h2><h2 id="DTAM"><a href="#DTAM" class="headerlink" title="DTAM"></a>DTAM</h2><img src="/20201226-CVPR-2020-SLAM-workshop-Davison/denseslam.png" class="" title="Dense SLAM">
+
+<p>2009년에 GPGPU를 사용해서 실시간 dense reconstruction을 성공시켰다.<br>당시 Davison 교수님 랩실에서 박사과정을 하고 있던 Richard Newcombe이 연구를 주도하였다.<br>이 연구를 발전시켜 2011년에 PTAM의 dense버전인 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9EZjlXaGdpYkNRQQ==">DTAM<i class="fa fa-external-link-alt"></i></span>이 발표되었다.<br>PTAM은 sparse map밖에 쓸 수 없었지만, DTAM은 이를 dense map으로 확장을 했다고 볼 수 있다.<br>이 연구를 통해 sparse map에 비해 dense map이 가지는 장점을 확실하게 알 수 있었다.</p>
+<h2 id="KinectFusion"><a href="#KinectFusion" class="headerlink" title="KinectFusion"></a>KinectFusion</h2><p>조금 다른 방향의 연구가 진행된 것도 있다.<br>Microsoft Kinect와 같은 RGB-D 카메라를 사용한 연구이다.<br>2010년에는 <span class="exturl" data-url="aHR0cHM6Ly93d3cubWljcm9zb2Z0LmNvbS9lbi11cy9yZXNlYXJjaC93cC1jb250ZW50L3VwbG9hZHMvMjAxNi8wMi9pc21hcjIwMTEucGRm">KinectFusion<i class="fa fa-external-link-alt"></i></span>이 발표되었다.<br>이 연구 역시 Richard Newcombe의 작품이다.</p>
+<p>DTAM의 경우는 monocular 카메라를 사용해서 dense map을 만드는 계산 방법을 만들어내는데에 많은 고민을 했다고 한다.<br>하지만 KinectFusion의 경우 하드웨어의 힘을 받아 dense map을 만드는 작업을 손쉽게 성공시켰다.<br>그리고 next step이라고 생각했던 ‘좀 더 큰 맵’을 만드는 과정과 volumetric representation 기술을 연구할 수 있게 되었다고 한다.</p>
+<br>
+
+<h2 id="ElasticFusion-SemanticFusion"><a href="#ElasticFusion-SemanticFusion" class="headerlink" title="ElasticFusion, SemanticFusion"></a>ElasticFusion, SemanticFusion</h2><img src="/20201226-CVPR-2020-SLAM-workshop-Davison/semanticfusion.png" class="" title="Semantic Fusion">
+
+<p>2016년에는 loop-closure가 가능한 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9YeVNyaFpwT0RZcw==">ElasticFusion<i class="fa fa-external-link-alt"></i></span>을 발표하였다.<br>이 방식은 기존의 KinectFusion에서 진화한 버전이라고 볼 수 있다.<br>그리고 2017년도에는 ElasticFusion으로 만들어내는 Map 정보에 딥러닝 CNN 기술로 semantic 정보를 추가한 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9fYXFQOXJ1bWtnUQ==">SemanticFusion<i class="fa fa-external-link-alt"></i></span>이 발표된다.<br>이 연구를 통해 dense semantic SLAM, deep-SLAM 연구가 시작되었다.</p>
+<hr>
+<h2 id="Deep-SLAM에-필요한-계산-설계도"><a href="#Deep-SLAM에-필요한-계산-설계도" class="headerlink" title="Deep SLAM에 필요한 계산 설계도"></a>Deep SLAM에 필요한 계산 설계도</h2><p>SLAM 기술이 발전되면서 몇가지 트렌드가 극명하게 드러났다.</p>
+<ol>
+<li>정확도의 향상을 위해 점점 더 많은 양의 계산이 요구되었다.</li>
+<li>실시간성 유지를 위해 병렬처리를 요구하게 되었으며, 이에 따른 하드웨어의 수도 늘어났다.</li>
+<li>새로운 기능들이 추가하면서 점점 더 많은 데이터의 타입을 저장하게 되었다.</li>
+</ol>
+<p>SLAM 시스템은 점점 더 복잡하게 바뀌어갔다.<br>과거와 비교했을 때, SemanticFusion과 같은 deep SLAM의 설계 구조를 보면 굉장히 복잡했다.<br>그럼에도 SLAM은 계속 발전해나가야한다.<br>하지만 이 트렌드가 유지된다면, Spatial AI 단계에 다다랐을 때 시스템이 요구하는 설계는 겉잡을 수 없을정도로 복잡할 것이다.</p>
+<p>아래는 간단한 Spatial AI가 수행해야하는 연산의 관계와 데이터의 타입들을 그래프 형태로 정리한 것이다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/computation_graph.png" class="" title="Spatial AI computation graph">
+
+<p>수많은 다양한 종류의 계산과 데이터가 오고가는 것을 볼 수 있다.<br>이 뜻은, 어떠한 계산에 최적화가 들어가도 해당 계산만 최적화가 될 것이라는거다.<br>즉, 최적화를 해도 전체 시스템의 성능에 큰 영향을 주지 못할 수 있다.<br>하드웨어 디펜던시도 걸려있다.<br>딥러닝 추론과 같은 계산은 병렬처리에 특화되어 GPU와 같은 하드웨어에서 잘 돌지만 CPU에서 잘 돌지 못할것이다.<br>반대로 최적화 프로그래밍 계산은 고성능 클럭을 가진 CPU에서만 잘된다.<br>하드웨어 간의 통신도 고려해야하며, 종종 큰 데이터가 이동해야할 때 효율성이 급격하게 떨어질 수도 있다 (e.g. CPU-&gt;GPU 정보이동).<br>정리하자면, 전체 시스템의 최적화을 하기에는 수많은 제약이 걸려있으며, 최적화는 굉장히 어려울 것이다.</p>
+<p>고성능 고효율의 spatial AI를 만들기 위해서는 이 그래프 전체를 최적화해야한다.<br>Davison 교수님은 두가지 방법을 제안하셨다.</p>
+<ol>
+<li>Representation을 개선하기</li>
+<li>하드웨어를 개선하기</li>
+</ol>
+<p>–</p>
+<h1 id="CodeSLAM-SceneCode-DeepFactors-딥러닝-keyframe-정보-압축"><a href="#CodeSLAM-SceneCode-DeepFactors-딥러닝-keyframe-정보-압축" class="headerlink" title="CodeSLAM, SceneCode, DeepFactors - 딥러닝 keyframe 정보 압축"></a>CodeSLAM, SceneCode, DeepFactors - 딥러닝 keyframe 정보 압축</h1><h2 id="CodeSLAM"><a href="#CodeSLAM" class="headerlink" title="CodeSLAM"></a>CodeSLAM</h2><img src="/20201226-CVPR-2020-SLAM-workshop-Davison/codeslam.png" class="" title="Code SLAM">
+
+<p>Visual-SLAM에서 keyframe 정보는 굉장히 많이 사용되는 정보 중 하나이다.<br>Visual-SLAM에서는 추출된 keyframe들로부터 3D reconstruction을 수행한다.<br>최근에는 Keyframe들로부터 depth map이나 semantic label map 등을 만들기도 한다.</p>
+<p>Davison 교수님 랩실에서 최근 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDQuMDA4NzQ=">CodeSLAM<i class="fa fa-external-link-alt"></i></span>과 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDMuMDY0ODI=">SceneCode<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDEuMDUwNDk=">DeepFactors<i class="fa fa-external-link-alt"></i></span>라는 연구를 발표되었다.<br>위의 사진은 SceneCode에서 가져왔다.</p>
+<p>가장 초기 연구였던 CodeSLAM에서는 딥러닝 기법인 variational autoencoder를 사용해서 keyframe 이미지로부터 추출하는 depth map을 압축할 수 있다는 것을 보여주었다.<br>Variational autoencoder는 encoder 부분에서 차원을 축소하면서 컴팩트한 데이터 형태로 바꿀 수 있다.<br>Decoder를 사용해서 다시 복원시킬 수도 있지만, 이 연구에서는 ‘압축’에 집중하기에 decoder는 고려하지 않는다.<br>Variational autoencoder를 SLAM에 적용했을 때, keyframe에서 얻을 수 있는 depth map을 컴팩트한 데이터 형태인 ‘code’로 변환할 수 있게 된다.<br>이 code는 약 32개의 파라미터를 가지며, 이는 기존의 방식에 비해 굉장히 작다는 것을 알 수 있다.<br>또, 이 code의 파라미터를 조정함으로써 값을 변화시킬 수도 있다.</p>
+<h2 id="SceneCode"><a href="#SceneCode" class="headerlink" title="SceneCode"></a>SceneCode</h2><p>후속 연구인 SceneCode에서는 depth map과 semantic map의 code를 이용해 joint optimisation을 수행하는 방법을 제안한다.<br>Depth map의 code화는 CodeSLAM에서 보여준 방식과 동일하다.<br>Semantic map의 code화는 새롭게 제안하는 방식이지만, CodeSLAM과 크게 차이가 나지는 않는 것 같다.<br>여러 keyframe들로터 depth map code와 semantic map code가 있을 때, 이 code 들의 값을 조정하면서 joint optmisation을 수행할 수 있다.<br>Code가 포함하는 파라미터의 수가 굉장히 작기 때문에, joint optimisation의 계산량도 많지 않다고 한다.</p>
+<h2 id="DeepFactors"><a href="#DeepFactors" class="headerlink" title="DeepFactors"></a>DeepFactors</h2><br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/deepfactors.png" class="" title="DeepFactors">
+
+<p>DeepFactors에서는 위 방식을 실제 Factor graph optmisation에 포함시켜 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9odG5SdUdLWm1adw==">실시간 데모<i class="fa fa-external-link-alt"></i></span>를 만들었고, <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pjemFybm93c2tpL0RlZXBGYWN0b3Jz">오픈소스 프로젝트<i class="fa fa-external-link-alt"></i></span>로 공개하였다.<br>CodeSLAM에서는 하나의 방법론을 탐색하였다면, DeepFactors에서는 전체 SLAM 시스템에서 작동하는 수준으로 끌어올린 것이다.<br>DeepFactors에서는 camera motion부터 dense scene geometry까지 joint optmisation을 수행한다.</p>
+<p>…여기까지 만들었지만, 정작 Davison 교수님은 이 방법에 대해 아직 의구심이 남아있으신 것 같다.<br>Depth map이나 3D scene에서 바뀔 수 있는 정보들을 고작 32개의 파라미터에 모두 담을 수 있을까?<br>한계가 있을 것이라고 보시는 것 같다.</p>
+<hr>
+<h1 id="SLAM-Hierarchical-map-Live-Maps-Dynamic-scene-graph-MoreFusion-Fusion-NodeSLAM"><a href="#SLAM-Hierarchical-map-Live-Maps-Dynamic-scene-graph-MoreFusion-Fusion-NodeSLAM" class="headerlink" title="SLAM++, Hierarchical map (Live Maps, Dynamic scene graph), MoreFusion, Fusion++, NodeSLAM"></a>SLAM++, Hierarchical map (Live Maps, Dynamic scene graph), MoreFusion, Fusion++, NodeSLAM</h1><p>SLAM에서 가장 효과적인 Map의 representation은 무엇일까?<br>Robotics, AR과 같은 분야에서는 objects를 다루는 경우가 많고, 각각의 objects에 정보를 저장해야한다.<br>Spatial AI에서 결국 우리가 가장 집중하게 되는 것은 ‘objects’이지 않을까 생각한다.<br>하지만 현재의 파이프라인에서는 reconstructed map에서부터 objects를 추출해야하는데, 굉장히 비효율적이다.<br>“SLAM에서 사용하는 map을 object단위로 만들 수 있을까?”라는 질문이 생긴다.</p>
+<h2 id="SLAM"><a href="#SLAM" class="headerlink" title="SLAM++"></a>SLAM++</h2><br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/slamplusplus.png" class="" title="SLAM++">
+
+<p>2013년에 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS90bXJBaDFDcUNSbw==">SLAM++<i class="fa fa-external-link-alt"></i></span>이라는 연구를 발표했다.<br>SLAM++은 뎁스카메라를 사용하면서 프론트엔드 단계에서 object recognition 기능을 추가하였다.<br>생성된 map은 object instance끼리 연결된 graph형태로 포현된다.<br>각각의 object instance는 3D 공간상의 위치+방향 정보와 해당하는 object class의 3D 모델 정보를 가지고 있었다.<br>이 방법의 단점이라면, 3D 공간 안에 어떤 object가 있어야하는지 미리 알고있어야한다는 것이다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/map_hierarchy.png" class="" title="Hierarchical Map">
+
+<p>현재 활발하게 연구되고 있는 분야는 Hierarchical map 구조이다.<br>이 구조는 SLAM++에서 영감을 받았다고 할 수 있다.<br>Facebook Reality Labs의 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9KVGE4em4wUk5WTQ==">Live Maps<i class="fa fa-external-link-alt"></i></span>나 MIT의 Luca Carlone 교수님 랩실에서 나온 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9KVGE4em4wUk5WTQ==">3D Dynamic Scene Graph<i class="fa fa-external-link-alt"></i></span><br>SLAM++은 object level만 다룬다고 하면, 이 방식들은 여러 level로 그래프를 구성한다는 것이다.<br>SLAM++에서 수행하는 작업이 Hierarchical map 속 하나의 level이 될 수 있다는 것이다.</p>
+<h2 id="MoreFusion"><a href="#MoreFusion" class="headerlink" title="MoreFusion"></a>MoreFusion</h2><br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/morefusion.png" class="" title="MoreFusion">
+
+<p><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS82b0xVaHVaTDRrbw==">MoreFusion<i class="fa fa-external-link-alt"></i></span>은 CVPR 2020 학회에서 선보인 object-level SLAM과 6D pose estimation 기법이다.<br>MoreFusion은 뎁스카메라 이미지와 사전에 3D CAD 데이터가 있는 물체들을 기반으로 map을 만들려고 한다.<br>이 점이 SLAM++와 굉장히 유사하다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/morefusion2.png" class="" title="MoreFusion2">
+
+<p>MoreFusion은 object가 겹쳐올려진 상태에서도 정확한 맵을 복원하여 로봇팔을 통해 물체들과 상호작용을 할 수 있다.<br>보통 Object가 겹쳐 올려진 상태에서는 서로가 서로를 가리기 때문에 6D pose를 정확하게 구할 수 없다.<br>MoreFusion은 volumetric reasoning를 (object끼리 서로 통과할 수 없는 constraint) 사용하여 정확하게 6D pose를 구할 수 있다.<br>하지만 SLAM++이 방 크기를 스캔할 수 있던데에 비해 MoreFusion은 훨씬 작은 테이블탑 크기에서만 사용할 수 있다. </p>
+<h2 id="Fusion"><a href="#Fusion" class="headerlink" title="Fusion++"></a>Fusion++</h2><br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/fusionplusplus.png" class="" title="Fusion++">
+
+<p>SLAM++이나 MoreFusion처럼 object에 대한 사전정보가 없으면 어떻게 할까?<br><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS8ybHVLTkMwM3g0aw==">Fusion++<i class="fa fa-external-link-alt"></i></span>은 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDMuMDY4NzA=">Mask-RCNN<i class="fa fa-external-link-alt"></i></span>이라는 딥러닝 object intance segmentation 기술을 이용해, 그 자리에서 object를 검출하고 volumetric reconstruction을 수행하여 object-level SLAM을 수행한다.</p>
+<h2 id="NodeSLAM"><a href="#NodeSLAM" class="headerlink" title="NodeSLAM"></a>NodeSLAM</h2><br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/nodeslam.png" class="" title="NodeSLAM">
+
+<p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDQuMDQ0ODU=">NodeSLAM<i class="fa fa-external-link-alt"></i></span>은 SLAM++와 Fusion++의 중간점이라고 볼 수 있다.<br>SLAM++은 검출하려는 object들의 모양을 알고 있어야하고, Fusion++은 아예 이러한 정보가 아예 없는 상황에서 만들어내는 과정이다.<br>NodeSLAM은 검출될 object들의 neural shape descriptor (i.e. differentiable shape feature)를 사전에 딥러닝 autoencoder로 학습해두고, 검출 단계에서 이 정보를 사용한다.<br>보통 shape descriptor들은 정확한 shape을 읽어내려는 것이 아니라 object의 class를 구분하는데에 쓰인다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/nodeslam_2.png" class="" title="NodeSLAM_2">
+
+<p>여기서 neural shape descriptor가 학습되는 과정은, 아까 설명되었던 CodeSLAM에서 했던 것 처럼 autoencoder의 encoder를 통해 압축된 code가 추출된다.<br>그리고 DeepFactors에서 이 code를 조정함으로써 camera pose와 map정보를 jointly optimise할 수 있던 것 처럼, NodeSLAM에서도 object shape와 camera pose를 jointly optimise할 수 있다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/nodeslam_3.png" class="" title="NodeSLAM_3">
+
+<p>Object shape와 camera pose이 joint optimisation을 거쳐 얼마나 정확해지냐면…<br>MoreFusion이 3D CAD 모델을 가지고 할 수 있었던 똑같은 작업인 Robot manipulation을 할 수 있을 정도로 정확해진다.</p>
+<hr>
+<h1 id="하드웨어-개선-Graphcore-IPU"><a href="#하드웨어-개선-Graphcore-IPU" class="headerlink" title="하드웨어 개선 - Graphcore IPU"></a>하드웨어 개선 - Graphcore IPU</h1><br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/processors.png" class="" title="Processors">
+
+<p>SLAM에서 쓸 수 있는 하드웨어는 여러가지 종류가 있다.<br>지난 PAMELA 프로젝트를 통해서 여러 하드웨어에 대해 SLAM 성능 벤치마크를 진행했었다.<br>다양한 SLAM 알고리즘을 단 하나의 칩으로 정확도, 속도, 효율성 모두 잡을 수는 없었다.<br>SLAM을 위한 하드웨어가 있어야한다는 생각도 들었다.<br>하지만 Sparse mapping, Dense mapping, CNN, Semantic mapping 등등 기술 트렌드가 너무나도 빨리 발전하기 때문에, 단 하나의 플랫폼에 엮이면 안된다는 생각도 들었다.<br>SLAM의 하드웨어 연구는 아직 계속 진행되어야한다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/ipu.png" class="" title="Graphcore IPU">
+
+<p>요즘 눈여겨보고 있는 프로세서는 Graph processor이다.<br>영국의 Graphcore라는 업체에서 IPU라는 이름으로 판매하고있기도 하다.</p>
+<p>IPU는 그래프 연산에 최적화된 설계를 가지고 있으며, AI 계산을 빠르게 수행하기 위해 개발되었다.<br>CPU는 보통의 연산에 효과적이지만, AI 계산에서는 좋지 않다.<br>GPU는 기존에는 그래픽스 렌더링을 위해 제작되어있지만, 현재는 AI 계산을 할 수 있도록 많이 기능이 추가되었다.<br>하지만 GPU 역시 비효율적인 부분이 있다.<br>IPU는 이 중 가장 효율적이게 작동할 수 있을 것이다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_memory.png" class="" title="IPU Memory">
+
+<p>IPU 역시 GPU와 비슷하게 병렬처리에 특화되어있다.<br>GPU는 모든 코어가 동일한 작업을 할 때 효과적인 연산을 할 수 있다.<br>그에 비해 IPU는 각각의 코어가 다른 작업을 하면서도 효과적으로 작업할 수 있다.</p>
+<p>IPU는 GPU에 비해서 메모리 공간이 GPU에 비해 훨씬 크다.<br>이 덕분에 프로세서 코어 당 더 많은 메모리를 사용할 수 있다.<br>또, 각 코어끼리 메모리에 저장된 내용을 공유할 수도 있다.<br>이를 통해, IPU는 각각의 코어에서 계산을 한 후 주변 코어에 결과 값을 넘겨주는 연산에 특화된 것을 알 수 있다.<br>딥러닝에서 사용하는 뉴럴넷 계산이 이러한 구조 덕에 훨씬 빠르게 계산될 수 있다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_vis.png" class="" title="Visualization of IPU processes">
+
+<p>위 그림은 AlexNet이라는 CNN 아키텍처를 가진 네트워크를 사용할 때 필요한 연산을 IPU에 탑재했을 때, 각각의 코어에서 담당하는 작업을 시각화 한 것이다.<br>IPU의 특성 상 가까이 있는 코어들끼리 비슷한 연산을 함께 할 수 있는 것을 볼 수 있다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_spatial_ai.png" class="" title="IPU for Spatial AI">
+
+<p>오늘 토크의 주제였던 Spatial AI를 달성하기 위해 IPU를 사용한다면, 프로세서의 구조가 어떻게 나눠질지 예상해본 그림이다.<br>위의 AlexNet 이미지와 어느정도 유사함을 보인다.</p>
+<p>IPU가 Spatial AI에 특화될 수 있는 또 하나의 이유는 map을 표현하는 그래프 구조와 큰 연관이 있다.<br>Map 위에 있는 위치들이 가까울 수록 실제 IPU에서도 가깝게 위치시킬 수 있다.<br>멀리 있는 위치들끼리는 코어끼리의 거리 상 멀리 떨어트려 놓을 수 있다.</p>
+<br>
+
+<img src="/20201226-CVPR-2020-SLAM-workshop-Davison/ipu_graph.png" class="" title="Gaussian belief propagation within graph in IPU">
+
+<p>2019년 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMTQxMzk=">FutureMapping2<i class="fa fa-external-link-alt"></i></span>라는 논문에서는 State estimation에서 쓰이는 Gaussian belief propagation을 Graph processor에서 수행하는 것을 제안하였다.<br>Gaussian belief propagation은 옛날에 사용되었던 방식이고, 현재 CPU에서 돌린다면 Gaussian belief propagation보다 많은 solver 라이브러리에 탑재된 Bundle adjustment가 훨씬 빠르게 작동한다.<br>하지만 CVPR 2020 학회에서 발표한 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMDMxMzQ=">Bundle adjustment on a Graph Processor<i class="fa fa-external-link-alt"></i></span> 논문에 따르면, Gaussian belief propagation 기반으로 bundle adjustment를 구현하여 IPU에 올렸을 때 CPU에서 돌린 bundle adjustment보다 20~40배는 더 빠르게 계산을 수행한 것을 확인할 수 있었다.</p>
+<hr>
+<h1 id="발표-질문들"><a href="#발표-질문들" class="headerlink" title="발표 질문들"></a>발표 질문들</h1><h2 id="Spatial-AI의-설계-그래프에는-여러-모듈이-있는데-그중-특볋히-발전시키기-어려운-모듈이-있을까요"><a href="#Spatial-AI의-설계-그래프에는-여러-모듈이-있는데-그중-특볋히-발전시키기-어려운-모듈이-있을까요" class="headerlink" title="Spatial AI의 설계 그래프에는 여러 모듈이 있는데, 그중 특볋히 발전시키기 어려운 모듈이 있을까요?"></a>Spatial AI의 설계 그래프에는 여러 모듈이 있는데, 그중 특볋히 발전시키기 어려운 모듈이 있을까요?</h2><p>딱 하나만 꼽기는 어렵고…<br>Robustness 문제가 생기는 모듈들은 전부 어려운 것 같다.</p>
+<p>예를 들어서, Semantic label을 만들어주는 모듈의 경우에는 하나의 데이터셋에서는 잘되지만 처음 보는 데이터셋에서는 굉장히 안될 수 있다.<br>이런 문제는 딥러닝 관점에서 보았을 때 unsupervised learning으로 풀어야하지 않을까 생각한다.<br>또는, 로봇이 처음 보는 환경에 있을 때, 그 자리에서 학습을 할 수 있어야한다고 생각한다.</p>
+<h2 id="IPU-칩이-Long-term-SLAM을-할-수-있을까요"><a href="#IPU-칩이-Long-term-SLAM을-할-수-있을까요" class="headerlink" title="IPU 칩이 Long-term SLAM을 할 수 있을까요?"></a>IPU 칩이 Long-term SLAM을 할 수 있을까요?</h2><p>IPU 칩에서는 factor graph를 통해서 in-place computation을 하면 좋다.<br>하지만 물론 당연히 map이 커지고, 더 많은 level의 hierarchical map을 만든다면, 칩이 감당할 수 없을 수 있다.<br>이런 경우에는 incremental abstraction을 써야한다.<br>예를 들어, 현재 보고 있는 이미지에서 포인트가 100개가 뽑혔다고 해보자.<br>그런데, 약 5초정도 후 보았을 때, 그 포인트가 알고보니까 어떤 하나의 plane에서 나왔다고 해보자.<br>이런 경우에는 포인트 100개가 아니라 plane을 저장하면 훨씬 메모리를 적게 사용할 수 있을 것이다.<br>이런식으로 세밀한 데이터 node들이 모여서 super-node를 만들어가고… 이 과정이 반복될 수 있지 않을까 생각한다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Graphcore/" rel="tag"># Graphcore</a>
+              <a href="/tags/IPU/" rel="tag"># IPU</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/MonoSLAM/" rel="tag"># MonoSLAM</a>
+              <a href="/tags/DTAM/" rel="tag"># DTAM</a>
+              <a href="/tags/KinectFusion/" rel="tag"># KinectFusion</a>
+              <a href="/tags/ElasticFusion/" rel="tag"># ElasticFusion</a>
+              <a href="/tags/SemanticFusion/" rel="tag"># SemanticFusion</a>
+              <a href="/tags/CodeSLAM/" rel="tag"># CodeSLAM</a>
+              <a href="/tags/SceneCode/" rel="tag"># SceneCode</a>
+              <a href="/tags/DeepFactors/" rel="tag"># DeepFactors</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM++</a>
+              <a href="/tags/MoreFusion/" rel="tag"># MoreFusion</a>
+              <a href="/tags/Fusion/" rel="tag"># Fusion++</a>
+              <a href="/tags/NodeSLAM/" rel="tag"># NodeSLAM</a>
+              <a href="/tags/FutureMapping/" rel="tag"># FutureMapping</a>
+              <a href="/tags/Graph-processor/" rel="tag"># Graph processor</a>
+              <a href="/tags/Andrew-Davison/" rel="tag"># Andrew Davison</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="prev" title="CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)">
+                  <i class="fa fa-chevron-left"></i> CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20201227-cvpr2020-slam-malisiewicz/" rel="next" title="CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)">
+                  CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

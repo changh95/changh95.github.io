@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Giseop Kim님의 LiDAR SLAM 페이퍼 리스트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LiDAR SLAM 논문 리스트">
+<meta property="og:url" content="https://changh95.github.io/20211201-lidar-slam/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Giseop Kim님의 LiDAR SLAM 페이퍼 리스트">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-01T12:34:42.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.987Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="LiDAR">
+<meta property="article:tag" content="LiDAR SLAM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20211201-lidar-slam/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>LiDAR SLAM 논문 리스트 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">시작하기 전…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paper-List"><span class="nav-number">2.</span> <span class="nav-text">Paper List</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20211201-lidar-slam/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LiDAR SLAM 논문 리스트
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-01 21:34:42" itemprop="dateCreated datePublished" datetime="2021-12-01T21:34:42+09:00">2021-12-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h2><p>이 글의 출처는 <span class="exturl" data-url="aHR0cHM6Ly93d3cubm90aW9uLnNvL0xpREFSLVNMQU0tMjk1MTQ3MDQwNjgzNDgzZDhjOGM1ODc3NmE0N2Y5Yzc=">Giseop Kim 님의 Notion 글<i class="fa fa-external-link-alt"></i></span>입니다. 그냥 다 그대로 가져온 수준이에요(…)</p>
+<p>기섭님 <span class="exturl" data-url="aHR0cHM6Ly9naXNiaS1raW0uZ2l0aHViLmlvLw==">블로그<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vY2hhbm5lbC9VQ3JtVk1KM0tFRmJERDlFdG5BbURUNmc=">유투브<i class="fa fa-external-link-alt"></i></span>에도 좋은 슬램 관련 글과 영상이 있습니다.</p>
+<h2 id="Paper-List"><a href="#Paper-List" class="headerlink" title="Paper List"></a>Paper List</h2><ul>
+<li>1987 PAMI <span class="exturl" data-url="aHR0cHM6Ly93d3cuZWNlLnF1ZWVuc3UuY2EvcGVvcGxlL1MtRC1CbG9zdGVpbi9wYXBlcnMvUEFNSS0zRExTLTE5ODcucGRm">Least-squares fitting of two 3D point sets<i class="fa fa-external-link-alt"></i></span><ul>
+<li>SVD-based closed form of registration; a basic of basic of the scan matching  </li>
+</ul>
+</li>
+<li>92 PAMI <span class="exturl" data-url="aHR0cDovL2dyYXBoaWNzLnN0YW5mb3JkLmVkdS9jb3Vyc2VzL2NzMTY0LTA5LXNwcmluZy9IYW5kb3V0cy9wYXBlcl9pY3AucGRm">A method for registration of 3-D shapes<i class="fa fa-external-link-alt"></i></span><ul>
+<li>ICP - a basic of the scan matching</li>
+</ul>
+</li>
+<li>97 AR <span class="exturl" data-url="aHR0cDovL2NpdGVzZWVyeC5pc3QucHN1LmVkdS92aWV3ZG9jL2Rvd25sb2FkP2RvaT0xMC4xLjEuMzAuODg4OCZyZXA9cmVwMSZ0eXBlPXBkZg==">Globally Consistent Range Scan Alignment for Environment Mapping<i class="fa fa-external-link-alt"></i></span><ul>
+<li>mostly called as “Lu and Milios”; considered as the first work of a scan matching and pose graph optimization-based SLAM</li>
+</ul>
+</li>
+<li>03 IROS <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzEyNDkyODU=">The Normal Distributions Transform: A New Approach to Laser Scan Matching<i class="fa fa-external-link-alt"></i></span><ul>
+<li>NDT registration</li>
+</ul>
+</li>
+<li>06 IJRR <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2MuZ2F0ZWNoLmVkdS9+ZGVsbGFlcnQvcHViL0RlbGxhZXJ0MDZpanJyLnBkZg==">Square Root SAM: Simultaneous Localization and Mapping via Square Root Information Smoothing<i class="fa fa-external-link-alt"></i></span><ul>
+<li>from probabilistic nature to least square formulation of SLAM for smoothing (i.e., modification of past poses)</li>
+</ul>
+</li>
+<li>07 JFR <span class="exturl" data-url="aHR0cDovLzEzMC4yNDMuMTA1LjQ5L1Jlc2VhcmNoL21yby9wdWJsaWNhdGlvbnMvMjAwNy9NYWdudXNzb25fZXRhbF8yMDA3LUpGUi0zRF9TY2FuX1JlZ2lzdHJhdGlvbl9mb3JfQXV0b25vbW91c19NaW5pbmdfVmVoaWNsZXMucGRm">Scan registration for autonomous mining vehicles using 3D-NDT<i class="fa fa-external-link-alt"></i></span><ul>
+<li>3D version of NDT registration</li>
+</ul>
+</li>
+<li>08 TRO <span class="exturl" data-url="aHR0cDovL3d3dy5jcy5jbXUuZWR1L35rYWVzcy9wdWIvS2Flc3MwOHRyby5wZGY=">iSAM: Incremental Smoothing and Mapping<i class="fa fa-external-link-alt"></i></span><ul>
+<li>incremental SAM and an open source library</li>
+</ul>
+</li>
+<li>09 ICRA <span class="exturl" data-url="aHR0cHM6Ly9hcHJpbC5lZWNzLnVtaWNoLmVkdS9wZGZzL29sc29uMjAwOWljcmEucGRm">Real-Time Correlative Scan Matching<i class="fa fa-external-link-alt"></i></span><ul>
+<li>prof. Olson; later affects  to Cartographer, etc</li>
+</ul>
+</li>
+<li>09 ICRA <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3ZsLmlpcy51LXRva3lvLmFjLmpwL2NsYXNzMjAxNi8yMDE2dy9wYXBlcnMvNi4zRGRhdGFQcm9jZXNzaW5nL1J1c3VfRlBGSF9JQ1JBMjAwOS5wZGY=">Fast Point Feature Histograms (FPFH) for 3D Registration<i class="fa fa-external-link-alt"></i></span><ul>
+<li>FPFH (the most famous 3D local descriptor) registration</li>
+</ul>
+</li>
+<li>09 RSS <span class="exturl" data-url="aHR0cHM6Ly93d3cucm9ib3RzLm94LmFjLnVrL35hdnNlZ2FsL3Jlc291cmNlcy9wYXBlcnMvR2VuZXJhbGl6ZWRfSUNQLnBkZg==">Generalized-ICP<i class="fa fa-external-link-alt"></i></span><ul>
+<li>uncertainty-embedded ICP (probabilistic perspective)</li>
+</ul>
+</li>
+<li>10 ITSM <span class="exturl" data-url="aHR0cDovL3d3dzIuaW5mb3JtYXRpay51bmktZnJlaWJ1cmcuZGUvfnN0YWNobmlzL3BkZi9ncmlzZXR0aTEwdGl0c21hZy5wZGY=">A Tutorial on Graph-Based SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Grisetti’s must-read tutorial</li>
+</ul>
+</li>
+<li>11 IV <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzU5NDAzOTY=">Velodyne SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>an early work of modern 3D scanning LiDAR-based motion estimation</li>
+</ul>
+</li>
+<li>12 TRO <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzYyMjA5MDA=">Zebedee: Design of a Spring-Mounted 3-D Range Sensor with Application to Mobile Mapping<i class="fa fa-external-link-alt"></i></span><ul>
+<li>mobile mapping system and IMU fusion</li>
+</ul>
+</li>
+<li>12 RAM <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzYyOTkxNjY=">Tutorial: Point Cloud Library: Three-Dimensional Object Recognition and 6 DOF Pose Estimation<i class="fa fa-external-link-alt"></i></span><ul>
+<li>PCL tutorial, but not much delved into the SLAM perspective.</li>
+</ul>
+</li>
+<li>12 IJRR <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3MuY211LmVkdS9+a2Flc3MvcHViL0thZXNzMTJpanJyLnBkZg==">iSAM2: Incremental smoothing and mapping using the Bayes tree<i class="fa fa-external-link-alt"></i></span><ul>
+<li>in GTSAM 4.0, iSAM2 (not iSAM1) is currently a de-facto default factor graph optimizer.</li>
+</ul>
+</li>
+<li>13 ICRA <span class="exturl" data-url="aHR0cHM6Ly92aXNpb24uaW4udHVtLmRlL19tZWRpYS9zcGV6aWFsL2JpYi9rZXJsMTNpY3JhLnBkZg==">Robust Odometry Estimation for RGB-D Cameras<i class="fa fa-external-link-alt"></i></span><ul>
+<li>DVO; this is not an actually LiDAR thing, but to understand the effectiveness of direct alignment rather ICP</li>
+</ul>
+</li>
+<li>13 IROS <span class="exturl" data-url="aHR0cHM6Ly9qc3R1cm0uZGUvcHVibGljYXRpb25zL2RhdGEva2VybDEzaXJvcy5wZGY=">Dense Visual SLAM for RGB-D Cameras<i class="fa fa-external-link-alt"></i></span><ul>
+<li>a SLAM version (i.e., including loop closures) of the DVO; studying RGB-D SLAMs is also worthy for LiDAR guys because they frequently considers the both a photometric error and a geometric error</li>
+</ul>
+</li>
+<li>13 AR <span class="exturl" data-url="aHR0cHM6Ly9oYWwuYXJjaGl2ZXMtb3V2ZXJ0ZXMuZnIvaGFsLTAxMTQzNDU0L2RvY3VtZW50">Challenging data sets for point cloud registration algorithms<i class="fa fa-external-link-alt"></i></span><ul>
+<li>a.k.a the open library: Libpointmatcher*</li>
+</ul>
+</li>
+<li>14 RSS <span class="exturl" data-url="aHR0cHM6Ly93d3cucmkuY211LmVkdS9wdWJfZmlsZXMvMjAxNC83L0ppX0xpZGFyTWFwcGluZ19SU1MyMDE0X3Y4LnBkZg==">LOAM: Lidar Odometry and Mapping in Real-time<i class="fa fa-external-link-alt"></i></span><ul>
+<li>THE LOAM; (surface and corner) feature matching for frame-to-frame registration and frame-to-map refinement</li>
+</ul>
+</li>
+<li>15 ICRA <span class="exturl" data-url="aHR0cHM6Ly9mcmMucmkuY211LmVkdS9+emhhbmdqaS9wdWJsaWNhdGlvbnMvSUNSQV8yMDE1LnBkZg==">Visual-lidar Odometry and Mapping: Low-drift, Robust, and Fast<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Visual + LOAM</li>
+</ul>
+</li>
+<li>15 ICRA <span class="exturl" data-url="aHR0cHM6Ly93d3cuY2MuZ2F0ZWNoLmVkdS9+ZGVsbGFlcnQvcHViL0NhcmxvbmUxNWljcmEucGRm">Initialization Techniques for 3D SLAM: a Survey on Rotation Estimation and its Use in Pose Graph Optimization<i class="fa fa-external-link-alt"></i></span><ul>
+<li>LiDAR SLAM usually have more opportunity to think of the better pose graph optimization because it directly measures the depth (rather easier front-end than visual domain).</li>
+</ul>
+</li>
+<li>15 RAM <span class="exturl" data-url="aHR0cHM6Ly93d3cuYWlzLnVuaS1ib25uLmRlL3BhcGVycy9SQU1fMjAxNV9Ib2x6X1BDTF9SZWdpc3RyYXRpb25fVHV0b3JpYWwucGRm">Registration with the Point Cloud Library: A Modular Framework for Aligning in 3-D<i class="fa fa-external-link-alt"></i></span><ul>
+<li>PCL tutorial for registration</li>
+</ul>
+</li>
+<li>15 IROS [NICP: Dense normal based point cloud registration<ul>
+<li>as already in the title, dense normal](<span class="exturl" data-url="aHR0cDovL2phY29wb3NlcmFmaW4uY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy9zZXJhZmluMTVpcm9zLnBkZg==">http://jacoposerafin.com/wp-content/uploads/serafin15iros.pdf<i class="fa fa-external-link-alt"></i></span>)</li>
+</ul>
+</li>
+<li>16 ICRA <span class="exturl" data-url="aHR0cHM6Ly9zdGF0aWMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL21lZGlhL3Jlc2VhcmNoLmdvb2dsZS5jb20vZW4vL3B1YnMvYXJjaGl2ZS80NTQ2Ni5wZGY=">Real-time loop closure in 2D LIDAR SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>the Google Cartographer’s paper</li>
+</ul>
+</li>
+<li>16 SSRR <span class="exturl" data-url="aHR0cHM6Ly9oYWwuYXJjaGl2ZXMtb3V2ZXJ0ZXMuZnIvaGFsLTAxNTIyMjQ4L2RvY3VtZW50">ICP-based pose-graph SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>an almost standard framework of scan matching- and pose-graph-based LiDAR SLAM</li>
+</ul>
+</li>
+<li>16 IROS <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzc3NTkwNjA=">M2DP: A novel 3D point cloud descriptor and its application in loop closure detection<i class="fa fa-external-link-alt"></i></span><ul>
+<li>place descriptor using a single LiDAR scan</li>
+</ul>
+</li>
+<li>16 BookChapter <span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9yZWZlcmVuY2V3b3JrZW50cnkvMTAuMTAwNyUyRjk3OC0zLTU0MC0zMDMwMS01XzM3">World modeling<i class="fa fa-external-link-alt"></i></span><ul>
+<li>various representations of a surrounding environment; selecting a proper representation of the environment is important and it determines the state estimation ways.</li>
+</ul>
+</li>
+<li>18 RSS <span class="exturl" data-url="aHR0cDovL3d3dy5yb2JvdGljc3Byb2NlZWRpbmdzLm9yZy9yc3MxNC9wMTYucGRm">Efficient Surfel-Based SLAM using 3D Laser Range Data in Urban Environments<i class="fa fa-external-link-alt"></i></span><ul>
+<li>a.k.a SuMa; projective view rendering, and open source</li>
+</ul>
+</li>
+<li>18 ICRA <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDIuMDg2MzM=">IMLS-SLAM: scan-to-model matching based on 3D data<i class="fa fa-external-link-alt"></i></span><ul>
+<li>sophisticated feature selections, not real-time but for the accuracy, this is considered as a SOTA</li>
+</ul>
+</li>
+<li>18 ICRA <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MTEuMDE2OTE=">Elastic LiDAR Fusion: Dense Map-Centric Continuous-Time SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>(continuous-time) non-rigid map deformation (see 15 RSS ElasticFusion also)</li>
+</ul>
+</li>
+<li>18 ICRA <span class="exturl" data-url="aHR0cDovL2Fpcy51bmktYm9ubi5kZS9wYXBlcnMvSUNSQV8yMDE4X0Ryb2VzY2hlbC5wZGY=">Efficient Continuous-time SLAM for 3D Lidar-based Online Mapping<i class="fa fa-external-link-alt"></i></span><ul>
+<li>a hierarchical continuous-time LiDAR SLAM</li>
+</ul>
+</li>
+<li>18 IROS <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzg1OTQyOTk=">LeGO-LOAM: Lightweight and Ground-Optimized Lidar Odometry and Mapping on Variable Terrain<i class="fa fa-external-link-alt"></i></span><ul>
+<li>range image-based fast feature selection for LOAM; and open source</li>
+</ul>
+</li>
+<li>18 <span class="exturl" data-url="aHR0cDovL3VkZWwuZWR1L355dXlhbmcvZG93bmxvYWRzL2dlbmV2YV9pcm9zMjAxOC5wZGY=">IROS LIPS: LiDAR-Inertial 3D Plane SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>leveraging plane for LINS system</li>
+</ul>
+</li>
+<li>18 IROS <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50Lzg1OTM5NTM=">Scan Context: Egocentric Spatial Descriptor for Place Recognition Within 3D Point Cloud Map<i class="fa fa-external-link-alt"></i></span><ul>
+<li>A visibility-based place descriptor for fast and robust place recognition, and open source</li>
+</ul>
+</li>
+<li>19 A-LOAM (code only)<ul>
+<li>a well-implemented LOAM algorithm (the original LOAM author closed the official code), and open source</li>
+</ul>
+</li>
+<li>19 ICRA <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDQuMDY5OTM=">Tightly Coupled 3D Lidar Inertial Odometry and Mapping<i class="fa fa-external-link-alt"></i></span><ul>
+<li>a.k.a lio-mapping; imu tight fusion but practically slow, and <em>open source</em></li>
+</ul>
+</li>
+<li>19 IV <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDQuMTI2Njc=">DeLiO: Decoupled LiDAR Odometry<i class="fa fa-external-link-alt"></i></span><ul>
+<li>rotation and translation are decoupled</li>
+</ul>
+</li>
+<li>19 IJRR <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDkuMTI4Mzc=">SegMap: Segment-based mapping and localization using data-driven descriptors<i class="fa fa-external-link-alt"></i></span><ul>
+<li>deep segment feature learning for LiDAR place recognition</li>
+</ul>
+</li>
+<li>19 IROS <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDUuMTEzMjA=">SuMa++: Efficient LiDAR-based Semantic SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>merging semantic information into SuMa</li>
+</ul>
+</li>
+<li>20 AR <span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczEwNTE0LTAxOS0wOTg4MS0w">DVL-SLAM: sparse depth enhanced direct visual-LiDAR SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>enhanced visual SLAM by LiDAR data</li>
+</ul>
+</li>
+<li>20 RSS <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDUuMTEzNDQ=">OverlapNet: Loop Closing for LiDAR-based SLAM<i class="fa fa-external-link-alt"></i></span><ul>
+<li>learning two scan’s overlap and integrated it into the modern probabilistic SLAM system.</li>
+</ul>
+</li>
+<li>20 IROS <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDcuMDAyNTg=">LIO-SAM: Tightly-coupled Lidar Inertial Odometry via Smoothing and Mapping<i class="fa fa-external-link-alt"></i></span><ul>
+<li>IMU fusion (tightly) of LOAM, and open source.</li>
+</ul>
+</li>
+<li>20 IROS <span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2RvY3VtZW50LzkzNDE1NDk=">SpoxelNet: Spherical Voxel-based Deep Place Recognition for 3D Point Clouds of Crowded Indoor Spaces<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Deep LiDAR feature learning for place recognition and robust to occlusions</li>
+</ul>
+</li>
+<li>20 IROS <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDguMTE0NTk=">Semantic Graph Based Place Recognition for 3D Point Clouds<i class="fa fa-external-link-alt"></i></span><ul>
+<li>Summarizing a place with a single semantic graph. The matching part is also deep (SegMap didn’t).</li>
+</ul>
+</li>
+<li>20 IROS <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDkuMDcyNjc=">A Fast and Robust Place Recognition Approach for Stereo Visual Odometry Using LiDAR Descriptors<i class="fa fa-external-link-alt"></i></span><ul>
+<li>LiDAR descriptors are also good for stereo-camera-based place recognition</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210530-icra-2021/" rel="bookmark">ICRA 2021 튜토리얼 / 워크샵 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210619-cvpr-2021/" rel="bookmark">CVPR 2021 튜토리얼 / 워크샵 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210719-icra-vins-stefan-leutenegger/" rel="bookmark">ICRA 2021 - Visual-Inertial SLAM and Spatial AI for Mobile Robotics (Prof. Stefan Leutenegger)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20211010-ICCV2021/" rel="bookmark">ICCV 2021 튜토리얼 / 워크샵 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20220315-autonomous-driving-lidar/" rel="bookmark">자율주행 자동차의 눈 - 라이다 - 이용이 책임 발표 노트</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/LiDAR/" rel="tag"># LiDAR</a>
+              <a href="/tags/LiDAR-SLAM/" rel="tag"># LiDAR SLAM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20211010-ICCV2021/" rel="prev" title="ICCV 2021 튜토리얼 / 워크샵 리스트">
+                  <i class="fa fa-chevron-left"></i> ICCV 2021 튜토리얼 / 워크샵 리스트
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20211207-rust-start-0/" rel="next" title="Rust 설치 + Hello World + Hello Cargo">
+                  Rust 설치 + Hello World + Hello Cargo <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

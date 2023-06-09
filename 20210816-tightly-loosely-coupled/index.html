@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Tightly-coupled 방식과 Loosely-coupled 방식의 차이점에 대해 설명">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tightly-coupled vs Loosely-coupled 방식">
+<meta property="og:url" content="https://changh95.github.io/20210816-tightly-loosely-coupled/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Tightly-coupled 방식과 Loosely-coupled 방식의 차이점에 대해 설명">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210816-tightly-loosely-coupled/vins.png">
+<meta property="article:published_time" content="2021-08-16T14:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.987Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Sensors">
+<meta property="article:tag" content="Tightly-coupled">
+<meta property="article:tag" content="Loosely-coupled">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210816-tightly-loosely-coupled/vins.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210816-tightly-loosely-coupled/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Tightly-coupled vs Loosely-coupled 방식 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%98%88%EC%83%81-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8"><span class="nav-number">1.</span> <span class="nav-text">예상 면접 질문</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8B%B5"><span class="nav-number">2.</span> <span class="nav-text">답</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Tightly-coupled-%EA%B0%95%EA%B2%B0%ED%95%A9-%EB%B0%A9%EC%8B%9D"><span class="nav-number">2.1.</span> <span class="nav-text">Tightly-coupled (강결합) 방식</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loosely-coupled-%EC%95%BD%EA%B2%B0%ED%95%A9-%EB%B0%A9%EC%8B%9D"><span class="nav-number">2.2.</span> <span class="nav-text">Loosely-coupled (약결합) 방식</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210816-tightly-loosely-coupled/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tightly-coupled vs Loosely-coupled 방식
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-16 23:38:19" itemprop="dateCreated datePublished" datetime="2021-08-16T23:38:19+09:00">2021-08-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/50%EA%B0%80%EC%A7%80-CV-SLAM-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%93%A4/" itemprop="url" rel="index"><span itemprop="name">50가지 CV/SLAM 기술면접 질문들</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>모바일로 글을 보신다면 ‘데스크탑 버전으로 보기’를 누르시면 좀 더 보기 쉽습니다</p>
+</blockquote>
+<h2 id="예상-면접-질문"><a href="#예상-면접-질문" class="headerlink" title="예상 면접 질문"></a>예상 면접 질문</h2><ol>
+<li>Tightly-coupled 방식과 Loosely-coupled 방식의 차이가 무엇일까요?</li>
+<li>Tightly-coupled 방식은 언제 유리하고, loosely-coupled 방식은 언제 유리할까요?</li>
+<li>VIO를 설계할 때 어떤 방식이 있을까요?</li>
+<li>센서 퓨전을 하는 방식에는 어떤 방식이 있을까요?</li>
+</ol>
+<p> </p>
+<hr>
+<h2 id="답"><a href="#답" class="headerlink" title="답"></a>답</h2><p>우선 Tightly-coupled 방식과 Loosely-coupled 방식은 모두 <strong>2개 이상의 센서 데이터를 받을 때 정보를 혼합하여 단일 상태치를 추정하기 위한 방법</strong>이다.</p>
+<p>특히, 이종 센서간의 정보를 혼합할 때 사용하기 좋다 (e.g. Camera+IMU, LiDAR+IMU, Camera+LiDAR+IMU+GPS+Wheel)</p>
+<p><strong>‘두 방법 중 어떤 방법이 더 좋다!’ 라고 단언할 수는 없으며</strong>, 실제로 둘 다 돌려보고 더 잘되는 방식을 써야한다.</p>
+<p>아래 각각의 방식의 특징을 설명한다.</p>
+<p> </p>
+<hr>
+<h3 id="Tightly-coupled-강결합-방식"><a href="#Tightly-coupled-강결합-방식" class="headerlink" title="Tightly-coupled (강결합) 방식"></a>Tightly-coupled (강결합) 방식</h3><img src="/20210816-tightly-loosely-coupled/vins.png" class="" title="vins">
+
+<ul>
+<li><strong>각각의 센서들에서 나온 관측치들을 한꺼번에 하나의 cost function을 통해 optimal state를 추정</strong>하는 방법<ul>
+<li>e.g. Tightly-coupled VIO : 카메라 센서 관측치에 대해서는 reprojection error를 계산, IMU 센서에 대해서는 kinematic residual을 계산, 이후 이 값들을 합한 값이 최저치가 되는 motion을 추정.</li>
+</ul>
+</li>
+<li><strong>Loosely-coupled 방식보다 더 정확하다는 인식</strong>이 있다.</li>
+<li><strong>Loosely-coupled 방식보다 계산량이 더 많다는 인식</strong>이 있다.</li>
+<li>Graph-based optimisation으로도 풀 수 있고, Filter-based approach로도 풀 수 있다.</li>
+</ul>
+<div class="tabs" id="graph-vs-filter"><ul class="nav-tabs"><li class="tab active"><a href="#graph-vs-filter-1">Graph-based optimisation</a></li><li class="tab"><a href="#graph-vs-filter-2">Filter-based approach</a></li></ul><div class="tab-content"><div class="tab-pane active" id="graph-vs-filter-1"><ul>
+<li><strong>Graph에 다양한 센서들의 관측치가 포함</strong>된다.<ul>
+<li>(위 이미지의 factor graph 참조. 카메라로 인한 variable과 IMU로 인한 variable이 둘 다 들어간다)</li>
+<li>단일 센서로 추정할 때 보다 더 많은 variable과 constraint가 생긴다.<ul>
+<li>이로 인해 얻는 장점: <strong>Filter 방식보다 동일 계산량 대비 더 정확한 결과</strong>를 얻을 수 있다 (이는 Graph-optimisation의 특징이기도 하다)</li>
+<li>이로 인해 얻는 단점: Filter 방식보다 <strong>절대적인 계산량이 훨씬 높기 때문에 고성능 CPU를 요구</strong>한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div><div class="tab-pane" id="graph-vs-filter-2"><ul>
+<li><strong>Extended Kalman filter (EKF)</strong> 또는 <strong>Unscented Kalman filter (UKF)**와 같은 **filter 알고리즘의 인풋으로 다양한 센서의 관측치를 포함</strong>한다.<ul>
+<li>이로 인해 얻는 장점: Graph-optimisation 방식에 비해 <strong>절대적인 계산량이 적기 때문에 저전력 CPU를 사용</strong>할 수 있다.</li>
+<li>이로 인해 얻는 단점: EKF 방식은 선형화 오차로 graph-optimisation 방식에 비해 <strong>조금 부정확</strong>하다</li>
+<li>이로 인해 얻는 단점2: EKF 방식은 관측치의 수가 많아질수록 연산량이 늘어나기 때문에 <strong>적은 수의 관측치만 이용</strong>할 수 있는데, 이는 <strong>상태추정을 불안정하게 만든다</strong> (i.e. robustness가 떨어진다).</li>
+</ul>
+</li>
+</ul></div></div></div>
+
+<p> </p>
+<hr>
+<h3 id="Loosely-coupled-약결합-방식"><a href="#Loosely-coupled-약결합-방식" class="headerlink" title="Loosely-coupled (약결합) 방식"></a>Loosely-coupled (약결합) 방식</h3><ul>
+<li><strong>센서들마다 각각 state를 추정</strong>하고, <strong>여러개의 state 정보를 합성해서 optimal state를 추정</strong>하는 것.<ul>
+<li>e.g. Loosely-coupled VIO = 카메라로 추정한 pose와 IMU로 추정한 pose를 EKF로 추정</li>
+<li>이로 인해 얻는 장점: 센서마다 state 추정 모듈을 쉽게 만들수 있다.</li>
+<li>이로 인해 얻는 장점2: <strong>센서 시스템을 쉽게 변경할 수 있다</strong> (i.e. 새 센서를 추가하기 쉽다 + 기존의 센서를 제거하기 쉽다)<ul>
+<li>하나의 코어 센서퓨전 프레임워크를 만들고, 다양한 센서 구성을 가진 시스템 (e.g. 자율주행 소프트웨어 -&gt; 소형자동차,중형세단,버스 탑재)를 만들 때 유용하다</li>
+</ul>
+</li>
+<li>이로 인해 얻는 장점3: <strong>특정 센서에 대해 가중치를 더 쉽게 줄 수 있다</strong>.<ul>
+<li>어떤 센서가 잘 작동하지 않을 때 가중치를 낮추고, 다른 잘 작동하는 센서의 가중치를 높혀서 끊기지 않고 좋은 상태추정을 이어갈 수 있다 (i.e. robustness가 올라간다!)</li>
+</ul>
+</li>
+<li>이로 인해 얻는 장점4: <strong>EKF를 사용할 때 많은 양의 관측치를 사용하지 않음으로 퓨전 프레임워크가 굉장히 가벼워진다</strong></li>
+<li><strong>장점 정리: 엔지니어링 측면에서 자유도가 굉장히 높다!</strong></li>
+<li>이로 인해 얻는 단점: <strong>특정 센서를 믿을 수 없을 때 어떻게 처리해야하는지 직접 설계해야한다</strong>.<ul>
+<li>e.g. 갑자기 하얀 벽이 나타났을 때 카메라는 pose 추정을 할 수 없다. IMU는 pose 추정을 잘 한다. 두 pose 값의 가중치를 동적으로 바꿔야할까? 동적으로 바꾼다면 어떻게?</li>
+<li>e.g. 저가형 IMU를 사용하기 때문에 종종 IMU의 값이 튄다. IMU 값이 튈 때는 가중치를 낮추고 싶은데, 어떻게 값이 튀는걸 감지할 수 있을까? 센서의 오작동으로 튀는 값과, 실제로 충격을 받아서 생기는 튀는 값을 어떻게 구분해야할까?</li>
+<li>이러한 edge 케이스들은 굉장히 많을텐데 어떻게 설계할 것인가?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210228-AD-sensors/" rel="bookmark">SLAM에서 사용할 수 있는 센서의 종류</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Sensors/" rel="tag"># Sensors</a>
+              <a href="/tags/Tightly-coupled/" rel="tag"># Tightly-coupled</a>
+              <a href="/tags/Loosely-coupled/" rel="tag"># Loosely-coupled</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210808-docker-for-slam/" rel="prev" title="SLAMOps를 위한 첫걸음 - Docker + CI">
+                  <i class="fa fa-chevron-left"></i> SLAMOps를 위한 첫걸음 - Docker + CI
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210817-vslam-vs-vio/" rel="next" title="Visual-SLAM vs VIO">
+                  Visual-SLAM vs VIO <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

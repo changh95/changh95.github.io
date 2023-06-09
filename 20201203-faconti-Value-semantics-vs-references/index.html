@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Value Semantics vs references&quot;을 적당히 번역했습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!">
+<meta property="og:url" content="https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Value Semantics vs references&quot;을 적당히 번역했습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/why_copy.jpg">
+<meta property="og:image" content="https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/const_reference.png">
+<meta property="og:image" content="https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/multiply_vector.png">
+<meta property="article:published_time" content="2020-12-03T03:44:26.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.827Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="CV">
+<meta property="article:tag" content="Optimisation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/why_copy.jpg">
+
+
+<link rel="canonical" href="https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요! | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pass-by-Value"><span class="nav-number">1.</span> <span class="nav-text">Pass by Value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Const-reference%EB%A5%BC-%EC%93%B0%EB%A9%B4-%EC%95%88%EB%90%98%EB%8A%94-%EC%98%88%EC%8B%9C"><span class="nav-number">2.</span> <span class="nav-text">Const reference를 쓰면 안되는 예시</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-03 12:44:26" itemprop="dateCreated datePublished" datetime="2020-12-03T12:44:26+09:00">2020-12-03</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/" itemprop="url" rel="index"><span itemprop="name">2.2 C++</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/2-2-C/%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%B9%84%EC%A0%84%EC%9D%84-%EC%9C%84%ED%95%9C-C-%EC%B5%9C%EC%A0%81%ED%99%94-%EC%8B%9C%EB%A6%AC%EC%A6%88/" itemprop="url" rel="index"><span itemprop="name">실시간 컴퓨터 비전을 위한 C++ 최적화 시리즈</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Value Semantics vs references”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9wcmVmZXJfcmVmZXJlbmNlcy8=">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
+<br>
+
+<h2 id="Pass-by-Value"><a href="#Pass-by-Value" class="headerlink" title="Pass by Value"></a>Pass by Value</h2><hr>
+<p>이번 글의 내용은 사실 어느정도 C++ 개발을 해보신 분들은 이미 잘 아는 내용일 것이라고 믿습니다.</p>
+<p>그래도 저는 종종 이런 코드를 짜는 사람들을 봅니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">OpenFile</span><span class="params">(str::<span class="built_in">string</span> filename)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DrawPath</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Points&gt; path)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Pose <span class="title">DetectFace</span><span class="params">(Image image)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Matrix3D <span class="title">Rotate</span><span class="params">(Matrix3D mat, AxisAngle axis_angle)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>위의 함수들은 제가 방금 만들어낸 것이긴 하지만, 실제로 제품으로 배포되는 코드에서도 종종 보이는 코드들입니다. </p>
+<p>위 코드들은 모두 함수 인자를 <strong><em>passing by value</em></strong> 형태로 넘깁니다.</p>
+<p>즉, 이 함수를 호출할 때 마다 함수 인자들은 우선 복사가 되고, 그 후에 함수로 넘겨집니다.</p>
+<img src="/20201203-faconti-Value-semantics-vs-references/why_copy.jpg" class="" title="왜 복사하는건데 대체">
+
+<p>복사 작업은 종종 굉장히 무거운 작업이 될 수 있습니다. 작은 객체를 복사할 때는 그리 무겁지 않지만, 엄청 큰 객체를 복사하면 무거울 수 있죠. 동적 heap memory allocation이 들어간다면 더 무거울 수도 있겠습니다. </p>
+<p>위의 예제들 중 아마 무시할 수 있을 정도의 굉장히 작은 양의 overhead가 나타나는 객체도 있습니다. <code>Matrix3D</code> 나 <code>AngleAxis</code> 같은 객체는 heap allocation이 없이도 복사가 됩니다. </p>
+<p>하지만 overhead가 작아도, 굳이 CPU 사이클을 이런 의미없는 복사에 낭비할 필요가 있을까요? 복사를 안하면 되지 않나요?</p>
+<p>아래 예제를 한번 봅시다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">OpenFile</span><span class="params">(<span class="keyword">const</span> str::<span class="built_in">string</span>&amp; filename)</span></span>; <span class="comment">// string_view is even better</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DrawPath</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Points&gt;&amp; path)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Pose <span class="title">DetectFace</span><span class="params">(<span class="keyword">const</span> Image&amp; image)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Matrix3D <span class="title">Rotate</span><span class="params">(<span class="keyword">const</span> Matrix3D&amp; mat, <span class="keyword">const</span> AxisAngle&amp; axis_angle)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>이번 예제에서 우리는 <strong><em>reference semantic</em></strong>이라는 기법을 사용했습니다.</p>
+<p>이 방법 대신에 <strong><em>C-style</em></strong>의 포인터를 사용해서 같은 결과를 얻을 수도 있겠습니다. 다만 포인터와 비교했을 때 reference semantic 기법이 다른 점이라면, reference semantic은 컴파일러에 다음과 같은 의미를 전달합니다.</p>
+<ul>
+<li>함수 인자들이 <strong>Constant</strong> 하다는 점. 함수를 호출한 쪽에서도, 함수 내부에서도 이 인자 값을 수정하지 않겠다는 점을 명시합니다. </li>
+<li>함수 인자들이 <strong>Reference</strong>라는 점. 이미 값이 존재하는 인자들을 ‘refer’ 하는 것입니다. C-style 포인터는 <code>nullptr</code> 가 값이 될 수 있지만, reference인 경우는 안되겠네요.</li>
+<li>포인터를 사용하는게 아니니, 우리는 이 객체의 <strong>ownership</strong>을 넘겨주는게 아닙니다. </li>
+</ul>
+<p>어쨋든 이 방법을 사용하면 아래에서 보는 것 처럼 계산량이 엄청나게 줄어듭니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">GetSpaces_Value</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span> str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> spaces = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">char</span> c: str)&#123;</span><br><span class="line">        <span class="keyword">if</span>( c == <span class="string">&#x27; &#x27;</span>) spaces++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> spaces;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">GetSpaces_Ref</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> spaces = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">char</span> c: str)&#123;</span><br><span class="line">        <span class="keyword">if</span>( c == <span class="string">&#x27; &#x27;</span>) spaces++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> spaces;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">LONG_STR</span><span class="params">(<span class="string">&quot;a long string that can&#x27;t use Small String Optimization&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PassStringByValue</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">        <span class="keyword">size_t</span> n = GetSpaces_Value(LONG_STR);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PassStringByRef</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">        <span class="keyword">size_t</span> n = GetSpaces_Ref(LONG_STR);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//----------------------------------</span></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">Sum_Value</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span>&gt; vect)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> val: vect) &#123; sum += val; &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">Sum_Ref</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span>&gt;&amp; vect)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">size_t</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> val: vect) &#123; sum += val; &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span>&gt; vect_in = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PassVectorByValue</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">        <span class="keyword">size_t</span> n = Sum_Value(vect_in);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PassVectorByRef</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">        <span class="keyword">size_t</span> n = Sum_Ref(vect_in);</span><br><span class="line">        benchmark::DoNotOptimize(n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/20201203-faconti-Value-semantics-vs-references/const_reference.png" class="" title="const reference가 최고입니다">
+
+
+<p>명백하게, <strong><em>passing by reference의 성능이 더 좋습니다</em></strong>.</p>
+<br>
+<br>
+
+<h2 id="Const-reference를-쓰면-안되는-예시"><a href="#Const-reference를-쓰면-안되는-예시" class="headerlink" title="Const reference를 쓰면 안되는 예시"></a>Const reference를 쓰면 안되는 예시</h2><blockquote>
+<p>“오옹… 앞으로는 <code>const&amp;</code>로 내 코드를 도배해야겠다~”</p>
+</blockquote>
+<p>이런 생각을 하기 전에, 다음 예제도 한번 봅시다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vector3D</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> x;</span><br><span class="line">    <span class="keyword">double</span> y;</span><br><span class="line">    <span class="keyword">double</span> z;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">Vector3D <span class="title">MultiplyByTwo_Value</span><span class="params">(Vector3D p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; p.x*<span class="number">2</span>, p.y*<span class="number">2</span>, p.z*<span class="number">2</span> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Vector3D <span class="title">MultiplyByTwo_Ref</span><span class="params">(<span class="keyword">const</span> Vector3D&amp; p)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; p.x*<span class="number">2</span>, p.y*<span class="number">2</span>, p.z*<span class="number">2</span> &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MultiplyVector_Value</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">    Vector3D in = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">        Vector3D out = MultiplyByTwo_Value(in);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MultiplyVector_Ref</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">    Vector3D in = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">        Vector3D out = MultiplyByTwo_Ref(in);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/20201203-faconti-Value-semantics-vs-references/multiply_vector.png" class="" title="const&amp; 써도 차이없음">
+
+<p>의외로, 이번에는 <code>const&amp;</code>를 써도 아무 차이가 없습니다.</p>
+<p>우리가 heap allocation이 필요없을만큼 작은 (그냥 몇 바이트 정도로 작은 데이터) 객체를 복사하는거면, passing by reference를 써도 거의 차이가 없습니다. 하지만 그렇다고 더 느려지는것도 아니죠. 그러니까 <code>const&amp;</code>를 써야할지 말지 모르겠을때는, 일단 써보면 좋을 것 같습니다. </p>
+<p>다만 문제가 되는 경우도 있습니다.</p>
+<p>Primitive types를 const reference로 복사할 때는 컴파일러가 추가적인 instruction을 더 만든다고 하지만 (여기서 테스트 해봤습니다 <span class="exturl" data-url="aHR0cHM6Ly9nb2Rib2x0Lm9yZy96Ly1ydXNhYg==">https://godbolt.org/z/-rusab<i class="fa fa-external-link-alt"></i></span>), 하지만 컴파일 옵션에 <code>-O3</code> 를 추가하면 이 문제 역시 해결됩니다. 하지만 매번 이 옵션을 넣어주긴 귀찮으니, <strong><em>저는 보통 ‘8 바이트 정도 되는 인자, 또는 그것보다 작은 인자 (e.g. int, double, chars, long)`은 절대로 pass by reference를 쓰지 않습니다</em></strong>. Primitive type에 const, &amp; 등을 사용하면, 성능 향상은 하나도 되지 않으면서, 동시에 코드가 더 헷갈려보이고 못생겨집니다.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">YouAreTryingTooHardDude</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span>&amp; a, <span class="keyword">const</span> <span class="keyword">double</span>&amp; b)</span></span>; <span class="comment">// 이건 하지 맙시다</span></span><br></pre></td></tr></table></figure>
+
+<br>
+<br>
+게시글 공유:<span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9pbnRlbnQvdHdlZXQ/dGV4dD0lMjIoJUVCJUIyJTg4JUVDJTk3JUFEKSUyMCVFQyU4QiVBNCVFQyU4QiU5QyVFQSVCMCU4NCUyMCVFQyVCQiVCNCVFRCU5MyVBOCVFRCU4NCVCMCUyMCVFQiVCOSU4NCVFQyVBMCU4NCVFQyU5RCU4NCUyMCVFQyU5QyU4NCVFRCU5NSU5QyUyMEMrKyUyMCVFQyVCNSU5QyVFQyVBMCU4MSVFRCU5OSU5NCUyMCgwKSUyMC0lMjBDb25zdCUyMHJlZmVyZW5jZSVFQiVBNSVCQyUyMCVFQyU5MyVCMCVFQyU4NCVCOCVFQyU5QSU5NCElMjIlMjBodHRwczovL2NoYW5naDk1LmdpdGh1Yi5pby8yMDIwMTIwMy1mYWNvbnRpLVZhbHVlLXNlbWFudGljcy12cy1yZWZlcmVuY2VzLyUyMHZpYSUyMEBoZXhvanM=">Twitter<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL3NoYXJlci9zaGFyZXIucGhwP3U9aHR0cHM6Ly9jaGFuZ2g5NS5naXRodWIuaW8vMjAyMDEyMDMtZmFjb250aS1WYWx1ZS1zZW1hbnRpY3MtdnMtcmVmZXJlbmNlcy8mdD0oJUVCJUIyJTg4JUVDJTk3JUFEKSUyMCVFQyU4QiVBNCVFQyU4QiU5QyVFQSVCMCU4NCUyMCVFQyVCQiVCNCVFRCU5MyVBOCVFRCU4NCVCMCUyMCVFQiVCOSU4NCVFQyVBMCU4NCVFQyU5RCU4NCUyMCVFQyU5QyU4NCVFRCU5NSU5QyUyMEMrKyUyMCVFQyVCNSU5QyVFQyVBMCU4MSVFRCU5OSU5NCUyMCgwKSUyMC0lMjBDb25zdCUyMHJlZmVyZW5jZSVFQiVBNSVCQyUyMCVFQyU5MyVCMCVFQyU4NCVCOCVFQyU5QSU5NCE=">Facebook<i class="fa fa-external-link-alt"></i></span>, and <span class="exturl" data-url="aHR0cHM6Ly93d3cubGlua2VkaW4uY29tL3NoYXJpbmcvc2hhcmUtb2Zmc2l0ZS8/dXJsPWh0dHBzOi8vY2hhbmdoOTUuZ2l0aHViLmlvLzIwMjAxMjAzLWZhY29udGktVmFsdWUtc2VtYW50aWNzLXZzLXJlZmVyZW5jZXMvJnRpdGxlPSglRUIlQjIlODglRUMlOTclQUQpJTIwJUVDJThCJUE0JUVDJThCJTlDJUVBJUIwJTg0JTIwJUVDJUJCJUI0JUVEJTkzJUE4JUVEJTg0JUIwJTIwJUVCJUI5JTg0JUVDJUEwJTg0JUVDJTlEJTg0JTIwJUVDJTlDJTg0JUVEJTk1JTlDJTIwQysrJTIwJUVDJUI1JTlDJUVDJUEwJTgxJUVEJTk5JTk0JTIwKDApJTIwLSUyMENvbnN0JTIwcmVmZXJlbmNlJUVCJUE1JUJDJTIwJUVDJTkzJUIwJUVDJTg0JUI4JUVDJTlBJTk0IQ==">LinkedIn<i class="fa fa-external-link-alt"></i></span>
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201205-faconti-do-not-use-linked-list/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (2) - Linked List 쓰지 마세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201205-faconti-use-vector-reserve/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요!</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201206-do-you-need-map/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (3) - std::map을 써야할까요?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201208-small-vector-optimisation/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (4) - 사이즈가 작은 vector를 쓸 때...</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201209-strings-are-almost-vectors/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (5) - String은 vector처럼 써야합니다</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/CV/" rel="tag"># CV</a>
+              <a href="/tags/Optimisation/" rel="tag"># Optimisation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20201127-heap/" rel="prev" title="Heap">
+                  <i class="fa fa-chevron-left"></i> Heap
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20201205-faconti-use-vector-reserve/" rel="next" title="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요!">
+                  (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (1) - std::vector<>::reserve()를 쓰세요! <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

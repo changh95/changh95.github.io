@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="메가존 클라우드에서 지원을 받아 Graphcore IPU로 Bundle adjustment &#x2F; SLAM을 해봤습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graphcore IPU로 Bundle adjustment &#x2F; SLAM 하기!">
+<meta property="og:url" content="https://changh95.github.io/20210128-gbp-poplar/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="메가존 클라우드에서 지원을 받아 Graphcore IPU로 Bundle adjustment &#x2F; SLAM을 해봤습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210128-gbp-poplar/ipu-running.png">
+<meta property="og:image" content="https://changh95.github.io/20210128-gbp-poplar/gbp-poplar.gif">
+<meta property="article:published_time" content="2021-01-28T13:38:19.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Graphcore">
+<meta property="article:tag" content="IPU">
+<meta property="article:tag" content="Bundle adjustment">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210128-gbp-poplar/ipu-running.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210128-gbp-poplar/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Graphcore IPU로 Bundle adjustment / SLAM 하기! | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IPU%EB%A1%9C-BA-SLAM"><span class="nav-number">1.</span> <span class="nav-text">IPU로 BA &#x2F; SLAM?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%BD%94%EB%93%9C"><span class="nav-number">2.</span> <span class="nav-text">코드</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%A0%80%EC%9E%90%EC%99%80%EC%9D%98-%EC%BB%A8%ED%83%9D"><span class="nav-number">3.</span> <span class="nav-text">저자와의 컨택</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210128-gbp-poplar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Graphcore IPU로 Bundle adjustment / SLAM 하기!
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-28 22:38:19" itemprop="dateCreated datePublished" datetime="2021-01-28T22:38:19+09:00">2021-01-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="IPU로-BA-SLAM"><a href="#IPU로-BA-SLAM" class="headerlink" title="IPU로 BA / SLAM?"></a>IPU로 BA / SLAM?</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZ3JhcGhjb3JlLmFpLw==">Graphcore<i class="fa fa-external-link-alt"></i></span>는 영국의 반도체 회사로, AI 계산에 특화된 프로세서인 IPU를 개발한다. 현재 단계의 SLAM은 아직 완전 AI라고 할 수 없지만, 영국 Imperial College London의 Andrew Davison 교수님은 IPU와 같은 구조의 프로세서가 Spatial AI를 만들 수 있을 것이라고 굳게 믿고 계신다. IPU에 대한 설명은 이 <a href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">링크</a>를 참고하자.</p>
+<p>이에 대해 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMTQxMzk=">FutureMapping 2: Gaussian Belief Propagation for Spatial AI<i class="fa fa-external-link-alt"></i></span>라는 논문을 통해 Bundle adjustment를 Gaussian belief propagation 형태로 풀은 선행 연구가 있었다. GBP 방식은 효과적이었으나 CPU에서는 효율적이지 않아 ceres-solver, g2o, GTSAM 등에서는 현재 지원하고 있지 않은 기능이다. 하지만 IPU의 특별한 구조 덕분에 GBP 방식을 실제로 사용할 수 있을 것 같은 가능성이 보였다.</p>
+<p>이 논문이 발표되고 1년의 시간이 지나 개선된 IPU 제품이 출시되었으며, 2020년 CVPR에서 해당 장비를 이용하여 CPU에서의 ceres-solver 라이브러리의 성능을 뛰어넘은 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMDMxMzQ=">Bundle adjustment on a graph processor<i class="fa fa-external-link-alt"></i></span> 논문이 발표되었다. 아래는 관련 영상이다.</p>
+<div class="video-container"><iframe src="https://www.youtube.com/embed/TqeN8aQNgd0" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<hr>
+<h1 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h1><p>이 논문에 꽤나 감명받아있던 때에, 국내 클라우드 업체인 <span class="exturl" data-url="aHR0cHM6Ly93d3cubWVnYXpvbmUuY29tLw==">메가존 클라우드<i class="fa fa-external-link-alt"></i></span>에서 Graphcore IPU 서버를 수입하고 테스터들을 모집하고 있었다. 아무래도 IPU 칩은 주로 클라우드 기반 딥러닝 학습에 초점을 두고 있다보니 모집인원은 딥러닝에 집중되어있었지만, 감사하게도 지인분께서 IPU를 사용해볼 수 있게 메가존 클라우드에 나를 소개해주셨다. 나를 포함한 3명이 첫 라운드로 하나의 서버를 할당받았고, 메가존 클라우드 측에서도 TensorFlow 환경과 PyTorch 환경을 미리 설정해주시고 Q&amp;A 채널을 만들어주시는 등 지원을 아낌없이 해주셨다. 물론 나는 딥러닝을 할 것이 아니기 때문에, BA / SLAM 코드를 따로 끌어왔어야했다.</p>
+<p>다행히도 Bundle adjustment on a graph processor 코드는 저자의 Github에 올라와있었다. 지원받은 기기는 M2000 IPU 속 일정 부분이였는데 (POD64와 성능이 비슷한? 또는 동일한? 것으로 알고 있다), 논문에서 구현된 내용을 돌리기에는 충분했을 것이다. ssh로 서버에 접속 후 git clone으로 끌어와서 돌려봤는데, 런타임 에러가 있었다. IPU를 다루게 해주는 프레임워크인 Poplar SDK 코드가 업데이트 되면서 바뀐건가? 했는데 그건 아닌 것 같았다. 어쩐지 조금 불신이 생겼지만, 해당 내용을 수정하고 저자의 repo에 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pvZWFvcnRpei9nYnAtcG9wbGFyL3B1bGwvMQ==">PR<i class="fa fa-external-link-alt"></i></span>을 넣었다.</p>
+<img src="/20210128-gbp-poplar/ipu-running.png" class="" title="BA">
+
+<p>그리고 코드를 실행해보았다. 우선 첫번째로 느낀 점은 <strong>데이터 로딩이 무지하게 오래 걸린다는 점</strong>이다. 거의 <strong>20~30초</strong>는 데이터로딩에 걸린 것 같다 (즉, 이 상태로 20~30초를 기다린다). 이게 이렇게 되는게 맞는건가…? 아직도 솔직히 의문이긴 하다.</p>
+<img src="/20210128-gbp-poplar/gbp-poplar.gif" class="" title="BA-2">
+
+<p>그리고는 위와 같이 코드가 돌아갔다. 이렇게 돌아가면서 느낀 점은 <strong>여전히 너무 느리다는 것</strong>이다. ‘설마 iteration 도는거를 보기 쉽게 하려고 std::chrono 같은걸 끼얹었나?’ 라는 생각도 들어서 코드를 뜯어봤지만 그런건 없었다. 분명 논문에서는 250ms에 BA가 끝났다는데, 내가 돌린 코드에서는 20초가 걸렸다 ㅋㅋㅋ 이런 결과를 보면 IPU에 대한 신뢰도가 사라질 것이다. 왜냐하면 CPU에서 ceres-solver가 도는 모습을 log로 찍으면 눈에 보이지도 않기 때문이다.</p>
+<hr>
+<h1 id="저자와의-컨택"><a href="#저자와의-컨택" class="headerlink" title="저자와의 컨택"></a>저자와의 컨택</h1><p>저자와 여러 이메일을 주고 받았다.</p>
+<p>나는 저자에게 ‘내가 돌린 코드에서는 20초가 나오는데, 논문에서 나오는 40ms는 어떻게 측정한 것인지?’ 라는 질문을 던졌다. 이에 대해 저자는 <strong>reprojection error가 1.5 pixel보다 작은 수치로 수렴하는 시간이 40 ms</strong>라고 하였다. 논문에서는 동일한 조건으로 CPU에서 ceres-solver로 계산 했을 때 1450ms 로 나왔다고 이야기하였다.</p>
+<p>내가 코드를 돌렸을 때 ~350번 프레임 쯤에서 에러치가 1.5 pixel보다 낮아졌다. 저자이 따르면 0번째 프레임부터 여기까지의 시간을 재는 것이 맞다고 한다.</p>
+<p>하지만 현재의 코드는 매 iteration마다 <code>engine.run</code> 함수가 들어가있고, 이는 반복 연산에 효율적인 방법은 아니다. 그렇기에 오버헤드가 많이 발생하여 훨씬 느리게 보이는 것이라고 저자는 이야기한다. </p>
+<p>저자는** <code>repeat()</code>함수를 사용해서 350 iteration을 하나의 <code>engine.run</code>으로 넣으면 문제가 해결될 것**이라고 했고, 추후에 코드를 수정해 공유해주겠다고 했지만… 아쉽게도 나는 IPU 테스트 기간이 끝나버렸다 ㅜㅜㅜ 저자를 믿는 수 밖에… </p>
+<p>저자의 말로는 <strong>다음 달 쯤에 논문이 또 나온다고 한다</strong>!!! 신나버려!</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210313-ba/" rel="bookmark">Bundle adjustment란?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Graphcore/" rel="tag"># Graphcore</a>
+              <a href="/tags/IPU/" rel="tag"># IPU</a>
+              <a href="/tags/Bundle-adjustment/" rel="tag"># Bundle adjustment</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210128-2021-january-slam-news/" rel="prev" title="2021년 1월 SLAM 뉴스">
+                  <i class="fa fa-chevron-left"></i> 2021년 1월 SLAM 뉴스
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210213-february-slam-news/" rel="next" title="2021년 2월 SLAM 뉴스">
+                  2021년 2월 SLAM 뉴스 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

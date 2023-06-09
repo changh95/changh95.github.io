@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="모두콘 2022에서 발표한 &#39;Spatial AI는 미래입니다&#39; 슬라이드 정리">
+<meta property="og:type" content="article">
+<meta property="og:title" content="모두콘 2022 - Spatial AI는 미래입니다 (장형기 발표)">
+<meta property="og:url" content="https://changh95.github.io/20221215-moducon2022/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="모두콘 2022에서 발표한 &#39;Spatial AI는 미래입니다&#39; 슬라이드 정리">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide12.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide34.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide56.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide78.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide910.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide1112.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide1314.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide15.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide1617.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide1819.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide2021.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide2223.png">
+<meta property="og:image" content="https://changh95.github.io/20221215-moducon2022/slide2425.png">
+<meta property="article:published_time" content="2022-12-15T05:48:45.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:02.651Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="모두의연구소">
+<meta property="article:tag" content="모두콘">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20221215-moducon2022/slide12.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20221215-moducon2022/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>모두콘 2022 - Spatial AI는 미래입니다 (장형기 발표) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spatial-AI%EB%8A%94-%EB%AF%B8%EB%9E%98%EC%9E%85%EB%8B%88%EB%8B%A4"><span class="nav-number">1.</span> <span class="nav-text">Spatial AI는 미래입니다</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20221215-moducon2022/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          모두콘 2022 - Spatial AI는 미래입니다 (장형기 발표)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-12-15 14:48:45" itemprop="dateCreated datePublished" datetime="2022-12-15T14:48:45+09:00">2022-12-15</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">1.2 Machine Learning & Deep Learning</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-4-Robotics/" itemprop="url" rel="index"><span itemprop="name">1.4 Robotics</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-4-Robotics/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="video-container"><iframe src="https://www.youtube.com/embed/QGjNggk7ZYM" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
+
+<h1 id="Spatial-AI는-미래입니다"><a href="#Spatial-AI는-미래입니다" class="headerlink" title="Spatial AI는 미래입니다"></a>Spatial AI는 미래입니다</h1><blockquote>
+<p>2022년 12월 15일 연세대학교 백양누리에서 열린 <span class="exturl" data-url="aHR0cHM6Ly9tb2R1Y29uLmtyLw==">모두콘 2022<i class="fa fa-external-link-alt"></i></span> 행사 AI+Research 트랙에서 첫번째 토크로써 ‘Spatial AI는 미래입니다’ 라는 주제로 발표를 하게 되었습니다.<br>구글 드라이브에 업로드한 <a target="_blank" rel="noopener" href="https://docs.google.com/presentation/d/17eJu8k7VfJr167f_qPCIYOb4yGm8V7JD/edit?usp=sharing&ouid=110711989250390692879&rtpof=true&sd=true"><strong>발표 자료 링크</strong></a>도 공유합니다.</p>
+</blockquote>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide12.png" class="" title="자기소개"> 
+
+<p>발표를 시작하기 전 간단하게 제 소개를 했습니다.</p>
+<p>Facebook 그룹인 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2dyb3Vwcy9zbGFta3Iv">SLAM KR<i class="fa fa-external-link-alt"></i></span> 을 소개하고, 카카오톡 오픈채팅방 그룹인 <span class="exturl" data-url="aHR0cHM6Ly9vcGVuLmtha2FvLmNvbS9vL2c4VDVreExi">저희는_SLAM_마스터가_될겁니다<i class="fa fa-external-link-alt"></i></span>를 소개했습니다. SLAM KR에는 약 3천명, SLAM 마스터 방에는 약 900명의 참여원이 있는데, 이 중에 현업자, 논문 저자, 대학원생, 기업 대표님들 및 팀장님들이 계십니다.<br>전체 청중 중 약 1/3 정도만이 SLAM 이라는 기술에 대해 알고 계신 것 같아, SLAM 기술은 로보틱스 분야에서 주변 환경에 대한 지도를 그리고 그 공간 안에서 자기 자신의 위치를 찾는 기술이라고 간단하게 소개 드렸습니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide34.png" class="" title="Spatial AI란?">
+
+<p>Spatial AI는 공간 지능을 뜻합니다.</p>
+<p>최근에 새롭게 부상하는 키워드로써, 수많은 기존의 딥러닝 테크닉들이 포함될 수 있는 포괄적인 개념이기 때문에 기존에 딥러닝을 하시는 분들께서는 spatial AI에 대해 부분적으로 익숙하실 수 있습니다 (e.g. 3D object detection, 3D reconstruction).</p>
+<p>Spatial AI가 정말 유망한 기술인지 bias가 없이 확인하기 위해, <span class="exturl" data-url="aHR0cHM6Ly9vcGVuYWkuY29tL2Jsb2cvY2hhdGdwdC8=">OpenAI chatGPT<i class="fa fa-external-link-alt"></i></span> 에게 물어보았습니다. 요약하자면 아래와 같은 문장들이 나옵니다.</p>
+<ul>
+<li>‘현재까지도 사용되고 있는 기술이다’</li>
+<li>‘시공간을 정보를 다루는 인공지능 시스템을 개발하는데에 사용됩니다.’</li>
+<li>‘예를 들어, 자율주행의 경우에는…’</li>
+<li>‘앞으로도 발전해 나갈 것으로 예상됩니다.’</li>
+</ul>
+<p>여기서 저는 ‘<strong>시공간의 정보</strong>를 다루는…’ 부분에 집중했습니다.</p>
+<p>Spatial AI는 공간에 대해 이해하려고 하는 인공지능입니다. <strong>공간에 대해 이해한다</strong>는건 어떤 의미를 가질까요? 아주 쉬운 레벨에서 생각해보자면, 어떤 공간이 비어있는지/아닌지 로 간단하게 공간을 파악할 수 있습니다. 예를 들어, 길거리에 아무것도 없다면 제가 우다다 달려도 부딪칠게 없겠죠. 조금 더 높은 수준으로 공간을 이해하려면, 내 앞에 어떤 물체가 있을 때 어떤 모양을 하고 있는지도 이해할 수 있겠습니다. 길이 x 넓이 x 높이 와 같은 표현도 가능하겠고, 점/선/면/곡면 등으로 물체의 생김새를 표현할 수 있겠죠. 이러한 정보를 통해 정확히 벽이 어디에 있는지도 표현할 수 있을 겁니다. 이와 같은 이해의 수준을 ‘<strong>기하학적 이해</strong>‘라고 합니다.</p>
+<p>기하학적 이해를 뛰어넘는 이해도 있습니다. ‘<strong>의미론적 이해</strong>‘나 ‘<strong>물리적 이해</strong>‘와 같은 성질이 있습니다. 내 앞에 있는 물체가 책상인지, 자동차인지, 장난감인지 구분할 수 있는게 의미론적 이해라고 볼 수 있겠습니다. 의미론적 이해를 깊은 수준까지 할 수 있다면, 내 앞에 놓인 자동차의 모양을 하고 있는 이 물체가 진짜 자동차인지, 자동차 형태를 한 장난감인지도 구분을 할 수 있을겁니다. 물리적 이해는 내 앞에 있는 물체의 물리적인 성질을 이해하는 것 입니다. 만졌을 때 단단한지 말랑말랑한지, 두드렸을 때 어떤 소리가 나타나는지, 빛을 쬐었을 때 어떻게 반사하는지 등등을 포함하겠습니다.</p>
+<p>마지막으로, ‘<strong>시간의 이해</strong>‘가 있습니다. 기하학적, 의미론적, 물리적 이해는 셋 다 모두 어떤 정해진 시점에서 고정된 값이지만, 시간이 지나면서 바뀔 수 있는 것들이 있습니다. 초록색으로 무성한 산이 가을에도 겨울에도 초록색일까요? 가을에는 단풍이 들 수도, 겨울에는 눈이 덮힐 수도 있습니다. 비가 오면 어두울 수도 있겠구요. 보수를 하지 않는 건물이 100년동안 그 모습을 유지를 할 수 있을지, 얼음 조각상이 봄이 와도 형태를 유지할 수 있을지, 와 같은 상황에서는 우리가 물체를 바라보는 모습이 시간에 따라 달라진다는 것을 알 수 있습니다.</p>
+<p>Spatial AI는 궁극적으로 시공간에 대한 완벽한 이해를 하려고 합니다. 그렇기 떄문에 <strong>기하학적, 의미론적, 물리적, 시간적 이해를 전부 포함</strong>합니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide56.png" class="" title="Spatial AI usages">
+
+<p>현재까지 올라온 Spatial AI의 수준을 보겠습니다. 사실 방금 전 슬라이드에 비하면 아주 부끄러울 정도로밖에 올라오지 못했습니다 ㅎㅎ</p>
+<p>Spatial AI가 현재 잘 적용되고 있는 대표적인 분야로는 <strong>자율주행</strong>과 <strong>가상/증강현실</strong>이 있습니다. 자동차 자율주행을 할 때에는 주로 기하학적 + 의미론적 이해를 달성하는데에 주로 집중합니다. 자동차 주변 환경에서 차도와 인도를 구분할 수 있어야하고, ‘인도에서는 주행하면 안돼’라는 룰을 기반으로 인도에는 절대 침범하지 않으려고 합니다. 전후좌우로 자동차가 있는지도 확인을 하고 충돌하지 않기 위해 속도를 조절하기도 하구요. ‘옆차가 나를 추월할까?’ 같은 문제를 풀 때는 아주 단기적으로 시간적인 이해를 하기도 합니다 (i.e. prediction). 드론 자율비행 같은 경우에는 자동차와는 다르게 의미론적 이해까지는 하지 않고, 충돌방지를 위한 기하학적 이해에 집중하는 경우가 많습니다. 가상/증강현실 분야에서는 자동차 자율주행 / 드론 자율비행보다는 훨씬 앞선 연구를 하지만, 현재 가장 성공적인 제품 중 하나인 <span class="exturl" data-url="aHR0cHM6Ly9wb2tlbW9uZ29saXZlLmNvbS8=">Niantic Pokemon Go<i class="fa fa-external-link-alt"></i></span>를 보았을 때는 공간적 이해만 사용하는 수준이라고 볼 수 있겠습니다. 실제 공간에 위치하는 물체와 겹쳐있지 않게 바닥과 벽을 잘 인식해서 가상의 포켓몬을 현실 세계에 렌더링하는 겁니다.</p>
+<p>최신 연구개발되는 제품들을 보면 조금 더 넓은 범위의 연구를 하는 것이 보입니다. 최신 <strong>메타버스 연구</strong> 아이디어들을 보면, 컴퓨터에 직접 키보드/마우스를 사용해서 접속하는 것이 아닌 가상의 키보드/마우스로 접속하는 모습도 보입니다. 구글의 자회사인 <span class="exturl" data-url="aHR0cHM6Ly9ldmVyeWRheXJvYm90cy5jb20v">Everyday Robots<i class="fa fa-external-link-alt"></i></span>나 청소기/헤어드라이어로 유명한 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZHlzb24uY29tL2Vu">Dyson<i class="fa fa-external-link-alt"></i></span>에서도 <strong>홈 로보틱스</strong>를 연구개발하고 있는데, 복잡한 환경 속에서 물리적인 업무를 수행 가능할 정도로 상당히 높은 수준의 로봇 개발 연구를 하고 있습니다. 예를 들어서 사람이 ‘내가 커피잔을 어디에 뒀더라?’ 라고 하면, 로봇이 이 내용을 파악해서 ‘주방 창가 옆 테이블 위에 두셨어요’라고 답을 할 수 있을 수준까지 입니다. 이를 위해서는 우선 사람의 언어를 이해해 ‘커피잔’이 ‘컵’과 동일하다는 것을 이해해야하고, ‘주방’이 어딘지 이해해야하고, ‘창가 옆 테이블’이라는 정보와 ‘위’ 라는 정보까지 완벽하게 이해해야합니다. 여기서 사람이 ‘아 그래? 가져와줘’ 라고 얘기한다면 현재 위치에서부터 주방 창가 옆 테이블까지 충돌하지 않고 안전하게 이동할 수 있어야하고, 컵을 적당한 힘으로 집어서, 다시 유저에게 돌아와야합니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide78.png" class="" title="Levels of Spatial AI">
+
+<p>Spatial AI는 <strong>4 단계로 분류</strong>할 수 있는데, 아래부터 쉬운 순서대로 쌓아올린다고 볼 수 있습니다.</p>
+<p>Level 1은 Motion Tracking &amp; Sparse map 입니다. <strong>Motion tracking은 자기 자신의 움직임을 파악하는 것</strong>이고, <strong>Sparse map은 공간 속에서 어떤 물체가 존재하는지/아닌지 정도를 구분</strong>하는 간단한 문제라고 볼 수 있습니다. SLAM이나 Visual odometry로 풀어낸 문제라고 볼 수 있고, 현재 이미 기능적으로는 연구가 거의 끝난 수준이며 ‘어떻게 하면 효율적이게 할 수 있을까?’에 집중하는 추세입니다. 예시로는 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9nX3dOME50MFZBVQ==">VINS-Mono<i class="fa fa-external-link-alt"></i></span>가 있겠습니다.</p>
+<p>Level 2는 Dense map 입니다. <strong>Dense map은 sparse map과 다르게 더욱 뺵뺵한 지도를 만드는 것</strong>이 목표입니다. 지도가 빽뺵해지면서 선, 면, 곡면 등을 검출해낼 수 있기 때문에, <strong>로봇이 명확하게 공간 속 벽을 파악할 수 있고 이에 맞춰 액션 플래닝</strong>을 하고 <strong>장애물 회피</strong>를 할 수 있게 됩니다. 고가의 센서들로 dense mapping을 하는 연구는 끝났지만, 저렴한 센서로 dense mapping을 하는 방법, 효율적으로 dense map을 다루는 방법, 더욱 저렴한 센서를 만드는 방법과 같이 여러가지 연구가 진행되고 있습니다. 알고리즘 예시로는 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9rZUlpclhyUmIxaw==">BundleFusion<i class="fa fa-external-link-alt"></i></span>이 있겠습니다.</p>
+<p>Level 3는 3D Scene understanding 입니다. <strong>Scene understanding을 통해서 로봇은 이제 어떤 벽이 어떤 물체를 의미하는지</strong>를 알게 됩니다. 차도/인도의 차이를 구분해서 이동에 제한을 두는 자율주행 자동차도 간단한 수준으로 이런 기술을 사용하고 있다고 볼 수 있습니다. 홈 로봇이 ‘주방’, ‘창가 옆 테이블’, ‘커피잔’ 등을 이해하는 것이 이 단계라고 볼 수 있겠습니다. CVPR 2020 부터 지금까지 계속 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dWJlLmNvbS9wbGF5bGlzdD9saXN0PVBMNlFYcHd2S2hRSXJTa2xOc1FKcWljanR4aU9zNl9OcFk=">3D scene understanding 워크샵<i class="fa fa-external-link-alt"></i></span>이 열리고 있으니 관련 연구를 보면 좋을 것 같습니다.</p>
+<p>Level 4는 Dynamic / Object-level map 입니다. <strong>물체들간의 상호관계를 이해하는 단계</strong> 라고 볼 수 있는데, 어떤 물체는 움직일 수 있고 어떤 물체는 움직일 수 없는지, 물체들간의 상호관계는 어떻게 되는지, 내가 이 물체를 만지면 형태가 바뀌는지에 대한 이해라고 볼 수 있겠습니다.</p>
+<p>이렇게 결국 Spatial AI는 기하학적 + 시간적 + 의미론적인 정보를 모아, Action과 Prediction을 가능하게 만들고, 이를 통해 고급 상호작용을 가능케 한다고 생각하면 좋을 것 같습니다. (물리적…은 의미론적 내용과 함께 들어갈 수 있습니다)</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide910.png" class="" title="Object Detection, Segmentation, GAN">
+
+<blockquote>
+<p>원본 pptx 자료를 보시면 gif 자료로 보실 수 있습니다.</p>
+</blockquote>
+<p>이번 슬라이드 부터는 기존의 딥러닝을 하시던 분들이 어떻게 Spatial AI와 이어질 수 있는지 알아보겠습니다.</p>
+<p>2D 컴퓨터 비젼을 하시는 분들께서는 주로 <strong>Detection / Segmentation</strong>과 같이 object semantic을 다루시는 분들께서 spatial AI 개발에 참여하시기 좋습니다. 하나 아쉬운 점이라면, 2D CV는 이미지 도메인에서만 적용되기 때문에 다시 3D 로 object semantic 정보를 쏘아올려서 3d object와 매칭을 시켜야한다는 점이 있습니다. 이에 대한 부분은 SLAM과 같이 multiple view geometry를 이용하면 좋은데, 좋은 예시로 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9RblZsZXhYaTlfYw==">cubeSLAM<i class="fa fa-external-link-alt"></i></span>이 있습니다.</p>
+<p><strong>GAN</strong>을 하신 분들 중에서는 다양한 날씨나 조명에 대한 <strong>latent variable</strong>을 학습해서 실제 데이터셋에 존재하지 않는 데이터를 생성해낼 수 있습니다. 이러한 latent variable을 이용해서 spatial AI에서도 시간에 따른 3D 공간의 기하학적, 물리적, 의미론적인 변화를 표현할 수도 있겠습니다.</p>
+<p>3D 컴퓨터 비젼을 하신 분들은… 사실 뭐 이미 spatial AI를 하고 있다고 봐도 괜찮지 않을까 싶습니다. <strong>3D 공간 속에서의 의미론적인 탐색</strong>을 하고 있는 거니까요. 3D Object detection / Segmentation 연구 모두 훌륭하다고 생각합니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide1112.png" class="" title="NeRF and NLP">
+
+<blockquote>
+<p>원본 pptx 자료를 보시면 gif 자료로 보실 수 있습니다.</p>
+</blockquote>
+<p>최근 그래픽스 분야에서 <strong>NeRF</strong>와 같이 렌더링 기법을 이용하면서 3D 공간에 대한 표현 방법을 찾고 있는 연구가 활발하게 진행되고 있습니다. Spatial AI에서는 <strong>3D 공간을 표현하는 방식</strong> 역시 굉장히 중요한데, 기존의 point cloud, mesh, occupancy grid map / voxel 같은 것으로 표현하는 방식 외로 새로운 neural representation이 나왔다는 건 굉장히 환영할만한 내용인 것 같아요. NeRF는 현재로써는 메모리를 잡아먹는다는 단점이 있지만, differentiable하기 때문에 다양한 뉴럴넷들과의 궁합이 잘 맞고 end-to-end 뉴럴넷을 만든다는 가능성을 열어준다는 것이 굉장히 유망합니다.</p>
+<p>Spatial AI는 컴퓨터 비젼만 할 것 같지만, 의외로 <strong>자연어 처리 및 language model</strong>이 활약할 부분이 많습니다. 자연어 처리 분야는 주로 chatGPT와 같은 챗봇에서 많이 사용되며 최근 급격한 성능 개선이 이뤄졌는데, 앞으로 메타버스 및 홈 로보틱스와 같은 제품군을 생각했을 떄 ‘<strong>공간을 표현하는 언어</strong>‘ 역시 굉장히 중요해지게 됩니다. 자연어는 실제로 비전 쪽에서 semantic을 표현하고 구분하는데에 아주 좋은 정보가 될 수 있으며, 비전 데이터로 봤을 때는 비교하기 어려운 경우에도 자연어 데이터가 섞였을 때 안정적으로 비교가 가능해지기도 합니다. 좋은 예시로 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9UOVhTVTBwS1gyRQ==">CLIP<i class="fa fa-external-link-alt"></i></span>이 있습니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide1314.png" class="" title="Reinforcement learning and SLAM">
+
+<blockquote>
+<p>원본 pptx 자료를 보시면 gif 자료로 보실 수 있습니다.</p>
+</blockquote>
+<p>3D 공간 속에서 최적의 action과 planning을 하기 위해 <strong>강화학습 (reinforcement learning)</strong> 연구도 활발하게 진행되고 있습니다. 복잡한 환경 속에서 최적의 control 파라미터를 찾기 위해 보상 기반 학습을 진행하며 최적의 action을 찾아낼 수 있기 떄문에, spatial AI의 frontend로써 perception 모델이 3D 공간을 잘 이해할 수 있다면, RL이 backend에서 받아서 해당 <strong>공간 속 최적의 action / planning</strong>을 할 수 있게 됩니다.</p>
+<p><strong>SLAM</strong>은 spatial AI와 아주 밀접한 관계를 가지고 있는 기술입니다. SLAM은 <strong>실시간으로 3D 공간의 형태를 파악하고 동시에 자기 자신이 해당 공간에서 어디에 위치하는지를 알아내는 기술</strong>인데, sparse map도 알아낼 수 있고 dense map도 알아낼 수 있다는 점에서 spatial AI의 level 1 및 level 2와 밀접하게 연관되어있다는 것을 알 수 있습니다. SLAM은 사실 상 motion model과 observation model을 동시 최적화하는 state estimation 기법인데, 여기에 semantic 정보나 시간에 대한 latent variable도 넣어 함께 최적화하는 방향도 최근 제안이 되고 있습니다. Spatial AI는 SLAM에서 코어엔진으로써 기하학적/의미론적/물리적/시간적 정보를 함께 최적화나는 spatial AI 기능이 될 가능성이 높습니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide15.png" class="" title="Spatial AI combination">
+
+<p>그래서 individual contributor로써는 spatial AI 연구를 어떻게 해야할까요?</p>
+<p>사실 아이디어를 낼 수 있는 경로는 무궁무진하다고 생각합니다. <strong>방금 전에 설명했던 분야들을 단순히 늘어놓고 짬뽕시키기만 시켜도 spatial AI 모듈이 나올 수 있지 않을까요?</strong> 현재까지 오버랩이 없던 분야들일 수록 더 새로운 아이디어가 나올 수 있다고 생각합니다. 다만, 어떻게 섞어야 가장 정확하고 효율적으로 spatial AI라는 문제를 풀 수 있을지에 대한 부분은 깊게 고민해볼 부분입니다.</p>
+<p>다음 슬라이드부터 최신 연구에서는 이렇게 다양한 분야를 어떻게 섞었는지에 대해 소개해보겠습니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide1617.png" class="" title="3D Dynamic Scene Graph">
+
+<blockquote>
+<p>원본 pptx 자료를 보시면 gif 자료로 보실 수 있습니다.</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDIuMDYyODk=">3D Dynamic Scene Graph<i class="fa fa-external-link-alt"></i></span>는 2020년 MIT의 Luca Carlone 교수님 랩실에서 나온 연구입니다. Indoor scene을 표현할 때 단순히 포인트 클라우드나 voxel로 전부 표현하는 것이 아닌, 로봇이 제대로 위치를 인식하고 interaction을 할 수 있는 정보를 넣어주는 것을 목표로 시작된 연구입니다. 5개의 Layer이 있는데, 단계별로 abstraction이 된다는 것이 특징입니다. Layer 1에서는 Kimera VIO를 통해 위치를 추정하면서 Metric-semantic map (i.e. 실제 세상의 스케일을 가지고 있으면서 의미론적인 정보를 담고 있는 지도)를 생성할 수 있습니다. 이 지도를 기반으로 Layer 2에서는 Object 및 agent를 찾아 검출할 수 있습니다. 알고있는 형태의 오브젝트라면 CAD 모델을 fit해서 비어있는 맵을 채워주고 오브젝트를 검출할 수 있고, 알고있지 못한 오브젝트거나 fit에 실패한 오브젝트라면 clustering을 통해서 3D object bounding box를 그려줍니다. Layer 3 에서는 metric-semantic map에서 평면을 감지해서 벽을 감지하고, 이를 통해 2D 벽 지도를 만듭니다. Layer 4에서는 2D 벽 지도를 기반으로 방을 구분할 수 있고, Layer 5에서는 입/출구 기반으로 건물을 구분할 수 있게 됩니다. </p>
+<p>초창기 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMDI0OTA=">Kimera<i class="fa fa-external-link-alt"></i></span> 연구부터 최근까지 계속 진행되고 있는 프로젝트인데, 오픈소스로도 잘 나와있습니다. </p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide1819.png" class="" title="LM-Nav">
+
+<blockquote>
+<p>원본 pptx 자료를 보시면 gif 자료로 보실 수 있습니다.</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvbG1uYXY=">LM-Nav<i class="fa fa-external-link-alt"></i></span>는 UC Berkeley의 Sergey Levine 교수님 랩실에서 나온 연구입니다. Vision-Language model을 사용해서 Robotic navigation도 풀 수 있을지에 대한 연구인데, 유저가 ‘X를 지나 Y에서 좌회전해서 Z로 가’ 라는 명령어를 내리면 지도 없이 공간을 탐색하면서 명령을 따라 이동하는 기술을 소개합니다. Langauge parsing을 하는 LLM 모델, 로봇에서 바라보고 있는 이미지 공간을 언어 공간으로 넘기는 VLM 모델, 그리고 이미지 공간을 navigation을 위한 공간으로 넘기는 VNM 모델을 차례대로 사용합니다.</p>
+<p>LM-Nav 연구는 Language도 공간을 이해하고 탐색하는데에 쓰일 수 있다는 점을 보여주며, Spatial AI 기술에 NLP 역시 큰 역할을 할 수 있음을 의미합니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide2021.png" class="" title="Do as I can, not as I say">
+
+<blockquote>
+<p>원본 pptx 자료를 보시면 gif 자료로 보실 수 있습니다.</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zYXktY2FuLmdpdGh1Yi5pby8=">Do as I can, not as I say<i class="fa fa-external-link-alt"></i></span> 연구는 구글의 자회사인 Everyday robots에서 나온 연구입니다. 사람이 추상적인 질문 (e.g. 문제가 생겼는데 도와줘~)을 했을 때 답변을 robotic task로써 이해하고, 그것을 실제로 vision + navigation 기술로써 풀어낸다는 연구입니다. 예시로는 ‘콜라를 쏟았는데 도와줘’ 라고 했을 때, 로봇이 ‘1. 콜라 캔을 찾는다, 2. 콜라 캔을 집어든다, 3. 쓰레기통 옆으로 이동한다, 4. 콜라 캔을 내려놓는다, 5. 스펀지를 찾는다, 6. 스펀지를 집어든다, 7. 유저가 있는 테이블로 이동한다, 8. 테이블에 스펀지를 내려놓는다’ 라는 독립적인 robotic task 문제로 풀어내고, 해당 위치에 도달했을 때 각각의 문제를 해결함으로써 아주 복잡하고 추상적인 질문을 해결하는 모습을 볼 수 있습니다.</p>
+<p>Say-Can 연구는 자칫 Vision + NLP + Navigation을 사용한다는 점에서 LM-Nav 연구와 비슷해보일 수 있지만, LM-Nav 연구는 명확한 task들을 주는 반면에 Say-Can 연구는 추상적인 질문 속 명확한 task들을 분류해새 수행하는 모습을 보이는 점에서 다르다고 볼 수 있습니다.</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide2223.png" class="" title="1_2_슬라이드">
+
+<blockquote>
+<p>원본 pptx 자료를 보시면 gif 자료로 보실 수 있습니다.</p>
+</blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIyMTAuMTczMjU=">Real-time Mapping of Physical Scene Properties with an Autonomous Robot Experimenter<i class="fa fa-external-link-alt"></i></span> 연구는 Imperial College London의 Andrew Davison 교수님 랩실에서 나온 연구입니다. 3D 공간 속에 우리가 물리적인 특성을 모르는 물체들이 있을 때, 물체들을 물리적인 특성을 기반으로 분류하고 3D 공간에 표시한다는 연구입니다. 로봇이 자율적으로 움직이면서 물체에 force/torque 센서가 부착된 팔로 만져보면서, 부드러운 물체와 딱딱한 물체를 구분할 수 있습니다. 이 때, 3D 공간 속 기하학적으로 뭉쳐있는 (i.e. 같은 물체일 확률이 높은) 공간들을 확률적으로 같은 물리적인 특성을 가지고 있다고 표현합니다. 처음에 딱딱한 물체를 만져봤을 때에는 아직 부드러운 물체를 만져본 적이 없기 때문에 세상 모든 부분이 딱딱하다고 생각하지만, 부드러운 물체와 딱딱한 물체를 번갈아가며 만져보며 부드러운 물체와 딱딱한 물체를 vision 정보와 결합하게 되며 이해하게 됩니다.</p>
+<p>Spatial AI 연구 쪽에서는 아직 물리적인 특성까지 고려하는 연구가 많이 없는데, 이런 연구가 있다는 점에 감사할 따름입니다 ㅎㅎ</p>
+<p> </p>
+<hr>
+<img src="/20221215-moducon2022/slide2425.png" class="" title="1_2_슬라이드">
+
+<p>Spatial AI는 결국 어떤 형태가 되게 될까요? AI가 우리가 살고 있는 공간을 전부 이해한다면, 그제서야 진정으로 Digital Twin과 메타버스가 이뤄지게 되지 않을까 생각합니다. 그때 쯤 되면 로봇들이 우리 집에서도, 공장에서도, 길에서도 우리의 일을 대신 다 해주고 있겠지요. 기술이 발전하면서 자동화를 꾀하는건 지극히 자연스러운 현상이라고 생각합니다. 연구자로써, 그리고 엔지니어로써 이러한 트렌드에 올라타 기여를 할 수 있다면 그게 커리어 적 성공이 아닐까라는 생각도 해봅니다.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20230102-2022-seminar-showdown/" rel="bookmark">2022년 세미나 결산</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/%EB%AA%A8%EB%91%90%EC%9D%98%EC%97%B0%EA%B5%AC%EC%86%8C/" rel="tag"># 모두의연구소</a>
+              <a href="/tags/%EB%AA%A8%EB%91%90%EC%BD%98/" rel="tag"># 모두콘</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20221021-pointers/" rel="prev" title="Pointer를 써도 될 때는 언제인가?">
+                  <i class="fa fa-chevron-left"></i> Pointer를 써도 될 때는 언제인가?
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20221219-bean-brothers-talk/" rel="next" title="빈브라더스 카페 뉴스레터 구독자 모임 후기">
+                  빈브라더스 카페 뉴스레터 구독자 모임 후기 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="2021년 04월 03일 NAVER LABS Europe 블로그 아티클 정리">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Methods for visual localization (NAVER LABS Europe)">
+<meta property="og:url" content="https://changh95.github.io/20210405-naver-labs-visloc/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="2021년 04월 03일 NAVER LABS Europe 블로그 아티클 정리">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20210405-naver-labs-visloc/visual_localization_methods.png">
+<meta property="og:image" content="https://changh95.github.io/20210405-naver-labs-visloc/comparison.png">
+<meta property="article:published_time" content="2021-04-01T21:53:43.000Z">
+<meta property="article:modified_time" content="2023-06-09T06:12:01.839Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="NAVER LABS">
+<meta property="article:tag" content="Visual localization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20210405-naver-labs-visloc/visual_localization_methods.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210405-naver-labs-visloc/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Methods for visual localization (NAVER LABS Europe) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual-localization"><span class="nav-number">1.</span> <span class="nav-text">Visual localization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%96%B4%EB%A0%A4%EC%9A%B4-%EC%9D%B4%EC%9C%A0"><span class="nav-number">1.1.</span> <span class="nav-text">어려운 이유</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B8%B0%EC%88%A0-%EC%98%A4%EB%B2%84%EB%B7%B0"><span class="nav-number">2.</span> <span class="nav-text">기술 오버뷰</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structure-based-methods"><span class="nav-number">3.</span> <span class="nav-text">Structure-based methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-retrieval-based-methods"><span class="nav-number">4.</span> <span class="nav-text">Image retrieval-based methods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pose-regression-based-method"><span class="nav-number">5.</span> <span class="nav-text">Pose regression-based method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A0%95%EB%A6%AC"><span class="nav-number">6.</span> <span class="nav-text">정리</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%B3%BC%EB%A7%8C%ED%95%9C-%EB%85%BC%EB%AC%B8%EB%93%A4"><span class="nav-number">7.</span> <span class="nav-text">볼만한 논문들</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210405-naver-labs-visloc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Methods for visual localization (NAVER LABS Europe)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-04-02 06:53:43" itemprop="dateCreated datePublished" datetime="2021-04-02T06:53:43+09:00">2021-04-02</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><span class="exturl" data-url="aHR0cHM6Ly9ldXJvcGUubmF2ZXJsYWJzLmNvbS9ibG9nL21ldGhvZHMtZm9yLXZpc3VhbC1sb2NhbGl6YXRpb24v">원본 글 링크<i class="fa fa-external-link-alt"></i></span></p>
+<hr>
+<h2 id="Visual-localization"><a href="#Visual-localization" class="headerlink" title="Visual localization"></a>Visual localization</h2><ul>
+<li>이미지로부터 현재 위치를 추정하는 기술.</li>
+<li>로보틱스, 자율주행, 증강현실</li>
+<li>기존에 사용하던 방법: GNSS<ul>
+<li>GNSS는 실내에서 사용 불가능</li>
+<li>오차 범위가 미터단위로 큼</li>
+<li>방향 정보가 없음<ul>
+<li>GPS와 Compass 정보를 합성하여 1~2m 정도의 위치 오차와 10도 정도의 방향 오차로 현재 위치를 추정할 수 있으나, 로보틱스/자율주행/증강현실에서 요구하는 정확도에 훨씬 못 미침.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<h3 id="어려운-이유"><a href="#어려운-이유" class="headerlink" title="어려운 이유"></a>어려운 이유</h3><ul>
+<li>Visual localization을 통해 실내와 실외 환경에서 cm 단위로 위치를 추정할 수 있어야함.<ul>
+<li>실외: 자율주행</li>
+<li>실내: 로보틱스, 증강현실, 자율주행 (GNSS가 닿지 않는 주차장 등)</li>
+<li>사전에 모아둔 reference 이미지들과 내가 현재 보고 있는 query 이미지들간의 correspondence를 이용하여 현재 위치를 추정 가능함.<ul>
+<li>이러한 ‘visual map’ 정보는 3D reconstruction을 통해 생성 가능함.  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>기술적 어려움:<ul>
+<li>조명 변화.<ul>
+<li>Visual map이 낮에 찍은 사진들로 이뤄졌다면, 밤에 찍은 query 이미지로 위치를 추정할 수 있을까?</li>
+</ul>
+</li>
+<li>동적 객체<ul>
+<li>Visual map을 만들 때 움직이는 객체가 포함되어있었다면?</li>
+</ul>
+</li>
+<li>날씨/계절 변화</li>
+<li>가려짐 / 부분적 가려짐</li>
+<li>시점의 차이</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>다양한 파이프라인이 제안 됨.</li>
+<li>다양한 데이터셋이 제안됨.<ul>
+<li>데이터셋마다 포맷이 많이 다름.</li>
+<li>NAVER LABS에서 만든 Kapture를 통해 포맷을 하나로 통합함.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="기술-오버뷰"><a href="#기술-오버뷰" class="headerlink" title="기술 오버뷰"></a>기술 오버뷰</h2><ol>
+<li>Structure-based<ul>
+<li>오래된 방법</li>
+<li>3D reconstruction으로 point cloud를 생성하고, local feture matching을 통해 query image와 3d map같의 correspondence를 찾는 작업.</li>
+</ul>
+</li>
+<li>Structure-based + Image retrieval<ul>
+<li>Image retrieval 등을 사용해서 search space를 줄일 수 있음.</li>
+</ul>
+</li>
+<li>Pose interpolation<ul>
+<li>3D reconstruction을 수행하지 않고, reference image로부터 pose interpolation을 함.</li>
+</ul>
+</li>
+<li>Relative pose estimation<ul>
+<li>3D reconstruction을 수행하지 않고, reference image로부터 query image에 대한 relative pose estimation을 함.</li>
+</ul>
+</li>
+<li>Scene poitn regression<ul>
+<li>딥러닝을 사용하여 2D pixel location과 3D point의 correspondence를 구함.</li>
+<li>Structured-based 방식과 비슷하지만, 딥러닝을 사용함.</li>
+<li>학습 과정에서 3D reconstruction을 사용하기도 함.</li>
+</ul>
+</li>
+<li>Absolute pose regression<ul>
+<li>End-to-end로 이미지-&gt;pose regression을 수행함. </li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>각각의 방법들은 generalization과 정확도가 많이 다름.</li>
+</ul>
+<img src="/20210405-naver-labs-visloc/visual_localization_methods.png" class="" title="methods">
+<img src="/20210405-naver-labs-visloc/comparison.png" class="" title="comparison">
+
+
+<p> </p>
+<hr>
+<h2 id="Structure-based-methods"><a href="#Structure-based-methods" class="headerlink" title="Structure-based methods"></a>Structure-based methods</h2><ul>
+<li>3D reconstruction을 사용하면 정확도가 높아진다.<ul>
+<li>하지만 종종 3D reconstruction을 할 수 없거나, 3D map을 유지보수하기 어려운 상황이 있다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>3D reconstruction은 Structure-from-Motion(SfM)으로 수행한다.<ul>
+<li>SfM은 여러개의 이미지로부터 local feature correspondence를 기반으로 reconstruction을 수행한다.</li>
+<li>Local feature correspondence는 feature descriptor들간의 거리를 기반으로 만들어진다.<ul>
+<li>하지만 이 feature descriptor들은 사실 visual localization을 위해 만들어진 것이 아니기 때문에 여러 단점을 가지고 있다.</li>
+<li>낮/밤, 계절, 날씨를 구분하지 못한다는 것들이다.</li>
+<li>최근에는 딥러닝 기반으로 학습한 local feature를 사용하기도 한다.</li>
+</ul>
+</li>
+<li>3D reconstruction은 local feature들간의 2D-2D correspondence를 통해 생성된다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Query 이미지의 위치를 계산하기 위해서는, query 이미지와 3D map간의 2D-3D correspondence를 descriptor matching으로 찾고, perspective-n-point (PnP) solver + RANSAC을 사용해서 위치 정보를 구한다.<ul>
+<li>Large-scale map의 경우 3D map이 엄청나게 커지게 되며 query 이미지와 3D map에 대한 correspondence를 탐색할 때 엄청난 계산량을 필요로 한다.<ul>
+<li>Aachen-Day-Night 데이터셋의 경우, 3D point는 약 70만개 ~ 250만개 정도 된다고 한다 (셋팅에 따라…).</li>
+</ul>
+</li>
+<li>Search space를 줄이기 위해서는 image retrieval이 사용된다.<ul>
+<li>비슷한 이미지를 가진 곳에서만 correspondence를 찾아보는 전략이다.</li>
+</ul>
+</li>
+<li>Global map에서 correspondence를 찾는 방법이 아닌, retrieved image들로 local map을 만들어서 그 안에서 correspondence를 구할 수도 있다.<ul>
+<li>이 경우 우리는 global map을 유지보수하지 않아도 된다.</li>
+<li>하지만 retrieved image들로부터 local map을 항상 만들 수 있다는 보장이 없다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Image-retrieval-based-methods"><a href="#Image-retrieval-based-methods" class="headerlink" title="Image retrieval-based methods"></a>Image retrieval-based methods</h2><ul>
+<li>Image retrieval-based 방식을 쓰려면 우선 데이터셋에 해당 이미지에 대한 위치정보 label이 필요하다.<ul>
+<li>GPS 정보나 6DOF 위치 정보로 보통 되어있다.</li>
+</ul>
+</li>
+<li>Image retrieval은 DB로부터 가장 비슷한 이미지를 찾는다.<ul>
+<li>종종 re-ranking step이 함께 사용되기도 한다.</li>
+<li>‘가장 비슷한 이미지’에 대한 criteria는 보통 2가지가 있다.<ol>
+<li>Landmark retrieval - Query와 retrieved 이미지가 동일한 landmark를 많이 가지고 있을 때</li>
+<li>Geolocalization / Place recognition - Query와 retrieved 이미지가 비슷한 위치에서 찍었을 때</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>예전에는 image retrieval을 위해 bag-of-visual-words를 사용했다.</li>
+<li>하지만 최근에는 딥러닝으로 좀 더 high-level semantics를 포함하는 정보를 사용한다.<ul>
+<li>Ranking loss를 사용해서 retrieval 작업에 특화된 네트워크를 만들기도 한다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Image retrieval을 사용해서 얻는 이점은 2가지이다.<ol>
+<li>Structure-based 방식을 사용할 때 search space 줄이기</li>
+<li>(Structure가 없을 때) Direct localization으로 pose를 구하기<ul>
+<li>Nearest neighbour image나 k개의 이미지들의 interpolation으로 구할 수 있음.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>Camera intrinsic이 있다면 relative pose를 구할 수도 있다.<ul>
+<li>Retrieved image의 absolute pose도 안다면, query image의 absolute pose도 계산할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="Pose-regression-based-method"><a href="#Pose-regression-based-method" class="headerlink" title="Pose regression-based method"></a>Pose regression-based method</h2><ul>
+<li>CNN을 이용해서 RGB-&gt;pose를 계산하는 end-to-end 방식<ul>
+<li>Low-level feature에 pose estimation을 위한 정보가 들어있다는 가정을 가짐.</li>
+<li>Transfer learning을 쓸 수 있다고 함?</li>
+</ul>
+</li>
+<li>PoseNet의 경우, VGGNet/ResNet의 CNN 레이어와 FC 레이어를 사용해서 6D pose를 regress함. (기존의 VGGNet/ResNet은 FC 레이어 대신 softmax 레이어를 가지고 있음)</li>
+</ul>
+<ul>
+<li>Pose regression 방식의 장점:<ul>
+<li>Feature engineering이 필요없다.<ul>
+<li>딥러닝이 알아서 robust feature를 학습함 (weather, viewpoint, lighting etc)</li>
+</ul>
+</li>
+<li>Structure-based 방식보다 메모리를 훨씬 적게 사용한다.<ul>
+<li>모델은 해봤자 50mb. SfM 포인트 클라우드는 Gb 단위.</li>
+</ul>
+</li>
+<li>Transfer learning을 사용해서 중간 크기의 데이터셋에서 잘 쓸 수 있다.</li>
+</ul>
+</li>
+<li>단점:<ul>
+<li>좀 부정확한 편.</li>
+</ul>
+</li>
+<li>PoseNet의 정확도를 높이기 위해 다음과 같은 방식이 시도되었다.<ul>
+<li>새로운 loss function 사용</li>
+<li>LSTM 레이어 추가</li>
+<li>추가 센서 사용</li>
+<li>Absolute + relative pose를 동시에 학습 - VLocNet<ul>
+<li>거기에 semantic segmentation도 같이 수행 - VLocNet++</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>이러한 방식은 결국 scene에 대한 정보를 compression하는 것에 지나지 않는다.<ul>
+<li>즉, generalize하기 어렵다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>최근에는 hybrid pose learning 방식이 적용되고 있다.<ul>
+<li>Learning은 좋은 2D-3D correspondence를 학습하는데에 집중하고, 기존의 structure-based + image retrieval 방식을 사용하던 파이프라인에서 집중하던 geometrical constraint를 그대로 사용하는 방식이 있다.</li>
+<li>하지만 이러한 방식은 pose accuracy를 높여주나, 새로운 scene에 generalize되지 않는다.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>최근의 SANet의 경우 camera localization을 위한 scene agnostic neural architecture를 제안했다고 한다. (?)<ul>
+<li>Model parameter와 scene이 독립적이라고 한다 (?)</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h2><ul>
+<li>Geometric 방식이 아직 end-to-end 방식보다 좋다.<ul>
+<li>하지만 최고의 성능을 내기 위해서는 geometric 방식에서 몇가지 모듈을 딥러닝 솔루션으로 바꾸는게 좋다.</li>
+<li>예를 들어, local / global feature extractor는 바꾸는게 좋다.<ul>
+<li>Handcrafted 방식들에 비해 좀 더 다양한 variation에 강인하기 때문이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Pure retrieval 기법은 rough location을 얻는데에 굉장히 좋은 솔루션이 될 수 있다.<ul>
+<li>빠르고 계산량이 적기 때문이다.</li>
+</ul>
+</li>
+<li>Regression pose generalization 분야는 아직 연구가 더 필요하다.</li>
+<li>Semantic 정보를 사용하는 시도가 아직 크게 없다.<ul>
+<li>이러한 시도는 local feature match의 성능을 높이거나</li>
+<li>특정 object를 localization에 사용할 수 있다.<ul>
+<li>반대로, 특정 object를 인식해서 localization에서 제외할 수 있다 (움직이는 물체들).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h2 id="볼만한-논문들"><a href="#볼만한-논문들" class="headerlink" title="볼만한 논문들"></a>볼만한 논문들</h2><p>Relja Arandjelovic, Petr Gronat, Akihiko Torii, Tomas Pajdla, and Josef Sivic. NetVLAD: CNN Architecture for Weakly Supervised Place Recognition. In CVPR, 2016.</p>
+<p>Eric Brachmann, Alexander Krull, Sebastian Nowozin, Jamie Shotton, Frank Michel, Stefan Gumhold, and Carsten Rother. DSAC – differentiable RANSAC for camera localization. In CVPR, 2017.</p>
+<p>Eric Brachmann and Carsten Rother. Learning less is more – 6d camera localization via 3d surface regression. In CVPR, 2018.</p>
+<p>Eric Brachmann and Carsten Rother. Expert sample consensus applied to camera re-localization. In ICCV, 2019.</p>
+<p>Eric Brachmann and Carsten Rother. Visual camera re-localization from rgb and rgb-d images using dsac, arXiv, 2020.</p>
+<p>(Brachmann 최고…)</p>
+<p>Gabriela Csurka, Christopher R. Dance, and Martin Humenberger. From Handcrafted to Deep Local Invariant Features. arXiv, 1807.10254, 2018.</p>
+<p>Daniel DeTone, Tomasz Malisiewicz, and Andrew Rabinovich. SuperPoint: Self-Supervised Interest Point Detection and Description. In CVPR Workshops, 2018.</p>
+<p>Mihai Dusmanu, Ignacio Rocco, Tomas Pajdla, Marc Pollefeys, Josef Sivic, Akihiko Torii, and Torsten Sattler. D2-Net: a Trainable CNN for Joint Description and Detection of Local Features. In CVPR, 2019.</p>
+<p>Martin Humenberger, Yohann Cabon, Nicolas Guerin, Julien Morat, Jerome Revaud, Philippe Rerole, Noe Pion, Cesar de Souza, Vincent Leroy, and Gabriela Csurka. Robust Image Retrieval-based Visual Localization using Kapture. arXiv:2007.13867, 2020.</p>
+<p>Revaud Jerome, Philippe Weinzaepfel, Cesar De Souza, and Martin Humenberger.R2D2: Reliable and Repeatable Detectors and Descriptors. In NeurIPS, 2019.</p>
+<p>Alex Kendall, Matthew Grimes, and Roberto Cipolla. PoseNet: A Convolutional Network for Real-Time 6-DOF Camera Relocalization. In ICCV, 2015.</p>
+<p>Alex Kendall and Roberto Cipolla. Geometric Loss Functions for Camera Pose Regression with Deep Learning. In CVPR, 2017.</p>
+<p>Xiaotian Li, Shuzhe Wang, Yi Zhao, Jakob Verbeek, and Juho Kannala. Hierarchical scene coordinate classification and regression for visual localization. In CVPR, 2020.</p>
+<p>Liu Liu, Hongdong Li, and Yuchao Dai. Efficient Global 2D-3D Matching for CameraLocalization in a Large-Scale 3D Map. In ICCV, 2017.</p>
+<p>Noé Pion, Martin Humenberger, Gabriela Csurka, Yohann Cabon, and Torsten Sattler. Benchmarking Image Retrieval for Visual Localization. In 3DV, 2020.</p>
+<p>Paul-Edouard Sarlin, Cesar Cadena, Roland Siegwart, and Marcin Dymczyk. From Coarse to Fine: Robust Hierarchical Localization at Large Scale. In CVPR, 2019.</p>
+<p>Paul-Edouard Sarlin, Daniel DeTone, Tomasz Malisiewicz, and Andrew Rabinovich. SuperGlue: Learning Feature Matching with Graph Neural Networks. In CVPR, 2020.</p>
+<p>Torsten Sattler, Will Maddern, Carl Toft, Akihiko Torii, Lars Hammarstrand, Erik Stenborg, Daniel Safari, Masatoshi Okutomi, Marc Pollefeys, Josef Sivic, Fredrik Kahl, and Tomas Pajdla. Benchmarking 6DoF Outdoor Visual Localization in Changing Conditions. In CVPR, 2018.</p>
+<p>Torsten Sattler, Qunjie Zhou, Marc Pollefeys, and Laura Leal-Taixe. Understanding the Limitations of CNN-based Absolute Camera Pose Regression. In CVPR, 2019.</p>
+<p>Johannes L. Schonberger and Jan-Michael Frahm. Structure-from-motion Revisited. In CVPR, 2016.</p>
+<p>Johannes Lutz Schonberger, Hans Hardmeier, Torsten Sattler, and Marc Pollefeys. Comparative Evaluation of Hand-Crafted and Learned Local Features. In CVPR, 2017.</p>
+<p>Matthias Schorghuber, Daniel Steininger, Yohann Cabon, Martin Humenberger, and Margrit Gelautz. Slamantic-leveraging semantics to improve vslam in dynamic environments. In ICCV Workshops, 2019.</p>
+<p>H. Taira, M. Okutomi, T. Sattler, M. Cimpoi, M. Pollefeys, J. Sivic, T. Pajdla, and A. Torii. InLoc: Indoor Visual Localization with Dense Matching and View Synthesis. PAMI, 2019.</p>
+<p>Philippe Weinzaepfel, Gabriela Csurka, Yohann Cabon, and Martin Humenberger. Visual localization by learning objects-of-interest dense match regression. In CVPR, June 2019.</p>
+<p>Luwei Yang, Ziqian Bai, Chengzhou Tang, Honghua Li, Yasutaka Furukawa, and Ping Tan. Sanet: Scene agnostic network for camera localization. In ECCV, 2019.</p>
+<p>Qunjie Zhou, Torsten Sattler, Marc Pollefeys, and Laura Leal-Taixe. To Learn or not to Learn: Visual Localization from Essential Matrices. ICRA, 2020.</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210405-R2D2/" rel="bookmark">R2D2 - Repeatable and Reliable Detector and Descriptor (NAVER LABS Europe)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210405-naver-labs-europe-kapture/" rel="bookmark">Kapture + CVPR2020 Visual localization challenge (NAVER LABS Europe)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210405-visloc-my-thoughts/" rel="bookmark">Visual localization 기술의 방향?</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210408-slamantic-blog/" rel="bookmark">SLAMANTIC – Leveraging semantics to improve VSLAM in dynamic environments (NAVER LABS Europe)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/NAVER-LABS/" rel="tag"># NAVER LABS</a>
+              <a href="/tags/Visual-localization/" rel="tag"># Visual localization</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210330-mersenne-twister/" rel="prev" title="메르센 트위스터 (std::mt19937 / std::mersenne_twister_engine)">
+                  <i class="fa fa-chevron-left"></i> 메르센 트위스터 (std::mt19937 / std::mersenne_twister_engine)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210405-naver-labs-europe-kapture/" rel="next" title="Kapture + CVPR2020 Visual localization challenge (NAVER LABS Europe)">
+                  Kapture + CVPR2020 Visual localization challenge (NAVER LABS Europe) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>
