@@ -9,22 +9,43 @@
 
 
     <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-4-Rust/</loc>
+        <lastmod>2023-06-10T11:54:39.379Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/2-3-Python/</loc>
+        <lastmod>2023-06-10T11:54:39.379Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
+        <lastmod>2023-06-10T11:54:39.379Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/2-Programming/</loc>
+        <lastmod>2023-06-10T11:54:39.379Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
-        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
+        <lastmod>2023-06-10T11:54:39.379Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
-        <lastmod>2023-06-02T13:27:37.670Z</lastmod>
+        <lastmod>2023-06-10T11:54:39.379Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -53,20 +74,6 @@
     <url>
         <loc>https://changh95.github.io/categories/4-Maths/</loc>
         <lastmod>2023-04-15T18:04:19.231Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-3-Python/</loc>
-        <lastmod>2023-04-15T17:50:57.170Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/</loc>
-        <lastmod>2023-04-15T17:50:57.170Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -172,13 +179,6 @@
     <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-6-Swift/</loc>
         <lastmod>2022-07-04T12:53:30.464Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/2-Programming/2-4-Rust/</loc>
-        <lastmod>2022-07-04T12:53:12.533Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
