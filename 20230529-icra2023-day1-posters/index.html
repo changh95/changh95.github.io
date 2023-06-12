@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day1-posters/IMG_0758.jpeg">
 <meta property="og:image" content="https://changh95.github.io/20230529-icra2023-day1-posters/IMG_0759.jpeg">
 <meta property="article:published_time" content="2023-05-29T05:48:45.000Z">
-<meta property="article:modified_time" content="2023-06-09T07:49:42.009Z">
+<meta property="article:modified_time" content="2023-06-12T08:11:18.375Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="SLAM">
@@ -430,7 +430,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 16:49:42" itemprop="dateModified" datetime="2023-06-09T16:49:42+09:00">2023-06-09</time>
+        <time title="Modified: 2023-06-12 17:11:18" itemprop="dateModified" datetime="2023-06-12T17:11:18+09:00">2023-06-12</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -467,15 +467,51 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture"><a href="#Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture" class="headerlink" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture"></a>Multi S-graphs: A Collaborative Semantic SLAM Architecture</h1><img src="/20230529-icra2023-day1-posters/IMG_0754.jpeg" class="" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture">
+        <h1 id="Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture"><a href="#Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture" class="headerlink" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture"></a>Multi S-graphs: A Collaborative Semantic SLAM Architecture</h1><ul>
+<li>룩셈베르크 대학 주관의 Scene graph 연구</li>
+<li>Kimera와 비슷한 scene graph hierarchy를 가지고 있음<ul>
+<li>하지만 Vision 기반인 Kimera와는 다르게 LiDAR를 사용함.</li>
+</ul>
+</li>
+<li>Kimera-multi 와 비슷한 multi-robot SLAM 아키텍처를 가지고 있음</li>
+<li>Room을 검출하기 위한 ‘room descriptor’를 제안함.<ul>
+<li>LiDAR 기반 place recognition 기술인 scan context 기반으로 맵을 생성함.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0754.jpeg" class="" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture">
 
 <p> </p>
 <hr>
-<h1 id="A-Robot-Web-for-Distributed-Many-Device-Localisation"><a href="#A-Robot-Web-for-Distributed-Many-Device-Localisation" class="headerlink" title="A Robot Web for Distributed Many-Device Localisation"></a>A Robot Web for Distributed Many-Device Localisation</h1><img src="/20230529-icra2023-day1-posters/IMG_0755.jpeg" class="" title="A Robot Web for Distributed Many-Device Localisation">
+<h1 id="A-Robot-Web-for-Distributed-Many-Device-Localisation"><a href="#A-Robot-Web-for-Distributed-Many-Device-Localisation" class="headerlink" title="A Robot Web for Distributed Many-Device Localisation"></a>A Robot Web for Distributed Many-Device Localisation</h1><ul>
+<li>ICL의 Andrew Davison 교수님 아래 5년차 박사과정 중인 Riku Murai의 연구임.</li>
+<li>다수의 agent를 포함하는 factor graph를 실시간으로 최적화하는 방법을 제안함.<ul>
+<li>기존의 factor graph optimization은 전체 그래프를 동시에 최적화하기 때문에, 1. 중앙 서버가 필요함, 2. 연산이 오래 걸림.</li>
+<li>Distributed 알고리즘 (i.e. Gaussian Belief Propagation - GBP)를 통해 그래프를 한번에 업데이트 하는 것이 아닌, local 하게 업데이트가 가능함.<ul>
+<li>Asynchronous Socket 통신을 통해 서로에게 factor를 보내줄 수 있음. 구현은 ROS2로 함.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>이번 연구의 초점은 ‘distributed algorithm’이 outlier의 존재에도 잘 동작하는지를 확인하기 위함임.<ul>
+<li>이를 위해, 다른 복잡한 부분 (e.g. 로봇의 포지셔닝)을 간단하게 함. 예를 들어, 로봇간의 factor는 AR 마커를 이용한 거리 측정 값으로 변경함.</li>
+<li>frontend 알고리즘이 무거워질 경우 실시간 동작이 안될 수 있음을 의미.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0755.jpeg" class="" title="A Robot Web for Distributed Many-Device Localisation">
 
 <p> </p>
 <hr>
-<h1 id="ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping"><a href="#ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping" class="headerlink" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping"></a>ConceptFusion: A Real-time Open-set Multimodal 3D Mapping</h1><img src="/20230529-icra2023-day1-posters/IMG_0756.jpeg" class="" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping">
+<h1 id="ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping"><a href="#ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping" class="headerlink" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping"></a>ConceptFusion: A Real-time Open-set Multimodal 3D Mapping</h1><ul>
+<li>Open-set 비전 알고리즘을 3D SLAM에 섞음<ul>
+<li>CLIP / DINO</li>
+</ul>
+</li>
+<li>Image, Audio, Text, Click 쿼리가 가능함.</li>
+<li>저자가 포스터만 걸어놓고 자기는 다른 오랄 들으러가서 설명이 없음…</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0756.jpeg" class="" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping">
 
 <p> </p>
 <hr>
@@ -483,11 +519,18 @@ mjx-container[display="true"] + br {
 
 <p> </p>
 <hr>
-<h1 id="VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation"><a href="#VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation" class="headerlink" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation"></a>VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation</h1><img src="/20230529-icra2023-day1-posters/IMG_0758.jpeg" class="" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation">
+<h1 id="VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation"><a href="#VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation" class="headerlink" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation"></a>VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation</h1><ul>
+<li>Depth, RGB, CLIP loss를 모두 최적화한 neural field</li>
+<li>CLIP loss가 있기 때문에, semantic segmentation도 잘 될 것이라는 전제를 가짐.</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0758.jpeg" class="" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation">
 
 <p> </p>
 <hr>
-<h1 id="Grounding-Pretrained-eatures-in-3D-Representations"><a href="#Grounding-Pretrained-eatures-in-3D-Representations" class="headerlink" title="Grounding Pretrained eatures in 3D Representations"></a>Grounding Pretrained eatures in 3D Representations</h1><img src="/20230529-icra2023-day1-posters/IMG_0759.jpeg" class="" title="Grounding Pretrained eatures in 3D Representations">
+<h1 id="Grounding-Pretrained-eatures-in-3D-Representations"><a href="#Grounding-Pretrained-eatures-in-3D-Representations" class="headerlink" title="Grounding Pretrained eatures in 3D Representations"></a>Grounding Pretrained eatures in 3D Representations</h1><ul>
+<li>저자가 포스터 걸어놓고 오랄 보러감…</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0759.jpeg" class="" title="Grounding Pretrained eatures in 3D Representations">
 
     </div>
 

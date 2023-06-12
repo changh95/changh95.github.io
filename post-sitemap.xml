@@ -9,8 +9,24 @@
 
 
     <url>
-        <loc>https://changh95.github.io/20230609-python-like-rust/</loc>
-        <lastmod>2023-06-09T09:30:22.344Z</lastmod>
+        <loc>https://changh95.github.io/20230529-icra2023-day1-posters/</loc>
+        <lastmod>2023-06-12T08:11:18.375Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230530-icra2023-day2-poster/</loc>
+        <lastmod>2023-06-12T08:11:18.375Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230602-icra-day-5/</loc>
+        <lastmod>2023-06-12T08:11:18.375Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -18,7 +34,15 @@
 
     <url>
         <loc>https://changh95.github.io/20230602-icra2023-hilti/</loc>
-        <lastmod>2023-06-09T07:50:25.444Z</lastmod>
+        <lastmod>2023-06-12T08:11:18.375Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230609-python-like-rust/</loc>
+        <lastmod>2023-06-12T08:10:34.776Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -27,14 +51,6 @@
     <url>
         <loc>https://changh95.github.io/20230602-icra2023-day5-poster/</loc>
         <lastmod>2023-06-09T07:50:21.096Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20230602-icra-day-5/</loc>
-        <lastmod>2023-06-09T07:50:05.224Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -51,22 +67,6 @@
     <url>
         <loc>https://changh95.github.io/20230531-icra2023-day3-poster/</loc>
         <lastmod>2023-06-09T07:49:55.048Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20230530-icra2023-day2-poster/</loc>
-        <lastmod>2023-06-09T07:49:47.352Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20230529-icra2023-day1-posters/</loc>
-        <lastmod>2023-06-09T07:49:42.009Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

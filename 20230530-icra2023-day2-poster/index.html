@@ -53,7 +53,7 @@
 <meta property="og:image" content="https://changh95.github.io/20230530-icra2023-day2-poster/22.png">
 <meta property="og:image" content="https://changh95.github.io/20230530-icra2023-day2-poster/23.png">
 <meta property="article:published_time" content="2023-05-30T05:48:45.000Z">
-<meta property="article:modified_time" content="2023-06-09T07:49:47.352Z">
+<meta property="article:modified_time" content="2023-06-12T08:11:18.375Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="SLAM">
@@ -447,7 +447,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 16:49:47" itemprop="dateModified" datetime="2023-06-09T16:49:47+09:00">2023-06-09</time>
+        <time title="Modified: 2023-06-12 17:11:18" itemprop="dateModified" datetime="2023-06-12T17:11:18+09:00">2023-06-12</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -484,35 +484,110 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment"><a href="#Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment" class="headerlink" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment"></a>Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment</h1><img src="/20230530-icra2023-day2-poster/1.png" class="" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment">
+        <h1 id="Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment"><a href="#Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment" class="headerlink" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment"></a>Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment</h1><ul>
+<li>Localization 시스템은 다양한 이유로 오차를 만들어냄.<ul>
+<li>센서 캘리브레이션이 잘 안되면 calibration error</li>
+<li>지도를 기반으로 위치를 추정하는데 지도가 부정확하면 map bias error</li>
+<li>INS와 같은 시스템에서는 drift error</li>
+</ul>
+</li>
+<li>시간이 지날수록 누적되는 에러를 reference 시스템과 비교해 bias를 추적함. 추적한 bias를 기반으로 target 시스템의 bias를 수정할 수 있음.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/1.png" class="" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment">
 
 <p> </p>
 <hr>
-<h1 id="Mapping-with-only-the-Ground"><a href="#Mapping-with-only-the-Ground" class="headerlink" title="Mapping with only the Ground"></a>Mapping with only the Ground</h1><img src="/20230530-icra2023-day2-poster/2.png" class="" title="Mapping with only the Ground">
+<h1 id="Mapping-with-only-the-Ground"><a href="#Mapping-with-only-the-Ground" class="headerlink" title="Mapping with only the Ground"></a>Mapping with only the Ground</h1><ul>
+<li>바닥 아스팔트 노면만 바라보며 수행하는 visual odometry.</li>
+<li>이미지 추출 -&gt; 키포인트 검출 -&gt; 바닥평면으로 투영 -&gt; 이후 기본적인 VO 파이프라인 사용</li>
+<li>루프클로저가 사용될 경우 정확도가 꽤 좋음</li>
+<li>루프클로저를 사용하지 않을 경우 drift가 누적됨<ul>
+<li>특히, 회전할 때 누적이 많이 됨</li>
+</ul>
+</li>
+<li>하지만 테스트 해본 공간이 겨우 3m x 2m 라서 큰 공간에서 동작할지 확신할 수 없음.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/2.png" class="" title="Mapping with only the Ground">
 
 <p> </p>
 <hr>
-<h1 id="Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras"><a href="#Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras" class="headerlink" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras"></a>Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras</h1><img src="/20230530-icra2023-day2-poster/3.png" class="" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras">
+<h1 id="Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras"><a href="#Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras" class="headerlink" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras"></a>Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras</h1><ul>
+<li>Line Segment Detection (LSD)로 선을 검출해서 2가지 용도로 사용한다.<ul>
+<li>Point-Line map 생성 (Geometry)</li>
+<li>Instance planar segmentation 이미지 생성 (Semantics)</li>
+</ul>
+</li>
+<li>두개를 퓨전하면 Line-Planar map이 생성된다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/3.png" class="" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras">
 
 <p> </p>
 <hr>
-<h1 id="Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types"><a href="#Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types" class="headerlink" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types"></a>Object-based SLAM utilizing unambigous pose parameters considering general symmetry types</h1><img src="/20230530-icra2023-day2-poster/4.png" class="" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types">
+<h1 id="Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types"><a href="#Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types" class="headerlink" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types"></a>Object-based SLAM utilizing unambigous pose parameters considering general symmetry types</h1><ul>
+<li>서울대에서 나온 연구</li>
+<li>Object-based SLAM을 할 때는 각각의 object의 pose를 아는 것이 중요하다.<ul>
+<li>하지만, 종종 symmetry를 가진 물체들은 방향을 정의하기 어렵기 때문에 pose를 구하기 어려울 수 있다. 2. Contribution 파트를 보면…</li>
+<li>[Asymmetry] 물체는 6dof 포즈를 바로 추정할 수 있다</li>
+<li>[Discrete symmetry] 물체는 2개의 평면으로 ambiguous pose가 나타난다</li>
+<li>[Continuous symmetry] 물체는 z축 기준으로 빙빙 돌려도 모두 똑같이 생겼기 때문에 무한개의 ambiguous pose가 생긴다.</li>
+</ul>
+</li>
+<li>Multiple hypothesis tracking을 통해 특정 object가 asymmetry/discrete symmetry/continuous symmetry인지 구분을 할 수 있다.</li>
+<li>이후, 각각의 타입에 맞춘 factor graph 최적화 방법을 제안한다.</li>
+<li>내가 드렸던 질문으로는 object label마다 asymmetry/discrete/continuous 클래스를 나눠놓으면 무거운 multiple hypothesis 연산을 하지 않아도 되는데 왜 이 방법을 사용하셨는지 여쭤봤다.<ul>
+<li>제시해주신 답으로는 ‘같은 object class임에도 디자인에 따라 symmetry가 생길수도 있기 때문에, symmetry를 기준으로 여러 object class를 학습하는건 효율적이지 않다. 특히나 새로운 디자인이 나오면 재학습 해야하는 경우도 생긴다’ 라고 하셨다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/4.png" class="" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types">
 
 <p> </p>
 <hr>
-<h1 id="Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph"><a href="#Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph" class="headerlink" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph"></a>Towards View-invariant and Accurate Loop Detection Based on Scene Graph</h1><img src="/20230530-icra2023-day2-poster/5.png" class="" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph">
+<h1 id="Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph"><a href="#Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph" class="headerlink" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph"></a>Towards View-invariant and Accurate Loop Detection Based on Scene Graph</h1><ul>
+<li>Semantic graph를 통해서 loop closure를 할 수 있는 descriptor를 생성하는 연구.</li>
+<li>Illumination이나 appearance가 바뀌어도 잘 동작한다는 장점이 있다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/5.png" class="" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph">
 
 <p> </p>
 <hr>
-<h1 id="Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants"><a href="#Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants" class="headerlink" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants"></a>Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants</h1><img src="/20230530-icra2023-day2-poster/6.png" class="" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants">
+<h1 id="Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants"><a href="#Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants" class="headerlink" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants"></a>Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants</h1><ul>
+<li>고려대 최성준 교수님 랩실 연구</li>
+<li>(확실하게 기억이 안나요…)</li>
+<li>Landmark scanning을 통해 지도를 만들고, </li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/6.png" class="" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants">
 
 <p> </p>
 <hr>
-<h1 id="COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM"><a href="#COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM" class="headerlink" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM"></a>COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM</h1><img src="/20230530-icra2023-day2-poster/7.png" class="" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM">
+<h1 id="COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM"><a href="#COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM" class="headerlink" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM"></a>COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM</h1><ul>
+<li>기존의 COVINS 프레임워크를 조금 더 확장한 버전<ul>
+<li>중앙 서버에서 multi-agent를 사용한 collaborative SLAM을 위한 백엔드 연산을 하는 프레임워크</li>
+<li>COVINS는 ORB-SLAM3 만 사용할 수 있었고, Multi-agent bundle adjustment를 하느라 연산량이 너무 많았음.<ul>
+<li>BA를 한다는건 모든 keypoint, pose, landmark를 통신으로 보내야하는건데, 통신 부하량도 너무 많았음.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>COVINS-G는 keyframe의 keypoint 정보와 pose 정보만 송수신함.<ul>
+<li>keypoint 정보를 기반으로 데이터베이스 관리를 하고 loop closure가 가능함.</li>
+<li>Loop closure를 할 때, 2개의 agent의 trajectory간 absolute scale을 복원할 수 있어야함. 여기서 하나의 트릭을 사용<ul>
+<li>각각의 agent들의 consecutive frame을 마치 stereo camera처럼 이용해서 동일 landmark를 보고있다고 하면 두개의 trajectory 간의 absolute scale을 알 수 있음. (포스터에서는 17 point algorithm이라고 하지만, 사실 그냥 2개의 stereo camera간의 absolute trajectory를 비교하는 것과 동일함)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/7.png" class="" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM">
 
 <p> </p>
 <hr>
-<h1 id="A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes"><a href="#A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes" class="headerlink" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes"></a>A Probabilistic Framework for Visual Localization in Ambiguous Scenes</h1><img src="/20230530-icra2023-day2-poster/8.png" class="" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes">
+<h1 id="A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes"><a href="#A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes" class="headerlink" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes"></a>A Probabilistic Framework for Visual Localization in Ambiguous Scenes</h1><ul>
+<li>(솔직히 잘 모르겠는 연구…)</li>
+<li>이미지 상 비슷하게 보이는 오브젝트/뷰가 많은 경우, visual localization을 하기 어렵다 (Problem 섹션 참고)</li>
+<li>MLP를 이용해서 pose regression을 한다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/8.png" class="" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes">
 
 <p> </p>
 <hr>

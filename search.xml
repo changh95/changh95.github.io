@@ -25494,15 +25494,51 @@ Domain Calibration via Robust SLAM </summary>
   <entry>
     <title>ICRA 2023 - 포스터 (Day 1)</title>
     <url>/20230529-icra2023-day1-posters/</url>
-    <content><![CDATA[<h1 id="Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture"><a href="#Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture" class="headerlink" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture"></a>Multi S-graphs: A Collaborative Semantic SLAM Architecture</h1><img src="/20230529-icra2023-day1-posters/IMG_0754.jpeg" class="" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture">
+    <content><![CDATA[<h1 id="Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture"><a href="#Multi-S-graphs-A-Collaborative-Semantic-SLAM-Architecture" class="headerlink" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture"></a>Multi S-graphs: A Collaborative Semantic SLAM Architecture</h1><ul>
+<li>룩셈베르크 대학 주관의 Scene graph 연구</li>
+<li>Kimera와 비슷한 scene graph hierarchy를 가지고 있음<ul>
+<li>하지만 Vision 기반인 Kimera와는 다르게 LiDAR를 사용함.</li>
+</ul>
+</li>
+<li>Kimera-multi 와 비슷한 multi-robot SLAM 아키텍처를 가지고 있음</li>
+<li>Room을 검출하기 위한 ‘room descriptor’를 제안함.<ul>
+<li>LiDAR 기반 place recognition 기술인 scan context 기반으로 맵을 생성함.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0754.jpeg" class="" title="Multi S-graphs: A Collaborative Semantic SLAM Architecture">
 
 <p> </p>
 <hr>
-<h1 id="A-Robot-Web-for-Distributed-Many-Device-Localisation"><a href="#A-Robot-Web-for-Distributed-Many-Device-Localisation" class="headerlink" title="A Robot Web for Distributed Many-Device Localisation"></a>A Robot Web for Distributed Many-Device Localisation</h1><img src="/20230529-icra2023-day1-posters/IMG_0755.jpeg" class="" title="A Robot Web for Distributed Many-Device Localisation">
+<h1 id="A-Robot-Web-for-Distributed-Many-Device-Localisation"><a href="#A-Robot-Web-for-Distributed-Many-Device-Localisation" class="headerlink" title="A Robot Web for Distributed Many-Device Localisation"></a>A Robot Web for Distributed Many-Device Localisation</h1><ul>
+<li>ICL의 Andrew Davison 교수님 아래 5년차 박사과정 중인 Riku Murai의 연구임.</li>
+<li>다수의 agent를 포함하는 factor graph를 실시간으로 최적화하는 방법을 제안함.<ul>
+<li>기존의 factor graph optimization은 전체 그래프를 동시에 최적화하기 때문에, 1. 중앙 서버가 필요함, 2. 연산이 오래 걸림.</li>
+<li>Distributed 알고리즘 (i.e. Gaussian Belief Propagation - GBP)를 통해 그래프를 한번에 업데이트 하는 것이 아닌, local 하게 업데이트가 가능함.<ul>
+<li>Asynchronous Socket 통신을 통해 서로에게 factor를 보내줄 수 있음. 구현은 ROS2로 함.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>이번 연구의 초점은 ‘distributed algorithm’이 outlier의 존재에도 잘 동작하는지를 확인하기 위함임.<ul>
+<li>이를 위해, 다른 복잡한 부분 (e.g. 로봇의 포지셔닝)을 간단하게 함. 예를 들어, 로봇간의 factor는 AR 마커를 이용한 거리 측정 값으로 변경함.</li>
+<li>frontend 알고리즘이 무거워질 경우 실시간 동작이 안될 수 있음을 의미.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0755.jpeg" class="" title="A Robot Web for Distributed Many-Device Localisation">
 
 <p> </p>
 <hr>
-<h1 id="ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping"><a href="#ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping" class="headerlink" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping"></a>ConceptFusion: A Real-time Open-set Multimodal 3D Mapping</h1><img src="/20230529-icra2023-day1-posters/IMG_0756.jpeg" class="" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping">
+<h1 id="ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping"><a href="#ConceptFusion-A-Real-time-Open-set-Multimodal-3D-Mapping" class="headerlink" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping"></a>ConceptFusion: A Real-time Open-set Multimodal 3D Mapping</h1><ul>
+<li>Open-set 비전 알고리즘을 3D SLAM에 섞음<ul>
+<li>CLIP / DINO</li>
+</ul>
+</li>
+<li>Image, Audio, Text, Click 쿼리가 가능함.</li>
+<li>저자가 포스터만 걸어놓고 자기는 다른 오랄 들으러가서 설명이 없음…</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0756.jpeg" class="" title="ConceptFusion: A Real-time Open-set Multimodal 3D Mapping">
 
 <p> </p>
 <hr>
@@ -25510,11 +25546,18 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation"><a href="#VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation" class="headerlink" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation"></a>VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation</h1><img src="/20230529-icra2023-day1-posters/IMG_0758.jpeg" class="" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation">
+<h1 id="VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation"><a href="#VL-Fields-Towards-Language-Grounded-Neural-Implicit-Spatial-Representation" class="headerlink" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation"></a>VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation</h1><ul>
+<li>Depth, RGB, CLIP loss를 모두 최적화한 neural field</li>
+<li>CLIP loss가 있기 때문에, semantic segmentation도 잘 될 것이라는 전제를 가짐.</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0758.jpeg" class="" title="VL-Fields: Towards Language-Grounded Neural Implicit Spatial Representation">
 
 <p> </p>
 <hr>
-<h1 id="Grounding-Pretrained-eatures-in-3D-Representations"><a href="#Grounding-Pretrained-eatures-in-3D-Representations" class="headerlink" title="Grounding Pretrained eatures in 3D Representations"></a>Grounding Pretrained eatures in 3D Representations</h1><img src="/20230529-icra2023-day1-posters/IMG_0759.jpeg" class="" title="Grounding Pretrained eatures in 3D Representations">
+<h1 id="Grounding-Pretrained-eatures-in-3D-Representations"><a href="#Grounding-Pretrained-eatures-in-3D-Representations" class="headerlink" title="Grounding Pretrained eatures in 3D Representations"></a>Grounding Pretrained eatures in 3D Representations</h1><ul>
+<li>저자가 포스터 걸어놓고 오랄 보러감…</li>
+</ul>
+<img src="/20230529-icra2023-day1-posters/IMG_0759.jpeg" class="" title="Grounding Pretrained eatures in 3D Representations">
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -25532,35 +25575,110 @@ Domain Calibration via Robust SLAM </summary>
   <entry>
     <title>ICRA 2023 - 포스터 (Day 2)</title>
     <url>/20230530-icra2023-day2-poster/</url>
-    <content><![CDATA[<h1 id="Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment"><a href="#Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment" class="headerlink" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment"></a>Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment</h1><img src="/20230530-icra2023-day2-poster/1.png" class="" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment">
+    <content><![CDATA[<h1 id="Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment"><a href="#Loosely-Coupled-Localization-Fusion-System-Based-on-Track-To-Track-Fusion-with-Bias-Alignment" class="headerlink" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment"></a>Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment</h1><ul>
+<li>Localization 시스템은 다양한 이유로 오차를 만들어냄.<ul>
+<li>센서 캘리브레이션이 잘 안되면 calibration error</li>
+<li>지도를 기반으로 위치를 추정하는데 지도가 부정확하면 map bias error</li>
+<li>INS와 같은 시스템에서는 drift error</li>
+</ul>
+</li>
+<li>시간이 지날수록 누적되는 에러를 reference 시스템과 비교해 bias를 추적함. 추적한 bias를 기반으로 target 시스템의 bias를 수정할 수 있음.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/1.png" class="" title="Loosely-Coupled Localization Fusion System Based on Track-To-Track Fusion with Bias Alignment">
 
 <p> </p>
 <hr>
-<h1 id="Mapping-with-only-the-Ground"><a href="#Mapping-with-only-the-Ground" class="headerlink" title="Mapping with only the Ground"></a>Mapping with only the Ground</h1><img src="/20230530-icra2023-day2-poster/2.png" class="" title="Mapping with only the Ground">
+<h1 id="Mapping-with-only-the-Ground"><a href="#Mapping-with-only-the-Ground" class="headerlink" title="Mapping with only the Ground"></a>Mapping with only the Ground</h1><ul>
+<li>바닥 아스팔트 노면만 바라보며 수행하는 visual odometry.</li>
+<li>이미지 추출 -&gt; 키포인트 검출 -&gt; 바닥평면으로 투영 -&gt; 이후 기본적인 VO 파이프라인 사용</li>
+<li>루프클로저가 사용될 경우 정확도가 꽤 좋음</li>
+<li>루프클로저를 사용하지 않을 경우 drift가 누적됨<ul>
+<li>특히, 회전할 때 누적이 많이 됨</li>
+</ul>
+</li>
+<li>하지만 테스트 해본 공간이 겨우 3m x 2m 라서 큰 공간에서 동작할지 확신할 수 없음.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/2.png" class="" title="Mapping with only the Ground">
 
 <p> </p>
 <hr>
-<h1 id="Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras"><a href="#Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras" class="headerlink" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras"></a>Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras</h1><img src="/20230530-icra2023-day2-poster/3.png" class="" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras">
+<h1 id="Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras"><a href="#Structure-PLP-SLAM-Efficient-Sparse-Mapping-and-Localization-using-Point-Line-and-Plane-for-Monocular-RGB-D-and-Stereo-Cameras" class="headerlink" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras"></a>Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras</h1><ul>
+<li>Line Segment Detection (LSD)로 선을 검출해서 2가지 용도로 사용한다.<ul>
+<li>Point-Line map 생성 (Geometry)</li>
+<li>Instance planar segmentation 이미지 생성 (Semantics)</li>
+</ul>
+</li>
+<li>두개를 퓨전하면 Line-Planar map이 생성된다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/3.png" class="" title="Structure PLP-SLAM: Efficient Sparse Mapping and Localization using Point, Line and Plane for Monocular, RGB-D and Stereo Cameras">
 
 <p> </p>
 <hr>
-<h1 id="Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types"><a href="#Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types" class="headerlink" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types"></a>Object-based SLAM utilizing unambigous pose parameters considering general symmetry types</h1><img src="/20230530-icra2023-day2-poster/4.png" class="" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types">
+<h1 id="Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types"><a href="#Object-based-SLAM-utilizing-unambigous-pose-parameters-considering-general-symmetry-types" class="headerlink" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types"></a>Object-based SLAM utilizing unambigous pose parameters considering general symmetry types</h1><ul>
+<li>서울대에서 나온 연구</li>
+<li>Object-based SLAM을 할 때는 각각의 object의 pose를 아는 것이 중요하다.<ul>
+<li>하지만, 종종 symmetry를 가진 물체들은 방향을 정의하기 어렵기 때문에 pose를 구하기 어려울 수 있다. 2. Contribution 파트를 보면…</li>
+<li>[Asymmetry] 물체는 6dof 포즈를 바로 추정할 수 있다</li>
+<li>[Discrete symmetry] 물체는 2개의 평면으로 ambiguous pose가 나타난다</li>
+<li>[Continuous symmetry] 물체는 z축 기준으로 빙빙 돌려도 모두 똑같이 생겼기 때문에 무한개의 ambiguous pose가 생긴다.</li>
+</ul>
+</li>
+<li>Multiple hypothesis tracking을 통해 특정 object가 asymmetry/discrete symmetry/continuous symmetry인지 구분을 할 수 있다.</li>
+<li>이후, 각각의 타입에 맞춘 factor graph 최적화 방법을 제안한다.</li>
+<li>내가 드렸던 질문으로는 object label마다 asymmetry/discrete/continuous 클래스를 나눠놓으면 무거운 multiple hypothesis 연산을 하지 않아도 되는데 왜 이 방법을 사용하셨는지 여쭤봤다.<ul>
+<li>제시해주신 답으로는 ‘같은 object class임에도 디자인에 따라 symmetry가 생길수도 있기 때문에, symmetry를 기준으로 여러 object class를 학습하는건 효율적이지 않다. 특히나 새로운 디자인이 나오면 재학습 해야하는 경우도 생긴다’ 라고 하셨다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/4.png" class="" title="Object-based SLAM utilizing unambigous pose parameters considering general symmetry types">
 
 <p> </p>
 <hr>
-<h1 id="Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph"><a href="#Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph" class="headerlink" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph"></a>Towards View-invariant and Accurate Loop Detection Based on Scene Graph</h1><img src="/20230530-icra2023-day2-poster/5.png" class="" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph">
+<h1 id="Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph"><a href="#Towards-View-invariant-and-Accurate-Loop-Detection-Based-on-Scene-Graph" class="headerlink" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph"></a>Towards View-invariant and Accurate Loop Detection Based on Scene Graph</h1><ul>
+<li>Semantic graph를 통해서 loop closure를 할 수 있는 descriptor를 생성하는 연구.</li>
+<li>Illumination이나 appearance가 바뀌어도 잘 동작한다는 장점이 있다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/5.png" class="" title="Towards View-invariant and Accurate Loop Detection Based on Scene Graph">
 
 <p> </p>
 <hr>
-<h1 id="Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants"><a href="#Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants" class="headerlink" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants"></a>Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants</h1><img src="/20230530-icra2023-day2-poster/6.png" class="" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants">
+<h1 id="Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants"><a href="#Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants" class="headerlink" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants"></a>Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants</h1><ul>
+<li>고려대 최성준 교수님 랩실 연구</li>
+<li>(확실하게 기억이 안나요…)</li>
+<li>Landmark scanning을 통해 지도를 만들고, </li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/6.png" class="" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants">
 
 <p> </p>
 <hr>
-<h1 id="COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM"><a href="#COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM" class="headerlink" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM"></a>COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM</h1><img src="/20230530-icra2023-day2-poster/7.png" class="" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM">
+<h1 id="COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM"><a href="#COVINS-G-A-Generic-Back-end-for-Collaborative-Visual-Inertial-SLAM" class="headerlink" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM"></a>COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM</h1><ul>
+<li>기존의 COVINS 프레임워크를 조금 더 확장한 버전<ul>
+<li>중앙 서버에서 multi-agent를 사용한 collaborative SLAM을 위한 백엔드 연산을 하는 프레임워크</li>
+<li>COVINS는 ORB-SLAM3 만 사용할 수 있었고, Multi-agent bundle adjustment를 하느라 연산량이 너무 많았음.<ul>
+<li>BA를 한다는건 모든 keypoint, pose, landmark를 통신으로 보내야하는건데, 통신 부하량도 너무 많았음.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>COVINS-G는 keyframe의 keypoint 정보와 pose 정보만 송수신함.<ul>
+<li>keypoint 정보를 기반으로 데이터베이스 관리를 하고 loop closure가 가능함.</li>
+<li>Loop closure를 할 때, 2개의 agent의 trajectory간 absolute scale을 복원할 수 있어야함. 여기서 하나의 트릭을 사용<ul>
+<li>각각의 agent들의 consecutive frame을 마치 stereo camera처럼 이용해서 동일 landmark를 보고있다고 하면 두개의 trajectory 간의 absolute scale을 알 수 있음. (포스터에서는 17 point algorithm이라고 하지만, 사실 그냥 2개의 stereo camera간의 absolute trajectory를 비교하는 것과 동일함)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/7.png" class="" title="COVINS-G: A Generic Back-end for Collaborative Visual-Inertial SLAM">
 
 <p> </p>
 <hr>
-<h1 id="A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes"><a href="#A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes" class="headerlink" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes"></a>A Probabilistic Framework for Visual Localization in Ambiguous Scenes</h1><img src="/20230530-icra2023-day2-poster/8.png" class="" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes">
+<h1 id="A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes"><a href="#A-Probabilistic-Framework-for-Visual-Localization-in-Ambiguous-Scenes" class="headerlink" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes"></a>A Probabilistic Framework for Visual Localization in Ambiguous Scenes</h1><ul>
+<li>(솔직히 잘 모르겠는 연구…)</li>
+<li>이미지 상 비슷하게 보이는 오브젝트/뷰가 많은 경우, visual localization을 하기 어렵다 (Problem 섹션 참고)</li>
+<li>MLP를 이용해서 pose regression을 한다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/8.png" class="" title="A Probabilistic Framework for Visual Localization in Ambiguous Scenes">
 
 <p> </p>
 <hr>
@@ -25741,7 +25859,8 @@ Domain Calibration via Robust SLAM </summary>
   <entry>
     <title>ICRA 2023 - Scalable Autonomous Driving 워크샵 (Day 5)</title>
     <url>/20230602-icra-day-5/</url>
-    <content><![CDATA[<h1 id="Toyota"><a href="#Toyota" class="headerlink" title="Toyota"></a>Toyota</h1><p>Foundation models == Zero-shot generalization</p>
+    <content><![CDATA[<p>(적는 중)</p>
+<h1 id="Toyota"><a href="#Toyota" class="headerlink" title="Toyota"></a>Toyota</h1><p>Foundation models == Zero-shot generalization</p>
 <p>Pre-trained models are great out of the box. We should leverage geometry more. Mathematical formulation in geometry (e.g. epipolar geometry) are essentially the best pre-trained models!</p>
 <p>Geometric foundation models? (== Data + Principles)</p>
 <p> </p>
@@ -25769,35 +25888,6 @@ Domain Calibration via Robust SLAM </summary>
 </li>
 </ul>
 </li>
-</ul>
-<h1 id="Hilti"><a href="#Hilti" class="headerlink" title="Hilti"></a>Hilti</h1><ul>
-<li>Process <ul>
-<li>Odometry</li>
-<li>Single session optimization</li>
-<li>Rigid alignment with vision</li>
-<li>GLobal map optimization</li>
-<li>Global LiDAR fine tuning</li>
-</ul>
-</li>
-<li>Raw Maps:<ul>
-<li>OKVIS or FAST-LIO2<ul>
-<li>SuperPoint + SuperGlue</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Rigid Alignment<ul>
-<li>PCA for compression</li>
-<li>Search with HNSW (Malkov 2018 - Efficient and robust approximate nearest neighbor search using hierarchical navigable small world graphs)</li>
-</ul>
-</li>
-</ul>
-<h2 id="KAIST"><a href="#KAIST" class="headerlink" title="KAIST"></a>KAIST</h2><ul>
-<li>AdaLIO<ul>
-<li>Detects degenerate cases and chanages parameters adaptively.</li>
-</ul>
-</li>
-<li></li>
 </ul>
 ]]></content>
       <categories>
@@ -25840,7 +25930,8 @@ Domain Calibration via Robust SLAM </summary>
   <entry>
     <title>ICRA 2023 - Hilti SLAM Challenge (Day 5)</title>
     <url>/20230602-icra2023-hilti/</url>
-    <content><![CDATA[<h2 id="Maplab-2-0"><a href="#Maplab-2-0" class="headerlink" title="Maplab 2.0"></a>Maplab 2.0</h2><ul>
+    <content><![CDATA[<p>(적는 중)</p>
+<h2 id="Maplab-2-0"><a href="#Maplab-2-0" class="headerlink" title="Maplab 2.0"></a>Maplab 2.0</h2><ul>
 <li>Process <ul>
 <li>Odometry</li>
 <li>Single session optimization</li>
@@ -25869,6 +25960,11 @@ Domain Calibration via Robust SLAM </summary>
 </li>
 <li>Quatro</li>
 </ul>
+<p> </p>
+<hr>
+<h2 id="Tencent-TXR-SLAM"><a href="#Tencent-TXR-SLAM" class="headerlink" title="Tencent TXR SLAM"></a>Tencent TXR SLAM</h2><ul>
+<li>어두운 곳에서는 Histogram equalization을 사용함</li>
+</ul>
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -25887,162 +25983,171 @@ Domain Calibration via Robust SLAM </summary>
     <content><![CDATA[<blockquote>
 <p>Kobzol’s blog의 <span class="exturl" data-url="aHR0cHM6Ly9rb2J6b2wuZ2l0aHViLmlvL3J1c3QvcHl0aG9uLzIwMjMvMDUvMjAvd3JpdGluZy1weXRob24tbGlrZS1pdHMtcnVzdC5odG1s">Writing Python like it’s Rust<i class="fa fa-external-link-alt"></i></span>를 번역한 글입니다.</p>
 </blockquote>
-<h1 id="왜-Python을-Rust처럼-적게되었나"><a href="#왜-Python을-Rust처럼-적게되었나" class="headerlink" title="왜 Python을 Rust처럼 적게되었나?"></a>왜 Python을 Rust처럼 적게되었나?</h1><p>저는 몇 년 전부터 Rust로 프로그래밍을 시작했고, 다른 프로그래밍 언어, 특히 Python에서 프로그램을 설계하는 방식을 점차 Rust 프로그래밍 방식처럼 바꾸고 있습니다. Rust를 사용하기 전에는 보통 타입 힌트 없이 매우 동적이고 타입이 느슨한 방식으로 파이썬 코드를 작성하고, 사방에 dict를 전달하고 반환하며, 때때로 ‘str 타입’ 인터페이스로 되돌아가는 경우가 많았어요. 그러나 <strong>Rust 타입 시스템의 엄격함</strong>을 경험하고 “구조상” 방지하는 모든 문제를 발견한 후, 저는 <strong>Python으로 돌아와서 동일한 보장이 제공되지 않을 때마다 갑자기 상당히 불안</strong>해졌습니다.</p>
-<p>여기서 ‘보장’이란 메모리 안전성을 의미하는 것이 아니라(파이썬은 현재도 상당히 메모리 안전합니다), 오용이 매우 어렵거나 완전히 불가능한 API를 설계하여 정의되지 않은 동작과 다양한 버그를 방지하는 개념인 ‘<strong>타입 건전성</strong>‘을 의미합니다. Rust에서 잘못 사용된 인터페이스는 일반적으로 컴파일 단계에서 (즉, 프로그램을 실행하기 전) 오류를 유발합니다. 파이썬에서는 컴파일 단계가 없어 실행 중 프로그램이 중단되는 잘못된 프로그램을 실행할 수도 있지만, 파이라이트(pyright)와 같은 타입 체커나 파이참(PyCharm)과 같은 타입 분석기가 있는 IDE를 사용하면 발생할 수 있는 문제에 대해 사전에 빠른 피드백을 얻을 수 있습니다.</p>
-<p>결국 저는 파이썬 프로그램에 Rust의 몇 가지 개념을 도입하기 시작했습니다. 기본적으로 <strong>타입 힌트를 최대한 많이 사용</strong>하고, <strong>잘못된 상태를 표현할 수 없게 만드는</strong> 좋은 원칙을 지키는 두 가지로 요약할 수 있습니다. 저는 한동안 유지 관리할 프로그램뿐만 아니라 일회성 유틸리티 스크립트에도 이 원칙을 적용하려고 노력합니다. 제 경험상 후자는 종종 전자로 바뀌기 때문입니다 :) 제 경험상 이 접근 방식은 이해하고 변경하기 더 쉬운 프로그램으로 이어집니다.</p>
-<p>이 글에서는 파이썬 프로그램에 적용된 이러한 패턴의 몇 가지 예를 보여드리겠습니다. 뭔가 엄청나게 대단한 기술은 아니지만 그래도 문서화하는 것이 유용할 것 같았습니다.</p>
+<h1 id="왜-Python을-Rust처럼-적게되었나"><a href="#왜-Python을-Rust처럼-적게되었나" class="headerlink" title="왜 Python을 Rust처럼 적게되었나?"></a>왜 Python을 Rust처럼 적게되었나?</h1><p>저는 몇 년 전부터 Rust로 프로그래밍을 시작했고, 다른 프로그래밍 언어로 (특히 Python으로) 프로그램을 설계할 때 Rust 프로그램의 설계 방식을 사용하고 있습니다. Rust를 사용하기 전 까지는, 저도 여느 사람들과 같이 Python으로 프로그래밍을 할 때는 타입 힌트 없이 함수를 작성하거나 느슨한 타입으 사용하는 코드를 작성하고, 사방에 dict를 전달하고 반환하며, 때때로 ‘str 타입’ 인터페이스를 사용하는 경우도 많았습니다. 그러나 Rust로부터 <strong>타입 시스템의 엄격함</strong>을 경험하고 수많은 문제들을 설계상 방지할 수 있다는 것을 발견한 후, 저는 <strong>Python 프로그래밍에서 Rust처럼 동일한 안전 수준이 보장되지 않는 것이 상당히 불안</strong>해졌습니다.</p>
+<p>여기서 ‘보장’이란 메모리 안전성을 의미하는 것이 아니라 (Python은 현재도 상당히 메모리 안전합니다), 오용이 매우 어렵거나 완전히 불가능한 API를 설계하여 정의되지 않은 동작 및 다양한 버그를 방지하는 개념인 ‘<strong>타입 건전성</strong>‘을 의미합니다. Rust에서는 잘못 사용된 API의 경우 일반적으로 컴파일 단계에서 에러를 유발함으로써 잘못된 코드가 실행되는 것을 방지합니다. Python에서는 이러한 컴파일 단계가 없어 잘못된 코드를 실행할 수도 있지만, pyright 같은 타입 체커나 PyCharm과 같은 타입 분석기가 있는 IDE를 사용하면 타입 건정성을 사전에 체크할 수 있습니다.</p>
+<p>결국 저는 Python 프로그램에 Rust의 몇 가지 개념을 도입하기 시작했습니다. 기본적으로 <strong>타입 힌트를 최대한 많이 사용</strong>하고, <strong>illegal state가 없게 만듬</strong>으로써 두 가지 원칙으로 요약할 수 있습니다. 장기간 유지보수 해야 할 프로그램뿐만 아니라, 일회성 유틸리티 스크립트에도 이 원칙을 적용하려고 노력합니다. 제 경험상 후자는 종종 전자로 바뀌기 때문입니다 :) 제 경험상 이 접근 방식은 이해하고 변경하기 더 쉬운 프로그램으로 이어집니다.</p>
+<p>이 글에서는 Python 프로그램에 적용된 이러한 패턴의 몇 가지 예를 보여드리겠습니다. 엄청나게 대단한 기술은 아니지만 그래도 문서화하는 것이 유용할 것 같았습니다.</p>
 <blockquote>
-<p>참고: 이 글에는 Python 코드 작성에 대한 많은 의견이 포함되어 있습니다. 모든 문장에 “IMHO”를 붙이고 싶지는 않으므로 이 글의 모든 내용은 보편적인 진리를 홍보하려는 시도가 아니라 단순히 해당 문제에 대한 제 의견으로 받아들여주세요 :) 또한 제시된 아이디어가 모두 Rust에서 발명되었다고 주장하는 것은 아니며 물론 다른 언어에서도 사용됩니다.</p>
+<p>참고: 이 글에는 Python 코드 작성에 대한 많은 개인적인 의견이 포함되어 있습니다. 모든 문장에 “IMHO”를 붙이고 싶지는 않으므로 이 글의 모든 내용은 보편적인 진리를 주장하려는게 아닌, 단순히 해당 문제에 대한 제 의견으로 받아들여주세요 :) 또한 제시된 아이디어가 모두 Rust에서 발명되었다고 주장하는 것은 아니며 다른 언어에서도 물론 이미 사용되고 있는 개념일 수 있습니다.</p>
 </blockquote>
 <p> </p>
 <hr>
 <h1 id="타입-힌트"><a href="#타입-힌트" class="headerlink" title="타입 힌트"></a>타입 힌트</h1><p>가장 중요한 것은 가능한 경우, 특히 <em>함수 서명</em>과 <em>클래스 속성</em>에서 <strong>타입 힌트</strong>를 사용하는 것입니다. 다음과 같은 함수 시그니처를 읽으면 다음과 같습니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_item</span>(<span class="params">records, check</span>):</span></span><br></pre></td></tr></table></figure>
 
-<p>서명 자체에서 무슨 일이 벌어지고 있는지 전혀 알 수 없습니다. records는 list인가요, dict인가요, 아니면 데이터베이스 연결인가요? check는 bool인가요, 아니면 함수인가요? 이 함수는 무엇을 반환하나요? 실패하면 어떻게 되나요, 예외를 발생시키나요, 아니면 None을 반환하나요? 이러한 질문에 대한 답을 찾으려면 함수 본문(그리고 종종 함수가 호출하는 다른 함수의 본문까지 재귀적으로 읽어야 하는데, 이는 매우 귀찮은 일입니다.)을 읽거나 문서(있는 경우)를 읽어야 합니다. 문서에는 함수가 수행하는 작업에 대한 유용한 정보가 포함되어 있을 수 있지만, 이전 질문에 대한 답변을 문서화하는 데까지 사용할 필요는 없습니다. 대부분의 질문은 내장된 메커니즘인 타입 힌트를 통해 답을 찾을 수 있습니다.</p>
+<p>함수 시그니처만 읽었을 때 무슨 일이 벌어지고 있는지 전혀 알 수 없습니다. records는 list일까요? dict일까요? 아니면 데이터베이스 연결일까요? check는 bool인가요, 아니면 함수인가요? 이 함수는 무엇을 반환하나요? 실패하면 어떻게 되나요, 예외를 발생시키나요, 아니면 None을 반환하나요? </p>
+<p>이러한 질문에 대한 답을 찾으려면 함수 본문(그리고 종종 함수가 호출하는 다른 함수의 본문까지 재귀적으로 읽어야 하는데, 이는 매우 귀찮은 일입니다.)을 읽거나 문서(있는 경우)를 읽어야 합니다. 문서에는 함수가 수행하는 작업에 대한 유용한 정보가 포함되어 있을 수 있지만, 이전 질문에 대한 답변을 문서화하는 데까지 사용할 필요는 없습니다. </p>
+<p>대부분의 질문은 내장된 메커니즘인 타입 힌트를 통해 답을 찾을 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_item</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  records: List[Item],</span></span></span><br><span class="line"><span class="function"><span class="params">  check: Callable[[Item], <span class="built_in">bool</span>]</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) -&gt; Optional[Item]:</span></span><br></pre></td></tr></table></figure>
 
-<p>서명을 작성하는 데 시간이 더 걸렸나요? 네. 그게 문제인가요? 아니요, 분당 작성하는 문자 수로 인해 코딩이 병목 현상을 일으키지 않는 한, 실제로 그런 일은 일어나지 않습니다. 타입을 명시적으로 작성하면 함수가 제공하는 실제 인터페이스가 무엇인지, 호출자가 함수를 잘못된 방식으로 사용하지 못하도록 최대한 엄격하게 만들 수 있는 방법이 무엇인지 생각하게 됩니다. 위의 서명을 사용하면 함수를 어떻게 사용할 수 있는지, 인자로 무엇을 전달해야 하는지, 함수를 통해 무엇을 반환할 수 있는지 꽤 잘 알 수 있습니다. 또한 코드가 변경되면 쉽게 구식이 될 수 있는 문서 주석과 달리, 타입을 변경하고 함수 호출자를 업데이트하지 않으면 타입 검사기가 저에게 소리를 지릅니다. Item이 무엇인지 궁금하다면 정의로 이동을 사용하여 해당 타입이 어떻게 생겼는지 즉시 확인할 수 있습니다.</p>
-<p>저는 이 점에서 절대 꽉 막히고 빡빡하게 사는 사람이 아니기 때문에, 하나의 매개변수를 설명하는 데 복잡한 5개의 중첩된 타입 힌트가 필요하다면, 보통 엄격함을 포기하고 부정확하지만 더 간단한 타입을 제공합니다. 제 경험상 이런 상황은 자주 발생하지 않습니다. 함수 매개변수가 숫자, 문자열 튜플 또는 문자열을 정수로 매핑하는 사전일 수 있다면 코드에 문제가 있다는 신호일 수 있으므로 리팩터링하여 단순화해야 할 수도 있습니다.</p>
+<p>함수 시그니처를 작성하는 데 시간이 더 걸렸나요? 네. 그게 문제가 될까요? 아니요, 분당 작성하는 문자 수로 인해 코딩이 병목 현상을 일으키지 않는 한, 실제로 그런 일은 일어나지 않습니다. 타입을 명시적으로 작성하면 함수가 제공하는 실제 인터페이스가 무엇인지, 호출자가 함수를 잘못된 방식으로 사용하지 못하도록 최대한 엄격하게 만들 수 있는 방법이 무엇인지 생각하게 됩니다. 위의 함수 시그니처를 사용하면 <strong>함수를 어떻게 사용할 수 있는지</strong>, <strong>인자로 무엇을 전달해야 하는지</strong>, <strong>함수를 통해 무엇을 반환할 수 있는지</strong> 명확하게 알 수 있습니다. 또한 코드가 변경되면 쉽게 구식이 될 수 있는 문서 주석과 달리, 타입을 변경하고 함수 호출자를 업데이트하지 않으면 <strong>정적 타입 검사기</strong>가 저에게 수많은 에러를 쏟아낼겁니다. Item이 무엇인지 궁금하다면 해당 클래스의 정의로 이동하여 해당 타입이 어떻게 생겼는지 즉시 확인할 수 있습니다.</p>
+<p>하나의 매개변수를 설명하기 위해 엄청나게 복잡한 타입을 사용해야한다면 (e.g. 5개의 중첩된 타입 힌트가 필요하다면), 때에 따라 엄격함을 포기하고 부정확하지만 더 간단한 타입을 제공할 수 있습니다 (저는 이 점에서 절대 꽉 막히고 빡빡하게 사는 사람이 아닙니다). 하지만 제 경험상 이러한 상황은 자주 발생하지 않습니다. 함수 매개변수가 숫자, str tuple 또는 {str:int} dict일 수 있다면 코드에 문제가 있다는 신호일 수 있으므로, 이는 함수를 리팩토링해서 단순하게 바꿔야하는 또 다른 주제의 문제일 수 있습니다.</p>
 <p> </p>
 <hr>
-<h1 id="Tuple이나-Dict-대신-Dataclass-사용"><a href="#Tuple이나-Dict-대신-Dataclass-사용" class="headerlink" title="Tuple이나 Dict 대신 Dataclass 사용"></a>Tuple이나 Dict 대신 Dataclass 사용</h1><p>타입 힌트를 사용하는 것도 한 가지 방법이지만, 이는 함수의 인터페이스가 무엇인지 설명할 뿐입니다. 두 번째 단계는 실제로 이러한 인터페이스를 가능한 한 정확하고 “잠긴” 상태로 만드는 것입니다. 일반적인 예로 함수에서 여러 값(또는 하나의 복합 값)을 반환하는 것을 들 수 있습니다. 게으르고 빠른 접근 방식은 Tuple을 반환하는 것입니다:</p>
+<h1 id="Tuple이나-Dict-대신-Dataclass-사용"><a href="#Tuple이나-Dict-대신-Dataclass-사용" class="headerlink" title="Tuple이나 Dict 대신 Dataclass 사용"></a>Tuple이나 Dict 대신 Dataclass 사용</h1><p>타입 힌트를 사용하는 것도 한 가지 방법이지만, 이는 함수의 인터페이스가 무엇인지 설명할 뿐입니다. 그 다음 단계는 실제로 이러한 인터페이스를 가능한 한 명확한 데이터 타입으로 ‘고정’하는 것입니다. </p>
+<p>일반적인 예로 함수에서 여러 값(또는 하나의 복합 값)을 반환하는 것을 들 수 있습니다. 가장 느슨하게 짜는 방식 (많은 파이썬 유저들이 채택하는 방식)은 Tuple을 반환하는 것입니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_person</span>(<span class="params">...</span>) -&gt; Tuple[str, str, int]:</span></span><br></pre></td></tr></table></figure>
 
-<p>좋아요, 세 개의 값을 반환한다는 것을 알았습니다. 그것들은 무엇일까요? 첫 번째 문자열은 사람의 이름인가요? 두 번째 문자열은 성인가요? 숫자는 무엇인가요? 나이인가요? 목록에서 어떤 위치인가요? 사회보장번호? 이런 종류의 입력은 불투명하며 함수 본문을 들여다보지 않는 한 여기서 무슨 일이 일어나는지 알 수 없습니다.</p>
-<p>이를 ‘개선’하기 위한 다음 단계는 Dict를 반환하는 것입니다:</p>
+<p>좋습니다, 세 개의 값을 반환한다는 것을 알았습니다. 하지만 이 값들은 무엇을 의미할까요? 첫 번째 문자열은 사람의 이름인가요? 두 번째 문자열은 성인가요? 숫자는 무엇인가요? 나이인가요? 목록에서 어떤 위치인가요? 사회보장번호? </p>
+<p>이런 종류의 입력은 <strong>불투명</strong>하며 함수 본문을 들여다보지 않는 한 여기서 무슨 일이 일어나는지 알 수 없습니다.</p>
+<p>이를 개선하기 위한 다음 단계는 Dict를 반환하는 것입니다 (하지만 이 방법 역시 좋은 방법은 아닙니다):</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_person</span>(<span class="params">...</span>) -&gt; Dict[str, Any]:</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> {</span><br><span class="line">        <span class="string">"name"</span>: ...,</span><br><span class="line">        <span class="string">"city"</span>: ...,</span><br><span class="line">        <span class="string">"age"</span>: ...</span><br><span class="line">    }</span><br></pre></td></tr></table></figure>
 
-<p>이제 실제로 반환된 개별 속성이 무엇인지 알 수 있지만, 이를 알아내기 위해 다시 함수 본문을 검사해야 합니다. 이제 우리는 개별 속성의 개수와 타입조차 모르기 때문에 어떤 의미에서는 타입이 더 나빠졌습니다. 게다가 함수가 변경되어 반환된 딕셔너리의 키가 이름이 바뀌거나 제거되면 타입 검사기로 쉽게 알 수 있는 방법이 없기 때문에 보통 매우 수동적이고 번거로운 실행-크래시-수정 코드 주기를 통해 호출자를 변경해야 합니다.</p>
-<p>적절한 해결책은 타입이 첨부된 명명된 매개변수와 함께 강력하게 타입화된 객체를 반환하는 것입니다. 파이썬에서는 클래스를 만들어야 한다는 뜻입니다. 이러한 상황에서 튜플과 딕셔너리가 자주 사용되는 이유는 클래스를 정의하고(그리고 이름을 생각해서), 매개변수가 있는 생성자를 만들고, 매개변수를 필드 등에 저장하는 것보다 훨씬 쉽기 때문이라고 생각합니다. 파이썬 3.7(그리고 패키지 폴리필을 사용하면 더 빨리)부터는 훨씬 더 빠른 솔루션인 데이터클래스가 있습니다.</p>
+<p>이제 실제로 반환된 개별 속성이 무엇인지 알 수 있지만, 이를 알아내기 위해 다시 함수 본문을 검사해야 합니다. 이제 우리는 개별 속성의 개수와 타입조차 모르기 때문에 어떤 의미에서는 타입이 더 나빠졌습니다. 게다가 함수가 변경되어 반환된 dict의 키가 이름이 바뀌거나 제거되면 타입 검사기로 쉽게 알 수 있는 방법이 없기 때문에, 보통 매우 수동적이고 번거로운 디버깅을 통해 함수가 호출되는 모든 코드를 변경해야 합니다.</p>
+<p>적절한 해결책은 타입이 첨부된 명명된 매개변수와 함께 <strong>강타입</strong>화된 (Strong-typed) 객체를 반환하는 것입니다. Python에서는 클래스를 만들어야 한다는 뜻입니다. 이러한 상황에서 Tuple과 Dict가 자주 사용되는 이유는 클래스를 정의하고(그리고 이름을 생각해서), 매개변수가 있는 생성자를 만들고, 매개변수를 필드 등에 저장하는 것보다 훨씬 쉽기 때문이라고 생각합니다. Python 3.7(그리고 package polyfill을 사용하면 더 빨리)부터는 훨씬 더 빠른 솔루션인 Dataclass가 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@dataclasses.dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">City</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line">    address: <span class="built_in">int</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dataclasses.dataclass</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> :</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line">    city: City</span><br><span class="line">    age: <span class="built_in">int</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_person</span>(<span class="params">...</span>) -&gt; Person:</span></span><br></pre></td></tr></table></figure>
 
-<p>여전히 생성된 클래스의 이름을 생각해야 하지만, 그 외에는 최대한 간결하고 모든 속성에 대한 타입 주석을 얻을 수 있습니다.</p>
-<p>이 데이터클래스를 사용하면 함수가 반환하는 내용에 대한 명시적인 설명이 있습니다. 이 함수를 호출하고 반환된 값으로 작업하면 IDE 자동 완성 기능이 해당 타입의 이름과 타입을 표시해 줍니다. 사소하게 들릴지 모르지만 제게는 생산성 향상에 큰 도움이 됩니다. 또한 코드가 리팩터링되어 속성이 변경되면 제가 프로그램을 실행할 필요 없이 IDE와 타입 검사기가 변경해야 하는 모든 위치를 표시해 줍니다. 일부 간단한 리팩터링(예: 속성 이름 바꾸기)의 경우 IDE가 이러한 변경을 대신 수행하기도 합니다. 또한 명시적으로 이름이 지정된 타입을 사용하면 다른 함수 및 클래스와 공유할 수 있는 용어 어휘집(Person, City)을 만들 수 있습니다.</p>
+<p>여전히 생성된 클래스의 이름을 생각해야 하지만, 그 외에는 최대한 간결하고 모든 속성에 대한 타입을 부여할 수 있습니다.</p>
+<p>Dataclass를 사용하면 함수가 반환하는 객체와 그 세부 타입들에 대한 명시적인 설명이 있습니다. 이 함수를 호출하고 반환된 값으로 작업하면 IDE 자동 완성 기능이 해당 타입의 이름과 타입을 표시해 줍니다. 사소하게 들릴지 모르지만 제게는 생산성 향상에 큰 도움이 됩니다. 또한 코드가 리팩터링되어 속성이 변경되면 제가 프로그램을 실행할 필요 없이 IDE와 타입 검사기가 변경해야 하는 모든 위치를 표시해 줍니다. 일부 간단한 리팩터링(예: 속성 이름 바꾸기)의 경우 IDE가 이러한 변경을 대신 수행하기도 합니다. 또한 명시적으로 이름이 지정된 타입을 사용하면 다른 함수 및 클래스와 공유할 수 있는 용어 어휘집(Person, City)을 만들 수 있습니다.</p>
 <blockquote>
 <p>필드가 있는 객체를 입력하는 다른 방법도 있습니다. 예를 들어 TypedDict 또는 NamedTuple이 있습니다.</p>
 </blockquote>
 <p> </p>
 <hr>
-<h1 id="Algebraic-data-type"><a href="#Algebraic-data-type" class="headerlink" title="Algebraic data type"></a>Algebraic data type</h1><p>대부분의 주류 언어에서 가장 부족한 점이 있다면 아마도 Algebraic data type (ADT)일 것입니다. ADT는 제 코드에서 작업하는 데이터의 형태를 명시적으로 설명할 수 있는 매우 강력한 도구입니다. 예를 들어 Rust에서 패킷으로 작업할 때 수신할 수 있는 다양한 종류의 패킷을 모두 명시적으로 열거하고 각 패킷에 서로 다른 데이터(필드)를 할당할 수 있습니다:</p>
+<h1 id="Algebraic-data-type"><a href="#Algebraic-data-type" class="headerlink" title="Algebraic data type"></a>Algebraic data type</h1><p>대부분의 주류 언어에서 가장 부족한 점이 있다면 아마도 Algebraic data type (ADT)일 것입니다. ADT는 제 코드에서 작업하는 데이터의 형태를 명시적으로 설명할 수 있는 매우 강력한 도구입니다. </p>
+<p>예를 들어 Rust에서 <code>Packet</code> 객체를 만들 때 (i.e. 소켓통신 프로그래밍을 할 때) 수신할 수 있는 다양한 종류의 <code>Packet</code>을 모두 명시적으로 열거하고 각 <code>Packet</code>에 서로 다른 데이터(필드)를 할당할 수 있습니다. Pattern matching을 사용하면 개별 타입에 반응할 수 있고 컴파일러는 실수를 하지 않았는지 확인합니다:</p>
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Packet</span></span> {</span><br><span class="line">  Header {</span><br><span class="line">    protocol: Protocol,</span><br><span class="line">    size: <span class="built_in">usize</span></span><br><span class="line">  },</span><br><span class="line">  Payload {</span><br><span class="line">    data: <span class="built_in">Vec</span>&lt;<span class="built_in">u8</span>&gt;</span><br><span class="line">  },</span><br><span class="line">  Trailer {</span><br><span class="line">    data: <span class="built_in">Vec</span>&lt;<span class="built_in">u8</span>&gt;,</span><br><span class="line">    checksum: <span class="built_in">usize</span></span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 
-<p>패턴 매칭을 사용하면 개별 변형에 반응할 수 있고 컴파일러는 제가 어떤 경우를 놓치지 않았는지 확인합니다:</p>
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">handle_packet</span></span>(packet: Packet) {</span><br><span class="line">  <span class="keyword">match</span> packet {</span><br><span class="line">    Packet::Header { protocol, size } =&gt; ...,</span><br><span class="line">    Packet::Payload { data } |</span><br><span class="line">    Packet::Trailer { data, ...} =&gt; <span class="built_in">println!</span>(<span class="string">"{data:?}"</span>)</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 
-<p>이는 유효하지 않은 상태를 표현할 수 없도록 하여 많은 런타임 오류를 방지하는 데 매우 유용합니다. 정적으로 타입이 지정된 언어에서 ADT는 특히 유용하며, 통일된 방식으로 일련의 타입으로 작업하려면 이를 참조할 공유 ‘이름’이 필요합니다. ADT가 없으면 일반적으로 OOP 인터페이스 및/또는 상속을 사용하여 이 작업을 수행합니다. 인터페이스와 가상 메서드는 사용되는 타입 집합이 개방형일 때 적합하지만, 타입 집합이 폐쇄형이고 가능한 모든 변형을 처리해야 하는 경우에는 ADT와 패턴 매칭이 훨씬 더 적합합니다.</p>
-<p>Python과 같이 동적으로 타입이 지정된 언어에서는 애초에 프로그램에서 사용되는 타입에 이름을 지정할 필요가 없기 때문에 타입 집합에 공유 이름을 지정할 필요는 없습니다. 하지만 유니온 타입을 생성하여 ADT와 유사한 것을 사용하는 것이 여전히 유용할 수 있습니다:</p>
+<p>이는 illegal state를 표현할 수 없도록 하여 많은 런타임 오류를 방지하는 데 매우 유용합니다. 정적으로 타입이 지정된 언어에서 ADT는 특히 유용하며, 통일된 방식으로 일련의 타입으로 작업하려면 이를 참조할 공유 ‘이름’이 필요합니다. ADT가 없으면 일반적으로 OOP 인터페이스 및/또는 상속을 사용하여 이 작업을 수행합니다. 인터페이스와 가상 메서드는 사용되는 타입 집합이 개방형일 때 적합하지만, 타입 집합이 폐쇄형이고 가능한 모든 변형을 처리해야 하는 경우에는 ADT와 패턴 매칭이 훨씬 더 적합합니다.</p>
+<p>Python과 같이 동적으로 타입이 지정된 언어에서는 애초에 프로그램에서 사용되는 타입에 이름을 지정할 필요가 없기 때문에 타입 집합에 공유 ‘이름’을 지정할 필요는 없습니다. 하지만 <strong>유니온 타입</strong>을 생성하여 ADT와 유사한 것을 사용하는 것이 여전히 유용할 수 있습니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Header</span>:</span></span><br><span class="line">  protocol: Protocol</span><br><span class="line">  size: <span class="built_in">int</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Payload</span>:</span></span><br><span class="line">  data: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trailer</span>:</span></span><br><span class="line">  data: <span class="built_in">str</span></span><br><span class="line">  checksum: <span class="built_in">int</span></span><br><span class="line"></span><br><span class="line">Packet = typing.Union[Header, Payload, Trailer]</span><br><span class="line"><span class="comment"># or `Packet = Header | Payload | Trailer` since Python 3.10</span></span><br></pre></td></tr></table></figure>
 
-<p>여기서 패킷은 헤더, 페이로드 또는 트레일러 패킷이 될 수 있는 새로운 타입을 정의합니다. 이제 이 세 가지 클래스만 유효하도록 하고 싶을 때 나머지 프로그램에서 이 타입(이름)을 사용할 수 있습니다. 클래스에 명시적인 “태그”가 첨부되어 있지 않으므로 클래스를 구분하려면 인스턴스 오브 또는 패턴 매칭 등을 사용해야 합니다:</p>
+<p>여기서 <code>Packet</code>은 <code>Header</code>, <code>Payload</code>, <code>Trailer</code>와 같이 <code>Packet</code>이 될 수 있는 새로운 타입을 정의합니다. 이제 이 세 가지 클래스만 유효하도록 하고 싶을 때 나머지 프로그램에서 이 타입(이름)을 사용할 수 있습니다. 클래스에 명시적인 “태그”가 첨부되어 있지 않으므로 클래스를 구분하려면 <code>instanceof</code> 또는 Pattern matching 등을 사용해야 합니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_is_instance</span>(<span class="params">packet: Packet</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(packet, Header):</span><br><span class="line">        print(<span class="string">"header {packet.protocol} {packet.size}"</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(packet, Payload):</span><br><span class="line">        print(<span class="string">"payload {packet.data}"</span>)</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">isinstance</span>(packet, Trailer):</span><br><span class="line">        print(<span class="string">"trailer {packet.checksum} {packet.data}"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">assert</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_pattern_matching</span>(<span class="params">packet: Packet</span>):</span></span><br><span class="line">    match packet:</span><br><span class="line">        case Header(protocol, size): print(<span class="string">f"header <span class="subst">{protocol}</span> <span class="subst">{size}</span>"</span>)</span><br><span class="line">        case Payload(data): print(<span class="string">"payload {data}"</span>)</span><br><span class="line">        case Trailer(data, checksum): print(<span class="string">f"trailer <span class="subst">{checksum}</span> <span class="subst">{data}</span>"</span>)</span><br><span class="line">        case _: <span class="keyword">assert</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
-<p>안타깝게도 여기서는 예기치 않은 데이터를 수신할 때 함수가 충돌하도록 성가신 assert False 브랜치를 포함해야 합니다(오히려 포함해야 합니다). Rust에서는 대신 컴파일 타임 에러가 발생합니다.</p>
+<p>안타깝게도 여기서는 예기치 않은 데이터를 수신할 때 함수가 터지도록 성가신 <code>assert False</code> 브랜치를 포함해야 합니다. Rust에서는 이렇게 만들 필요 없이 컴파일 타임 에러로 대체할 수 있습니다.</p>
 <blockquote>
-<p>Reddit의 여러 사람들이 최적화 빌드(python -O …)에서는 실제로 assert False가 완전히 최적화되어 있다는 사실을 상기시켜 주었습니다. 따라서 예외를 직접 발생시키는 것이 더 안전할 것입니다. 파이썬 3.11의 typing.assert_never도 있는데, 이는 타입 검사기에 이 브랜치로 떨어지는 것이 “컴파일 타임” 에러가 되어야 한다고 명시적으로 알려줍니다.</p>
+<p>Reddit의 여러 사람들이 최적화 빌드(python -O …)에서는 실제로 <code>assert False</code>가 완전히 최적화되어 있다는 점을 알려주었습니다. 따라서 예외를 직접 발생시키는 것이 더 안전할 것입니다. Python 3.11의 <code>typing.assert_never</code>도 있는데, 이는 타입 검사기에 이 브랜치로 떨어지는 것이 “컴파일 타임” 에러가 되어야 한다고 명시적으로 알려줍니다.</p>
 </blockquote>
-<p>공용체 타입의 좋은 특성은 공용체의 일부인 클래스 외부에 정의된다는 것입니다. 따라서 클래스는 자신이 유니온에 포함된다는 사실을 알지 못하므로 코드의 결합이 줄어듭니다. 또한 동일한 타입을 사용하여 여러 개의 다른 유니온을 만들 수도 있습니다:</p>
+<p>Union 타입의 좋은 특성은 Union의 일부인 클래스 외부에 정의된다는 것입니다. 따라서 클래스는 자신이 Union에 포함된다는 사실을 알지 못하므로 코드의 강결합이 줄어듭니다. 또한 동일한 타입을 사용하여 여러 개의 다른 Union을 만들 수도 있습니다:</p>
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line">Packet = Header | Payload | Trailer</span><br><span class="line">PacketWithData = Payload | Trailer</span><br></pre></td></tr></table></figure>
 
-<p>유니온 타입은 자동 (역)직렬화에도 매우 유용합니다. 최근에 저는 유서 깊은 Rust serde 직렬화 프레임워크를 기반으로 하는 pyserde라는 멋진 직렬화 라이브러리를 발견했습니다. 다른 많은 멋진 기능 중에서도 타이핑 주석을 활용하여 추가 코드 없이 유니온 타입을 직렬화 및 역직렬화할 수 있습니다:</p>
+<p>Union 타입은 자동 (역)직렬화에도 매우 유용합니다. 최근에 저는 유서 깊은 Rust의 serde 직렬화 프레임워크를 기반으로 하는 <strong>pyserde</strong>라는 멋진 직렬화 라이브러리를 발견했습니다. 다른 많은 멋진 기능 중에서도 코드 주석을 활용하여 추가 코드 없이 Union 타입을 직렬화 및 역직렬화할 수 있습니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> serde</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Packet = Header | Payload | Trailer</span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span>:</span></span><br><span class="line">    packet: Packet</span><br><span class="line"></span><br><span class="line">serialized = serde.to_dict(Data(packet=Trailer(data=<span class="string">"foo"</span>, checksum=<span class="number">42</span>)))</span><br><span class="line"><span class="comment"># {'packet': {'Trailer': {'data': 'foo', 'checksum': 42}}}</span></span><br><span class="line"></span><br><span class="line">deserialized = serde.from_dict(Data, serialized)</span><br><span class="line"><span class="comment"># Data(packet=Trailer(data='foo', checksum=42))</span></span><br></pre></td></tr></table></figure>
 
-<p>serde와 마찬가지로 유니온 태그를 어떻게 직렬화할지 선택할 수도 있습니다. 유니온 타입을 (역)직렬화하는 데 매우 유용하기 때문에 비슷한 기능을 오랫동안 찾고 있었습니다. 그러나 제가 시도한 대부분의 다른 직렬화 라이브러리(예: dataclasses_json 또는 dacite)에서 구현하는 것이 상당히 번거로웠습니다.</p>
-<p>예를 들어, 머신 러닝 모델로 작업할 때 유니온을 사용하여 다양한 유형의 신경망(예: 분류 또는 세분화 CNN 모델)을 단일 구성 파일 형식 안에 저장하고 있습니다. 또한 이와 같이 다양한 형식의 데이터(제 경우에는 설정 파일)를 버전별로 저장하는 것이 유용하다는 것을 알게 되었습니다:</p>
+<p>serde와 마찬가지로 Union 태그를 어떻게 직렬화할지 선택할 수도 있습니다. Union 타입을 (역)직렬화하는 데 매우 유용하기 때문에 비슷한 기능을 오랫동안 찾고 있었습니다. 그러나 제가 시도한 대부분의 다른 직렬화 라이브러리(예: dataclasses_json 또는 dacite)에서 구현하는 것이 상당히 번거로웠습니다.</p>
+<p>예를 들어, 머신 러닝 모델로 작업할 때 Union을 사용하여 다양한 유형의 신경망(예: classification 또는 segmentation CNN 모델)을 단일 config 파일 형식 안에 저장하고 있습니다. 또한 이와 같이 다양한 형식의 데이터(제 경우에는 config 파일)를 버전별로 저장하는 것이 유용하다는 것을 알게 되었습니다:</p>
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line">Config = ConfigV1 | ConfigV2 | ConfigV3</span><br></pre></td></tr></table></figure>
 
-<p>Config를 역직렬화하면 이전 버전의 모든 구성 형식을 읽을 수 있으므로 이전 버전과의 호환성을 유지할 수 있습니다.</p>
+<p>Config를 역직렬화하면 이전 버전의 모든 config 형식을 읽을 수 있으므로 이전 버전과의 호환성을 유지할 수 있습니다.</p>
 <p> </p>
 <hr>
-<h1 id="newtype-사용하기"><a href="#newtype-사용하기" class="headerlink" title="newtype 사용하기"></a>newtype 사용하기</h1><p>Rust에서는 새로운 동작을 추가하지 않고 단순히 다른 일반적인 데이터 타입(예: 정수)의 도메인과 의도된 용도를 지정하는 역할을 하는 데이터 타입을 정의하는 것이 매우 일반적입니다. 이 패턴을 “newtype”이라고 하며 Python에서도 사용할 수 있습니다. 다음은 동기를 부여하는 예시입니다:</p>
+<h1 id="newtype-사용하기"><a href="#newtype-사용하기" class="headerlink" title="newtype 사용하기"></a>newtype 사용하기</h1><p>Rust에서는 일반적인 데이터 타입 (e.g. 정수)에 새로운 동작을 추가하지 않고, 도메인에 걸맞는 용도로 새롭게 이름을 지정하는 데이터 타입을 정의하는게 일반적입니다. 이 패턴을 “newtype”이라고 하며 Python에서도 사용할 수 있습니다.</p>
+<p>아래의 상황을 한번 봅시다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Database</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_car_id</span>(<span class="params">self, brand: <span class="built_in">str</span></span>) -&gt; int:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_driver_id</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; int:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_ride_info</span>(<span class="params">self, car_id: <span class="built_in">int</span>, driver_id: <span class="built_in">int</span></span>) -&gt; RideInfo:</span></span><br><span class="line"></span><br><span class="line">db = Database()</span><br><span class="line">car_id = db.get_car_id(<span class="string">"Mazda"</span>)</span><br><span class="line">driver_id = db.get_driver_id(<span class="string">"Stig"</span>)</span><br><span class="line">info = db.get_ride_info(driver_id, car_id)</span><br></pre></td></tr></table></figure>
 
 <p>오류를 발견하셨나요?</p>
 <p>…</p>
 <p>…</p>
-<p>get_ride_info의 인수가 바뀝니다. 차량 ID와 운전자 ID는 모두 정수에 불과하므로 의미상 함수 호출이 잘못되었더라도 타입은 올바르므로 타입 오류는 없습니다.</p>
+<p><code>get_ride_info</code>의 인수가 잘못들어갔습니다 (db.get_rider_info(car_id, driver_id)가 되어야합니다). 하지만, 차량 ID와 운전자 ID는 모두 정수에 불과하므로 의미상 함수 호출이 잘못되었더라도 타입 자체는 올바르므로 타입 오류는 없습니다.</p>
 <p>이 문제는 “NewType”을 사용하여 서로 다른 종류의 ID에 대해 별도의 타입을 정의함으로써 해결할 수 있습니다:</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> NewType</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define a new type called "CarId", which is internally an `int`</span></span><br><span class="line">CarId = NewType(<span class="string">"CarId"</span>, <span class="built_in">int</span>)</span><br><span class="line"><span class="comment"># Ditto for "DriverId"</span></span><br><span class="line">DriverId = NewType(<span class="string">"DriverId"</span>, <span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Database</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_car_id</span>(<span class="params">self, brand: <span class="built_in">str</span></span>) -&gt; CarId:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_driver_id</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; DriverId:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_ride_info</span>(<span class="params">self, car_id: CarId, driver_id: DriverId</span>) -&gt; RideInfo:</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db = Database()</span><br><span class="line">car_id = db.get_car_id(<span class="string">"Mazda"</span>)</span><br><span class="line">driver_id = db.get_driver_id(<span class="string">"Stig"</span>)</span><br><span class="line"><span class="comment"># Type error here -&gt; DriverId used instead of CarId and vice-versa</span></span><br><span class="line">info = db.get_ride_info(&lt;error&gt;driver_id&lt;/error&gt;, &lt;error&gt;car_id&lt;/error&gt;)</span><br></pre></td></tr></table></figure>
 
-<p>이 패턴은 매우 간단한 패턴으로, 다른 방법으로는 발견하기 어려운 오류를 포착하는 데 도움이 될 수 있습니다. 예를 들어, 여러 종류의 ID(<code>CarId</code> 대 <code>DriverId</code>)를 다루거나 함께 섞어서는 안 되는 일부 메트릭(‘Speed’ 대 ‘Length’ 대 ‘Temperature’ 등)을 처리하는 경우 특히 유용합니다.</p>
+<p>이렇게 매우 간단한 방식으로 다른 방법으로는 발견하기 어려운 오류를 포착하는 데 도움이 될 수 있습니다. 예를 들어, 여러 종류의 ID(<code>CarId</code> 대 <code>DriverId</code>)를 다루거나, 함께 섞어서는 안 되는 일부 메트릭(<code>Speed</code>, <code>Length</code>, <code>Temperature</code> 등)을 처리하는 경우 특히 유용합니다.</p>
 <p> </p>
 <hr>
-<h1 id="생성자-함수-사용하기"><a href="#생성자-함수-사용하기" class="headerlink" title="생성자 함수 사용하기"></a>생성자 함수 사용하기</h1><p>제가 Rust에서 아주 좋아하는 점 중 하나는 생성자 자체가 없다는 점입니다. 대신 일반 함수를 사용해 구조체의 인스턴스(이상적으로는 적절하게 초기화된 인스턴스)를 생성하는 경향이 있습니다. 파이썬에서는 생성자 오버로딩이 없기 때문에 객체를 여러 가지 방법으로 생성해야 하는 경우, 때로는 초기화를 위해 여러 가지 방법으로 사용되는 매개변수가 많은 <code>__init__</code> 메서드를 사용해야 하는데 실제로는 함께 사용할 수 없습니다.</p>
+<h1 id="생성자-함수-사용하기"><a href="#생성자-함수-사용하기" class="headerlink" title="생성자 함수 사용하기"></a>생성자 함수 사용하기</h1><p>제가 Rust에서 아주 좋아하는 점 중 하나는 생성자 자체가 없다는 점입니다. 대신 일반 함수를 사용해 구조체의 인스턴스(이상적으로는 적절하게 초기화된 인스턴스)를 생성하는 경향이 있습니다. Python에서는 생성자 오버로딩이 없기 때문에 객체를 여러 가지 방법으로 생성해야 하는 경우, 때로는 초기화를 위해 여러 가지 방법으로 사용되는 매개변수가 많은 <code>__init__</code> 메서드를 사용해야 하는데 실제로는 함께 사용할 수 없습니다.</p>
 <p>대신, 저는 객체를 구성하는 방법과 어떤 데이터에서 객체를 구성하는지 명확히 알 수 있는 명시적인 이름을 가진 “생성” 함수를 만드는 것을 좋아합니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span>:</span></span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">from_x1x2y1y2</span>(<span class="params">x1: <span class="built_in">float</span>, ...</span>) -&gt; "Rectangle":</span></span><br><span class="line">    </span><br><span class="line"><span class="meta">    @staticmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">from_tl_and_size</span>(<span class="params">top: <span class="built_in">float</span>, left: <span class="built_in">float</span>, width: <span class="built_in">float</span>, height: <span class="built_in">float</span></span>) -&gt; "Rectangle":</span></span><br></pre></td></tr></table></figure>
 
-<p>이렇게 하면 객체를 훨씬 깔끔하게 구성할 수 있으며, 클래스 사용자가 객체를 구성할 때 잘못된 데이터를 전달할 수 없습니다(예: y1과 width를 결합하는 경우).</p>
+<p>위와 같은 방법을 통해 객체를 훨씬 명확하고 깔끔하게 생성할 수 있으며, 클래스 사용자가 객체를 구성할 때 잘못된 데이터를 전달할 수 없습니다(예: y1과 width를 결합하는 경우).</p>
 <p> </p>
 <hr>
-<h1 id="타입을-사용해-불변성-인코딩하기"><a href="#타입을-사용해-불변성-인코딩하기" class="headerlink" title="타입을 사용해 불변성 인코딩하기"></a>타입을 사용해 불변성 인코딩하기</h1><p>타입 시스템 자체를 사용해 런타임에만 추적할 수 있는 불변성을 인코딩하는 것은 매우 일반적이고 강력한 개념입니다. 파이썬(뿐만 아니라 다른 주류 언어에서도)에서는 변경 가능한 상태의 커다란 털덩어리인 클래스를 자주 볼 수 있습니다. 이러한 혼란의 원인 중 하나는 런타임에 객체의 불변성을 추적하려는 코드입니다. 타입 시스템에서 불가능하게 만든 것이 아니기 때문에 이론상 발생할 수 있는 많은 상황을 고려해야 합니다(“클라이언트가 연결을 끊으라는 요청을 받았는데 누군가 메시지를 보내려고 하는데 소켓이 여전히 연결되어 있으면 어떻게 할까요?” 등).</p>
+<h1 id="타입을-사용해-불변성-인코딩하기"><a href="#타입을-사용해-불변성-인코딩하기" class="headerlink" title="타입을 사용해 불변성 인코딩하기"></a>타입을 사용해 불변성 인코딩하기</h1><p>타입 시스템 자체를 사용해 런타임에만 추적할 수 있는 불변성을 인코딩하는 것은 매우 일반적이고 강력한 개념입니다. Python(뿐만 아니라 다른 주류 언어에서도)에서는 mutable한 데이터가 얽히고 섥혀서 사용되는 클래스들을 자주 볼 수 있습니다. 이러한 현상의 원인 중 하나는  객체의 불변성을 런타임에 추적하려고 하기 때문입니다. 타입 시스템에서 금지시킨 것이 아니기 때문에 (i.e. 컴파일 단계에서 설계상 막아둔 것이 아니기 때문에), 발생할 수 있는 많은 상황을 가정하고 각각의 상황에 대한 대처 방식을 고려해야 합니다(“클라이언트가 연결을 끊으라는 요청을 받았는데 누군가 메시지를 보내려고 하는데 소켓이 여전히 연결되어 있으면 어떻게 할까요?” 등).</p>
 <h2 id="클라이언트"><a href="#클라이언트" class="headerlink" title="클라이언트"></a>클라이언트</h2><p>다음은 전형적인 예입니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Client</span>:</span></span><br><span class="line">  <span class="string">"""</span></span><br><span class="line"><span class="string">  Rules:</span></span><br><span class="line"><span class="string">  - Do not call `send_message` before calling `connect` and then `authenticate`.</span></span><br><span class="line"><span class="string">  - Do not call `connect` or `authenticate` multiple times.</span></span><br><span class="line"><span class="string">  - Do not call `close` without calling `connect`.</span></span><br><span class="line"><span class="string">  - Do not call any method after calling `close`.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, address: <span class="built_in">str</span></span>):</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">self</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span>(<span class="params">self, password: <span class="built_in">str</span></span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">send_message</span>(<span class="params">self, msg: <span class="built_in">str</span></span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">close</span>(<span class="params">self</span>):</span></span><br></pre></td></tr></table></figure>
 
-<p>…쉽죠? 문서를 주의 깊게 읽고, 언급된 규칙을 위반하지 않도록(정의되지 않은 동작이나 충돌을 유발하지 않도록) 주의하기만 하면 됩니다. 다른 대안은 런타임에 언급된 모든 규칙을 검사하는 다양한 어설션으로 클래스를 채우는 것인데, 이는 코드가 지저분해지고 에지 케이스를 놓치며 문제가 발생했을 때 피드백이 느려집니다(컴파일 타임과 런타임 비교). 문제의 핵심은 클라이언트가 다양한(상호 배타적인) 상태로 존재할 수 있지만 이러한 상태를 개별적으로 모델링하는 대신 모두 단일 타입으로 병합한다는 것입니다.</p>
+<p>…쉽죠? 문서를 주의 깊게 읽고, 언급된 규칙을 위반하지 않도록(정의되지 않은 동작이나 충돌을 유발하지 않도록) 주의하기만 하면 됩니다 (껄껄). 다른 대안은 런타임에 언급된 모든 규칙을 검사하는 다양한 assertion으로 클래스를 채우는 것인데, 이는 코드가 지저분해지고 edge-case를 놓치며 문제가 발생했을 때 피드백이 느려집니다(컴파일 타임과 런타임 비교). 문제의 핵심은 클라이언트가 다양한(상호 배타적인) 상태로 존재할 수 있지만 이러한 상태를 개별적으로 모델링하는 대신 모두 단일 타입으로 병합한다는 것입니다.</p>
 <p>다양한 상태를 별도의 타입으로 분할하여 이 문제를 개선할 수 있는지 살펴봅시다.</p>
 <ul>
-<li>우선, 아무 것도 연결되지 않은 클라이언트를 갖는 것이 합리적일까요? 그렇지 않은 것 같습니다. 연결되지 않은 클라이언트는 어차피 연결을 호출할 때까지 아무것도 할 수 없습니다. 그렇다면 왜 이런 상태가 존재하도록 허용할까요? 연결된 클라이언트를 반환하는 connect라는 함수를 만들 수 있습니다:</li>
+<li>우선, 아무 것도 연결되지 않은 ‘Client’를 갖는 것이 합리적일까요? 그렇지 않은 것 같습니다. 연결되지 않은 client는 어차피 <code>connect</code>를 호출할 때까지 아무것도 할 수 없습니다. 그렇다면 왜 이런 상태가 존재하도록 허용할까요? <code>ConnectedClient</code>를 생성하고 반환하는 <code>connect</code>라는 함수를 만들 수 있습니다:</li>
 </ul>
+<p>함수가 성공하면 “연결됨” 불변성을 유지하는 클라이언트를 반환합니다. 이러한 구조는 우리가 실수로 다시 <code>connect</code>를 호출했을 때 다시 connect를 하려는 이상한 상태 변화를 피할 수 있게 됩니다. connect가 실패하면 함수는 예외를 발생시키거나 <code>None</code> 또는 명시적인 오류를 반환할 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">connect</span>(<span class="params">address: <span class="built_in">str</span></span>) -&gt; Optional[ConnectedClient]:</span></span><br><span class="line">  <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConnectedClient</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span>(<span class="params">...</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">send_message</span>(<span class="params">...</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">close</span>(<span class="params">...</span>):</span></span><br></pre></td></tr></table></figure>
 
-<p>함수가 성공하면 “연결됨” 불변성을 유지하는 클라이언트를 반환하며, 이 클라이언트에서는 connect를 다시 호출하여 상황을 엉망으로 만들 수 없습니다. 연결이 실패하면 함수는 예외를 발생시키거나 없음 또는 명시적 오류를 반환할 수 있습니다.</p>
-<pre><code>인증된 상태에도 비슷한 접근 방식을 사용할 수 있습니다. 클라이언트가 연결되고 인증되었다는 불변성을 보유하는 다른 타입을 도입할 수 있습니다:</code></pre>
+<ul>
+<li>인증된 상태에도 비슷한 접근 방식을 사용할 수 있습니다. 클라이언트가 연결되고 인증되었다는 (<code>authenticate</code>) 불변성을 보유하는 다른 타입을 도입할 수 있습니다:</li>
+</ul>
+<p>실제로 <code>AuthenticatedClient</code>의 인스턴스가 있어야만 실제로 메시지 전송을 시작할 수 있습니다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ConnectedClient 클래스:</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">authenticate</span>(<span class="params">...</span>) -&gt; Optional["AuthenticatedClient"]:</span></span><br><span class="line"></span><br><span class="line">클래스 AuthenticatedClient:</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">send_message</span>(<span class="params">...</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">close</span>(<span class="params">...</span>):</span></span><br></pre></td></tr></table></figure>
 
-<p>실제로 AuthenticatedClient의 인스턴스가 있어야만 실제로 메시지 전송을 시작할 수 있습니다.</p>
-<pre><code>마지막 문제는 닫기 메서드에 있습니다. Rust에서는 (파괴적 이동 시맨틱 덕분에) close 메서드가 호출되면 클라이언트를 더 이상 사용할 수 없다는 사실을 표현할 수 있습니다. 파이썬에서는 실제로 불가능하므로 몇 가지 해결 방법을 사용해야 합니다. 한 가지 해결책은 런타임 트래킹으로 돌아가서 클라이언트에 부울 속성을 도입하고 close 및 send_message에서 아직 닫히지 않았다고 어설트하는 것입니다. 또 다른 접근 방식은 닫기 메서드를 완전히 제거하고 클라이언트를 컨텍스트 관리자로만 사용하는 것입니다:</code></pre>
+<ul>
+<li>마지막 문제는 <code>close</code> 메서드에 있습니다. Rust에서는 (destructive move semantics 때문에) <code>close</code> 메서드가 호출되면, Client를 더 이상 사용할 수 없다는 사실을 표현할 수 있습니다. Python에서는 이러한 표현 방식이 불가능하므로 몇 가지 우회 방법을 사용해야 합니다. 한 가지 해결책은 런타임 트래킹으로 돌아가서 Client에 bool 속성을 도입하고 <code>close</code> 및 <code>send_message</code>에서 아직 닫히지 않았다고 assert하는 것입니다. 또 다른 접근 방식은 <code>close</code> 메서드를 완전히 제거하고 Client를 context manager로만 사용하는 것입니다:</li>
+</ul>
+<p><code>close</code> 메서드를 사용할 수 없게 만든다면,실수로 Client를 두 번 닫을 수 없을겁니다.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">connect(...)를 client로 사용합니다:</span><br><span class="line">    client.send_message(<span class="string">"foo"</span>)</span><br><span class="line"><span class="comment"># 여기서 클라이언트가 닫힙니다.</span></span><br></pre></td></tr></table></figure>
 
-<p>close 메서드를 사용할 수 없으므로 실수로 클라이언트를 두 번 닫을 수 없습니다.</p>
-<h2 id="강타입의-바운딩-박스"><a href="#강타입의-바운딩-박스" class="headerlink" title="강타입의 바운딩 박스"></a>강타입의 바운딩 박스</h2><p>객체 감지는 제가 가끔 작업하는 컴퓨터 비전 작업으로, 프로그램이 이미지에서 일련의 경계 상자를 감지해야 하는 작업입니다. 바운딩 박스는 기본적으로 일부 데이터가 첨부된 미화된 직사각형으로, 객체 감지를 구현할 때 사방에 존재합니다. 한 가지 성가신 점은 때로는 정규화(사각형의 좌표와 크기가 [0.0, 1.0] 간격에 있음)되지만 때로는 비정규화(좌표와 크기가 첨부된 이미지의 크기에 의해 경계됨)된다는 것입니다. 예를 들어 데이터 전처리 또는 후처리를 처리하는 많은 함수를 통해 바운딩 박스를 보내면 이를 엉망으로 만들기 쉽고, 예를 들어 바운딩 박스를 두 번 정규화하여 디버깅하기 매우 성가신 오류가 발생합니다.</p>
+<h2 id="강타입의-바운딩-박스"><a href="#강타입의-바운딩-박스" class="headerlink" title="강타입의 바운딩 박스"></a>강타입의 바운딩 박스</h2><p>Object detection은 제가 가끔 작업하는 컴퓨터 비전 작업으로, 프로그램이 이미지에서 일련의 bounding box를 추론해야 하는 작업입니다. Bbox는 기본적으로 기본 직사각형에 left,top과 같은 추가 정보를 가지는 객체로 object detection 알고리즘을 구현할 때 항상 사용됩니다.한 가지 성가신 점은 때로는 정규화(사각형의 좌표와 크기가 [0.0, 1.0] 간격에 있음)되지만 때로는 비정규화(좌표와 크기가 첨부된 이미지의 크기에 의해 경계됨)된다는 것입니다. 예를 들어 데이터 전처리 또는 후처리를 처리하는 많은 함수에 Bbox를 보내면 이를 엉망으로 만들기 쉽고, 예를 들어 Bbox를 두 번 정규화하여 디버깅하기 매우 성가신 오류가 발생합니다.</p>
 <p>이런 일이 몇 번 있었기 때문에 한 번은 이 두 가지 타입의 bbox를 두 개의 개별 타입으로 분할하여 이 문제를 완전히 해결하기로 결정했습니다:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">데이터클래스</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NormalizedBBox</span>:</span></span><br><span class="line">  왼쪽: <span class="built_in">float</span></span><br><span class="line">  top: <span class="built_in">float</span></span><br><span class="line">  width: <span class="built_in">float</span></span><br><span class="line">  높이: <span class="built_in">float</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">데이터클래스</span><br><span class="line">DenormalizedBBox 클래스:</span><br><span class="line">  왼쪽: <span class="built_in">float</span></span><br><span class="line">  top: <span class="built_in">float</span></span><br><span class="line">  width: <span class="built_in">float</span></span><br><span class="line">  높이: <span class="built_in">float</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NormalizedBBox</span>:</span></span><br><span class="line">  left: <span class="built_in">float</span></span><br><span class="line">  top: <span class="built_in">float</span></span><br><span class="line">  width: <span class="built_in">float</span></span><br><span class="line">  height: <span class="built_in">float</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line">DenormalizedBBox 클래스:</span><br><span class="line">  left: <span class="built_in">float</span></span><br><span class="line">  top: <span class="built_in">float</span></span><br><span class="line">  width: <span class="built_in">float</span></span><br><span class="line">  height: <span class="built_in">float</span></span><br></pre></td></tr></table></figure>
 
-<p>이렇게 분리하면 정규화된 바운딩 박스와 비정규화된 바운딩 박스가 더 이상 쉽게 섞일 수 없으므로 문제가 대부분 해결됩니다. 하지만 코드를 보다 인체공학적으로 만들기 위해 개선할 수 있는 몇 가지 사항이 있습니다:</p>
+<p>이렇게 분리하면 정규화된 Bbox와 비정규화된 BBox가 더 이상 쉽게 섞일 수 없으므로 문제가 대부분 해결됩니다. 하지만 코드를 보다 읽기 쉽게 만들기 위해 개선할 수 있는 몇 가지 사항이 있습니다:</p>
 <ul>
-<li>통합 또는 상속을 통해 중복 감소:</li>
+<li>통합(Composition) 또는 상속(Inheritance)를 통한 코드 중복 감소:</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BBoxBase</span>:</span></span><br><span class="line">  left: <span class="built_in">float</span></span><br><span class="line">  top: <span class="built_in">float</span></span><br><span class="line">  width: <span class="built_in">float</span></span><br><span class="line">  height: <span class="built_in">float</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Composition</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NormalizedBBox</span>:</span></span><br><span class="line">  bbox: BBoxBase</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DenormalizedBBox</span>:</span></span><br><span class="line">  bbox: BBoxBase</span><br><span class="line"></span><br><span class="line">Bbox = Union[NormalizedBBox, DenormalizedBBox]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Inheritance</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NormalizedBBox</span>(<span class="params">BBoxBase</span>):</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DenormalizedBBox</span>(<span class="params">BBoxBase</span>):</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>런타임 검사를 추가하여 정규화된 바운딩 박스가 실제로 정규화되었는지 확인:</li>
+<li>런타임 검사를 추가하여 정규화된 Bbox가 실제로 정규화되었는지 확인:</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NormalizedBBox</span>(<span class="params">BboxBase</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__post_init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">assert</span> <span class="number">0.0</span> &lt;= self.left &lt;= <span class="number">1.0</span></span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>두 타입 간 변환하는 방법을 추가. 어떤 곳에서는 명시적인 표현을 알고 싶지만, 다른 곳에서는 일반 인터페이스(“모든 타입의 BBox”)로 작업하고 싶을 수도 있습니다. 이 경우 ‘모든 BBox’를 두 가지 표현 중 하나로 변환할 수 있어야 합니다:</li>
+<li>두 타입 간의 변환 방법을 추가. 어떤 곳에서는 명시적인 표현을 알고 싶지만, 다른 곳에서는 일반 인터페이스(“모든 타입의 BBox”)로 작업하고 싶을 수도 있습니다. 이 경우 ‘모든 BBox’를 두 가지 표현 중 하나로 변환할 수 있어야 합니다:</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BBoxBase</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">as_normalized</span>(<span class="params">self, size: Size</span>) -&gt; "NormalizeBBox":</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">as_denormalized</span>(<span class="params">self, size: Size</span>) -&gt; "DenormalizedBBox":</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NormalizedBBox</span>(<span class="params">BBoxBase</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">as_normalized</span>(<span class="params">self, size: Size</span>) -&gt; "NormalizedBBox":</span></span><br><span class="line">    <span class="keyword">return</span> self</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">as_denormalized</span>(<span class="params">self, size: Size</span>) -&gt; "DenormalizedBBox":</span></span><br><span class="line">    <span class="keyword">return</span> self.denormalize(size)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DenormalizedBBox</span>(<span class="params">BBoxBase</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">as_normalized</span>(<span class="params">self, size: Size</span>) -&gt; "NormalizedBBox":</span></span><br><span class="line">    <span class="keyword">return</span> self.normalize(size)</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">as_denormalized</span>(<span class="params">self, size: Size</span>) -&gt; "DenormalizedBBox":</span></span><br><span class="line">    <span class="keyword">return</span> self</span><br></pre></td></tr></table></figure>
 
-<p>이 인터페이스를 사용하면 정확성을 위해 분리된 타입과 인체공학적 편의를 위해 통합된 인터페이스라는 두 가지 장점을 모두 누릴 수 있습니다.</p>
+<p>이 인터페이스를 사용하면 정확성을 위해 분리된 타입과 편의성을 동시에 취하는 통합된 인터페이스라는 두 가지 장점을 모두 누릴 수 있습니다.</p>
 <p>참고: 부모/베이스 클래스에 해당 클래스의 인스턴스를 반환하는 일부 공유 메서드를 추가하려면 Python 3.11부터 typing.Self를 사용할 수 있습니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BBoxBase</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">move</span>(<span class="params">self, x: <span class="built_in">float</span>, y: <span class="built_in">float</span></span>) -&gt; typing.Self:</span> ...</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NormalizedBBox</span>(<span class="params">BBoxBase</span>):</span></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">bbox = NormalizedBBox(...)</span><br><span class="line"><span class="comment"># The type of `bbox2` is `NormalizedBBox`, not just `BBoxBase`</span></span><br><span class="line">bbox2 = bbox.move(<span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="더-안전한-뮤텍스"><a href="#더-안전한-뮤텍스" class="headerlink" title="더 안전한 뮤텍스"></a>더 안전한 뮤텍스</h2><p>Rust의 뮤텍스와 잠금은 일반적으로 두 가지 이점이 있는 매우 멋진 인터페이스 뒤에 제공됩니다:</p>
 <ul>
-<li>뮤텍스를 잠그면 가드 객체가 반환되며, 이 객체가 파괴되면 유서 깊은 RAII 메커니즘을 활용하여 뮤텍스의 잠금을 자동으로 해제합니다: </li>
+<li>뮤텍스를 잠그면 guard 객체가 반환되며, 이 객체가 파괴되면 유서 깊은 RAII 메커니즘을 활용하여 뮤텍스의 잠금을 자동으로 해제합니다: </li>
 </ul>
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="keyword">let</span> guard = mutex.lock(); <span class="comment">// locked here</span></span><br><span class="line">  ...</span><br><span class="line">} <span class="comment">// automatically unlocked here</span></span><br></pre></td></tr></table></figure>
 
-<p>즉, 실수로 뮤텍스 잠금을 해제하는 것을 잊어버릴 수 없습니다. C++에서도 매우 유사한 메커니즘이 일반적으로 사용되지만, 가드 객체가 없는 명시적 잠금/잠금 해제 인터페이스는 std::mutex에도 사용할 수 있으므로 여전히 잘못 사용될 수 있습니다.</p>
+<p>즉, 실수로 뮤텍스 잠금을 해제하는 것을 잊어버릴 수 없습니다. C++에서도 매우 유사한 메커니즘이 일반적으로 사용되지만, guard 객체가 없는 명시적 <code>lock</code>/<code>unlock</code> 인터페이스는 std::mutex에도 사용할 수 있으므로 여전히 잘못 사용될 수 있습니다.</p>
 <ul>
-<li>뮤텍스에 의해 보호되는 데이터는 뮤텍스(구조체)에 직접 저장됩니다. 이 설계에서는 뮤텍스를 실제로 잠그지 않고는 보호된 데이터에 액세스할 수 없습니다. 가드를 얻으려면 먼저 뮤텍스를 잠근 다음 가드 자체를 사용하여 데이터에 액세스해야 합니다:</li>
+<li>뮤텍스에 의해 보호되는 데이터는 뮤텍스(구조체)에 직접 저장됩니다. 이 설계에서는 뮤텍스를 실제로 잠그지 않고는 보호된 데이터에 액세스할 수 없습니다. guard를 얻으려면 먼저 뮤텍스를 잠근 다음 guard 자체를 사용하여 데이터에 액세스해야 합니다:</li>
 </ul>
 <figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> lock = Mutex::new(<span class="number">41</span>); <span class="comment">// Create a mutex that stores the data inside</span></span><br><span class="line"><span class="keyword">let</span> guard = lock.lock().unwrap(); <span class="comment">// Acquire guard</span></span><br><span class="line">*guard += <span class="number">1</span>; <span class="comment">// Modify the data using the guard</span></span><br></pre></td></tr></table></figure>
 
-<p>이는 뮤텍스와 뮤텍스가 보호하는 데이터가 분리되어 있어 데이터에 액세스하기 전에 뮤텍스를 실제로 잠그는 것을 쉽게 잊어버릴 수 있는 파이썬을 비롯한 주류 언어의 일반적인 뮤텍스 API와는 완전히 대조적인 방식입니다:</p>
+<p>이는 뮤텍스와 뮤텍스가 보호하는 데이터가 분리되어 있어 데이터에 액세스하기 전에 뮤텍스를 실제로 잠그는 것을 쉽게 잊어버릴 수 있는 Python을 비롯한 주류 언어의 일반적인 뮤텍스 API와는 완전히 대조적인 방식입니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">mutex = Lock()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">thread_fn</span>(<span class="params">data</span>):</span></span><br><span class="line">    <span class="comment"># Acquire mutex. There is no link to the protected variable.</span></span><br><span class="line">    mutex.acquire()</span><br><span class="line">    data.append(<span class="number">1</span>)</span><br><span class="line">    mutex.release()</span><br><span class="line"></span><br><span class="line">data = []</span><br><span class="line">t = Thread(target=thread_fn, args=(data,))</span><br><span class="line">t.start()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Here we can access the data without locking the mutex.</span></span><br><span class="line">data.append(<span class="number">2</span>)  <span class="comment"># Oops</span></span><br></pre></td></tr></table></figure>
 
-<p>파이썬에서 Rust에서와 똑같은 이점을 얻을 수는 없지만 모든 이점을 잃은 것은 아닙니다. 파이썬 잠금은 컨텍스트 관리자 인터페이스를 구현하므로 with 블록에서 잠금을 사용하여 범위가 끝날 때 자동으로 잠금이 해제되도록 할 수 있습니다. 그리고 약간의 노력만 더하면 더 멀리 갈 수 있습니다:</p>
+<p>Python에서 Rust에서와 똑같은 이점을 얻을 수는 없지만 모든 이점을 잃은 것은 아닙니다. Python 잠금은 컨텍스트 관리자 인터페이스를 구현하므로 <code>with</code> 블록에서 잠금을 사용하여 범위가 끝날 때 자동으로 잠금이 해제되도록 할 수 있습니다. 그리고 약간의 노력만 더하면 더 대단한걸 할 수 있습니다:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> contextlib</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Lock</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> ContextManager, Generic, TypeVar</span><br><span class="line"></span><br><span class="line">T = TypeVar(<span class="string">"T"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Make the Mutex generic over the value it stores.</span></span><br><span class="line"><span class="comment"># In this way we can get proper typing from the `lock` method.</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mutex</span>(<span class="params">Generic[T]</span>):</span></span><br><span class="line">  <span class="comment"># Store the protected value inside the mutex </span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, value: T</span>):</span></span><br><span class="line">    <span class="comment"># Name it with two underscores to make it a bit harder to accidentally</span></span><br><span class="line">    <span class="comment"># access the value from the outside.</span></span><br><span class="line">    self.__value = value</span><br><span class="line">    self.__lock = Lock()</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Provide a context manager `lock` method, which locks the mutex,</span></span><br><span class="line">  <span class="comment"># provides the protected value, and then unlocks the mutex when the</span></span><br><span class="line">  <span class="comment"># context manager ends.</span></span><br><span class="line"><span class="meta">  @contextlib.contextmanager</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">lock</span>(<span class="params">self</span>) -&gt; ContextManager[T]:</span></span><br><span class="line">    self.__lock.acquire()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">yield</span> self.__value</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        self.__lock.release()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a mutex wrapping the data</span></span><br><span class="line">mutex = Mutex([])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Lock the mutex for the scope of the `with` block</span></span><br><span class="line"><span class="keyword">with</span> mutex.lock() <span class="keyword">as</span> value:</span><br><span class="line">  <span class="comment"># value is typed as `list` here</span></span><br><span class="line">  value.append(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
-<p>이 설계를 사용하면 뮤텍스를 실제로 잠근 후에만 보호된 데이터에 액세스할 수 있습니다. 물론 이것은 여전히 파이썬이므로 뮤텍스 외부에 보호된 데이터에 대한 다른 포인터를 저장하는 등의 방법으로 불변성을 깨뜨릴 수 있습니다. 그러나 적대적으로 행동하지 않는 한, 파이썬의 뮤텍스 인터페이스는 사용하기에 훨씬 더 안전합니다.</p>
-<p>어쨌든, 제가 파이썬 코드에서 사용하는 “건전성 패턴”이 더 있을 거라고 확신하지만, 현재로서는 이것이 제가 생각할 수 있는 전부입니다. 비슷한 아이디어의 예가 있거나 다른 의견이 있으시면 Reddit에 알려주세요.</p>
+<p>이 설계를 사용하면 뮤텍스를 실제로 잠근 후에만 보호된 데이터에 액세스할 수 있습니다. 물론 이것은 여전히 Python이므로 뮤텍스 외부에 보호된 데이터에 대한 다른 포인터를 저장하는 등의 방법으로 불변성을 깨뜨릴 수 있습니다. 그러나 적대적으로 행동하지 않는 한, Python의 뮤텍스 인터페이스는 사용하기에 훨씬 더 안전합니다.</p>
+<p>어쨌든, 제가 Python 코드에서 사용하는 “건전성 패턴”이 더 있을 거라고 확신하지만, 현재로서는 이것이 제가 생각할 수 있는 전부입니다. 비슷한 아이디어의 예가 있거나 다른 의견이 있으시면 댓글을 달아주세요.</p>
 <ol>
 <li>공평하게 말하자면, 문서 주석의 매개변수 타입에 대한 설명에서 구조화된 형식(예: reStructuredText)을 사용하는 경우에도 마찬가지일 수 있습니다. 이 경우 타입 검사기가 이를 사용하여 타입이 일치하지 않는 경우 경고를 표시할 수 있습니다. 하지만 어쨌든 타입 검사기를 사용한다면 타입을 지정하는 “네이티브” 메커니즘인 타입 힌트를 활용하는 것이 더 좋을 것 같습니다.</li>
-<li>일명 차별/태그 유니온, 합산 타입, 봉인된 클래스 등입니다.</li>
-<li>새로운 타입에는 여기에 설명된 것 이외의 다른 사용 사례도 있습니다.</li>
-<li>이를 타입 상태 패턴이라고 합니다 (ypestate pattern).</li>
+<li>일명 discriminated/tagged unions, sum types, sealed classes 등입니다.</li>
+<li>newtype에는 여기에 설명된 것 이외의 다른 사용 사례도 있습니다.</li>
+<li>이를 타입 상태 패턴이라고 합니다 (typestate pattern).</li>
 <li>예를 들어 마법의 <strong>exit</strong> 메서드를 수동으로 호출하는 등 열심히 노력하지 않는 한 말입니다.</li>
 </ol>
 ]]></content>
