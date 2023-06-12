@@ -53,7 +53,7 @@
 <meta property="og:image" content="https://changh95.github.io/20230530-icra2023-day2-poster/22.png">
 <meta property="og:image" content="https://changh95.github.io/20230530-icra2023-day2-poster/23.png">
 <meta property="article:published_time" content="2023-05-30T05:48:45.000Z">
-<meta property="article:modified_time" content="2023-06-10T11:54:39.378Z">
+<meta property="article:modified_time" content="2023-06-12T16:01:06.882Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="ICRA">
@@ -461,7 +461,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-10 20:54:39" itemprop="dateModified" datetime="2023-06-10T20:54:39+09:00">2023-06-10</time>
+        <time title="Modified: 2023-06-13 01:01:06" itemprop="dateModified" datetime="2023-06-13T01:01:06+09:00">2023-06-13</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -567,6 +567,20 @@ mjx-container[display="true"] + br {
 <hr>
 <h1 id="Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants"><a href="#Zero-shot-Active-Visual-Search-ZAVIS-Intelligent-Object-Search-for-Robotic-Assistants" class="headerlink" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants"></a>Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants</h1><ul>
 <li>고려대 최성준 교수님 랩실 연구</li>
+<li>Active visual search (AVS) 방법론에 대한 연구</li>
+<li>방법론:<ul>
+<li>Scan landmark: 라이다와 PTZ 카메라를 이용해서 semantic view 생성<ul>
+<li>Open-set detector를 사용해서 사전에 학습되지 않은 class의 물체도 검출한다.</li>
+<li>‘Unknown’ class를 검출했을 때, CLIP 기반 text-image matching을 통해 실제 class를 찾아낸다.</li>
+</ul>
+</li>
+<li>Waypoint generation: Semantic uncertainty (vision-language model의 text-image matching의 entropy)와 pre-trained language model의 common sense knowledge를 바탕으로 한 cost function을 통해 waypoint 생성<ul>
+<li>COMET ATOMIC 2020이라는 common sense knowledge 데이터셋이 있다고 함.</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
 <li>(확실하게 기억이 안나요…)</li>
 <li>Landmark scanning을 통해 지도를 만들고, </li>
 </ul>
@@ -609,7 +623,12 @@ mjx-container[display="true"] + br {
 
 <p> </p>
 <hr>
-<h1 id="NoCal-Calibration-Free-Semi-Supervised-Learning-of-Odometry-and-Camera-Intrinsics"><a href="#NoCal-Calibration-Free-Semi-Supervised-Learning-of-Odometry-and-Camera-Intrinsics" class="headerlink" title="NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics"></a>NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics</h1><img src="/20230530-icra2023-day2-poster/10.png" class="" title="NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics">
+<h1 id="NoCal-Calibration-Free-Semi-Supervised-Learning-of-Odometry-and-Camera-Intrinsics"><a href="#NoCal-Calibration-Free-Semi-Supervised-Learning-of-Odometry-and-Camera-Intrinsics" class="headerlink" title="NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics"></a>NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics</h1><ul>
+<li>비디오 시퀀스가 주어졌을 때, 1. NeRF 기반 scene rendering, 2. relative pose estimation (i.e. odometry), 3. camera calibration을 동시에 수행하는 시스템을 제안.</li>
+<li>저자들에 의하면 사실 View syenthesis가 잘 되지 않는다고 한다. 하지만 view synthesis를 같이 함으로써 인해 odometry 추정 및 calibration이 꽤 잘 된다고 한다.</li>
+<li>Camera model은 OpenCV perspective를 사용했다고 한다. 이 이야기를 듣고 나는 differentiable한 camera model을 사용하면 모델 자체가 backprop으로 인해 업데이트가 되며 자동 캘리브레이션이 될 것이라고 조언해줬다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/10.png" class="" title="NoCal: Calibration-Free Semi-Supervised Learning of Odometry and Camera Intrinsics">
 
 <p> </p>
 <hr>
@@ -625,11 +644,33 @@ mjx-container[display="true"] + br {
 
 <p> </p>
 <hr>
-<h1 id="Loc-NeRF-Monte-Carlo-Localization-using-Neural-Radiance-Fields"><a href="#Loc-NeRF-Monte-Carlo-Localization-using-Neural-Radiance-Fields" class="headerlink" title="Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields"></a>Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields</h1><img src="/20230530-icra2023-day2-poster/14.png" class="" title="Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields">
+<h1 id="Loc-NeRF-Monte-Carlo-Localization-using-Neural-Radiance-Fields"><a href="#Loc-NeRF-Monte-Carlo-Localization-using-Neural-Radiance-Fields" class="headerlink" title="Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields"></a>Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields</h1><ul>
+<li>Monte Carlo Localization (i.e. Particle filter 기반 위치 추정 기법)에 NeRF를 섞어본 실험적인 방법<ul>
+<li>Monte Carlo Localization은 보통 이렇게 동작한다: 1. Motion model 기반으로 이동치 추정, 2. 이동 후 위치할 가능성이 있는 곳에 particle을 뿌림, 3. 각각의 particle 마다 observation (보통 LiDAR 스캔)을 지도와 매칭해서 가장 확률이 높은 particle을 정답으로 삼음.</li>
+</ul>
+</li>
+<li>Loc-NeRF도 Monte Carlo Localization의 파이프라인을 따라가지만, observation이 NeRF의 novel view rendering을 이용함.<ul>
+<li>사전에 Scene에 대해서 Neural radiance field를 학습해놓음.</li>
+<li>위치 추정을 하기 위해 초기 motion model 값을 기반으로 particle을 뿌림.</li>
+<li>각각의 particle마다 (i.e. pose candidate)마다 novel view rendering을 수행 함. 이 때, 모든 픽셀을 다 렌더링하면 너무 오래 걸리기 때문에, 64개의 픽셀만 렌더링을 수행함.</li>
+<li>렌더링 된 결과와 실제 카메라에서 나온 결과가 가장 비슷한 particle이 다음 위치가 됨.</li>
+</ul>
+</li>
+<li>기존의 Monte Carlo Localization 기법에 Particle annealing이라는 기법을 함께 사용함.<ul>
+<li>첫 프레임에서 위치를 찾을 때에는 넓은 공간 속 위치를 찾기 때문에 정확한 위치를 찾을 수 없으나, particle filter가 진행되면서 점점 정답 위치로 수렴해가기 때문에, particle의 수가 많을 필요가 없다.</li>
+<li>그렇기 때문에, 초기 iteration에서는 수많은 particle을 뿌려서 위치를 찾되, iteration이 높아질수록 particle의 수를 줄여 실시간 프로세싱이 가능하게 하는 기법 역시 제안한다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/14.png" class="" title="Loc-NeRF: Monte Carlo Localization using Neural Radiance Fields">
 
 <p> </p>
 <hr>
-<h1 id="Ditto-in-the-House-Building-Articulated-Models-of-Indoor-Scenes-through-INteractive-Perception"><a href="#Ditto-in-the-House-Building-Articulated-Models-of-Indoor-Scenes-through-INteractive-Perception" class="headerlink" title="Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception"></a>Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception</h1><img src="/20230530-icra2023-day2-poster/15.png" class="" title="Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception">
+<h1 id="Ditto-in-the-House-Building-Articulated-Models-of-Indoor-Scenes-through-INteractive-Perception"><a href="#Ditto-in-the-House-Building-Articulated-Models-of-Indoor-Scenes-through-INteractive-Perception" class="headerlink" title="Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception"></a>Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception</h1><ul>
+<li>Affordance network를 이용해 ‘움직일 수 있는 static object’를 검출한다. 이를 통해 어떤 형태의 state change가 나타날 수 있는지 예상하는 네트워크를 만든다. (e.g. 냉장고 문이 열리고 닫힘)</li>
+<li>이런 프로그램을 짤 때 어떤 라이브러리를 썼냐고 물어보니, PCL과 Open3D를 썼다고 한다. </li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/15.png" class="" title="Ditto in the House: Building Articulated Models of Indoor Scenes through INteractive Perception">
 
 <p> </p>
 <hr>
