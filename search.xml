@@ -25648,18 +25648,15 @@ Domain Calibration via Robust SLAM </summary>
 <li>방법론:<ul>
 <li>Scan landmark: 라이다와 PTZ 카메라를 이용해서 semantic view 생성<ul>
 <li>Open-set detector를 사용해서 사전에 학습되지 않은 class의 물체도 검출한다.</li>
-<li>‘Unknown’ class를 검출했을 때, CLIP 기반 text-image matching을 통해 실제 class를 찾아낸다.</li>
+<li>‘Unknown’ class를 검출했을 때, 유저 프롬프트 정보에 대해 CLIP 기반 text-image matching을 통해 실제 class를 찾아낸다.</li>
 </ul>
 </li>
 <li>Waypoint generation: Semantic uncertainty (vision-language model의 text-image matching의 entropy)와 pre-trained language model의 common sense knowledge를 바탕으로 한 cost function을 통해 waypoint 생성<ul>
 <li>COMET ATOMIC 2020이라는 common sense knowledge 데이터셋이 있다고 함.</li>
 </ul>
 </li>
-<li></li>
 </ul>
 </li>
-<li>(확실하게 기억이 안나요…)</li>
-<li>Landmark scanning을 통해 지도를 만들고, </li>
 </ul>
 <img src="/20230530-icra2023-day2-poster/6.png" class="" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants">
 

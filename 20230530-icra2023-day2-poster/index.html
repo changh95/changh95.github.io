@@ -53,7 +53,7 @@
 <meta property="og:image" content="https://changh95.github.io/20230530-icra2023-day2-poster/22.png">
 <meta property="og:image" content="https://changh95.github.io/20230530-icra2023-day2-poster/23.png">
 <meta property="article:published_time" content="2023-05-30T05:48:45.000Z">
-<meta property="article:modified_time" content="2023-06-12T16:01:06.882Z">
+<meta property="article:modified_time" content="2023-06-14T02:24:59.436Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="ICRA">
@@ -461,7 +461,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-13 01:01:06" itemprop="dateModified" datetime="2023-06-13T01:01:06+09:00">2023-06-13</time>
+        <time title="Modified: 2023-06-14 11:24:59" itemprop="dateModified" datetime="2023-06-14T11:24:59+09:00">2023-06-14</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -571,18 +571,15 @@ mjx-container[display="true"] + br {
 <li>방법론:<ul>
 <li>Scan landmark: 라이다와 PTZ 카메라를 이용해서 semantic view 생성<ul>
 <li>Open-set detector를 사용해서 사전에 학습되지 않은 class의 물체도 검출한다.</li>
-<li>‘Unknown’ class를 검출했을 때, CLIP 기반 text-image matching을 통해 실제 class를 찾아낸다.</li>
+<li>‘Unknown’ class를 검출했을 때, 유저 프롬프트 정보에 대해 CLIP 기반 text-image matching을 통해 실제 class를 찾아낸다.</li>
 </ul>
 </li>
 <li>Waypoint generation: Semantic uncertainty (vision-language model의 text-image matching의 entropy)와 pre-trained language model의 common sense knowledge를 바탕으로 한 cost function을 통해 waypoint 생성<ul>
 <li>COMET ATOMIC 2020이라는 common sense knowledge 데이터셋이 있다고 함.</li>
 </ul>
 </li>
-<li></li>
 </ul>
 </li>
-<li>(확실하게 기억이 안나요…)</li>
-<li>Landmark scanning을 통해 지도를 만들고, </li>
 </ul>
 <img src="/20230530-icra2023-day2-poster/6.png" class="" title="Zero-shot Active Visual Search (ZAVIS): Intelligent Object Search for Robotic Assistants">
 
