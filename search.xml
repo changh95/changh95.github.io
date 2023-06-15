@@ -25906,11 +25906,28 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph"><a href="#Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph" class="headerlink" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph"></a>Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph</h1><img src="/20230531-icra2023-day3-poster/4.png" class="" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph">
+<h1 id="Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph"><a href="#Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph" class="headerlink" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph"></a>Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph</h1><ul>
+<li>비디오로부터 dynamic scene graph를 표현하는 기술인 Time-variant Relation-aware TRansformer (TR2)를 소개함.<ul>
+<li>Dynamic scene graph는 물체들 사이의 다양한 interaction/action을 소개하는 표현 방법임.</li>
+<li><a href="www.cv-learn.com/20230329-rosinol-2021-kimera-3d-dgs">Kimera</a>와 같은 방법에서 소개하는 dynamic scene graph와는 조금 다름.</li>
+</ul>
+</li>
+<li>영상으로부터 text embedding을 추출해서, 해당 text embedding이 시간에 따라 변화하는 것을 감지해 dynamic scene graph를 업데이트 함.</li>
+<li>Action genome이라는 데이터셋에서 실험을 수행함. </li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/4.png" class="" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph">
 
 <p> </p>
 <hr>
-<h1 id="3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs"><a href="#3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs" class="headerlink" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs"></a>3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs</h1><img src="/20230531-icra2023-day3-poster/5.png" class="" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs">
+<h1 id="3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs"><a href="#3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs" class="headerlink" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs"></a>3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs</h1><ul>
+<li>3D dynamic scene graph가 존재할 때, 이동할 수 있는 물체가 어떤 것인지 graph neural network로 학습함으로써 ‘이동할 확률’을 prediction하는 내용.<ul>
+<li>이 Dynamic scene graph에서 node는 object class instance이고 edge는 두 물체간의 euclidean distance임.</li>
+<li>물체를 여러번 옮기면서 매번 scene capture를 통해 데이터를 생성해서 뉴럴넷을 학습함.</li>
+</ul>
+</li>
+<li>Scene graph는 graph이기 때문에, 분석 용도로 graph neural network를 사용하기 좋다는 점을 보여줌.</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/5.png" class="" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs">
 
 <p> </p>
 <hr>
@@ -25918,15 +25935,26 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines"><a href="#Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines" class="headerlink" title="Efficient Bundle Adjustment for Coplanar Points and Lines"></a>Efficient Bundle Adjustment for Coplanar Points and Lines</h1><img src="/20230531-icra2023-day3-poster/7.png" class="" title="Efficient Bundle Adjustment for Coplanar Points and Lines">
+<h1 id="Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines"><a href="#Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines" class="headerlink" title="Efficient Bundle Adjustment for Coplanar Points and Lines"></a>Efficient Bundle Adjustment for Coplanar Points and Lines</h1><ul>
+<li>무려 Guoquan Huang 교수님께서 직접 포스터 발표를 하신 ㄷㄷ,,</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/7.png" class="" title="Efficient Bundle Adjustment for Coplanar Points and Lines">
 
 <p> </p>
 <hr>
-<h1 id="Detecting-Spatiao-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine"><a href="#Detecting-Spatiao-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine" class="headerlink" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine"></a>Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine</h1><img src="/20230531-icra2023-day3-poster/8.png" class="" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine">
+<h1 id="Detecting-Spatio-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine"><a href="#Detecting-Spatio-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine" class="headerlink" title="Detecting Spatio-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine"></a>Detecting Spatio-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine</h1><img src="/20230531-icra2023-day3-poster/8.png" class="" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine">
 
 <p> </p>
 <hr>
-<h1 id="Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding"><a href="#Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding" class="headerlink" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding"></a>Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding</h1><img src="/20230531-icra2023-day3-poster/9.png" class="" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding">
+<h1 id="Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding"><a href="#Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding" class="headerlink" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding"></a>Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding</h1><ul>
+<li>엄청나게 큰 데이터셋에서 pre-trained된 feature detector (e.g. EfficientNet, DINO)와 같은 feature map들을 NeRF를 통해서 3D fusion을 하면 어떨까?<ul>
+<li>color 값이 아닌, feature 값을 가진 neural implicit feature-field가 생성될 것이다.</li>
+<li>이 feature field는 segmentation과 같은 downstream task를 하기에 아주 적합한 구조를 가졌다.</li>
+</ul>
+</li>
+<li>Human interaction (e.g. 클릭 한번)을 통해 새로운 sub-class를 생성하고 곧바로 실시간으로 scene에서 모든 feature에 해당 class를 부여하여 open-set interactive labelling을 할 수 있다.</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/9.png" class="" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding">
 
 <p> </p>
 <hr>
@@ -25959,7 +25987,13 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization"><a href="#SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization" class="headerlink" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization"></a>SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization</h1><img src="/20230531-icra2023-day4-poster/2.png" class="" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization">
+<h1 id="SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization"><a href="#SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization" class="headerlink" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization"></a>SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization</h1><ul>
+<li>Paul Eduard Sarlin의 HLoc (Hierarchical Localization) 방식을 teacher-student 방식으로 distillation해서 훨씬 더 가벼운 visual localization 방식을 만들었다.<ul>
+<li>이 때, global structure-aware constraint와 local structure-aware constraint를 추출해서 학습에 사용함으로써 안정성을 추구했다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/2.png" class="" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization">
 
 <p> </p>
 <hr>
