@@ -30,7 +30,7 @@
 <meta property="og:description" content="Python의 느슨한 Type 정책을 Rust의 강한 Type 정책으로 바꾸기">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-09T05:48:45.000Z">
-<meta property="article:modified_time" content="2023-06-12T08:10:34.776Z">
+<meta property="article:modified_time" content="2023-06-12T08:11:56.138Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Rust">
@@ -333,19 +333,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-count">238</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-count">332</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -420,7 +420,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-12 17:10:34" itemprop="dateModified" datetime="2023-06-12T17:10:34+09:00">2023-06-12</time>
+        <time title="Modified: 2023-06-12 17:11:56" itemprop="dateModified" datetime="2023-06-12T17:11:56+09:00">2023-06-12</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -460,7 +460,7 @@ mjx-container[display="true"] + br {
         <blockquote>
 <p>Kobzol’s blog의 <span class="exturl" data-url="aHR0cHM6Ly9rb2J6b2wuZ2l0aHViLmlvL3J1c3QvcHl0aG9uLzIwMjMvMDUvMjAvd3JpdGluZy1weXRob24tbGlrZS1pdHMtcnVzdC5odG1s">Writing Python like it’s Rust<i class="fa fa-external-link-alt"></i></span>를 번역한 글입니다.</p>
 </blockquote>
-<h1 id="왜-Python을-Rust처럼-적게되었나"><a href="#왜-Python을-Rust처럼-적게되었나" class="headerlink" title="왜 Python을 Rust처럼 적게되었나?"></a>왜 Python을 Rust처럼 적게되었나?</h1><p>저는 몇 년 전부터 Rust로 프로그래밍을 시작했고, 다른 프로그래밍 언어로 (특히 Python으로) 프로그램을 설계할 때 Rust 프로그램의 설계 방식을 사용하고 있습니다. Rust를 사용하기 전 까지는, 저도 여느 사람들과 같이 Python으로 프로그래밍을 할 때는 타입 힌트 없이 함수를 작성하거나 느슨한 타입으 사용하는 코드를 작성하고, 사방에 dict를 전달하고 반환하며, 때때로 ‘str 타입’ 인터페이스를 사용하는 경우도 많았습니다. 그러나 Rust로부터 <strong>타입 시스템의 엄격함</strong>을 경험하고 수많은 문제들을 설계상 방지할 수 있다는 것을 발견한 후, 저는 <strong>Python 프로그래밍에서 Rust처럼 동일한 안전 수준이 보장되지 않는 것이 상당히 불안</strong>해졌습니다.</p>
+<h1 id="왜-Python을-Rust처럼-적게되었나"><a href="#왜-Python을-Rust처럼-적게되었나" class="headerlink" title="왜 Python을 Rust처럼 적게되었나?"></a>왜 Python을 Rust처럼 적게되었나?</h1><p>저는 몇 년 전부터 Rust로 프로그래밍을 시작했고, 다른 프로그래밍 언어로 (특히 Python으로) 프로그램을 설계할 때 Rust 프로그램의 설계 방식을 사용하고 있습니다. Rust를 사용하기 전 까지는, 저도 여느 사람들과 같이 Python으로 프로그래밍을 할 때는 타입 힌트 없이 함수를 작성하거나 느슨한 타입을 사용하는 코드를 작성하고, 사방에 dict를 전달하고 반환하며, 때때로 ‘str 타입’ 인터페이스를 사용하는 경우도 많았습니다. 그러나 Rust로부터 <strong>타입 시스템의 엄격함</strong>을 경험하고 수많은 문제들을 설계상 방지할 수 있다는 것을 발견한 후, 저는 <strong>Python 프로그래밍에서 Rust처럼 동일한 안전 수준이 보장되지 않는 것이 상당히 불안</strong>해졌습니다.</p>
 <p>여기서 ‘보장’이란 메모리 안전성을 의미하는 것이 아니라 (Python은 현재도 상당히 메모리 안전합니다), 오용이 매우 어렵거나 완전히 불가능한 API를 설계하여 정의되지 않은 동작 및 다양한 버그를 방지하는 개념인 ‘<strong>타입 건전성</strong>‘을 의미합니다. Rust에서는 잘못 사용된 API의 경우 일반적으로 컴파일 단계에서 에러를 유발함으로써 잘못된 코드가 실행되는 것을 방지합니다. Python에서는 이러한 컴파일 단계가 없어 잘못된 코드를 실행할 수도 있지만, pyright 같은 타입 체커나 PyCharm과 같은 타입 분석기가 있는 IDE를 사용하면 타입 건정성을 사전에 체크할 수 있습니다.</p>
 <p>결국 저는 Python 프로그램에 Rust의 몇 가지 개념을 도입하기 시작했습니다. 기본적으로 <strong>타입 힌트를 최대한 많이 사용</strong>하고, <strong>illegal state가 없게 만듬</strong>으로써 두 가지 원칙으로 요약할 수 있습니다. 장기간 유지보수 해야 할 프로그램뿐만 아니라, 일회성 유틸리티 스크립트에도 이 원칙을 적용하려고 노력합니다. 제 경험상 후자는 종종 전자로 바뀌기 때문입니다 :) 제 경험상 이 접근 방식은 이해하고 변경하기 더 쉬운 프로그램으로 이어집니다.</p>
 <p>이 글에서는 Python 프로그램에 적용된 이러한 패턴의 몇 가지 예를 보여드리겠습니다. 엄청나게 대단한 기술은 아니지만 그래도 문서화하는 것이 유용할 것 같았습니다.</p>
@@ -669,6 +669,9 @@ mjx-container[display="true"] + br {
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/20230614-buy-write-strategy/" rel="next" title="Buy-write 전략이란?">
+                  Buy-write 전략이란? <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

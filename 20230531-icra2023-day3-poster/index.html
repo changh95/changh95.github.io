@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://changh95.github.io/20230531-icra2023-day3-poster/10.png">
 <meta property="og:image" content="https://changh95.github.io/20230531-icra2023-day3-poster/11.png">
 <meta property="article:published_time" content="2023-06-01T05:48:45.000Z">
-<meta property="article:modified_time" content="2023-06-09T07:49:55.048Z">
+<meta property="article:modified_time" content="2023-06-15T09:46:09.827Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="SLAM">
@@ -348,19 +348,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">236</span>
+          <span class="site-state-item-count">238</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">329</span>
+        <span class="site-state-item-count">332</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -435,7 +435,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 16:49:55" itemprop="dateModified" datetime="2023-06-09T16:49:55+09:00">2023-06-09</time>
+        <time title="Modified: 2023-06-15 18:46:09" itemprop="dateModified" datetime="2023-06-15T18:46:09+09:00">2023-06-15</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -472,15 +472,54 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping"><a href="#Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping" class="headerlink" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping"></a>Convolutional Bayesian Kernel Inference for 3D Semantic Mapping</h1><img src="/20230531-icra2023-day3-poster/1.png" class="" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping">
+        <h1 id="Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping"><a href="#Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping" class="headerlink" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping"></a>Convolutional Bayesian Kernel Inference for 3D Semantic Mapping</h1><ul>
+<li>3D mapping의 트렌드에는 2가지 방식이 있었다: Probabilistic과 Deep Learning 방식이다.<ul>
+<li>Probabilistic 방식은 uncertainty 기반으로 백트랙킹이 가능하지만, 느리고 핸드 튜닝이 필요했다.</li>
+<li>Deep Learning 방식은 빠르게 동작하고 데이터셋에 맞춰서 잘 동작하지만, 동작 방식이 블랙박스였다.</li>
+<li>이 둘을 합할 수 없을까?</li>
+</ul>
+</li>
+<li>Probabilistic 방식의 Gaussian process (GP)에서 영감을 얻어, 각각의 semantic class마다 geometric probability distribution을 Deep Learning 방식으로 학습하는 Convolutional bayesian Kernel Inference (ConvBKI) layer를 만든다.</li>
+<li>Semantic point cloud가 있을 때 ConvBKI layer를 통해 geometric uncertainty를 추론하고, 이 값을 기반으로 mapping을 하면 DL 방식의 추론과 Probabilistic 방식의 reconstruction 방식을 둘 다 취할 수 있다는게 이 논문의 contribution이다.</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/1.png" class="" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping">
 
 <p> </p>
 <hr>
-<h1 id="SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations"><a href="#SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations" class="headerlink" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations"></a>SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations</h1><img src="/20230531-icra2023-day3-poster/2.png" class="" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations">
+<h1 id="SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations"><a href="#SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations" class="headerlink" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations"></a>SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations</h1><ul>
+<li>기존의 large-scale 3D mapping 방식은 mapping의 정확도와 memory 사용의 trade-off가 있었다.<ul>
+<li>Memory를 적게 쓰면 정확도가 낮아지고, 반대로 정확도를 높이면 memory도 많이 써야했다.</li>
+</ul>
+</li>
+<li>Octree 구조와 뉴럴네트워크를 함께 사용해서 정확도는 유지하나 메모리 사용량을 획기적으로 낮추는 방법을 제안한다.<ul>
+<li>뉴럴네트워크가 implicit하게 geometric 정보를 담게 될 것이다.</li>
+</ul>
+</li>
+<li>Octree의 각각의 level마다 node에 대해 1D feature vector를 생성한다. 그리고 이 feature vector를 모두 더해서, 크기가 작은 뉴럴네트워크에 넣었을 때 Signed distance function (SDF)가 나오도록 학습을 한다. 전체 프로세스는 differentiable하기 때문에 backprop을 통해 뉴럴네트워크와 feature octree를 둘 다 최적화 할 수 있다.</li>
+<li>특정 scene에서 어떤 octree의 형태가 어떤 sdf를 만드는지 추정하는 작은 네트워크만 사용는거다보니, 메모리 사용량은 뉴럴넷의 크기로 한정된다. 즉, scene의 크기는 훨씬 커도 된다는 뜻.</li>
+<li>내 질문: Scene이 어느정도까지 커도 되나요? Scene이 커지면 뉴럴넷 크기도 커져야하는게 아닐까요?<ul>
+<li>답변: 꽤 작은 뉴럴넷으로도 왠만한 large dataset은 다 될거다. 뉴럴넷의 크기를 키울 필요를 느끼지 못했다. </li>
+<li>질문 2: 예를 들어서, 중국 전체를 다 스캐닝한 지도가 있다고하면 이게 잘 될까요?</li>
+<li>답변: (당황) 그러면 아마 뉴럴넷 크기를 키워야할거다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/2.png" class="" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations">
 
 <p> </p>
 <hr>
-<h1 id="Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking"><a href="#Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking" class="headerlink" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking"></a>Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking</h1><img src="/20230531-icra2023-day3-poster/3.png" class="" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking">
+<h1 id="Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking"><a href="#Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking" class="headerlink" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking"></a>Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking</h1><ul>
+<li>주차 시나리오에서 버드아이뷰를 이용해 occupancy grid map을 만드는 연구 (라이다를 카메라로 대체한다고 보면 됨)<ul>
+<li>Tong Qin이 저자이다… 화웨이의 주차 솔루션을 만들고 있는 사람이며, <a href="www.cv-learn.com/20230218-qin-2020-avpslam">AVP-SLAM</a>, <a href="www.cv-learn.com/20230218-qin-2021-roadmap">RoadMap</a>등 연구의 후속 연구이다. VINS-Mono의 저자이기도 하다.</li>
+</ul>
+</li>
+<li>Inverse projection mapping을 수행해 BEV를 만든 후, 16x16 m 공간에서 나타나는 LiDAR 정보를 같이 모아 학습을 진행한다. 네트워크는 BiSeNet을 백본으로 사용한다. 이 백본은 lane, marker, stop line과 같은 정보를 segmentation하는 multi-task framework로도 사용될 수 있다.</li>
+<li>Local occupancy grid map을 추론한다면, 이는 probabilistic 방식으로 쌓아가면서 global occupancy grid map을 생성할 수 있다.<ul>
+<li>즉, 카메라만을 이용해서 라이다 SLAM의 occupancy grid map을 생성할 수 있다는 것이다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/3.png" class="" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking">
 
 <p> </p>
 <hr>

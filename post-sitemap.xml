@@ -9,8 +9,8 @@
 
 
     <url>
-        <loc>https://changh95.github.io/20230529-icra2023-day1-posters/</loc>
-        <lastmod>2023-06-12T08:11:18.375Z</lastmod>
+        <loc>https://changh95.github.io/20230531-icra2023-day3-poster/</loc>
+        <lastmod>2023-06-15T09:46:09.827Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -18,6 +18,54 @@
 
     <url>
         <loc>https://changh95.github.io/20230530-icra2023-day2-poster/</loc>
+        <lastmod>2023-06-15T08:51:06.776Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20221219-bean-brothers-talk/</loc>
+        <lastmod>2023-06-15T08:23:10.707Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230115-2022-retro/</loc>
+        <lastmod>2023-06-15T08:23:10.707Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230614-buy-write-strategy/</loc>
+        <lastmod>2023-06-15T08:23:10.707Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/</loc>
+        <lastmod>2023-06-15T08:23:10.707Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230609-python-like-rust/</loc>
+        <lastmod>2023-06-12T08:11:56.138Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230529-icra2023-day1-posters/</loc>
         <lastmod>2023-06-12T08:11:18.375Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -41,14 +89,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20230609-python-like-rust/</loc>
-        <lastmod>2023-06-12T08:10:34.776Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20230602-icra2023-day5-poster/</loc>
         <lastmod>2023-06-09T07:50:21.096Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -59,14 +99,6 @@
     <url>
         <loc>https://changh95.github.io/20230531-icra2023-day4-poster/</loc>
         <lastmod>2023-06-09T07:49:59.768Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20230531-icra2023-day3-poster/</loc>
-        <lastmod>2023-06-09T07:49:55.048Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -185,14 +217,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20230115-2022-retro/</loc>
-        <lastmod>2023-06-09T06:12:02.719Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20230213-ubuntu-partition/</loc>
         <lastmod>2023-06-09T06:12:02.719Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -211,14 +235,6 @@
     <url>
         <loc>https://changh95.github.io/20230102-2022-seminar-showdown/</loc>
         <lastmod>2023-06-09T06:12:02.711Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20221219-bean-brothers-talk/</loc>
-        <lastmod>2023-06-09T06:12:02.663Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
