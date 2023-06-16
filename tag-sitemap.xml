@@ -3,36 +3,57 @@
 
 
     <url>
-        <loc>https://changh95.github.io/tags/Posters/</loc>
-        <lastmod>2023-06-15T10:06:10.987Z</lastmod>
+        <loc>https://changh95.github.io/tags/Jetson/</loc>
+        <lastmod>2023-06-16T06:41:26.679Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/ICRA/</loc>
-        <lastmod>2023-06-15T10:06:10.987Z</lastmod>
+        <loc>https://changh95.github.io/tags/Tutorial/</loc>
+        <lastmod>2023-06-16T06:41:26.679Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
-        <lastmod>2023-06-15T10:06:10.987Z</lastmod>
+        <loc>https://changh95.github.io/tags/NVIDIA/</loc>
+        <lastmod>2023-06-16T06:41:26.679Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2023-06-15T10:06:10.987Z</lastmod>
+        <lastmod>2023-06-16T06:41:26.679Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Posters/</loc>
+        <lastmod>2023-06-16T06:11:28.720Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/ICRA/</loc>
+        <lastmod>2023-06-16T06:11:28.720Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
+        <lastmod>2023-06-16T06:11:28.720Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/tags/Robotics/</loc>
-        <lastmod>2023-06-15T10:06:10.987Z</lastmod>
+        <lastmod>2023-06-16T06:11:28.720Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -829,13 +850,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Tutorial/</loc>
-        <lastmod>2023-06-09T06:12:02.195Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/calib-io/</loc>
         <lastmod>2023-06-09T06:12:02.195Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1390,13 +1404,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/GTC/</loc>
-        <lastmod>2023-06-09T06:12:01.839Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/NVIDIA/</loc>
         <lastmod>2023-06-09T06:12:01.839Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

@@ -25988,7 +25988,7 @@ Domain Calibration via Robust SLAM </summary>
 <p> </p>
 <hr>
 <h1 id="SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization"><a href="#SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization" class="headerlink" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization"></a>SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization</h1><ul>
-<li>Paul Eduard Sarlin의 HLoc (Hierarchical Localization) 방식을 teacher-student 방식으로 distillation해서 훨씬 더 가벼운 visual localization 방식을 만들었다.<ul>
+<li>Paul Eduard Sarlin의 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2N2Zy9IaWVyYXJjaGljYWwtTG9jYWxpemF0aW9u">HLoc (Hierarchical Localization)<i class="fa fa-external-link-alt"></i></span> 방식을 teacher-student 방식으로 distillation해서 훨씬 더 가벼운 visual localization 방식을 만들었다.<ul>
 <li>이 때, global structure-aware constraint와 local structure-aware constraint를 추출해서 학습에 사용함으로써 안정성을 추구했다.</li>
 </ul>
 </li>
@@ -25997,7 +25997,25 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network"><a href="#Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network" class="headerlink" title="Implicit Map Representation and Localization with Invertible Neural Network"></a>Implicit Map Representation and Localization with Invertible Neural Network</h1><img src="/20230531-icra2023-day4-poster/3.png" class="" title="Implicit Map Representation and Localization with Invertible Neural Network">
+<h1 id="Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network"><a href="#Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network" class="headerlink" title="Implicit Map Representation and Localization with Invertible Neural Network"></a>Implicit Map Representation and Localization with Invertible Neural Network</h1><ul>
+<li>LiDAR Mapping과 Localization을 둘 다 할 수 있는 뉴럴네트워크를 만듬.<ul>
+<li>특이한 점이라면, Invertible neural network를 사용했다는 점.<ul>
+<li>Invertible neural network는 양방향으로 사용할 수 있는 네트워크를 의미함. 즉, 네트워크를 정방향으로 쓸 때의 input과 output은, 역방향으로 사용할 때는 output과 input이 된다는 점.</li>
+<li>이 논문에서는 정방향 사용 시 Pose를 input으로 사용하면 LiDAR scan이 output으로 나오고 (i.e. Mapping), 역방향 사용 시 LiDAR scan이 input이 되고 Pose가 output이 된다 (i.e. Localization).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>어떤 scene에 대해서 이 invertible neural network 를 학습하면 다음과 같은 방법으로 사용할 수 있다.<ul>
+<li>Pose가 주어졌을 때, 주변은 어떻게 생길 것인가? (이 때, pose는 실제로 취득한 데이터가 아닌 novel pose도 가능하다 -&gt; LiDAR novel view synthesis)</li>
+<li>Scan이 주어졌을 때, 로봇은 어디에 위치해있을까? (이 때, pose에 대한 값은 확률적으로 나타난다. 그렇기 때문에 LiDAR로 헷갈리기 쉬운 scene에서도 여러 확률의 값이 나타나게 된다. 확률값이 주어진다면 추후 보정을 하기에 아주 유용하다는 얘기다.)</li>
+</ul>
+</li>
+<li>이를 통해 꽤 큰 공간에서도 큰 용량의 point cloud map 파일을 저장하고 있을 필요가 없다. 뉴럴넷 weight만 저장하고 있으면 된다.</li>
+<li>뉴럴넷 자체도 상당히 가벼운 편이라 Jetson NX에서도 270Hz로 돌아간다.</li>
+<li>ROS2 코드도 준비되어있다.</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/3.png" class="" title="Implicit Map Representation and Localization with Invertible Neural Network">
 
 <p> </p>
 <hr>
@@ -26005,7 +26023,11 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups"><a href="#A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups" class="headerlink" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups"></a>A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups</h1><img src="/20230531-icra2023-day4-poster/5.png" class="" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups">
+<h1 id="A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups"><a href="#A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups" class="headerlink" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups"></a>A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups</h1><ul>
+<li>다수의 카메라가 벽에 설치되어있고, 로봇의 위치를 알아내기 위한 hand-eye calibration을 할 때, 문제 자체를 factor graph로 표현한 후 캘리브레이션을 하는 방법을 소개한다.</li>
+<li>단순히 다중 카메라간의 extrinsic calib을 수행한 후, 각각의 카메라에서 mono_view -&gt; robot hand-eye calib을 하는 것보다 훨씬 정확하다.</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/5.png" class="" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups">
 
 <p> </p>
 <hr>
@@ -26013,7 +26035,12 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning"><a href="#Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning" class="headerlink" title="Open-vocabulary Queryable Scene Representations or Real World Planning"></a>Open-vocabulary Queryable Scene Representations or Real World Planning</h1><img src="/20230531-icra2023-day4-poster/7.png" class="" title="Open-vocabulary Queryable Scene Representations or Real World Planning">
+<h1 id="Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning"><a href="#Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning" class="headerlink" title="Open-vocabulary Queryable Scene Representations or Real World Planning"></a>Open-vocabulary Queryable Scene Representations or Real World Planning</h1><ul>
+<li>Everyday robots와 Robotics at Google에서 진행한 연구.</li>
+<li>Open vocabulary와 CLIP을 함께 사용함으로써 object에 대한 novel prompt를 생성한 후, 각각 물체에 대한 task를 만들어내는 연구이다.</li>
+<li>NLMap + SayCan 연구를 비교군으로 잡았다.</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/7.png" class="" title="Open-vocabulary Queryable Scene Representations or Real World Planning">
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -26384,6 +26411,37 @@ Domain Calibration via Robust SLAM </summary>
         <tag>Semantic SLAM</tag>
         <tag>NeRF</tag>
         <tag>Open-set detection</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>&#39;NVIDIA Jetson Nano와 함께하는 SLAM의 이해와 구현&#39; - 책 PDF 무료 공개</title>
+    <url>/20230616-slam-book-kr/</url>
+    <content><![CDATA[<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xTzA2cHplT21zMVA2MUJSZVQ1a1NWTFFpekpkalk0aUcvdmlldz91c3A9c2hhcmluZw==">책 pdf 다운로드 링크<i class="fa fa-external-link-alt"></i></span><br>PDF 비밀번호: slamkr</p>
+</blockquote>
+<h1 id="책-소개"><a href="#책-소개" class="headerlink" title="책 소개"></a>책 소개</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2dyb3Vwcy9zbGFta3I=">SLAM KR<i class="fa fa-external-link-alt"></i></span> 커뮤니티에서 몇년간 활동을 하며 SLAM에 대해 많은 것들을 배웠다. </p>
+<p>그동안 배운 것들을 기반으로 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjMwMTAyLTIwMjItc2VtaW5hci1zaG93ZG93bi8=">다수의 강의<i class="fa fa-external-link-alt"></i></span>도 진행하고, <span class="exturl" data-url="aHR0cHM6Ly9vcGVuLmtha2FvLmNvbS9vL2c4VDVreExi">카카오톡 커뮤니티 채팅<i class="fa fa-external-link-alt"></i></span>도 열며 지식을 공유했지만, 항상 답답했던 점이 있었다. </p>
+<p>처음 SLAM을 배울 때에는 한국어로 된 SLAM 자료가 없어서 공부하는데에 많이 불편했었다. 이해가 되지않는 부분은 몇년동안 끈기있게 잡고있다가 겨우 해결하거나, 또는 그냥 이해하기를 포기해야하는 경우도 많았다. 5년이 지난 지금은 그 당시보다는 조금 나아지긴 했지만, 아직도 한국어 자료가 많이 부족하다는 건 매 한가지이다. </p>
+<p>마침 <span class="exturl" data-url="aHR0cHM6Ly9kb25nd29uc2hpbi5vb3B5LmlvLw==">SLAM KR의 신동원 님<i class="fa fa-external-link-alt"></i></span>께서 함께 SLAM에 대한 책을 써보자고 제안을 주셨다. 이번 기회에 내가 지금까지 답답하게 느꼈던 점을 해소할, VSLAM을 공부하는데에 있어서 기본이 되는 자료들을 한 곳에 모을 기회가 생겼다고 생각해 열심히 책을 적었다. </p>
+<p>이 책을 통해 새롭게 SLAM을 공부하시는 분들께서는 내가 겪었던 불편함을 겪지 않기를 바라며, 국내에 더 많은 SLAM 개발자가 많아졌으면 좋겠다. (좋은 기회를 주신 신동원 님 감사합니다 :))</p>
+<p> </p>
+<hr>
+<h1 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h1><img src="/20230616-slam-book-kr/2.png" class="" title="contents1">
+<img src="/20230616-slam-book-kr/3.png" class="" title="contents2">
+<img src="/20230616-slam-book-kr/4.png" class="" title="contents3">
+<img src="/20230616-slam-book-kr/5.png" class="" title="contents4">
+<img src="/20230616-slam-book-kr/6.png" class="" title="contents5">
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>1.4 Robotics</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>NVIDIA</tag>
+        <tag>Tutorial</tag>
+        <tag>Jetson</tag>
       </tags>
   </entry>
 </search>
