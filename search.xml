@@ -26038,7 +26038,6 @@ Domain Calibration via Robust SLAM </summary>
 <h1 id="Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning"><a href="#Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning" class="headerlink" title="Open-vocabulary Queryable Scene Representations or Real World Planning"></a>Open-vocabulary Queryable Scene Representations or Real World Planning</h1><ul>
 <li>Everyday robots와 Robotics at Google에서 진행한 연구.</li>
 <li>Open vocabulary와 CLIP을 함께 사용함으로써 object에 대한 novel prompt를 생성한 후, 각각 물체에 대한 task를 만들어내는 연구이다.</li>
-<li>NLMap + SayCan 연구를 비교군으로 잡았다.</li>
 </ul>
 <img src="/20230531-icra2023-day4-poster/7.png" class="" title="Open-vocabulary Queryable Scene Representations or Real World Planning">
 ]]></content>
