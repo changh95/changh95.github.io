@@ -3,6 +3,111 @@
 
 
     <url>
+        <loc>https://changh95.github.io/tags/Multi-modal/</loc>
+        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/NeRF/</loc>
+        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/CVPR/</loc>
+        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Semantic-SLAM/</loc>
+        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
+        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
+        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SLAM/</loc>
+        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Open-set-detection/</loc>
+        <lastmod>2023-06-17T16:59:00.957Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Jetson/</loc>
+        <lastmod>2023-06-17T16:58:40.279Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Posters/</loc>
+        <lastmod>2023-06-17T16:58:40.279Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Tutorial/</loc>
+        <lastmod>2023-06-17T16:58:40.279Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/NVIDIA/</loc>
+        <lastmod>2023-06-17T16:58:40.279Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/Robotics/</loc>
+        <lastmod>2023-06-17T16:58:40.279Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/ICRA/</loc>
+        <lastmod>2023-06-17T16:58:40.279Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/%EC%A3%BC%EC%8B%9D/</loc>
+        <lastmod>2023-06-14T12:22:45.762Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/%EB%B9%88%EB%B8%8C%EB%9D%BC%EB%8D%94%EC%8A%A4/</loc>
         <lastmod>2023-06-14T12:16:48.817Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -19,41 +124,6 @@
     <url>
         <loc>https://changh95.github.io/tags/%ED%9A%8C%EA%B3%A0/</loc>
         <lastmod>2023-06-14T12:07:04.727Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Posters/</loc>
-        <lastmod>2023-06-14T02:24:59.436Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
-        <lastmod>2023-06-14T02:24:59.436Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Robotics/</loc>
-        <lastmod>2023-06-14T02:24:59.436Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/ICRA/</loc>
-        <lastmod>2023-06-14T02:24:59.436Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SLAM/</loc>
-        <lastmod>2023-06-14T02:24:59.436Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -136,13 +206,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
-        <lastmod>2023-06-02T13:24:26.277Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Deep-Learning/</loc>
         <lastmod>2023-06-02T13:24:26.277Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -152,13 +215,6 @@
     <url>
         <loc>https://changh95.github.io/tags/Linear-algebra/</loc>
         <lastmod>2023-04-15T18:04:19.231Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Semantic-SLAM/</loc>
-        <lastmod>2023-04-15T17:45:31.826Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -941,13 +997,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/NVIDIA/</loc>
-        <lastmod>2022-07-04T12:30:16.480Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/NVIDIA-Jetson/</loc>
         <lastmod>2022-07-04T12:30:16.480Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1125,20 +1174,6 @@
     <url>
         <loc>https://changh95.github.io/tags/Camera-calibration/</loc>
         <lastmod>2022-07-04T12:27:50.199Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/Tutorial/</loc>
-        <lastmod>2022-07-04T12:27:49.880Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/CVPR/</loc>
-        <lastmod>2022-07-04T12:27:49.880Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

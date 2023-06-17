@@ -25748,19 +25748,72 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Category-level-Shape-Estimation-for-Densely-Cluttered-Objects"><a href="#Category-level-Shape-Estimation-for-Densely-Cluttered-Objects" class="headerlink" title="Category-level Shape Estimation for Densely Cluttered Objects"></a>Category-level Shape Estimation for Densely Cluttered Objects</h1><img src="/20230530-icra2023-day2-poster/16.png" class="" title="Category-level Shape Estimation for Densely Cluttered Objects">
+<h1 id="Category-level-Shape-Estimation-for-Densely-Cluttered-Objects"><a href="#Category-level-Shape-Estimation-for-Densely-Cluttered-Objects" class="headerlink" title="Category-level Shape Estimation for Densely Cluttered Objects"></a>Category-level Shape Estimation for Densely Cluttered Objects</h1><ul>
+<li>다수의 물체들이 서로 엉켜있어 아주 강한 occlusion이 존재할 때, 물체들의 Shape을 계산한다는 연구이다.<ul>
+<li>이 때, 우리는 ‘어떤 class의 물체들이 있는지’는 알고 있지만, ‘해당 class의 물체들은 모두 길이, 넓이, 높이가 조금씩 다르다’ 라는 전제를 가지고 물체의 형태를 추정한다.</li>
+</ul>
+</li>
+<li>우선 Instance segmentation을 통해 point cloud segmentation을 수행한다.<ul>
+<li>Occlusion이 심하기 때문에, point cloud는 부분적으로만 복원이 될 것이다.</li>
+<li>Class는 정확하게 추론했다는 전제를 가진다.</li>
+</ul>
+</li>
+<li>Segmentation을 통해 추론한 class를 우리가 가지고 있는 물체의 shape template과 비교한다.</li>
+<li>3D GCN을 통해 geometric transformation parameter를 추정한다.<ul>
+<li>이 파라미터들은 길이, 넓이, 높이의 차이를 의미한다.</li>
+<li>이 파라미터들을 구하면, 길이/넓이/높이에 맞춰 변형한 shape template을 구할 수 있다.<ul>
+<li>즉, 실제로 point cloud에서 빈 곳을 채우는게 아니라, 적당히 맞는 길이/넓이/높이를 추정해 shape deformation을 하는 것이라고 볼 수 있다. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/16.png" class="" title="Category-level Shape Estimation for Densely Cluttered Objects">
 
 <p> </p>
 <hr>
-<h1 id="Category-level-Global-Camera-Pose-Estimation-with-Multi-Hypothesis-Point-Cloud-Correspondence"><a href="#Category-level-Global-Camera-Pose-Estimation-with-Multi-Hypothesis-Point-Cloud-Correspondence" class="headerlink" title="Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence"></a>Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence</h1><img src="/20230530-icra2023-day2-poster/17.png" class="" title="Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence">
+<h1 id="Category-level-Global-Camera-Pose-Estimation-with-Multi-Hypothesis-Point-Cloud-Correspondence"><a href="#Category-level-Global-Camera-Pose-Estimation-with-Multi-Hypothesis-Point-Cloud-Correspondence" class="headerlink" title="Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence"></a>Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence</h1><ul>
+<li>딥러닝을 사용하지 않고 object를 바라보는 camera pose estimation을 하는 방법을 소개한다.<ul>
+<li>이 때, 우리가 바라보고 있는 object는 class는 알고 있지만, ground truth 3D model과 다른 형태를 가지고 있는 상황이다.</li>
+<li>예를 들어, 우리가 가진 모델은 BMW 520d 자동차의 3D 모델이지만, 실제로 바라보고 있는 자동차는 BMW 320d 일 수 있다는 것이다. 대충 전체 쉐입은 비슷하지만, 디테일 적인 부분에서 다를 수 있다.</li>
+</ul>
+</li>
+<li>3D 모델에서 3D keypoint를 추출해서 매칭을 한 후, affinity matrix라는 것을 통해서 제대로 매칭을 했는지 확인을 한다. 이 후, Least squares를 이용해서 초기 포즈를 추정한 후, Weighted pairwise distance loss를 기반으로 포즈 최적화를 진행한다.</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/17.png" class="" title="Category-level Global Camera Pose Estimation with Multi-Hypothesis Point Cloud Correspondence">
 
 <p> </p>
 <hr>
-<h1 id="Simple-BEV-What-Really-Matters-for-Multi-Sensor-BEV-Perception"><a href="#Simple-BEV-What-Really-Matters-for-Multi-Sensor-BEV-Perception" class="headerlink" title="Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?"></a>Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?</h1><img src="/20230530-icra2023-day2-poster/18.png" class="" title="Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?">
+<h1 id="Simple-BEV-What-Really-Matters-for-Multi-Sensor-BEV-Perception"><a href="#Simple-BEV-What-Really-Matters-for-Multi-Sensor-BEV-Perception" class="headerlink" title="Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?"></a>Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?</h1><ul>
+<li><ol>
+<li>최신 BEV 생성 방식을 비교하면서 ‘BEV를 생성하는데에 어떤 점들이 중요한가?’를 정리하고, 2. 본인들의 BEV 알고리즘을 소개한다.</li>
+</ol>
+</li>
+<li>BEV를 생성하는데에 중요한 점들<ul>
+<li>‘Predicting semantic map representations from images using pyramid occupancy networks’, ‘Lift, splat, shoot: Encoding images from arbitrary camera rigs by Implicitly unprojecting to 3D’, ‘Translating images into maps’, ‘Learning bird’s eye-view representation from multi-camera images via spatiotemporal transformers’와 저자의 BEV 알고리즘을 비교한다.<ul>
+<li>위 논문들 사이의 성능 차이는, 사실 논문에 있는 성능 벤치마크에서 이야기하는 것 보다 훨씬 작다 (다들 고만고만하다…)</li>
+<li>Unweighted splatiing, depth-based splatting, deformable attention과 같은 멋있어보이지만 무거운 알고리즘들보다, 사실 우리가 쓴 bilinear sampling과 같은 가벼운 알고리즘도 성능이 잘 나온다.</li>
+</ul>
+</li>
+<li>BEV 모델을 학습할 때, batch size를 키우면 정확도가 높아지는 것을 볼 수 있다.</li>
+<li>BEV 모델을 학습할 때, 고해상도 이미지를 생성할 경우 정확도가 높아지는 것을 볼 수 있다.</li>
+<li>BEV 모델을 학습할 때, 더 깊은 backbone을 사용하면 정확도가 높아지는 것을 볼 수 있다.</li>
+<li>BEV 모델을 학습할 때, augmentation으로 cropping/resizing/camera shuffling을 사용하면 정확도가 높아진다.<ul>
+<li>camera dropout는 도움이 되지 않는다.</li>
+</ul>
+</li>
+<li>BEV 모델을 학습할 때, LiDAR와 RADAR 정보를 섞으면 정확도가 많이 올라간다.<ul>
+<li>LiDAR + RADAR 정보를 섞기 위해서는 그냥 단순히 feature에 concatenate하면 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/18.png" class="" title="Simple-BEV: What Really Matters for Multi-Sensor BEV Perception?">
 
 <p> </p>
 <hr>
-<h1 id="BEVFusion-Multi-Task-Multi-SEnsor-Fusion-with-Unified-Bird’s-Eye-View-Representation"><a href="#BEVFusion-Multi-Task-Multi-SEnsor-Fusion-with-Unified-Bird’s-Eye-View-Representation" class="headerlink" title="BEVFusion: Multi-Task Multi-SEnsor Fusion with Unified Bird’s-Eye View Representation"></a>BEVFusion: Multi-Task Multi-SEnsor Fusion with Unified Bird’s-Eye View Representation</h1><img src="/20230530-icra2023-day2-poster/19.png" class="" title="BEVFusion: Multi-Task Multi-SEnsor Fusion with Unified Bird" alt="s-Eye View Representation">
+<h1 id="BEVFusion-Multi-Task-Multi-Sensor-Fusion-with-Unified-Bird’s-Eye-View-Representation"><a href="#BEVFusion-Multi-Task-Multi-Sensor-Fusion-with-Unified-Bird’s-Eye-View-Representation" class="headerlink" title="BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird’s-Eye View Representation"></a>BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird’s-Eye View Representation</h1><img src="/20230530-icra2023-day2-poster/19.png" class="" title="BEVFusion: Multi-Task Multi-SEnsor Fusion with Unified Bird" alt="s-Eye View Representation">
 
 <p> </p>
 <hr>
@@ -25768,15 +25821,23 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Cross-Modal-Monouclar-Localization-in-Prior-LiDAR-Maps-Utilizing-Semantic-Consistency"><a href="#Cross-Modal-Monouclar-Localization-in-Prior-LiDAR-Maps-Utilizing-Semantic-Consistency" class="headerlink" title="Cross-Modal Monouclar Localization in Prior LiDAR Maps Utilizing Semantic Consistency"></a>Cross-Modal Monouclar Localization in Prior LiDAR Maps Utilizing Semantic Consistency</h1><img src="/20230530-icra2023-day2-poster/21.png" class="" title="Cross-Modal Monouclar Localization in Prior LiDAR Maps Utilizing Semantic Consistency">
+<h1 id="Cross-Modal-Monocular-Localization-in-Prior-LiDAR-Maps-Utilizing-Semantic-Consistency"><a href="#Cross-Modal-Monocular-Localization-in-Prior-LiDAR-Maps-Utilizing-Semantic-Consistency" class="headerlink" title="Cross-Modal Monocular Localization in Prior LiDAR Maps Utilizing Semantic Consistency"></a>Cross-Modal Monocular Localization in Prior LiDAR Maps Utilizing Semantic Consistency</h1><ul>
+<li>Semantic LiDAR 지도가 있을 때, 카메라만 가지고 위치를 추정하는 방법이다.</li>
+<li>우선 카메라 이미지로부터 semantic segmentation과 ORB-SLAM3를 돌려서 semantic visual map을 생성한다.<ul>
+<li>여기에 semantic LiDAR map을 가져와서 ICP를 통해서 포즈를 구한다.</li>
+</ul>
+</li>
+<li>내 질문: 실제 3D 공간에서의 LiDAR의 포인트 클라우드 위치와 Visual 포인트 클라우드의 위치가 다르지 않나? 그러면 정합이 잘 안되서 정확도가 잘 안나올텐데.<ul>
+<li>답변: 그러고보니 그렇네… 근데 실험 결과 보면 잘됨.</li>
+<li>(ㅋㅋㅋ… 왜 되는지는 모르겠지만 일단 된다 라는 답변…)</li>
+</ul>
+</li>
+</ul>
+<img src="/20230530-icra2023-day2-poster/21.png" class="" title="Cross-Modal Monouclar Localization in Prior LiDAR Maps Utilizing Semantic Consistency">
 
 <p> </p>
 <hr>
 <h1 id="L-C-Visual-inertial-Loose-Coupling-for-Resilient-and-Lightweight-Direct-Visual-Localization"><a href="#L-C-Visual-inertial-Loose-Coupling-for-Resilient-and-Lightweight-Direct-Visual-Localization" class="headerlink" title="L-C*: Visual-inertial Loose Coupling for Resilient and Lightweight Direct Visual Localization"></a>L-C*: Visual-inertial Loose Coupling for Resilient and Lightweight Direct Visual Localization</h1><img src="/20230530-icra2023-day2-poster/22.png" class="" title="L-C*: Visual-inertial Loose Coupling for Resilient and Lightweight Direct Visual Localization">
-
-<p> </p>
-<hr>
-<h1 id="Category-level-Shape-Estimation-for-Densely-Cluttered-Objects-1"><a href="#Category-level-Shape-Estimation-for-Densely-Cluttered-Objects-1" class="headerlink" title="Category-level Shape Estimation for Densely Cluttered Objects"></a>Category-level Shape Estimation for Densely Cluttered Objects</h1><img src="/20230530-icra2023-day2-poster/23.png" class="" title="Category-level Shape Estimation for Densely Cluttered Objects">
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -25839,23 +25900,79 @@ Domain Calibration via Robust SLAM </summary>
   <entry>
     <title>ICRA 2023 - 포스터 (Day 3)</title>
     <url>/20230531-icra2023-day3-poster/</url>
-    <content><![CDATA[<h1 id="Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping"><a href="#Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping" class="headerlink" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping"></a>Convolutional Bayesian Kernel Inference for 3D Semantic Mapping</h1><img src="/20230531-icra2023-day3-poster/1.png" class="" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping">
+    <content><![CDATA[<h1 id="Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping"><a href="#Convolutional-Bayesian-Kernel-Inference-for-3D-Semantic-Mapping" class="headerlink" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping"></a>Convolutional Bayesian Kernel Inference for 3D Semantic Mapping</h1><ul>
+<li>3D mapping의 트렌드에는 2가지 방식이 있었다: Probabilistic과 Deep Learning 방식이다.<ul>
+<li>Probabilistic 방식은 uncertainty 기반으로 백트랙킹이 가능하지만, 느리고 핸드 튜닝이 필요했다.</li>
+<li>Deep Learning 방식은 빠르게 동작하고 데이터셋에 맞춰서 잘 동작하지만, 동작 방식이 블랙박스였다.</li>
+<li>이 둘을 합할 수 없을까?</li>
+</ul>
+</li>
+<li>Probabilistic 방식의 Gaussian process (GP)에서 영감을 얻어, 각각의 semantic class마다 geometric probability distribution을 Deep Learning 방식으로 학습하는 Convolutional bayesian Kernel Inference (ConvBKI) layer를 만든다.</li>
+<li>Semantic point cloud가 있을 때 ConvBKI layer를 통해 geometric uncertainty를 추론하고, 이 값을 기반으로 mapping을 하면 DL 방식의 추론과 Probabilistic 방식의 reconstruction 방식을 둘 다 취할 수 있다는게 이 논문의 contribution이다.</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/1.png" class="" title="Convolutional Bayesian Kernel Inference for 3D Semantic Mapping">
 
 <p> </p>
 <hr>
-<h1 id="SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations"><a href="#SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations" class="headerlink" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations"></a>SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations</h1><img src="/20230531-icra2023-day3-poster/2.png" class="" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations">
+<h1 id="SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations"><a href="#SHINE-Mapping-Large-Scale-3D-Mapping-using-Sparse-Hierarchical-Implicit-Neural-Represetations" class="headerlink" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations"></a>SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations</h1><ul>
+<li>기존의 large-scale 3D mapping 방식은 mapping의 정확도와 memory 사용의 trade-off가 있었다.<ul>
+<li>Memory를 적게 쓰면 정확도가 낮아지고, 반대로 정확도를 높이면 memory도 많이 써야했다.</li>
+</ul>
+</li>
+<li>Octree 구조와 뉴럴네트워크를 함께 사용해서 정확도는 유지하나 메모리 사용량을 획기적으로 낮추는 방법을 제안한다.<ul>
+<li>뉴럴네트워크가 implicit하게 geometric 정보를 담게 될 것이다.</li>
+</ul>
+</li>
+<li>Octree의 각각의 level마다 node에 대해 1D feature vector를 생성한다. 그리고 이 feature vector를 모두 더해서, 크기가 작은 뉴럴네트워크에 넣었을 때 Signed distance function (SDF)가 나오도록 학습을 한다. 전체 프로세스는 differentiable하기 때문에 backprop을 통해 뉴럴네트워크와 feature octree를 둘 다 최적화 할 수 있다.</li>
+<li>특정 scene에서 어떤 octree의 형태가 어떤 sdf를 만드는지 추정하는 작은 네트워크만 사용는거다보니, 메모리 사용량은 뉴럴넷의 크기로 한정된다. 즉, scene의 크기는 훨씬 커도 된다는 뜻.</li>
+<li>내 질문: Scene이 어느정도까지 커도 되나요? Scene이 커지면 뉴럴넷 크기도 커져야하는게 아닐까요?<ul>
+<li>답변: 꽤 작은 뉴럴넷으로도 왠만한 large dataset은 다 될거다. 뉴럴넷의 크기를 키울 필요를 느끼지 못했다. </li>
+<li>질문 2: 예를 들어서, 중국 전체를 다 스캐닝한 지도가 있다고하면 이게 잘 될까요?</li>
+<li>답변: (당황) 그러면 아마 뉴럴넷 크기를 키워야할거다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/2.png" class="" title="SHINE-Mapping: Large-Scale 3D Mapping using Sparse Hierarchical Implicit Neural Represetations">
 
 <p> </p>
 <hr>
-<h1 id="Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking"><a href="#Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking" class="headerlink" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking"></a>Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking</h1><img src="/20230531-icra2023-day3-poster/3.png" class="" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking">
+<h1 id="Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking"><a href="#Inverse-Perspective-Mapping-Based-Neural-Occupancy-Grid-Map-for-Visual-Parking" class="headerlink" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking"></a>Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking</h1><ul>
+<li>주차 시나리오에서 버드아이뷰를 이용해 occupancy grid map을 만드는 연구 (라이다를 카메라로 대체한다고 보면 됨)<ul>
+<li>Tong Qin이 저자이다… 화웨이의 주차 솔루션을 만들고 있는 사람이며, <a href="www.cv-learn.com/20230218-qin-2020-avpslam">AVP-SLAM</a>, <a href="www.cv-learn.com/20230218-qin-2021-roadmap">RoadMap</a>등 연구의 후속 연구이다. VINS-Mono의 저자이기도 하다.</li>
+</ul>
+</li>
+<li>Inverse projection mapping을 수행해 BEV를 만든 후, 16x16 m 공간에서 나타나는 LiDAR 정보를 같이 모아 학습을 진행한다. 네트워크는 BiSeNet을 백본으로 사용한다. 이 백본은 lane, marker, stop line과 같은 정보를 segmentation하는 multi-task framework로도 사용될 수 있다.</li>
+<li>Local occupancy grid map을 추론한다면, 이는 probabilistic 방식으로 쌓아가면서 global occupancy grid map을 생성할 수 있다.<ul>
+<li>즉, 카메라만을 이용해서 라이다 SLAM의 occupancy grid map을 생성할 수 있다는 것이다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/3.png" class="" title="Inverse Perspective Mapping-Based Neural Occupancy Grid Map for Visual Parking">
 
 <p> </p>
 <hr>
-<h1 id="Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph"><a href="#Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph" class="headerlink" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph"></a>Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph</h1><img src="/20230531-icra2023-day3-poster/4.png" class="" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph">
+<h1 id="Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph"><a href="#Cross-Modality-Time-Variant-Relation-Learning-for-Generative-Dynamic-Scene-Graph" class="headerlink" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph"></a>Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph</h1><ul>
+<li>비디오로부터 dynamic scene graph를 표현하는 기술인 Time-variant Relation-aware TRansformer (TR2)를 소개함.<ul>
+<li>Dynamic scene graph는 물체들 사이의 다양한 interaction/action을 소개하는 표현 방법임.</li>
+<li><a href="www.cv-learn.com/20230329-rosinol-2021-kimera-3d-dgs">Kimera</a>와 같은 방법에서 소개하는 dynamic scene graph와는 조금 다름.</li>
+</ul>
+</li>
+<li>영상으로부터 text embedding을 추출해서, 해당 text embedding이 시간에 따라 변화하는 것을 감지해 dynamic scene graph를 업데이트 함.</li>
+<li>Action genome이라는 데이터셋에서 실험을 수행함. </li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/4.png" class="" title="Cross Modality Time-Variant Relation Learning for Generative Dynamic Scene Graph">
 
 <p> </p>
 <hr>
-<h1 id="3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs"><a href="#3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs" class="headerlink" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs"></a>3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs</h1><img src="/20230531-icra2023-day3-poster/5.png" class="" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs">
+<h1 id="3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs"><a href="#3D-VSG-Long-Term-Semantic-Scene-Change-Prediction-through-3D-Variable-Scene-Graphs" class="headerlink" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs"></a>3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs</h1><ul>
+<li>3D dynamic scene graph가 존재할 때, 이동할 수 있는 물체가 어떤 것인지 graph neural network로 학습함으로써 ‘이동할 확률’을 prediction하는 내용.<ul>
+<li>이 Dynamic scene graph에서 node는 object class instance이고 edge는 두 물체간의 euclidean distance임.</li>
+<li>물체를 여러번 옮기면서 매번 scene capture를 통해 데이터를 생성해서 뉴럴넷을 학습함.</li>
+</ul>
+</li>
+<li>Scene graph는 graph이기 때문에, 분석 용도로 graph neural network를 사용하기 좋다는 점을 보여줌.</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/5.png" class="" title="3D-VSG: Long-Term Semantic Scene Change Prediction through 3D Variable Scene Graphs">
 
 <p> </p>
 <hr>
@@ -25863,15 +25980,26 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines"><a href="#Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines" class="headerlink" title="Efficient Bundle Adjustment for Coplanar Points and Lines"></a>Efficient Bundle Adjustment for Coplanar Points and Lines</h1><img src="/20230531-icra2023-day3-poster/7.png" class="" title="Efficient Bundle Adjustment for Coplanar Points and Lines">
+<h1 id="Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines"><a href="#Efficient-Bundle-Adjustment-for-Coplanar-Points-and-Lines" class="headerlink" title="Efficient Bundle Adjustment for Coplanar Points and Lines"></a>Efficient Bundle Adjustment for Coplanar Points and Lines</h1><ul>
+<li>무려 Guoquan Huang 교수님께서 직접 포스터 발표를 하신 ㄷㄷ,,</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/7.png" class="" title="Efficient Bundle Adjustment for Coplanar Points and Lines">
 
 <p> </p>
 <hr>
-<h1 id="Detecting-Spatiao-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine"><a href="#Detecting-Spatiao-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine" class="headerlink" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine"></a>Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine</h1><img src="/20230531-icra2023-day3-poster/8.png" class="" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine">
+<h1 id="Detecting-Spatio-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine"><a href="#Detecting-Spatio-Temporal-Relations-by-Combining-a-Semantic-Map-with-a-Stream-Processing-Engine" class="headerlink" title="Detecting Spatio-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine"></a>Detecting Spatio-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine</h1><img src="/20230531-icra2023-day3-poster/8.png" class="" title="Detecting Spatiao-Temporal Relations by Combining a Semantic Map with a Stream Processing Engine">
 
 <p> </p>
 <hr>
-<h1 id="Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding"><a href="#Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding" class="headerlink" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding"></a>Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding</h1><img src="/20230531-icra2023-day3-poster/9.png" class="" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding">
+<h1 id="Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding"><a href="#Feature-Realistic-Neural-Fusion-for-Real-Time-Open-Set-Scene-Understanding" class="headerlink" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding"></a>Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding</h1><ul>
+<li>엄청나게 큰 데이터셋에서 pre-trained된 feature detector (e.g. EfficientNet, DINO)와 같은 feature map들을 NeRF를 통해서 3D fusion을 하면 어떨까?<ul>
+<li>color 값이 아닌, feature 값을 가진 neural implicit feature-field가 생성될 것이다.</li>
+<li>이 feature field는 segmentation과 같은 downstream task를 하기에 아주 적합한 구조를 가졌다.</li>
+</ul>
+</li>
+<li>Human interaction (e.g. 클릭 한번)을 통해 새로운 sub-class를 생성하고 곧바로 실시간으로 scene에서 모든 feature에 해당 class를 부여하여 open-set interactive labelling을 할 수 있다.</li>
+</ul>
+<img src="/20230531-icra2023-day3-poster/9.png" class="" title="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding">
 
 <p> </p>
 <hr>
@@ -25904,11 +26032,35 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization"><a href="#SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization" class="headerlink" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization"></a>SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization</h1><img src="/20230531-icra2023-day4-poster/2.png" class="" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization">
+<h1 id="SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization"><a href="#SAMLoc-Structure-Aware-Constraints-With-Multi-Trask-Distillation-for-Long-Term-Visual-Localization" class="headerlink" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization"></a>SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization</h1><ul>
+<li>Paul Eduard Sarlin의 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2N2Zy9IaWVyYXJjaGljYWwtTG9jYWxpemF0aW9u">HLoc (Hierarchical Localization)<i class="fa fa-external-link-alt"></i></span> 방식을 teacher-student 방식으로 distillation해서 훨씬 더 가벼운 visual localization 방식을 만들었다.<ul>
+<li>이 때, global structure-aware constraint와 local structure-aware constraint를 추출해서 학습에 사용함으로써 안정성을 추구했다.</li>
+</ul>
+</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/2.png" class="" title="SAMLoc: Structure-Aware Constraints With Multi-Trask Distillation for Long-Term Visual Localization">
 
 <p> </p>
 <hr>
-<h1 id="Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network"><a href="#Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network" class="headerlink" title="Implicit Map Representation and Localization with Invertible Neural Network"></a>Implicit Map Representation and Localization with Invertible Neural Network</h1><img src="/20230531-icra2023-day4-poster/3.png" class="" title="Implicit Map Representation and Localization with Invertible Neural Network">
+<h1 id="Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network"><a href="#Implicit-Map-Representation-and-Localization-with-Invertible-Neural-Network" class="headerlink" title="Implicit Map Representation and Localization with Invertible Neural Network"></a>Implicit Map Representation and Localization with Invertible Neural Network</h1><ul>
+<li>LiDAR Mapping과 Localization을 둘 다 할 수 있는 뉴럴네트워크를 만듬.<ul>
+<li>특이한 점이라면, Invertible neural network를 사용했다는 점.<ul>
+<li>Invertible neural network는 양방향으로 사용할 수 있는 네트워크를 의미함. 즉, 네트워크를 정방향으로 쓸 때의 input과 output은, 역방향으로 사용할 때는 output과 input이 된다는 점.</li>
+<li>이 논문에서는 정방향 사용 시 Pose를 input으로 사용하면 LiDAR scan이 output으로 나오고 (i.e. Mapping), 역방향 사용 시 LiDAR scan이 input이 되고 Pose가 output이 된다 (i.e. Localization).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>어떤 scene에 대해서 이 invertible neural network 를 학습하면 다음과 같은 방법으로 사용할 수 있다.<ul>
+<li>Pose가 주어졌을 때, 주변은 어떻게 생길 것인가? (이 때, pose는 실제로 취득한 데이터가 아닌 novel pose도 가능하다 -&gt; LiDAR novel view synthesis)</li>
+<li>Scan이 주어졌을 때, 로봇은 어디에 위치해있을까? (이 때, pose에 대한 값은 확률적으로 나타난다. 그렇기 때문에 LiDAR로 헷갈리기 쉬운 scene에서도 여러 확률의 값이 나타나게 된다. 확률값이 주어진다면 추후 보정을 하기에 아주 유용하다는 얘기다.)</li>
+</ul>
+</li>
+<li>이를 통해 꽤 큰 공간에서도 큰 용량의 point cloud map 파일을 저장하고 있을 필요가 없다. 뉴럴넷 weight만 저장하고 있으면 된다.</li>
+<li>뉴럴넷 자체도 상당히 가벼운 편이라 Jetson NX에서도 270Hz로 돌아간다.</li>
+<li>ROS2 코드도 준비되어있다.</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/3.png" class="" title="Implicit Map Representation and Localization with Invertible Neural Network">
 
 <p> </p>
 <hr>
@@ -25916,7 +26068,11 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups"><a href="#A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups" class="headerlink" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups"></a>A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups</h1><img src="/20230531-icra2023-day4-poster/5.png" class="" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups">
+<h1 id="A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups"><a href="#A-Graph-Based-Optimization-Framework-for-Hand-Eye-Calibration-for-Multi-Camera-Setups" class="headerlink" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups"></a>A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups</h1><ul>
+<li>다수의 카메라가 벽에 설치되어있고, 로봇의 위치를 알아내기 위한 hand-eye calibration을 할 때, 문제 자체를 factor graph로 표현한 후 캘리브레이션을 하는 방법을 소개한다.</li>
+<li>단순히 다중 카메라간의 extrinsic calib을 수행한 후, 각각의 카메라에서 mono_view -&gt; robot hand-eye calib을 하는 것보다 훨씬 정확하다.</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/5.png" class="" title="A Graph-Based Optimization Framework for Hand-Eye Calibration for Multi-Camera Setups">
 
 <p> </p>
 <hr>
@@ -25924,7 +26080,12 @@ Domain Calibration via Robust SLAM </summary>
 
 <p> </p>
 <hr>
-<h1 id="Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning"><a href="#Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning" class="headerlink" title="Open-vocabulary Queryable Scene Representations or Real World Planning"></a>Open-vocabulary Queryable Scene Representations or Real World Planning</h1><img src="/20230531-icra2023-day4-poster/7.png" class="" title="Open-vocabulary Queryable Scene Representations or Real World Planning">
+<h1 id="Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning"><a href="#Open-vocabulary-Queryable-Scene-Representations-or-Real-World-Planning" class="headerlink" title="Open-vocabulary Queryable Scene Representations or Real World Planning"></a>Open-vocabulary Queryable Scene Representations or Real World Planning</h1><ul>
+<li>Everyday robots와 Robotics at Google에서 진행한 연구.</li>
+<li>Open vocabulary와 CLIP을 함께 사용함으로써 object에 대한 novel prompt를 생성한 후, 각각 물체에 대한 task를 만들어내는 연구이다.</li>
+<li>NLMap + SayCan 연구를 비교군으로 잡았다.</li>
+</ul>
+<img src="/20230531-icra2023-day4-poster/7.png" class="" title="Open-vocabulary Queryable Scene Representations or Real World Planning">
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -26197,6 +26358,293 @@ Domain Calibration via Robust SLAM </summary>
       <tags>
         <tag>Python</tag>
         <tag>Rust</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Buy-write 전략이란?</title>
+    <url>/20230614-buy-write-strategy/</url>
+    <content><![CDATA[<h1 id="Buy-write-전략"><a href="#Buy-write-전략" class="headerlink" title="Buy-write 전략"></a>Buy-write 전략</h1><p>“Buy-Write” 전략은 단일/다수의 주식을 구입하고 동시에 해당 주식의 콜 옵션을 판매하는 전략을 말합니다.</p>
+<ol>
+<li>우선, 특정 주식을 구입합니다.</li>
+<li>그 다음, 그 주식에 대한 콜 옵션을 판매합니다. 소유한 주식의 수는 판매하는 콜 옵션의 기초가 되는 주식의 수와 같아야 합니다 (이러한 이유 떄문에 ‘Covered call’ 전략이라고 불리기도 합니다 - 판매하는 콜 옵션은 소유한 주식에 의해 ‘커버’됩니다). 콜 옵션을 판매한다는 것은, 옵션의 만기일에 주식을 특정 가격에 판매할 권리를 다른 사람에게 팔아 주는 것입니다.</li>
+<li>만약 주식의 가격이 콜 옵션의 행사 가격보다 높아진다면, 옵션은 행사되고, 주식은 행사 가격에 팔리게 됩니다. 이 경우, 수익은 행사 가격과 원래 주식을 구입한 가격, 그리고 팔린 콜 옵션의 프리미엄으로 이루어집니다.</li>
+<li>만약 주식의 가격이 콜 옵션의 행사 가격보다 낮다면, 옵션은 행사되지 않고 만료되며, 주식은 여전히 소유하게 됩니다. 이 경우, 수익은 팔린 콜 옵션의 프리미엄으로 이루어집니다.</li>
+</ol>
+<p>이 전략의 목표는 주식의 수익과 팔린 옵션의 프리미엄을 모두 얻는 것입니다. 프리미엄은 옵션의 판매자가 받는 지불액입니다.</p>
+<p>주식의 가격이 동일하거나 하락하면 투자자는 프리미엄을 유지하고, 콜 옵션의 행사 가격까지 주식이 오르면 이익을 볼 수도 있습니다.</p>
+<p>그러나 이익의 잠재력은 콜 옵션의 행사 가격과 받은 프리미엄까지로 제한됩니다. 주식의 가격이 행사 가격 이상으로 오르면 콜 옵션은 아마도 행사될 것이고, 투자자는 행사 가격에서 주식을 팔아야 하며, 추가적인 이익은 놓치게 됩니다.</p>
+<p>이 전략은 투자자가 시장이나 특정 주식에 대해 중립적에서 약간 상승적인 전망을 가질 때 종종 사용됩니다. 이것은 수익을 창출하고 중간 정도의 손실을 완화하는 방법이지만, 큰 이익의 잠재력은 제한합니다.</p>
+<p> </p>
+<hr>
+<h1 id="Call-option"><a href="#Call-option" class="headerlink" title="Call option"></a>Call option</h1><p>콜 옵션은 특정 가격(행사 가격이라고 함)에서 특정 기간 내에 기초 자산을 사는 권리(하지만 의무는 아님)를 보유자(구매자)에게 부여하는 옵션 시장의 금융 계약 유형입니다.</p>
+<p>콜 옵션의 주요 구성 요소를 분석해 보겠습니다:</p>
+<ul>
+<li>구매자: 콜 옵션을 구매하는 사람입니다. 그들은 기초 자산을 사는 권리를 얻기 위해 판매자에게 프리미엄을 지불합니다.</li>
+<li>판매자(또는 작성자): 콜 옵션을 판매하는 사람입니다. 그들은 프리미엄을 받고, 구매자가 옵션을 행사하기로 결정하면 기초 자산을 팔도록 의무가 있습니다.</li>
+<li>프리미엄: 이것은 콜 옵션을 얻기 위해 구매자가 판매자에게 지불하는 가격입니다. 주식 가격과 행사 가격 간의 차이, 만기까지의 시간, 기초 자산의 변동성 등 여러 요인에 의해 결정됩니다.</li>
+<li>행사 가격: 이것은 구매자가 콜 옵션을 행사하기로 결정하면 기초 자산을 구매할 수 있는 가격입니다.</li>
+<li>만기일: 이것은 옵션이 만료되는 날짜입니다. 이 날짜까지 옵션을 행사하지 않으면 옵션은 무가치가 되고 구매자는 옵션에 대해 지불한 금액(프리미엄)을 잃게 됩니다.</li>
+</ul>
+<p>콜 옵션의 구매자는 옵션이 만료되기 전에 기초 자산의 가격이 상승할 것이라는 베팅을 합니다. 그래서 그들은 더 낮은 행사 가격으로 자산을 사고 현재 시장 가격에 팔아 이익을 낼 수 있습니다. 반면에 판매자는 기초 자산의 가격이 행사 가격을 초과하지 않을 것이라는 베팅을 하여 자산을 팔지 않고도 프리미엄을 유지할 수 있습니다.</p>
+]]></content>
+      <categories>
+        <category>3. Life</category>
+        <category>3.1 일상</category>
+      </categories>
+      <tags>
+        <tag>주식</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>&#39;NVIDIA Jetson Nano와 함께하는 SLAM의 이해와 구현&#39; - 책 PDF 무료 공개</title>
+    <url>/20230616-slam-book-kr/</url>
+    <content><![CDATA[<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL2ZpbGUvZC8xTzA2cHplT21zMVA2MUJSZVQ1a1NWTFFpekpkalk0aUcvdmlldz91c3A9c2hhcmluZw==">책 pdf 다운로드 링크<i class="fa fa-external-link-alt"></i></span><br>PDF 비밀번호: slamkr</p>
+</blockquote>
+<h1 id="책-소개"><a href="#책-소개" class="headerlink" title="책 소개"></a>책 소개</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2dyb3Vwcy9zbGFta3I=">SLAM KR<i class="fa fa-external-link-alt"></i></span> 커뮤니티에서 몇년간 활동을 하며 SLAM에 대해 많은 것들을 배웠다. </p>
+<p>그동안 배운 것들을 기반으로 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjMwMTAyLTIwMjItc2VtaW5hci1zaG93ZG93bi8=">다수의 강의<i class="fa fa-external-link-alt"></i></span>도 진행하고, <span class="exturl" data-url="aHR0cHM6Ly9vcGVuLmtha2FvLmNvbS9vL2c4VDVreExi">카카오톡 커뮤니티 채팅<i class="fa fa-external-link-alt"></i></span>도 열며 지식을 공유했지만, 항상 답답했던 점이 있었다. </p>
+<p>처음 SLAM을 배울 때에는 한국어로 된 SLAM 자료가 없어서 공부하는데에 많이 불편했었다. 이해가 되지않는 부분은 몇년동안 끈기있게 잡고있다가 겨우 해결하거나, 또는 그냥 이해하기를 포기해야하는 경우도 많았다. 5년이 지난 지금은 그 당시보다는 조금 나아지긴 했지만, 아직도 한국어 자료가 많이 부족하다는 건 매 한가지이다. </p>
+<p>마침 <span class="exturl" data-url="aHR0cHM6Ly9kb25nd29uc2hpbi5vb3B5LmlvLw==">SLAM KR의 신동원 님<i class="fa fa-external-link-alt"></i></span>께서 함께 SLAM에 대한 책을 써보자고 제안을 주셨다. 이번 기회에 내가 지금까지 답답하게 느꼈던 점을 해소할, VSLAM을 공부하는데에 있어서 기본이 되는 자료들을 한 곳에 모을 기회가 생겼다고 생각해 열심히 책을 적었다. </p>
+<p>이 책을 통해 새롭게 SLAM을 공부하시는 분들께서는 내가 겪었던 불편함을 겪지 않기를 바라며, 국내에 더 많은 SLAM 개발자가 많아졌으면 좋겠다. (좋은 기회를 주신 신동원 님 감사합니다 :))</p>
+<p> </p>
+<hr>
+<h1 id="목차"><a href="#목차" class="headerlink" title="목차"></a>목차</h1><img src="/20230616-slam-book-kr/2.png" class="" title="contents1">
+<img src="/20230616-slam-book-kr/3.png" class="" title="contents2">
+<img src="/20230616-slam-book-kr/4.png" class="" title="contents3">
+<img src="/20230616-slam-book-kr/5.png" class="" title="contents4">
+<img src="/20230616-slam-book-kr/6.png" class="" title="contents5">
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>1.4 Robotics</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>NVIDIA</tag>
+        <tag>Tutorial</tag>
+        <tag>Jetson</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mazur 2022 - Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding 논문 리뷰</title>
+    <url>/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/</url>
+    <content><![CDATA[<h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>3D scene 속 실시간 semantic segmentation을 하는 방법을 제안합니다. Pre-trained 2D image feature extractor (여기서는 EfficientNet과 DINO)와 iMAP과 비슷한 SLAM 백엔드 시스템을 이용해서 정보를 퓨전시킵니다. 퓨전을 하는 방법은 latent volumetric rendering 테크닉을 사용합니다. 이 방법을 사용함으로써 EfficientNet 및 DINO의 feature-map을 퓨전해서 3D 공간에 고정시킬 수 있습니다.</p>
+<p>The system is particularly effective for dynamic open set semantic segmentation. In this context, dynamic open set semantic segmentation refers to the ability to identify and group objects of varying appearance and geometry, given a semantic class, with minimal user input. This is a challenging problem in the field of computer vision and the authors’ approach presents a promising solution.</p>
+<p>The introduction also provides a brief overview of related work in the field. This includes SemanticFusion, Semantic NeRF, Distilled Feature Fields (DFF), and Neural Feature Fusion Fields (N3F). Each of these methods has its own strengths and weaknesses, but the authors argue that their proposed method offers several advantages over these existing approaches.</p>
+<p>In particular, the authors highlight that their method is capable of handling dynamic scenes, which is a significant challenge in the field of semantic segmentation. Furthermore, their method is designed to be efficient, which is a critical requirement for real-time applications.</p>
+<p>Overall, the introduction sets the stage for the rest of the paper, which delves into the details of the proposed method, provides experimental results demonstrating its effectiveness, and discusses potential future directions for this line of research.</p>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>논문 리뷰</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>Visual-SLAM</tag>
+        <tag>Spatial AI</tag>
+        <tag>Semantic SLAM</tag>
+        <tag>NeRF</tag>
+        <tag>Open-set detection</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CVPR 2023 학회에서 눈여겨볼 SLAM 관련 튜토리얼/워크샵</title>
+    <url>/20230618-cvpr2023-tutorials-workshops/</url>
+    <content><![CDATA[<h1 id="Tutorials"><a href="#Tutorials" class="headerlink" title="Tutorials"></a>Tutorials</h1><h2 id="SLAM-focus"><a href="#SLAM-focus" class="headerlink" title="SLAM-focus"></a>SLAM-focus</h2><ul>
+<li><strong>Large-Scale Visual Localization</strong><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvbHN2bDIwMjMvaG9tZQ==">https://sites.google.com/view/lsvl2023/home<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Hands-on Egocentric Research with Project Aria from Meta<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hcmlhdHV0b3JpYWwyMDIzLmdpdGh1Yi5pby8=">https://ariatutorial2023.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Rolling Shutter Camera: Modeling, Optimization, Learning, and Hardware<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9yc3R1dG9yaWFsLmdpdGh1Yi5pby8=">https://rstutorial.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Automatic 3D modeling of indoor structures from panoramic imagery<ul>
+<li><span class="exturl" data-url="aHR0cDovL3ZpYy5jcnM0Lml0L3ZpYy9jdnByMjAyMy10dXRvcmlhbC1wYW5vLw==">http://vic.crs4.it/vic/cvpr2023-tutorial-pano/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>A Comprehensive Tour and Recent Advancements toward Real-world Visual Geo-Localization<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3JpLmNvbS9jb21wdXRlci12aXNpb24vY3Zwci0yMDIzLWEtY29tcHJlaGVuc2l2ZS10b3VyLWFuZC1yZWNlbnQtYWR2YW5jZW1lbnRzLXRvd2FyZC1yZWFsLXdvcmxkLXZpc3VhbC1nZW8tbG9jYWxpemF0aW9uLw==">https://www.sri.com/computer-vision/cvpr-2023-a-comprehensive-tour-and-recent-advancements-toward-real-world-visual-geo-localization/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="Towards-Deep-Learning…"><a href="#Towards-Deep-Learning…" class="headerlink" title="Towards Deep Learning…"></a>Towards Deep Learning…</h2><ul>
+<li>Vision Transformer: More is different</li>
+<li>Efficient Neural Networks: From Algorithm Design to Practical Mobile Deployment<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zbmFwLXJlc2VhcmNoLmdpdGh1Yi5pby9lZmZpY2llbnQtbm4tdHV0b3JpYWwv">https://snap-research.github.io/efficient-nn-tutorial/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>All Things ViTs: Understanding and Interpreting Attention in Vision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9hbGwtdGhpbmdzLXZpdHMuZ2l0aHViLmlvL2F0di8=">https://all-things-vits.github.io/atv/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Boosting Computer Vision Research with OpenMMLab and OpenDataLab<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVubW1sYWIuY29tL2NvbW11bml0eS9jdnByMjAyMy10dXRvcmlhbA==">https://openmmlab.com/community/cvpr2023-tutorial<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Denoising Diffusion Models: A Generative Learning Big Bang<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jdnByMjAyMy10dXRvcmlhbC1kaWZmdXNpb24tbW9kZWxzLmdpdGh1Yi5pby8=">https://cvpr2023-tutorial-diffusion-models.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Recent Advances in Vision Foundation Models<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly92bHAtdHV0b3JpYWwuZ2l0aHViLmlvLw==">https://vlp-tutorial.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>All you need to know about self-driving<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jdnByMjAyMy53YWFiaS5haS8=">https://cvpr2023.waabi.ai/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Prompting in Vision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wcm9tcHRpbmctaW4tdmlzaW9uLmdpdGh1Yi5pby8=">https://prompting-in-vision.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Full-Stack, GPU-based Acceleration of Deep Learning<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05WbGFicy9FZmZpY2llbnRETC8=">https://github.com/NVlabs/EfficientDL/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Multi-Objective Optimization for Deep Learning<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tdWx0aW9iamVjdGl2ZS1tbC5vcmcv">https://multiobjective-ml.org/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<p> </p>
+<hr>
+<h1 id="Workshops"><a href="#Workshops" class="headerlink" title="Workshops"></a>Workshops</h1><h2 id="SLAM-focus-1"><a href="#SLAM-focus-1" class="headerlink" title="SLAM-focus"></a>SLAM-focus</h2><ul>
+<li>6th International Workshop on Visual Odometry and Computer Vision Applications Based on Location Clues<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvdm9jdmFsYzIwMjMvaG9tZQ==">https://sites.google.com/view/vocvalc2023/home<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Image Matching: Local Features and Beyond<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9pbWFnZS1tYXRjaGluZy13b3Jrc2hvcC5naXRodWIuaW8v">https://image-matching-workshop.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Photogrammetric Computer Vision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9waG90b2dyYW1tZXRyaWMtY3Ytd29ya3Nob3AuZ2l0aHViLmlvLw==">https://photogrammetric-cv-workshop.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>DynaVis: The 4th International Workshop on Dynamic Scene Reconstruction<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9keW5hdmlzLmdpdGh1Yi5pby8yMDIzLw==">https://dynavis.github.io/2023/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+<h2 id="Deep-Learning"><a href="#Deep-Learning" class="headerlink" title="Deep Learning"></a>Deep Learning</h2><ul>
+<li>The 2nd International Workshop on Transformers for Vision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvdDR2LWN2cHIyMw==">https://sites.google.com/view/t4v-cvpr23<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Synthetic Data for Autonomous Systems (SDAS)<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvc2RhczIwMjMv">https://sites.google.com/view/sdas2023/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>The Second Workshop on 3D Vision and Robotics<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvY3ZwcjIwMjMtM2QtdmlzaW9uLXJvYm90aWNz">https://sites.google.com/view/cvpr2023-3d-vision-robotics<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>OmniLabel: Infinite label spaces for semantic understanding via natural language<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvb21uaWxhYmVsLXdvcmtzaG9wLWN2cHIyMw==">https://sites.google.com/view/omnilabel-workshop-cvpr23<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>XRNeRF: Advances in NeRF for the Metaverse<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcveHJuZXJmLw==">https://sites.google.com/view/xrnerf/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>2nd Monocular Depth Estimation Challenge<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9qc3Blbm1hci5naXRodWIuaW8vTURFQy8=">https://jspenmar.github.io/MDEC/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>2nd Workshop on Tracking and Its Many Guises: Tracking Any Object in Open-World<ul>
+<li><span class="exturl" data-url="aHR0cDovL3Rhb2RhdGFzZXQub3JnL3dvcmtzaG9wL2N2cHIyMy8=">http://taodataset.org/workshop/cvpr23/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>The 4th CVPR Workshop on 3D Scene Understanding for Vision, Graphics, and Robotics<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zY2VuZS11bmRlcnN0YW5kaW5nLmNvbS8=">https://scene-understanding.com/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Visual Perception via Learning in an Open World<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly92cGxvdy5naXRodWIuaW8vdnBsb3dfM3JkLmh0bWw=">https://vplow.github.io/vplow_3rd.html<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Computer Vision for Mixed Reality<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jdjRtci5naXRodWIuaW8v">https://cv4mr.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Workshop on End-to-end Autonomous Driving<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9vcGVuZHJpdmVsYWIuY29tL2UyZWFkL2N2cHIyMy5odG1s">https://opendrivelab.com/e2ead/cvpr23.html<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>6th Multi-modal Learning and Applications Workshop (MULA)<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9tdWxhLXdvcmtzaG9wLmdpdGh1Yi5pby8=">https://mula-workshop.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Workshop on Autonomous Driving (WAD)<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9jdnByMjAyMy53YWQudmlzaW9uLw==">https://cvpr2023.wad.vision/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>End-to-End Autonomous Driving: Perception, Prediction, Planning and Simulation<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lMmVhZC5naXRodWIuaW8vMjAyMy5odG1s">https://e2ead.github.io/2023.html<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>1st workshop on Capturing, Interpreting &amp; Visualizing Indoor Living Spaces<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvY3ZwcmNpdmlsczIwMjM=">https://sites.google.com/view/cvprcivils2023<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Vision-Centric Autonomous Driving (VCAD)<ul>
+<li><span class="exturl" data-url="aHR0cDovL3ZjYWQuc2l0ZS8=">http://vcad.site/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>3DMV: Learning 3D with Multi-View Supervision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly8zZG12MjAyMy5naXRodWIuaW8v">https://3dmv2023.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>EMBEDDED VISION WORKSHOP 2023<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbWJlZGRlZHZpc2lvbndvcmtzaG9wLndvcmRwcmVzcy5jb20v">https://embeddedvisionworkshop.wordpress.com/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Joint 3rd Ego4D and 11th EPIC Workshop on Egocentric Vision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvZWdvNGQtZXBpYy1jdnByMjAyMy13b3Jrc2hvcC8=">https://sites.google.com/view/ego4d-epic-cvpr2023-workshop/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Vision for All Seasons: Adverse Weather and Lighting Conditions<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly92aXNpb240YWxsc2Vhc29uLm5ldC8=">https://vision4allseason.net/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>4th Embodied AI Workshop<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9lbWJvZGllZC1haS5vcmcv">https://embodied-ai.org/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>Visual Pre-training for Robotics<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly92aXNwci13b3Jrc2hvcC5naXRodWIuaW8v">https://vispr-workshop.github.io/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>The 4th Workshop on Omnidirectional Computer Vision<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9zaXRlcy5nb29nbGUuY29tL3ZpZXcvb21uaWN2MjAyMw==">https://sites.google.com/view/omnicv2023<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+<li>5th ScanNet Indoor Scene Understanding Challenge<ul>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5zY2FuLW5ldC5vcmcvY3ZwcjIwMjN3b3Jrc2hvcC8=">http://www.scan-net.org/cvpr2023workshop/<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>논문 리뷰</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>Visual-SLAM</tag>
+        <tag>Spatial AI</tag>
+        <tag>Semantic SLAM</tag>
+        <tag>CVPR</tag>
+        <tag>NeRF</tag>
+        <tag>Multi-modal</tag>
       </tags>
   </entry>
 </search>
