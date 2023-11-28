@@ -27015,4 +27015,259 @@ Domain Calibration via Robust SLAM </summary>
         <tag>LiDAR SLAM</tag>
       </tags>
   </entry>
+  <entry>
+    <title>100 SLAM-related interview questions</title>
+    <url>/20231128-slam-interview-questions-100-eng/</url>
+    <content><![CDATA[<blockquote>
+<p>There are 4 sections - <a href="#general">General</a>, <a href="#lidar-slam">LiDAR SLAM</a>, <a href="#visual-slam">Visual SLAM</a>, <a href="#system-design">System design</a>, <a href="#coding-interview-questions-live--implementation">Coding interview questions (Live / implementation)</a>. Each section has 10-25 questions - there many be a number of follow-up questions or questions with different approaches. The questions range from beginner to expert level, though not in any specific order.</p>
+</blockquote>
+<h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><ol>
+<li>What are the different ways to represent rotations in 3D space?<ul>
+<li>Discuss the differences between the SO(3) matrix, Quaternion, Axis-angle, and Euler angle representations.</li>
+<li>What problems does gimbal lock pose in the expression of 3D rotations?</li>
+<li>What mathematical constraints are applicable to SO(3) matrices?</li>
+</ul>
+</li>
+<li>Describe the structure of the SE(3) matrix.<ul>
+<li>What is the significance of the bottom row ([0,0,0,1]) in the SE(3) matrix?</li>
+</ul>
+</li>
+<li>What sensors are suitable for SLAM (Simultaneous Localization and Mapping)?<ul>
+<li>Compare tightly-coupled fusion and loosely-coupled fusion in this context.</li>
+</ul>
+</li>
+<li>Why is non-linear optimization used in SLAM?<ul>
+<li>Where do we encounter non-linearity in Visual-SLAM?</li>
+<li>Where is non-linearity found in LiDAR SLAM?</li>
+</ul>
+</li>
+<li>What optimization methods are applicable for non-linear optimization in SLAM?<ul>
+<li>Compare gradient descent, Newton-Raphson, Gauss-Newton, and Levenberg-Marquardt methods.</li>
+<li>What is the trust-region method?</li>
+</ul>
+</li>
+<li>What is loop closure and how is it achieved in SLAM?</li>
+<li>Define and differentiate the motion model and observation model in SLAM.</li>
+<li>What is RANSAC?</li>
+<li>Explain the concept of a robust kernel (or M-estimator).</li>
+<li>Discuss the Kalman filter and particle filter.<ul>
+<li>Highlight the differences between the Kalman filter (KF) and the Extended Kalman filter (EKF).</li>
+</ul>
+</li>
+<li>Contrast filter-based SLAM with graph-based SLAM.</li>
+<li>Define the information matrix and covariance matrix in the context of SLAM.</li>
+<li>What is the Schur complement?</li>
+<li>Compare LU, Cholesky, QR, SVD, and Eigenvalue decomposition.<ul>
+<li>Which methods are commonly used in SLAM and why?</li>
+</ul>
+</li>
+<li>Why is least squares optimization favored?<ul>
+<li>Explain how Maximum-a-posteriori (MAP) and Maximum Likelihood Estimation (MLE) are applied in SLAM.</li>
+</ul>
+</li>
+<li>What representations are used to describe a map or structure in SLAM?<ul>
+<li>Which map representation would you choose for path planning and why?</li>
+<li>Distinguish between sparse mapping and dense mapping.</li>
+</ul>
+</li>
+<li>Explain the concepts of Lie groups and Lie algebra.<ul>
+<li>What are the Exp/Log maps?</li>
+</ul>
+</li>
+<li>How can multiple maps be merged into a single map in SLAM?</li>
+<li>What is Inverse Depth Parameterization?</li>
+<li>Describe pose graph optimization in SLAM.</li>
+<li>Define drift in SLAM.<ul>
+<li>What is scale drift?</li>
+</ul>
+</li>
+<li>How can computational costs be reduced in SLAM?<ul>
+<li>What is keyframe-based optimization?</li>
+<li>Why is a Look-Up Table (LUT) considered an effective strategy?</li>
+</ul>
+</li>
+<li>What is relocalization in SLAM?<ul>
+<li>How does relocalization differ from loop closure detection?</li>
+</ul>
+</li>
+<li>What does marginalization entail in the context of SLAM?</li>
+<li>Explain the concept of IMU pre-integration in SLAM.</li>
+</ol>
+<p> </p>
+<h2 id="LiDAR-SLAM"><a href="#LiDAR-SLAM" class="headerlink" title="LiDAR SLAM"></a>LiDAR SLAM</h2><ol start="26">
+<li>Explain how the Iterative Closest Point (ICP) algorithm functions.<ul>
+<li>Which derivative work of the ICP algorithm do you prefer and why?</li>
+</ul>
+</li>
+<li>Discuss the Point-to-Point and Point-to-Plane metrics in the context of the ICP algorithm.</li>
+<li>If an ICP algorithm fails to register two sets of point clouds, what could be the possible reasons?</li>
+<li>Explain the concept of a K-D tree.<ul>
+<li>How is the K-D tree utilized in processing LiDAR point clouds?</li>
+</ul>
+</li>
+<li>Describe the Octree data structure.</li>
+<li>In which scenarios would you use a K-D tree over an Octree for LiDAR point cloud processing, and vice versa?</li>
+<li>What is point cloud downsampling and why is it used?<ul>
+<li>Describe the voxelization process.</li>
+<li>What are the consequences of excessive downsampling?</li>
+</ul>
+</li>
+<li>How is ground segmentation performed in point clouds?<ul>
+<li>What is the mathematical formulation of a 3D plane?</li>
+</ul>
+</li>
+<li>What is a passthrough filter?</li>
+<li>What preprocessing techniques are available for removing outliers from LiDAR point clouds?<ul>
+<li>How does the Statistical Outlier Removal (SOR) filter work?</li>
+</ul>
+</li>
+<li>Why is initial alignment crucial in ICP?</li>
+<li>Besides x, y, and z coordinates, what additional information can be embedded in a point cloud?</li>
+<li>What advantages are gained by integrating LiDAR with an IMU?</li>
+<li>How is loop detection performed using LiDAR point clouds?</li>
+<li>If a loop is detected, how should loop closure optimization be carried out?<ul>
+<li>How does loop closure in LiDAR SLAM differ from the bundle-adjustment technique in Visual SLAM?</li>
+</ul>
+</li>
+<li>Why does z-drift often occur in LiDAR SLAM optimization using the ground plane?</li>
+<li>What is LiDAR de-skewing?</li>
+<li>What challenges arise in LiDAR SLAM when there are moving objects in the vicinity?</li>
+<li>What is the Multi-path problem in LiDAR?</li>
+<li>In what types of environments does LiDAR typically underperform?</li>
+<li>What are the different types of LiDAR?</li>
+<li>What are various methods for combining data from a camera and LiDAR?</li>
+<li>Contrast a point cloud, mesh, and surfel.</li>
+<li>What is a Fast Point Feature Histogram (FPFH) descriptor?</li>
+<li>What methods are available for detecting changes in a point cloud</li>
+</ol>
+<p> </p>
+<h2 id="Visual-SLAM"><a href="#Visual-SLAM" class="headerlink" title="Visual SLAM"></a>Visual SLAM</h2><ol start="51">
+<li>Explain the process of image projection.<ul>
+<li>What are intrinsic and extrinsic matrices?</li>
+<li>Which formula is used to estimate depth from a single-view image?</li>
+</ul>
+</li>
+<li>What does camera calibration entail and what information is gained from it?<ul>
+<li>Provide the formulas for the K matrix and the Distortion coefficient.</li>
+</ul>
+</li>
+<li>Describe the characteristics of Monocular, Stereo, and RGB-D SLAM, along with their respective advantages and disadvantages.<ul>
+<li>How is the depth map generated in RGB-D?</li>
+<li>How is the depth map generated in Stereo?</li>
+<li>Explain the concept of stereo disparity.</li>
+<li>Is there any way to restore scale in monocular VSLAM?</li>
+</ul>
+</li>
+<li>Explain bundle adjustment.<ul>
+<li>What are the differences between local and global bundle adjustments?</li>
+</ul>
+</li>
+<li>What are the Essential and Fundamental matrices?<ul>
+<li>Write down the formulas for the Essential and Fundamental matrices.</li>
+<li>How many degrees of freedom do the Essential and Fundamental matrices have?</li>
+<li>What is the 5/7/8-point algorithm?</li>
+</ul>
+</li>
+<li>What is the Homography matrix?</li>
+<li>Describe the camera models you are familiar with.</li>
+<li>Explain the process of local feature matching.<ul>
+<li>What are the differences between a keypoint and a descriptor?</li>
+<li>How does a feature in deep learning differ from a feature in SLAM?</li>
+<li>What strategies are effective for accurate feature matching?</li>
+</ul>
+</li>
+<li>Explain how local feature tracking is performed.<ul>
+<li>What can serve as a motion model?</li>
+<li>What methods can be used for optical flow?</li>
+<li>Describe template tracking.</li>
+<li>How does optical flow differ from direct tracking?</li>
+</ul>
+</li>
+<li>Explain the features and differences between PTAM, ORB-SLAM, and SVO.</li>
+<li>What are the differences between Visual Odometry, Visual-SLAM, and Structure-from-Motion (SfM)?</li>
+<li>Why isn’t SIFT used in real-time VSLAM?<ul>
+<li>What are some alternatives to SIFT?</li>
+<li>What are the benefits of using deep learning-based local feature detection?</li>
+</ul>
+</li>
+<li>What is reprojection error?<ul>
+<li>What is photometric error?</li>
+</ul>
+</li>
+<li>What is the Perspective-n-Point (PnP) problem?<ul>
+<li>How do you determine the camera’s pose when there is a 2D-3D correspondence?</li>
+</ul>
+</li>
+<li>What are the differences between Feature-based VSLAM and Direct VSLAM?</li>
+<li>What methods are effective in reducing blur in an image?</li>
+<li>What is a co-visibility graph?</li>
+<li>How is loop closure detection performed?<ul>
+<li>Describe the Bag-of-Visual-Words and VLADs.</li>
+<li>How is a Bag-of-Visual-Words created?</li>
+<li>Explain TF-IDF.</li>
+</ul>
+</li>
+<li>What distinguishes a floating-point descriptor from a binary descriptor?<ul>
+<li>How can the distance between feature descriptors be calculated?</li>
+</ul>
+</li>
+<li>What defines a good local feature?<ul>
+<li>What is meant by invariance?</li>
+</ul>
+</li>
+<li>How is image patch similarity determined?<ul>
+<li>Compare SSD, SAD, and NCC.</li>
+</ul>
+</li>
+<li>Explain Direct Linear Transform (DLT).</li>
+<li>Describe the Image Pyramid.</li>
+<li>Outline the methods for line/edge extraction.</li>
+<li>Explain Triangulation.</li>
+</ol>
+<p> </p>
+<h2 id="System-design"><a href="#System-design" class="headerlink" title="System design"></a>System design</h2><ol start="76">
+<li>You have a mobile robot system with four cameras mounted on the front, back, and sides. Design a system that can use it for indoor mapping, localization, and path planning.</li>
+<li>Design a kiosk robot that can be used in an amusement park.</li>
+<li>Design a mapping/positioning system for parking in a garage (common in the US and Europe).</li>
+<li>Design a mapping/localization system for a parking garage.</li>
+<li>Design an augmented reality device for use on a moving Ferris wheel.</li>
+<li>Design an augmented reality device for a crowded subway station.</li>
+<li>Design a robust positioning system for an unmanned forklift to be used in a logistics facility. There are multiple forklifts moving around, and people are present.</li>
+<li>Design a SLAM system for a mobile robot to be used in a factory. There is constant lighting, but the floor is coated and highly reflective, and the factory equipment is made of metal and has few visual features and is highly reflective.</li>
+<li>You have 10 TB of real-world data. What development pipeline would you create to make SLAM work in as many environments as possible?</li>
+<li>Design a crowdsourced, automated HD-Map creation system for autonomous driving.</li>
+</ol>
+<p> </p>
+<h2 id="Coding-interview-questions-Live-implementation"><a href="#Coding-interview-questions-Live-implementation" class="headerlink" title="Coding interview questions (Live / implementation)"></a>Coding interview questions (Live / implementation)</h2><ol start="86">
+<li>Implement an image stitcher to create a panorama image from multiple consecutive images.</li>
+<li>Implement LiDAR SLAM using G-ICP based odometry. Loop closure should be implemented.</li>
+<li>Implement FAST keypoint detector.</li>
+<li>Implement an algorithm to find the camera pose, given 2D-3D correspondence data.</li>
+<li>Implement the PROSAC framework.</li>
+<li>Implement the ICP algorithm.</li>
+<li>Implement a brute-force matcher given a set of 2 pairs of feature descriptors.</li>
+<li>Implement a Vector / Matrix container. Basic operators should work (e.g. matrix-matrix addition, matrix-matrix multiplication, matrix-vector multiplication).</li>
+<li>Implement the A* algorithm</li>
+<li>Implement a fast matrix multiplication algorithm.</li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9WYlZRSlJLWHhCQT9zaT16ak1WbEgza1o2YUdUdGk3">Two Sum problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS91MjAyemdNN0Zxaz9zaT1RSTNvWmI2STlCWHMyWDl3">Maximum subarray sum problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS82cDdtZktvcGZMWT9zaT0yZHlmWjFxNFVpM1FVVUxz">Product of array except self problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9Za2FjbklPdDJqTT9zaT1QT1drYW1ZVExRbU5DLUpY">Subarray sum equals k problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9pMXUyQ2huVXZaTT9zaT1aZ3VPOElpUERfaWNBeHZ6">Longest common sequence problem<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>50가지 CV/SLAM 기술면접 질문들</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>Visual-SLAM</tag>
+        <tag>Interview</tag>
+        <tag>Questions</tag>
+        <tag>Spatial AI</tag>
+        <tag>LiDAR SLAM</tag>
+      </tags>
+  </entry>
 </search>
