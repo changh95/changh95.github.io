@@ -26760,4 +26760,259 @@ Domain Calibration via Robust SLAM </summary>
         <tag>Venture Captial</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SLAM 기술면접 질문 100선</title>
+    <url>/20231127-100-slam-interview-questions/</url>
+    <content><![CDATA[<blockquote>
+<p>4개의 분야로 나눠져있습니다 - <a href="#general">General</a>, <a href="#lidar-slam">LiDAR SLAM</a>, <a href="#visual-slam">Visual SLAM</a>, <a href="#system-design">System design</a>, <a href="#coding-interview-questions-live--implementation">Coding interview questions (Live / implementation)</a>. 각각의 분야는 10-25개의 메인 질문으로 이뤄져있으며, 후속 질문 또는 비슷하지만 다른 형태의 질문이 있을 수 있습니다. 난이도는 무작위입니다.</p>
+</blockquote>
+<h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><ol>
+<li>3D Rotation을 표현하는데에는 어떤 방법들이 있나요?<ul>
+<li>SO(3) matrix, Quaternion, Axis-angle, Euler angle의 차이점을 설명해주세요</li>
+<li>Gimbal lock은 어떤 문제를 일으키나요? </li>
+<li>SO(3) 매트릭스의 수학적 전제 조건이 어떻게 되나요?</li>
+</ul>
+</li>
+<li>SE(3) 매트릭스의 구조에 대해 설명해주세요.<ul>
+<li>SE(3) 매트릭스에서 가장 아랫단 row인 [0,0,0,1]은 무슨 뜻을 가지나요?</li>
+</ul>
+</li>
+<li><a href="https://changh95.github.io/20210228-AD-sensors/">SLAM에서 쓸 수 있는 센서에는 어떤게 있을까요?</a><ul>
+<li>여러개의 센서를 함께 사용해서 SLAM 추정을 하려면 어떤 방법들이 있을까요?</li>
+<li><a href="https://changh95.github.io/20210816-tightly-loosely-coupled">Tightly-coupled 방식과 loosely-coupled 방식의 차이를 설명해주세요.</a></li>
+</ul>
+</li>
+<li>SLAM에서 비선형 최적화는 왜 하나요?<ul>
+<li>Visual-SLAM에서 비선형 모델을 가진 부분에 어떤 것들이 있나요?</li>
+<li>LiDAR SLAM에서 비선형 모델을 가진 부분에 어떤 것들이 있나요?</li>
+</ul>
+</li>
+<li>비선형 최적화 방법에는 어떤 것들이 있나요?<ul>
+<li><a href="https://changh95.github.io/20210314-nonlinear-optimisation/">Gradient descent 방식, Newton-Raphson 방식, Gauss-Newton 방식, Levenberg-Marquardt 방식 최적화 기법은 어떻게 다른가요?</a></li>
+<li>Trust-region method는 어떤 것인가요?</li>
+</ul>
+</li>
+<li>Loop closure가 무엇인가요? 어떻게 하는건가요?</li>
+<li>Motion model과 observation model이 무엇인가요?</li>
+<li><a href="https://changh95.github.io/20210313-ransac/">RANSAC에 대해 설명해주세요.</a></li>
+<li>Robust kernel (또는 M-estimator)에 대해 설명해주세요.</li>
+<li>Kalman filter와 Particle filter에 대해서 설명해주세요.<ul>
+<li>Kalman filter와 Extended Kalman filter의 차이는 무엇인가요?</li>
+</ul>
+</li>
+<li>Filter-based SLAM과 Graph-based SLAM의 차이를 설명해주세요.</li>
+<li>Information matrix, 또는 covariance matrix란 무엇일까요?</li>
+<li>Schur complement는 무엇일까요?</li>
+<li>LU, Cholesky, QR, SVD, Eigenvalue decomposition의 차이가 무엇인가요?<ul>
+<li>SLAM에서는 어떤 방식을 자주 사용하고, 어떤 상황에서 이를 사용하나요?</li>
+</ul>
+</li>
+<li>Least squares optimization을 왜 할까요?<ul>
+<li>Maximum-a-posteriori (MAP)와 Maximum likelihood (MLE) 문제가 SLAM에 어떻게 적용되는지 설명해주세요.</li>
+</ul>
+</li>
+<li>SLAM을 수행할 때 map의 표현 방식에는 어떤게 있을까요?<ul>
+<li>SLAM으로 생성한 지도를 기반으로 Planning을 수행하려면 어떤 형태의 지도를 고르실래요?  </li>
+<li>Sparse mapping과 Dense mapping의 차이와 장단점을 설명하세요.</li>
+</ul>
+</li>
+<li>Lie group과 lie algebra를 설명해주세요.<ul>
+<li>Exp / Log map이 무엇인가요?</li>
+</ul>
+</li>
+<li>여러개의 map을 하나로 합치려면 어떻게 해야할까요?</li>
+<li>Inverse depth parameterization이 무엇인가요?</li>
+<li>Pose graph optimization에 대해 설명해주세요.</li>
+<li>Drift란 무엇인가요?<ul>
+<li>Scale drift는 무엇인가요?</li>
+</ul>
+</li>
+<li>SLAM에서 연산량을 줄이는 방법에는 어떤게 있을까요?<ul>
+<li>Keyframe 방식이란 무엇일까요?</li>
+</ul>
+</li>
+<li>Relocalization이란 무엇인가요?<ul>
+<li>Loop closure detection과 어떤 점이 다를까요?</li>
+</ul>
+</li>
+<li>Marginalization이 무엇인가요?</li>
+<li>IMU pre-integration이란 무엇인가요?</li>
+</ol>
+<p> </p>
+<h2 id="LiDAR-SLAM"><a href="#LiDAR-SLAM" class="headerlink" title="LiDAR SLAM"></a>LiDAR SLAM</h2><ol start="26">
+<li>ICP 알고리즘에 대해 설명해주세요.<ul>
+<li>ICP의 파생 알고리즘 중 어떤 걸 주로 사용하시나요?</li>
+</ul>
+</li>
+<li>Point-to-point metric과 point-to-plane metric 의 차이를 설명해주세요.</li>
+<li>2개의 포인트 클라우드를 정합하기 위해 ICP를 수행했지만 결과가 좋지 않았습니다. 여기에 어떤 이유들이 있을 수 있을까요?</li>
+<li>K-D tree에 대해 설명해주세요.<ul>
+<li>라이다 프로세싱에서 K-D tree를 어떤 방법으로 이용할 수 있을까요?</li>
+</ul>
+</li>
+<li>Octree에 대해 설명해주세요.</li>
+<li>어떤 상황에서 K-D tree를 사용하기 좋을까요? 반대로, 어떤 상황에서 Octree를 사용하기 좋을까요?</li>
+<li>Downsampling 이란 무엇이고, 왜 할까요?<ul>
+<li>Voxelization에 대해 설명해주세요.</li>
+<li>너무 많은 downsampling을 하면 어떤 일이 생길까요?</li>
+</ul>
+</li>
+<li>바닥면을 검출하는 방법에는 어떤 것이 있을까요?<ul>
+<li>Plane의 수식을 적어주세요.</li>
+</ul>
+</li>
+<li>Passthrough 필터란 무엇인가요?</li>
+<li>라이다 포인트 클라우드에서 아웃라이어를 제거하는 전처리 기법에는 어떤 것들이 있을까요?<ul>
+<li>Statistical outlier removal (SOR) 필터는 어떻게 동작하나요?</li>
+</ul>
+</li>
+<li>ICP를 수행할 때, initial alignment가 무슨 뜻이고 왜 중요할까요?</li>
+<li>포인트 클라우드에 x,y,z 정보 외로 어떤 정보를 담을 수 있을까요?</li>
+<li>LiDAR와 IMU를 함께 사용하면 어떤 점이 좋을까요?</li>
+<li>LiDAR point cloud로 loop detection을 하려면 어떤 방법들이 있을까요?</li>
+<li>Loop를 찾았습니다. 어떤 방식으로 최적화를 수행하나요?<ul>
+<li>Visual SLAM에서 이야기하는 Bundle adjustment와는 어떤 점들이 다르나요?</li>
+</ul>
+</li>
+<li>Ground plane을 사용해 최적화를 진행하는 LiDAR SLAM의 경우, z-drift가 자주 발생하기도 합니다. 왜 일까요?</li>
+<li>LiDAR De-skew가 무엇일까요?</li>
+<li>LiDAR SLAM을 수행하는 도중, 주변에 움직이는 객체가 있을 경우 어떤 현상이 발생하나요?</li>
+<li>Multi-path 문제가 무엇인가요?</li>
+<li>라이다가 잘 동작하지 않는 환경들에는 어떤 것들이 있을까요?</li>
+<li>라이다의 종류에는 어떤 것들이 있을까요?</li>
+<li>카메라의 정보와 라이다의 정보를 합치는데에는 어떤 방법이 있을까요?</li>
+<li>Point cloud, mesh, surfel은 어떻게 다를까요?</li>
+<li>Fast Point Feature Histogram (FPFH) descriptor가 무엇일까요?</li>
+<li>Point cloud에서의 변화를 감지하는 방법에는 어떤 것들이 있을까요?</li>
+</ol>
+<p> </p>
+<h2 id="Visual-SLAM"><a href="#Visual-SLAM" class="headerlink" title="Visual SLAM"></a>Visual SLAM</h2><ol start="51">
+<li><a href="https://changh95.github.io/20210222-image-projection/">Image projection 과정에 대해서 설명해주세요.</a><ul>
+<li>Intrisic matrix와 Extrinsic matrix가 무엇일까요?</li>
+<li>Single view 이미지에서 depth를 추정할 때 어떤 수식을 이용할까요?</li>
+</ul>
+</li>
+<li>카메라 캘리브레이션은 어떤 것이고, 수행 시 어떤 정보를 얻을 수 있나요?<ul>
+<li>K 매트릭스와 Distortion coefficient의 수식을 적어주세요.</li>
+</ul>
+</li>
+<li><a href="https://changh95.github.io/20210222-mono-stereo-rgbd/">Monocular / Stereo / RGB-D SLAM의 특징을 설명해주세요. 각각 방식의 장점과 단점은 무엇인가요?</a><ul>
+<li>RGB-D 에서는 depth map을 어떻게 얻어낼까요?</li>
+<li>Stereo 에서는 depth map을 어떻게 얻어낼까요?</li>
+<li>Stereo disparity에 대해 설명해주세요.</li>
+<li>Monocular vslam을 할 때 scale을 어떻게 복원할 수 있을까요?</li>
+</ul>
+</li>
+<li><a href="https://changh95.github.io/20210313-ba/">Bundle adjustment에 대해서 설명해주세요</a><ul>
+<li>Local bundle adjustment와 global bundle adjustment의 차이가 무엇일까요?</li>
+</ul>
+</li>
+<li>Essential matrix와 Fundamental matrix가 무엇인가요?<ul>
+<li>Essential / Fundamental matrix의 수식을 적어주세요</li>
+<li>Essential / Fundamental matrix의 degrees of freedom 은 몇개인가요?</li>
+<li>5/7/8 point algorithm은 어떤건가요?</li>
+</ul>
+</li>
+<li>Homography matrix가 무엇인가요?</li>
+<li>알고계시는 카메라 모델들에 대해 설명해주세요.</li>
+<li>Local feature matching의 과정에 대해 설명해주세요.<ul>
+<li>Keypoint와 descriptor는 어떻게 다른가요?</li>
+<li>딥러닝에서 말하는 feature와 SLAM에서 말하는 feature는 어떤게 다른가요?</li>
+<li>정확한 feature matching을 만드는 전략에는 어떤 방법들이 있을까요?</li>
+</ul>
+</li>
+<li>Local feature tracking을 하는 방법에 대해 설명해주세요.<ul>
+<li>Motion model로 어떤걸 사용할 수 있을까요?</li>
+<li>Optical flow 방식 중에 어떤걸 사용할 수 있을까요?</li>
+<li>Template tracking에 대해 설명해주세요.</li>
+<li>Optical flow와 direct tracking은 어떤 차이가 있나요?</li>
+</ul>
+</li>
+<li>PTAM, ORB-SLAM, SVO의 특징과 차이점에 대해 설명해주세요.</li>
+<li>Visual odometry, Visual-SLAM, Structure-from-Motion (SfM)의 차이는 무엇인가요?</li>
+<li>실시간 VSLAM에서 SIFT를 쓰지 않는 이유는 무엇인가요?<ul>
+<li>SIFT의 대안으로 어떤 것들이 있을까요?</li>
+<li>딥러닝 기반 local feature detection을 사용할 경우, 어떤 장점이 있을까요?</li>
+</ul>
+</li>
+<li>Reprojection error란 무엇인가요?<ul>
+<li>Photometric error란 무엇인가요?</li>
+</ul>
+</li>
+<li>Perspective-n-Point (PnP) 문제가 무엇인가요?<ul>
+<li>2D-3D correspondence가 있을 때, 어떻게 카메라의 pose를 구할 수 있을까요?</li>
+</ul>
+</li>
+<li>Feature-based VSLAM과 Direct VSLAM의 차이가 어떻게 되나요?</li>
+<li>이미지 속 블러를 줄이는 방법엔 어떤 것들이 있을까요?</li>
+<li>Covisibility graph란 무엇인가요?</li>
+<li>Loop closure detection을 수행할 때 어떻게 하나요?<ul>
+<li>Bag-of-visual-words와 VLAD에 대해 설명해주세요.</li>
+<li>Bag-of-visual-words를 만드는 방법에 대해 설명해주세요.</li>
+<li>TF-IDF에 대해 설명해주세요.</li>
+</ul>
+</li>
+<li>Floating-point descriptor와 Binary descriptor는 무슨 차이가 있나요?<ul>
+<li>Feature descriptor distance는 어떤 방식으로 구할 수 있나요?</li>
+</ul>
+</li>
+<li>좋은 local feature란 무엇일까요?<ul>
+<li>Invariance란 무엇인가요?</li>
+</ul>
+</li>
+<li>이미지 patch similarity를 구하는 방법엔 어떤게 있나요?<ul>
+<li>SSD, SAD, NCC를 비교해주세요.</li>
+</ul>
+</li>
+<li>Direct linear transform (DLT)에 대해 설명해주세요.</li>
+<li>Image pyramid에 대해 설명해주세요.</li>
+<li>Line/edge 추출 방식들을 설명해주세요.</li>
+<li>Triangulation에 대해 설명해주세요.    </li>
+</ol>
+<p> </p>
+<h2 id="System-design"><a href="#System-design" class="headerlink" title="System design"></a>System design</h2><ol start="76">
+<li>4개의 카메라를 전후좌우 설치한 모바일 로봇 시스템이 있습니다. 이를 이용한 실내 맵핑/측위/경로계획이 가능한 시스템을 설계하세요.</li>
+<li>놀이동산에서 사용할 수 있는 키오스크 로봇을 설계하세요.</li>
+<li>(미국이나 유럽에서 자주 보이는) 차고에 주차 시 사용 가능한 맵핑/측위 시스템을 설계해보세요.</li>
+<li>주차장에서 사용가능한 맵핑/로컬라이제이션 시스템을 설계해보세요.</li>
+<li>움직이는 관람차에서 사용가능한 증강현실 디바이스를 설계해보세요.</li>
+<li>유동인구가 많은 지하철역에서 사용 가능한 증강현실 디바이스를 설계해보세요.</li>
+<li>물류센서에서 사용할 무인지게차에 탑재될 SLAM 시스템을 설계해보세요. 다수의 지게차가 돌아다니며, 사람도 함께 있습니다.</li>
+<li>공장에서 사용할 모바일 로봇에 탑재될 SLAM 시스템을 설계해보세요. 일정한 조명이 있지만, 코팅 바닥이라 반사가 잦고 공장 설비는 메탈 재질로 되어있어 비쥬얼 피쳐가 적으며 반사가 잦습니다.</li>
+<li>10TB의 리얼월드 데이터가 있습니다. 최대한 모든 환경에서 잘 동작하는 SLAM을 만들기 위해 어떤 개발 파이프라인을 만드실건가요?</li>
+<li>크라우드 소싱 기반 자동 HD-Map 제작 시스템을 설계해보세요.</li>
+</ol>
+<p> </p>
+<h2 id="Coding-interview-questions-Live-implementation"><a href="#Coding-interview-questions-Live-implementation" class="headerlink" title="Coding interview questions (Live / implementation)"></a>Coding interview questions (Live / implementation)</h2><ol start="86">
+<li>다수의 연속된 이미지로부터 panorama image를 만드는 image stitcher를 구현해보세요.</li>
+<li>G-ICP 기반의 odometry를 사용해 LiDAR SLAM을 구현하세요. Loop closure가 구현되어야합니다.</li>
+<li>FAST keypoint detector를 구현하세요.</li>
+<li>2D-3D correspondence 데이터가 주어졌을 때, camera pose를 구할 수 있는 알고리즘을 구현하세요.</li>
+<li>PROSAC 프레임워크를 구현해보세요.</li>
+<li>ICP 알고리즘을 구현해보세요.</li>
+<li>Feature descriptor의 set이 2쌍 주어졌을 때, brute-force matcher를 구현하세요.</li>
+<li>Vector / Matrix container를 구현해보세요. 기본적인 operator들이 동작해야합니다 (e.g. matrix-matrix addition, matrix-matrix multiplication, matrix-vector multiplication)</li>
+<li>A* 알고리즘을 구현해보세요.</li>
+<li>Matrix multiplication을 가장 빠르게 동작하도록 구현해보세요. </li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9WYlZRSlJLWHhCQT9zaT16ak1WbEgza1o2YUdUdGk3">Two Sum 문제<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS91MjAyemdNN0Zxaz9zaT1RSTNvWmI2STlCWHMyWDl3">Maximum subarray sum 문제<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS82cDdtZktvcGZMWT9zaT0yZHlmWjFxNFVpM1FVVUxz">Product of array except self 문제<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9Za2FjbklPdDJqTT9zaT1QT1drYW1ZVExRbU5DLUpY">Subarray sum equals k 문제<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9pMXUyQ2huVXZaTT9zaT1aZ3VPOElpUERfaWNBeHZ6">Longest common sequence 문제<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+]]></content>
+      <categories>
+        <category>1. Spatial AI</category>
+        <category>1.1 SLAM</category>
+        <category>50가지 CV/SLAM 기술면접 질문들</category>
+      </categories>
+      <tags>
+        <tag>SLAM</tag>
+        <tag>Visual-SLAM</tag>
+        <tag>Interview</tag>
+        <tag>Questions</tag>
+        <tag>Spatial AI</tag>
+        <tag>LiDAR SLAM</tag>
+      </tags>
+  </entry>
 </search>

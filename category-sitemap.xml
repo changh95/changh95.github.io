@@ -9,6 +9,27 @@
 
 
     <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/50%25EA%25B0%2580%25EC%25A7%2580-CV-SLAM-%25EA%25B8%25B0%25EC%2588%25A0%25EB%25A9%25B4%25EC%25A0%2591-%25EC%25A7%2588%25EB%25AC%25B8%25EB%2593%25A4/</loc>
+        <lastmod>2023-11-28T02:35:08.885Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
+        <lastmod>2023-11-28T02:35:08.885Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
+        <lastmod>2023-11-28T02:35:08.885Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/categories/3-Life/3-2-%25EC%25BB%25A4%25EB%25A6%25AC%25EC%2596%25B4/</loc>
         <lastmod>2023-09-15T09:04:40.543Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -24,20 +45,6 @@
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
-        <lastmod>2023-06-17T18:04:43.545Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
         <lastmod>2023-06-17T18:04:43.545Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -248,13 +255,6 @@
 
     <url>
         <loc>https://changh95.github.io/categories/3-Life/3-3-Blog/</loc>
-        <lastmod>2022-04-22T13:42:48.024Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/50%25EA%25B0%2580%25EC%25A7%2580-CV-SLAM-%25EA%25B8%25B0%25EC%2588%25A0%25EB%25A9%25B4%25EC%25A0%2591-%25EC%25A7%2588%25EB%25AC%25B8%25EB%2593%25A4/</loc>
         <lastmod>2022-04-22T13:42:48.024Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
