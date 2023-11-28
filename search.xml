@@ -27016,7 +27016,7 @@ Domain Calibration via Robust SLAM </summary>
       </tags>
   </entry>
   <entry>
-    <title>100 SLAM-related interview questions</title>
+    <title>100 SLAM-related technical interview questions</title>
     <url>/20231128-slam-interview-questions-100-eng/</url>
     <content><![CDATA[<blockquote>
 <p>There are 4 sections - <a href="#general">General</a>, <a href="#lidar-slam">LiDAR SLAM</a>, <a href="#visual-slam">Visual SLAM</a>, <a href="#system-design">System design</a>, <a href="#coding-interview-questions-live--implementation">Coding interview questions (Live / implementation)</a>. Each section has 10-25 questions - there many be a number of follow-up questions or questions with different approaches. The questions range from beginner to expert level, though not in any specific order.</p>
