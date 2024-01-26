@@ -27391,6 +27391,7 @@ Domain Calibration via Robust SLAM </summary>
 </ul>
 </li>
 </ul>
+<p>(거의 다 적었습니다!! 곧 나머지 내용 업로드하겠습니다)</p>
 ]]></content>
       <categories>
         <category>1. Spatial AI</category>
@@ -27569,6 +27570,63 @@ Domain Calibration via Robust SLAM </summary>
         <tag>LiDAR SLAM</tag>
         <tag>Papers</tag>
         <tag>Scholar Inbox</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex)</title>
+    <url>/20240126-latex-ocr/</url>
+    <content><![CDATA[<h1 id="배경"><a href="#배경" class="headerlink" title="배경"></a>배경</h1><p>Spatial AI를 하는 우리는 논문을 읽으면서 수식에 대한 기록을 남길 때가 많다. </p>
+<p>수식을 텍스트로 남기는건 정말 어렵기 때문에, 보통 <span class="exturl" data-url="aHR0cHM6Ly9rby53aWtpcGVkaWEub3JnL3dpa2kvTGFUZVg=">LaTeX<i class="fa fa-external-link-alt"></i></span> 렌더러가 동작하는 에디터를 사용해서 많이 저장한다 (e.g. Notion, Overleaf, 블로그에 mathjax 기능을 활성화).</p>
+<p>대학원을 거치면서 논문을 적어봤다면 간단한 LaTeX 문법은 알고 있겠지만, <strong>LaTeX 문법을 잘 알고 있다고해서 복잡하고 긴 수식을 순식간에 적어낼 수 있는 것은 아니다</strong>.</p>
+<p>예시를 들면, 아래 수식을 10초 안에 적어내는 사람은 없을거다.</p>
+<script type="math/tex; mode=display">\Delta\mathrm{R}_{i j}\stackrel{\cdot\cdot}{=}\mathrm{R}_{i}^{\top}\mathrm{R}_{j}=\prod_{k=i}^{j-1}\mathrm{Exp}\left(\left(\tilde{\omega}_{k}-{\bf{b}}_{k}^{g}-\eta_{k}^{g d}\right)\Delta t\right)</script><p> </p>
+<p>아마 수식을 좀 따보신 분들께서는 <span class="exturl" data-url="aHR0cHM6Ly9tYXRocGl4LmNvbQ==">MathPix<i class="fa fa-external-link-alt"></i></span> 라는 OCR 시스템을 사용해보셨을 것이다.</p>
+<p>사용하기 쉬운 GUI로 되어있어서 필자도 자주 사용했던 소프트웨어인데, 초창기에는 매일 50개씩 무료로 쓸 수 있던데에 비해 요즘에는 1달에 수식 10개정도만 변환해도 돈내라고 한다.</p>
+<p>매달 5달러를 내면 5000개까지 딸 수 있게 해준다는데… LaTeX OCR이 편하기는 해도 매달 5천개씩 따야하는 사람은 많이 없을 것이다.</p>
+<p> </p>
+<p>요즘 AI 기술도 굉장히 좋은데… 분명 누군가가 OCR 모델을 학습 잘 해놓고 무료로 풀지 않았을까 하는 생각에 찾아봤는데</p>
+<p>왠걸! pix2tex라는 아주 좋은 소프트웨어를 찾아냈다.</p>
+<blockquote>
+<p><strong>pix2tex를 이용하면 수식에 스크린샷을 한 후 2초안에 LaTeX 문법을 얻어낼 수 있다.</strong><br><strong> 무료로 사용할 수 있으며 횟수 제한도 없다.</strong></p>
+</blockquote>
+<p> </p>
+<p>이번 글에서는 완전 무료인 LaTeX OCR 소프트웨어 - pix2tex를 소개한다.</p>
+<img src="/20240126-latex-ocr/latex_ocr.png" class="" title="pix2tex">
+<p> </p>
+<hr>
+<h1 id="pix2tex"><a href="#pix2tex" class="headerlink" title="pix2tex"></a>pix2tex</h1><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x1a2FzLWJsZWNoZXIvTGFUZVgtT0NS">pix2tex<i class="fa fa-external-link-alt"></i></span>는 GitHub에 올라와있는 레포지토리에서 받을 수 있다.</p>
+<p>Ubuntu Linux에서는 GUI도 사용할 수 있다고 하는데, 나는 주로 문서 작업을 할 때 Mac을 사용하기 때문에 Mac 지원도 되야한다.</p>
+<p>다행히도 M1/M2도 된다고 한다 (실제로 돌려봤는데 상당히 빠르다).</p>
+<p>파이썬 3.7+ 이상이 설치되어있어야하는데, Spatial AI를 하는 분들은 다 있을 것이라고 본다.</p>
+<p>아래 커맨드로 간단하게 설치를 할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install <span class="string">"pix2tex[gui]"</span></span><br></pre></td></tr></table></figure>
+<p>설치 후 <code>pix2tex</code> 커맨드를 실행해보니, 모델을 다운로드 받는 것 같았다.</p>
+<p>모델은 ViT 모델을 기준으로 학습된거라고 한다.</p>
+<img src="/20240126-latex-ocr/run.png" class="" title="run">
+<p> </p>
+<p>모델 다운로드가 끝나면 자동으로 프로그램이 실행된다.</p>
+<p>어떻게 쓰는지 잘 모르겠을 때는 <code>h</code> 버튼을 눌러서 help를 볼 수 있다고 한다.</p>
+<p>사용 방법을 보니 Windows나 MacOS에서는 내가 분석하려는 수식에 대한 이미지를 클립보드에 넣어둔 상태에서 <code>Enter</code>를 누르면 된다고 한다.</p>
+<p>MacOS에서는 command + shift + 5 를 누르면 스크린샷 윈도우가 나타나고, 여기서 command + c를 누르면 클립보드에 이미지를 저장할 수 있다.</p>
+<p>저장후 엔터를 누르고 나니 결과가 나온다.</p>
+<img src="/20240126-latex-ocr/help.png" class="" title="pix2tex help">
+<p> </p>
+<p>pix2tex의 워크플로우를 보면 아래처럼 되겠다.</p>
+<ol>
+<li>논문에서 LaTeX로 변환하고 싶은 수식을 찾는다. 예시 논문으로 On-manifold IMU preintegration 논문을 가지고 왔다.</li>
+<li>수식에 대한 스크린샷을 따고, pix2tex에서 Enter를 누른다. LaTeX 수식이 나온다.</li>
+<li>내가 사용하는 LaTeX 렌더러에 작성한다. 사실 이 글의 초반에 작성한 ‘10초만에 못 적을 수식’은 pix2tex로 1초만에 적은 수식이다.</li>
+</ol>
+<img src="/20240126-latex-ocr/works.png" class="" title="it works">
+<p>pix2tex를 이용하면 OCR로 상당히 높은 정확도로 빠르게 수식을 LaTeX로 변환할 수 있다. </p>
+<p>해피 논문 라이프를 위한 필수 템이다.</p>
+]]></content>
+      <categories>
+        <category>2. Programming</category>
+      </categories>
+      <tags>
+        <tag>OCR</tag>
+        <tag>pix2tex</tag>
       </tags>
   </entry>
 </search>
