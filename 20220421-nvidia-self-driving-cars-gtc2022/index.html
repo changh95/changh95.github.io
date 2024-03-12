@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -41,9 +41,9 @@
 <meta property="article:published_time" content="2022-04-21T13:20:30.000Z">
 <meta property="article:modified_time" content="2023-06-09T06:12:02.467Z">
 <meta property="article:author" content="cv-learn">
-<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="Autonomous driving">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/1.png">
@@ -345,19 +345,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -499,7 +499,6 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/1.png" class="" title="overview"> 
-
 <p>&nbsp;</p>
 <hr>
 <h1 id="NVIDIA-Drive-데모"><a href="#NVIDIA-Drive-데모" class="headerlink" title="NVIDIA Drive 데모"></a>NVIDIA Drive 데모</h1><h2 id="지도-생성-NVIDIA-DRIVE-Map"><a href="#지도-생성-NVIDIA-DRIVE-Map" class="headerlink" title="지도 생성 (NVIDIA DRIVE Map)"></a>지도 생성 (NVIDIA DRIVE Map)</h2><blockquote>
@@ -507,7 +506,6 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p><span class="exturl" data-url="aHR0cHM6Ly93d3cubnZpZGlhLmNvbS9rby1rci9zZWxmLWRyaXZpbmctY2Fycy9oZC1tYXBwaW5nLw==">HD Mapping (DRIVE MAP) 알고리즘<i class="fa fa-external-link-alt"></i></span>을 기반으로 사전에 이미 따놓은 지도를 사용함. 이 지도는 NVIDIA가 인수한 DeepMap이라는 회사의 알고리즘과 기존의 NVIDIA가 만든 DRIVE Map 기술의 클라우드 인프라를 합친 것임.</p>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/2.gif" class="" title="deepmap"> 
-
 <p>&nbsp;</p>
 <h2 id="DRIVE-Concierge"><a href="#DRIVE-Concierge" class="headerlink" title="DRIVE Concierge"></a>DRIVE Concierge</h2><blockquote>
 <p>TLDR; 잘되는 대화형 AI. 시선인식. 멀티모달 디텍션. 자동주차. 서라운드뷰 모니터링.</p>
@@ -517,17 +515,14 @@ mjx-container[display="true"] + br {
 <p>운행을 시작하고 얼마 안되서 ‘DRIVE Pilot 실행해’라고 말함으로써 자율주행이 시작된다.</p>
 <p>주인공이 ‘친구에게 가고있다고 알려줄래?’ 라고 얘기하니, 아바타는 주인공의 친구에게 ‘12분 후 도착 예정’이라는 문자를 보낸다. </p>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/3.png" class="" title="avartar"> 
-
 <p>보행자, 공사 사인 등을 잘 피해간다. 움직이는 객체들에 대해서는 confidence map을 통해 검출 정확도도 표시한다. 자전거 도로도 잘 피해낸다.</p>
 <p>차는 특정 인물을 검출할 수 있는 능력이 있어, 주인공의 친구를 바로 알아챈다.</p>
 <p>주인공이 바깥을 바라보며 ‘저 빌딩이 뭐야?’라고 물어본다. 이 때, 자동차는 시선트랙킹을 통해 어떤 빌딩을 이야기하는지 추론한다. 주인공이 물어본 빌딩은 쇼를 하는 곳인데, 주인공은 ‘무슨 쇼를 하는지’ 물어보고 아바타가 답을해주자 ‘토요일 저녁에 티켓 2개 예약해줘’라고 한다.</p>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/4.png" class="" title="multimodal"> 
-
 <p>데모에서는 실제 세상과 Omniverse 기반의 DRIVE SIM의 세상이 거의 비슷하다고 이야기한다. DRIVE SIM에서도 NVIDIA 자동차 플랫폼인 Hyperion 8과 동일한 센서를 가지고 있다.</p>
 <p>좌측 이미지가 omniverse 시뮬레이션, 오른쪽이 실제이다.</p>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/5.png" class="" title="hyperion and omniverse"> 
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/6.png" class="" title="omniverse vs real"> 
-
 <p>도착하고나서, 주인공은 ‘차를 주차해줘’라고 얘기한다. 자동차는 Surround view를 이용해서 주변에 주차할 수 있는 곳을 자동으로 탐색해 주차에 성공한다.</p>
 <p>&nbsp;</p>
 <hr>
@@ -556,10 +551,8 @@ mjx-container[display="true"] + br {
 <p>현재 이를 위해 2가지 방법을 쓰고 있다고 한다.</p>
 <p>첫번째 방법은 NVIDIA DRIVE Map을 NVIDIA Omniverse로 로딩한 후, 실제 객체들의 위치에 가상 렌더링 객체를 올려 정확한 그래픽 요소를 채운다.</p>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/7.gif" class="" title="drive map to omniverse"> 
-
 <p>그 후, DRIVE Map에 있는 동적 객체들을 딥러닝으로 검출해서, 그 위치를 디지털 트윈으로 대체한다. 해당 객체들은 이제 직접 컨트롤 할 수 있게 되며, 이를 통해 다양한 상황들을 시뮬레이션으로 만들어낼 수 있다.</p>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/8.gif" class="" title="adversarial scenarios">
-
 <p>&nbsp; </p>
 <p>두번째 방법은, 운전 중에 녹화된 영상을 기반으로 3D reconstruction을 사용해서 지도를 만든다. 동적 객체들을 검출해서 정적 물체만 가득한 지도를 만들고, 빈 곳들은 neural reconstruction (i.e. NeRF)를 이용해서 채워넣는다. 또, NeRF를 사용해서 자동차의 시점을 원하는대로 돌려 새로운 데이터를 만들어낼 수 있다.</p>
 <img src="/20220421-nvidia-self-driving-cars-gtc2022/9.gif" class="" title="nerf"> 
@@ -591,9 +584,9 @@ mjx-container[display="true"] + br {
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/SLAM/" rel="tag"># SLAM</a>
               <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/Autonomous-driving/" rel="tag"># Autonomous driving</a>
           </div>
 
@@ -658,7 +651,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -467,123 +467,104 @@ mjx-container[display="true"] + br {
 <h2 id="이번-달-내가-관심가지는-논문들-키노트-랜드마크-급"><a href="#이번-달-내가-관심가지는-논문들-키노트-랜드마크-급" class="headerlink" title="이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)"></a>이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)</h2><details>
   <summary> Monocular Visual Odometry Using Template Matching and IMU </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MjcxOTA=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>Sebastian Scherer 교수님 랩실에서 나온 논문</li>
-<li>지상을 바라보는 카메라로 VO를 할 때 template matching을 통해 Ackerman steering model에 대한 pose 변환을 잴 수 있으나, 강건하지 못하다.<ul>
-<li>IMU를 사용해서 yaw 값을 치환해서 성능을 높인다.</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9427190)
+- Sebastian Scherer 교수님 랩실에서 나온 논문
+- 지상을 바라보는 카메라로 VO를 할 때 template matching을 통해 Ackerman steering model에 대한 pose 변환을 잴 수 있으나, 강건하지 못하다.
+  - IMU를 사용해서 yaw 값을 치환해서 성능을 높인다.
+
 </details>
 
 <details>
   <summary> Super Odometry: IMU-centric LiDAR-Visual-Inertial Estimator for Challenging Environments</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMTQ5MzgucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>Sebastian Scherer 교수님 랩실에서 나온 논문</li>
-<li>IMU를 중심으로 Camera + LiDAR를 퓨전해서 퓨어 비전 / 퓨어 라이다로는 어려운 공간에서 안정적으로 맵핑할 수 있는 기술</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.14938.pdf)
+- Sebastian Scherer 교수님 랩실에서 나온 논문
+- IMU를 중심으로 Camera + LiDAR를 퓨전해서 퓨어 비전 / 퓨어 라이다로는 어려운 공간에서 안정적으로 맵핑할 수 있는 기술
+
 </details>
 
 <details>
   <summary> Simultaneous Localization and Mapping: A Rapprochement of Filtering and Optimization-Based Approaches</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cyLmVlY3MuYmVya2VsZXkuZWR1L1B1YnMvVGVjaFJwdHMvMjAyMS9FRUNTLTIwMjEtNzYucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>An invitiation to 3D vision의 저자인 Yi Ma와 Sastry가 마킹한 버클리 졸업논문.</li>
-<li>Optimisation 방식과 EKF 방식을 비교 및 짬뽕</li>
-</ul>
+- [논문 링크](https://www2.eecs.berkeley.edu/Pubs/TechRpts/2021/EECS-2021-76.pdf)
+- An invitiation to 3D vision의 저자인 Yi Ma와 Sastry가 마킹한 버클리 졸업논문.
+- Optimisation 방식과 EKF 방식을 비교 및 짬뽕
+
 </details>
 
 <details>
   <summary> Learning to Predict Repeatability of Interest Points</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMDM1NzgucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>Niantic 팀과 Tat-jun Chin이 참여</li>
-<li>시간에 따른 interest point의 repeatability를 평가하는 시스템을 만듬.<ul>
-<li>하루의 시간동안 바뀌는 조명에서…</li>
-<li>계절이 바뀌면서…</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2105.03578.pdf)
+- Niantic 팀과 Tat-jun Chin이 참여
+- 시간에 따른 interest point의 repeatability를 평가하는 시스템을 만듬.
+  - 하루의 시간동안 바뀌는 조명에서...
+  - 계절이 바뀌면서...
+
 </details>
 
 <details>
   <summary> TSDF++: A Multi-Object Formulation for Dynamic Object Tracking and Reconstruction</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMDc0NjgucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>Roland Siegwart, Juan Nieto 교수님 참여</li>
-<li>하나의 reconstruction volume으로 scene 전체와 모든 object를 표현하는 multi-object TSDF 기법을 소개함.<ul>
-<li>기존의 TSDF 방식으로 다수의 object를 표현하기 위해서는 object의 수 만큼 reconstruction volume이 필요했어서 scalable하지 않았음.</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2105.07468.pdf)
+- Roland Siegwart, Juan Nieto 교수님 참여
+- 하나의 reconstruction volume으로 scene 전체와 모든 object를 표현하는 multi-object TSDF 기법을 소개함.
+  - 기존의 TSDF 방식으로 다수의 object를 표현하기 위해서는 object의 수 만큼 reconstruction volume이 필요했어서 scalable하지 않았음.
+
 </details>
 
 <details>
   <summary> Enhancing Photorealism Enhancement </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDUuMDQ2MTk=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>Vladlen Koltun + 인텔 자율주행 랩</li>
-<li>가상 이미지를 실제처럼 보이게 바꿔주는 네트워크를 만듬.</li>
-</ul>
+- [논문 링크](https://arxiv.org/abs/2105.04619)
+- Vladlen Koltun + 인텔 자율주행 랩
+- 가상 이미지를 실제처럼 보이게 바꿔주는 네트워크를 만듬.
+
 </details>
 
 <details>
   <summary> USACv20: robust essential, fundamental and homography matrix estimation </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMDUwNDQucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>SAC계열의 고수들: Daniel Barath, Jiri Matas</li>
-<li>RANSAC 계열 기술들을 리뷰하고, 가장 좋은것들만 골라서 USAC을 만듬.<ul>
-<li>(근데 USAC 논문은 바뀐건 크게 없는거 같은데 왜 매번 나오는거지…?)</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.05044.pdf)
+- SAC계열의 고수들: Daniel Barath, Jiri Matas
+- RANSAC 계열 기술들을 리뷰하고, 가장 좋은것들만 골라서 USAC을 만듬.
+  - (근데 USAC 논문은 바뀐건 크게 없는거 같은데 왜 매번 나오는거지...?)
+
 </details>
 
 <details>
   <summary> A Front-End for Dense Monocular SLAM using a Learned Outlier Mask Prior </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMDA1NjIucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>John Leonard 교수님 랩실</li>
-<li>Depth from video를 수행하면서 부산물로 생기는 outlier mask까지 SLAM에 사용해서 depth 정보를 더 좋게 만들고, CNN-SLAM 파이프라인에 넣어서 Dense monocular SLAM의 frontend를 구현</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.00562.pdf)
+- John Leonard 교수님 랩실
+- Depth from video를 수행하면서 부산물로 생기는 outlier mask까지 SLAM에 사용해서 depth 정보를 더 좋게 만들고, CNN-SLAM 파이프라인에 넣어서 Dense monocular SLAM의 frontend를 구현
+
 </details>
 
 <details>
   <summary> The Temporal Opportunist: Self-Supervised Multi-Frame Monocular Depth </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMTQ1NDAucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>Victor Prisacariu &amp; Niantic 팀</li>
-<li>학습된 정보 뿐이 아닌 실시간으로 들어오는 정보까지 사용해서 더 좋은 성능을 내는 dense depth estimation 기법을 소개함.</li>
-<li>해당 기법은 self-supervision으로만 학습됨.</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.14540.pdf)
+- Victor Prisacariu &amp; Niantic 팀
+- 학습된 정보 뿐이 아닌 실시간으로 들어오는 정보까지 사용해서 더 좋은 성능을 내는 dense depth estimation 기법을 소개함.
+- 해당 기법은 self-supervision으로만 학습됨.
+
 </details>
 
 <details>
   <summary> 드론 자율비행 기술 동향 </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua29yZWFzY2llbmNlLm9yLmtyL2FydGljbGUvSkFLTzIwMjE1MzE1MDY0NDEzNS5wZGY=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>ETRI</li>
-</ul>
+- [논문 링크](https://www.koreascience.or.kr/article/JAKO202153150644135.pdf)
+- ETRI
+
 </details>
 
 <details>
   <summary> Guest Editorial: Special Issue on Performance Evaluation in Computer Vision </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczExMjYzLTAyMS0wMTQ1NS14">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>Torsten Sattler</li>
-</ul>
+- [논문 링크](https://link.springer.com/article/10.1007/s11263-021-01455-x)
+- Torsten Sattler
+
 </details>
 
 <p> </p>
@@ -591,235 +572,206 @@ mjx-container[display="true"] + br {
 <h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><details>
   <summary> MonoGRNet: A General Framework for Monocular 3D Object Detection</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMDg3OTcucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.08797.pdf)
+
 </details>
 
 <details>
   <summary> FCOS3D: Fully Convolutional One-Stage Monocular 3D Object Detection </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMTA5NTYucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.10956.pdf)
+
 </details>
 
 <details>
   <summary> PLC-VIO: Visual-Inertial Odometry Based on Point-Line Constraints </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MzE2Nzk=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9431679)
+
 </details>
 
 <details>
   <summary> Scene Coordinate Regression Network With Global Context-Guided Spatial Feature Transformation for Visual Relocalization
 </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0Mzc2OTk=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9437699)
+
 </details>
 
 
 <details>
   <summary> Adaptive depth estimation for pyramid multi-view stereo </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cDovL2dyYXBodmlzaW9uLndodS5lZHUuY24vcGFwZXJzL2xpYW9qaWUyMDIxY2FnLnBkZg==">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](http://graphvision.whu.edu.cn/papers/liaojie2021cag.pdf)
+
 </details>
 
 <details>
   <summary> Self-Point-Flow: Self-Supervised Scene Flow Estimation from Point Clouds with Optimal Transport and Random Walk</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMDgyNDgucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2105.08248.pdf)
+
 </details>
 
 <details>
   <summary> VS-Net: Voting with Segmentation for Visual Localization </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMTA4ODYucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2105.10886.pdf)
+
 </details>
 
 <details>
   <summary> Improved Real-Time Monocular SLAM Using Semantic Segmentation on Selective Frames </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMDAxMTQucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2105.00114.pdf)
+
 </details>
 
 <details>
   <summary> Visual SLAM based on instance segmentation in dynamic scenes </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pb3BzY2llbmNlLmlvcC5vcmcvYXJ0aWNsZS8xMC4xMDg4LzEzNjEtNjUwMS9hYmZjZWIvbWV0YQ==">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://iopscience.iop.org/article/10.1088/1361-6501/abfceb/meta)
+
 </details>
 
 <details>
   <summary> Factor graph optimization for GNSS/INS integration: A comparison with the extended Kalman filter </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9vbmxpbmVsaWJyYXJ5LndpbGV5LmNvbS9kb2kvYWJzLzEwLjEwMDIvbmF2aS40MjE=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://onlinelibrary.wiley.com/doi/abs/10.1002/navi.421)
+
 </details>
 
 <details>
   <summary> Monocular Semantic Mapping Based on 3D Cuboids Tracking </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MDEwNzE=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9401071)
+
 </details>
 
 <details>
   <summary> Adaptive Stereo Direct Visual Odometry with Real-Time Loop Closure Detection and Relocalization </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MDE0Njk=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9401469)
+
 </details>
 
 <details>
   <summary> DeepAVO: Efficient Pose Refining with Feature Distilling for Deep Visual Odometry</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDUuMDk4OTkucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2105.09899.pdf)
+
 </details>
 
 <details>
   <summary> Vehicle Odometry with Camera-Lidar-IMU Information Fusion and Factor-Graph Optimization </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczEwODQ2LTAyMS0wMTMyOS14">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://link.springer.com/article/10.1007/s10846-021-01329-x)
+
 </details>
 
 <details>
   <summary> RANSIC: Fast and Highly Robust Estimation for Rotation Search and Point Cloud Registration using Invariant Compatibility</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMDkxMzMucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.09133.pdf)
+
 </details>
 
 <details>
   <summary> Monocular Semantic Mapping Based on 3D Cuboids Tracking </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MDEwNzE=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9401071)
+
 </details>
 
 <details>
   <summary> A sky region segmentation method for outdoor visual-inertial SLAM </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MDg3NzE=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9408771)
+
 </details>
 
 <details>
   <summary> Line Flow Based Simultaneous Localization and Mapping </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50LzkzOTM0NzQ=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9393474)
+
 </details>
 
 <details>
   <summary> MinkLoc++: Lidar and Monocular Image Fusion for Place Recognition</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMDUzMjcucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.05327.pdf)
+
 </details>
 
 <details>
   <summary> Semantic visual SLAM in dynamic environment </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczEwNTE0LTAyMS0wOTk3OS00">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://link.springer.com/article/10.1007/s10514-021-09979-4)
+
 </details>
 
 <details>
   <summary> Simultaneous Video Stabilization and Rolling Shutter Removal </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MTE3MDE=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9411701)
+
 </details>
 
 <details>
   <summary> Semi-Direct Monocular SLAM With Three Levels of Parallel Optimizations </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50LzkzOTg4NjM=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9398863)
+
 </details>
 
 <details>
   <summary> Non-uniform Observability for FastMoving Horizon Estimation with application to the SLAM problem </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMTIzMjgucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.12328.pdf)
+
 </details>
 
 <details>
   <summary> Radar SLAM: A Robust SLAM System for All Weather Conditions </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDQuMDUzNDcucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2104.05347.pdf)
+
 </details>
 
 <details>
   <summary> Not Only Look But Infer: Multiple Hypothesis Clustering of Data Association Inference for Semantic SLAM </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk0MTA2MTA=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9410610)
+
 </details>
 
 <details>
   <summary> SE-Harris and eSUSAN: Asynchronous Event-Based Corner Detection Using Megapixel Resolution CeleX-V Camera </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9kZWVwYWkub3JnL3B1YmxpY2F0aW9uL3NlLWhhcnJpcy1hbmQtZXN1c2FuLWFzeW5jaHJvbm91cy1ldmVudC1iYXNlZC1jb3JuZXItZGV0ZWN0aW9uLXVzaW5nLW1lZ2FwaXhlbC1yZXNvbHV0aW9uLWNlbGV4LXYtY2FtZXJh">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://deepai.org/publication/se-harris-and-esusan-asynchronous-event-based-corner-detection-using-megapixel-resolution-celex-v-camera)
+
 </details>
 
 <details>
   <summary> A scalable parallel preconditioned conjugate gradient method for bundle adjustment </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczEwNDg5LTAyMS0wMjM0OS04">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://link.springer.com/article/10.1007/s10489-021-02349-8)
+
 </details>
 
 <details>
   <summary> Self-Supervised Multi-Frame Monocular Scene Flow </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDUuMDIyMTY=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/abs/2105.02216)
+
 </details>
 
 <details>
   <summary> MonodepthPlus: self-supervised monocular depth estimation using soft-attention and learnable outlier-masking </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3BpZWRpZ2l0YWxsaWJyYXJ5Lm9yZy9qb3VybmFscy9qb3VybmFsLW9mLWVsZWN0cm9uaWMtaW1hZ2luZy92b2x1bWUtMzAvaXNzdWUtMi8wMjMwMTcvTW9ub2RlcHRoUGx1cy0tc2VsZi1zdXBlcnZpc2VkLW1vbm9jdWxhci1kZXB0aC1lc3RpbWF0aW9uLXVzaW5nLXNvZnQtYXR0ZW50aW9uLzEwLjExMTcvMS5KRUkuMzAuMi4wMjMwMTcuc2hvcnQ/U1NPPTE=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://www.spiedigitallibrary.org/journals/journal-of-electronic-imaging/volume-30/issue-2/023017/MonodepthPlus--self-supervised-monocular-depth-estimation-using-soft-attention/10.1117/1.JEI.30.2.023017.short?SSO=1)
+
 </details>
     </div>
 
@@ -830,13 +782,13 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210329-mar-2021-slam-news/" rel="bookmark">2021년 3월 SLAM 뉴스</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210128-2021-january-slam-news/" rel="bookmark">2021년 1월 SLAM 뉴스</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210213-february-slam-news/" rel="bookmark">2021년 2월 SLAM 뉴스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210329-mar-2021-slam-news/" rel="bookmark">2021년 3월 SLAM 뉴스</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210728-2021-july-slam-news/" rel="bookmark">2021년 7월 SLAM 뉴스</a></div>
@@ -915,7 +867,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

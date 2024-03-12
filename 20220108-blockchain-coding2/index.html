@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -350,19 +350,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -477,18 +477,15 @@ mjx-container[display="true"] + br {
         <h2 id="Metamask-지갑-셋업"><a href="#Metamask-지갑-셋업" class="headerlink" title="Metamask 지갑 셋업"></a>Metamask 지갑 셋업</h2><p><a target="_blank" rel="noopener" href="https://metamask.io/index.html"><strong>Metamask</strong></a>는 가장 유명한 지갑 시스템 중 하나이다.</p>
 <p>Metamask를 다운받자. 웹 브라우저 익스텐션 형태로 깔린다.</p>
 <img src="/20220108-blockchain-coding2/metamask_download.png" class="" title="metamask">
-
 <p>다운로드가 끝나면 새로운 지갑을 생성하자.</p>
 <p>비밀번호를 설정하면 Secret backup phrase (i.e. seed phrase)가 생성된다.</p>
 <img src="/20220108-blockchain-coding2/seed.png" class="" title="seed_phrase">
-
 <p>이 <strong>Seed phrase는 무조건 백업을 하고 절대로 남에게 알려주면 안된다</strong>. 이 seed phrase가 있으면 계정에 들어있는 모든 자금에 접근할 수 있기 때문이다. 돈 뺏기기 싫으면 꼭 백업하고 꼭꼭 숨겨두자.</p>
 <p>하나의 seed phrase로 여러개의 지갑을 생성할 수 있다. 이 뜻은, seed phrase가 털리면 내 모든 지갑에 있는 코인이 털릴 수 있다는 것이다.</p>
 <p>설정이 끝나면 메인 페이지로 이동한다.</p>
 <p> </p>
 <h2 id="메타마스크-인터페이스"><a href="#메타마스크-인터페이스" class="headerlink" title="메타마스크 인터페이스"></a>메타마스크 인터페이스</h2><p>메인 페이지에는 다음과 같은 모습이 보인다.</p>
 <img src="/20220108-blockchain-coding2/main.png" class="" title="main">
-
 <h3 id="Account-정보"><a href="#Account-정보" class="headerlink" title="Account 정보"></a>Account 정보</h3><p>가장 상위단에는 account 정보가 있다. 이 account 정보에는 우리 지갑의 <strong>public address</strong>가 적혀있는데, 이 address 정보는 <span class="exturl" data-url="aHR0cHM6Ly9ldGhlcnNjYW4uaW8v">Etherscan<i class="fa fa-external-link-alt"></i></span>과 같은 서비스를 통해서 조회할 수 있다.</p>
 <p>Account 칸 옆에 3개의 점이 찍혀있는 것을 볼 수 있는데, ‘Account details’에 들어가서 <strong>private key</strong>를 받을 수도 있다. Private key는 해당 account에 접근 권한을 의미한다.</p>
 <h3 id="네트워크-설정"><a href="#네트워크-설정" class="headerlink" title="네트워크 설정"></a>네트워크 설정</h3><p>페이지 우 상단에는 네트워크 설정을 할 수 있다.</p>
@@ -498,29 +495,24 @@ mjx-container[display="true"] + br {
 <h2 id="Rinkeby-faucet"><a href="#Rinkeby-faucet" class="headerlink" title="Rinkeby faucet"></a>Rinkeby faucet</h2><p>이 코스에서는 블록체인 개발을 할 때 <span class="exturl" data-url="aHR0cHM6Ly9mYXVjZXQucmlua2VieS5pby8=">Rinkeby faucet<i class="fa fa-external-link-alt"></i></span>을 이용할 것이다. 추후에 Kovan network도 사용할 것이다.</p>
 <p>Faucet은 개발/테스트 목적을 위한 ethereum을 무료로 제공하는 것을 뜻한다.</p>
 <img src="/20220108-blockchain-coding2/rinkeby.png" class="" title="rinkeby">
-
 <p>무료 eth를 받기 위해서는 페이스북/트위터를 통해 소셜 네트워크 포스트를 하나 올려야한다.</p>
 <p>트위터를 사용할 때는 다음과 같은 화면이 나온다. 여기서 0x00000000000…이라고 된 부분을 내 지갑의 public address로 바꾼다.</p>
 <img src="/20220108-blockchain-coding2/rinkeby2.png" class="" title="rinkeby">
-
 <p>이제 트윗의 링크를 복사해서 rinkeby 웹사이트에 입력하자. 이후, 3일간 18.75 eth를 받는 옵션을 선택한다.</p>
 <p>(필자는 Rinkeby faucet에서 받으려고 했지만, Rinkeby 네트워크 이슈로 Kovan test network에서 받았다.)</p>
 <p> </p>
 <hr>
 <h2 id="Transaction-amp-Gas"><a href="#Transaction-amp-Gas" class="headerlink" title="Transaction & Gas"></a>Transaction &amp; Gas</h2><p>Metamask를 통해 ETH를 받은 것을 확인할 수 있다. 이후, 사용중인 testnet의 Etherscan에 들어가서 누가 보냈는지도 확인할 수 있다. Etherscan과 같은 서비스는 <strong>Block Explorer</strong>라고 하며 거래내역을 볼 수 있게 만든 것이다.</p>
 <img src="/20220108-blockchain-coding2/kovan_etherscan.png" class="" title="kovan">
-
 <p>Transaction hash (txn hash)는 해당 거래에 대한 유일 hash이다. 보낸 사람과 받는 사람의 account address도 확인할 수 있다.</p>
 <p>Transaction fee와 관련해서 Gas에 대해서도 확인할 수 있다. <strong>Gas</strong>는 계산을 하는데에 필요한 컴퓨팅 자원을 뜻하며, <strong>거래를 하기 위해 많은 계산을 할 수록 더 많은 gas비를 내야한다</strong>. 이 gas비는 계산을 수행한 node-operator에게 간다.</p>
 <p>이는 즉 체인 내부에 어떠한 변화를 주게 될 경우, 무조건 gas비를 내게 된다는 것이다. 거래의 입장에서는 ETH를 1000개의 address에 보내는 것 보다 1개의 address에 보내는 것이 더 저렴하다. 앱 개발의 입장에서 봤을 때는 또 다른 시나리오를 고려해야한다.</p>
 <img src="/20220108-blockchain-coding2/gas.png" class="" title="gas">
-
 <p>이제 거래를 직접 해보자. 거래를 하면 Gas를 내게 될 것이다.</p>
 <p>Gas비는 ETH보다 작은 Gwei라는 단위를 가진다. ETH와 Gwei의 단위 환산을 위해서는 <span class="exturl" data-url="aHR0cHM6Ly9ldGgtY29udmVydGVyLmNvbS8=">Ethereum Unit converter<i class="fa fa-external-link-alt"></i></span>와 같은 기능을 사용하면 좋다.</p>
 <p><strong>Gas Price</strong>는 gas의 단위마다의 가격을 의미한다. <strong>Gas Limit</strong>은 거래에 사용되는 최대 gas의 양을 의미한다.</p>
 <p>Transaction fee는 Gas Used * Gas price 이다. 예를 들어 21,000gas @ 1 GWEI per gas라면 21,000 GWEI가 거래 수수료인것이다.</p>
 <img src="/20220108-blockchain-coding2/transaction.png" class="" title="transaction">
-
 <p>거래를 진행할 때 Gas비를 올리거나 낮출 수 있다. Gas비를 수수료처럼 생각하면 무조건 낮은게 좋아보이는데, 올리는 옵션은 대체 왜 있는걸까?</p>
 <p>위 질문에 대한 해답은 다음과 같다. 블록체인에서 Node operator들은 계산을 해주고 gas비를 받는데, 아무래도 동일한 계산에 대해 더 높은 수수료를 지급하는 계산을 하고 싶을 것이다. 낮은 수수료의 계산은 손해라고 생각할 것이며, priority가 낮아질 수 밖에 없다. 내가 내 거래의 gas비를 높게 책정하면 아무래도 node operator들이 이 gas비를 받기 위해 내 계산을 먼저 해줄 확률이 높다.</p>
 <p>체인 내부에서 gas비의 시세를 확인하려면 <span class="exturl" data-url="aHR0cHM6Ly9ldGhnYXNzdGF0aW9uLmluZm8v">ETH Gas Station<i class="fa fa-external-link-alt"></i></span>과 같은 서비스를 사용하면 좋다. 이 웹사이트는 1. 당장 거래를 원할 때 (2분), 2. 비교적 빠른 편으로 거래를 원할 때 (5분), 3. 천천히 거래를 진행해도 될 때 (30분) 의 평균 gas비를 알려준다.</p>
@@ -626,7 +618,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

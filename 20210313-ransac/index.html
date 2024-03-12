@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -330,7 +330,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%98%88%EC%83%81-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8"><span class="nav-number">1.</span> <span class="nav-text">예상 면접 질문</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8B%B5"><span class="nav-number">2.</span> <span class="nav-text">답</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlier-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%9E%80"><span class="nav-number">2.1.</span> <span class="nav-text">Outlier 데이터란?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlier-removal%EC%9D%B4%EB%9E%80"><span class="nav-number">2.2.</span> <span class="nav-text">Outlier removal이란?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RANSAC%EC%9D%B4%EB%9E%80"><span class="nav-number">2.3.</span> <span class="nav-text">RANSAC이란?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RANSAC-%EC%9E%91%EB%8F%99-%EB%B0%A9%EC%8B%9D"><span class="nav-number">2.3.1.</span> <span class="nav-text">RANSAC 작동 방식</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%EC%98%88%EC%8B%9C-Homography-in-RANSAC-framework"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">예시: Homography in RANSAC framework</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RANSAC-%EA%B3%B5%EC%8B%9D"><span class="nav-number">2.3.2.</span> <span class="nav-text">RANSAC 공식</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RANSAC%EC%9D%98-%EC%9E%A5-%EB%8B%A8%EC%A0%90"><span class="nav-number">2.3.3.</span> <span class="nav-text">RANSAC의 장&#x2F;단점</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EA%B0%9C%EB%9F%89-RANSAC"><span class="nav-number">2.3.4.</span> <span class="nav-text">개량 RANSAC?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-Estimator%EB%9E%80"><span class="nav-number">2.4.</span> <span class="nav-text">M-Estimator란?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">사용하는 방법</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%98%88%EC%83%81-%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8"><span class="nav-number">1.</span> <span class="nav-text">예상 면접 질문</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8B%B5"><span class="nav-number">2.</span> <span class="nav-text">답</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlier-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%9E%80"><span class="nav-number">2.1.</span> <span class="nav-text">Outlier 데이터란?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Outlier-removal%EC%9D%B4%EB%9E%80"><span class="nav-number">2.2.</span> <span class="nav-text">Outlier removal이란?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RANSAC%EC%9D%B4%EB%9E%80"><span class="nav-number">2.3.</span> <span class="nav-text">RANSAC이란?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RANSAC-%EC%9E%91%EB%8F%99-%EB%B0%A9%EC%8B%9D"><span class="nav-number">2.3.1.</span> <span class="nav-text">RANSAC 작동 방식</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RANSAC-%EA%B3%B5%EC%8B%9D"><span class="nav-number">2.3.2.</span> <span class="nav-text">RANSAC 공식</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RANSAC%EC%9D%98-%EC%9E%A5-%EB%8B%A8%EC%A0%90"><span class="nav-number">2.3.3.</span> <span class="nav-text">RANSAC의 장&#x2F;단점</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EA%B0%9C%EB%9F%89-RANSAC"><span class="nav-number">2.3.4.</span> <span class="nav-text">개량 RANSAC?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-Estimator%EB%9E%80"><span class="nav-number">2.4.</span> <span class="nav-text">M-Estimator란?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">사용하는 방법</span></a></li></ol></li></ol></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -344,19 +344,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -542,39 +542,33 @@ mjx-container[display="true"] + br {
 <details>
   <summary> 예시: Homography in RANSAC framework </summary>
 
-<hr>
-<h5 id="예시-Homography-in-RANSAC-framework"><a href="#예시-Homography-in-RANSAC-framework" class="headerlink" title="예시: Homography in RANSAC framework"></a>예시: Homography in RANSAC framework</h5><ol>
-<li>전체 데이터로부터 무작위로 4개의 데이터를 추출 (i.e. Homography matrix를 추정하는데 필요한 최소한의 데이터의 수는 4개)</li>
-<li>뽑은 데이터로 Homography matrix 추정</li>
-<li>해당 모델을 기반으로 전체 데이터에 대한 Reprojection error를 측정하고, error threshold를 넘지 않은 데이터의 수를 Score로 저장.<ul>
-<li>If (현재 score &gt; 이전 score), Update score</li>
-</ul>
-</li>
-<li>1로 돌아감.</li>
-</ol>
-<ul>
-<li>100개의 input 데이터가 (i.e. keypoint correspondence) 있다고 해보자. 그리고 Error threshold는 3.0으로 셋팅했다고 해보자.</li>
-<li>첫번째 루프에서 100개 데이터 중 4개를 무작위로 뽑는다.<ul>
-<li>이 4개의 데이터를 기반으로 Homography matrix를 계산한다.</li>
-<li>해당 Homography matrix를 모든 input 데이터에 적용한다. Keypoint correspondence이기 때문에, 1번 이미지로부터 나온 keypoint의 위치 값에 homography matrix를 곱하면 2번 이미지 위의 keypoint 위치를 추정할 것이다. 하지만 실제 위치와는 조금 차이가 있을 것인데 (i.e. reprojection error), 이 차이를 구하여 error threshold를 넘는지 확인한다.</li>
-<li>계산을 해봤더니 10개의 데이터가 error treshold를 넘지 않았다고 해보자. 우리는 이 데이터의 갯수를 ‘inlier의 수’로 취급하며, 이 값을 우리는 ‘best model score’로 저장한다.</li>
-</ul>
-</li>
-<li>두번째 루프를 시작한다. 다시 100개 데이터 중 4개를 무작위로 뽑는다.<ul>
-<li>이 4개의 데이터를 기반으로 Homography matrix를 계산한다.</li>
-<li>다시 해당 homography matrix를 모든 input 데이터에 적용하고 inlier의 수를 측정한다.</li>
-<li>이번에는 50개의 inlier 데이터가 측정되었고, 지난 루프의 10개보다 더 많다. 즉, 이 모델은 지난 루프보다 더 정확한 모델이니, 이 값을 ‘best model score’로 저장한다.</li>
-</ul>
-</li>
-<li>세번째 루프를 시작한다. 다시 100개 데이터 중 4개를 무작위로 뽑는다.<ul>
-<li>이 4개의 데이터를 기반으로 Homography matrix를 계산한다.</li>
-<li>다시 해당 homography matrix를 모든 input 데이터에 적용하고 inlier의 수를 측정한다.</li>
-<li>이번에는 25개의 inlier 데이터가 측정되었고, 지난 루프의 50개보다 적다. 즉, 이 모델은 지난 루프보다 더 부정확한 모델이니, ‘best model score’는 변하지 않는다.</li>
-</ul>
-</li>
-<li>이 과정을 반복한다.</li>
-</ul>
-<hr>
+---
+
+##### 예시: Homography in RANSAC framework
+
+1. 전체 데이터로부터 무작위로 4개의 데이터를 추출 (i.e. Homography matrix를 추정하는데 필요한 최소한의 데이터의 수는 4개)
+2. 뽑은 데이터로 Homography matrix 추정
+3. 해당 모델을 기반으로 전체 데이터에 대한 Reprojection error를 측정하고, error threshold를 넘지 않은 데이터의 수를 Score로 저장.
+   - If (현재 score &gt; 이전 score), Update score
+4. 1로 돌아감.
+
+- 100개의 input 데이터가 (i.e. keypoint correspondence) 있다고 해보자. 그리고 Error threshold는 3.0으로 셋팅했다고 해보자.
+- 첫번째 루프에서 100개 데이터 중 4개를 무작위로 뽑는다.
+  - 이 4개의 데이터를 기반으로 Homography matrix를 계산한다.
+  - 해당 Homography matrix를 모든 input 데이터에 적용한다. Keypoint correspondence이기 때문에, 1번 이미지로부터 나온 keypoint의 위치 값에 homography matrix를 곱하면 2번 이미지 위의 keypoint 위치를 추정할 것이다. 하지만 실제 위치와는 조금 차이가 있을 것인데 (i.e. reprojection error), 이 차이를 구하여 error threshold를 넘는지 확인한다.
+  - 계산을 해봤더니 10개의 데이터가 error treshold를 넘지 않았다고 해보자. 우리는 이 데이터의 갯수를 'inlier의 수'로 취급하며, 이 값을 우리는 'best model score'로 저장한다.
+- 두번째 루프를 시작한다. 다시 100개 데이터 중 4개를 무작위로 뽑는다.
+  - 이 4개의 데이터를 기반으로 Homography matrix를 계산한다.
+  - 다시 해당 homography matrix를 모든 input 데이터에 적용하고 inlier의 수를 측정한다.
+  - 이번에는 50개의 inlier 데이터가 측정되었고, 지난 루프의 10개보다 더 많다. 즉, 이 모델은 지난 루프보다 더 정확한 모델이니, 이 값을 'best model score'로 저장한다.
+- 세번째 루프를 시작한다. 다시 100개 데이터 중 4개를 무작위로 뽑는다.
+  - 이 4개의 데이터를 기반으로 Homography matrix를 계산한다.
+  - 다시 해당 homography matrix를 모든 input 데이터에 적용하고 inlier의 수를 측정한다.
+  - 이번에는 25개의 inlier 데이터가 측정되었고, 지난 루프의 50개보다 적다. 즉, 이 모델은 지난 루프보다 더 부정확한 모델이니, 'best model score'는 변하지 않는다.
+- 이 과정을 반복한다.
+
+---
+
 </details>
 
 <p> </p>
@@ -592,7 +586,6 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <img src="/20210313-ransac/ransac.png" class="" title="ransac">
-
 <p> </p>
 <h4 id="RANSAC의-장-단점"><a href="#RANSAC의-장-단점" class="headerlink" title="RANSAC의 장/단점"></a>RANSAC의 장/단점</h4><ul>
 <li><p>장점:</p>
@@ -618,7 +611,6 @@ mjx-container[display="true"] + br {
 </ul>
 <p> </p>
 <h4 id="개량-RANSAC"><a href="#개량-RANSAC" class="headerlink" title="개량 RANSAC?"></a>개량 RANSAC?</h4><div class="video-container"><iframe src="https://www.youtube.com/embed/Q7FqV_bglHo" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
-
 <p>@19:05초 부터…</p>
 <p>[다른 글에서 좀 더 제대로 설명할게요 :)]</p>
 <hr>
@@ -657,7 +649,6 @@ mjx-container[display="true"] + br {
 </ul>
 <img src="/20210313-ransac/m-estimator.png" class="" title="m-estimator">
 
-
     </div>
 
     
@@ -673,13 +664,13 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20210716-outlier-1/" rel="bookmark">Robust estimation 시리즈 (1) - RANSAC이란?</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+      <div class="popular-posts-title"><a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="bookmark">IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
     </li>
   </ul>
 
@@ -759,7 +750,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

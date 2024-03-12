@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -462,610 +462,481 @@ mjx-container[display="true"] + br {
 <h2 id="이번-달-내가-관심가지는-논문들-키노트-랜드마크-급"><a href="#이번-달-내가-관심가지는-논문들-키노트-랜드마크-급" class="headerlink" title="이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)"></a>이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)</h2><details>
   <summary> ODAM: Object Detection, Association, and Mapping using Posed RGB Video </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMTAxNjUucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Daniel DeTone, Richard Newcombe 참여 (Facebook Reality Labs)</li>
-<li>딥러닝 기반 3D object detection을 수행, 이후 GNN을 이용해서 object-based map 생성. Object scale prior와 multiple view geometry 기반 최적화를 (i.e. SLAM) 사용해서 super-quadric 기반 object bounding volume을 최적화함.</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.10165.pdf)
+  - Daniel DeTone, Richard Newcombe 참여 (Facebook Reality Labs)
+  - 딥러닝 기반 3D object detection을 수행, 이후 GNN을 이용해서 object-based map 생성. Object scale prior와 multiple view geometry 기반 최적화를 (i.e. SLAM) 사용해서 super-quadric 기반 object bounding volume을 최적화함.
+
 </details>
 
 <details>
   <summary> Unified Representation of Geometric Primitives for Graph-SLAM Optimization Using Decomposed Quadrics</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDg5NTcucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Sebastian Scherer 교수님 랩실 연구</li>
-<li>Points, lines, planes, ellipsoids, cylinders, cones 등을 하나의 representation으로 표현하는 ‘quadrics’를 사용한다.<ul>
-<li>최근 Super-quadrics라던지 많이 사용되는 방식인데, related works와 ‘quadric basics’ 챕터가 굉장히 좋다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.08957.pdf)
+  - Sebastian Scherer 교수님 랩실 연구
+  - Points, lines, planes, ellipsoids, cylinders, cones 등을 하나의 representation으로 표현하는 'quadrics'를 사용한다.
+    - 최근 Super-quadrics라던지 많이 사용되는 방식인데, related works와 'quadric basics' 챕터가 굉장히 좋다.
+
 </details>
 
 <details>
   <summary> DSP-SLAM: Object Oriented SLAM with Deep Shape Priors </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDk0ODEucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9qaW5nd2Vud2FuZzk1LmdpdGh1Yi5pby9kc3Atc2xhbS8=">논문 소개 페이지<i class="fa fa-external-link-alt"></i></span><ul>
-<li>CubeSLAM의 진화판?</li>
-<li>기존의 ORB-SLAM2 프레임워크에서 추가로 Instance segmentation으로 object를 검출하고 deep shape embedding을 prior로 삼아서 object-level SLAM을 수행하는 것.</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.09481.pdf)
+- [논문 소개 페이지](https://jingwenwang95.github.io/dsp-slam/)
+  - CubeSLAM의 진화판?
+  - 기존의 ORB-SLAM2 프레임워크에서 추가로 Instance segmentation으로 object를 검출하고 deep shape embedding을 prior로 삼아서 object-level SLAM을 수행하는 것.
+
 </details>
 
 <details>
   <summary> Semi-dense visual-inertial odometry and mapping for computationally constrained platforms </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczEwNTE0LTAyMS0xMDAwMi16">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Vijay Kumar 교수님 랩실에서 나온 작품</li>
-<li>초경량 ARM 보드에서 작동하는 Semi-dense Stereo VIO.<ul>
-<li>VI-Stereo-DSO 보다 더 가볍게 돌아감</li>
-<li>Semi-dense 방식이기 때문에 low textured area 에서도 잘 돌아감</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://link.springer.com/article/10.1007/s10514-021-10002-z)
+  - Vijay Kumar 교수님 랩실에서 나온 작품
+  - 초경량 ARM 보드에서 작동하는 Semi-dense Stereo VIO.
+    - VI-Stereo-DSO 보다 더 가볍게 돌아감
+    - Semi-dense 방식이기 때문에 low textured area 에서도 잘 돌아감
+
 </details>
 
 <details>
   <summary> DROID-SLAM: Deep Visual SLAM for Monocular, Stereo, and RGB-D Cameras </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMTA4NjkucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>딥러닝 기반 Dense Bundle Adjustment layer를 제안함<ul>
-<li>이 layer는 RNN 계열로, camera pose와 pixelwise depth를 업데이트함</li>
-</ul>
-</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ByaW5jZXRvbi12bC9EUk9JRC1TTEFN">GitHub 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.10869.pdf)
+  - 딥러닝 기반 Dense Bundle Adjustment layer를 제안함
+    - 이 layer는 RNN 계열로, camera pose와 pixelwise depth를 업데이트함
+  - [GitHub 링크](https://github.com/princeton-vl/DROID-SLAM)
+
 </details>
 
 <details>
   <summary> Comparison of modern open-source visual SLAM approaches</summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDE2NTQucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>오픈소스 Visual-SLAM을 다 비교해본다!</li>
-<li>Related works가 굉장히 좋은 편이다. 이거만 읽어도 왠만한 트렌드 다 파악할듯</li>
-<li>Euroc 데이터셋 우승자: Basalt, ORB-SLAM3</li>
-<li>TUM-VI 데이터셋 우승자: VINS-Mono, ORB-SLAM3</li>
-<li>KITTI 데이터셋 우승자: ORB-SLAM3, OpenVSLAM, ORB-SLAM2</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.01654.pdf)
+  - 오픈소스 Visual-SLAM을 다 비교해본다!
+  - Related works가 굉장히 좋은 편이다. 이거만 읽어도 왠만한 트렌드 다 파악할듯
+  - Euroc 데이터셋 우승자: Basalt, ORB-SLAM3
+  - TUM-VI 데이터셋 우승자: VINS-Mono, ORB-SLAM3
+  - KITTI 데이터셋 우승자: ORB-SLAM3, OpenVSLAM, ORB-SLAM2
+
 </details>
 
 <details>
   <summary> A Multi-Hypothesis Approach to Pose Ambiguity in Object-Based SLAM</summary>
 
-<ul>
-<li>John Leonard 교수님 랩실 연구</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDEyMjUucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Object의 pose를 계산할 때… 특정 view에서는 여러 pose에 대한 가능성이 제시될 때도 있으나, 네트워크는 하나의 아웃풋을 내도록 설계가 되어있다.<ul>
-<li>잘못 추론한 경우 완전 꼬이게 된다</li>
-</ul>
-</li>
-<li>이를 위해 여러개의 가능성을 모두 트랙킹하는 multiple pose hypothesis 기법을 제안한다.</li>
-</ul>
-</li>
-</ul>
+- John Leonard 교수님 랩실 연구
+- [논문 링크](https://arxiv.org/pdf/2108.01225.pdf)
+  - Object의 pose를 계산할 때... 특정 view에서는 여러 pose에 대한 가능성이 제시될 때도 있으나, 네트워크는 하나의 아웃풋을 내도록 설계가 되어있다.
+    - 잘못 추론한 경우 완전 꼬이게 된다
+  - 이를 위해 여러개의 가능성을 모두 트랙킹하는 multiple pose hypothesis 기법을 제안한다.
+
 </details>
 
 <p> </p>
 <h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><details>
   <summary> PC-SD-VIO: A constant intensity semi-direct monocular visual-inertial odometry with online photometric calibration </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2NpZW5jZWRpcmVjdC5jb20vc2NpZW5jZS9hcnRpY2xlL2Ficy9waWkvUzA5MjE4ODkwMjEwMDE2Mjc=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>auto-exposure, camera response, vignetting 등으로 인해 야외에서 direct 기법은 잘 작동하지 않을때가 있음</li>
-<li>Feature-based 방식과 (gain-adaptive KLT optical flow) Direct-방식 (gain-adaptive direct image aligment)를 이용해서 online photometric calibration과 backend optimization을 수행함<ul>
-<li>Online photometric calibration이 되기 때문에 야외에서도 잘 되지 않을까!</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0921889021001627)
+  - auto-exposure, camera response, vignetting 등으로 인해 야외에서 direct 기법은 잘 작동하지 않을때가 있음
+  - Feature-based 방식과 (gain-adaptive KLT optical flow) Direct-방식 (gain-adaptive direct image aligment)를 이용해서 online photometric calibration과 backend optimization을 수행함
+    - Online photometric calibration이 되기 때문에 야외에서도 잘 되지 않을까!
+
 </details>
 
 <details>
   <summary> Accurate 6D object pose estimation and refinement in cluttered scenes </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9lcHJpbnRzLndoaXRlcm9zZS5hYy51ay8xNzcwMTAv">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Object pose estimation을 할 수 있는 Contour alignment (CA) 기법을 소개함.<ul>
-<li>기존의 PnP 방식보다 더 잘된다고…</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://eprints.whiterose.ac.uk/177010/)
+  - Object pose estimation을 할 수 있는 Contour alignment (CA) 기법을 소개함.
+    - 기존의 PnP 방식보다 더 잘된다고...
+
 </details>
 
 <details>
   <summary> Linear RGB-D SLAM for Structured Environments </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk1MjE3NDI=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>권인소 교수님 참여</li>
-<li>Manhattan world 에서 효율적으로 작동하는 SLAM을 제안함<ul>
-<li>Manhattan world에서는 camera rotation과 structural regularity를 추정하는 것을 따로 떼어놓을 수 있는데, camera rotation을 먼저 구하고 linear kalman filter를 통해 camera translation과 global planar map을 효율적으로 (i.e. linear complexity)하게 풀 수 있음</li>
-<li>L-SLAM 이라고 칭함</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9521742)
+  - 권인소 교수님 참여
+  - Manhattan world 에서 효율적으로 작동하는 SLAM을 제안함
+    - Manhattan world에서는 camera rotation과 structural regularity를 추정하는 것을 따로 떼어놓을 수 있는데, camera rotation을 먼저 구하고 linear kalman filter를 통해 camera translation과 global planar map을 효율적으로 (i.e. linear complexity)하게 풀 수 있음
+    - L-SLAM 이라고 칭함
+
 </details>
 
 <details>
   <summary> Robust Visual-Lidar Simultaneous Localization and Mapping System for UAV </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk1MDExNjc=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Visual + LiDAR 시스템을 통해서 point cloud로부터 더 안정적으로 line / plane feature를 추출</li>
-<li>이미지 + 포인트 클라우드 데이터를 혼합해서 사용하는 direct odometry를 사용해서 위치 추정</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9501167)
+  - Visual + LiDAR 시스템을 통해서 point cloud로부터 더 안정적으로 line / plane feature를 추출
+  - 이미지 + 포인트 클라우드 데이터를 혼합해서 사용하는 direct odometry를 사용해서 위치 추정
+
 </details>
 
 <details>
   <summary> SM3D: Simultaneous Monocular Mapping and 3D Detection </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk1MDYzMDI=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>딥러닝 기반 Depth estimation을 통해 Pseudo-LiDAR point cloud를 생성하고, 이로부터 3D detector를 사용해서 3D detection + Localization을 수행함</li>
-<li>기존의 3D detector만 사용하는 것 보다 더 정확함</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9506302)
+  - 딥러닝 기반 Depth estimation을 통해 Pseudo-LiDAR point cloud를 생성하고, 이로부터 3D detector를 사용해서 3D detection + Localization을 수행함
+  - 기존의 3D detector만 사용하는 것 보다 더 정확함
+
 </details>
 
 <details>
   <summary> Visual Simultaneous Localization and Mapping (SLAM) Based on Blurred Image Detection </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9hcnRpY2xlLzEwLjEwMDcvczEwODQ2LTAyMS0wMTQ1Ni01">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>VSLAM을 구동할 때 blur된 이미지는 정확도를 저하시키는 요인 중 하나이다.</li>
-<li>Blurred image가 있어도 잘 되는 VSLAM을 제안한다.<ul>
-<li>Haar wavelet transform을 통해 blur를 제거한다</li>
-<li>Correlation-weighted pose optimization을 통해 좋은 결과를 뽑아 내는 백엔드를 제안한다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://link.springer.com/article/10.1007/s10846-021-01456-5)
+  - VSLAM을 구동할 때 blur된 이미지는 정확도를 저하시키는 요인 중 하나이다.
+  - Blurred image가 있어도 잘 되는 VSLAM을 제안한다.
+    - Haar wavelet transform을 통해 blur를 제거한다
+    - Correlation-weighted pose optimization을 통해 좋은 결과를 뽑아 내는 백엔드를 제안한다.
+
 </details>
 
 <details>
   <summary> Continual Learning for Image-Based Camera Localization </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDkxMTIucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>기존의 딥러닝 기반 Visual localization 네트워크 (i.e. Direct pose regression)을 학습할 때는 data distribution을 크게 고려하지 않는 것 같다.<ul>
-<li>이로 인해 catastrophic forgetting 등의 문제가 나타난다.</li>
-</ul>
-</li>
-<li>Continual learning (i.e. incremental training) 학습 방식을 제안한다.<ul>
-<li>고정된 버퍼에서 반복적으로 이미지를 보여줌으로써 좋은 baseline을 생성한다</li>
-<li>Buff-CS라는 coverage score 기반의 샘플링 기법을 소개한다</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.09112.pdf)
+  - 기존의 딥러닝 기반 Visual localization 네트워크 (i.e. Direct pose regression)을 학습할 때는 data distribution을 크게 고려하지 않는 것 같다.
+    - 이로 인해 catastrophic forgetting 등의 문제가 나타난다.
+  - Continual learning (i.e. incremental training) 학습 방식을 제안한다.
+    - 고정된 버퍼에서 반복적으로 이미지를 보여줌으로써 좋은 baseline을 생성한다
+    - Buff-CS라는 coverage score 기반의 샘플링 기법을 소개한다
+
 </details>
 
 <details>
   <summary> SBAS: Salient Bundle Adjustment for Visual SLAM </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk1MTQ1NzA=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Geometric + Semantic 정보를 기반으로 추론한 saliency map을 이용한 VSLAM을 제안한다.<ul>
-<li>Saliency prediction이 feature point의 weight 값으로 들어가는 Salient bundle adjustment (SBA)를 제안한다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9514570)
+  - Geometric + Semantic 정보를 기반으로 추론한 saliency map을 이용한 VSLAM을 제안한다.
+    - Saliency prediction이 feature point의 weight 값으로 들어가는 Salient bundle adjustment (SBA)를 제안한다.
+
 </details>
 
 <details>
   <summary> Majorization Minimization Methods for Distributed Pose Graph Optimization </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDAwODMucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>여러 robust loss kernel과 함께 잘 작동하는 Majorization minimization method for distributed pose graph optimization (MM-PGO) 방법을 소개한다.<ul>
-<li>Majorization minimization이 뭐야;;</li>
-</ul>
-</li>
-<li>Multi-Robot PGO 환경에서 사용하는 기법인 것 같음.</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.00083.pdf)
+  - 여러 robust loss kernel과 함께 잘 작동하는 Majorization minimization method for distributed pose graph optimization (MM-PGO) 방법을 소개한다.
+    - Majorization minimization이 뭐야;;
+  - Multi-Robot PGO 환경에서 사용하는 기법인 것 같음.
+
 </details>
 
 <details>
   <summary> Blitz-SLAM: A semantic SLAM in dynamic environments </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2NpZW5jZWRpcmVjdC5jb20vc2NpZW5jZS9hcnRpY2xlL2Ficy9waWkvUzAwMzEzMjAzMjEwMDQwNjQ=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>RGB-D 데이터에서 Semantic mask와 뎁스 정보를 이용해서 움직이는 객체를 제외하고 SLAM을 진행하는 방법</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0031320321004064)
+  - RGB-D 데이터에서 Semantic mask와 뎁스 정보를 이용해서 움직이는 객체를 제외하고 SLAM을 진행하는 방법
+
 </details>
 
 <details>
   <summary> Rethinking Training Objective For Self-Supervised Monocular Depth Estimation: Semantic Cues To Rescue </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk1MDY3NDQ=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>(IEEE지만 논문 공개되어있음)</li>
-<li>기존의 Self-supervised learning 기반의 Monocular depth estimation 학습을 할 때, semantic 정보까지 함께 넣음으로써 좀 더 정확한 depth 추론을 할 수 있게 함<ul>
-<li>기존의 depth estimation은 depth 네트워크와 pose 네트워크를 이용한 후 view synthesis 워핑을 통해 photommetric loss를 기반으로 학습하였음.</li>
-<li>여기에 semantic 정보까지 넣음으로써 ambiguity가 생기는 부분들을 semantic 정보로 풀어냄</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9506744)
+  - (IEEE지만 논문 공개되어있음)
+  - 기존의 Self-supervised learning 기반의 Monocular depth estimation 학습을 할 때, semantic 정보까지 함께 넣음으로써 좀 더 정확한 depth 추론을 할 수 있게 함
+    - 기존의 depth estimation은 depth 네트워크와 pose 네트워크를 이용한 후 view synthesis 워핑을 통해 photommetric loss를 기반으로 학습하였음.
+    - 여기에 semantic 정보까지 넣음으로써 ambiguity가 생기는 부분들을 semantic 정보로 풀어냄
+
 </details>
 
 <details>
   <summary> Incorporating Learnt Local and Global Embeddings into Monocular Visual SLAM </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDIwMjgucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>딥러닝을 사용한 Visual SLAM의 정석?<ul>
-<li>SuperPoint 기반 Local feature extraction</li>
-<li>Model uncertainty + direct 방식을 이용한 feature tracking</li>
-<li>NetVLAD 기반 global feature extraction</li>
-<li>ORB-SLAM 파이프라인 + Bundle adjustment 최적화</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.02028.pdf)
+  - 딥러닝을 사용한 Visual SLAM의 정석?
+    - SuperPoint 기반 Local feature extraction
+    - Model uncertainty + direct 방식을 이용한 feature tracking
+    - NetVLAD 기반 global feature extraction
+    - ORB-SLAM 파이프라인 + Bundle adjustment 최적화
+
 </details>
 
 <details>
   <summary> A dual-mode automatic switching feature points matching algorithm fusing IMU data </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2NpZW5jZWRpcmVjdC5jb20vc2NpZW5jZS9hcnRpY2xlL2Ficy9waWkvUzAyNjMyMjQxMjEwMDk2ODQ=">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Feature matching을 할 때 brute-force 매칭과 같은 방식은 너무 오래걸린다</li>
-<li>이 논문에서는 IMU를 함께 사용함으로써 global matching &lt;-&gt; local matching 모드를 자동전환하는 방식을 제안한다.<ul>
-<li>Global 방식은 brute-force와 같이 모든 local feature를 비교하는 방식이다.</li>
-<li>Local 방식은 IMU pre-integration 데이터로 추정한 pose를 통해 다음 이미지 위 가능성이 높은 소수의 feature들과의 매칭을 하는 방식이다.</li>
-<li>IMU가 실패하는 것을 감지하기 위해 Support vector machine (SVM) 방식으로 돌아가는 디텍터 알고리즘을 만든다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0263224121009684)
+  - Feature matching을 할 때 brute-force 매칭과 같은 방식은 너무 오래걸린다
+  - 이 논문에서는 IMU를 함께 사용함으로써 global matching &lt;-&gt; local matching 모드를 자동전환하는 방식을 제안한다.
+    - Global 방식은 brute-force와 같이 모든 local feature를 비교하는 방식이다.
+    - Local 방식은 IMU pre-integration 데이터로 추정한 pose를 통해 다음 이미지 위 가능성이 높은 소수의 feature들과의 매칭을 하는 방식이다.
+    - IMU가 실패하는 것을 감지하기 위해 Support vector machine (SVM) 방식으로 돌아가는 디텍터 알고리즘을 만든다.
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 
@@ -1078,13 +949,13 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210329-mar-2021-slam-news/" rel="bookmark">2021년 3월 SLAM 뉴스</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210128-2021-january-slam-news/" rel="bookmark">2021년 1월 SLAM 뉴스</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210213-february-slam-news/" rel="bookmark">2021년 2월 SLAM 뉴스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210329-mar-2021-slam-news/" rel="bookmark">2021년 3월 SLAM 뉴스</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210728-2021-july-slam-news/" rel="bookmark">2021년 7월 SLAM 뉴스</a></div>
@@ -1163,7 +1034,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

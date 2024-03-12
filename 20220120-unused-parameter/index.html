@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -332,19 +332,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -454,7 +454,6 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
         <h2 id="Unused-parameter-warning"><a href="#Unused-parameter-warning" class="headerlink" title="Unused parameter warning"></a>Unused parameter warning</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjIwMTE1LXNhZmVyLWMv">더 안전하게 C++ 코드를 작성하는법<i class="fa fa-external-link-alt"></i></span> 글에 나왔던 것 처럼 <code>-Wall</code> 플래그를 사용해서 빌드를 할 때, <strong>함수 인자로 받은 변수를 함수에서 사용하지 않을 경우 경고</strong>가 나타나게 됩니다.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">In file included from /home/hyunggi/c++/directory/sample_code.cpp:10:</span><br><span class="line">/hyunggi/c++/directory/sample_code.hpp: In member function ‘virtual bool someClass::someNamespace::someFunction(const std::string&amp;)’:</span><br><span class="line">/hyunggi/c++/directory/sample_code.hpp:30:53: error: unused parameter ‘slam_is_awesome’ [-Werror=unused-parameter]</span><br><span class="line">   30 |   virtual bool someFunction(const std::string&amp; slam_is_awesome)</span><br><span class="line">      |                                  ~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~</span><br><span class="line">cc1plus: all warnings being treated as errors</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <p>이 경고의 의미는 아래와 같습니다.</p>
 <blockquote>
@@ -469,7 +468,7 @@ mjx-container[display="true"] + br {
 <p> </p>
 <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
 <li>C++17 이상이라면 <strong><code>[[maybe_unused]]</code></strong> 씁시다</li>
-<li>C++17보다 낮은 스탠다드를 쓰지만 Boost 프레임워크를 쓴다면 **<code>boost::ignore_unused()</code>**를 씁시다</li>
+<li>C++17보다 낮은 스탠다드를 쓰지만 Boost 프레임워크를 쓴다면 <strong><code>boost::ignore_unused()</code></strong>를 씁시다</li>
 <li><strong>왠만하면 처음부터 잘 짭시다</strong></li>
 <li>여의치 않는다면 <code>std::ignore</code>를 써서 표시해두고, 빠르게 리팩토링해서 경고가 안나게 합시다</li>
 <li><strong>경고는 절대 끄지 맙시다</strong> =.=</li>
@@ -485,14 +484,12 @@ mjx-container[display="true"] + br {
 <h3 id="void-cast-하지마세요"><a href="#void-cast-하지마세요" class="headerlink" title="void cast 하지마세요"></a>void cast 하지마세요</h3><p>아래 방법과 같은 방식으로, void로 사용하지 않은 변수를 캐스팅하는 겁니다.</p>
 <p>void casting은 전혀 아무런 의미도 가지지 않지만, 적어도 변수에 어떠한 액션을 취했기 때문에 컴파일러 경고가 사라지게 됩니다.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    (<span class="keyword">void</span>)(unused_parameter); <span class="comment">// 또는 static_cast&lt;void&gt;(unused_parameter);</span></span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>근데 아니 아무 죄도 없는 변수는 왜 공허로 보냅니까?</p>
 <p><strong>void casting의 목적은 컴파일러 경고를 끄기 위함이 아닙니다.</strong></p>
 <p>그렇다고 주석으로 ‘컴파일러 경고를 끄기 위해 사용함’ 이라고 적는건 더 이상합니다.</p>
 <p>이럴거면 차라리 함수를 제대로 리팩토링 해줍시다.</p>
 <p> </p>
-<h3 id="ignore-함수나-매크로-지정-하지마세요"><a href="#ignore-함수나-매크로-지정-하지마세요" class="headerlink" title="ignore 함수나 매크로 지정 하지마세요"></a>ignore 함수나 매크로 지정 하지마세요</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UNUSED(x) (void)(x)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ignore_unused</span><span class="params">(T &amp;&amp;)</span></span></span><br><span class="line"><span class="function"></span>{ }</span><br><span class="line"></span><br><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    UNUSED(unused_parameter); <span class="comment">// 매크로 방법</span></span><br><span class="line">    ignore_unused(unused_parameter); <span class="comment">// 함수 방법</span></span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
+<h3 id="ignore-함수나-매크로-지정-하지마세요"><a href="#ignore-함수나-매크로-지정-하지마세요" class="headerlink" title="ignore 함수나 매크로 지정 하지마세요"></a>ignore 함수나 매크로 지정 하지마세요</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UNUSED(x) (void)(x)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ignore_unused</span><span class="params">(T &amp;&amp;)</span></span></span><br><span class="line"><span class="function"></span>{ }</span><br><span class="line"></span><br><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">UNUSED</span>(unused_parameter); <span class="comment">// 매크로 방법</span></span><br><span class="line">    <span class="built_in">ignore_unused</span>(unused_parameter); <span class="comment">// 함수 방법</span></span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p>void cast 방식보다는 낫지만, C++ 에서 이런 매크로 사용하지 맙시다.</p>
 <p>매크로는 C++ 코드가 C 코드 처럼 보이게 만듭니다.</p>
 <p>함수로 만들면 그래도 가독성은 좀더 좋아지지만… 똑같습니다.</p>
@@ -506,20 +503,17 @@ mjx-container[display="true"] + br {
 <p>하지만 적당히 정상적으로 코드를 짰다면 (i.e. unused parameter가 2개 이상이 아니라면), 함수 인자 리스트가 그렇게 길어질리가 없습니다.</p>
 <p>Unused parameter가 2개 이상이라면, 그냥 함수 자체를 다시 짜시죠…</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, __attribute__((unused)) T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h3 id="변수-주석처리"><a href="#변수-주석처리" class="headerlink" title="변수 주석처리"></a>변수 주석처리</h3><p>좀 애매한 방법이지만 작동하는 방법입니다.</p>
 <p>하지만 IDE에서 검색해서 리팩토링하기 어렵기 때문에 추천하지 않습니다.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span><span class="params">(T var1, T var2, T <span class="comment">/*unused_parameter*/</span>)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h3 id="std-ignore"><a href="#std-ignore" class="headerlink" title="std::ignore"></a>std::ignore</h3><p><code>std::ignore</code>는 원래 <span class="exturl" data-url="aHR0cHM6Ly9lbi5jcHByZWZlcmVuY2UuY29tL3cvY3BwL3V0aWxpdHkvdHVwbGU=">std::tuple<i class="fa fa-external-link-alt"></i></span>을 쓸 때 특정 변수를 무시하도록 만든 헬퍼 기능입니다.</p>
 <p>근데 그냥 변수에도 쓸 수 있습니다.</p>
 <p>그냥 변수에서 쓰라고 만든 기능은 아니지만, <code>std::ignore</code>라는 이름답게 <strong>개발자들이 읽을 때 ‘아 이 변수는 무시하라고 만든거구나’ 라고 이해할 수 있습니다</strong>. </p>
 <p>이런 면에서는 void cast보다 훨씬 좋다고 생각합니다.</p>
 <p>나중에 리팩토링할 때 <code>std::ignore</code>를 찾아서 고칠수도 있습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">std</span>::ignore = unused_parameter;</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    std::ignore = unused_parameter;</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p> </p>
 <hr>
 <h2 id="추천하는-방법들"><a href="#추천하는-방법들" class="headerlink" title="추천하는 방법들"></a>추천하는 방법들</h2><p>제일 좋은 방법들이라고 생각합니다.</p>
@@ -529,13 +523,12 @@ mjx-container[display="true"] + br {
 <p>컴파일러도, 나도, 내 동료들도, 모두가 바로 이해하는 방법입니다.</p>
 <p>단점이라면 C++17을 요구합니다. 현재 자율주행 쪽 C++ 프로그래밍 규제로 C++11에서 작업하는데, 이거 못써서 미칠 노릇입니다.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, [[maybe_unused]] T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h3 id="boost-ignore-unused"><a href="#boost-ignore-unused" class="headerlink" title="boost::ignore_unused()"></a>boost::ignore_unused()</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjIwMTA2LWJvb3N0LXZzLWFic2VpbC8/aGlnaGxpZ2h0PWJvb3N0">Boost 프레임워크<i class="fa fa-external-link-alt"></i></span>를 쓴다면 고려해볼만한 방법입니다.</p>
 <p>C++11등에서 작업하는데 C++17/20의 기능을 불러오기 위해 Boost 프레임워크를 쓰는 경우가 있습니다.</p>
 <p><code>boost::ignore_unused()</code>는 boost의 내장함수이며, <strong>좋은 함수 이름으로 unused parameter를 무시</strong>할 수 있게 해줍니다.</p>
 <p>이거도 나중에 <code>boost::ignore_unused</code>로 찾아서 리팩토링 해주기 좋습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"boost/core/ignore_unused.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    boost::ignore_unused(unused_paramter);</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"boost/core/ignore_unused.hpp"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">T <span class="title">foo</span> <span class="params">(T var1, T var2, T unused_parameter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    boost::<span class="built_in">ignore_unused</span>(unused_paramter);</span><br><span class="line">    <span class="keyword">return</span> var1 + var2;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -548,6 +541,9 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
     <li class="popular-posts-item">
@@ -555,9 +551,6 @@ mjx-container[display="true"] + br {
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
     </li>
   </ul>
 
@@ -628,7 +621,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

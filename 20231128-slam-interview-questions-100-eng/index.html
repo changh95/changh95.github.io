@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="100 questions on SLAM, from theory to system design and live coding interview.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="100 SLAM-related technical interview questions">
+<meta property="og:url" content="https://changh95.github.io/20231128-slam-interview-questions-100-eng/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="100 questions on SLAM, from theory to system design and live coding interview.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-27T07:50:21.000Z">
+<meta property="article:modified_time" content="2024-02-17T08:28:42.109Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Interview">
+<meta property="article:tag" content="Questions">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="LiDAR SLAM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20231128-slam-interview-questions-100-eng/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>100 SLAM-related technical interview questions | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#General"><span class="nav-number">1.</span> <span class="nav-text">General</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LiDAR-SLAM"><span class="nav-number">2.</span> <span class="nav-text">LiDAR SLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual-SLAM"><span class="nav-number">3.</span> <span class="nav-text">Visual SLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#System-design"><span class="nav-number">4.</span> <span class="nav-text">System design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding-interview-questions-Live-implementation"><span class="nav-number">5.</span> <span class="nav-text">Coding interview questions (Live &#x2F; implementation)</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">253</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">351</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20231128-slam-interview-questions-100-eng/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          100 SLAM-related technical interview questions
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-27 16:50:21" itemprop="dateCreated datePublished" datetime="2023-11-27T16:50:21+09:00">2023-11-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-02-17 17:28:42" itemprop="dateModified" datetime="2024-02-17T17:28:42+09:00">2024-02-17</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/50%EA%B0%80%EC%A7%80-CV-SLAM-%EA%B8%B0%EC%88%A0%EB%A9%B4%EC%A0%91-%EC%A7%88%EB%AC%B8%EB%93%A4/" itemprop="url" rel="index"><span itemprop="name">50가지 CV/SLAM 기술면접 질문들</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>There are 4 sections - <a href="#general">General</a>, <a href="#lidar-slam">LiDAR SLAM</a>, <a href="#visual-slam">Visual SLAM</a>, <a href="#system-design">System design</a>, <a href="#coding-interview-questions-live--implementation">Coding interview questions (Live / implementation)</a>. Each section has 10-25 questions - there many be a number of follow-up questions or questions with different approaches. The questions range from beginner to expert level, though not in any specific order.</p>
+</blockquote>
+<h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><ol>
+<li>What are the different ways to represent rotations in 3D space?<ul>
+<li>Discuss the differences between the SO(3) matrix, Quaternion, Axis-angle, and Euler angle representations.</li>
+<li>What problems does gimbal lock pose in the expression of 3D rotations?</li>
+<li>What mathematical constraints are applicable to SO(3) matrices?</li>
+</ul>
+</li>
+<li>Describe the structure of the SE(3) matrix.<ul>
+<li>What is the significance of the bottom row ([0,0,0,1]) in the SE(3) matrix?</li>
+</ul>
+</li>
+<li>What sensors are suitable for SLAM (Simultaneous Localization and Mapping)?<ul>
+<li>Compare tightly-coupled fusion and loosely-coupled fusion in this context.</li>
+</ul>
+</li>
+<li>Why is non-linear optimization used in SLAM?<ul>
+<li>Where do we encounter non-linearity in Visual-SLAM?</li>
+<li>Where is non-linearity found in LiDAR SLAM?</li>
+</ul>
+</li>
+<li>What optimization methods are applicable for non-linear optimization in SLAM?<ul>
+<li>Compare gradient descent, Newton-Raphson, Gauss-Newton, and Levenberg-Marquardt methods.</li>
+<li>What is the trust-region method?</li>
+</ul>
+</li>
+<li>What is loop closure and how is it achieved in SLAM?</li>
+<li>Define and differentiate the motion model and observation model in SLAM.</li>
+<li>What is RANSAC?</li>
+<li>Explain the concept of a robust kernel (or M-estimator).</li>
+<li>Discuss the Kalman filter and particle filter.<ul>
+<li>Highlight the differences between the Kalman filter (KF) and the Extended Kalman filter (EKF).</li>
+</ul>
+</li>
+<li>Contrast filter-based SLAM with graph-based SLAM.</li>
+<li>Define the information matrix and covariance matrix in the context of SLAM.</li>
+<li>What is the Schur complement?</li>
+<li>Compare LU, Cholesky, QR, SVD, and Eigenvalue decomposition.<ul>
+<li>Which methods are commonly used in SLAM and why?</li>
+</ul>
+</li>
+<li>Why is least squares optimization favored?<ul>
+<li>Explain how Maximum-a-posteriori (MAP) and Maximum Likelihood Estimation (MLE) are applied in SLAM.</li>
+</ul>
+</li>
+<li>What representations are used to describe a map or structure in SLAM?<ul>
+<li>Which map representation would you choose for path planning and why?</li>
+<li>Distinguish between sparse mapping and dense mapping.</li>
+</ul>
+</li>
+<li>Explain the concepts of Lie groups and Lie algebra.<ul>
+<li>What are the Exp/Log maps?</li>
+</ul>
+</li>
+<li>How can multiple maps be merged into a single map in SLAM?</li>
+<li>What is Inverse Depth Parameterization?</li>
+<li>Describe pose graph optimization in SLAM.</li>
+<li>Define drift in SLAM.<ul>
+<li>What is scale drift?</li>
+</ul>
+</li>
+<li>How can computational costs be reduced in SLAM?<ul>
+<li>What is keyframe-based optimization?</li>
+<li>Why is a Look-Up Table (LUT) considered an effective strategy?</li>
+</ul>
+</li>
+<li>What is relocalization in SLAM?<ul>
+<li>How does relocalization differ from loop closure detection?</li>
+</ul>
+</li>
+<li>What does marginalization entail in the context of SLAM?</li>
+<li>Explain the concept of IMU pre-integration in SLAM.</li>
+</ol>
+<p> </p>
+<h2 id="LiDAR-SLAM"><a href="#LiDAR-SLAM" class="headerlink" title="LiDAR SLAM"></a>LiDAR SLAM</h2><ol>
+<li>Explain how the Iterative Closest Point (ICP) algorithm functions.<ul>
+<li>Which derivative work of the ICP algorithm do you prefer and why?</li>
+</ul>
+</li>
+<li>Discuss the Point-to-Point and Point-to-Plane metrics in the context of the ICP algorithm.</li>
+<li>If an ICP algorithm fails to register two sets of point clouds, what could be the possible reasons?</li>
+<li>Explain the concept of a K-D tree.<ul>
+<li>How is the K-D tree utilized in processing LiDAR point clouds?</li>
+</ul>
+</li>
+<li>Describe the Octree data structure.</li>
+<li>In which scenarios would you use a K-D tree over an Octree for LiDAR point cloud processing, and vice versa?</li>
+<li>What is point cloud downsampling and why is it used?<ul>
+<li>Describe the voxelization process.</li>
+<li>What are the consequences of excessive downsampling?</li>
+</ul>
+</li>
+<li>How is ground segmentation performed in point clouds?<ul>
+<li>What is the mathematical formulation of a 3D plane?</li>
+</ul>
+</li>
+<li>What is a passthrough filter?</li>
+<li>What preprocessing techniques are available for removing outliers from LiDAR point clouds?<ul>
+<li>How does the Statistical Outlier Removal (SOR) filter work?</li>
+</ul>
+</li>
+<li>Why is initial alignment crucial in ICP?</li>
+<li>Besides x, y, and z coordinates, what additional information can be embedded in a point cloud?</li>
+<li>What advantages are gained by integrating LiDAR with an IMU?</li>
+<li>How is loop detection performed using LiDAR point clouds?</li>
+<li>If a loop is detected, how should loop closure optimization be carried out?<ul>
+<li>How does loop closure in LiDAR SLAM differ from the bundle-adjustment technique in Visual SLAM?</li>
+</ul>
+</li>
+<li>Why does z-drift often occur in LiDAR SLAM optimization using the ground plane?</li>
+<li>What is LiDAR de-skewing?</li>
+<li>What challenges arise in LiDAR SLAM when there are moving objects in the vicinity?</li>
+<li>What is the Multi-path problem in LiDAR?</li>
+<li>In what types of environments does LiDAR typically underperform?</li>
+<li>What are the different types of LiDAR?</li>
+<li>What are various methods for combining data from a camera and LiDAR?</li>
+<li>Contrast a point cloud, mesh, and surfel.</li>
+<li>What is a Fast Point Feature Histogram (FPFH) descriptor?</li>
+<li>What methods are available for detecting changes in a point cloud</li>
+</ol>
+<p> </p>
+<h2 id="Visual-SLAM"><a href="#Visual-SLAM" class="headerlink" title="Visual SLAM"></a>Visual SLAM</h2><ol>
+<li>Explain the process of image projection.<ul>
+<li>What are intrinsic and extrinsic matrices?</li>
+<li>Which formula is used to estimate depth from a single-view image?</li>
+</ul>
+</li>
+<li>What does camera calibration entail and what information is gained from it?<ul>
+<li>Provide the formulas for the K matrix and the Distortion coefficient.</li>
+</ul>
+</li>
+<li>Describe the characteristics of Monocular, Stereo, and RGB-D SLAM, along with their respective advantages and disadvantages.<ul>
+<li>How is the depth map generated in RGB-D?</li>
+<li>How is the depth map generated in Stereo?</li>
+<li>Explain the concept of stereo disparity.</li>
+<li>Is there any way to restore scale in monocular VSLAM?</li>
+</ul>
+</li>
+<li>Explain bundle adjustment.<ul>
+<li>What are the differences between local and global bundle adjustments?</li>
+</ul>
+</li>
+<li>What are the Essential and Fundamental matrices?<ul>
+<li>Write down the formulas for the Essential and Fundamental matrices.</li>
+<li>How many degrees of freedom do the Essential and Fundamental matrices have?</li>
+<li>What is the 5/7/8-point algorithm?</li>
+</ul>
+</li>
+<li>What is the Homography matrix?</li>
+<li>Describe the camera models you are familiar with.</li>
+<li>Explain the process of local feature matching.<ul>
+<li>What are the differences between a keypoint and a descriptor?</li>
+<li>How does a feature in deep learning differ from a feature in SLAM?</li>
+<li>What strategies are effective for accurate feature matching?</li>
+</ul>
+</li>
+<li>Explain how local feature tracking is performed.<ul>
+<li>What can serve as a motion model?</li>
+<li>What methods can be used for optical flow?</li>
+<li>Describe template tracking.</li>
+<li>How does optical flow differ from direct tracking?</li>
+</ul>
+</li>
+<li>Explain the features and differences between PTAM, ORB-SLAM, and SVO.</li>
+<li>What are the differences between Visual Odometry, Visual-SLAM, and Structure-from-Motion (SfM)?</li>
+<li>Why isn’t SIFT used in real-time VSLAM?<ul>
+<li>What are some alternatives to SIFT?</li>
+<li>What are the benefits of using deep learning-based local feature detection?</li>
+</ul>
+</li>
+<li>What is reprojection error?<ul>
+<li>What is photometric error?</li>
+</ul>
+</li>
+<li>What is the Perspective-n-Point (PnP) problem?<ul>
+<li>How do you determine the camera’s pose when there is a 2D-3D correspondence?</li>
+</ul>
+</li>
+<li>What are the differences between Feature-based VSLAM and Direct VSLAM?</li>
+<li>What methods are effective in reducing blur in an image?</li>
+<li>What is a co-visibility graph?</li>
+<li>How is loop closure detection performed?<ul>
+<li>Describe the Bag-of-Visual-Words and VLADs.</li>
+<li>How is a Bag-of-Visual-Words created?</li>
+<li>Explain TF-IDF.</li>
+</ul>
+</li>
+<li>What distinguishes a floating-point descriptor from a binary descriptor?<ul>
+<li>How can the distance between feature descriptors be calculated?</li>
+</ul>
+</li>
+<li>What defines a good local feature?<ul>
+<li>What is meant by invariance?</li>
+</ul>
+</li>
+<li>How is image patch similarity determined?<ul>
+<li>Compare SSD, SAD, and NCC.</li>
+</ul>
+</li>
+<li>Explain Direct Linear Transform (DLT).</li>
+<li>Describe the Image Pyramid.</li>
+<li>Outline the methods for line/edge extraction.</li>
+<li>Explain Triangulation.</li>
+</ol>
+<p> </p>
+<h2 id="System-design"><a href="#System-design" class="headerlink" title="System design"></a>System design</h2><ol>
+<li>You have a mobile robot system with four cameras mounted on the front, back, and sides. Design a system that can use it for indoor mapping, localization, and path planning.</li>
+<li>Design a kiosk robot that can be used in an amusement park.</li>
+<li>Design a mapping/positioning system for parking in a garage (common in the US and Europe).</li>
+<li>Design a mapping/localization system for a parking garage.</li>
+<li>Design an augmented reality device for use on a moving Ferris wheel.</li>
+<li>Design an augmented reality device for a crowded subway station.</li>
+<li>Design a robust positioning system for an unmanned forklift to be used in a logistics facility. There are multiple forklifts moving around, and people are present.</li>
+<li>Design a SLAM system for a mobile robot to be used in a factory. There is constant lighting, but the floor is coated and highly reflective, and the factory equipment is made of metal and has few visual features and is highly reflective.</li>
+<li>You have 10 TB of real-world data. What development pipeline would you create to make SLAM work in as many environments as possible?</li>
+<li>Design a crowdsourced, automated HD-Map creation system for autonomous driving.</li>
+</ol>
+<p> </p>
+<h2 id="Coding-interview-questions-Live-implementation"><a href="#Coding-interview-questions-Live-implementation" class="headerlink" title="Coding interview questions (Live / implementation)"></a>Coding interview questions (Live / implementation)</h2><ol>
+<li>Implement an image stitcher to create a panorama image from multiple consecutive images.</li>
+<li>Implement LiDAR SLAM using G-ICP based odometry. Loop closure should be implemented.</li>
+<li>Implement FAST keypoint detector.</li>
+<li>Implement an algorithm to find the camera pose, given 2D-3D correspondence data.</li>
+<li>Implement the PROSAC framework.</li>
+<li>Implement the ICP algorithm.</li>
+<li>Implement a brute-force matcher given a set of 2 pairs of feature descriptors.</li>
+<li>Implement a Vector / Matrix container. Basic operators should work (e.g. matrix-matrix addition, matrix-matrix multiplication, matrix-vector multiplication).</li>
+<li>Implement the A* algorithm</li>
+<li>Implement a fast matrix multiplication algorithm.</li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9WYlZRSlJLWHhCQT9zaT16ak1WbEgza1o2YUdUdGk3">Two Sum problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS91MjAyemdNN0Zxaz9zaT1RSTNvWmI2STlCWHMyWDl3">Maximum subarray sum problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS82cDdtZktvcGZMWT9zaT0yZHlmWjFxNFVpM1FVVUxz">Product of array except self problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9Za2FjbklPdDJqTT9zaT1QT1drYW1ZVExRbU5DLUpY">Subarray sum equals k problem<i class="fa fa-external-link-alt"></i></span></li>
+<li>(Live) <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9pMXUyQ2huVXZaTT9zaT1aZ3VPOElpUERfaWNBeHZ6">Longest common sequence problem<i class="fa fa-external-link-alt"></i></span></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231127-100-slam-interview-questions/" rel="bookmark">SLAM 기술면접 질문 100선</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231128-dsp-slam/" rel="bookmark">Wang 2021 - DSP-SLAM - Object Oriented SLAM with Deep Shape Priors 논문 리뷰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231221-how-to-follow-slam-papers/" rel="bookmark">2024년 Spatial AI 및 Robotics 최신 논문 빠르게 파악하는 방법</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Interview/" rel="tag"># Interview</a>
+              <a href="/tags/Questions/" rel="tag"># Questions</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/LiDAR-SLAM/" rel="tag"># LiDAR SLAM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20230910-red-flags-from-top-vcs/" rel="prev" title="VC들이 지적한 투자 위험 신호 목록">
+                  <i class="fa fa-chevron-left"></i> VC들이 지적한 투자 위험 신호 목록
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20231128-dsp-slam/" rel="next" title="Wang 2021 - DSP-SLAM - Object Oriented SLAM with Deep Shape Priors 논문 리뷰">
+                  Wang 2021 - DSP-SLAM - Object Oriented SLAM with Deep Shape Priors 논문 리뷰 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

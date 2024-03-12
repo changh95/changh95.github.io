@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -32,9 +32,9 @@
 <meta property="article:published_time" content="2021-03-26T05:48:45.000Z">
 <meta property="article:modified_time" content="2023-06-09T06:12:01.839Z">
 <meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Bash">
 <meta property="article:tag" content="tmux">
-<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
 
 
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -455,10 +455,8 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <div class="video-container"><iframe src="https://www.youtube.com/embed/0eCHCrYMQIw?t=514" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
-
 <h2 id="설정"><a href="#설정" class="headerlink" title="설정"></a>설정</h2><p>위 영상을 참고해서 tmux 를 설정했다.<br>사용한 <code>.tmux.conf</code>는 다음과 같다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># split windows like vim</span></span><br><span class="line"><span class="comment"># vim's definition of a horizontal/vertical split is reversed from tmux's</span></span><br><span class="line"><span class="built_in">bind</span> s split-window -v</span><br><span class="line"><span class="built_in">bind</span> v split-window -h</span><br><span class="line"></span><br><span class="line"><span class="comment"># move around panes with hjkl, as one would in vim after pressing ctrl-w</span></span><br><span class="line"><span class="built_in">bind</span> h run-shell -b <span class="string">'tmux-keep-zoom L'</span></span><br><span class="line"><span class="built_in">bind</span> j run-shell -b <span class="string">'tmux-keep-zoom D'</span></span><br><span class="line"><span class="built_in">bind</span> k run-shell -b <span class="string">'tmux-keep-zoom U'</span></span><br><span class="line"><span class="built_in">bind</span> l run-shell -b <span class="string">'tmux-keep-zoom R'</span></span><br><span class="line">unbind z</span><br><span class="line"><span class="built_in">bind</span> z run-shell -b <span class="string">'tmux-resize-screen'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># vi-style controls for copy mode</span></span><br><span class="line">setw -g mode-keys vi</span><br><span class="line"><span class="built_in">set</span> -g base-index 1</span><br><span class="line">setw -g pane-base-index 1</span><br><span class="line">set-option -g prefix C-a</span><br><span class="line">unbind-key C-b</span><br><span class="line">bind-key C-a send-prefix</span><br><span class="line">setw -g mode-keys vi</span><br><span class="line"><span class="built_in">set</span> -g display-time 1</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>ctrl + a</code> + <code>v</code>를 누르면 화면이 좌우로 쪼개진다</li>
 <li><code>ctrl + a</code> + <code>h</code>를 누르면 화면이 상하로 쪼개진다</li>
@@ -484,6 +482,9 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20210326-alacritty-tmux-zsh-prezto/" rel="bookmark">리눅스 터미널 업그레이드 - Alacritty + zsh + prezto + tmux + (NeoVim)!</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210808-docker-for-slam/" rel="bookmark">SLAMOps를 위한 첫걸음 - Docker + CI</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210322-missing-semester-shell/" rel="bookmark">Missing Semesters (2020) 1강 The Shell</a></div>
     </li>
     <li class="popular-posts-item">
@@ -492,17 +493,14 @@ mjx-container[display="true"] + br {
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210323-missing-semesters-vim/" rel="bookmark">Missing Semesters (2020) 3강 Vim</a></div>
     </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210325-missing-semester-data-wranglnig/" rel="bookmark">Missing Semesters (2020) 4강 Data Wrangling</a></div>
-    </li>
   </ul>
 
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
               <a href="/tags/Bash/" rel="tag"># Bash</a>
               <a href="/tags/tmux/" rel="tag"># tmux</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
           </div>
 
         
@@ -566,7 +564,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -349,19 +349,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -487,7 +487,6 @@ mjx-container[display="true"] + br {
 <li>“니 컴 문제는 니가 해결하십시오”</li>
 </ul>
 <img src="/20210808-docker-for-slam/ddocker.jpg" class="" title="ddocker">
-
 <p> </p>
 <p>보통 <strong>어떤 팀원이 새로운 코드를 팀 전체가 사용하는 코드에 푸쉬해놓고, 다른 팀원의 컴퓨터에서 빌드가 터질 때 변명처럼 나오는 말</strong>입니다.</p>
 <p>정말 무책임하지 않나요?</p>
@@ -551,7 +550,6 @@ mjx-container[display="true"] + br {
 <p>하지만 이 방법도 <strong>설치해야하는 모든 시스템 라이브러리를 리스팅 하는 노가다</strong>를 엄청 많이 했어요.</p>
 <p>디버깅을 하면서도 <strong>‘이게 맞나…? 다 한건가…?’ 싶다가도 버그가 터지면 ‘내가 그럼 그렇지’를 외치기를 몇번씩 반복</strong>했던 것 같습니다.</p>
 <img src="/20210808-docker-for-slam/bug.jpg" class="" title="bug">
-
 <p> </p>
 <p><strong>근데 Docker를 쓰고 엄청 쉬워졌습니다.</strong></p>
 <ol>
@@ -568,9 +566,11 @@ mjx-container[display="true"] + br {
 </li>
 <li>SLAM 프로그램 빌드<ul>
 <li>OpenCV랑 Ceres를 매번 빌드하기에는 너무 오래걸림 (30분 ~ 1시간)</li>
-<li>그러니 Ubuntu 20.04에 OpenCV랑 Ceres를 미리 빌드해놓은 이미지를 생성</li>
+<li>그러니 Ubuntu 20.04에 OpenCV랑 Ceres를 미리 빌드해놓은 이미지를 생성<ul>
 <li>git에서 소스코드만 떙겨와서 빌드<ul>
 <li><strong>1분만에 Clean Ubuntu 20.04에 OpenCV + Ceres + 나의 SLAM 프로그램이 빌드</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -584,37 +584,28 @@ mjx-container[display="true"] + br {
 <li>이전에 Docker를 설치하려고 한 경험이 있다면, Docker 버전 충돌을 피하기 위해 예전 Docker를 삭제합니다. (이전에 설치 경험이 없으면 이 단계는 건너뜁시다)</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker docker-engine docker.io containerd runc</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li>apt에 Docker repository를 추가해줍니다. 이 과정을 거치면 apt install docker~~~ 로 쉽게 받을 수 있습니다.</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br><span class="line"></span><br><span class="line">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> \</span><br><span class="line"><span class="string">"deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \</span></span><br><span class="line"><span class="string"><span class="subst">$(lsb_release -cs)</span> stable"</span> | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol>
 <li>Docker engine을 설치해줍니다.</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
+<ol>
 <li>Docker의 Hello world를 실행해서 잘 설치되었는지 확인합니다.</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
-
-<p>다음과 같은 화면이 나오면 성공입니다.</p>
-<img src="/20210808-docker-for-slam/hello-docker.png" class="" title="hello-docker">
-
-<ol start="5">
+<p>다음과 같은 화면이 나오면 성공입니다.<br><img src="/20210808-docker-for-slam/hello-docker.png" class="" title="hello-docker"></p>
+<ol>
 <li>(선택) Docker를 쓸 때는 항상 <code>sudo docker...</code>로 써야합니다. 매번 sudo 쳐주는것도 귀찮고, 아니면 CI 등 자동화 스크립트를 쓸 때 비밀번호 쳐주기 귀찮다면 sudo를 떼버립시다. 한번 로그아웃하고 다시 로그인해야지 적용됩니다.</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd docker</span><br><span class="line"></span><br><span class="line">sudo usermod -aG docker <span class="variable">$USER</span></span><br><span class="line"></span><br><span class="line">newgrp docker</span><br><span class="line"></span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <hr>
 <h2 id="Clean-Ubuntu-설치-방법"><a href="#Clean-Ubuntu-설치-방법" class="headerlink" title="Clean Ubuntu 설치 방법"></a>Clean Ubuntu 설치 방법</h2><p>엄청 간단합니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -dit ubuntu:latest</span><br><span class="line"></span><br><span class="line">sudo docker images</span><br></pre></td></tr></table></figure>
-
 <img src="/20210808-docker-for-slam/clean_ubuntu.png" class="" title="clean_ubuntu">
-
 <p> </p>
 <hr>
 <h2 id="Image-Container-사용법"><a href="#Image-Container-사용법" class="headerlink" title="Image / Container 사용법"></a>Image / Container 사용법</h2><p>기본적인 Docker 사용을 위해서는 image와 container의 개념을 이해해야합니다.</p>
@@ -636,39 +627,26 @@ mjx-container[display="true"] + br {
 </ul>
 <h3 id="Image-확인하기"><a href="#Image-확인하기" class="headerlink" title="Image 확인하기"></a>Image 확인하기</h3><p>현재 내 Docker에 설정이 된 image들은 다음과 같은 커맨드로 확인할 수 있습니다</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker images</span><br></pre></td></tr></table></figure>
-
 <img src="/20210808-docker-for-slam/docker_images.png" class="" title="docker_images">
-
 <h3 id="Container-확인하기"><a href="#Container-확인하기" class="headerlink" title="Container 확인하기"></a>Container 확인하기</h3><p>현재 내 Docker에서 만든 container들은 다음과 같은 커맨드로 확인할 수 있습니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps -a</span><br></pre></td></tr></table></figure>
-
 <img src="/20210808-docker-for-slam/docker_ps_a.png" class="" title="docker_ps_a">
-
 <h3 id="Container-지우기"><a href="#Container-지우기" class="headerlink" title="Container 지우기"></a>Container 지우기</h3><p>우리가 앞으로 딱히 hello-world container를 더 쓸 것 같지 않습니다. 지워주도록 하겠습니다. 지울때는 container ID로 지워주거나, names로 지워주면 됩니다. <code>sad_faraday</code>나 <code>clever_meitner</code> 같은 것들이 name인데, 이는 우리가 container 생성 시 이름을 지어주지 않았기 때문에 docker가 임의로 지어준 것입니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NAMES 로 지우기</span></span><br><span class="line">sudo docker rm sad_farady</span><br><span class="line">sudo docker rm clever_meitner</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONTAINER ID로 지우기</span></span><br><span class="line"></span><br><span class="line">sudo docker rm ceb8a255cab8</span><br><span class="line">sudo docker rm 425b90a1a354</span><br></pre></td></tr></table></figure>
-
-<p>그러면 container가 지워진 걸 볼 수 있습니다</p>
-<img src="/20210808-docker-for-slam/docker_ps_a_2.png" class="" title="docker_ps_a2">
-
+<p>그러면 container가 지워진 걸 볼 수 있습니다<br><img src="/20210808-docker-for-slam/docker_ps_a_2.png" class="" title="docker_ps_a2"></p>
 <h3 id="Image-지우기"><a href="#Image-지우기" class="headerlink" title="Image 지우기"></a>Image 지우기</h3><p>hello-world 이미지도 지워보겠습니다.</p>
 <p>Image를 지울때는 remove-image를 줄인 <code>rmi</code>를 사용합니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker rmi d1165f221234</span><br></pre></td></tr></table></figure>
-
 <img src="/20210808-docker-for-slam/docker_rmi.png" class="" title="docker_rmi">
-
 <h3 id="Container-생성하기-CLI"><a href="#Container-생성하기-CLI" class="headerlink" title="Container 생성하기 (CLI)"></a>Container 생성하기 (CLI)</h3><p>이제 image로부터 Container를 생성해보겠습니다.</p>
 <p>가장 쉬운 방법은 아까의 <code>Clean Ubuntu 설치 방법</code> 섹션의 run 커맨드입니다. 여기에 <code>--name</code> flag를 주어서 container에 이름을 부여해줄 수 있습니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run --name clean_ubuntu -dit ubuntu:latest</span><br></pre></td></tr></table></figure>
-
 <img src="/20210808-docker-for-slam/docker_run_name.png" class="" title="docker_run_name">
-
 <h3 id="Clean-Ubuntu-20-04-실행하기-i-e-Container-실행하기"><a href="#Clean-Ubuntu-20-04-실행하기-i-e-Container-실행하기" class="headerlink" title="Clean Ubuntu 20.04 실행하기 (i.e. Container 실행하기)"></a>Clean Ubuntu 20.04 실행하기 (i.e. Container 실행하기)</h3><p><code>sudo docker ps -a</code>로 container가 생성된 것을 확인할 수 있습니다. recursive_wing과 같이 Docker에서 임의로 정한 구린 이름 말고, 내가 직접 지정한 좋은 이름으로 생성되었습니다.</p>
 <p>이제 생성된 container를 실행해서 실제로 Clean Ubuntu 환경으로 들어가보겠습니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># NAME으로 접근하기</span></span><br><span class="line">sudo docker attach clean_ubuntu</span><br><span class="line"></span><br><span class="line"><span class="comment"># CONTAINER ID로 접근하기</span></span><br><span class="line">sudo docker attach 3cff7e522c6f</span><br></pre></td></tr></table></figure>
-
 <p>아래 사진과 같이 Clean Ubuntu 20.04 환경에 root 권한으로 <code>/</code>에 들어왔습니다. <code>exit</code>을 사용해서 container를 빠져나올 수 있습니다.</p>
 <img src="/20210808-docker-for-slam/docker_attach.png" class="" title="docker_attach">
-
 <p>이제 여기서 <code>git clone ...</code>으로 소스코드를 땡겨오고 빌드를 하고 여러가지 실험을 할 수 있습니다. 실험이 끝나면 container를 삭제해주면 됩니다.</p>
 <h3 id="Container-생성하기-Dockerfile"><a href="#Container-생성하기-Dockerfile" class="headerlink" title="Container 생성하기 (Dockerfile)"></a>Container 생성하기 (Dockerfile)</h3><p>근데 Clean Ubuntu이다보니 너무 clean 합니다.</p>
 <p>git, cmake, build-essential, gcc, wget, curl 뭐 다 새로 깔아줘야하는데, <strong>실험을 위해 container를 만들 때 마다 매번 커맨드를 쳐주기 너무 귀찮습니다</strong>.</p>
@@ -676,12 +654,9 @@ mjx-container[display="true"] + br {
 <p><strong>이 반복적인 작업을 자동화하는 방법, Dockerfile</strong>이 있습니다.</p>
 <p>우선 container에서 빠져나온 후, 원하는 위치에 Dockerfile을 만들고 (i.e. <code>touch Dockerfile</code>) 저장해봅시다.</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu:latest는 20.04를 의미합니다.</span></span><br><span class="line"><span class="keyword">FROM</span> ubuntu:latest </span><br><span class="line"></span><br><span class="line"><span class="comment"># 작성자 이름입니다</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> changh95</span><br><span class="line"></span><br><span class="line"><span class="comment"># apt로 패키지 받을 때 interative하게 사용하는 기능들을 끕니다. Docker에서 로그를 넘길 때 문제가 생길 수 있으므로 이 옵션은 필수입니다!</span></span><br><span class="line"><span class="keyword">ARG</span> DEBIAN_FRONTEND=noninteractive</span><br><span class="line"></span><br><span class="line"><span class="comment"># apt-get update와 기본적인 패키지들을 깔아줍니다.</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get -y update &amp;&amp;\</span></span><br><span class="line"><span class="bash">apt-get -y install build-essential cmake git sudo wget &amp;&amp;\</span></span><br><span class="line"><span class="bash">apt-get -y install python3 python3-pip &amp;&amp;\</span></span><br><span class="line"><span class="bash">apt-get autoclean</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 원하는 프로젝트의 소스코드를 clone해와서 빌드 스크립트를 실행합니다</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir cv-project &amp;&amp;\</span></span><br><span class="line"><span class="bash"><span class="built_in">cd</span> cv-project &amp;&amp;\</span></span><br><span class="line"><span class="bash">git <span class="built_in">clone</span> https://github.com/changh95/cpp-cv-project-template.git . &amp;&amp;\</span></span><br><span class="line"><span class="bash">git checkout <span class="string">"develop"</span> &amp;&amp;\</span></span><br><span class="line"><span class="bash">pip3 install pyyaml &amp;&amp;\</span></span><br><span class="line"><span class="bash">./setup.py</span></span><br></pre></td></tr></table></figure>
-
 <p>그리고 <code>sudo docker build ...</code> 커맨드를 Dockerfile에 명시된 instruction을 따라 이미지를 생성합니다. 여러가지 flag도 사용하는데, 함께 설명합니다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo docker build --no-cache --force-rm -f Dockerfile -t cvproject:base .</span><br><span class="line"></span><br><span class="line"><span class="comment"># --no-cache 는 이전 빌드에서 생성된 캐시를 사용하지 않겠다는겁니다. 생성시간을 줄이기 위해서 캐시를 사용하는 경우도 있는데, 처음 사용하는 사람은 실수하기 쉬우니 일단 no cache 옵션을 씁시다.</span></span><br><span class="line"><span class="comment"># --force-rm 은 빌드하다가 터지면 이미지/컨테이너를 지워줍니다.</span></span><br><span class="line"><span class="comment"># -f 는 사용할 Dockerfile의 이름을 명시합니다</span></span><br><span class="line"><span class="comment"># -t 는 우리가 만드는 이미지의 이름 + 태그를 명시합니다</span></span><br><span class="line"><span class="comment"># . 는 Dockerfile의 경로를 명시합니다.</span></span><br></pre></td></tr></table></figure>
-
 <img src="/20210808-docker-for-slam/dockerfile_build.png" class="" title="docker_attach">
-
 <p> </p>
 <hr>
 <h2 id="고수처럼-CI-Docker-사용하기"><a href="#고수처럼-CI-Docker-사용하기" class="headerlink" title="고수처럼 CI + Docker 사용하기"></a>고수처럼 CI + Docker 사용하기</h2><p>우리는 이제 Docker의 기본적인 사용법을 알고있습니다.</p>
@@ -690,14 +665,12 @@ mjx-container[display="true"] + br {
 <p>그에 비해, 팀원들과의 협업은 GitHub나 GitLab 같은 온라인 Git 서비스에서 이뤄지는 경우가 대부분입니다.</p>
 <p>GitHub에 Docker를 연결할 수 있는 방법이 있을까요?</p>
 <img src="/20210808-docker-for-slam/building.png" class="" title="Docker CI">
-
 <p> </p>
-<p>여기서부터는 **CI (Continuous Integration)**을 개발한다고 볼 수 있습니다.</p>
+<p>여기서부터는 <strong>CI (Continuous Integration)</strong>을 개발한다고 볼 수 있습니다.</p>
 <p>가장 간단한 CI 개념으로, <strong>Pull Request로 코드가 들어오면 자동으로 Docker build를 하고 성공/실패 결과를 표시</strong>할 수 있습니다.</p>
 <p>간단하게 <strong>GitHub Actions</strong>를 사용해봅시다.</p>
 <h3 id="GitHub-Actions-활성화하기"><a href="#GitHub-Actions-활성화하기" class="headerlink" title="GitHub Actions 활성화하기"></a>GitHub Actions 활성화하기</h3><p>GitHub 레포지토리에 들어가서, <code>Actions</code> 탭을 눌러 들어가면 아래와 같은 화면이 나옵니다.</p>
 <img src="/20210808-docker-for-slam/ga.png" class="" title="github actions">
-
 <p>‘set up a workflow yourself’를 누르면 <code>.github/workflows/main.yml</code>이라는 파일을 생성하며, 해당 파일이 가질 내용을 보여줍니다.</p>
 <p>일단 이 파일을 저장해줍니다.</p>
 <p>이제 우리는 1. <strong>MS Azure 클라우드 서버에서 빌드를 할지</strong>, 2. <strong>개인 장비에서 빌드를 할지 선택</strong>해야합니다.</p>
@@ -720,15 +693,12 @@ mjx-container[display="true"] + br {
 <p>우리가 보았던 커맨드는 왠만하면 다 들어가있습니다.</p>
 <p>추가로, Docker 빌드가 실패했을 경우 실패한 image / container를 삭제해주는 기능이 있습니다.</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">CI</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">development</span></span><br><span class="line">  <span class="attr">pull_request:</span></span><br><span class="line">    <span class="attr">branches:</span> [<span class="string">development</span>]</span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">self-hosted</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">Docker</span> <span class="string">image</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Build start==="</span></span><br><span class="line">         <span class="string">echo</span> <span class="string">${{</span> <span class="string">github.head_ref</span> <span class="string">}}</span></span><br><span class="line">        </span><br><span class="line">         <span class="string">cd</span> <span class="string">Dockerfiles</span></span><br><span class="line">         <span class="string">docker</span> <span class="string">build</span> <span class="string">--force-rm</span> <span class="string">--no-cache</span> <span class="string">-f</span> <span class="string">build.dockerfile</span> <span class="string">-t</span> <span class="string">"cpp-cv-project-template:base"</span> <span class="string">--build-arg</span> <span class="string">BRANCH=${{</span> <span class="string">github.head_ref</span> <span class="string">}}</span> <span class="string">.</span> </span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Build finished==="</span></span><br><span class="line">         </span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Clean</span> <span class="string">up</span> <span class="string">Docker</span> <span class="string">image</span> <span class="string">if</span> <span class="string">build</span> <span class="string">fails</span></span><br><span class="line">        <span class="attr">if:</span> <span class="string">failure()</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Remove failed image start==="</span></span><br><span class="line">         <span class="string">docker</span> <span class="string">rmi</span> <span class="string">-f</span> <span class="string">$(docker</span> <span class="string">images</span> <span class="string">-f</span> <span class="string">"dangling=true"</span> <span class="string">-q)</span></span><br><span class="line">         <span class="string">docker</span> <span class="string">images</span> </span><br><span class="line">         <span class="string">echo</span> <span class="string">"=== Removal finished==="</span></span><br></pre></td></tr></table></figure>
-
 <p>레포지토리에서 branch protetion rule 까지 설정해주고 나면, <strong>빌드가 성공한 경우에만 merge가 가능하게 설정</strong>을 바꿀 수 있습니다.</p>
 <p>제가 좋아하는 설정은 주로 1. <strong>최소 N명 이상의 코드 리뷰에서 approve</strong>를 받아야함, 2. <strong>모든 status check를 통과</strong>해야함 (e.g. 빌드, 유닛테스트, 린터/포맷터, 벤치마크)입니다.</p>
 <p>아래는 가장 간단한 빌드 테스트에 대한 status check가 적용된 모습입니다.</p>
 <img src="/20210808-docker-for-slam/status_check.png" class="" title="Status check">
-
 <p>빌드가 진행되는 동안에는 다음과 같이 확인할 수 있습니다 (원래 빌드 진행 중 로그도 볼 수 있는데, 1시간동안 로그가 많이 쌓여서 로딩하는데 시간이 좀 걸리는 것 같습니다)</p>
 <img src="/20210808-docker-for-slam/ga_2.png" class="" title="asdf">
-
 <p> </p>
 <h3 id="MS-Azure-클라우드-서버로-빌드하기"><a href="#MS-Azure-클라우드-서버로-빌드하기" class="headerlink" title="MS Azure 클라우드 서버로 빌드하기"></a>MS Azure 클라우드 서버로 빌드하기</h3><p>MS Azure 클라우드의 경우 2코어 7GB 램의 옵션을 가지고 있는데, Public repository의 경우 제한시간동안 공짜로 사용할 수 있습니다.</p>
 <p>이 방법도 Self-hosted runner 방법과 크게 다르지 않으며, 대신 아래의 옵션들 중에 선택해서 넣으면 됩니다.</p>
@@ -825,7 +795,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

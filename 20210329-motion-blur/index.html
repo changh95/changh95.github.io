@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -350,19 +350,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -482,7 +482,6 @@ mjx-container[display="true"] + br {
 <p>모션 블러는 기존의 사진 및 영상 촬영에서는 물체의 자연스러운 움직임을 표현하기 위해 꼭 들어가야하는 요소이다.</p>
 <p>그러나, <strong>로보틱스 비전</strong>와 <strong>딥러닝 비전</strong> 등 영상을 분석해서 주위 환경에 대해 이해하고 정보를 추출하려고 하는 목적을 지닐 때에 <strong>모션 블러는 굉장히 골칫거리</strong>가 될 수 있다. 비-딥러닝 방식의 영상처리이던지, CNN 딥러닝의 컨벌루션 방식이라던지, 영상을 분석하기 위해서는 점과 선 등의 low-level feature를 조합해서 high-level 지식을 추출해야하는데, 모션 블러는 이 점과 선을 흐리게 하기 때문에 high-level 지식을 추출하기 더 어려워진다. 그러므로, <strong>모션 블러는 가능하면 최대한 피해야한다!</strong></p>
 <img src="/20210329-motion-blur/Untitled.png" class="" title="goddamnit">
-
 <p>디텍션 + 트랙킹을 수행할 때, 여러가지 급격한 이미지 변화를 나타내는 이유 중 몇개를 보여주는 이미지입니다. (d) Abrupt motions는 갑작스러운 움직임에 피사체 및 주위 환경이 흐려져 보이는 것을 뜻 하는데, 이는 모션 블러 효과도 포함된다고 볼 수 있습니다. </p>
 <p>이 이미지는 ICCV 2015년 “Hierarchical Convolutional Features for Visual Tracking” 이라는 자료에서 발췌했습니다.</p>
 <p> </p>
@@ -499,17 +498,13 @@ mjx-container[display="true"] + br {
 <p>모션 블러가 왜 나타나는지 이해하기 위해서는 카메라가 어떻게 작동하는지 이해해야한다. 카메라가 작동하는 원리는 아래와 같다</p>
 <p> </p>
 <h3 id="2-1-카메라의-원리"><a href="#2-1-카메라의-원리" class="headerlink" title="2.1 카메라의 원리"></a>2.1 카메라의 원리</h3><ol>
-<li><p>셔터가 열리고, 이미지 센서가 빛에 노출된다.</p>
-<img src="/20210329-motion-blur/Untitled_1.png" width="500" height="200" alt="lol" title="lol2">
+<li><p>셔터가 열리고, 이미지 센서가 빛에 노출된다.<br><img src="/20210329-motion-blur/Untitled_1.png" width="500" height="200" alt="lol" title="lol2"></p>
 </li>
-<li><p>빛이 센서에 닿으면서, <strong>센서의 픽셀마다 받아드린 빛의 양 만큼의 신호를 모은다</strong>.</p>
-<img src="/20210329-motion-blur/Untitled_2.png" width="500" height="200" alt="lol" title="lol2">
+<li><p>빛이 센서에 닿으면서, <strong>센서의 픽셀마다 받아드린 빛의 양 만큼의 신호를 모은다</strong>.<br><img src="/20210329-motion-blur/Untitled_2.png" width="500" height="200" alt="lol" title="lol2"></p>
 </li>
-<li><p>셔터가 닫히면서, 더 이상 이미지 센서가 빛에 노출되지 않는다.</p>
-<img src="/20210329-motion-blur/Untitled_3.png" width="500" height="200" alt="lol" title="lol2">
+<li><p>셔터가 닫히면서, 더 이상 이미지 센서가 빛에 노출되지 않는다.<br><img src="/20210329-motion-blur/Untitled_3.png" width="500" height="200" alt="lol" title="lol2"></p>
 </li>
-<li><p><strong>지금까지 모아온 빛 신호를 디지털 신호로 바꾸고</strong>, 2D 이미지를 만든다.</p>
-<img src="/20210329-motion-blur/Untitled_4.png" width="500" height="200" alt="lol" title="lol2">
+<li><p><strong>지금까지 모아온 빛 신호를 디지털 신호로 바꾸고</strong>, 2D 이미지를 만든다.<br><img src="/20210329-motion-blur/Untitled_4.png" width="500" height="200" alt="lol" title="lol2"></p>
 </li>
 <li><p>1로 돌아가서 새 사진을 찍는다.</p>
 </li>
@@ -518,8 +513,7 @@ mjx-container[display="true"] + br {
 <p> </p>
 <h3 id="모션블러의-원리"><a href="#모션블러의-원리" class="headerlink" title="모션블러의 원리"></a>모션블러의 원리</h3><p>이미지 센서는 빛에 특정 시간동안 노출되어있어야 한다. 이 노출되어있는 시간을 우리는 <strong>Exposure, 또는 Exposure time</strong>이라고 한다. </p>
 <p>Exposure를 받고있는 도중에 피사체가 움직여버렸다고 생각해보자. <strong>움직이기 전과 움직이기 시작한 후에 들어오는 빛이 다를것이다</strong>. 움직이기 전의 빛을 받던 픽셀은 더 이상 빛을 받지 못하게 되고, 움직이면서 새로운 픽셀이 빛을 받게 된다. 이렇게 <strong>(이전에 빛을 받던 픽셀 + 새로 빛을 받는 픽셀)만큼의 픽셀들이 피사체에 대한 정보를 담게 된다</strong>. 하지만, 충분한 시간동안 <strong>충분한 양의 빛이 담기지 않기 때문에 약한 신호로 측정</strong>되고, 이 때문에 <strong>투명해보이는 효과</strong>가 나타난다.</p>
-<img src="/20210329-motion-blur/Untitled_5.png" width="750" height="500" alt="lol" title="lol2">
-
+<p><img src="/20210329-motion-blur/Untitled_5.png" width="750" height="500" alt="lol" title="lol2"></p>
 <p>그렇다면, Exposure 중에만 피사체가 움직이지 않으면 모션 블러가 없겠다! </p>
 <p>하지만 대부분 피사체들은 연속적으로 움직이고, exposure 중에만 멈춰주는 착한 피사체는 없기 때문에… Exposure 중에 번지는 효과를 최소화하기 위해서는 <strong>Exposure를 줄이면 되겠다</strong>. 10의 Exposure에서 10 픽셀의 번짐 (모션 블러)를 일으킨다면, 1의 Exposure에는 1픽셀의 번짐만이 있을 것이다. 모션 블러의 효과가 10 픽셀에서 1픽셀로 줄었다!</p>
 <p>그리고 아주 다행히도, <strong>괜찮은 웹캠, 스마트폰, 디지털 카메라에서도 요즘은 exposure를 조정할 수 있다!</strong></p>
@@ -530,52 +524,42 @@ mjx-container[display="true"] + br {
 <p>그러면 모션 블러를 최소화하려면, <strong>Exposure를 줄이고, ISO 값을 높이면 되겠다</strong>.</p>
 <p>다만 <strong>ISO 값은 높이면 높일수록 노이즈가 커진다</strong>. 이미지 센서 특성 상 항상 어느정도의 노이즈가 들어가는데, 그 값을도 함께 증폭이 되기 때문이다. <strong>이 때 생기는 노이즈는 피할 수 없다</strong>. 최소화 하려면 이미지 센서 사이즈를 큰거를 쓰거나, 가우시안 블러 등으로 노이즈를 없애면 되지만… 이 부분은 <strong>다른 글에서 다루기로 한다</strong>.</p>
 <img src="/20210329-motion-blur/Untitled_6.png" class="" title="ISO and noise">
-
 <p> </p>
 <hr>
 <h2 id="스마트폰에서-모션블러-지우기"><a href="#스마트폰에서-모션블러-지우기" class="headerlink" title="스마트폰에서 모션블러 지우기"></a>스마트폰에서 모션블러 지우기</h2><p>스마트폰에서는 다행히도 Exposure 값을 바꿀 수 있다. 사용한 스마트폰은 삼성 갤럭시 S7 Edge이다.</p>
-<p>기존의 카메라 앱에 들어가서, 왼쪽으로 슬라이드하면 **’프로 모드’**가 있다.</p>
+<p>기존의 카메라 앱에 들어가서, 왼쪽으로 슬라이드하면 <strong>‘프로 모드’</strong>가 있다.</p>
 <p><strong>프로 모드에서는 Exposure, ISO 등 여러 값들을 사용자가 원하는대로 바꿀 수 있다.</strong></p>
 <p>아이폰, 다른 안드로이드 스마트폰에서도 비슷한 기능을 찾아 들어가면 된다.</p>
 <img src="/20210329-motion-blur/pro.png" class="" title="pro1">
-
 <p>비교를 위해서 Exposure를 1/5정도로 가능한 높이고 손을 가볍게 흔들면서 사진을 찍었다. 엄청난 양의 모션 블러가 보인다. 그에 비해, 뒤에 움직이지 않는 물체들은 선명하게 촬영되었다.</p>
 <p>(아래 사진은 블러가 가득하다)</p>
-<img src="/20210329-motion-blur/blur.jpg" width="350" height="500" alt="lol" title="lol2">
-
+<p><img src="/20210329-motion-blur/blur.jpg" width="350" height="500" alt="lol" title="lol2"></p>
 <p>이제 Exposure를 줄여보기로 한다. 약 1/250 정도로 줄여보았다. </p>
 <p>이렇게 되서 모션 블러와 함께 피사체가 함께 사라졌다. 우리가 원하는건 피사체는 남고 블러만 사라지는거니까, ISO를 높여보기로 한다.</p>
 <p>(이미지가 전체적으로 어두워졌다. 이미지가 로딩이 안되는게 아니다! 사진 오른쪽 위를 보면 빛을 강하게 발산하는 컴퓨터 화면은 보인다.)</p>
-<img src="/20210329-motion-blur/before_fix.jpg" width="350" height="500" alt="lol" title="lol2">
-
+<p><img src="/20210329-motion-blur/before_fix.jpg" width="350" height="500" alt="lol" title="lol2"></p>
 <p>ISO를 높이고, 가볍게 손을 흔들면서 다시 촬영해보았다.</p>
 <p>오른쪽의 사진이 방금 ISO를 높인 후 찍힌사진이다. </p>
 <p>사진만 봐서는 손을 움직이지 않고 찍은것 처럼 보이나, 실제로는 아까전에 찍은 왼쪽의 블러 이미지를 얻을 때와 똑같이 움직인 사진이다. </p>
 <img src="/20210329-motion-blur/comparison.png" class="" title="comp">
-
-
 <p>모션 블러가 없어진건 정말 다행이다! 하지만 ISO를 높이면서 이미지에 노이즈가 생겼다.</p>
 <p>지금 나오는 두개의 이미지는 각각 높은 ISO에서 얻어진 이미지와, 기존의 낮은 ISO에서 얻어진 이미지이다. <strong>높은 ISO에서 얻어진 이미지는 노이즈가 생겼다</strong>. 사진을 찍는 사람들은 이걸 보고 사진의 grain (질감)이라고 하고 이를 통해 특정한 느낌을 표현하려고 하지만, 로보틱스 비전이나 딥러닝 비전을 하는 우리에게는 전혀 필요 없다. 깔끔한 이미지가 최고다!</p>
 <img src="/20210329-motion-blur/comp2.png" class="" title="comp2">
-
 <p> </p>
 <h2 id="머신-비전-카메라-Scientific-Camera로-모션-블러-제거하기"><a href="#머신-비전-카메라-Scientific-Camera로-모션-블러-제거하기" class="headerlink" title="머신 비전 카메라 / Scientific Camera로 모션 블러 제거하기"></a>머신 비전 카메라 / Scientific Camera로 모션 블러 제거하기</h2><p>위의 스마트폰과 같은 방식으로 진행되었다.</p>
 <p>FLIR사의 Chameleon 3 Monochrome 카메라를 이용해서 촬영되었고, Spinnaker Evaluation S/W를 사용했다.</p>
 <p>머신 비전 카메라들은 Exposure time와 ISO를 훨씬 더 정확하게 조정할 수 있다. FLIR 사의 경우에는 ISO를 Gain이라는 단어로 표현한다. 머신 비전 회사마다 명칭을 다르게 부르는 경우가 있으니, 이 점 유의해야한다. 보통 Exposure와 ISO는 오토모드로 고정이 되어있어서, 이 락을 먼저 풀어줘야한다.</p>
 <p>첫번째 영상은 레퍼런스 영상이다.</p>
 <p>약 이정도의 속도로 손을 열심히 흔들어서 모션 블러를 만들어보려고 했다. </p>
-<img src="/20210329-motion-blur/1.gif" width="1080" height="720" alt="[alternative_text]" title="[이예에~~1]">
-
+<p><img src="/20210329-motion-blur/1.gif" width="1080" height="720" alt="[alternative_text]" title="[이예에~~1]"></p>
 <p>2번째 영상에서는 기본 세팅에서 잡혀있는 Exposure 값으로 촬영을 해보았다.</p>
 <p>기본 세팅이 워낙 잘 잡혀있어서 모션 블러가 스마트폰 만큼 크진 않지만, 모션블러가 없지는 않다.</p>
 <p>이정도 모션 블러라면, 데이터셋이 충분하지 않은 딥러닝 비전은 검출에 실패할 수도 있고, 로보틱스 비전의 경우 피쳐 검출이 부정확할 수 있다.</p>
-<img src="/20210329-motion-blur/2.gif" width="1080" height="720" alt="[alternative_text]" title="[이예에~~2]">
-
+<p><img src="/20210329-motion-blur/2.gif" width="1080" height="720" alt="[alternative_text]" title="[이예에~~2]"></p>
 <p>세번째 영상에서는 Exposure 값을 줄이고, 밝아질 때 까지 Gain을 높여보았다.</p>
 <p>빠르게 움직이는 피사체임에도 불구하고, 모션 블러가 없는 영상을 얻을 수 있었다.</p>
 <p>그러나, 영상 썸네일에서 보이듯이 전체적으로 영상에 노이즈가 생긴 것을 확인할 수 있다.</p>
-<img src="/20210329-motion-blur/3.gif" width="1080" height="720" alt="[alternative_text]" title="[이예에~~3]">
-
+<p><img src="/20210329-motion-blur/3.gif" width="1080" height="720" alt="[alternative_text]" title="[이예에~~3]"></p>
 <hr>
 <h2 id="참고자료-소스"><a href="#참고자료-소스" class="headerlink" title="참고자료 + 소스"></a>참고자료 + 소스</h2><ul>
 <li><p>ICCV 2015 - “Hierarchical Convolutional Features for Visual Tracking”</p>
@@ -598,10 +582,10 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210228-AD-sensors/" rel="bookmark">SLAM에서 사용할 수 있는 센서의 종류</a></div>
+      <div class="popular-posts-title"><a href="/20210116-sensor-size/" rel="bookmark">카메라 센서 사이즈의 영향</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210116-sensor-size/" rel="bookmark">카메라 센서 사이즈의 영향</a></div>
+      <div class="popular-posts-title"><a href="/20210228-AD-sensors/" rel="bookmark">SLAM에서 사용할 수 있는 센서의 종류</a></div>
     </li>
   </ul>
 
@@ -674,7 +658,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

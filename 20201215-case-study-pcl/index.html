@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -340,19 +340,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -465,27 +465,22 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Case study: filter a Point Cloud faster”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9wY2xfZmlsdGVyLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9wb2ludGNsb3Vkcy5vcmcv">Point Cloud Library (PCL)<i class="fa fa-external-link-alt"></i></span>는 로보틱스, 자율주행, 3D 인지 쪽에서 굉장히 유명한 라이브러리죠. 이 라이브러리는 위 분야들에 <strong><em>엄청난 기여</em></strong>를 했습니다. </p>
 <img src="/20201215-case-study-pcl/pcl.jpg" class="" title="PCL library">
-
 <p>PCL은 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BvaW50Q2xvdWRMaWJyYXJ5L3BjbA==">12,000개가 넘는 커밋과 5천개가 넘는 Github star<i class="fa fa-external-link-alt"></i></span>를 가진 거대 오픈소스 프로젝트입니다.</p>
 <p>약 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BvaW50Q2xvdWRMaWJyYXJ5L3BjbC9ncmFwaHMvY29udHJpYnV0b3Jz">400명이 넘는 컨트리뷰터<i class="fa fa-external-link-alt"></i></span>가 있는데, 이런 경우에는 이 분야 고수들이 기능을 만드느라 최적화를 할 기회가 없다고 생각하실 수도 있겠습니다.</p>
 <p>그리고 여기 제가 있습니다.</p>
 <p>나: “ㅋㅋㅋ”</p>
-<br>
-
+<p><br></p>
 <h2 id="ConditionalRemoval-필터"><a href="#ConditionalRemoval-필터" class="headerlink" title="ConditionalRemoval 필터"></a>ConditionalRemoval 필터</h2><hr>
 <p>PCL을 조금 써보신 분들이라면 <span class="exturl" data-url="aHR0cHM6Ly9wY2wtdHV0b3JpYWxzLnJlYWR0aGVkb2NzLmlvL2VuL2xhdGVzdC9yZW1vdmVfb3V0bGllcnMuaHRtbA==">pcl::ConditionalRemoval<i class="fa fa-external-link-alt"></i></span> 기능을 한번쯤은 써보셨을 것 같습니다. </p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9wY2wtdHV0b3JpYWxzLnJlYWR0aGVkb2NzLmlvL2VuL2xhdGVzdC9yZW1vdmVfb3V0bGllcnMuaHRtbA==">공식 튜토리얼<i class="fa fa-external-link-alt"></i></span>에서는 해당 기능을 다음과 같은 방식으로 사용하라고 알려줍니다:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 읽기 쉽게 조금 코드를 바꿨습니다</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> pcl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> range_cond  = <span class="built_in">std</span>::make_shared&lt;ConditionAnd&lt;PointXYZ&gt; ();</span><br><span class="line">range_cond-&gt;addComparison ( </span><br><span class="line">    <span class="built_in">std</span>::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::GT, <span class="number">0.0</span>));</span><br><span class="line">range_cond-&gt;addComparison (</span><br><span class="line">    <span class="built_in">std</span>::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::LT, <span class="number">1.0</span>)));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 필터 생성</span></span><br><span class="line">ConditionalRemoval&lt;PointXYZ&gt; condition_removal;</span><br><span class="line">condition_removal.setCondition (range_cond);</span><br><span class="line">condition_removal.setInputCloud (input_cloud);</span><br><span class="line"><span class="comment">// 필터 적용</span></span><br><span class="line">condition_removal.filter (*cloud_filtered);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 읽기 쉽게 조금 코드를 바꿨습니다</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> pcl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> range_cond  = std::make_shared&lt;ConditionAnd&lt;PointXYZ&gt; ();</span><br><span class="line">range_cond-&gt;<span class="built_in">addComparison</span> ( </span><br><span class="line">    std::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::GT, <span class="number">0.0</span>));</span><br><span class="line">range_cond-&gt;<span class="built_in">addComparison</span> (</span><br><span class="line">    std::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::LT, <span class="number">1.0</span>)));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 필터 생성</span></span><br><span class="line">ConditionalRemoval&lt;PointXYZ&gt; condition_removal;</span><br><span class="line">condition_removal.<span class="built_in">setCondition</span> (range_cond);</span><br><span class="line">condition_removal.<span class="built_in">setInputCloud</span> (input_cloud);</span><br><span class="line"><span class="comment">// 필터 적용</span></span><br><span class="line">condition_removal.<span class="built_in">filter</span> (*cloud_filtered);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>이 코드는 간단하게 Point cloud에 필터를 적용하는데, 필터를 통과할 수 있는 point의 특성에 대한 조건을 걸어주는 겁니다. 여기서 그 조건은 다음과 같습니다. 0.0보다 크고 (Greater than == GT) 1.0보다 작은 경우 (Less than == LT). </p>
 </blockquote>
-<br>
-
+<p><br></p>
 <p>PCL 사용에 익숙하지 않으신 분들을 위해 조금 더 쉽게 정리하겠습니다.</p>
 <ul>
 <li>필터 조건을 하나 만듭니다. 첫번째 조건은 ‘Point의 xyz좌표 중 Z 값이 0.0보다 커야한다’ 입니다.</li>
@@ -494,37 +489,24 @@ mjx-container[display="true"] + br {
 <li><code>ConditionalRemoval</code>을 사용해 이 두개의 조건들을 Point cloud에 적용할겁니다.</li>
 <li>필터가 적용되면, 이 조건을 통과하는 point들만 point cloud에 남게 됩니다. </li>
 </ul>
-<br>
-보통의 Point cloud는 몇천개~몇만개의 포인트를 가지고 있습니다.
-
+<p><br><br>보통의 Point cloud는 몇천개~몇만개의 포인트를 가지고 있습니다.</p>
 <p>한번 생각해봅시다: </p>
 <img src="/20201215-case-study-pcl/think_about_it.jpg" class="" title="생각 좀 해보고">
-
 <p>Point cloud는 사실상 <strong><em>vector</em></strong>에 point 들을 담아놓은 데이터가 아니겠습니까?</p>
 <p>각각의 point들은 아래처럼 생겼겠죠.</p>
-<br>
-
+<p><br></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 엄청 간단하게 축약한겁니다.</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">PointXYZ</span>&#123;</span></span><br><span class="line">  <span class="keyword">float</span> x;</span><br><span class="line">  <span class="keyword">float</span> y;</span><br><span class="line">  <span class="keyword">float</span> z; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>필터를 통과하고 난 후의 point cloud를 새로 만든다고 생각해봅시다. 필터 조건은 아래와 같습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.0</span> &lt; point.z &lt; <span class="number">1.0</span></span><br></pre></td></tr></table></figure>
-
-<br>
-
+<p><br></p>
+<p>필터를 통과하고 난 후의 point cloud를 새로 만든다고 생각해봅시다. 필터 조건은 아래와 같습니다.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.0</span> &lt; point.z &lt; <span class="number">1.0</span></span><br></pre></td></tr></table></figure></p>
+<p><br></p>
 <p>제가 어떻게 코드를 바꿀껀지 물어보신다면, 저는 우선 이렇게 할 것 같습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> cloud_filtered = <span class="built_in">std</span>::make_shared&lt;PointCloud&lt;PointXYZ&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; point: input_cloud-&gt;points) </span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>( point.z &gt; <span class="number">0.0</span> &amp;&amp; point.z &lt; <span class="number">1.0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    cloud_filtered-&gt;push_back( point );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> cloud_filtered = std::make_shared&lt;PointCloud&lt;PointXYZ&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; point: input_cloud-&gt;points) </span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span>( point.z &gt; <span class="number">0.0</span> &amp;&amp; point.z &lt; <span class="number">1.0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    cloud_filtered-&gt;<span class="built_in">push_back</span>( point );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>굉장히 간단한 <strong>“naive filter”</strong> 입니다.</p>
 <p>실제 벤치마크를 보여드리기 전에, 우선 말씀드려야 할 점은… <code>pcl</code> 필터는 사실 이거보다 더 많은 체크를 하긴 합니다. 포인트 클라우드는 종종 이상한 레어 케이스가 있는데, 그걸 방지하는 체크가 많이 내장되어있습니다.</p>
 <p>하지만 우선 저희가 아래와 같은 필터 조건을 건 것은 기억해주세요.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcl::FieldComparison&lt;pcl::PointXYZ&gt; (<span class="string">&quot;z&quot;</span>, pcl::ComparisonOps::GT, <span class="number">0.0</span>)));</span><br><span class="line">pcl::FieldComparison&lt;pcl::PointXYZ&gt; (<span class="string">&quot;z&quot;</span>, pcl::ComparisonOps::LT, <span class="number">1.0</span>)));</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<p><br></p>
 <p>생각해보면, 어딘가 ‘parser’가 하나 있어야할겁니다.</p>
 <p>이 parser를 짠다면 아무래도 <code>switch</code> 문을 써서 만들었을 것 같기도 하지만… 몇천~몇만개의 포인트마다 switch를 쓸 사람은 없을 것 같습니다.</p>
 <p>…라고 생각했지만. 제엔장!! <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BvaW50Q2xvdWRMaWJyYXJ5L3BjbC9ibG9iL3BjbC0xLjExLjAvZmlsdGVycy9pbmNsdWRlL3BjbC9maWx0ZXJzL2ltcGwvY29uZGl0aW9uYWxfcmVtb3ZhbC5ocHAjTDk4LUwxMjc=">진짜 switch 썼네요!<i class="fa fa-external-link-alt"></i></span></p>
@@ -532,42 +514,30 @@ mjx-container[display="true"] + br {
 <p>요약하자면 - 이 함수들은 이해하기 쉽게 만들기 위해서 <strong><em>속도를 버리고 있습니다</em></strong>.</p>
 <p>이렇게 짜인건 어쩔 수 없죠.</p>
 <p>대신 우리가 쓸 때 바꿔주면 됩니다 ;)</p>
-<br>
-
+<p><br></p>
 <h2 id="빠르고-읽기-쉬운-코드를-짜봅시다"><a href="#빠르고-읽기-쉬운-코드를-짜봅시다" class="headerlink" title="빠르고 읽기 쉬운 코드를 짜봅시다!"></a>빠르고 읽기 쉬운 코드를 짜봅시다!</h2><hr>
 <p>수많은 pcl 함수들이 <code>switch</code>문을 쓰면서 성능이 박살났습니다. </p>
 <p>우리가 직접 pcl 함수들을 짜봅시다. <code>pcl::ConditionBase</code>는 어떨까요?</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> PointT&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GenericCondition</span> :</span> <span class="keyword">public</span> pcl::ConditionBase&lt;PointT&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;GenericCondition&lt;PointT&gt;&gt; Ptr;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="keyword">const</span> GenericCondition&lt;PointT&gt;&gt; ConstPtr;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="built_in">std</span>::function&lt;<span class="keyword">bool</span>(<span class="keyword">const</span> PointT&amp;)&gt; FunctorT;</span><br><span class="line"></span><br><span class="line">  GenericCondition(FunctorT evaluator): </span><br><span class="line">    pcl::ConditionBase&lt;PointT&gt;(),_evaluator( evaluator ) </span><br><span class="line">  &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">evaluate</span> <span class="params">(<span class="keyword">const</span> PointT &amp;point)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// just delegate ALL the work to the injected std::function</span></span><br><span class="line">    <span class="keyword">return</span> _evaluator(point);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  FunctorT _evaluator;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<br>
-딱 이 코드만 있어도 됩니다.
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> PointT&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GenericCondition</span> :</span> <span class="keyword">public</span> pcl::ConditionBase&lt;PointT&gt;</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">typedef</span> std::shared_ptr&lt;GenericCondition&lt;PointT&gt;&gt; Ptr;</span><br><span class="line">  <span class="keyword">typedef</span> std::shared_ptr&lt;<span class="keyword">const</span> GenericCondition&lt;PointT&gt;&gt; ConstPtr;</span><br><span class="line">  <span class="keyword">typedef</span> std::function&lt;<span class="built_in"><span class="keyword">bool</span></span>(<span class="keyword">const</span> PointT&amp;)&gt; FunctorT;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">GenericCondition</span>(FunctorT evaluator): </span><br><span class="line">    pcl::ConditionBase&lt;PointT&gt;(),_evaluator( evaluator ) </span><br><span class="line">  &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">evaluate</span> <span class="params">(<span class="keyword">const</span> PointT &amp;point)</span> <span class="keyword">const</span> </span>&#123;</span><br><span class="line">    <span class="comment">// just delegate ALL the work to the injected std::function</span></span><br><span class="line">    <span class="keyword">return</span> _evaluator(point);</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  FunctorT _evaluator;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><br><br>딱 이 코드만 있어도 됩니다.</p>
 <p>저는 단순히 <code>pcl::ConditionBase</code>속 <code>std::function&lt;bool&gt;(const PointT&amp;)</code>를 랩핑해준겁니다. 다른건 없어요.</p>
 <p>이렇게 바뀐 코드를 적용해봅시다.</p>
-<br>
-
+<p><br></p>
 <p><strong>예전 코드</strong>는 아래와 같습니다. </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> range_cond  = <span class="built_in">std</span>::make_shared&lt;ConditionAnd&lt;PointXYZ&gt; ();</span><br><span class="line">range_cond-&gt;addComparison ( </span><br><span class="line">    <span class="built_in">std</span>::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::GT, <span class="number">0.0</span>));</span><br><span class="line">range_cond-&gt;addComparison (</span><br><span class="line">    <span class="built_in">std</span>::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::LT, <span class="number">1.0</span>)));</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> range_cond  = std::make_shared&lt;ConditionAnd&lt;PointXYZ&gt; ();</span><br><span class="line">range_cond-&gt;<span class="built_in">addComparison</span> ( </span><br><span class="line">    std::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::GT, <span class="number">0.0</span>));</span><br><span class="line">range_cond-&gt;<span class="built_in">addComparison</span> (</span><br><span class="line">    std::make_shared&lt;FieldComparison&lt;PointXYZ&gt;(<span class="string">&quot;z&quot;</span>, ComparisonOps::LT, <span class="number">1.0</span>)));</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>그리고 여기 <strong>새 코드</strong> 입니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> range_cond = <span class="built_in">std</span>::make_shared&lt;GenericCondition&lt;PointXYZ&gt;&gt;(</span><br><span class="line">  [](<span class="keyword">const</span> PointXYZ&amp; point)&#123; </span><br><span class="line">      <span class="keyword">return</span> point.z &gt; <span class="number">0.0</span> &amp;&amp; point.z &lt; <span class="number">1.0</span>; </span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> range_cond = std::make_shared&lt;GenericCondition&lt;PointXYZ&gt;&gt;(</span><br><span class="line">  [](<span class="keyword">const</span> PointXYZ&amp; point)&#123; </span><br><span class="line">      <span class="keyword">return</span> point.z &gt; <span class="number">0.0</span> &amp;&amp; point.z &lt; <span class="number">1.0</span>; </span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 <p>나머지 코드는 바뀐게 없습니다!</p>
 <img src="/20201215-case-study-pcl/beautiful.jpg" class="" title="아름답습니다...">
-
 <p>아름답습니다…</p>
-<br>
-
+<p><br></p>
 <h2 id="벤치마크-결과"><a href="#벤치마크-결과" class="headerlink" title="벤치마크 결과"></a>벤치마크 결과</h2><hr>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZhY29udGlkYXZpZGUvQ1BQX09wdGltaXphdGlvbnNfRGlhcnkvdHJlZS9tYXN0ZXIvY3BwL3BjbF9jb25kaXRpb25hbF9yZW1vdmFsLmNwcA==">여기<i class="fa fa-external-link-alt"></i></span> 제가 짜둔 코드가 있습니다. 이 코드를 그대로 가져가셔서 테스트 해보셔도 됩니다.</p>
 <p>여기 아래 샘플 포인트 클라우드에 4개의 필터를 돌린 벤치마크가 있습니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-------------------------------------------------------------</span><br><span class="line">Benchmark                   Time             CPU   Iterations</span><br><span class="line">-------------------------------------------------------------</span><br><span class="line">PCL_Filter            1403083 ns      1403084 ns          498</span><br><span class="line">Naive_Filter           107418 ns       107417 ns         6586</span><br><span class="line">PCL_Filter_Generic     668223 ns       668191 ns         1069</span><br></pre></td></tr></table></figure>
-
 <p>물론 결과 값은 필터 조건이 몇개인지에 따라, 포인트 클라우드의 크기에 따라 달라질 수 있습니다.</p>
-<br>
-
+<p><br></p>
 <h1 id="배워갈-점"><a href="#배워갈-점" class="headerlink" title="배워갈 점"></a>배워갈 점</h1><ul>
 <li>“naive” 필터도 여러 케이스에서 사용해도 됩니다. 엄청 빠릅니다.</li>
 <li><code>pcl::ConditionalRemoval</code>는 계속 써도 됩니다. 대신 기존의 <code>pcl::Conditions</code>는 너무 느리니까 가능하면 쓰지 마세요. 대신 <code>GenericCondition</code>을 쓰면 더 읽기 쉽고 빠르게 작동할 수 있습니다. </li>
@@ -612,13 +582,13 @@ mjx-container[display="true"] + br {
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/20201215-Harris-corner/" rel="prev" title="Harris Corner (Harris & Stephens 1988)">
-                  <i class="fa fa-chevron-left"></i> Harris Corner (Harris & Stephens 1988)
+                <a href="/20201214-exotic-container/" rel="prev" title="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (10) - STL에 없는 새로운 컨테이너">
+                  <i class="fa fa-chevron-left"></i> (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (10) - STL에 없는 새로운 컨테이너
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20201217-std-vector-reserve/" rel="next" title="컴퓨터 비전에서 std::vector 초기화 vs reserve 성능비교">
-                  컴퓨터 비전에서 std::vector 초기화 vs reserve 성능비교 <i class="fa fa-chevron-right"></i>
+                <a href="/20201215-Harris-corner/" rel="next" title="Harris Corner (Harris & Stephens 1988)">
+                  Harris Corner (Harris & Stephens 1988) <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -669,7 +639,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

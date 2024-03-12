@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -65,8 +65,8 @@
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Deep SLAM">
-<meta property="article:tag" content="AR">
 <meta property="article:tag" content="Tomasz Malisiewicz">
+<meta property="article:tag" content="AR">
 <meta property="article:tag" content="Magic Leap">
 <meta property="article:tag" content="SuperPoint">
 <meta property="article:tag" content="DeepChArUco">
@@ -373,19 +373,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -515,190 +515,131 @@ mjx-container[display="true"] + br {
 </ol>
 <hr>
 <h1 id="SuperPoint-SIFT를-딥러닝으로-대체하기"><a href="#SuperPoint-SIFT를-딥러닝으로-대체하기" class="headerlink" title="SuperPoint - SIFT를 딥러닝으로 대체하기"></a>SuperPoint - SIFT를 딥러닝으로 대체하기</h1><p>(SIFT는 SLAM에서 잘 안쓰지 않나…? ORB가 더 말이 될 것 같지만, Tomasz 본인이 SIFT를 대체하는 기술이라고 적었다.)</p>
-<h2 id="SLAM-Frontend란"><a href="#SLAM-Frontend란" class="headerlink" title="SLAM Frontend란?"></a>SLAM Frontend란?</h2><br>
-
+<h2 id="SLAM-Frontend란"><a href="#SLAM-Frontend란" class="headerlink" title="SLAM Frontend란?"></a>SLAM Frontend란?</h2><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/slam.png" class="" title="SLAM in 2 parts">
-
 <p>Visual SLAM은 두가지 단계로 나눠진다.<br>Frontend는 keypoint extraction과 keypoint matching 작업을 수행한다.<br>Backend는 bundle adjustment와 같은 nonlinear least squares optimisation 작업을 수행하며 카메라 위치와 주변 환경 구조를 최적화한다.</p>
 <p>Frontend는 이미지만을 다루기 때문에, 최근 classification, detection, segmentation 등 2D 이미지를 다루는 딥러닝 CNN 기술을 frontend에도 사용해볼 수 있다.</p>
-<h2 id="SuperPoint-특징"><a href="#SuperPoint-특징" class="headerlink" title="SuperPoint 특징"></a>SuperPoint 특징</h2><br>
-
+<h2 id="SuperPoint-특징"><a href="#SuperPoint-특징" class="headerlink" title="SuperPoint 특징"></a>SuperPoint 특징</h2><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superpoint_simple.png" class="" title="SuperPoint in a nutshell">
-
 <p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MTIuMDc2Mjk=">SuperPoint<i class="fa fa-external-link-alt"></i></span>는 CVPR 2018 학회에서 발표된 연구이다.<br>SuperPoint를 간단하게 설명하면, 이미지 속 2D keypoint의 위치와 해당 feature의 descriptor 정보를 내뱉는 CNN 네트워크이다.</p>
 <p>SuperPoint는 Keypoint의 위치와 descriptor 정보를 jointly 하게 계산할 수 있다.<br>이는 기존의 keypoint descriptor 알고리즘들이 keypoint 주변의 patch 정보를 사용했던 점과 확연히 다른 점이라고 볼 수 있다.</p>
 <p>논문에서는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE0MDkuMTU1Ni5wZGY=">VGG<i class="fa fa-external-link-alt"></i></span> 네트워크를 backbone으로 사용하였다.<br>하지만 다른 backbone을 쓰지 못할 이유는 없다.</p>
 <p>SuperPoint는 GPU에서 실시간으로 돌 수 있게 설계되었다고 한다.<br>이는 Keypoint location과 descriptor 계산이 ~90%의 weight 정보를 공유할 수 있게 만듬으로써 가능했다고 한다.<br>또, backbone 네트워크가 크지 않아서 가능했다고 한다.</p>
 <p>이렇게 나온 SuperPoint를 가지고 Backend에 그대로 넣어 SLAM을 할 수 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/decoder.png" class="" title="Keypoint decoder">
-
 <p>SuperPoint는 어떻게 Keypoint를 추출하는걸까?<br>SuperPoint의 코어 컴포넌트 중 하나인 keypoint decoder는, 어떠한 픽셀이 keypoint인지 아닌지 classification 문제를 푼다고 한다.<br>SuperPoint는 우선 8x8 크기의 패치 안에는 무조건 하나의 keypoint만 있을 수 있다고 가정한다.<br>8x8 크기의 패치 안에는 keypoint가 될 수 있는 64개의 후보 픽셀들이 있다.<br>여기에 1개의 ‘dustbin’이라는 후보를 추가한다.<br>SuperPoint의 목적은, 이 65개의 후보들에 대한 distribution을 생성하는 것이다.<br>Distribution을 쓰면 이 모든 후보들에 대한 heatmap을 얻을 수 있다.</p>
-<h2 id="SuperPoint-학습-과정"><a href="#SuperPoint-학습-과정" class="headerlink" title="SuperPoint 학습 과정"></a>SuperPoint 학습 과정</h2><br>
-
+<h2 id="SuperPoint-학습-과정"><a href="#SuperPoint-학습-과정" class="headerlink" title="SuperPoint 학습 과정"></a>SuperPoint 학습 과정</h2><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/training.png" class="" title="Training">
-
 <p>SuperPoint는 다수의 이미지 페어들에서 좋은 keypoint matching이 되는 것을 목적으로 만들었다.<br>즉, matching이 잘 되는 keypoint만을 추출하는 것이 중요하다.<br>우선 Keypoint matching을 하기 위해서는 2D location을 추출해주는 ‘keypoint detector’와 keypoint의 매칭을 위한 정보를 추출해주는 ‘keypoint descriptor’가 필요하다.<br>여기서, 같은 keypoint를 다른 각도에서 바라보아도 비슷한 keypoint descriptor가 뽑히며, 다른 keypoint의 descriptor와는 차이가 나타나야한다.<br>이러한 점을 학습하기 위해, SuperPoint의 학습과정에서는 ground truth 데이터로 keypoint matching이 잘 된 이미지 페어 (i.e. 2장)이 필요했다.<br>또, 2장의 이미지로부터 효과적으로 학습하기 위해 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS82amZ3OE11S3dwSQ==">Siamese training<i class="fa fa-external-link-alt"></i></span> 기법으로 학습되었다.</p>
 <p>2장의 이미지는 다음과 같이 생성되었다.<br>원본 이미지를 <span class="exturl" data-url="aHR0cHM6Ly93d3cubGVhcm5vcGVuY3YuY29tL2hvbW9ncmFwaHktZXhhbXBsZXMtdXNpbmctb3BlbmN2LXB5dGhvbi1jLw==">homography warp<i class="fa fa-external-link-alt"></i></span>를 통해 또 다른 이미지를 생성한다.<br>Homography warp를 하면, 원본 이미지에서의 픽셀 위치를 새롭게 생성된 warp 이미지에서도 찾을 수 있다.<br>즉, 원본 이미지에서의 keypoint 위치를 다른 이미지에서도 똑같이 찾을 수 있다는 것이다.</p>
 <p>Keypoint detector는 keypoint label을 supervised learning으로 학습하였다.</p>
 <p>그리고, keypoint detector로 찾은 keypoint location에서 descriptor를 추출하여 비교한 후 descriptor 학습을 수행하였다.<br>Keypoint descriptor 학습은 최근 많이 사용되는 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS95SWR0eDNwUWtkZw==">contrastive loss<i class="fa fa-external-link-alt"></i></span>를 이용한 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9NMEVqckZRSDQ5bw==">metric learning<i class="fa fa-external-link-alt"></i></span> 기법을 사용하였다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/natural_image.png" class="" title="Natural images">
-
 <p>아까 위에서 Keypoint detector는 keypoint label을 기반으로 학습을 진행했다고 하였다.<br>그러면 이 label은 어디서 오는 것일까?<br>가장 생각하기 쉬운 방법은 SIFT, SURF, ORB 등의 방식에서 뽑아서 label 데이터를 만드는 것이다.<br>하지만 이 방식으로 트레이닝을 하면, SuperPoint의 최대성능이 SIFT, SURF 정도밖에 되지 않기 때문에, 사용할 수 없다.<br>그러면 다른 방법으로 keypoint label을 만들어야한다.<br>일단, 사람이 직접 label을 추가할 수는 없다.</p>
 <p>이러한 문제를 해결하기 위해, <span class="exturl" data-url="aHR0cHM6Ly9ob3lhMDEyLmdpdGh1Yi5pby9ibG9nL1NlbGYtU3VwZXJ2aXNlZC1MZWFybmluZy1PdmVydmlldy8=">Self-supervised learning<i class="fa fa-external-link-alt"></i></span> 방식을 도입하였다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/self_supervised_training.png" class="" title="Render">
-
 <p>존경하는 hoya012 블로그에서는 Self-supervised learning을 다음과 같이 설명하였다.<br>“Network로 하여금 만든 pretext task를 학습하게 하여 데이터 자체에 대한 이해를 높일 수 있게 하고, 이렇게 network를 pretraining 시킨 뒤 downstream task로 transfer learning을 하는 접근 방법”</p>
 <p>SuperPoint에서는 pretext task로써 네트워크가 간단한 환경에서 keypoint를 찾는 기능을 학습하게 하였다.<br>이 과정은 2017년 발표된 SuperPoint 이전의 논문인 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDcuMDc0MTA=">Towards Geometric Deep SLAM<i class="fa fa-external-link-alt"></i></span> 논문에서 소개하는 MagicPoint에 해당한다.<br>가상 렌더링을 사용하여 이미지 데이터와 렌더링된 모델의 vertex 위치 데이터를 기반으로 네트워크를 학습하였다.<br>Robustness를 높이기 위해  가상 이미지 데이터는 다양한 조명과 노이즈도 첨가되어있다.<br>이를 통해 네트워크는 keypoint의 특성을 학습하게 되었다.</p>
 <p>가상 이미지로 학습한 결과를 Real-world 데이터셋으로 옮기기 위해 (transfer), <span class="exturl" data-url="aHR0cHM6Ly9jb2NvZGF0YXNldC5vcmcvI2hvbWU=">MS-COCO 데이터셋<i class="fa fa-external-link-alt"></i></span>에 다시 학습을 하였다.<br>MS-COCO 데이터셋은 keypoint에 대한 label이 없다.<br>이 데이터셋에서 keypoint label을 만들기 위해 homographic adaptation이라는 기법을 사용했다.<br>Homographic adaptation 기법에는 추후에 설명한다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/magicpoint.png" class="" title="MagicPoint Performance">
-
 <p>지금까지 소개한 부분인 MagicPoint는 기존의 FAST, Harris, Shi-Tomasi keypoint detector에 비해 월등히 좋은 성능을 가진다.<br>특히, 노이즈가 있는 상황에서 더 잘 작동하는 것을 볼 수 있다.<br>이는 MagicPoint가 noise가 있는 상황에서도 잘 작동할 수 있게 학습되었기 때문이다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/homographic_adaptation.png" class="" title="Homographic adaptation">
-
 <p>아까 부족했던 Homographic adaptation에 대해 설명하겠다.<br>Homographic adaptation의 목적은 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9wZW5jdi5vcmcvbWFzdGVyL2Q5L2RhYi90dXRvcmlhbF9ob21vZ3JhcGh5Lmh0bWw=">homography 기법<i class="fa fa-external-link-alt"></i></span>을 이용해 planar camera motion을 만들어내는 것이다.<br>두 이미지 사이의 camera motion을 알 수 있다면, 하나의 이미지 위의 keypoint 위치들을 다른 이미지 위에 그대로 옮길 수 있다.<br>즉, self-labelling 기술이 된다는 것이다.<br>Homograpic adaptation을 통한 self-labelling을 통해 우리는 두가지 효과를 기대할 수 있다.</p>
 <ol>
 <li>잘못된 keypoint detection을 피할 수 있다</li>
 <li>Keypoint detection의 repeatability (i.e. 다른 각도에서 보아도 동일한 위치에서 keypoint가 검출되는 능력)을 향상시킬 수 있다.</li>
 </ol>
 <p>Label이 없는 원본 이미지에 homography를 적용하여 여러 각도에서 바라보는 이미지들을 생성한다.<br>그 후, 각각의 이미지에 MagicPoint를 적용하여 keypoint를 추출한다.<br>이 keypoint들을 homography 변환으로 원본 이미지에 다시 옮겨주면, keypoint들의 ‘superset’이 생기는 것이다.<br>(SuperPoint의 ‘super’가 여기서 왔다고 한다).</p>
-<h2 id="SuperPoint-성능-비교"><a href="#SuperPoint-성능-비교" class="headerlink" title="SuperPoint 성능 비교"></a>SuperPoint 성능 비교</h2><br>
-
+<h2 id="SuperPoint-성능-비교"><a href="#SuperPoint-성능-비교" class="headerlink" title="SuperPoint 성능 비교"></a>SuperPoint 성능 비교</h2><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superpoint_eval.png" class="" title="Evaluation of SuperPoint">
-
 <p>SuperPoint, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MDMuMDkxMTQ=">LIFT<i class="fa fa-external-link-alt"></i></span>, SIFT, ORB를 비교한 결과이다.<br>LIFT는 또 다른 딥러닝 기반 keypoint detector + descriptor 이다.<br>SuperPoint가 매칭된 keypoint의 수도 가장 높고, keypoint들의 위치도 이미지에 고루고루 퍼져있다.<br>그에 비해, Visual-SLAM에서 많이 사용되는 ORB feature는 좋지 않은 성능을 보여준다.<br>특히, 대부분의 keypoint가 한곳에 밀집되어있고, 그 keypoint끼리 생김새가 비슷할 때 매칭의 성능이 많이 떨어진다.<br>이런 경우에는 camera motion이 정확하게 계산될 수 없다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superpoint_eval2.png" class="" title="Evaluation of SuperPoint 2">
-
 <p>두번째 비교이다.<br>위에서 설명한 ORB의 단점이 잘 보이는 또 다른 예시이다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superpoint_eval3.png" class="" title="Evaluation of SuperPoint 3">
-
 <p>세번째 비교이다.<br>LIFT에 비해 회전에 좀 더 강인한 모습을 보인다.<br>하지만 SuperPoint도 완전하게 rotation-invariant하지 않다는 점을 인지해야한다.<br>Backbone으로 사용한 VGG 네트워크는 rotation-invariant하지 않기 때문이다.<br>그렇기 때문에 SuperPoint도 최대 15~30도 정도의 회전만을 고려했다고 한다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/3d.png" class="" title="3D Performance">
-
 <p>SuperPoint의 학습과정는 전부 2D 이미지에서 학습한 것을 볼 수 있다.<br>그러면 3D에서 잘 작동할지 궁금해진다.<br>결과만 이야기하면, 잘 작동한다.</p>
 <p>SuperPoint를 직접 사용해보고 싶으면 이 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hZ2ljbGVhcC9TdXBlclBvaW50UHJldHJhaW5lZE5ldHdvcms=">Github 링크<i class="fa fa-external-link-alt"></i></span>를 참조하면 좋다.<br>PyTorch 기반으로 작동한다고 한다.</p>
 <hr>
-<h1 id="DeepChArUco-SuperPoint의-성능을-보여주는-다른-예시"><a href="#DeepChArUco-SuperPoint의-성능을-보여주는-다른-예시" class="headerlink" title="DeepChArUco - SuperPoint의 성능을 보여주는 다른 예시"></a>DeepChArUco - SuperPoint의 성능을 보여주는 다른 예시</h1><br>
-
+<h1 id="DeepChArUco-SuperPoint의-성능을-보여주는-다른-예시"><a href="#DeepChArUco-SuperPoint의-성능을-보여주는-다른-예시" class="headerlink" title="DeepChArUco - SuperPoint의 성능을 보여주는 다른 예시"></a>DeepChArUco - SuperPoint의 성능을 보여주는 다른 예시</h1><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/deepcharuco.png" class="" title="DeepChArUco">
-
 <p>SuperPoint의 robustness를 보여주는 프로젝트를 하나 소개하려고 한다.</p>
 <p>ChArUco라는 패턴이 있다.<br>이 패턴은 체스보드 패턴에 <span class="exturl" data-url="aHR0cHM6Ly93d3cudWNvLmVzL2ludmVzdGlnYS9ncnVwb3MvYXZhL25vZGUvMjY=">ArUco<i class="fa fa-external-link-alt"></i></span> 마커를 임베딩한 패턴이다.<br>ArUco 마커들은 각각의 ID를 가지고 있으며, 이 ID를 기반으로 fiducial marker detection을 할 수 있다.<br>또, 체스보드와 ArUco 마커 코너 점들을 이용하여 2D-3D correspondence matching을 통해 pose estimation도 수행할 수 있다.</p>
 <p>DeepChArUco 연구에서는 기존의 Corner detector와 ArUco 마커 ID detection 알고리즘을 새롭게 변형하였다.<br>Corner detector는 SuperPoint로 대체되었다.<br>그리고 ArUco 마커 ID detection도 딥러닝 기반 classifier로 변형되었다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/deepcharuco_dark.png" class="" title="DeepChArUco in dark environment">
-
 <p>DeepChArUco 방식은 사람도 구분할 수 없는 어두운 상황에서도 정확하게 마커를 찾을 수 있다.<br><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9TbW9yZzlkZmZjMA==">데모 영상<i class="fa fa-external-link-alt"></i></span>을 보면, 어두워도, 그림자가 져도 찾을 수 있다.</p>
 <p>딥러닝 기반 Local feature detection의 성능이 뛰어나다는 것을 보여주는 좋은 예시라고 볼 수 있다.</p>
-<br>
-
+<p><br></p>
 <hr>
 <h1 id="SuperPointVO-SuperPoint로-Visual-Odometry를-할-수-있을까"><a href="#SuperPointVO-SuperPoint로-Visual-Odometry를-할-수-있을까" class="headerlink" title="SuperPointVO - SuperPoint로 Visual Odometry를 할 수 있을까?"></a>SuperPointVO - SuperPoint로 Visual Odometry를 할 수 있을까?</h1><p>이 연구는 2018년 발표된 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MTIuMDMyNDU=">Self-improving visual odometry<i class="fa fa-external-link-alt"></i></span> 연구를 소개한다.</p>
 <p>위에서 보여준 것 처럼, SuperPoint로 얻은 keypoint는 3D 환경에서도 트랙킹이 잘 되는 것을 볼 수 있다.<br>그리고 실제로 optmisation 프로그래밍을 추가하여 visual odometry 시스템을 만들었을 때도 성공적으로 3D reconstruction을 수행할 수 있었다.<br>SuperPoint가 visual odometry에서도 쓰일 수 있다는 점이 입증되었으나, visual odometry를 위해 최적화되어있진 않다.</p>
 <p>이번 연구는 visual odometry를 수행하여 나오는 데이터를 기반으로 네트워크를 학습한다.<br>이로써 오랜 시간이 지나도 keypoint correspondence를 만들 수 있게 네트워크를 학습할 수 있다.<br>또, 어떤 keypoint가 오랜 시간이 지나도 stable하게 매칭이 되는지 학습할 수 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superpointvo.png" class="" title="SuperPointVO">
-
 <p>학습 과정은 다음과 같다.<br>우선 Monocular 이미지 시퀀스들로부터 SuperPoint를 추출하고, correspondence를 만든다.<br>그 후, <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9pN2llclZrWFlhOA==">SfM (Structure-from-Motion)<i class="fa fa-external-link-alt"></i></span>을 이용하여 3D reconstruction을 수행한다.<br>(어차피 학습은 비실시간에서 수행하기 때문에 SfM이라는 단어를 사용하였다. 이론상 VO backend나 SfM이나 크게 다르지 않다)</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/reproj_error.png" class="" title="Stable / Unstable points">
-
 <p>이렇게 생긴 3D map을 각각의 이미지에 재투영하고 (reprojection), <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmNvbS9xdWVzdGlvbnMvMjkwOTUzNDkvaG93LWlzLXRoZS1yZXByb2plY3Rpb24tZXJyb3ItY2FsY3VsYXRlZC1pbi1tYXRsYWJzLXRyaWFuZ3VsYXRlLWZ1bmN0aW9uLXNhZGx5">reprojection error<i class="fa fa-external-link-alt"></i></span>를 계산한다.<br>이 때 3d map point의 평균 reprojection error가 1 픽셀보다 낮다면, 어떤 방향에서 보던지 3D map을 정확하게 만들어내는 keypoint 가 되겠다.<br>반대로, 평균 reprojection error가 5 픽셀보다 높으면, 3D map을 정확하게 만들지 못하는 keypoint가 되겠다.<br>중간에 어중간한 keypoint들은 무시한다.</p>
 <p>이 정보들을 기반으로 CNN 네트워크를 학습한다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superpointvo_training.png" class="" title="Training SuperPointVO">
-
 <p>SuperPointVO의 학습과정은 SuperPoint를 학습하는 과정과 유사하다.<br>Siamese training 구조로 keypoint loss와 descriptor loss를 구한다.</p>
-<br>
-
+<p><br></p>
 <h2 id="결과"><a href="#결과" class="headerlink" title="결과"></a>결과</h2><img src="/20201227-cvpr2020-slam-malisiewicz/superpointvo_result1.png" class="" title="SuperPointVO result 1">
-
 <p>1초 정도의 프레임 간격에는, SuperPointVO의 성능이 크게 부각되지 않는다.<br>이는, 바라보고 있는 방향이 비슷할 때는 왠만한 keypoint detector는 좋은 성능을 보인다는 것이다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superpointvo_result2.png" class="" title="SuperPointVO result 2">
-
 <p>하지만 3초정도 프레임 간격에는 카메라 위치와 방향에 큰 차이가 나게 된다 (i.e. wide baseline이 생긴다).<br>이런 경우에 SuperPointVO의 성능이 부각된다.</p>
-<br>
-
+<p><br></p>
 <hr>
-<h1 id="SuperGlue-Graph-neural-network-Self-attention-기반-keypoint-매칭"><a href="#SuperGlue-Graph-neural-network-Self-attention-기반-keypoint-매칭" class="headerlink" title="SuperGlue - Graph neural network + Self-attention 기반 keypoint 매칭"></a>SuperGlue - Graph neural network + Self-attention 기반 keypoint 매칭</h1><br>
-
+<h1 id="SuperGlue-Graph-neural-network-Self-attention-기반-keypoint-매칭"><a href="#SuperGlue-Graph-neural-network-Self-attention-기반-keypoint-매칭" class="headerlink" title="SuperGlue - Graph neural network + Self-attention 기반 keypoint 매칭"></a>SuperGlue - Graph neural network + Self-attention 기반 keypoint 매칭</h1><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superglue.png" class="" title="SuperGlue">
-
 <p>SuperGlue는 Graph Neural Network에 Optimal transport procedure를 추가한 알고리즘이다.</p>
 <p>SuperGlue의 목적은 wide baseline에서 SuperPoint를 매칭하는 것이며, motion model을 사용하지 않고도 기존의 motion-guided matching 기법보다 더 좋은 성능을 내는 것이다.<br>이는, SLAM을 진행하면서 종종 잘못된 motion model을 사용했을 때 feature matching의 성능이 급격하게 감소하는 것을 방지하기 위함이다.</p>
 <p>SuperGlue는 GPU에서 실시간으로 돌아가면서 State-of-the-Art 성능을 보여준다.<br>SuperGlue는 SuperPoint와 쓸 수도 있고, SIFT와 쓸 수도 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superglue_architecture.png" class="" title="SuperGlue Architecture">
-
 <p>(원래 영상에서는 깊게 설명하지 않지만, 다른 SuperGlue 영상에서 내용을 가져와서 첨부하였습니다)</p>
 <p>SuperGlue는 2가지 단계로 나눠져있다.<br>첫번째는 Attention을 이용한 graph neural network이다.<br>이 부분은 Keypoint들의 location 정보와 descriptor 정보를 attention 메커니즘을 사용해서 contextual cue에 대한 정보를 학습한다.<br>두번째는 기존의 (i.e. 딥러닝을 쓰지 않는) 최적화 프로그래밍을 수행하며, 사용한 알고리즘은 sinkhorn 알고리즘이다.<br>Sinkhorn 알고리즘을 통해 differentaible solver를 만듬으로써, domain knowledge에 대한 constraint를 만든다.</p>
-<h2 id="Keypoint-encoder"><a href="#Keypoint-encoder" class="headerlink" title="Keypoint encoder"></a>Keypoint encoder</h2><br>
-
+<h2 id="Keypoint-encoder"><a href="#Keypoint-encoder" class="headerlink" title="Keypoint encoder"></a>Keypoint encoder</h2><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superglue_front.png" class="" title="SuperGlue Architecture - creating representation">
-
 <p>SuperGlue의 가장 앞단에서는, 매칭을 수행할 이미지 2장으로부터 추출된 keypoint들을 모두 attention 메커니즘에 input 데이터로 사용한다.<br>이런 방법은 기존의 매칭 방법과 큰 차이를 보인다.<br>기존의 매칭 방법은, 각각의 이미지에서 따로 descriptor 등의 계산을 거친 후 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hcml1c211amEvZmxhbm4=">nearest neighbour 방식<i class="fa fa-external-link-alt"></i></span> 등으로 매칭을 수행하였다.<br>하지만 비슷한 local feature descriptor가 많이 있을 때, 매칭 candidate가 너무 많기 때문에 이런 경우에는 매칭에 실패하기도 한다.</p>
 <p>SuperPoint를 사용했을 경우를 가정해보고 설명한다.<br>빨간색이 1번 이미지에서 나온 정보, 파란색이 2번 이미지에서 나온 정보이다.<br>두 이미지에 각각 SuperPoint를 검출한 후 keypoint location 정보를 keypoint encoder 네트워크로 보내 섞는다.<br>이 encoded keypoint location 정보는 local visual appearance 정보와 (i.e. visual descriptor) multi-layer perceptron 레이어을 거치며 합쳐진다.<br>이 결과 keypoint representation이 만들어진다.</p>
-<h2 id="Attentional-aggregation-Attentional-Graph-Neural-Network-update"><a href="#Attentional-aggregation-Attentional-Graph-Neural-Network-update" class="headerlink" title="Attentional aggregation (Attentional Graph Neural Network update)"></a>Attentional aggregation (Attentional Graph Neural Network update)</h2><br>
-
+<h2 id="Attentional-aggregation-Attentional-Graph-Neural-Network-update"><a href="#Attentional-aggregation-Attentional-Graph-Neural-Network-update" class="headerlink" title="Attentional aggregation (Attentional Graph Neural Network update)"></a>Attentional aggregation (Attentional Graph Neural Network update)</h2><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superglue_graph.png" class="" title="SuperGlue Architecture - Attentional aggregation">
-
 <p>Keypoint representation은 Attentional graph neural network 구조 속 다른 keypoint 정보들로부터 iterative하게 업데이트 된다.</p>
 <p>업데이트가 되는 방식이 두개가 있는데, self-edge 업데이트와 cross-edge 업데이트가 있다.<br>하나의 keypoint 정보가 동일한 이미지의 다른 keypoint 정보로부터 업데이트가 되는 것이 self-edge update이다.<br>그리고 keypoint 정보가 다른 이미지의 다른 keypoint 정보로부터 업데이트가 되는 것이 cross-edge udpate이다.<br>이 keypoint 정보들을 node로 표현하고 update 관계를 edge로 표현하면, self-edge와 cross-edge로 이뤄진 하나의 graph 형태가 나타난다.<br>이 업데이트 과정은 graph neural network의 한 종류인 Message passing neural network를 사용하며, 각각의 message는 self-attention 또는 cross-attention을 이용하여 계산된다.<br>이 Self-attention은 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDYuMDM3NjI=">Transformer<i class="fa fa-external-link-alt"></i></span>에서 영감을 받았다.</p>
 <p>Self/cross-attention을 통한 message 계산은 database retrieval과 비슷하다고 한다.<br>Query 데이터 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.439ex" xmlns="http://www.w3.org/2000/svg" width="1.674ex" height="1.439ex" role="img" focusable="false" viewBox="0 -442 740 636"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D45E" d="M33 157Q33 258 109 349T280 441Q340 441 372 389Q373 390 377 395T388 406T404 418Q438 442 450 442Q454 442 457 439T460 434Q460 425 391 149Q320 -135 320 -139Q320 -147 365 -148H390Q396 -156 396 -157T393 -175Q389 -188 383 -194H370Q339 -192 262 -192Q234 -192 211 -192T174 -192T157 -193Q143 -193 143 -185Q143 -182 145 -170Q149 -154 152 -151T172 -148Q220 -148 230 -141Q238 -136 258 -53T279 32Q279 33 272 29Q224 -10 172 -10Q117 -10 75 30T33 157ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mi" transform="translate(446, -150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>와 비슷한 Key 데이터 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.666ex" xmlns="http://www.w3.org/2000/svg" width="1.951ex" height="2.236ex" role="img" focusable="false" viewBox="0 -694 862.3 988.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(521, -150) scale(0.707)"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g></g></g></g></svg></mjx-container>를 찾고, 해당하는 value 데이터 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.666ex" xmlns="http://www.w3.org/2000/svg" width="1.87ex" height="1.668ex" role="img" focusable="false" viewBox="0 -443 826.3 737.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g><g data-mml-node="mi" transform="translate(485, -150) scale(0.707)"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g></g></g></g></svg></mjx-container>를 찾는다고 한다.<br>이 때, 평균 value 값에 query~key 데이터의 similarity 값을 weight로 곱해준 값을 message 값으로 사용한다고 한다.<br>이 때문에, 이 업데이트 과정을 attentional aggregation이라고도 한다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/attentional_aggregation.png" class="" title="Query to Key and Values">
-
 <p>위 과정을 조금 더 쉽게 설명하겠다.<br><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.959ex" height="1.357ex" role="img" focusable="false" viewBox="0 -442 866 599.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mi" transform="translate(572, -150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container> keypoint 정보로 Query를 했을 때, Key 값으로 여러 keypoint candidate가 나온다.<br>이 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.959ex" height="1.357ex" role="img" focusable="false" viewBox="0 -442 866 599.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mi" transform="translate(572, -150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container> 값은 keypoint location과 visual appearance 정보를 encode 하고 있기 때문에, <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.666ex" xmlns="http://www.w3.org/2000/svg" width="1.951ex" height="2.236ex" role="img" focusable="false" viewBox="0 -694 862.3 988.2"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D458" d="M121 647Q121 657 125 670T137 683Q138 683 209 688T282 694Q294 694 294 686Q294 679 244 477Q194 279 194 272Q213 282 223 291Q247 309 292 354T362 415Q402 442 438 442Q468 442 485 423T503 369Q503 344 496 327T477 302T456 291T438 288Q418 288 406 299T394 328Q394 353 410 369T442 390L458 393Q446 405 434 405H430Q398 402 367 380T294 316T228 255Q230 254 243 252T267 246T293 238T320 224T342 206T359 180T365 147Q365 130 360 106T354 66Q354 26 381 26Q429 26 459 145Q461 153 479 153H483Q499 153 499 144Q499 139 496 130Q455 -11 378 -11Q333 -11 305 15T277 90Q277 108 280 121T283 145Q283 167 269 183T234 206T200 217T182 220H180Q168 178 159 139T145 81T136 44T129 20T122 7T111 -2Q98 -11 83 -11Q66 -11 57 -1T48 16Q48 26 85 176T158 471L195 616Q196 629 188 632T149 637H144Q134 637 131 637T124 640T121 647Z"></path></g><g data-mml-node="mi" transform="translate(521, -150) scale(0.707)"><path data-c="1D457" d="M297 596Q297 627 318 644T361 661Q378 661 389 651T403 623Q403 595 384 576T340 557Q322 557 310 567T297 596ZM288 376Q288 405 262 405Q240 405 220 393T185 362T161 325T144 293L137 279Q135 278 121 278H107Q101 284 101 286T105 299Q126 348 164 391T252 441Q253 441 260 441T272 442Q296 441 316 432Q341 418 354 401T367 348V332L318 133Q267 -67 264 -75Q246 -125 194 -164T75 -204Q25 -204 7 -183T-12 -137Q-12 -110 7 -91T53 -71Q70 -71 82 -81T95 -112Q95 -148 63 -167Q69 -168 77 -168Q111 -168 139 -140T182 -74L193 -32Q204 11 219 72T251 197T278 308T289 365Q289 372 288 376Z"></path></g></g></g></g></svg></mjx-container>들로 spatial neighbour, self-similarity, salient keypoint를 매칭할 수 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/self_cross.png" class="" title="Self/Cross attention">
-
 <p>Self-attention으로는 동일한 이미지에서 다른 keypoint들로부터 self-similarity 정보를 효과적으로 얻어낼 수 있다.<br>Cross-attention은 이미지 간 candidate match로 찾을 수 있다.</p>
-<h2 id="Optimal-matching"><a href="#Optimal-matching" class="headerlink" title="Optimal matching"></a>Optimal matching</h2><br>
-
+<h2 id="Optimal-matching"><a href="#Optimal-matching" class="headerlink" title="Optimal matching"></a>Optimal matching</h2><p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superglue_optimal_matching.png" class="" title="Optimal matching layer">
-
 <p>Attentional aggregation이 끝나면 최종 matching descriptor 정보가 각각의 이미지로부터 나온다.<br>Matching descriptor 정보를 dot product하면, 두 keypoint descriptor 정보간의 밀접도를 (i.e. affinity) 표현하는 score matrix가 생긴다.<br>종종 occlusion의 이유로 매칭이 될 수 없는 keypoint가 있는 것을 대비하여, score matrix에 dustbin score를 추가시켰다.</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9taWNoaWVsc3RvY2suZ2l0aHViLmlvL09wdGltYWxUcmFuc3BvcnQv">Sinkhorn 알고리즘<i class="fa fa-external-link-alt"></i></span>을 사용하여 partial assignment 최적화 문제를 GPU에서 잘 돌 수 있도록 바꿔주었다.</p>
 <p>SuperGlue의 네트워크 최앞단부터 partial assignment matrix까지 전부 ground truth correspondence 데이터를 통해 end-to-end 트레이닝이 가능하다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superglue_eval.png" class="" title="Evaluation of SuperGlue">
-
 <p>기존의 Nearest neighbour 매칭 방식에 비교했을 때, SuperGlue가 훨씬 더 많은 매칭 결과를 보여준다.<br>특히나, 바닥에서 반복되는 패턴이 있음에도 굉장히 매칭이 잘된다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201227-cvpr2020-slam-malisiewicz/superglue_eval2.png" class="" title="Evaluation of SuperGlue 2">
-
 <p>MagicLeap 팀이 지금까지 테스트 해본 결과 SuperPoint + SuperGlue 조합이 제일 잘 되는 것을 확인하였다.</p>
 <p>SuperGlue는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21hZ2ljbGVhcC9TdXBlckdsdWVQcmV0cmFpbmVkTmV0d29yaw==">오픈소스<i class="fa fa-external-link-alt"></i></span>로 공개되어있다.<br>GPU가 달린 노트북/데스크탑으로 VGA 이미지로부터 약 512개의 keypoint를 추출했을 때, 15FPS 정도로 작동한다고 한다.</p>
 <p>Tomasz의 조언에 따르면, 데모가 굉장히 잘된다고 한다.<br>논문을 읽고나서 이 기술을 쓸지 말지 결정하는데는 몇시간이 걸릴 수도 있지만, 그냥 웹캠 하나 꽂고 돌려보면 바로 써봐야겠다는 결정을 할거라고 한다.<br>본인도 이 데모의 failure case를 만들어보기 위해 카메라 포커스도 바꿔보고, occlusion도 만들어봤지만 그냥 너무 잘된다고 한다.</p>
 <p>실제로 CVPR 2020 학회에서 진행된 3개의 대회 (Image matching challenge, Local features for visual localization, Visual localization for handheld devices) 대회에서 모두 우승했다고 한다.</p>
-<br>
-
+<p><br></p>
 <hr>
 <h1 id="SuperMaps-SuperPoint-SuperGlue의-미래…"><a href="#SuperMaps-SuperPoint-SuperGlue의-미래…" class="headerlink" title="SuperMaps - SuperPoint + SuperGlue의 미래…?"></a>SuperMaps - SuperPoint + SuperGlue의 미래…?</h1><p>SuperPoint + SuperGlue의 다음은 뭘까?</p>
 <p>SuperPoint + SuperGlue 콤보는 이미지 pair를 사용할 수 있다.<br>SuperMaps는 여러장의 이미지를 쓸 수 있지 않을까?<br>여러장의 이미지는 보통 3D Map을 의미하기도 한다.<br>3D Map 끼리 섞는것도 가능하지 않을까?</p>
@@ -755,8 +696,8 @@ mjx-container[display="true"] + br {
               <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
               <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
               <a href="/tags/Deep-SLAM/" rel="tag"># Deep SLAM</a>
-              <a href="/tags/AR/" rel="tag"># AR</a>
               <a href="/tags/Tomasz-Malisiewicz/" rel="tag"># Tomasz Malisiewicz</a>
+              <a href="/tags/AR/" rel="tag"># AR</a>
               <a href="/tags/Magic-Leap/" rel="tag"># Magic Leap</a>
               <a href="/tags/SuperPoint/" rel="tag"># SuperPoint</a>
               <a href="/tags/DeepChArUco/" rel="tag"># DeepChArUco</a>
@@ -826,7 +767,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

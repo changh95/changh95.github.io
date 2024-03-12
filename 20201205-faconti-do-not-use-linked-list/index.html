@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -337,19 +337,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -463,11 +463,9 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “I have learnt linked-lists at university, should I use them?” Nooope.”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9ub19saXN0cy8=">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
 <p>역자 코멘트: 원작자의 요청으로 최대한 원글의 뉘앙스를 그대로 옮겨왔습니다. 저는 <code>std::list</code>가 글에서 표현하는 것 처럼 쓸모없다고 생각하지는 않습니다. 그랬다면 이미 C++ 언어에서 사라졌겠지요 ㅎㅎ… 적시적기에 사용한다면 <code>std::list</code> 역시 타 자료구조보다 좋은 성능을 내겠습니다. 하지만, 실시간 컴퓨터 비전의 용도에서 그런 상황이 자주 나타나지 않는 점에도 동의합니다. 이 점 유의하시고 읽어주시길 부탁드립니다 :)</p>
-<br>
-
+<p><br></p>
 <h1 id="std-list를-쓰고-계신다면-당장-그만두세요"><a href="#std-list를-쓰고-계신다면-당장-그만두세요" class="headerlink" title="std::list를 쓰고 계신다면, 당장 그만두세요."></a><code>std::list</code>를 쓰고 계신다면, 당장 그만두세요.</h1><hr>
 <img src="/20201205-faconti-do-not-use-linked-list/linked_list.png" class="" title="Linked List를 왜 씁니까?">
-
 <p>사실 linked list의 효율성에 대한 벤치마크는 이미 이전에도 다른 사람들이 많이 했었습니다. 제가 똑같은 벤치마크를 다시 돌릴 필요는 없다고 봅니다.</p>
 <ul>
 <li><p><span class="exturl" data-url="aHR0cHM6Ly9iYXB0aXN0ZS13aWNodC5jb20vcG9zdHMvMjAxMi8xMS9jcHAtYmVuY2htYXJrLXZlY3Rvci12cy1saXN0Lmh0bWw=">std::vector vs std::list benchmark<i class="fa fa-external-link-alt"></i></span></p>
@@ -488,18 +486,15 @@ mjx-container[display="true"] + br {
 <p>아니면, 우리의 영원한 친구 <code>std::vector</code>가 해결해줄 수도 있죠. 종종 <code>std::vector</code>는 list보다 더 효율적이게 작동합니다.</p>
 <p>나는 너무 힙하고 멋져야하고 남들보다 뛰어나야하니 <code>std::vector</code>나 <code>std::deque</code> 같은건 절대로 쓸 수 없다, 라고 하신다면 <span class="exturl" data-url="aHR0cHM6Ly9wbGZsaWIub3JnL2NvbG9ueS5odG0=">plf::colony<i class="fa fa-external-link-alt"></i></span>를 보시는걸 추천드려요.</p>
 <p><strong><em>근데 진짜로, 그냥 <code>std::vector</code>나 <code>std::deque</code> 쓰세요.</em></strong></p>
- <br>
-
+<p> <br></p>
 <h2 id="실제로-쓰인-예시-Intel-RealSense-카메라-드라이버의-성능-끌어올리기"><a href="#실제로-쓰인-예시-Intel-RealSense-카메라-드라이버의-성능-끌어올리기" class="headerlink" title="실제로 쓰인 예시: Intel RealSense 카메라 드라이버의 성능 끌어올리기"></a>실제로 쓰인 예시: Intel RealSense 카메라 드라이버의 성능 끌어올리기</h2><hr>
 <p>제가 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ludGVsUmVhbFNlbnNl">Intel RealSense<i class="fa fa-external-link-alt"></i></span> 코드에 컨트리뷰트 했던 Pull Request에 대해 얘기해보려고 합니다.</p>
 <img src="/20201205-faconti-do-not-use-linked-list/realsense.png" class="" title="영롱한 RealSense">
-
 <p>대체 무슨 생각으로 그랬는지는 모르겠지만, RealSense의 코드에서는 <code>std::list&lt;&gt;</code>를 쓰고 있었습니다. Intel에서 왜 아직도 이런걸 쓰고 있었는지 정말 이해가 안되네요.</p>
 <p><strong><em>농담입니다, 인텔 개발자들 사랑해요 알러뷰!</em></strong></p>
 <p>여기 제가 건의했던 PR의 링크입니다. <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ludGVsUmVhbFNlbnNlL3JlYWxzZW5zZS1yb3MvcHVsbC8xMDk3">Considerable CPU saving in BaseRealSenseNode::publishPointCloud()<i class="fa fa-external-link-alt"></i></span></p>
 <p>요약하자면, 이 PR은 간단한 내용 2개를 수정했습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 여기 매 카메라 프레임마다 생성되는 list가 있습니다.</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">list</span>&lt;<span class="keyword">unsigned</span>&gt; valid_indices;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 이 list를 vector로 바꿨습니다. 이 vector는 class member로써, 사용 전에 clear됩니다.</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span>&gt; _valid_indices;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 여기 매 카메라 프레임마다 생성되는 list가 있습니다.</span></span><br><span class="line">std::list&lt;<span class="keyword">unsigned</span>&gt; valid_indices;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 이 list를 vector로 바꿨습니다. 이 vector는 class member로써, 사용 전에 clear됩니다.</span></span><br><span class="line">std::vector&lt;<span class="keyword">unsigned</span>&gt; _valid_indices;</span><br></pre></td></tr></table></figure>
 <p>추가로, 매 프레임마다 <code>sensor_msgs::PointCloud2 msg_pointcloud</code>라는 큰 오브젝트가 생성됬습니다. 이 큰 오브젝트를 class member로 변환되어 재사용함으로써 더 빨라졌지요.</p>
 <p>이렇게 수정해줌으로써, 약 20~30% 정도의 속도를 향상시켰습니다.</p>
 <p>코드 몇줄 바꿔서 이 정도 속도 향상을 얻는건 엄청난거죠.</p>
@@ -618,7 +613,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

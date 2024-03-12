@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -337,19 +337,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -462,8 +462,7 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Strings are (almost) vectors”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9zdHJpbmdzX2FyZV92ZWN0b3JzLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <h1 id="String에-대해-진지하게-고민할-필요가-있나요"><a href="#String에-대해-진지하게-고민할-필요가-있나요" class="headerlink" title="String에 대해 진지하게 고민할 필요가 있나요?"></a>String에 대해 진지하게 고민할 필요가 있나요?</h1><hr>
 <p><code>std::string</code>은 엄청나게 좋습니다. <strong><em>C</em></strong>언어에서 사용하는 raw pointer와 길이 값과 코드를 짜면서 생기는 온간 세상 근심걱정에 비해서요.</p>
 <p>농담입니다. C 개발자들, 사랑해요!</p>
@@ -474,21 +473,16 @@ mjx-container[display="true"] + br {
 <p>하지만 우리가 생각하지 못했던 <strong><em>또 다른 점</em></strong>이 있습니다. “Small string Optimisation (SSO)”가 가능하다는 점이죠.</p>
 <p>SSO에 대해서 <a href="https://changh95.github.io/20201210-small-string-optimisation/">여기</a> 글에 적어두었습니다.</p>
 <p>제가 말씀드리고 싶은 점은, <code>std::string</code>도 다른 memory allocation이 필요할 수도 있는 자료구조를 다루는 것 처럼 비슷한 방식으로 다룰 수 있어야 효율적으로 사용할 수 있다는 겁니다.</p>
-<br>
-
+<p><br></p>
 <h2 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h2><hr>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Color</span>&#123;</span></span><br><span class="line">    BLUE,</span><br><span class="line">    RED,</span><br><span class="line">    YELLOW</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">ToStringBad</span><span class="params">(Color c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(c) &#123;</span><br><span class="line">    <span class="keyword">case</span> BLUE:   <span class="keyword">return</span> <span class="string">&quot;BLUE&quot;</span>;</span><br><span class="line">    <span class="keyword">case</span> RED:    <span class="keyword">return</span> <span class="string">&quot;RED&quot;</span>;</span><br><span class="line">    <span class="keyword">case</span> YELLOW: <span class="keyword">return</span> <span class="string">&quot;YELLOW&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; <span class="title">ToStringBetter</span><span class="params">(Color c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> color_name[<span class="number">3</span>] =&#123;<span class="string">&quot;BLUE&quot;</span>, <span class="string">&quot;RED&quot;</span>, <span class="string">&quot;YELLOW&quot;</span>&#125;;</span><br><span class="line">    <span class="keyword">switch</span>(c) &#123;</span><br><span class="line">    <span class="keyword">case</span> BLUE:   <span class="keyword">return</span> color_name[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">case</span> RED:    <span class="keyword">return</span> color_name[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">case</span> YELLOW: <span class="keyword">return</span> color_name[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Color</span>&#123;</span></span><br><span class="line">    BLUE,</span><br><span class="line">    RED,</span><br><span class="line">    YELLOW</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">ToStringBad</span><span class="params">(Color c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in"><span class="keyword">switch</span></span>(c) &#123;</span><br><span class="line">    <span class="keyword">case</span> BLUE:   <span class="keyword">return</span> <span class="string">&quot;BLUE&quot;</span>;</span><br><span class="line">    <span class="keyword">case</span> RED:    <span class="keyword">return</span> <span class="string">&quot;RED&quot;</span>;</span><br><span class="line">    <span class="keyword">case</span> YELLOW: <span class="keyword">return</span> <span class="string">&quot;YELLOW&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">const</span> std::string&amp; <span class="title">ToStringBetter</span><span class="params">(Color c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> std::string color_name[<span class="number">3</span>] =&#123;<span class="string">&quot;BLUE&quot;</span>, <span class="string">&quot;RED&quot;</span>, <span class="string">&quot;YELLOW&quot;</span>&#125;;</span><br><span class="line">    <span class="built_in"><span class="keyword">switch</span></span>(c) &#123;</span><br><span class="line">    <span class="keyword">case</span> BLUE:   <span class="keyword">return</span> color_name[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">case</span> RED:    <span class="keyword">return</span> color_name[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">case</span> YELLOW: <span class="keyword">return</span> color_name[<span class="number">2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>여기 예제에서 보이는 것 처럼, 가능하다면 최대한 새로운 string을 만들고 또 만드는 행위는 피해야합니다. </p>
 <img src="/20201209-strings-are-almost-vectors/tostring.png" class="" title="To String...">
-
-<br>
-
+<p><br></p>
 <h2 id="Temp-string을-재사용합시다"><a href="#Temp-string을-재사용합시다" class="headerlink" title="Temp string을 재사용합시다"></a>Temp string을 재사용합시다</h2><hr>
-<p>아래 예시를 보시면 이전에 할당한 메모리를 재사용 할 수**<em>도**</em> 있는 예시를 보실 수 있습니다. </p>
+<p>아래 예시를 보시면 이전에 할당한 메모리를 재사용 할 수<strong><em>도</em></strong> 있는 예시를 보실 수 있습니다. </p>
 <p>두번째 함수가 첫번째 함수보다 항상 빠를 것이라고 단정할 수는 없습니다. 하지만 왠만하면 빠르지 않을까 싶어요.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 첫번째 방법은 매번 새로운 string을 만드는겁니다.</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">ModifyString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; input)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> output = input;</span><br><span class="line">    output.append(<span class="string">&quot;... indeed&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> output;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 이미 할당한 string을 다시 사용합니다. 이 string이 우리가 필요한 메모리 공간을 이미 충분히 가지고 있길 빌어야죠. </span></span><br><span class="line"><span class="comment">// (아닐 수도 있구요... 그러면 느릴수도 있어요)</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ModifyStringBetter</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; input, <span class="built_in">std</span>::<span class="built_in">string</span>&amp; output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    output = input;</span><br><span class="line">    output.append(<span class="string">&quot;... indeed&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 첫번째 방법은 매번 새로운 string을 만드는겁니다.</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> std::string <span class="title">ModifyString</span><span class="params">(<span class="keyword">const</span> std::string&amp; input)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::string output = input;</span><br><span class="line">    output.<span class="built_in">append</span>(<span class="string">&quot;... indeed&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> output;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 이미 할당한 string을 다시 사용합니다. 이 string이 우리가 필요한 메모리 공간을 이미 충분히 가지고 있길 빌어야죠. </span></span><br><span class="line"><span class="comment">// (아닐 수도 있구요... 그러면 느릴수도 있어요)</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">ModifyStringBetter</span><span class="params">(<span class="keyword">const</span> std::string&amp; input, std::string&amp; output)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    output = input;</span><br><span class="line">    output.<span class="built_in">append</span>(<span class="string">&quot;... indeed&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>벤치마크를 돌렸더니, 예상한대로 나왔습니다.</p>
 <img src="/20201209-strings-are-almost-vectors/modifystring.png" class="" title="Modify string">
 
@@ -586,7 +580,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

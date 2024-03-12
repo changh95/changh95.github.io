@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -33,8 +33,8 @@
 <meta property="article:modified_time" content="2023-06-09T06:12:01.839Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Deep Learning">
-<meta property="article:tag" content="NAVER LABS">
 <meta property="article:tag" content="Visual localization">
+<meta property="article:tag" content="NAVER LABS">
 <meta property="article:tag" content="Thoughts">
 <meta name="twitter:card" content="summary">
 
@@ -335,19 +335,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -483,7 +483,7 @@ mjx-container[display="true"] + br {
 <h3 id="Visual-localization이-정확하지만-충분히-빨리-돌지-않는다면"><a href="#Visual-localization이-정확하지만-충분히-빨리-돌지-않는다면" class="headerlink" title="Visual localization이 정확하지만 충분히 빨리 돌지 않는다면?"></a>Visual localization이 정확하지만 충분히 빨리 돌지 않는다면?</h3><p>Visual localization이 생각보다 그렇게 빨리 돌지 않는다고 해도, <strong>VL은 충분히 SLAM과 사용될 수 있다</strong>. SLAM을 하다보면 맵 생성 + pose 계산을 하면서 메모리와 프로세서를 엄청나게 잡아먹는다. 맵핑 목적으로해서 맵을 계속 이어나가고 있다면, 메모리는 한계치가 있을 것이다. 그렇다면 단순히 localization이 목적이라면, <strong>sliding window VIO</strong> 등을 사용하면서 pose만 계산하는 방법이 있을 것이다. 적당한 local map만 유지하면서 메모리를 아끼는 전략이다. 이 경우에는 대신 global consistency를 유지하기 힘들게 되는데, 이 때 visual localization을 통해 relocalization과 같은 전략을 취해주면 충분히 <strong>global consistency</strong>를 유지하는 localization agent를 만들 수 있지 않을까 싶다.</p>
 <p> </p>
 <hr>
-<h2 id="SLAM-공부하는-사람으로써-공부해야할-방향"><a href="#SLAM-공부하는-사람으로써-공부해야할-방향" class="headerlink" title="SLAM 공부하는 사람으로써 공부해야할 방향"></a>SLAM 공부하는 사람으로써 공부해야할 방향</h2><h3 id="Fusion-Multi-modal-Visual-inertial-Visual-LiDAR-Cross-descriptor"><a href="#Fusion-Multi-modal-Visual-inertial-Visual-LiDAR-Cross-descriptor" class="headerlink" title="Fusion - Multi-modal (Visual-inertial, Visual-LiDAR), Cross-descriptor"></a>Fusion - Multi-modal (Visual-inertial, Visual-LiDAR), Cross-descriptor</h3><p>3D map을 사용하는 visual localization 방식이 주 방식이 된다면 <strong>정확한 맵핑을 할 수 있는 SLAM 알고리즘이 꼭 필요</strong>할 것이다. 그렇다면 기존의 Visual-only 방식은 정확도가 떨어질 것이고, 정확도를 끌어올려줄 수 있는 complementary 센서를 사용하는 것이 새로운 norm이 될 것이다. 가장 가능성이 있는 것은 <strong>VINS (Visual-inertial system)**이지 아닐까 싶다. 모바일 기기와 자동차 등에도 IMU가 기본적으로 탑재되어있고, 이를 위한 (아직 visual-only보다는 훨씬 적지만) 선행 연구가 많이 되었다. 특히나 IMU preintegration 연구 이후로 박차를 가한 것으로 보인다. 실외 맵핑 특정으로 GNSS까지 함께 사용할 수 있는데, Visual-inertial-GNSS 시스템을 다루는 SLAM 엔지니어라면 몸값이 굉장히 높아질 것 같다. 또 다른 가능성은 **Visual-LiDAR</strong>가 될 텐데, 이 경우 LiDAR mapping의 경우 2D image로부터 local feature를 뽑는 것이 아닌 3d structural descriptor를 뽑을 수 있다는 것이 큰 장점이다. Visual 정보를 혼합하면서 이 <strong>3d structural descriptor를 visual 센서 값으로 읽을 수 있다면</strong>, 사실상 robust한 descriptor를 얻게 되는게 아닌가 생각이 든다. 이 경우, mapping agent는 visual-lidar 구조를 가지게 되고 VL agent는 visual-only 또는 vins가 되며 하드웨어 구조가 달라진다고 볼 수 있다. 또 다른 가능성은 <strong>Cross-descriptor</strong>로써, 다양한 local feature들을 모두 사용해서 최대한 빽빽한 3d map을 만들고, 이 정보를 모두 호환할 수 있는 local feature를 사용하는 것이다. 이를 통해 ‘오래 걸리지만 정확하게 matching이 되는 feature’ 정보를 ‘부정확하지만 빠르게 돌아가는 feature’와 호환할 수 있게 되면서 새로운 가능성을 부여한다.</p>
+<h2 id="SLAM-공부하는-사람으로써-공부해야할-방향"><a href="#SLAM-공부하는-사람으로써-공부해야할-방향" class="headerlink" title="SLAM 공부하는 사람으로써 공부해야할 방향"></a>SLAM 공부하는 사람으로써 공부해야할 방향</h2><h3 id="Fusion-Multi-modal-Visual-inertial-Visual-LiDAR-Cross-descriptor"><a href="#Fusion-Multi-modal-Visual-inertial-Visual-LiDAR-Cross-descriptor" class="headerlink" title="Fusion - Multi-modal (Visual-inertial, Visual-LiDAR), Cross-descriptor"></a>Fusion - Multi-modal (Visual-inertial, Visual-LiDAR), Cross-descriptor</h3><p>3D map을 사용하는 visual localization 방식이 주 방식이 된다면 <strong>정확한 맵핑을 할 수 있는 SLAM 알고리즘이 꼭 필요</strong>할 것이다. 그렇다면 기존의 Visual-only 방식은 정확도가 떨어질 것이고, 정확도를 끌어올려줄 수 있는 complementary 센서를 사용하는 것이 새로운 norm이 될 것이다. 가장 가능성이 있는 것은 <strong>VINS (Visual-inertial system)</strong>이지 아닐까 싶다. 모바일 기기와 자동차 등에도 IMU가 기본적으로 탑재되어있고, 이를 위한 (아직 visual-only보다는 훨씬 적지만) 선행 연구가 많이 되었다. 특히나 IMU preintegration 연구 이후로 박차를 가한 것으로 보인다. 실외 맵핑 특정으로 GNSS까지 함께 사용할 수 있는데, Visual-inertial-GNSS 시스템을 다루는 SLAM 엔지니어라면 몸값이 굉장히 높아질 것 같다. 또 다른 가능성은 <strong>Visual-LiDAR</strong>가 될 텐데, 이 경우 LiDAR mapping의 경우 2D image로부터 local feature를 뽑는 것이 아닌 3d structural descriptor를 뽑을 수 있다는 것이 큰 장점이다. Visual 정보를 혼합하면서 이 <strong>3d structural descriptor를 visual 센서 값으로 읽을 수 있다면</strong>, 사실상 robust한 descriptor를 얻게 되는게 아닌가 생각이 든다. 이 경우, mapping agent는 visual-lidar 구조를 가지게 되고 VL agent는 visual-only 또는 vins가 되며 하드웨어 구조가 달라진다고 볼 수 있다. 또 다른 가능성은 <strong>Cross-descriptor</strong>로써, 다양한 local feature들을 모두 사용해서 최대한 빽빽한 3d map을 만들고, 이 정보를 모두 호환할 수 있는 local feature를 사용하는 것이다. 이를 통해 ‘오래 걸리지만 정확하게 matching이 되는 feature’ 정보를 ‘부정확하지만 빠르게 돌아가는 feature’와 호환할 수 있게 되면서 새로운 가능성을 부여한다.</p>
 <p> </p>
 <h3 id="Semantic-SLAM"><a href="#Semantic-SLAM" class="headerlink" title="Semantic SLAM"></a>Semantic SLAM</h3><p>Semantic SLAM은 Object detection/tracking, segmentation 등을 통해서 <strong>semantic 정보를 SLAM에 포함하는 방법</strong>이다. 간단한 방법으로는 segmentation으로 움직이는 객체들에 제외해서 static 환경만 맵핑하는 것도 있지만, 학계에서 크게 주목을 받고있지는 않다. 제대로 연구를 해볼만한 분야로써는 semantic 정보를 SLAM optimization 파이프라인에 넣는 것이 있는데, Detection / Segmentation으로부터 나오는 픽셀 값들의 reprojection error나 depth 값을 optimization에 사용한다거나, 또는 segmentation 등으로 object class를 얻어내고 shape descriptor, reflectance 같은 embedding feature를 optimization하는 방식들이 주목을 받고 있다. 하지만 이런 연구들도 <strong>사실 아직 object들을 class로 다루고 있으며, 각각의 instance로 다루지 못한다</strong>. SLAM++ 논문에서 보여준 것 처럼 동일 class의 객체들을 각각 트랙킹하면서 해당 객체들에 대한 정보를 메모리로 가지고 있을 수 있다면, UX와 interaction관련으로 엄청나게 큰 가능성을 제시해준다. 예를 들어, 실외 자율주행 중 이미지에 63빌딩이 보인다면, 기존의 방식처럼 단순히 global feature + local feature로 프로세싱하는 것이 아니라 63빌딩이 보이는 위치들로 우선 search space를 제한한뒤 그 후 global + local feature 탐색을 하면서 서치속도를 가속할 수 있겠다.</p>
 <p> </p>
@@ -507,10 +507,10 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20210405-naver-labs-visloc/" rel="bookmark">Methods for visual localization (NAVER LABS Europe)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210327-Andrew-Ng-MLOps-talk/" rel="bookmark">MLOps - From Model-centric to Data-centric AI (Andrew Ng 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
     </li>
   </ul>
 
@@ -518,8 +518,8 @@ mjx-container[display="true"] + br {
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
-              <a href="/tags/NAVER-LABS/" rel="tag"># NAVER LABS</a>
               <a href="/tags/Visual-localization/" rel="tag"># Visual localization</a>
+              <a href="/tags/NAVER-LABS/" rel="tag"># NAVER LABS</a>
               <a href="/tags/Thoughts/" rel="tag"># Thoughts</a>
           </div>
 
@@ -584,7 +584,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

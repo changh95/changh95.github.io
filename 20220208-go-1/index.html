@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -465,17 +465,14 @@ mjx-container[display="true"] + br {
 <p> </p>
 <h2 id="Go-작업공간-만들기"><a href="#Go-작업공간-만들기" class="headerlink" title="Go 작업공간 만들기"></a>Go 작업공간 만들기</h2><p><code>/Users/유저이름/</code>으로 이동한다. 이후, 아래의 커맨드를 입력해서 기본적인 Go 작업공간을 만든다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /Users/유저이름</span><br><span class="line"></span><br><span class="line">mkdir go &amp;&amp; <span class="built_in">cd</span> go</span><br><span class="line"></span><br><span class="line">mkdir bin pkg src</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> src</span><br><span class="line">mkdir github.com</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> github.com</span><br><span class="line">mkdir 깃허브아이디</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> 깃허브아이디</span><br><span class="line">mkdir go-tutorial</span><br></pre></td></tr></table></figure>
-
 <p>위와 같은 커맨드를 통해 go-tutorial이라는 프로젝트를 생성했다.</p>
 <p>Go는 파이썬이나 javascript와는 다르게, 원하는 곳에 프로젝트를 생성할 수 없다. 대신 go 폴더 밑에 모든 프로젝트를 관리한다.</p>
 <p> </p>
 <h2 id="Hello-go-world"><a href="#Hello-go-world" class="headerlink" title="Hello go world!"></a>Hello go world!</h2><p>아래 커맨드를 입력해서 <code>main.go</code> 파일을 만들고 VSCode를 연다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> go-tutorial</span><br><span class="line"></span><br><span class="line">touch main.go</span><br><span class="line"></span><br><span class="line">code .</span><br></pre></td></tr></table></figure>
-
 <p>VSCode에서 go extension을 설치해준다.</p>
 <p>이후, 아래의 스크립트를 <code>main.go</code> 파일에 입력한다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">fmt.Println(<span class="string">"Hello, Go World!"</span>)</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p>이후, 터미널을 열어 <code>go run main.go</code>를 입력해서 실행되는 것을 본다.</p>
 <p> </p>
 <h2 id="Hello-go-world-분석"><a href="#Hello-go-world-분석" class="headerlink" title="Hello go world 분석"></a>Hello go world 분석</h2><p><code>package main</code>을 선언함으로써 이 파일이 main문을 가지고 있다는 것을 표기한다.</p>
@@ -579,7 +576,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

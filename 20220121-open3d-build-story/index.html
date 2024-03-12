@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -341,19 +341,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -462,7 +462,6 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <img src="/20220121-open3d-build-story/intro.png" class="" title="intro">
-
 <p> </p>
 <h2 id="TLDR"><a href="#TLDR" class="headerlink" title="TLDR;"></a>TLDR;</h2><ul>
 <li>Open3D를 그냥 빌드했더니 1.2GB로 엄청나게 컸다</li>
@@ -478,7 +477,6 @@ mjx-container[display="true"] + br {
 <h2 id="첫번째-시도-Naive-빌드"><a href="#첫번째-시도-Naive-빌드" class="headerlink" title="첫번째 시도: Naive 빌드"></a>첫번째 시도: Naive 빌드</h2><p>GitHub에서 소스코드를 땡겨왔다.</p>
 <p>기본적인 CMake 빌드를 돌리면 되겠지~ 하고 아래 커맨드를 입력했다. 필자는 시스템 설치보다는 로컬 설치를 좋아해서 추가 옵션을 사용했다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir open3d &amp;&amp; <span class="built_in">cd</span> open3d</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/isl-org/Open3D.git .</span><br><span class="line">mkdir build</span><br><span class="line">mkdir install</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line"></span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install ..</span><br><span class="line">make -j</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
 <p>일단 cmake configure할 때 <code>-GNinja</code> 옵션을 통해  Ninja 빌드도 돌려보려고 했는데, ninja는 의외로 작동하지 않았다. 그래도 make로는 잘 돌아가니 얼마나 다행인가.</p>
 <p>빌드를 하며 깜짝 놀랐는데, 필요한 3rdParty 라이브러리들을 다 땡겨와서 소스빌드를 하고있다는 점이였다. CMake 스크립트를 어떻게 짰는지는 모르겠는데 굉장히 엘레강스 해보였다. 대신, 빌드하는데에 걸리는 전체 시간을 예상할 수 없는 점은 조금 아쉬웠다.</p>
 <p>약 10분 정도 시간이 지난 후 빌드가 완료되었다.</p>
@@ -494,14 +492,11 @@ mjx-container[display="true"] + br {
 <h2 id="두번째-시도-BLAS-라이브러리를-교체해서-빌드"><a href="#두번째-시도-BLAS-라이브러리를-교체해서-빌드" class="headerlink" title="두번째 시도: BLAS 라이브러리를 교체해서 빌드"></a>두번째 시도: BLAS 라이브러리를 교체해서 빌드</h2><p>Open3D CMakeLists.txt를 보니 <code>USE_BLAS</code>라는 옵션이 보였다.</p>
 <p><strong>MKL 대신 BLAS를 사용</strong>한다? 그러면 MKL을 다운받을 필요가 없을테니, 700MB나 되는 라이브러리가 더 작아질 것이다.</p>
 <img src="/20220121-open3d-build-story/two.png" class="" title="two">
-
 <p>그래서 다음과 같은 커맨드로 빌드를 해봤다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir open3d &amp;&amp; <span class="built_in">cd</span> open3d</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/isl-org/Open3D.git .</span><br><span class="line">mkdir build</span><br><span class="line">mkdir install</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line"></span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install -DUSE_BLAS=ON ..</span><br><span class="line">make -j</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
 <p>또 빌드가 10분정도 돌았는데, 의외로 빌드가 중간에 터졌다.</p>
 <p>나타는 에러는 다음과 같았다 - <code>libopenblas.a: undefined reference to '_gfortran_concat_string'</code></p>
 <img src="/20220121-open3d-build-story/three.png" class="" title="three">
-
 <p>gfortran???? GNU Fortran 컴파일러가 여기서 왜 나와???</p>
 <p>추정하기로는, Open3D에서 <code>USE_BLAS</code> 옵션을 키면 선형대수 계산 가속을 OpenBLAS 라이브러리를 통해서 하는데, 이 라이브러리를 빌드할 때 gfortran 링크가 안된 것이다.</p>
 <p>그러면 OpenBLAS를 다시 깔아야한다.</p>
@@ -512,7 +507,6 @@ mjx-container[display="true"] + br {
 <p>일단 첫날은 여기까지 하고, Open3D GitHub에 issue를 남겼다.</p>
 <p>“컴파일 된 라이브러리 크기를 줄일 방법이 없나요?”</p>
 <img src="/20220121-open3d-build-story/one.png" class="" title="one">
-
 <p>답변은 생각보다 굉장히 빠르게 왔다. <code>USE_BLAS</code> 옵션을 줘서 빌드를 해보면 된다고 한다.</p>
 <p>원작자는 제대로 빌드하면 100MB 정도로 나온다고 한다.</p>
 <p>근데 그거 내가 하고있는거잖아!</p>
@@ -533,7 +527,6 @@ mjx-container[display="true"] + br {
 <p>Shared library가 뭔지 정확하게 몰라서 조금 공부를 하고 노트를 남겼다. (<span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjIwMTIwLXN0YXRpYy12cy1zaGFyZWQtbGlicy8=">Static library vs Shared library 정리 글<i class="fa fa-external-link-alt"></i></span>).</p>
 <p>그리고 shared library 형태로 빌드를 해봤다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">mkdir open3d &amp;&amp; <span class="built_in">cd</span> open3d</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/isl-org/Open3D.git .</span><br><span class="line">mkdir build</span><br><span class="line">mkdir install</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line"></span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install -DUSE_BLAS=ON -DBUILD_SHARED_LIBS=ON -DBUILD_BLAS_FROM_SOURCE=OFF ..</span><br><span class="line">make -j</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
-
 <p>그래서 나온 결과물은 단 하나의 <code>libOpen3D.so</code> 파일. <strong>크기는 106 MB</strong>이다. 홀리몰리과카몰리~~~</p>
 <img src="/20220121-open3d-build-story/five.png" class="" title="five">
     </div>
@@ -545,19 +538,19 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231127-100-slam-interview-questions/" rel="bookmark">SLAM 기술면접 질문 100선</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231128-dsp-slam/" rel="bookmark">Wang 2021 - DSP-SLAM - Object Oriented SLAM with Deep Shape Priors 논문 리뷰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231128-slam-interview-questions-100-eng/" rel="bookmark">100 SLAM-related technical interview questions</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231221-how-to-follow-slam-papers/" rel="bookmark">2024년 Spatial AI 및 Robotics 최신 논문 빠르게 파악하는 방법</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20220108-slam-libraries/" rel="bookmark">SLAM 개발에 유용한 라이브러리</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
     </li>
   </ul>
 
@@ -631,7 +624,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

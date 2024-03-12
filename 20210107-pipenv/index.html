@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -337,19 +337,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -465,8 +465,7 @@ mjx-container[display="true"] + br {
 <p>주변인들로 추천받은건 Docker, Conda, pipenv가 있었다.</p>
 <p>Docker는 현재 우리 팀의 서버 상황때문에 사용하기 조금 껄끄러웠다.</p>
 <p>Conda는 두가지 셋팅이 있는데, Anaconda 셋팅으로 사용하기에는 용량이 너무 크고 (3gb), Miniconda 셋팅을 고려할 수 있었다.<br>하지만 팀원들이 파이썬에 익숙하지 않아서 ‘제 코드를 실행시키려면 conda라는 패키지를 깔아주세요~’라고 했을 때 별로 좋아하지 않을 가능성이 높았다.<br>무엇보다 conda의 주 목적은 scientific computing이지, 가상환경 설정이 아니였기 때문에… 다른 가상환경 패키지를 먼저 찾아보게 되었다.</p>
-<br>
-
+<p><br></p>
 <p>그리고 약 30분 전, <code>pipenv</code>라는 패키지를 알게 되었다.</p>
 <p>pipenv 패키지는 </p>
 <ol>
@@ -481,17 +480,13 @@ mjx-container[display="true"] + br {
 <p>그리고 터미널을 보면 <code>(python_test) ...</code> 라는 형태가 보이는데, 이는 내가 현재 활성화된 ‘python_test’라는 가상환경 안에 있다는 것을 보여준다.<br>‘python_test’는 내가 <code>pipenv shell</code>을 실행한 경로의 폴더 이름이다!<br><strong>신기!</strong></p>
 <p>보통의 터미널에서 <code>python --version</code>을 실행하면 python2가 없기 때문에 이런 명령어가 나온다.<br>하지만 가상환경 안에서 동일한 명령어를 실행하면 자동으로 python3를 찾는다.<br>왜냐하면 이 가상환경 안에서 <code>python</code>은 우리의 전역설정인 python3 3.8.5이기 때문이다.</p>
 <img src="/20210107-pipenv/activated2.png" class="" title="activated2">
-
-
 <hr>
 <h1 id="패키지-설치"><a href="#패키지-설치" class="headerlink" title="패키지 설치"></a>패키지 설치</h1><p>가상환경이 켜진 상태에서는 <code>pipenv install ***</code> 명령어로 패키지를 설치할 수 있다.<br>예시로 나는 <code>pipenv install numpy</code>를 해봤다.<br>뱀 이모티콘이 나오면서 numpy가 설치되었다.</p>
 <p>pipfile이 업데이트가 되고, pipfile_lock이라는게 생긴다.</p>
 <p>pipfile에서 package 부분을 보면 <code>numpy = "*"</code>라는게 생겼다.<br><code>*</code>는 최신버전이라는 뜻이다.</p>
 <p>pipfile_lock에는 뭔가 복잡한게 생겼다.<br>대강 내부의 정보는 패키지의 버전 정보, 디펜던시 정보, 디펜던시의 디펜던시 정보가 있다.<br>pipfile_lock이 있으면 추후에 패키지가 업데이트되면서 내가 사용했던 버전들을 찾기 어려워질 때를 대비할 수 있다.</p>
 <img src="/20210107-pipenv/pipfile.png" class="" title="pipfile2">
-
 <img src="/20210107-pipenv/pipfile_lock.png" class="" title="pipfile_lock">
-
 <p>터미널에서 <code>pipenv lock -r</code> 명령어를 사용해서 pipfile_lock에 저장된 내용들을 확인할 수도 있다.</p>
 <p>패키지를 지우려면 <code>pipenv uninstall ***</code>를 하면 된다.</p>
 <p>배포할 때 필요하지 않은 패키지는 <code>pipenv install *** --dev</code> 명령어를 사용하면 된다.<br>이 경우 pipfile에서 ‘dev-packages’에 들어가게 된다.</p>
@@ -591,7 +586,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -342,19 +342,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -469,11 +469,9 @@ mjx-container[display="true"] + br {
         <h1 id="논문-요약"><a href="#논문-요약" class="headerlink" title="논문 요약"></a>논문 요약</h1><p>이 논문에서는 Semantic 정보로 이뤄져있는 지도를 만들고, 관리하고, visual localization 목적으로 사용하는 프레임워크를 제안한다. </p>
 <p>지도는 노면에서 검출 가능한 road marker로 이뤄져있고, semantic 정보만을 포함하기에 굉장히 적은 용량을 요구한다.</p>
 <img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.57.46%20PM.png" class="" title="RTK+Wheel">
-
 <p> </p>
 <hr>
 <h1 id="시스템-오버뷰"><a href="#시스템-오버뷰" class="headerlink" title="시스템 오버뷰"></a>시스템 오버뷰</h1><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.46.45%20PM.png" class="" title="system overview">
-
 <p>시스템은 3가지 컴포넌트로 나눠진다.</p>
 <ol>
 <li>고성능 센서를 탑재한 지도 생성용 자동차</li>
@@ -485,14 +483,11 @@ mjx-container[display="true"] + br {
 <h1 id="로컬-지도-생성"><a href="#로컬-지도-생성" class="headerlink" title="로컬 지도 생성"></a>로컬 지도 생성</h1><p>RTK-GPS, wheel odometry, front facing camera를 가진 ‘데이터 수집용 차량’이 운행을 하면서 지도를 만든다.</p>
 <p>RTK-GPS + Wheel odometry로 로봇 포즈를 구하고, Front facing camera 이미지를 이용해 bird eye view segmentation 이미지를 생성한다. 이 정보를 지도 관리 서버로 보낸다.</p>
 <h2 id="RTK-GPS-Wheel-odometry를-이용한-포즈-추정"><a href="#RTK-GPS-Wheel-odometry를-이용한-포즈-추정" class="headerlink" title="RTK-GPS + Wheel odometry를 이용한 포즈 추정"></a>RTK-GPS + Wheel odometry를 이용한 포즈 추정</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.55.57%20PM.png" class="" title="RTK+Wheel">
-
 <img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.53.40%20PM.png" class="" title="RTK+Wheel factor graph">
-
 <p>RTK-GPS는 정확한 absolute pose를 구해줄 수 있지만, 종종 도심에서는 GPS multi-path 문제로 인해 RTK-GPS 조차 신호가 흔들리기도 한다. 저자는 언제나 정확한 포즈를 추정할 수 있도록 다음과 같은 알고리즘을 설계했다: RTK-GPS의 정보가 흔들리지 않을 때는 RTK-GPS + Wheel odometry의 tightly-coupled 추정 값을 사용하고, RTK-GPS의 정보가 흔들릴 때는 RTK-GPS 데이터를 제거해서 wheel odometry만 믿는다. 이를 위해 GPS와 wheel-odometry의 residual을 최소화하는 cost function을 제안한다 (굉장히 스탠다드한 방법이다.)</p>
 <p>사실 이 논문은 RTK-GPS를 사용함으로써 시스템이 굉장히 간단해졌다. RTK-GPS는 absolute pose를 얻을 수 있기 때문에 다음 단계인 클라우드 서버에서 map merging을 수행할 때 multi-session map들 사이의 overlap 및 relative pose를 구하지 않고 단순 이어붙히기로 작업을 완료할 수 있다.</p>
 <p>하지만 필자는 이러한 시스템이 적절치 않다고 생각하는데, RTK-GPS 센서는 굉장히 비싸고 커버리지도 작기 때문에 전혀 scalable 한 방식이 아니라고 생각되며, RTK-GPS+Wheel 방식의 odometry가 아닌 visual odometry로 추정하고 relocalization 기능을 사용해서 map merging을 하는 것이 적절하다고 생각한다. 아마 실제 저자들도 이것을 알고 있겠지만, 내부 기술을 전부 노출할 수 없으니, 대안으로 RTK+Wheel 방식으로 위장을 했다고 생각한다. 따라서 이번 리뷰에서는 RTK+Wheel 퓨전 관련 수식을 설명하지 않는다.</p>
 <h2 id="BEV-segmentation"><a href="#BEV-segmentation" class="headerlink" title="BEV segmentation"></a>BEV segmentation</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.31.50%20PM.png" class="" title="BEV seg">
-
 <p>Front facing camera 이미지에서 CNN 기반 semantic segmentation 모델을 돌려 segmentation image를 얻는다. 특별히 어떤 모델을 사용했는지는 나오지 않는다.</p>
 <p>이후 inverse perspective mapping (IPM) 기법을 사용해서 이미지를 바닥면에 projection 한다. 이를 하기 위해서는 사전에 캘리브레이션된 camera intrinsic parameter와 extrinsic을 알고 있어야한다. IPM을 수행하면 엄청 멀리까지 맵핑되는데, 여기서 차량 전방 12 m x 8 m 만 맵핑을 한다고 한다. 이러한 IPM 기법은 저자의 이전 논문인 AVP-SLAM에서도 사용했던 방법이다.</p>
 <p>사실 IPM을 제대로 하기가 굉장히 어렵다. IPM을 제대로 한다는건 제대로 바닥면을 추정했다는건데, 이를 위해서는 1. 바닥면이 완벽하게 평평하거나, 2. 바닥면이 울퉁불퉁해도 gravity 방향을 알고있어야한다. 완벽하게 평평한 바닥면은 없고, 또 차가 가속/감속을 하거나 코너를 돌 때 중심이 바뀌기 때문에 제대로 된 projection이 안되는 경우가 많다. 보통 IMU를 탑재한 자동차들만 이것이 가능한데, 저자 이름을 찾아 중국 블로그까지 스토킹해서 들어가본 결과 Huawei의 프리미엄 자동차 라인에 대해 설명하는걸 보니 그정도 되는 차에 IMU가 들어갈 것을 추정할 수 있다. IMU가 없는 차에서는 아마 IPM이 굉장히 흔들릴 가능성이 높다.</p>
@@ -505,7 +500,6 @@ mjx-container[display="true"] + br {
 <h2 id="지도-취합"><a href="#지도-취합" class="headerlink" title="지도 취합"></a>지도 취합</h2><p>데이터를 수집한 차량은 클라우드 서버에 semantic 지도를 보낸다. 보낼 때, 데이터 송수신량을 줄이기 위해 ‘공간을 차지하는 부분’에 대한 정보만 보낸다.</p>
 <p>클라우드 서버는 다수의 차량에게서 다수의 지도를 받는다. 그리고 global map에 전부 이 지도를 덧대어서 그린다. 이전 단계와 동일하게, 0.1 x 0.1 x 0.1 m 단위로 scene을 쪼갠 후, 최종 class label을 voting scheme을 통해 정한다.</p>
 <h2 id="지도-압축"><a href="#지도-압축" class="headerlink" title="지도 압축"></a>지도 압축</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.49.02%20PM.png" class="" title="Map compression">
-
 <p>이렇게 만들어진 global map을 다시 운행중인 자동차로 보내기에는 너무 데이터가 클 수 있다. 지도를 압축해야하는데, 여기서 road marker에 대해 contour를 추출해서 정보를 압축할 수 있다.</p>
 <p>3D 지도에서 top view만 추출한 후, contour를 추출해서 새로운 global map을 만든다. 어떻게 contour를 추출하는지, 어떤 자료구조로 저장하는지는 또 설명하지 않았다.</p>
 <p> </p>
@@ -515,7 +509,6 @@ mjx-container[display="true"] + br {
 <h2 id="지도-압축풀기"><a href="#지도-압축풀기" class="headerlink" title="지도 압축풀기"></a>지도 압축풀기</h2><p>중앙 클라우드 서버는 contour만 있는 지도를 현재 운행중인 차량에 송신한다. 운행중인 차량은 RTK와 같은 고급 센서는 없다. 아마 front facing camera와 wheel 정보만 있을 것이다.</p>
 <p>차량은 contour 지도를 수신한 후, contour 내부의 빈 곳을 채워넣는 작업을 한다. 이로써 다시 dense한 semantic map을 만들었다.</p>
 <h2 id="위치-추정"><a href="#위치-추정" class="headerlink" title="위치 추정"></a>위치 추정</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.55.15%20PM.png" class="" title="Vis loc">
-
 <p>현재 front facing camera로 얻은 이미지에 semantic segmentation을 수행하고, 이를 IPM을 통해 BEV segmentation 이미지로 만든다.</p>
 <p>여기서 얻은 데이터를 복원한 semantic map에 대조해서 현재 pose를 알아낼 수 있다. BEV segmentation에 있는 semantic 정보를 모두 포인트 클라우드처럼 다루고, semantic map에 있는 정보도 포인트 클라우드처럼 다룬다면, iterative closest point (ICP) 알고리즘을 통해 3D-3D 매칭을 수행해서 6dof 포즈를 알아낼 수 있을 것이다 (이 과정이 visual localization이 된다).</p>
 <p>하지만 매 순간마다 ICP를 계산히기는 너무 계산량이 클 것이다. ICP는 기회가 될 때마다 계산하고, 이를 자동차의 wheel odometry와 함께 visual localization 결과를 Extended Kalman Filter (EKF)로 퓨전하면 위치 추정의 결과도 더 정확하게 만들 수 있고 trajectory smoothing 도 가능하다.</p>
@@ -558,7 +551,7 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/" rel="bookmark">Mazur 2022 - Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding 논문 리뷰</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20230618-cvpr2023-tutorials-workshops/" rel="bookmark">CVPR 2023 학회에서 눈여겨볼 SLAM 관련 튜토리얼/워크샵</a></div>
     </li>
   </ul>
 
@@ -579,8 +572,8 @@ mjx-container[display="true"] + br {
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/" rel="next" title="Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰">
-                  Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰 <i class="fa fa-chevron-right"></i>
+                <a href="/20240308-papers/" rel="next" title="2024년 1분기 Spatial AI 뉴스">
+                  2024년 1분기 Spatial AI 뉴스 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -631,7 +624,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

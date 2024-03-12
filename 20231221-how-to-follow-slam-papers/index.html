@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="새로운 시대에는 새로운 논문 팔로잉 방법이 필요합니다. 일단 Scholar inbox 꼭 쓰세요 진짜!!!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2024년 Spatial AI 및 Robotics 최신 논문 빠르게 파악하는 방법">
+<meta property="og:url" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="새로운 시대에는 새로운 논문 팔로잉 방법이 필요합니다. 일단 Scholar inbox 꼭 쓰세요 진짜!!!">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/thumbnail.jpg">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/meme.jpg">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/slam_survey.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar-inbox-1.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar-inbox-2.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar-inbox-3.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar-inbox-5.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar-inbox-4.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar-inbox-6.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/ryohei_sasaki.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/zhenjun_zhao.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/ak.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/changh95_x.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar_0.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/scholar_1.png">
+<meta property="og:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/geeknews.png">
+<meta property="article:published_time" content="2023-12-21T07:50:21.000Z">
+<meta property="article:modified_time" content="2024-03-04T02:12:57.245Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Spatial AI">
+<meta property="article:tag" content="LiDAR SLAM">
+<meta property="article:tag" content="Papers">
+<meta property="article:tag" content="Scholar Inbox">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20231221-how-to-follow-slam-papers/thumbnail.jpg">
+
+
+<link rel="canonical" href="https://changh95.github.io/20231221-how-to-follow-slam-papers/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>2024년 Spatial AI 및 Robotics 최신 논문 빠르게 파악하는 방법 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B0%B0%EA%B2%BD"><span class="nav-number">1.</span> <span class="nav-text">배경</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84-%EC%B4%88%EB%B3%B4%EC%9E%90%EB%B6%84%EB%93%A4%EC%9D%84-%EC%9C%84%ED%95%98%EC%97%AC%E2%80%A6"><span class="nav-number">2.</span> <span class="nav-text">시작하기 전, 초보자분들을 위하여…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scholar-Inbox"><span class="nav-number">3.</span> <span class="nav-text">Scholar-Inbox</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%8A%B8%EC%9C%84%ED%84%B0-%EB%85%BC%EB%AC%B8-%ED%81%90%EB%A0%88%EC%9D%B4%ED%84%B0"><span class="nav-number">4.</span> <span class="nav-text">트위터 논문 큐레이터</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ryohei-Sasaki"><span class="nav-number">4.1.</span> <span class="nav-text">Ryohei Sasaki</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zhenjun-Zhao"><span class="nav-number">4.2.</span> <span class="nav-text">Zhenjun Zhao</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AK"><span class="nav-number">4.3.</span> <span class="nav-text">AK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hyunggi-Chang"><span class="nav-number">4.4.</span> <span class="nav-text">Hyunggi Chang</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Scholar"><span class="nav-number">5.</span> <span class="nav-text">Google Scholar</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GeekNews"><span class="nav-number">6.</span> <span class="nav-text">GeekNews</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">253</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">351</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20231221-how-to-follow-slam-papers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2024년 Spatial AI 및 Robotics 최신 논문 빠르게 파악하는 방법
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-21 16:50:21" itemprop="dateCreated datePublished" datetime="2023-12-21T16:50:21+09:00">2023-12-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-03-04 11:12:57" itemprop="dateModified" datetime="2024-03-04T11:12:57+09:00">2024-03-04</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EC%9B%94%EA%B0%84-SLAM-%EB%89%B4%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">월간 SLAM 뉴스</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="/20231221-how-to-follow-slam-papers/thumbnail.jpg" class="" title="thumbnail">
+<h1 id="배경"><a href="#배경" class="headerlink" title="배경"></a>배경</h1><blockquote>
+<p>새로운 시대가 열렸습니다.</p>
+</blockquote>
+<p>5년 전과 지금은 너무나도 다른 세상입니다.</p>
+<p>매일매일 쏟아져나오는 Gaussian Splatting 논문들, Robotic foundation model 논문들, LLM 논문들…</p>
+<p>ORB-SLAM 하나만 잘 알아도 몇년을 든든국밥처럼 써먹던 시대는 이제 없습니다.</p>
+<p>Spatial AI (딥러닝, 컴퓨터비전, 자연어처리, 로보틱스, SLAM) 기술을 공부하는 엔지니어들은 <strong>새로운 논문을 쫒아가는 것 만으로도 곤혹</strong>입니다.</p>
+<p> </p>
+<p>물론 과거에도 논문은 쏟아져나왔습니다.</p>
+<p>AI 커뮤니티는 굉장히 핫했고, 국내 TensorFlow KR, PyTorch KR, SLAM KR (렛츠고!)를 통한 수 많은 KR 커뮤니티들에 신규 논문 소식이 자주 공유되었습니다.</p>
+<p>해외 유투브에서도 수많은 딥러닝 논문 리뷰 채널들이 있었죠.</p>
+<p>지금은? 그 인기가 무색할정도로 조용합니다.</p>
+<p>2021년에 소개했던 ‘<span class="exturl" data-url="aHR0cDovL3d3dy5jdi1sZWFybi5jb20vMjAyMTEyMzEtZGVlcC1sZWFybmluZy1haS1uZXdzLw==">최신 딥러닝 / 로보틱스 뉴스를 따라잡는 방법<i class="fa fa-external-link-alt"></i></span>‘ 글에 언급되었던 Yannic Kilcher와 Henry AI Labs는 완전히 다른 방향의 컨텐츠를 하고 있고, PR12는 활동을 중단한지 오래되었습니다.</p>
+<p>기술은 더욱더 빨리 발전하는데, 빠르게 발전하는 기술의 소식을 받기는 쉽지 않습니다.</p>
+<p> </p>
+<p><strong>새로운 세상에는 새로운 해결 방법이 필요합니다.</strong> </p>
+<p>이번 글에서는 어떻게 <strong>빠르게 기술 트렌드를 파악하고 내 분야의 최신 논문을 팔로잉 할 수 있는지</strong> 알아보겠습니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/meme.jpg" class="" title="modern problems require modern solution">
+<p> </p>
+<hr>
+<h1 id="시작하기-전-초보자분들을-위하여…"><a href="#시작하기-전-초보자분들을-위하여…" class="headerlink" title="시작하기 전, 초보자분들을 위하여…"></a>시작하기 전, 초보자분들을 위하여…</h1><p>최신 논문은 굉장히 어렵습니다.</p>
+<p>수식이 정리가 되지 않았을 때도 있고, 오타가 많다던지, 영어를 잘 못하는 사람이 적어서 원하는 바가 잘 전달이 되지 않는 경우가 많습니다.</p>
+<p>최악의 경우에는 실험이 끝나지도 않았는데 ‘될거야~’라고 하면서 적는 선점식 논문도 있습니다.</p>
+<p> </p>
+<p>기술 트렌드를 파악하는게 목적이라면, 초보자분들께서는 2-3년 과거의 논문일지라도 <strong>서베이 논문</strong>을 보시는 것을 추천드립니다.</p>
+<p>구글에 ‘[특정 기술 이름] survey paper’ 라고 검색하신 후, 2-3년 내에 나온 인용 수 많은 서베이 논문을 골라보시면 전체적인 그림을 파악할 수 있을겁니다.</p>
+<p>Visual-SLAM의 경우, 제가 만든 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1L3Zpc3VhbC1zbGFtLXJvYWRtYXA=">Visual-SLAM roadmap<i class="fa fa-external-link-alt"></i></span>을 보시는 것도 방법입니다 ㅎㅎ</p>
+<img src="/20231221-how-to-follow-slam-papers/slam_survey.png" class="" title="slam survey">
+<p> </p>
+<hr>
+<h1 id="Scholar-Inbox"><a href="#Scholar-Inbox" class="headerlink" title="Scholar-Inbox"></a>Scholar-Inbox</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc2Nob2xhci1pbmJveC5jb20=">Scholar-inbox<i class="fa fa-external-link-alt"></i></span>는 2023년 12월 20일 새벽 (이 글을 적기 바로 15시간 전) 릴리즈된 논문 추천 플랫폼입니다.</p>
+<p>KITTI 데이터셋의 저자이면서 최신 3D 컴퓨터 비전 기술을 뽑아내는걸로 유명한 University of Tübingen의 Autonomous Vision Group (AVG)의 Andreas Geiger 교수님 랩실에서 만든 시스템입니다.</p>
+<p>여기는 이 시스템을 지난 2년간 내부적으로 사용하고 있었고, 주변 연구자분들께는 1년 전부터 공개했다고 하네요 (먼저 써볼 수 있던 사람들이 부럽습니다!).</p>
+<p>그리고 이 플랫폼이 너무 좋다고 판단 - 일반 대중에게도 릴리즈 하기로 결정해 어제 밤 릴리즈 되었습니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-1.png" class="" title="scholar inbox on X">
+<p> </p>
+<p>Scholar inbox는 기본적으로 Arxiv에 올라오는 논문들을 전부 인덱싱하고, 또 수많은 머신러닝, 컴퓨터 비전, 자연어처리 학회 프로시딩에 올라오는 논문들도 인덱싱합니다. (아쉽게도 ICRA나 IROS처럼 IEEE에 있는건 유료라서 하지 못하는 것 같습니다)</p>
+<p>내가 좋아하는 논문을 몇개 고르면, 그 정보를 기반으로 ‘<strong>내가 관심있어할 논문’을 추천해줍니다.</strong></p>
+<p>Scholar inbox를 써야하는 이유는 다음과 같습니다.</p>
+<ol>
+<li><strong>매일 + 매주 이메일로 내가 좋아할만한 이유를 추천해줍니다.</strong></li>
+<li><strong>논문에 ‘좋아요’를 함으로써 사람들의 선호도를 볼 수 있고, 또 나의 논문 추천 알고리즘을 개선할 수 있습니다.</strong></li>
+<li><strong>연구 트렌드를 파악할 수 있고, 다른 사람이 많이 읽는 논문도 파악할 수 있습니다.</strong></li>
+<li><strong>논문 검색이 Arxiv 보다 몇배는 더 빠릅니다.</strong></li>
+<li><strong>Figure / table을 먼저 빠르게 볼 수 있는 기능이 존재합니다. 즉, 빠르게 논문을 훑어볼 수 있는거죠.</strong></li>
+<li><strong>Arxiv 보다 다운로드가 빠릅니다. Scholar inbox 만의 PDF 캐쉬 서버가 있기 떄문입니다.</strong></li>
+<li><strong>PC와 모바일 둘 다 읽을 수 있습니다.</strong></li>
+</ol>
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-2.png" class="" title="Why scholar inbox?">
+<p> </p>
+<p>Scholar inbox를 사용하기 위해서는 회원가입이 필요합니다.</p>
+<p>계정 정보와 비밀번호를 넣고, 이메일로 인증을 하면 바로 계정을 생성할 수 있습니다.</p>
+<p>이후, 나의 <strong>논문 성향 파악을 위해 조사</strong>를 합니다.</p>
+<p>내가 좋아하는 논문 저자의 이름을 넣으면, 그분의 논문 리스트가 쭉 나옵니다.</p>
+<p>이 중에서 내가 좋아하는 논문들을 다 골라주면 됩니다. </p>
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-3.png" class="" title="bootstrapping">
+<p> </p>
+<p>논문을 다 골라주면 바로 <strong>오늘의 추천 논문 리스트</strong>가 나옵니다.</p>
+<p>내일 새로운 논문이 나온다? 바로 내일 리스트에 추가가 될겁니다.</p>
+<p>내가 좋아하는 분야와 가까운 논문일 경우 주황색으로 표시되고, 내가 잘 모르는 분야의 논문일 경우 파란색으로 표시됩니다. (필터링을 조정해서 내가 모르는 분야 논문은 아예 없애버려도 됩니다)</p>
+<p>논문들마다 ‘좋아요’가 몇개인지, ‘몇번 읽었는지’, ‘GitHub 링크’ 연결, ‘ArXiV 연결’, ‘트위터 쓰레드 연결’ 등등 여러 기능이 있습니다.</p>
+<p>여기서 내가 ‘좋아요’를 누르거나 ‘즐겨찾기’를 누르게 되면, 이 선택이 추천 시스템 알고리즘에 반영되어 앞으로의 추천에 영향을 주게 됩니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-5.png" class="" title="paper recommendations">
+<p> </p>
+<p>추천 시스템이라는건 기본적으로 데이터가 쌓여야 잘 동작하게 됩니다.</p>
+<p>추천 시스템을 개선하기 위해 <strong>데이터를 제공해줌으로써 실시간으로 모델을 개선</strong>시킬 수 있습니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-4.png" class="" title="iterative training">
+<p> </p>
+<p>추천한 논문들은 <strong>이메일로도 옵니다.</strong></p>
+<p>오늘 하나 받아봤습니다.</p>
+<p>제 추천 알고리즘 중에는 좋은 것도 있지만, 아닌 것들도 있어서 조금 더 시간을 써서 모델 학습을 할 예정입니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-6.png" class="" title="scholar inbox email">
+<p> </p>
+<hr>
+<h1 id="트위터-논문-큐레이터"><a href="#트위터-논문-큐레이터" class="headerlink" title="트위터 논문 큐레이터"></a>트위터 논문 큐레이터</h1><p>트위터에는 다양한 연구자들이 많습니다.</p>
+<p>트위터에서 좋아하는 연구자들의 계정을 팔로우하는 것도 굉장히 좋습니다. 저도 Andreas Geiger 교수님, Andrew Davison 교수님, Jon Barron, Songyou Peng, Paul-Edouard Sarlin, Torsten Sattler 등등 유명한 교수님 및 연구자들의 계정을 팔로우 하고 알림을 받고 있습니다.</p>
+<p>근데 이런 분들은 본인이 논문이 나올 경우, 또는 지인 연구자의 멋진 연구를 샤라웃 해줄 때’만’ 글이 올라옵니다.</p>
+<p>트위터에 계정이 없는 연구자들, 또는 아직 인지도가 낮은 연구들은 잘 주목받지 못합니다.</p>
+<p> </p>
+<p>여기에 ‘논문 큐레이터’들이 굉장히 큰 도움이 됩니다.</p>
+<p>이분들은 물론 <strong>굵직한 연구</strong>도 팔로잉하고 공유합니다.</p>
+<p>하지만, <strong>마이너하지만 멋진 연구</strong>라던지, <strong>공부에 도움이 되는 자료</strong>라던지, <strong>뉴스</strong> 같은 것들도 많이 공유를 합니다.</p>
+<p>보통 이런 인플루언서 분들은 자신의 연구분야에만 집중해서 보는 경우가 많기 때문에, <strong>본인의 연구 분야와 잘 매칭이 되는 사람을 찾아서 팔로우</strong>를 해야합니다.</p>
+<p>여기에 3명의 인플루언서를 소개합니다.</p>
+<p> </p>
+<h2 id="Ryohei-Sasaki"><a href="#Ryohei-Sasaki" class="headerlink" title="Ryohei Sasaki"></a>Ryohei Sasaki</h2><p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9yc2FzYWtpMDEwOQ==">Ryohei Sasaki<i class="fa fa-external-link-alt"></i></span> 님은 일본의 MAP IV에서 근무하시는 Localization and mapping engineer입니다. </p>
+<p>주로 <strong>SLAM, 3D reconstruction, NeRF 분야의 논문을 많이 소개</strong>해주시며, <strong>하루에 4-5개의 논문을 공유</strong>해주십니다.</p>
+<p>이전에 제 글 중 ‘<span class="exturl" data-url="aHR0cDovL3d3dy5jdi1sZWFybi5jb20vMjAyMzExMjgtc2xhbS1pbnRlcnZpZXctcXVlc3Rpb25zLTEwMC1lbmcv">100가지 SLAM 기술 면접 질문들<i class="fa fa-external-link-alt"></i></span>‘ 글을 소개해주셨어서 좋은 감정을 가지고 있습니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/ryohei_sasaki.png" class="" title="ryohei sasaki on X">
+<p> </p>
+<h2 id="Zhenjun-Zhao"><a href="#Zhenjun-Zhao" class="headerlink" title="Zhenjun Zhao"></a>Zhenjun Zhao</h2><p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS96aGVuanVuX3poYW8=">Zhenjun Zhao<i class="fa fa-external-link-alt"></i></span> 님은 홍콩에서 3D 컴퓨터 비전 및 SLAM을 연구하는 박사과정 학생이십니다.</p>
+<p>주로 <strong>SLAM, 3D reconstruction, NeRF 분야의 논문을 많이 소개</strong>해주시며, <strong>하루에 4-5개의 논문을 공유</strong>해주십니다.</p>
+<p>위의 Ryohei 님보다는 좀 더 논문에 치중해서 자료를 공유해주시는 편 입니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/zhenjun_zhao.png" class="" title="Zhenjun Zhao on X">
+<p> </p>
+<h2 id="AK"><a href="#AK" class="headerlink" title="AK"></a>AK</h2><p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9fYWtoYWxpcQ==">AK<i class="fa fa-external-link-alt"></i></span> 님은 과거 Gradio - 현 HuggingFace 소속의 ML 엔지니어이십니다. </p>
+<p>다양한 <strong>딥러닝</strong> 관련 논문을 소개해주시는 편인데, 빅테크의 뉴스도 자주 소개해주십니다.</p>
+<p>대신 SLAM 논문은 거의 없는 편입니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/ak.png" class="" title="AK on X">
+<p> </p>
+<h2 id="Hyunggi-Chang"><a href="#Hyunggi-Chang" class="headerlink" title="Hyunggi Chang"></a>Hyunggi Chang</h2><p>… 아니면 위의 분들 + 중요한 Spatial AI, SLAM, 3D 컴퓨터 비전 연구자들을 팔로잉하고, 새로운 연구가 나올때마다 리포스트 하는 <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9jaGFuZ2g5NQ==">제 트위터<i class="fa fa-external-link-alt"></i></span>를 팔로우하셔도 좋습니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/changh95_x.png" class="" title="me on X">
+<p> </p>
+<hr>
+<h1 id="Google-Scholar"><a href="#Google-Scholar" class="headerlink" title="Google Scholar"></a>Google Scholar</h1><p>과거에는 Google Scholar로 논문 탐색을 하는 방법이 사실 제일 좋았습니다.</p>
+<p>왜냐하면 내가 좋아하는 연구자분들의 연구, 또는 그분들의 연구를 인용한 후속 연구들에 대한 소식을 이메일 알림으로 바로 보내줬기 때문입니다.</p>
+<p>하지만 <strong>문제가 하나 있는데, 바로 읽는데 시간이 너무 많이 든다는 점</strong> 입니다.</p>
+<p>정말 좋은 논문들을 많이 추천해주지만… </p>
+<ol>
+<li><strong>다운로드는 직접 해야하기 때문에 이메일-&gt;웹페이지-&gt;다운로드-&gt;뷰어… 로 가는 시간이 너무 오래걸립니다</strong>.</li>
+<li><strong>핫한 논문이 어떤건지 모릅니다</strong></li>
+<li><strong>좋아하는 교수님이 많으면… 하루에 이메일이 20개씩도 옵니다</strong>.</li>
+</ol>
+<p>이정도로 논문을 깊게 보는 사람은 아무래도 ‘<strong>현역 대학원생 / 교수님</strong>‘ 정도밖에 안될겁니다 - <strong>물론 이렇게 볼 수 있어야 정말정말 깊게 이해할 수 있습니다</strong>.</p>
+<p>바쁘다 바빠 현대사회에서 살고있는 소시민 엔지니어는 출퇴근길 40분만에 작은 모바일 화면에서 파악할 수 있어야합니다. </p>
+<p>그래서 저는 Google Scholar보다는 트위터 인플루언서들을, 그리고 앞으로는 Scholar inbox를 이용할 예정입니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/scholar_0.png" class="" title="Google scholar email">
+<img src="/20231221-how-to-follow-slam-papers/scholar_1.png" class="" title="Google scholar email 2">
+<p> </p>
+<hr>
+<h1 id="GeekNews"><a href="#GeekNews" class="headerlink" title="GeekNews"></a>GeekNews</h1><p>마지막으로는 <strong>테크뉴스 팔로잉</strong>입니다.</p>
+<p><strong>국내 테크뉴스는 GeekNews가 최고인 것 같습니다.</strong></p>
+<p>네이버 뉴스 또는 AI 뉴스? 웹페이지로 직접 들어가야합니다.</p>
+<p>유투브? 영상이 이쁘고 좋지만 10분짜리 영상을 다 봐야합니다.</p>
+<p>GeekNews는 <strong>해외 빅테크 관련 뉴스 번역해서 정리해서 공유</strong>하기도 하고, 또 <strong>개발 관련 좋은 블로그 글이나 인사이트를 공유</strong>합니다.</p>
+<p>2023년 OpenAI에서 쫒겨날뻔한 샘알트먼의 소식도 긱뉴스로 들었고, 구글에서 10년을 일한 개발자의 이직 썰도 들었고, Kent Beck의 TDD 관련한 팟캐스트 링크도 여기서 얻어서 들었습니다.</p>
+<p>아무튼 좋은 내용들이 많은 웹사이트입니다.</p>
+<p>가장 좋은 부분은, Slack이나 Discord 앱을 통해 연결을 하면 웹사이트를 들어가지도 않고 메세지로 받아볼 수 있다는 점 입니다.</p>
+<img src="/20231221-how-to-follow-slam-papers/geeknews.png" class="" title="GeekNews">
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231127-100-slam-interview-questions/" rel="bookmark">SLAM 기술면접 질문 100선</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231128-dsp-slam/" rel="bookmark">Wang 2021 - DSP-SLAM - Object Oriented SLAM with Deep Shape Priors 논문 리뷰</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20231128-slam-interview-questions-100-eng/" rel="bookmark">100 SLAM-related technical interview questions</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
+              <a href="/tags/LiDAR-SLAM/" rel="tag"># LiDAR SLAM</a>
+              <a href="/tags/Papers/" rel="tag"># Papers</a>
+              <a href="/tags/Scholar-Inbox/" rel="tag"># Scholar Inbox</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20231127-100-slam-interview-questions/" rel="prev" title="SLAM 기술면접 질문 100선">
+                  <i class="fa fa-chevron-left"></i> SLAM 기술면접 질문 100선
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20240126-latex-ocr/" rel="next" title="논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex)">
+                  논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

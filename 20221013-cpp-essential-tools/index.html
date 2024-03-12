@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -340,19 +340,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -470,22 +470,19 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="Compiler-Explorer-amp-Disassembly"><a href="#Compiler-Explorer-amp-Disassembly" class="headerlink" title="Compiler Explorer & Disassembly"></a>Compiler Explorer &amp; Disassembly</h1><blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly9nb2Rib2x0Lm9yZy8=">https://godbolt.org<i class="fa fa-external-link-alt"></i></span> - 온라인 Disassembly 체커</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9nb2Rib2x0Lm9yZw==">https://godbolt.org<i class="fa fa-external-link-alt"></i></span> - 온라인 Disassembly 체커</p>
 </blockquote>
 <p>내 C++ 코드가 효율적으로 작성되었는지 확인하는 가장 쉬운 방법은 컴파일 후 생성된 ‘<strong>어셈블리 코드</strong>‘를 확인하는 것이다. 그리고 <strong>Godbolt</strong> 또는 <strong>Compiler Explorer</strong>라고 불리는 이 웹사이트는 <strong>온라인에서 어셈블리 코드를 확인</strong>할 수 있게 해준다. C++의 대가인 Jason Turner가 유투브 영상에서 자주 사용하는 웹사이트이기도 하다. 컴파일러의 버전도 고를 수 있고, 플랫폼도 고를 수 있다.</p>
 <img src="/20221013-cpp-essential-tools/godbolt.png" class="" title="godbolt"> 
-
 <p> </p>
 <p>웹사이트로는 사실 간단한 STL 함수의 성능 정도만 체크할 수 있고, 내가 심혈을 기울여 만들고 있는 프로그램에서 성능을 체크하기는 쉽지 않다. 내가 직접 만들고 있는 프로그램에 대해서는, <strong>IDE에서 제공하는 Disassembly 기능</strong>을 사용해서 어셈블리 코드를 볼 수 있다. MS Visual Studio도 지원하고, JetBrains CLion도 지원한다. VSCode는 아마 안되는 것으로 알고 있다.</p>
 <img src="/20221013-cpp-essential-tools/disassembly.png" class="" title="disassembly"> 
-
 <p> </p>
 <p>여기서 많이들 이렇게 생각하실 것 같다 - ‘C++ 프로그래밍도 어려운데, 어셈블리까지 알아야하나??’. 물론 어셈블리 까지 제대로 알고 있다면 정확히 코드가 얼마나 효율적으로 돌아가는지 알 수 있겠지만, <strong>어셈블리 특성 상 C++ 프로그래밍보다 몇배나 어렵게 느껴질 수 있다</strong>.</p>
 <p>그래서 간단한 꿀팁을 소개하려고 한다.</p>
 <p>첫번째 꿀팁 - ‘<strong>어셈블리 코드의 라인 수가 적으면, 아무래도 효율적인 코드일 확률이 높다</strong>‘. 어셈블리 코드는 아무래도 굉장히 작은 operation들이 많아 abstraction이 적을 것이라고 생각하기 때문에, 이런 추측을 할 수 있다.</p>
 <p>두번째 꿀팁 - ‘<strong>대략적인 operation들의 CPU 사이클 수를 외워두자</strong>‘. 어셈블리 프로그래밍을 10년간 해온 장인이 Stack Overflow에서 어디선가 언급한 것을 스크린샷으로 찍어둔 것이 있다. (출처가 기억이 나지 않아서… 언젠간 추가할 예정). 이 정보를 기반으로 효율적인 프로그램을 작성하기 위한 그라운드 룰을 만들 수 있다.</p>
 <img src="/20221013-cpp-essential-tools/image.png" class="" title="tips"> 
-
 <p> </p>
 <hr>
 <h1 id="Quickbench-amp-Profiler"><a href="#Quickbench-amp-Profiler" class="headerlink" title="Quickbench & Profiler"></a>Quickbench &amp; Profiler</h1><blockquote>
@@ -495,27 +492,23 @@ mjx-container[display="true"] + br {
 <p>우선 툴을 소개하기 전에 ‘프로그램의 속도를 측정하면 사실 효율성은 다 본게 아닌가? 굳이 어셈블리 코드도 봐야할 필요가 있는가?’ 라는 질문이 들 수 있다. 정답부터 말하자면, <strong>어셈블리 코드 + 런타임 벤치마크 둘 다 봐야한다</strong>. 어셈블리 코드는 CPU에 내려지는 하이레벨 instruction을 의미하는데, CPU 내부에서 동작하는 로우레벨 instruction은 우리가 뜯어볼 수도 없고 상당히 복잡하게 되어있다. 현재 OS가 어떤 작업을 수행중인지, 어떤 하드웨어 포트가 열려있고 닫혀있는지, 어떤 백그라운드 프로세스가 있는지, 메모리 여유분이 어떻게 되어있는지에 따라 CPU 내부에서 동작하는 로우레벨 instruction의 동작 방법이 달라진다. 극단적인 예시를 들면, CPU 온도가 낮을 때에는 CPU가 자율적으로 단기 오버클럭을 수행해서 더 빠르게 작업을 수행할 수도 있는데, 이러한 작업은 이미 온도가 높을 때에는 동작하지 않기 때문에 runtime이 달라질 수도 있다.</p>
 <p><strong>QuickBench</strong>는 온라인 런타임 체커 웹사이트다. Godbolt와 비슷하게 컴파일러를 선택한 후, Google Benchmark 코드와 비슷한 방식으로 코드를 작성해서 <strong>내 코드의 효율성을 체크</strong>할 수 있다. 하지만 이 웹사이트는 기부받은 CPU들에 작동하기 때문에, 종종 운이 나쁘면 돌릴 때 마다 다른 결과가 나타나기도 한다.</p>
 <img src="/20221013-cpp-essential-tools/quickbench.png" class="" title="quickbench"> 
-
 <p> </p>
 <p>내 컴퓨터 / 내 타겟 디바이스에서 정확히 런타임이 어떻게 되는지 확인하기 위해서는 CPU profiler를 돌려보는 것이 좋다. 필자가 추천하는 방식은 <strong>Easy-profiler</strong>이다. 이름처럼 사용하기 쉬울 뿐 더러, 로깅 오버헤드가 작고, 멀티 쓰레드 성능이 시각화가 잘 되어있어서 사용하기 아주 좋다.</p>
 <p>단점이 있다면, 로깅 오버헤드가 아예 없는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0tEQUIvaG90c3BvdA==">hotspot<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9wZXJmLndpa2kua2VybmVsLm9yZy9pbmRleC5waHAvTWFpbl9QYWdl">perf<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9rby53aWtpcGVkaWEub3JnL3dpa2kvRFRyYWNl">dTrace<i class="fa fa-external-link-alt"></i></span> 같은 방법들도 있지만, 개인적으로 이 방법들로는 SLAM의 멀티쓰레드 특성을 한눈에 분석하기가 어렵다고 생각이 든다. </p>
 <p>개인적으로 Easy-profiler를 사용하면서 런타임을 로깅하고 체크하다가, 마지막 실제 릴리즈 직전에 easy-profiler를 빌드에서 뺌으로써 로깅을 하지 않고, 이로써 조금이라도 더 성능을 얻어내는 방법을 사용하고 있다.</p>
 <img src="/20221013-cpp-essential-tools/easy_profiler.png" class="" title="easy_profiler"> 
-
 <p> </p>
 <hr>
 <h1 id="Valgrind-amp-Massif"><a href="#Valgrind-amp-Massif" class="headerlink" title="Valgrind & Massif"></a>Valgrind &amp; Massif</h1><blockquote>
-<p><span class="exturl" data-url="aHR0cHM6Ly92YWxncmluZC5vcmdfLw==">Valgrind<i class="fa fa-external-link-alt"></i></span> - 메모리 릭 체커<br><span class="exturl" data-url="aHR0cHM6Ly92YWxncmluZC5vcmcvZG9jcy9tYW51YWwvbXMtbWFudWFsLmh0bWw=">Massif<i class="fa fa-external-link-alt"></i></span> - 메모리 프로파일러</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly92YWxncmluZC5vcmdf">Valgrind<i class="fa fa-external-link-alt"></i></span> - 메모리 릭 체커<br><span class="exturl" data-url="aHR0cHM6Ly92YWxncmluZC5vcmcvZG9jcy9tYW51YWwvbXMtbWFudWFsLmh0bWw=">Massif<i class="fa fa-external-link-alt"></i></span> - 메모리 프로파일러</p>
 </blockquote>
 <p>Valgrind와 Massif는 메모리를 분석하는 툴이다. <strong>Valgrind</strong>는 예전부터 <strong>Memory leak을 분석하는 툴</strong>로 많이 쓰이고, <strong>Massif</strong>는 많이 알려진 툴은 아니지만 valgrind 내부에서 <strong>heap memory profiling</strong>을 하는 도구이다.</p>
 <p>제발, 대체, 왜 2022년에 아직도 new/delete를 사용하는 사람이 있는지는 모르겠지만, 혹시나 new/delete를 사용하고 있는 사람이라면 valgrind를 꼭 돌려보는 것을 추천한다. Valgrind를 사용하면 1. 전체 heap allocation이 몇번 일어났는지, 2. 전체 heap deallocation이 몇번 일어났는지, 3. Dangling pointer (i.e. memory leak)이 얼마나 있는지를 알 수 있다.</p>
 <p>SLAM의 경우 heap allocation을 사용하는 경우가 굉장히 많다 (물론 안 쓰고 하는 방법도 있겠지만, 대부분의 오픈소스에서 보이는 방식은 전부 힙이라고 보면 된다). 왜냐하면 맵이 점점 커지는 형태의 프로그램인데, 이 맵 포인트를 추가할 때 거의 대부분의 경우 heap으로 추가하기 때문이다. 또, 멀티쓰레딩을 위해 여러 쓰레드에서 접근할 수 있는 공유자원을 만들면서 heap에 올리는 경우도 굉장히 많다. 그렇기 때문에, SLAM을 하는 사람들에게는 필수 툴이라고 볼 수 있다.</p>
 <img src="/20221013-cpp-essential-tools/valgrind.png" class="" title="valgrind"> 
-
 <p> </p>
 <p>그 다음은 massif 이다. Massif 자체만으로는 memory profiling 기능만을 지원하지만, KDE에서 만든 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0tERS9tYXNzaWYtdmlzdWFsaXplcg==">massif-visualizer<i class="fa fa-external-link-alt"></i></span>를 사용하면 프로그램이 진행되면서 얼마나 많은 stack / heap 메모리가 점유되었는지도 볼 수 있다. 어떤 프로세스 / 어떤 모듈이 얼마나 메모리를 먹는지 볼 수 있고, 이를 통해 이유없이 데이터를 저장하고 있는 부분들을 발견해서 메모리 최적화를 진행할 수도 있다. PC에서 개발할 때에는 왠만하면 CPU나 메모리가 부족할 일이 없는데 (만약 부족했다면 높은 확률로 뭔가 크게 잘못하고 있을 확률이 높다), 타겟 디바이스에서는 PC에서의 작은 실수가 아주 큰 부메랑으로 돌아오기 때문에 메모리 프로파일링이 큰 도움이 될 수 있다.</p>
 <img src="/20221013-cpp-essential-tools/massif-visualizer.png" class="" title="massif-visualizer"> 
-
 
     </div>
 
@@ -529,6 +522,9 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
     <li class="popular-posts-item">
@@ -536,9 +532,6 @@ mjx-container[display="true"] + br {
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
     </li>
   </ul>
 
@@ -609,7 +602,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

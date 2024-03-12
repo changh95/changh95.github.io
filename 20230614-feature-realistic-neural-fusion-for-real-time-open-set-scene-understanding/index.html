@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -22,15 +22,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="Kimera 및 3D Dynamic Scene Graphs 논문을 리뷰합니다.">
+<meta name="description" content="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding 논문을 리뷰합니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mazur 2022 - Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding 논문 리뷰">
 <meta property="og:url" content="https://changh95.github.io/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/index.html">
 <meta property="og:site_name" content="cv-learn">
-<meta property="og:description" content="Kimera 및 3D Dynamic Scene Graphs 논문을 리뷰합니다.">
+<meta property="og:description" content="Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding 논문을 리뷰합니다.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-14T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-06-15T08:23:10.707Z">
+<meta property="article:modified_time" content="2023-09-07T02:57:30.883Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
@@ -310,7 +310,7 @@ mjx-container[display="true"] + br {
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -323,6 +323,7 @@ mjx-container[display="true"] + br {
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -336,19 +337,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -423,7 +424,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-15 17:23:10" itemprop="dateModified" datetime="2023-06-15T17:23:10+09:00">2023-06-15</time>
+        <time title="Modified: 2023-09-07 11:57:30" itemprop="dateModified" datetime="2023-09-07T11:57:30+09:00">2023-09-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -460,7 +461,12 @@ mjx-container[display="true"] + br {
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <h1 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h1><h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>3D scene 속 실시간 semantic segmentation을 하는 방법을 제안합니다. Pre-trained 2D image feature extractor (여기서는 EfficientNet과 DINO)와 iMAP과 비슷한 SLAM 백엔드 시스템을 이용해서 정보를 퓨전시킵니다. 퓨전을 하는 방법은 latent volumetric rendering 테크닉을 사용합니다. 이 방법을 사용함으로써 EfficientNet 및 DINO의 feature-map을 퓨전해서 3D 공간에 고정시킬 수 있습니다.</p>
+<p>The system is particularly effective for dynamic open set semantic segmentation. In this context, dynamic open set semantic segmentation refers to the ability to identify and group objects of varying appearance and geometry, given a semantic class, with minimal user input. This is a challenging problem in the field of computer vision and the authors’ approach presents a promising solution.</p>
+<p>The introduction also provides a brief overview of related work in the field. This includes SemanticFusion, Semantic NeRF, Distilled Feature Fields (DFF), and Neural Feature Fusion Fields (N3F). Each of these methods has its own strengths and weaknesses, but the authors argue that their proposed method offers several advantages over these existing approaches.</p>
+<p>In particular, the authors highlight that their method is capable of handling dynamic scenes, which is a significant challenge in the field of semantic segmentation. Furthermore, their method is designed to be efficient, which is a critical requirement for real-time applications.</p>
+<p>Overall, the introduction sets the stage for the rest of the paper, which delves into the details of the proposed method, provides experimental results demonstrating its effectiveness, and discusses potential future directions for this line of research.</p>
+
     </div>
 
     
@@ -470,19 +476,19 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230329-rosinol-2021-kimera-3d-dgs/" rel="bookmark">Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰</a></div>
+      <div class="popular-posts-title"><a href="/20230618-cvpr2023-tutorials-workshops/" rel="bookmark">CVPR 2023 학회에서 눈여겨볼 SLAM 관련 튜토리얼/워크샵</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+      <div class="popular-posts-title"><a href="/20230329-rosinol-2021-kimera-3d-dgs/" rel="bookmark">Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230215-rosen-2021/" rel="bookmark">Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping</a></div>
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230218-qin-2020-avpslam/" rel="bookmark">Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot</a></div>
+      <div class="popular-posts-title"><a href="/20230215-rosen-2021/" rel="bookmark">Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping</a></div>
     </li>
   </ul>
 
@@ -558,7 +564,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

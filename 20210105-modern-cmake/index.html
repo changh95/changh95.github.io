@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -342,19 +342,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -464,11 +464,9 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
         <p>Joshua Lospinoso의 ‘<span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9iRGRrSnUtblZUbw==">Modern Cmake: An introduction<i class="fa fa-external-link-alt"></i></span>‘ 영상을 보고 공부한 노트입니다.<br>추천하는 책은 ‘<span class="exturl" data-url="aHR0cHM6Ly9jcmFzY2l0LmNvbS9wcm9mZXNzaW9uYWwtY21ha2Uv">Professional CMake: A Practical Guide<i class="fa fa-external-link-alt"></i></span>‘</p>
 <hr>
-<h1 id="가장-쉬운-인트로"><a href="#가장-쉬운-인트로" class="headerlink" title="가장 쉬운 인트로"></a>가장 쉬운 인트로</h1><h2 id="Executable-프로그램-만들기"><a href="#Executable-프로그램-만들기" class="headerlink" title="Executable 프로그램 만들기"></a>Executable 프로그램 만들기</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, world!\n"</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
+<h1 id="가장-쉬운-인트로"><a href="#가장-쉬운-인트로" class="headerlink" title="가장 쉬운 인트로"></a>가장 쉬운 인트로</h1><h2 id="Executable-프로그램-만들기"><a href="#Executable-프로그램-만들기" class="headerlink" title="Executable 프로그램 만들기"></a>Executable 프로그램 만들기</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"Hello, world!\n"</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p>위와 같은 형태의 .cpp 파일이 있다고 해보자.<br>우리는 이 파일을 기반으로 binary executable이나 library를 만들고싶다.<br>이를 위해 우리는 CMake를 사용한다.</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.15</span>)</span><br><span class="line"><span class="keyword">project</span>(HelloWorld)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(App main.cpp)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>CMake 버전은 3.xx 이후로 사용한다면 어떤걸 사용하던지 크게 상관없다.</li>
 <li>하나의 <code>CMakeLists.txt</code>는 단 1개의 project만 설정할 수 있다.<ul>
@@ -479,20 +477,14 @@ mjx-container[display="true"] + br {
 <li>여기서 <code>App</code>에 해당하는 것을 target이라고 한다.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ls -1</span><br><span class="line">   CMakeLists.txt</span><br><span class="line">   main.cpp</span><br><span class="line">$ mkdir build &amp;&amp; <span class="built_in">cd</span> build/</span><br><span class="line">$ cmake .. -GNinja</span><br><span class="line">$ ninja</span><br><span class="line">$ ./App</span><br><span class="line">Hello, world!</span><br></pre></td></tr></table></figure>
-
 <p>터미널에서 다음과 같은 커맨드를 사용하면 프로젝트를 생성하고 실행할 수 있다.<br><code>-GNinja</code> 라는 generator flag는 추후에 기술한다.<br>ninja 대신 make를 사용해도 된다 (Lospinoso는 ninja를 더 좋아한다고 한다).</p>
-<br>
-
+<p><br></p>
 <h3 id="cmake-커맨드-amp-ninja-커맨드-설명"><a href="#cmake-커맨드-amp-ninja-커맨드-설명" class="headerlink" title="cmake 커맨드 & ninja 커맨드 설명"></a>cmake 커맨드 &amp; ninja 커맨드 설명</h3><img src="/20210105-modern-cmake/cmake_run.png" class="" title="CMake run">
-
 <p><code>cmake .. -GNinja</code> 커맨드를 실행했을 때, 위와 같은 파일들이 생성된다.<br>이 중 제일 중요한 것은 <code>CMakeCache.txt</code>인데, 이 파일 안에 빌드에 필요한 캐쉬 값들이 저장된다.</p>
 <img src="/20210105-modern-cmake/ninja_run.png" class="" title="ninja run">
-
 <p>이 후 <code>ninja</code> 커맨드를 실행하면 빌드를 위해 ninja 패키지가 사용하는 intermediate object와 log, dependency 등이 생성된다.<br>그리고 제일 중요한 빌드의 결과물인 <code>build/App</code> executable이 생성된다.</p>
-<br>
-
+<p><br></p>
 <h3 id="add-executable에-사용-가능한-옵션"><a href="#add-executable에-사용-가능한-옵션" class="headerlink" title="add_executable에 사용 가능한 옵션"></a>add_executable에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span> (&lt;name&gt; [WIN32] [MACOSX_BUNDLE]</span><br><span class="line">                [EXCLUDE_FROM_ALL]</span><br><span class="line">                [source1] [source2 ...])</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>&lt;name&gt;</code>은 executable의 이름<ul>
 <li>Globally unique 해야함</li>
@@ -500,10 +492,9 @@ mjx-container[display="true"] + br {
 </li>
 <li><code>WIN32</code>와 <code>MACOSX_BUNDLE</code>은 OS에 따른 빌드 방식 선언</li>
 <li><code>EXCLUDE_FROM_ALL</code>은 <code>make all</code>과 같은 상위레벨 빌드 명령에서 이 target 빌드를 제외하는 플래그</li>
-<li> 헤더 파일은 보통 자동으로 찾아지고, cpp 소스파일만 넣어준다.</li>
+<li>헤더 파일은 보통 자동으로 찾아지고, cpp 소스파일만 넣어준다.</li>
 </ul>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_EXECUTABLE_SUFFIX .bin)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Windows에서 target은 <code>App.exe</code>로 나온다</li>
 <li>Linux에서 target은 suffix가 없이 <code>App</code>으로 나온다.</li>
@@ -514,15 +505,12 @@ mjx-container[display="true"] + br {
 </ul>
 <hr>
 <h2 id="Library-만들기"><a href="#Library-만들기" class="headerlink" title="Library 만들기"></a>Library 만들기</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(Cat cat.cpp)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Executable을 만드는 방식과 비슷하다.</li>
 <li><code>Cat</code>이 target이고, <code>cat.cpp</code>는 소스파일이다.</li>
 </ul>
-<br>
-
+<p><br></p>
 <h3 id="add-library에-사용-가능한-옵션"><a href="#add-library에-사용-가능한-옵션" class="headerlink" title="add_library에 사용 가능한 옵션"></a>add_library에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(&lt;name&gt; [STATIC | SHARED | MODULE | OBJECT]</span><br><span class="line">            [EXCLUDE_FROM_ALL]</span><br><span class="line">            [source1] [source2 ...])</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>STATIC</code>이나 <code>SHARED</code> library를 고를 수 있다.</li>
 <li>필요에 따라 <code>MODULE</code> (i.e. plug-in) 라이브러리를 만들 수도 있다.<ul>
@@ -535,7 +523,6 @@ mjx-container[display="true"] + br {
 <hr>
 <h2 id="Executable에-Library-링크하기"><a href="#Executable에-Library-링크하기" class="headerlink" title="Executable에 Library 링크하기."></a>Executable에 Library 링크하기.</h2><p><code>App</code>이 <code>Cat</code> 라이브러리를 사용한다면…</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(App PUBLIC Cat)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>PUBLIC</code>은 <code>Cat</code> 라이브러리가 사용하는 모든 symbol이 App에서 노출된다는 것이다.<ul>
 <li><code>PRIVATE</code>, <code>INTERFACE</code> 등도 있다. 추후에 기술한다.</li>
@@ -546,10 +533,8 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<br>
-
+<p><br></p>
 <h3 id="target-link-libraries에-사용-가능한-옵션"><a href="#target-link-libraries에-사용-가능한-옵션" class="headerlink" title="target_link_libraries에 사용 가능한 옵션"></a>target_link_libraries에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(&lt;<span class="keyword">target</span>&gt;</span><br><span class="line">                      &lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt; ...</span><br><span class="line">                      [&lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt; ...] ...)                      </span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>동시에 다수의 라이브러리를 링크할 수 있다.<ul>
 <li>라이브러리마다 각각의 방식으로 링크할 수 있다.</li>
@@ -557,26 +542,20 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <img src="/20210105-modern-cmake/target_link_libraries.png" class="" title="target_link_libraries">
-
 <p>큰 프로젝트에서는 위와 같은 구조도 만들 수 있다.</p>
 <hr>
 <h2 id="파일-디렉토리-추가"><a href="#파일-디렉토리-추가" class="headerlink" title="파일/디렉토리 추가"></a>파일/디렉토리 추가</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(dir1)</span><br><span class="line"><span class="keyword">include</span>(dir2/HelperScript.cmake)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Directory를 추가하고 싶을 때는 보통 <code>add_subdirectory</code> 명령어를 사용한다.</li>
 <li>CMake script를 직접 추가하고 싶을 때는 <code>include</code> 명령어를 사용한다.</li>
 </ul>
-<br>
-
+<p><br></p>
 <h3 id="add-subdirectory에-사용-가능한-옵션"><a href="#add-subdirectory에-사용-가능한-옵션" class="headerlink" title="add_subdirectory에 사용 가능한 옵션"></a>add_subdirectory에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(source_dir [binary_dir] [EXCLUDE_FROM_ALL])</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>binary_dir</code>은 보통 잘 안쓰인다. 정말 필요한 경우가 아닌 경우에는 추천 안한다.</li>
 </ul>
-<br>
-
+<p><br></p>
 <h3 id="include에-사용-가능한-옵션"><a href="#include에-사용-가능한-옵션" class="headerlink" title="include에 사용 가능한 옵션"></a>include에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(&lt;<span class="keyword">file</span>|module&gt; [OPTIONAL] [RESULT_VARIABLE &lt;var&gt;] [NO_POLICY_SCOPE]) </span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>OPTIONAL</code>이 있다면, 파일이나 모듈을 찾지 못했을 때 에러를 반환하지 않는다.</li>
 <li><code>RESULT_VARIABLE</code>은 파일을 찾으면 full filename을 주고, 못찾으면 NOTFOUND를 준다.</li>
@@ -584,7 +563,6 @@ mjx-container[display="true"] + br {
 </ul>
 <hr>
 <h2 id="CMake-디버깅하기"><a href="#CMake-디버깅하기" class="headerlink" title="CMake 디버깅하기"></a>CMake 디버깅하기</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>([&lt;mode&gt;] <span class="string">"message text"</span> ...)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>message</code>에 <code>&lt;mode&gt;</code> 파라미터를 설정함으로써 다양한 디버깅을 할 수 있다.</li>
 <li>사용 가능한 <code>&lt;mode&gt;</code> 파라미터에는<code>TRACE</code>, <code>DEBUG</code>, <code>VERBOSE</code>, <code>STATUS</code>, <code>NOTICE</code>, <code>DEPRECATION</code>, <code>AUTHOR_WARNING</code>, <code>WARNING</code>, <code>SEND_ERROR</code>, <code>FATAL_ERROR</code>가 있다.<ul>
@@ -593,13 +571,10 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <h3 id="간단한-디버깅-예시"><a href="#간단한-디버깅-예시" class="headerlink" title="간단한 디버깅 예시"></a>간단한 디버깅 예시</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(STATUS a)</span><br><span class="line"><span class="keyword">message</span>(ERROR b)</span><br><span class="line"><span class="keyword">message</span>(FATAL_ERROR c)</span><br><span class="line"><span class="keyword">message</span>(STATUS a)</span><br></pre></td></tr></table></figure>
-
 <p>위와 같은 CMakeLists.txt를 작성했다면,</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cmake -GNinja ..</span><br><span class="line">...</span><br><span class="line">-- a</span><br><span class="line">ERRORb</span><br><span class="line">CMake Error at CMakeLists.txt:5 (message):</span><br><span class="line"> c</span><br><span class="line"> -- Configuring incomplete, errors occured!</span><br></pre></td></tr></table></figure>
-
 <p>이런 결과가 나온다.<br><code>ERRORb</code>가 나온 이유는, <code>ERROR</code>는 <code>message</code>가 사용할 수 있는 <code>&lt;mode&gt;</code>가 아니기 때문에 string으로 취급되기 때문이다.</p>
 <h3 id="message-mode를-variable로-선언하기"><a href="#message-mode를-variable로-선언하기" class="headerlink" title="message mode를 variable로 선언하기"></a>message mode를 variable로 선언하기</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MODE TRACE CACHE <span class="keyword">STRING</span> <span class="string">"Message mode/level"</span>)</span><br><span class="line"><span class="keyword">message</span>(<span class="variable">${MODE}</span> <span class="string">"message(${MODE})"</span>)</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Cache variable을 통해 mode 값을 조정할 수 있다.<ul>
 <li>Cache variable에 대해서는 추후에 설명한다.</li>
@@ -607,9 +582,7 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cmake .. -GNinja -DMODE:STRING=STATUS</span><br><span class="line">-- message(STATUS)</span><br><span class="line">$ cmake .. -GNinja -DMODE:STRING=NOTICE</span><br><span class="line">message(NOTICE)</span><br></pre></td></tr></table></figure>
-
 <h3 id="CMake의-모든-message-보기"><a href="#CMake의-모든-message-보기" class="headerlink" title="CMake의 모든 message 보기"></a>CMake의 모든 message 보기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake --log-level=TRACE ...</span><br></pre></td></tr></table></figure>
-
 <p>위와 같은 방식으로 cmake를 돌렸을 때, 리눅스 환경에서는</p>
 <ul>
 <li><code>STATUS</code>는 stdout으로</li>
@@ -620,7 +593,6 @@ mjx-container[display="true"] + br {
 </ul>
 <hr>
 <h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><h2 id="Variables-사용하기"><a href="#Variables-사용하기" class="headerlink" title="Variables 사용하기"></a>Variables 사용하기</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(NormalVariable <span class="string">"A normal variable"</span>)</span><br><span class="line"><span class="keyword">set</span>(CacheVariable <span class="string">"A cache variable"</span> CACHE <span class="keyword">STRING</span> <span class="string">"Some description"</span>)</span><br></pre></td></tr></table></figure>
-
 <p>CMake에서 쓸 수 있는 variable에는 두가지가 있다.</p>
 <ul>
 <li>보통의 variable<ul>
@@ -633,24 +605,18 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <h3 id="사용-예시"><a href="#사용-예시" class="headerlink" title="사용 예시"></a>사용 예시</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-- NormalVariable = A normal variable</span><br><span class="line">-- CacheVariable = A cache variable</span><br></pre></td></tr></table></figure>
-
 <p>실제로 돌렸을 때는 위와 같이 나온다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ grep -IrE <span class="string">"Variable"</span> -C1 CMakeCache.txt</span><br><span class="line">CMakeCache.txt-//Some description</span><br><span class="line">CMakeCache.txt:CacheVariable:STRING=A cache variable</span><br><span class="line">CMakeCache.txt-</span><br></pre></td></tr></table></figure>
-
 <p>Cache variable만 <code>CmakeCache.txt</code>에 저장된다.</p>
 <h3 id="같은-이름의-variable들"><a href="#같은-이름의-variable들" class="headerlink" title="같은 이름의 variable들"></a>같은 이름의 variable들</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(Variable <span class="string">"A normal variable"</span>)</span><br><span class="line"><span class="keyword">set</span>(Variable <span class="string">"A cache variable"</span> CACHE <span class="keyword">STRING</span> <span class="string">"Conflicts"</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">"CacheVariable = ${CacheVariable})</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if (Variable STREQUAL "</span>A cache variable<span class="string">")</span></span><br><span class="line"><span class="string">    message(STATUS "</span>Variable (<span class="variable">${Variable}</span>) is Cache<span class="string">")</span></span><br><span class="line"><span class="string">else()</span></span><br><span class="line"><span class="string">    message(STATUS "</span>Variable (<span class="variable">${Variable}</span>) is Normal<span class="string">")</span></span><br><span class="line"><span class="string">endif()</span></span><br></pre></td></tr></table></figure>
-
 <p>위와 같은 형태로 CMakeList를 만들었다고 해보자.<br>동일한 이름의 normal variable과 cache variable을 만들었다.</p>
 <p>이 경우 작동은 하지만, 아래와 같은 참사가 나타난다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = A cache variable</span><br><span class="line">-- Variable (A cache variable) is Cache</span><br><span class="line"></span><br><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = A cache variable</span><br><span class="line">-- Variable (A normal variable) is Normal</span><br></pre></td></tr></table></figure>
-
 <p>처음 돌렸을 때는 Cache variable이고,<br>두번째 돌렸을 때는 Normal variable로 나온다.</p>
 <p>위와 같은 방식을 쓰지 말자!<br>스크립트를 돌릴 때 마다 매번 같은 결과가 나오는 좋은 스크립트를 짜도록 하자.</p>
 <h3 id="set에-사용할-수-있는-옵션"><a href="#set에-사용할-수-있는-옵션" class="headerlink" title="set에 사용할 수 있는 옵션"></a>set에 사용할 수 있는 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set a normal variable</span></span><br><span class="line"><span class="keyword">set</span>(&lt;variable&gt; &lt;value&gt;... [PARENT_SCOPE])</span><br><span class="line"></span><br><span class="line"><span class="comment"># Set a cache variale (cache entry)</span></span><br><span class="line"><span class="keyword">set</span>(&lt;variable&gt; &lt;value&gt;... CACHE &lt;type&gt; &lt;docstring&gt; [FORCE])</span><br><span class="line"><span class="comment"># (Where &lt;type&gt; is one of BOOL, FILEPATH, PATH, STRING, or INTERNAL)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Set an environment variable directly</span></span><br><span class="line"><span class="keyword">set</span>(ENV{&lt;variable&gt;} [&lt;value&gt;])</span><br></pre></td></tr></table></figure>
-
 <h3 id="Cache-variable의-특징"><a href="#Cache-variable의-특징" class="headerlink" title="Cache variable의 특징"></a>Cache variable의 특징</h3><p>Cache variable은 한번 만들고나면 <code>CMakeLists.txt</code>를 통해서 수정이 불가능하다.<br>왜냐하면 Cache variable 정보가 이미 <code>CMakeCache.txt</code>에 저장이 되어버렸기 때문에, 해당 파일을 수정하거나 지우지 않는 이상 cache variable 정보에 접근할 수 없다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ cmake .. -DCacheVariable:STRING=<span class="string">"Permanent override"</span></span><br><span class="line">-- CacheVariable = Permanent override</span><br><span class="line"></span><br><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = Permanent override</span><br><span class="line"></span><br><span class="line">$ rm CMakeCache.txt</span><br><span class="line"></span><br><span class="line">$ cmake ..</span><br><span class="line">-- CacheVariable = A cache variable</span><br></pre></td></tr></table></figure>
-
 <h3 id="CMakeCache-txt의-특징"><a href="#CMakeCache-txt의-특징" class="headerlink" title="CMakeCache.txt의 특징"></a>CMakeCache.txt의 특징</h3><p><code>CMakeCache.txt</code> 파일은 최상위 빌드 디렉토리에 있으며, 빌드에 대한 모든 정보를 담고 있다.</p>
 <p>이 파일을 새로 만들거나 수정한다면, <code>configure</code>나 <code>generate</code>를 할 때 모든 <code>CMakeLists.txt</code> 파일이 다시 처리되어야한다.</p>
 <hr>
@@ -661,19 +627,13 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <h3 id="String-사용하기"><a href="#String-사용하기" class="headerlink" title="String 사용하기"></a>String 사용하기</h3><img src="/20210105-modern-cmake/string1.png" class="" title="string1">
-
 <img src="/20210105-modern-cmake/string2.png" class="" title="string2">
-
 <img src="/20210105-modern-cmake/string3.png" class="" title="string3">
-
 <h3 id="List-사용하기"><a href="#List-사용하기" class="headerlink" title="List 사용하기"></a>List 사용하기</h3><img src="/20210105-modern-cmake/list1.png" class="" title="list1">
-
 <img src="/20210105-modern-cmake/list2.png" class="" title="list2">
-
 <hr>
 <h1 id="Control-flow"><a href="#Control-flow" class="headerlink" title="Control flow"></a>Control flow</h1><p>CMake에 control flow 함수는 많지 않다.</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (A)</span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
 <p><code>x(...)</code>라는 control flow 함수가 있다면,<br>그 함수는 끝날 때 <code>endx()</code>로 끝나게 된다.</p>
 <h2 id="Control-flow-함수"><a href="#Control-flow-함수" class="headerlink" title="Control flow 함수"></a>Control flow 함수</h2><ul>
 <li><code>if()</code> ; <code>else()</code> ; <code>elseif()</code> ; <code>endif()</code></li>
@@ -684,7 +644,6 @@ mjx-container[display="true"] + br {
 <li><code>break()</code> ; <code>continue()</code> - 루프 컨트롤</li>
 </ul>
 <h2 id="if문"><a href="#if문" class="headerlink" title="if문"></a>if문</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(&lt;condition&gt;)</span><br><span class="line">    &lt;commands&gt;</span><br><span class="line"><span class="keyword">elseif</span>(&lt;condition&gt;)</span><br><span class="line">    &lt;commands&gt;</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    &lt;commands&gt;</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>리턴 타입은 <ul>
 <li>True: 1, ON, YES, TRUE, Y, 또는 non-zero number</li>
@@ -707,6 +666,9 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
     <li class="popular-posts-item">
@@ -714,9 +676,6 @@ mjx-container[display="true"] + br {
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
     </li>
   </ul>
 
@@ -788,7 +747,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

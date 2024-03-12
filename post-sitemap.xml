@@ -9,6 +9,126 @@
 
 
     <url>
+        <loc>https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/</loc>
+        <lastmod>2024-03-12T00:07:54.542Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240312-nvidia-ngc/</loc>
+        <lastmod>2024-03-12T00:05:28.816Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240308-papers/</loc>
+        <lastmod>2024-03-08T04:28:03.919Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240305-ros1-study/</loc>
+        <lastmod>2024-03-05T11:02:23.406Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240304-fast-kitti-download/</loc>
+        <lastmod>2024-03-04T02:27:54.665Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/</loc>
+        <lastmod>2024-03-04T02:12:57.285Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231221-how-to-follow-slam-papers/</loc>
+        <lastmod>2024-03-04T02:12:57.245Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240126-latex-ocr/</loc>
+        <lastmod>2024-03-04T02:12:57.245Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231128-dsp-slam/</loc>
+        <lastmod>2024-03-04T02:12:57.241Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231128-slam-interview-questions-100-eng/</loc>
+        <lastmod>2024-02-17T08:28:42.109Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230910-red-flags-from-top-vcs/</loc>
+        <lastmod>2024-02-17T08:28:42.097Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231127-100-slam-interview-questions/</loc>
+        <lastmod>2024-02-17T08:28:42.097Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230907-kiss-icp/</loc>
+        <lastmod>2023-09-07T02:58:29.714Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/</loc>
+        <lastmod>2023-09-07T02:57:30.883Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230618-cvpr2023-tutorials-workshops/</loc>
+        <lastmod>2023-09-07T02:57:30.883Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20230531-icra2023-day4-poster/</loc>
         <lastmod>2023-06-16T07:55:11.883Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -58,14 +178,6 @@
 
     <url>
         <loc>https://changh95.github.io/20230614-buy-write-strategy/</loc>
-        <lastmod>2023-06-15T08:23:10.707Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/</loc>
         <lastmod>2023-06-15T08:23:10.707Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -345,7 +457,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220329-standford-machine-learning-cs229/</loc>
+        <loc>https://changh95.github.io/20220402-clean-coders-practicing/</loc>
         <lastmod>2023-06-09T06:12:02.467Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -353,7 +465,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220402-clean-coders-practicing/</loc>
+        <loc>https://changh95.github.io/20220329-standford-machine-learning-cs229/</loc>
         <lastmod>2023-06-09T06:12:02.467Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -377,7 +489,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220418-10-lessons-from-smartest-engineer/</loc>
+        <loc>https://changh95.github.io/20220418-is-a-default-constructor-a-must/</loc>
         <lastmod>2023-06-09T06:12:02.467Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -385,7 +497,7 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20220418-is-a-default-constructor-a-must/</loc>
+        <loc>https://changh95.github.io/20220418-10-lessons-from-smartest-engineer/</loc>
         <lastmod>2023-06-09T06:12:02.467Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1441,6 +1553,14 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20210405-visloc-my-thoughts/</loc>
+        <lastmod>2023-06-09T06:12:01.839Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20210407-3dgv-andrew-davison/</loc>
         <lastmod>2023-06-09T06:12:01.839Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1465,22 +1585,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210528-work-history/</loc>
-        <lastmod>2023-06-09T06:12:01.839Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20210405-visloc-my-thoughts/</loc>
-        <lastmod>2023-06-09T06:12:01.839Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20210523-cpp-coding-guideline/</loc>
         <lastmod>2023-06-09T06:12:01.839Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1497,6 +1601,14 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20210528-work-history/</loc>
+        <lastmod>2023-06-09T06:12:01.839Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20210529-tartan-scherer/</loc>
         <lastmod>2023-06-09T06:12:01.839Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1505,7 +1617,31 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20201212-prml-kor/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-wolfram-mathworld/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20201214-exotic-container/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201215-Harris-corner/</loc>
         <lastmod>2023-06-09T06:12:01.835Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1545,7 +1681,55 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20201223-IROS2020-Luca-Carlone-SLAM-workshop/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201227-cvpr2020-slam-malisiewicz/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20201228-cvpr2020-slam-yang/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201229-dec-2020-slam-news/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201231-retro/</loc>
         <lastmod>2023-06-09T06:12:01.835Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1601,6 +1785,14 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20210116-sensor-size/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20210119-autonomous-driving/</loc>
         <lastmod>2023-06-09T06:12:01.835Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1649,78 +1841,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/20210128-gbp-poplar/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201215-Harris-corner/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201223-IROS2020-Luca-Carlone-SLAM-workshop/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201227-cvpr2020-slam-malisiewicz/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201229-dec-2020-slam-news/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201231-retro/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20210116-sensor-size/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/20210128-2021-january-slam-news/</loc>
         <lastmod>2023-06-09T06:12:01.835Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1729,23 +1849,15 @@
     </url>
 
     <url>
+        <loc>https://changh95.github.io/20210128-gbp-poplar/</loc>
+        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20210213-february-slam-news/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201212-prml-kor/</loc>
-        <lastmod>2023-06-09T06:12:01.835Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201212-wolfram-mathworld/</loc>
         <lastmod>2023-06-09T06:12:01.835Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1786,6 +1898,14 @@
 
     <url>
         <loc>https://changh95.github.io/20201125-cpp-linear-structures/</loc>
+        <lastmod>2023-06-09T06:12:01.827Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201125-stl-containers/</loc>
         <lastmod>2023-06-09T06:12:01.827Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -1890,14 +2010,6 @@
 
     <url>
         <loc>https://changh95.github.io/20201212-2d-matrix-iteration/</loc>
-        <lastmod>2023-06-09T06:12:01.827Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20201125-stl-containers/</loc>
         <lastmod>2023-06-09T06:12:01.827Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

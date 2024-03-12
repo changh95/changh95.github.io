@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="MathPix의 시대는 갔습니다. 미래는 pix2tex!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex)">
+<meta property="og:url" content="https://changh95.github.io/20240126-latex-ocr/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="MathPix의 시대는 갔습니다. 미래는 pix2tex!">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/latex_ocr.png">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/run.png">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/help.png">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/works.png">
+<meta property="article:published_time" content="2024-01-26T07:50:21.000Z">
+<meta property="article:modified_time" content="2024-03-04T02:12:57.245Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="OCR">
+<meta property="article:tag" content="pix2tex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20240126-latex-ocr/latex_ocr.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20240126-latex-ocr/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex) | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B0%B0%EA%B2%BD"><span class="nav-number">1.</span> <span class="nav-text">배경</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pix2tex"><span class="nav-number">2.</span> <span class="nav-text">pix2tex</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">253</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">351</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20240126-latex-ocr/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-01-26 16:50:21" itemprop="dateCreated datePublished" datetime="2024-01-26T16:50:21+09:00">2024-01-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-03-04 11:12:57" itemprop="dateModified" datetime="2024-03-04T11:12:57+09:00">2024-03-04</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/2-Programming/" itemprop="url" rel="index"><span itemprop="name">2. Programming</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="배경"><a href="#배경" class="headerlink" title="배경"></a>배경</h1><p>Spatial AI를 하는 우리는 논문을 읽으면서 수식에 대한 기록을 남길 때가 많다. </p>
+<p>수식을 텍스트로 남기는건 정말 어렵기 때문에, 보통 <span class="exturl" data-url="aHR0cHM6Ly9rby53aWtpcGVkaWEub3JnL3dpa2kvTGFUZVg=">LaTeX<i class="fa fa-external-link-alt"></i></span> 렌더러가 동작하는 에디터를 사용해서 많이 저장한다 (e.g. Notion, Overleaf, 블로그에 mathjax 기능을 활성화).</p>
+<p>대학원을 거치면서 논문을 적어봤다면 간단한 LaTeX 문법은 알고 있겠지만, <strong>LaTeX 문법을 잘 알고 있다고해서 복잡하고 긴 수식을 순식간에 적어낼 수 있는 것은 아니다</strong>.</p>
+<p>예시를 들면, 아래 수식을 10초 안에 적어내는 사람은 없을거다.</p>
+<script type="math/tex; mode=display">\Delta\mathrm{R}_{i j}\stackrel{\cdot\cdot}{=}\mathrm{R}_{i}^{\top}\mathrm{R}_{j}=\prod_{k=i}^{j-1}\mathrm{Exp}\left(\left(\tilde{\omega}_{k}-{\bf{b}}_{k}^{g}-\eta_{k}^{g d}\right)\Delta t\right)</script><p> </p>
+<p>아마 수식을 좀 따보신 분들께서는 <span class="exturl" data-url="aHR0cHM6Ly9tYXRocGl4LmNvbQ==">MathPix<i class="fa fa-external-link-alt"></i></span> 라는 OCR 시스템을 사용해보셨을 것이다.</p>
+<p>사용하기 쉬운 GUI로 되어있어서 필자도 자주 사용했던 소프트웨어인데, 초창기에는 매일 50개씩 무료로 쓸 수 있던데에 비해 요즘에는 1달에 수식 10개정도만 변환해도 돈내라고 한다.</p>
+<p>매달 5달러를 내면 5000개까지 딸 수 있게 해준다는데… LaTeX OCR이 편하기는 해도 매달 5천개씩 따야하는 사람은 많이 없을 것이다.</p>
+<p> </p>
+<p>요즘 AI 기술도 굉장히 좋은데… 분명 누군가가 OCR 모델을 학습 잘 해놓고 무료로 풀지 않았을까 하는 생각에 찾아봤는데</p>
+<p>왠걸! pix2tex라는 아주 좋은 소프트웨어를 찾아냈다.</p>
+<blockquote>
+<p><strong>pix2tex를 이용하면 수식에 스크린샷을 한 후 2초안에 LaTeX 문법을 얻어낼 수 있다.</strong><br><strong> 무료로 사용할 수 있으며 횟수 제한도 없다.</strong></p>
+</blockquote>
+<p> </p>
+<p>이번 글에서는 완전 무료인 LaTeX OCR 소프트웨어 - pix2tex를 소개한다.</p>
+<img src="/20240126-latex-ocr/latex_ocr.png" class="" title="pix2tex">
+<p> </p>
+<hr>
+<h1 id="pix2tex"><a href="#pix2tex" class="headerlink" title="pix2tex"></a>pix2tex</h1><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x1a2FzLWJsZWNoZXIvTGFUZVgtT0NS">pix2tex<i class="fa fa-external-link-alt"></i></span>는 GitHub에 올라와있는 레포지토리에서 받을 수 있다.</p>
+<p>Ubuntu Linux에서는 GUI도 사용할 수 있다고 하는데, 나는 주로 문서 작업을 할 때 Mac을 사용하기 때문에 Mac 지원도 되야한다.</p>
+<p>다행히도 M1/M2도 된다고 한다 (실제로 돌려봤는데 상당히 빠르다).</p>
+<p>파이썬 3.7+ 이상이 설치되어있어야하는데, Spatial AI를 하는 분들은 다 있을 것이라고 본다.</p>
+<p>아래 커맨드로 간단하게 설치를 할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install <span class="string">"pix2tex[gui]"</span></span><br></pre></td></tr></table></figure>
+<p>설치 후 <code>pix2tex</code> 커맨드를 실행해보니, 모델을 다운로드 받는 것 같았다.</p>
+<p>모델은 ViT 모델을 기준으로 학습된거라고 한다.</p>
+<img src="/20240126-latex-ocr/run.png" class="" title="run">
+<p> </p>
+<p>모델 다운로드가 끝나면 자동으로 프로그램이 실행된다.</p>
+<p>어떻게 쓰는지 잘 모르겠을 때는 <code>h</code> 버튼을 눌러서 help를 볼 수 있다고 한다.</p>
+<p>사용 방법을 보니 Windows나 MacOS에서는 내가 분석하려는 수식에 대한 이미지를 클립보드에 넣어둔 상태에서 <code>Enter</code>를 누르면 된다고 한다.</p>
+<p>MacOS에서는 command + shift + 5 를 누르면 스크린샷 윈도우가 나타나고, 여기서 command + c를 누르면 클립보드에 이미지를 저장할 수 있다.</p>
+<p>저장후 엔터를 누르고 나니 결과가 나온다.</p>
+<img src="/20240126-latex-ocr/help.png" class="" title="pix2tex help">
+<p> </p>
+<p>pix2tex의 워크플로우를 보면 아래처럼 되겠다.</p>
+<ol>
+<li>논문에서 LaTeX로 변환하고 싶은 수식을 찾는다. 예시 논문으로 On-manifold IMU preintegration 논문을 가지고 왔다.</li>
+<li>수식에 대한 스크린샷을 따고, pix2tex에서 Enter를 누른다. LaTeX 수식이 나온다.</li>
+<li>내가 사용하는 LaTeX 렌더러에 작성한다. 사실 이 글의 초반에 작성한 ‘10초만에 못 적을 수식’은 pix2tex로 1초만에 적은 수식이다.</li>
+</ol>
+<img src="/20240126-latex-ocr/works.png" class="" title="it works">
+<p>pix2tex를 이용하면 OCR로 상당히 높은 정확도로 빠르게 수식을 LaTeX로 변환할 수 있다. </p>
+<p>해피 논문 라이프를 위한 필수 템이다.</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/OCR/" rel="tag"># OCR</a>
+              <a href="/tags/pix2tex/" rel="tag"># pix2tex</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20231221-how-to-follow-slam-papers/" rel="prev" title="2024년 Spatial AI 및 Robotics 최신 논문 빠르게 파악하는 방법">
+                  <i class="fa fa-chevron-left"></i> 2024년 Spatial AI 및 Robotics 최신 논문 빠르게 파악하는 방법
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20240207-spatial-ai-kr-hyunwoo-yoo/" rel="next" title="Robot Perception for Activities and Adaptation - UNIST 유현우 교수님">
+                  Robot Perception for Activities and Adaptation - UNIST 유현우 교수님 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

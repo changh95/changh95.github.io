@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -336,19 +336,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -459,7 +459,6 @@ mjx-container[display="true"] + br {
         <p>C++로 프로그램을 만드는 이유 중 하나는 <strong>빠른 실행 속도</strong>이다.<br>gcc 컴파일러를 사용해서 C++ 프로그램을 컴파일 할 때, 평소보다 <strong>훨씬 더 빠르게 프로그램이 작동하도록 컴파일하는 방법</strong>이 있다.<br><span class="exturl" data-url="aHR0cDovL2djYy5nbnUub3JnL29ubGluZWRvY3MvZ2NjL09wdGltaXplLU9wdGlvbnMuaHRtbA==">온라인 도큐먼트에 다양한 컴파일 옵션<i class="fa fa-external-link-alt"></i></span>들이 잘 설명되어있다. </p>
 <p> </p>
 <img src="/20210107-gcc-ffast-math/tldr.gif" class="" title="tldr">
-
 <p><strong>근데 이걸 언제 다 읽어!</strong><br>간단하게 중요한 몇개의 컴파일 플래그만 알아보도록 한다.</p>
 <hr>
 <h2 id="ffast-math-플래그"><a href="#ffast-math-플래그" class="headerlink" title="ffast-math 플래그"></a>ffast-math 플래그</h2><p><code>ffast-math</code>는 기존의 IEEE에서 정의한 C++ 컴파일 방식을 따르지 않고, <strong>더 효율적인 방식으로 프로그램을 컴파일</strong>한다.</p>
@@ -468,7 +467,6 @@ mjx-container[display="true"] + br {
 <p>와 같은 코드가 있다고 해보자.<br>이 방식은 7 번의 곱셈 계산이 필요할 것이다.</p>
 <p> </p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x *= x;</span><br><span class="line">x *= x;</span><br><span class="line">x *= x;</span><br></pre></td></tr></table></figure>
-
 <p><code>ffast-math</code> 플래그를 사용하면 위 연산은 이렇게 바뀐다.<br>동일한 연산을 3번의 곱셈 연산으로 바꾸었다.<br>이론적으로, 이 연산은 약 <strong>7/3배 빠르다</strong>.</p>
 <p> </p>
 <h2 id="사용할-때-유의할-점-1"><a href="#사용할-때-유의할-점-1" class="headerlink" title="사용할 때 유의할 점 1"></a>사용할 때 유의할 점 1</h2><p><span class="exturl" data-url="aHR0cHM6Ly9kbC5hY20ub3JnL2RvaS8xMC4xMTQ1LzEwMzE2Mi4xMDMxNjM=">Goldberg 논문<i class="fa fa-external-link-alt"></i></span>에 나온 것 처럼 floating-point의 계산은 associative하지 않다.<br>그러므로 <strong><code>ffast-math</code> 연산 방식에서는 실제 값에 오류를 포함</strong>할 수 밖에 없다.<br>이러한 점 때문에 <code>ffast-math</code> 방식은 IEEE에서 정의한 방식을 따르지 못한다.</p>
@@ -494,7 +492,6 @@ mjx-container[display="true"] + br {
 <hr>
 <h2 id="Ofast-플래그"><a href="#Ofast-플래그" class="headerlink" title="Ofast 플래그"></a>Ofast 플래그</h2><p><strong>가장 강력한 최적화 플래그</strong>이다.<br>IEEE고 정확도고 뭐고 다 비켜!!!!!!<br>속도가 짱짱이시다!!! 같은 느낌…</p>
 <img src="/20210107-gcc-ffast-math/ggf.png" class="" title="gotta go fest">
-
 <p><code>ffast-math</code>와 <code>fallow-store-data-races</code> 플래그를 포함하기 때문에, IEEE 규칙을 무시한 것은 물론이고 <code>ffast-math</code>에서 주의해야할 점들도 모두 가지고 있다.<br>그 외로, 아래에 보이는 것 처럼 control flow 관련 최적화 플래그도 모두 포함한다.</p>
 <ul>
 <li>fgcse-after-reload </li>
@@ -532,13 +529,13 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
     </li>
   </ul>
 
@@ -610,7 +607,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

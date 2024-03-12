@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -460,7 +460,6 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
         <h2 id="For-loop"><a href="#For-loop" class="headerlink" title="For loop"></a>For loop</h2><p>Golang에는 <code>for</code>만 있다. for each, for in, for of 등등은 없다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">addInForLoop</span><span class="params">(numbers ...<span class="keyword">int</span>)</span> <span class="title">int</span></span> {</span><br><span class="line">	total := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(numbers); i++ {</span><br><span class="line">		total += numbers[i]</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> total</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h2 id="Range"><a href="#Range" class="headerlink" title="Range"></a>Range</h2><p>range를 통해 array 에 for loop를 적용하여 iteration을 할 수 있다. range를 통해 index를 받을 수 있다. 실제 값을 받고 싶다면 <code>index, value</code>를 받으면 된다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">addInForLoop</span><span class="params">(numbers ...<span class="keyword">int</span>)</span> <span class="title">int</span></span> {</span><br><span class="line">	total := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> _, number := <span class="keyword">range</span> numbers {</span><br><span class="line"></span><br><span class="line">		total += number</span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> total</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
@@ -558,7 +557,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -332,19 +332,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -463,11 +463,9 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h2 id="Rust-설치-amp-설정"><a href="#Rust-설치-amp-설정" class="headerlink" title="Rust 설치 & 설정"></a>Rust 설치 &amp; 설정</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ curl https://sh.rustup.rs -sSf | sh</span><br><span class="line">$ <span class="built_in">source</span> <span class="variable">$HOME</span>/.cargo/env <span class="comment"># or add the following to ~/.bashrc `export PATH="$HOME/.cargo/bin:$PATH"</span></span><br><span class="line"></span><br><span class="line">$ rustc --version <span class="comment"># to check Rust version</span></span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <hr>
 <h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>(){</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"Hello, world!"</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>Rust에서 들여쓰기는 탭이 아니라 공백문자 4개를 이용한다.</li>
 <li><code>println!</code>은 Rust macro이다. 함수가 아니라 매크로를 호출하는것이다.</li>
@@ -475,7 +473,6 @@ mjx-container[display="true"] + br {
 </ul>
 <p> </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ rustc main.rs</span><br><span class="line">$ ./main</span><br><span class="line">Hello, world!</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>처음에 위 코드를 돌렸을 때 <code>error: linker 'cc' not found</code> 라는 에러가 나타났다.<ul>
 <li><code>sudo apt-get install gcc clang</code>을 함으로써 해결되었다. 내 경우는 cc가 clang과 연결되어있어서 clang을 설치해줬더니 해결되었다. 대부분의 경우 gcc와 연결이 되어있을테니 gcc를 설치하면 해결될 것이다.</li>
@@ -489,7 +486,6 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h2 id="Hello-Cargo"><a href="#Hello-Cargo" class="headerlink" title="Hello Cargo"></a>Hello Cargo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cargo new hello_cargo_project</span><br><span class="line">$ <span class="built_in">cd</span> hello_cargo_project</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>cargo</code>라는 Rust 언어 전용 패키지 매니저를 사용해서 프로젝트를 생성한다.</li>
 <li>위와 같은 커맨드로 프로젝트를 생성하면 다음과 같은 내용들이 있다.<ul>
@@ -505,7 +501,6 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ cargo build <span class="comment"># Build only (Debug by default)</span></span><br><span class="line">$ cargo build --release <span class="comment"># Build Release mode</span></span><br><span class="line">$ ./target/debug/hello_cargo_project</span><br><span class="line">$ cargo run <span class="comment"># Build + Run</span></span><br><span class="line">$ cargo check <span class="comment"># Only check if code can be compiled without error (i.e. Does not produce binary program)</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>위와 같은 커맨드를 이용해서 빌드 / 빌드 + 실행 / 컴파일 검사를 할 수 있다.</li>
 <li><code>--release</code> 옵션을 이용해서 코드 실행에 최적화된 release 모드 빌드를 할 수 있다.</li>
@@ -597,7 +592,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

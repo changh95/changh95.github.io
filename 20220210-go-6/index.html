@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -460,15 +460,12 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
         <h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><p>크기가 정해져있는 array를 만들 때 사용한다</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">names := [<span class="number">3</span>]<span class="keyword">string</span>{<span class="string">"Hi"</span>, <span class="string">"Hello"</span>, <span class="string">"Bye"</span>}</span><br><span class="line">fmt.Println(names, names[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
-
 <h2 id="Slice"><a href="#Slice" class="headerlink" title="Slice"></a>Slice</h2><p>C++의 <code>std::vector</code>와 비슷하다. 크기가 정해져있지 않은 array이며, 원하는대로 element를 계속 추가할 수 있다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">names_slice := []<span class="keyword">string</span>{<span class="string">"Hi"</span>, <span class="string">"Hello"</span>, <span class="string">"Bye"</span>}</span><br><span class="line">names_slice = <span class="built_in">append</span>(names_slice, <span class="string">"Hi again!"</span>)</span><br><span class="line">fmt.Println(names_slice)</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <hr>
 <h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Hash table 형태로 저장할 수 있는 자료구조이다. Python에서 dictionary, 또는 C++ 에서 std::unordered_map과 비슷하다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">    name_and_age := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>{<span class="string">"Harry"</span>:<span class="number">15</span>,<span class="string">"Ron"</span>:<span class="number">16</span>}</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> key, value := <span class="keyword">range</span> name_and_age {</span><br><span class="line">    fmt.Println(key, value)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> _, value := <span class="keyword">range</span> name_and_age {</span><br><span class="line">    fmt.Println(value)</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> key, _ := <span class="keyword">range</span> name_and_age {</span><br><span class="line">    fmt.Println(key)</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <hr>
 <h2 id="Struct"><a href="#Struct" class="headerlink" title="Struct"></a>Struct</h2><p>C++에서 사용하는 struct처럼 만들 수 있다. 하지만 default constructor가 없다.</p>
@@ -568,7 +565,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

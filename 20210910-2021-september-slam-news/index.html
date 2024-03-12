@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -462,38 +462,29 @@ mjx-container[display="true"] + br {
 <h2 id="이번-달-내가-관심가지는-논문들-키노트-랜드마크-급"><a href="#이번-달-내가-관심가지는-논문들-키노트-랜드마크-급" class="headerlink" title="이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)"></a>이번 달 내가 관심가지는 논문들 (키노트/랜드마크 급)</h2><details>
   <summary> DnD: Dense Depth Estimation in Crowded Dynamic Indoor Scenes </summary>
 
-<ul>
-<li>NAVER LABS 연구</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDU2MTUucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>사람들이 많이 돌아다니는 환경에서도 정확하게 depth를 추정할 수 있는 네트워크를 제안<ul>
-<li>3D reconstruction으로 미리 생성해둔 3D 모델로부터 추출한 sparse depth map과 RGB 이미지를 사용</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- NAVER LABS 연구
+- [논문 링크](https://arxiv.org/pdf/2108.05615.pdf)
+  - 사람들이 많이 돌아다니는 환경에서도 정확하게 depth를 추정할 수 있는 네트워크를 제안
+    - 3D reconstruction으로 미리 생성해둔 3D 모델로부터 추출한 sparse depth map과 RGB 이미지를 사용
+
 </details>
 
 <details>
   <summary> A Comprehensive Review of Coverage Path Planning in Robotics Using Classical and Heuristic Algorithms </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL3N0YW1wL3N0YW1wLmpzcD9hcm51bWJlcj05NTIzNzQz">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Coverage path planning에 대한 서베이 논문</li>
-<li>Classical -&gt; Heuristic -&gt; DL 방법까지!</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9523743)
+  - Coverage path planning에 대한 서베이 논문
+  - Classical -&gt; Heuristic -&gt; DL 방법까지!
+
 </details>
 
 <details>
   <summary> The Hilti SLAM Challenge Dataset </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDkuMTEzMTYucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>짱짱맨 데이터셋은 언제나 환영합니다~~~~</li>
-<li>IROS 2021의 SLAM 워크샵 챌린지 데이터셋입니다</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2109.11316.pdf)
+- 짱짱맨 데이터셋은 언제나 환영합니다~~~~
+- IROS 2021의 SLAM 워크샵 챌린지 데이터셋입니다
+
 </details>
 
 
@@ -501,441 +492,368 @@ mjx-container[display="true"] + br {
 <h2 id="그-외"><a href="#그-외" class="headerlink" title="그 외"></a>그 외</h2><details>
   <summary> A stereo matching algorithm based on the improved PSMNet </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9qb3VybmFscy5wbG9zLm9yZy9wbG9zb25lL2FydGljbGU/aWQ9MTAuMTM3MS9qb3VybmFsLnBvbmUuMDI1MTY1Nw==">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>기존의 PSMNet (Pyramid Stereo Matching Network)를 개선해서 weak texture가 있는 곳에서도 잘 작동하게 만들었다.<ul>
-<li>ResNeXt를 사용해서 feature를 뽑고, ASPP (Atrous Spatial Pyramid Pooling)을 사용해서 multiscale spatial feature 정보를 뽑는다.</li>
-<li>Feature fusion 모델을 사용해서 여러 스케일의 feature 정보를 퓨전하고 matching cost volume을 생성한다.</li>
-<li>Stacked encoding / decoding 구조를 사용하는 개선된 3D CNN를 통해 다양한 parallax 환경에서도 correspondence를 찾는다.</li>
-<li>마지막으로, regression을 통해 disparity map을 생성한다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0251657)
+  - 기존의 PSMNet (Pyramid Stereo Matching Network)를 개선해서 weak texture가 있는 곳에서도 잘 작동하게 만들었다.
+    - ResNeXt를 사용해서 feature를 뽑고, ASPP (Atrous Spatial Pyramid Pooling)을 사용해서 multiscale spatial feature 정보를 뽑는다.
+    - Feature fusion 모델을 사용해서 여러 스케일의 feature 정보를 퓨전하고 matching cost volume을 생성한다.
+    - Stacked encoding / decoding 구조를 사용하는 개선된 3D CNN를 통해 다양한 parallax 환경에서도 correspondence를 찾는다.
+    - 마지막으로, regression을 통해 disparity map을 생성한다.
+
 </details>
 
 <details>
   <summary> Category-Level 6D Object Pose Estimation via
 Cascaded Relation and Recurrent Reconstruction Networks </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDg3NTUucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Cascaded relation 네트워크와 recurrent reconstruction 네트워크를 사용해서 정확한 category-level 6D pose estimation을 한다.<ul>
-<li>Cascaded relation 네트워크는 RGB 이미지 &lt;-&gt; 3D point cloud &lt;-&gt; 카테고리의 shape prior를 학습한다.</li>
-<li>Recurrent reconstruction 네트워크는 coarse-to-fne 방식으로 correspondence를 추정하고, 이후 iterative하게 reconstruction을 수행하는 네트워크이다.</li>
-<li>6D pose는 추정된 3D point cloud와 reconstruction된 3D model의 dense correspondence를 구함으로써 추정할 수 있다.</li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93YW5namlhemUuY24vcHJvamVjdHMvNkRQb3NlRXN0aW1hdGlvbi5odG1s">코드 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.08755.pdf)
+  - Cascaded relation 네트워크와 recurrent reconstruction 네트워크를 사용해서 정확한 category-level 6D pose estimation을 한다.
+    - Cascaded relation 네트워크는 RGB 이미지 &lt;-&gt; 3D point cloud &lt;-&gt; 카테고리의 shape prior를 학습한다.
+    - Recurrent reconstruction 네트워크는 coarse-to-fne 방식으로 correspondence를 추정하고, 이후 iterative하게 reconstruction을 수행하는 네트워크이다.
+    - 6D pose는 추정된 3D point cloud와 reconstruction된 3D model의 dense correspondence를 구함으로써 추정할 수 있다.
+    - [코드 링크](https://wangjiaze.cn/projects/6DPoseEstimation.html)
+
 </details>
 
 <details>
   <summary> Semantic Reinforced Attention Learning for Visual Place Recognition </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDg0NDMucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>Place recognition을 할 때 모든 픽셀의 정보가 중요한 것은 아니다.</li>
-<li>중요한 semantic 정보를 추출하는 Semantic reinforced attention learning network (SRALNet)을 제안한다.<ul>
-<li>Semantic prior를 이용해서 local attention에 weight를 더 줄 수 있다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.08443.pdf)
+  - Place recognition을 할 때 모든 픽셀의 정보가 중요한 것은 아니다.
+  - 중요한 semantic 정보를 추출하는 Semantic reinforced attention learning network (SRALNet)을 제안한다.
+    - Semantic prior를 이용해서 local attention에 weight를 더 줄 수 있다.
+
 </details>
 
 <details>
   <summary> A Hybrid Sparse-Dense Monocular SLAM System for Autonomous Driving </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDc3MzYucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>UnRectDepthNet을 사용해서 dense depth map을 추론</li>
-<li>ORB-SLAM2 프레임워크를 사용해서 Feature extraction + RGBD Camera tracking + Keyframe 추출 </li>
-<li>추정된 모션 정보를 기반으로 dense surfel map 생성</li>
-<li>RGB-D pose refinement 수행 (Joint photometric + geometric alignment)</li>
-<li>추정된 모션 정보를 기반으로 dense surfel map 생성<ul>
-<li>Joint photometric + geometric alignment (synthetic + live RGB-D 이미지)</li>
-</ul>
-</li>
-<li>Loop closure는 surface-to-surface constraint를 사용해서 deformation graph 생성 후 최적화</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.07736.pdf)
+  - UnRectDepthNet을 사용해서 dense depth map을 추론
+  - ORB-SLAM2 프레임워크를 사용해서 Feature extraction + RGBD Camera tracking + Keyframe 추출 
+  - 추정된 모션 정보를 기반으로 dense surfel map 생성
+  - RGB-D pose refinement 수행 (Joint photometric + geometric alignment)
+  - 추정된 모션 정보를 기반으로 dense surfel map 생성
+    - Joint photometric + geometric alignment (synthetic + live RGB-D 이미지)
+  - Loop closure는 surface-to-surface constraint를 사용해서 deformation graph 생성 후 최적화
+
 </details>
 
 <details>
   <summary> Is Pseudo-Lidar needed for Monocular 3D Object detection? </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDguMDY0MTcucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span><ul>
-<li>DD3D라는 End-to-end single stage monocular 3D object detector를 제안함.<ul>
-<li>Pseudo-LiDAR와 같은 기법을 통해 depth pre-training을 정보를 얻어낼 수 있음</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2108.06417.pdf)
+  - DD3D라는 End-to-end single stage monocular 3D object detector를 제안함.
+    - Pseudo-LiDAR와 같은 기법을 통해 depth pre-training을 정보를 얻어낼 수 있음
+
 </details>
 
 <details>
   <summary> A Benchmark Comparison of Visual Place Recognition Techniques for Resource-Constrained Embedded Platforms </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDkuMTEwMDIucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>최신 Visual Place Recognition 기법들을 임베디드-&gt;데탑 보드까지 컴퓨팅 파워/메모리 순서대로 돌려보면서 성능을 비교한 논문<ul>
-<li>비교한 보드들은 라즈베리파이3 (ARM), ODROID (ARM), UP (x86_64 아키텍처), 노트북 (하이엔드 노트북), 데스크탑</li>
-<li>비교한 기술들은 HOG, CoHOG, HybridNet, CALC, RegionVLAD</li>
-</ul>
-</li>
-<li>전반적인 트렌드: 임베디드 보드의 정확도와 데스크탑의 정확도는 그렇게 크게 차이나지 않았다</li>
-<li>좋은 보드: 라즈베리파이 3 (UP, ODROID와 비교해서)<ul>
-<li>파워를 제일 적게 먹고, 정확도도 데탑과 비슷, 속도도 괜찮은 편</li>
-</ul>
-</li>
-<li>임베디드 보드 트렌드: descriptor size 때문에 메모리를 많이 먹는건 어쩔 수 없음… swap space를 추가하기 전까지는 성능이 안나옴</li>
-<li>알고리즘 트렌드: 파이와 ODROID에서는 CALC가 제일 전력을 많이 소비하고 RegionVLAD가 제일 적게 소비함. UP에서는 CoHOG가 전력을 제일 많이 소비하는데 아무래도 x86_64 아키텍처에서는 모든 코어를 다 돌리느라 그런 듯.</li>
-<li>저자의 의견: 여러 플랫폼에 올라가는 SDK를 만들 때에는 사용하는 하드웨어에 적절한 알고리즘을 고를 수 있는 로직을 넣어두는게 좋을 것 같다. 새로운 보드가 나올 때에는 RAM의 크기가 커졌는지 보는게 리얼타임을 구현하는데에 중요할 것이다 (라즈베리파이4가 그런면에서 굉장히 좋다). </li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2109.11002.pdf)
+- 최신 Visual Place Recognition 기법들을 임베디드-&gt;데탑 보드까지 컴퓨팅 파워/메모리 순서대로 돌려보면서 성능을 비교한 논문
+  - 비교한 보드들은 라즈베리파이3 (ARM), ODROID (ARM), UP (x86_64 아키텍처), 노트북 (하이엔드 노트북), 데스크탑
+  - 비교한 기술들은 HOG, CoHOG, HybridNet, CALC, RegionVLAD
+- 전반적인 트렌드: 임베디드 보드의 정확도와 데스크탑의 정확도는 그렇게 크게 차이나지 않았다
+- 좋은 보드: 라즈베리파이 3 (UP, ODROID와 비교해서)
+  - 파워를 제일 적게 먹고, 정확도도 데탑과 비슷, 속도도 괜찮은 편
+- 임베디드 보드 트렌드: descriptor size 때문에 메모리를 많이 먹는건 어쩔 수 없음... swap space를 추가하기 전까지는 성능이 안나옴
+- 알고리즘 트렌드: 파이와 ODROID에서는 CALC가 제일 전력을 많이 소비하고 RegionVLAD가 제일 적게 소비함. UP에서는 CoHOG가 전력을 제일 많이 소비하는데 아무래도 x86_64 아키텍처에서는 모든 코어를 다 돌리느라 그런 듯.
+- 저자의 의견: 여러 플랫폼에 올라가는 SDK를 만들 때에는 사용하는 하드웨어에 적절한 알고리즘을 고를 수 있는 로직을 넣어두는게 좋을 것 같다. 새로운 보드가 나올 때에는 RAM의 크기가 커졌는지 보는게 리얼타임을 구현하는데에 중요할 것이다 (라즈베리파이4가 그런면에서 굉장히 좋다). 
+
 </details>
 
 <details>
   <summary> RGB-D DSO: Direct Sparse Odometry with RGB-D Cameras for Indoor Scenes </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9pZWVleHBsb3JlLmllZWUub3JnL2Fic3RyYWN0L2RvY3VtZW50Lzk1NDY1MzQ=">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li>기존의 DSO 모듈에 RGB-D 카메라로부터 얻은 depth 값을 이용해서 occlusion removal과 depth refinement를 추가해서 성능을 더 높인 논문<ul>
-<li>Occlusion removal을 함으로써 energy function 최적화 할 때 생길 수 있는 문제를 회피함</li>
-<li>Depth refinement를 함으로써 keyframe에 골고루 depth 값이 분포할 수 있도록 함</li>
-</ul>
-</li>
-<li>Monocular에서는 불안정하게 얻는 depth 값을 그냥 센서 값으로 대체함으로써 훨씬 안정적으로 만든 것 (조금 뻔한?)</li>
-</ul>
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9546534)
+- 기존의 DSO 모듈에 RGB-D 카메라로부터 얻은 depth 값을 이용해서 occlusion removal과 depth refinement를 추가해서 성능을 더 높인 논문
+  - Occlusion removal을 함으로써 energy function 최적화 할 때 생길 수 있는 문제를 회피함
+  - Depth refinement를 함으로써 keyframe에 골고루 depth 값이 분포할 수 있도록 함
+- Monocular에서는 불안정하게 얻는 depth 값을 그냥 센서 값으로 대체함으로써 훨씬 안정적으로 만든 것 (조금 뻔한?)
+
 </details>
 
 <details>
   <summary> Semantic Segmentation in the Task of Long-Term Visual Localization </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9saW5rLnNwcmluZ2VyLmNvbS9jaGFwdGVyLzEwLjEwMDcvOTc4LTMtMDMwLTg3NzI1LTVfMw==">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2N2Zy9IaWVyYXJjaGljYWwtTG9jYWxpemF0aW9u">Hierarchical Localization (hloc)<i class="fa fa-external-link-alt"></i></span> 을 실행할 때 fine-tuning으로 성능이 더 올라갈 수 있는 것을 확인</li>
-<li>그리고, 이미지 속 어떤 부분이 localization에 전혀 도움이 안되는 부분인지 semantic segmentation 학습을 통해 분석 가능 (데이터셋 분석용으로 좋을듯?)</li>
-</ul>
+- [논문 링크](https://link.springer.com/chapter/10.1007/978-3-030-87725-5_3)
+- [Hierarchical Localization (hloc)](https://github.com/cvg/Hierarchical-Localization) 을 실행할 때 fine-tuning으로 성능이 더 올라갈 수 있는 것을 확인
+- 그리고, 이미지 속 어떤 부분이 localization에 전혀 도움이 안되는 부분인지 semantic segmentation 학습을 통해 분석 가능 (데이터셋 분석용으로 좋을듯?)
+
 </details>
 
 <details>
   <summary> Infrastructure Node-based Vehicle Localization for Autonomous Driving </summary>
 
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDkuMTA0NTcucGRm">논문 링크<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
+- [논문 링크](https://arxiv.org/pdf/2109.10457.pdf)
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
 <details>
   <summary> </summary>
 
-<ul>
-<li><a href="">논문 링크</a></li>
-</ul>
+- [논문 링크]()
+
 </details>
 
     </div>
@@ -947,13 +865,13 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210329-mar-2021-slam-news/" rel="bookmark">2021년 3월 SLAM 뉴스</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210128-2021-january-slam-news/" rel="bookmark">2021년 1월 SLAM 뉴스</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210213-february-slam-news/" rel="bookmark">2021년 2월 SLAM 뉴스</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210329-mar-2021-slam-news/" rel="bookmark">2021년 3월 SLAM 뉴스</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210728-2021-july-slam-news/" rel="bookmark">2021년 7월 SLAM 뉴스</a></div>
@@ -1032,7 +950,7 @@ Cascaded Relation and Recurrent Reconstruction Networks </summary>
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

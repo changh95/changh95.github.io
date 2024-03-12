@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+<meta name="description" content="2023년 Spatial AI KR 오프라인 행사에서 UNIST 유현우 교수님의 발표 정리입니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Robot Perception for Activities and Adaptation - UNIST 유현우 교수님">
+<meta property="og:url" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="2023년 Spatial AI KR 오프라인 행사에서 UNIST 유현우 교수님의 발표 정리입니다.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/yu.png">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/hfnet_teaser.jpg">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/vlmaps_blog_post.gif">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/Tesla-AEB.gif">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/yu2.png">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/zero-shot.png">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/yu3.png">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/nerf.png">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/vmap.png">
+<meta property="og:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/visual-locomotion.png">
+<meta property="article:published_time" content="2024-02-07T11:38:19.000Z">
+<meta property="article:modified_time" content="2024-03-12T00:07:54.542Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="Deep Learning">
+<meta property="article:tag" content="Deep SLAM">
+<meta property="article:tag" content="UNIST">
+<meta property="article:tag" content="유현우 교수님">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/yu.png">
+
+
+<link rel="canonical" href="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+<title>Robot Perception for Activities and Adaptation - UNIST 유현우 교수님 | cv-learn</title>
+  
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">cv-learn</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B0%9C%ED%91%9C%EC%9E%90-%EC%86%8C%EA%B0%9C"><span class="nav-number">1.</span> <span class="nav-text">발표자 소개</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Geometric-SLAM%EC%97%90%EC%84%9C-%EA%B3%A0%EC%B0%A8%EC%9B%90%EC%A0%81%EC%9D%B8-SLAM%EC%9C%BC%EB%A1%9C%E2%80%A6-%EB%94%A5%EB%9F%AC%EB%8B%9D-SLAM"><span class="nav-number">2.</span> <span class="nav-text">Geometric SLAM에서 고차원적인 SLAM으로… (딥러닝 + SLAM)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM%EC%9D%98-%EC%97%AD%ED%95%A0-%EC%9D%B8%EC%A7%80"><span class="nav-number">3.</span> <span class="nav-text">SLAM의 역할 - 인지</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM%EC%9D%98-%EC%97%AD%ED%95%A0-Mobility-amp-Locomotion"><span class="nav-number">4.</span> <span class="nav-text">SLAM의 역할 - Mobility &amp; Locomotion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">5.</span> <span class="nav-text">Q&amp;A</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Active%ED%95%9C-continual-learning%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-metric%EC%9D%80-%EC%96%B4%EB%96%BB%EA%B2%8C-%EA%B3%A0%EB%A5%B4%EB%82%98%EC%9A%94"><span class="nav-number">5.1.</span> <span class="nav-text">Active한 continual learning을 수행하는 metric은 어떻게 고르나요?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Traditional-vs-DL-based-SLAM%EC%9D%98-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90"><span class="nav-number">5.2.</span> <span class="nav-text">Traditional vs DL-based SLAM의 성능 비교</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">253</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">351</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Robot Perception for Activities and Adaptation - UNIST 유현우 교수님
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-07 20:38:19" itemprop="dateCreated datePublished" datetime="2024-02-07T20:38:19+09:00">2024-02-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-03-12 09:07:54" itemprop="dateModified" datetime="2024-03-12T09:07:54+09:00">2024-03-12</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%ED%95%99%ED%9A%8C-%EB%B0%9C%ED%91%9C-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">학회 발표 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="발표자-소개"><a href="#발표자-소개" class="headerlink" title="발표자 소개"></a>발표자 소개</h1><ul>
+<li>UNIST 유현우 교수님 - 로보틱스 / 인공지능 연구실</li>
+<li>카네기 멜론 대학 포닥</li>
+<li>2024년 3월 부터 성균관대 교수님</li>
+</ul>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/yu.png" class="" width="1000" title="yu">
+<p> </p>
+<hr>
+<h1 id="Geometric-SLAM에서-고차원적인-SLAM으로…-딥러닝-SLAM"><a href="#Geometric-SLAM에서-고차원적인-SLAM으로…-딥러닝-SLAM" class="headerlink" title="Geometric SLAM에서 고차원적인 SLAM으로… (딥러닝 + SLAM)"></a>Geometric SLAM에서 고차원적인 SLAM으로… (딥러닝 + SLAM)</h1><blockquote>
+<p>“로보틱스에서 SLAM이 어떤 역할을 해야할까?”</p>
+</blockquote>
+<p><strong>초창기 SLAM은 주로 geometric SLAM</strong>이 많았다. 이는 우리가 흔히 이야기하는 ORB-SLAM이나 HDL-Graph-SLAM과 같은 것들이다. Geometric SLAM은 ‘자기 자신의 위치’를 추정하며 동시에 ‘지도’를 추정할 수 있지만, 모바일 로보틱스에서 흔히 <strong>우리는 ‘자기 자신의 위치 추정’에 집중하였고</strong>, <strong>지도는 부수적으로 따라오는 것</strong>으로 여겼다. SLAM의 정확도를 높였다고 하면 주로 ATE, RPE와 같은 pose 정확도 척도로 성능 비교를 했고, IMU 퓨전과 같은 연구 트렌드가 떠오른 것도 이와 연관이 있다.</p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/hfnet_teaser.jpg" class="" width="1000" title="hfnet">
+<p>하지만 시간이 지나면서, <strong>geometric SLAM의 결과로는 부족함을 느끼는 시기</strong>가 다가왔다. 최근 빅테크 회사들에서 휴머노이드 로봇 연구라던지 (테슬라 옵티머스), <strong>공간을 인지하고 상호작용을 하기 위해</strong> 탐색 및 액션을 계획하는 로봇 연구 (메타)를 수행하면서, <strong>고차원적인 정보</strong>를 다룰 수 있는 능력이 필요하게 되었다. 특히, 최근에는 ChatGPT와 같은 <strong>LLM을 통해 로봇의 task와 같은 고차원적인 정보를 ‘언어’ 데이터로써 전달</strong>할 수 있는게 입증되었는데, 이를 위해서는 <strong>로봇들이 세상을 인지하는 방법</strong>에 대해 깊은 고민이 필요하다. </p>
+<p>SLAM 연구자들은 이 부분에 있어서 3D 공간에 대한 정보를 담는 <strong>‘Mapping’ 과정을 어떻게 만들어야 고차원적인 정보를 잘 담을 수 있을까</strong>에 대해 깊은 고민을 하고 있다. 빅테크들에서는 SLAM보다는 아직 multi-task가 가능한 AI를 만드는데에 집중하고 있는데, 실시간으로 동작하는 AI들이 많이 나오고 있기 때문에 SLAM하는 우리의 입장에서는 그냥 가져다 쓰면 되서 생각보다 개발이 편하다. 딥러닝 정보를 이용해서 SLAM을 할 때는 <strong>어떤 수준의 scene understanding이 가능한지에 따라 급이 나뉜다</strong>고 볼 수 있다 - 예를 들어서, 바닥과 벽만 인지하는 SLAM인지, object를 검출하고 class를 인지하는 SLAM인지, object를 instance 별로 검출하고 트랙킹까지 되는 SLAM인지 등등에 따라 급이 나뉘게 된다. <strong>최종 목적은 결국 ‘3D 공간을 잘 이해할 수 있는가’</strong> 로 귀결되는데, <strong>결국 이것은 ‘인지 잘 해야한다’로 이어지기 때문</strong>에, <strong>1. SLAM이 인지에서 굉장히 중요한 역할을 가지며</strong>, <strong>2. 딥러닝과 슬램을 합치는 것은 불가피하다</strong>고 생각하게 되었다.</p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/vlmaps_blog_post.gif" class="" title="vlmaps 2">
+<p>앞으로의 연구 방향은 ‘<strong>Embodied AI</strong>‘라는 키워드로 이뤄지게 될 것이다. 뜻을 풀자면 ‘몸이 있는 AI’라는건데, 지금까지의 로보틱스 기술은 하드웨어에 주로 집중했다면, 앞으로는 <strong>AI라는 똑똑한 두뇌를 가진 시스템이 물리적인 플랫폼을 가진 상태로 서비스를 제공한다</strong>는 것이다. 이는 반대로 얘기하자면, <strong>AI가 실패하게 될 경우 물리적인 공간에서도 실패</strong>가 나타난다는건데, 자율주행 시나리오와 같은 상황에서는 인명피해로 이어질 수도 있다는 것이다. 기존의 컴퓨터 비전 연구에서는 인지 성능이 조금 떨어진다고 하면 불확실성을 인정하고 결과를 수정한다거나 실패-&gt;수정-&gt;개선 사이클을 거쳐 개선시키는 작업을 거쳤겠지만, 로보틱스로 넘어오게 되면서 실패의 대가가 급격하게 커지기 때문에 <strong>무조건 인지를 성공시켜야한다는 조건</strong>이 생기게 된다. 그리고 성공적인 인지를 수행하기 위해서는 성능이 떨어지는 부분을 파악해 방지해야하는데, 이를 위해서는 <strong>‘불확실성’ 개념에 대해 깊은 이해</strong>를 필요로 한다.</p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/Tesla-AEB.gif" class="" title="Tesla AEB">
+<p>유현우 교수님께서 진행하셨던 연구는, <strong>생성모델을 다룰 때 제공되는 확률모델에 SLAM 최적화 기법을 조합해서 인지 기술의 성능을 개선하는 연구</strong>였다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE4MDguMTAxODAucGRm">ICRA 2019<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzIxMDEuMTAzOTkucGRm">RA-L 2021<i class="fa fa-external-link-alt"></i></span>. 주로 SLAM은 ‘센서 데이터는 Gaussian 노이즈를 가지고 있다’라는 조건을 가정하고 최적화 연산을 수행하는데, 우리가 3D object detection 등에 사용하는 딥러닝 기반 인지 네트워크의 결과는 같은 센서 데이터와 같은 ‘관측 결과’임에도 불구하고 Gaussian 노이즈를 가지고 있지 않아 SLAM에 무턱대고 적용하면 잘못된 결과가 나와 사고로 이어질 수 있다. 유현우 교수님은 여기서 생성모델의 확률모델을 강제로 Gaussian 분포에 근사함으로써 SLAM 최적화를 성공적으로 수행하는 방법이였다.</p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/yu2.png" class="" width="1200" title="yu" alt="s research">
+<p> </p>
+<h1 id="SLAM의-역할-인지"><a href="#SLAM의-역할-인지" class="headerlink" title="SLAM의 역할 - 인지"></a>SLAM의 역할 - 인지</h1><p>SLAM이 성공적으로 상용화에 성공하는데에 넘어야할 과제가 2가지가 있다 - 1. 다양한 환경에서 안정적으로 동작해야하고, 2. 다양한 플랫폼에서 작동해야한다. </p>
+<p>Semantic SLAM이 상용화가 어려운 이유는, 인지 부분에서 사용되는 detection 및 segmentation <strong>네트워크의 학습 환경과 실제 테스트 환경이 다를 확률이 너무 높기 때문</strong>이다. 이러한 이유 때문에 Waymo가 샌프란시스코를 벗어나지 못하는 이유이기도 하다. 수많은 유저가 각각의 다른 환경을 가지고 있을텐데, 모두가 좋은 성능으로 인지 시스템을 갖추는 것은 굉장히 어렵다. 이를 위해서 zero-shot 연구 등도 진행되었지만 상용화 단계까지 가기에는 역부족이였다. </p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/zero-shot.png" class="" width="1200" title="YOLO fail & Zero shot">
+<p>또 다른 문제로는 <strong>너무 다양한 플랫폼</strong>이 존재한다는 점이다. 자동차, 사족보행 로봇, 휴머노이드 로봇, 드론, 잠수함과 같은 운행 플랫폼이 다를수도 있고, 카메라, 라이다, 레이더와 같이 센서가 다를 수도 있고, 단일센서, 다중센서, 퓨전센서 처럼 센서 조합이 다를 수도 있고, 움직임이 다를수도 있고… 특정 플랫폼을 고른다면 결국 해당 플랫폼에서 최적의 성능을 뽑아내기 위해 <strong>수많은 시간을 파라미터 튜닝에 쏟아야한다</strong>. 센서 하나 위치만 바꿔도 튜닝 다시해야하고, 데이터셋 다시 모아야하고, 학습도 다시 해야한다. </p>
+<p>그렇다면 해결법은 무엇일까? 교수님께서도 정답은 모른다고 하신다. 교수님께서 제안하시는 방법은 <strong>Continual learning</strong>이다. 어차피 연구실/실험실에서 완벽하게 튜닝을 한다고해도, 실제 환경으로 나가면 성능이 틀어질 것이다. 그 때마다 사람이 직접 튜닝을 해줄 수 없으니, 우리는 continual learning을 사용해서, <strong>로봇이 직접 환경을 관측하며 데이터를 모아 지속적으로 인지 모델의 성능을 해당 환경에 맞게 최적화</strong> 하는 것을 바랄 수 있겠다. 우리가 연구실/실험실에서 모델 학습을 할 때는 수없이 학습과 튜닝을 할 수 있다는 장점은 있지만, 정작 실 사용 환경에 대한 정보는 바로바로 얻기 어렵다는 단점이 있다. 반대로, 모바일 로봇 플랫폼은 학습과 튜닝에 제약이 있지만, 실 사용 환경에 직접 들어가 데이터를 수집할 수 있다는 장점이 있기 때문에, <strong>continual learning을 이용한 환경 최적화 기법</strong>이야말로 이러한 문제의 해결법이 될 수 있겠다. (여기서 든 생각은… Active SLAM 쪽이 굉장히 재밌는 분야가 되지 않을까? Continual learning과 섞어서, 실시간으로 학습을 수행하면서 데이터의 uncertainty를 모니터링하면서, 부족한 데이터들에 대해 더 observation을 스캐닝하도록 유도해서 로봇 플랫폼을 기동시킬 수 있지 않을까 싶음).</p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/yu3.png" class="" width="1000" title="Continual learning guided SLAM">
+<p><strong>SLAM을 이용해서 데이터를 학습시키는건 생각보다 쉽지 않다</strong>. 라이다를 사용해서 슬램을 하면 포인트 클라우드 특성 상 빈 공간이 굉장히 많고, RGB 이미지를 기반으로 SLAM을 해도 보통은 ORB-SLAM과 같은 sparse SLAM을 하기 때문에 빈 공간이 많다. Dense SLAM을 해도 관측이 부족한 공간은 텅 비어있기 마련이다. <strong>네트워크가 3D 공간에 대해 학습하려고 할 때 빈 공간이 너무 많기 때문에 스스로 학습하기가 굉장히 어렵다</strong>. 여기에 큰 변화를 줄 수 있는 기술이 <strong>NeRF</strong>와 <strong>3D Gaussian Splatting</strong> 같은 기술이다. 기존의 SLAM 기술은 센서가 제공하는 discrete한 정보를 이용하거나 또는 후처리를 통해서 이러한 정보를 만들어 (i.e. ORB) 3D 공간 역시 discrete한 데이터로써 표현하였는데, NeRF와 같은 기술은 <strong>3D 공간의 형태를 continuous한 비선형 함수로써 표현</strong>을 하기 때문에 <strong>꽉 찬 공간 데이터를 얻을 수 있다</strong>. 즉, <strong>공간을 표현하는 방식이 ‘3D xyz + attribute’가 아닌, <code>f(x)</code>로 바뀐다는 것을 의미</strong>하고, <strong>로봇은 이 <code>f(x)</code>를 학습함으로써 공간을 이해할 수 있다</strong>는 것이다. </p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/nerf.png" class="" width="1000" title="NeRF">
+<p>vMAP의 연구를 보면 이러한 특성이 잘 나타난다. vMAP은 공간을 NeRF로써 학습하면서, 동시에 물체 하나하나를 전부 NeRF로 학습한다. 처음에 이런 방식으로 스캐닝을 하고, 나중에 다시 이 공간을 방문해서 다시 스캐닝을 한다면, 예전에 봤던 물체를 다시 관측하는 경우에는 데이터베이스 속 <code>f(x)</code>와 현재 새롭게 관측한 <code>f'(x)</code> 두개가 상당히 유사할 것이라는거다. 이 둘의 유사도를 비교하기 위해서는, NeRF 데이터 - 즉, neural radiance field라고 불리는 MLP 속 담기는 파라미터를 비교했을 때, 두 네트워크의 파라미터가 비슷하다면 아마 같은 공간을 의미하는 것이 될 수 있다 (Bayesian learning과 관련이 있다).</p>
+<blockquote>
+<p>지금까지의 내용을 정리하자면… 앞으로 <strong>다양한 환경/플랫폼에서 로봇이 고성능으로 동작하기 위해서는, 1. 어떤 센서를 사용하던지간에 실시간으로 공간에 대한 정보를 continuous한 비선형 함수로써 재구성하며 dense 공간에 대한 정보를 담아, 2. continual learning을 통해 zero-shot detection을 수행함으로써 어떤 환경에서던지 재-학습을 할 필요를 없게 만드는 방법이 기대가 된다</strong>.</p>
+</blockquote>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/vmap.png" class="" width="1000" title="vMAP">
+<p> </p>
+<h1 id="SLAM의-역할-Mobility-amp-Locomotion"><a href="#SLAM의-역할-Mobility-amp-Locomotion" class="headerlink" title="SLAM의 역할 - Mobility & Locomotion"></a>SLAM의 역할 - Mobility &amp; Locomotion</h1><p>Embodied AI를 만들기 위해 정확한 인지를 하는 것은 중요하지만, 인지’만’ 잘 한다고 해서 로봇이 잘 움직이게 되는건 아니다. Gaussian splatting은 예쁜 이미지를 만들어내지만, 정말 이게 로코모션에 도움이 될까? RGB 정보는 로코모션에서 필요할까? </p>
+<p>로코모션 기술 역시 지난 몇년간 non-linear regression 기술을 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9oTWZuQzM4SHVhaz9zaT1VOHQ1dHh2alhrYXhWbm5i">강화학습 및 제어 분야에 적용<i class="fa fa-external-link-alt"></i></span>하며 많이 발전하였지만, 안타깝게도 <strong>아직까지 제대로 된 인지 기술을 제어와 함께 엮어서 사용하지 못하고 있다</strong>. 조금 당연한 이야기일 수도 있는데, 인지를 잘 하는 사람들은 인지만 하기에도 바쁘고, 로코모션을 하는 사람들은 로코모션만 잘하기에도 굉장히 바쁘기 때문이다. 2023년 나온 최신 연구를 보면, 놀랍게도 ‘이제서야’ 뎁스카메라로 주변 환경을 바라보면서 실시간 피드백을 로코모션에 넣어주는 연구를 하고 있다 (뎁스이미지를 non-linear 함수로 압축해서 강화학습 네트워크에 넣는 연구). </p>
+<p>그렇다면 <strong>SLAM에서 만든 지도를 어떻게 로코모션에 도움되게 만들 수 있을까?</strong> 사실 교수님도 답을 명확하게 알지는 못한다고 아신다. 교수님께서는 이전에 SLAM의 지도를 하나의 함수로 담는 연구를 (i.e. NeRF-based SLAM) 통해서 힌트를 얻으셨다고 하셨는데, 이 함수로 담긴 SLAM 지도를 로코모션의 인풋으로써 넣기 위한 연구를 진행 중이라고 하셨다. </p>
+<img src="/20240207-spatial-ai-kr-hyunwoo-yoo/visual-locomotion.png" class="" width="1000" title="visual locomotion">
+<p> </p>
+<h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&A"></a>Q&amp;A</h1><h2 id="Active한-continual-learning을-수행하는-metric은-어떻게-고르나요"><a href="#Active한-continual-learning을-수행하는-metric은-어떻게-고르나요" class="headerlink" title="Active한 continual learning을 수행하는 metric은 어떻게 고르나요?"></a>Active한 continual learning을 수행하는 metric은 어떻게 고르나요?</h2><p>Q. 맵핑을 하는 과정을 마치 representation learning과 같은 방식처럼 표현해주셔서 굉장히 인상깊게 보았습니다. 이러한 방식으로 공간에 대한 학습을 할 때, ‘우리가 아는 것’과 ‘우리가 모르는 것’을 구분하는 방법이 굉장히 중요할 것 같은데, 이 두개는 어떻게 구분을 할 수 있을까요?<br>A. ‘모른다는 것’이 어떤 의미일까요?<br>Q. 이 환경을 모르고 있고, 그래서 학습이 필요하고, 데이터 수집이 필요하다는것을 어떤 메트릭으로 정의할 수 있을까요?<br>A. 메트릭은 태스크 마다 다를 것 같습니다. 자율주행의 경우, 주변 환경에 건물, 도로, 인도, 차선 등이 있을텐데, 이 중에서 특정 정보를 랜드마크를 선정해 학습하는 것이 굉장히 중요할 것 같습니다. 여기서 생기는 질문은, 무엇을 랜드마크로 잡아야 주행 및 패스플래닝 성능이 더 좋아지는지도 있겠구요. 매니퓰레이터의 경우, 어떤 정보를 학습해야 더 매니퓰레이션을 잘하게 되는지 선정하는 것이 중요하겠습니다. 결국은 메트릭 선정이 굉장히 중요하다는건데, 이건 결국 시스템 설계/역설계 분야와도 연결됩니다.<br>Q. 추가질문 드립니다. 말씀하신 내용은 End-to-end 알고리즘을 개발하는 것 처럼 들리는데요. End-to-end 알고리즘을 바로 만드는건 굉장히 어렵기 때문에, 저희가 경험적으로 알고 있는 정보들을 중간에 prior로써 주는 학습 방법을 시도해보는게 좋다고 생각합니다. 교수님께서 보시기에는 현재 어떤 학습 방법이 연구되고 있나요?<br>A. 말씀하신 것 처럼 처음부터 태스크 레벨까지 도달하는 것은 굉장히 어렵습니다. 중간에 사이사이에 prior를 넣어줘서 연구를 하는 방향도 굉장히 좋고, 현재 많이 연구되고 있습니다.</p>
+<h2 id="Traditional-vs-DL-based-SLAM의-성능-비교"><a href="#Traditional-vs-DL-based-SLAM의-성능-비교" class="headerlink" title="Traditional vs DL-based SLAM의 성능 비교"></a>Traditional vs DL-based SLAM의 성능 비교</h2><p>Q. 제가 알기로는 NeRF-SLAM 같은 기술은 ORB-SLAM과 같은 기법에 대해 정확도가 떨어지는 것으로 알고 있는데요. Robot adaptation을 하시려면 트랙킹 성능은 무관한지 궁금합니다.<br>A. 말씀하신거처럼 NeRF-SLAM은 ORB-SLAM 보다 정확도가 많이 떨어집니다. 저희 연구실에서는 라이다를 이용한 Gaussian Splatting SLAM을 만들고 있습니다. Gaussian Splatting SLAM을 만들 때 간과되는 부분이 하나 있는데, Gaussian Splatting은 포인트 클라우드 기반입니다. (그렇기 때문에 카메라로 3D 포인트 클라우드를 부정확하게 추론하느니, 정확하게 포인트 클라우드가 나타나는 3D 라이다를 사용한다). 현재 NeRF-SLAM과 같은 기술의 정확도가 ORB-SLAM 등에 비해 떨어지는건 사실이지만, 그렇다고 정확도는 절대로 포기하면 안됩니다. </p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">Related Posts</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20210529-tartan-scherer/" rel="bookmark">Tartan Series 2021 - Challenges in SLAM - What's ahead (Prof. Sebastian Scherer)</a></div>
+    </li>
+  </ul>
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Deep-SLAM/" rel="tag"># Deep SLAM</a>
+              <a href="/tags/UNIST/" rel="tag"># UNIST</a>
+              <a href="/tags/%EC%9C%A0%ED%98%84%EC%9A%B0-%EA%B5%90%EC%88%98%EB%8B%98/" rel="tag"># 유현우 교수님</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20240126-latex-ocr/" rel="prev" title="논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex)">
+                  <i class="fa fa-chevron-left"></i> 논문 수식 OCR해서 LaTeX 코드 만드는 방법 (pix2tex)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/" rel="next" title="Omnidirectional Depth Estimation and Mapping - SNU 임종우 교수님">
+                  Omnidirectional Depth Estimation and Mapping - SNU 임종우 교수님 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cv-learn</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+<script src="/js/local-search.js"></script>
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  const url = element.dataset.target;
+  const pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+  <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+</body>
+</html>

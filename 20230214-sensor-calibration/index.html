@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -341,19 +341,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -466,7 +466,6 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <div class="video-container"><iframe src="https://www.youtube.com/embed/VPM7N6SqiEo" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
-
 <p> </p>
 <hr>
 <h1 id="캘리브레이션이-중요한-이유"><a href="#캘리브레이션이-중요한-이유" class="headerlink" title="캘리브레이션이 중요한 이유"></a>캘리브레이션이 중요한 이유</h1><p>ADAS와 같이 자동화된 퍼셉션 기능이 많아질 수록 캘리브레이션이 중요해진다. 자동차의 눈이 다른 곳을 향해있다던가 목표를 제대로 보지 못하고 있다면,차선변경이나 회피기동을 올바르게 하지 못할 수도 있다.</p>
@@ -478,7 +477,6 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="캘리브레이션의-종류"><a href="#캘리브레이션의-종류" class="headerlink" title="캘리브레이션의 종류"></a>캘리브레이션의 종류</h1><img src="/20230214-sensor-calibration/calib.png" class="" width="1"> 
-
 <ul>
 <li>Intrinsic : 센서의 내부 파라미터에 대한 캘리브레이션</li>
 <li>Extrinsic : 센서들 사이를 잇는 파라미터에 대한 캘리브레이션</li>
@@ -489,16 +487,13 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="캘리브레이션-방법의-종류"><a href="#캘리브레이션-방법의-종류" class="headerlink" title="캘리브레이션 방법의 종류"></a>캘리브레이션 방법의 종류</h1><img src="/20230214-sensor-calibration/calib2.png" class="" width="2">
-
 <p>Target 기반 캘리브레이션 방법은 target을 바라보는 여러개의 센서 데이터를 취합해서 reprojection error를 최소화하는 최적화 기법을 사용해 센서 파라미터를 추정한다. 다양한 종류의 센서가 이 타겟을 정확하게 바라볼 수 있는 (i.e. 체커보드의 코너를 검출하게 만드는) 방법을 찾는 것이 어렵기 때문에 난이도가 높다 - 라이다/레이더/초음파로 체커보드를 검출시키는 방법이라던가, 센서들 모두 field of view가 겹쳐야한다던가… 하지만 디버깅이 제일 쉽기 때문에 하나의 데이터셋만 가지고 센서 데이터를 골라 좋은 캘리 값을 얻는 것이 가능하기 때문에 제일 인기 있는 방법으로 꼽힌다.</p>
 <p>Ego-motion 기반 캘리브레이션 방법은 사전에 잘 만들어놓은 지도가 있을 때 센서들의 위치를 추정함으로써 (i.e. localization) 캘리브레이션을 진행하는 방식이다. 이 때, 위치추정 기법이 정확하게 수행될 수 있어야 좋은 캘리브레이션이 가능한데, 보통 위치추정 기법이 잘 동작하려면 6dof 방향으로 큰 모션이 있어야 가능하다 - 자동차의 경우 위/아래로 움직일 수가 없다. 그렇기 때문에 위아래로 움직일 수 있는 드론이나 소형 로봇에서만 사용하는 방법이다.</p>
 <p>Appearance 기반 캘리브레이션 방법은 여러 센서들에서 나타나는 intensity 정보를 기반으로 센서들간의 자세 차이를 구하는 방법이다. (영상에서 설명해주긴 하는데 명확하게 이해가 안된다)</p>
 <p> </p>
 <hr>
 <h1 id="대학교-연구소에서-진행중인-캘리브레이션-방법들"><a href="#대학교-연구소에서-진행중인-캘리브레이션-방법들" class="headerlink" title="대학교 연구소에서 진행중인 캘리브레이션 방법들"></a>대학교 연구소에서 진행중인 캘리브레이션 방법들</h1><h2 id="토론토-대학-STARS-Lab의-셀프-캘리브레이션"><a href="#토론토-대학-STARS-Lab의-셀프-캘리브레이션" class="headerlink" title="토론토 대학 STARS Lab의 셀프 캘리브레이션"></a>토론토 대학 STARS Lab의 셀프 캘리브레이션</h2><img src="/20230214-sensor-calibration/stars.png" class="" title="stars">
-
 <img src="/20230214-sensor-calibration/stars2.png" class="" title="stars2">
-
 <p>STARS Lab은 캘리브레이션 작업 자체가 사람이 하기에는 너무 정교하기 때문에, 실시간으로 센서들 사이의 셀프 캘리브레이션이 수행되어야한다고 믿고있다.</p>
 <p>Ground truth로 삼을 수 있는 센서를 하나 준비한 후, Figure 8을 돈다거나 또는 주변 환경에서 물체를 검출해서 (e.g. 신호등) 검출한 물체들을 align한다. 이를 통해 각각의 센서들을 align 시킬 수 있다.</p>
 <p>이 외로도 여러가지 캘리브레이션 연구를 수행중이다. 꽤나 관심가는 논문 중 하나는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvcGRmLzE4MDkuMDM1NTQucGRm">Giamou 2020 - Certifiably Globally Optimal Extrinsic Calibration from Per-Sensor Egomotion<i class="fa fa-external-link-alt"></i></span> - <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3V0aWFzU1RBUlMvY2VydGlmaWFibGUtY2FsaWJyYXRpb24=">GitHub<i class="fa fa-external-link-alt"></i></span>.</p>
@@ -511,7 +506,6 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="기업에서-진행중인-캘리브레이션-방법들"><a href="#기업에서-진행중인-캘리브레이션-방법들" class="headerlink" title="기업에서 진행중인 캘리브레이션 방법들"></a>기업에서 진행중인 캘리브레이션 방법들</h1><h2 id="OEM"><a href="#OEM" class="headerlink" title="OEM"></a>OEM</h2><img src="/20230214-sensor-calibration/oem.png" class="" title="OEM">
-
 <p>차량 제조사들은 캘리브레이션 관련 여러 특허를 걸어뒀지만, 뭔가 새로운 캘리브레이션 방법론을 찾기보다는 편하게 target 기반 캘리를 할 수 있는 악세서리 개발 등에 초점을 뒀다. 이 방법들은 사실 그렇게 scalable하다고 볼 수 없으며, OEM만 이걸 쓸게 아니라 사실 애프터서비스 쪽에서도 필요한거기 때문에 잘 된거라고 볼 수 없고, 그렇기 때문에 크게 주목할 부분은 아니다.</p>
 <p> </p>
 <h2 id="AV-Fleet"><a href="#AV-Fleet" class="headerlink" title="AV Fleet"></a>AV Fleet</h2><p>Waymo 같이 fleet을 운영하는 곳에서는 캘리브레이션에 대해 연구를 하고 있지만, 실제로는 3rdParty 회사에게 위탁 캘리브레이션을 맡겨서 운영하고 있다. 왜냐하면 차량 한대를 캘리하는데 약 60분 정도 시간이 들고 이걸 매일 해야하는데, 이건 결국 유지보수 비용으로 나가기 때문에 소중한 연구 시간을 뺏길 수 없기 때문이다. 역으로 생각하면 3rdParty 업자들에게는 기회가 있다고 볼 수 있다.</p>
@@ -521,10 +515,9 @@ mjx-container[display="true"] + br {
 <p>AEye는 이와 같은 점을 고려해서 정기적인 캘리가 필요한 Rotating lidar가 아닌 Solid state lidar로 변경했다. 단단한 케이스를 만들어서 진동과 온도 변화에 강하게 만들어 캘리를 덜 자주하게 만들 수 있다.</p>
 <p> </p>
 <h2 id="소프트웨어-업체"><a href="#소프트웨어-업체" class="headerlink" title="소프트웨어 업체"></a>소프트웨어 업체</h2><p>많은 AI 알고리즘들이 raw 센서 데이터를 인풋으로 받아 연산을 하는 경우가 많다. 이 때문에, 캘리브레이션 값이 정확하지 않으면 동작하지 않게 되는 경우도 있고, 캘리를 다시 할 경우 AI 알고리즘도 전부 학습을 다시해야하는 경우도 있다. 이러한 부분은 연구실에서는 문제가 되지 않을 수 있으나, 양산을 하기에는 큰 문제가 될 수 있다.</p>
-<p>영국 스타트업 <span class="exturl" data-url="aHR0cHM6Ly9sZ24uYWkv">LGN<i class="fa fa-external-link-alt"></i></span>은 raw 센서 값을 쓰기보다는 센서의 latent space를 인풋으로 받아서 사용하는 곳도 있다. 이 latent space는 캘리 값 변화로 인한 인풋 데이터의 변화에도 상당히 강인하며, 다양한 센서 조합을 사용하는데에도 유용하다. 또, raw 센서 데이터에 대한 redundancy로도 사용될 수 있다.</p>
+<p>영국 스타트업 <span class="exturl" data-url="aHR0cHM6Ly9sZ24uYWk=">LGN<i class="fa fa-external-link-alt"></i></span>은 raw 센서 값을 쓰기보다는 센서의 latent space를 인풋으로 받아서 사용하는 곳도 있다. 이 latent space는 캘리 값 변화로 인한 인풋 데이터의 변화에도 상당히 강인하며, 다양한 센서 조합을 사용하는데에도 유용하다. 또, raw 센서 데이터에 대한 redundancy로도 사용될 수 있다.</p>
 <p> </p>
 <h2 id="애프터마켓-솔루션"><a href="#애프터마켓-솔루션" class="headerlink" title="애프터마켓 솔루션"></a>애프터마켓 솔루션</h2><img src="/20230214-sensor-calibration/bosch.png" class="" title="bosch">
-
 <p>Bosch와 같은 곳에서는 캘리브레이션을 쉽게 할 수 있는 솔루션을 개발해서 판매하고 있다. 하지만 엄청 비싸다. 이런 부분에 대해 <span class="exturl" data-url="aHR0cHM6Ly93d3cuYnJpZGdlc3RvbmUuY29tL3JlZ2lvbmFsL2FzaWFfcGFjaWZpYy8=">Bridgestone<i class="fa fa-external-link-alt"></i></span> 같은 3rdParty 회사들에서 기회를 보고 있다 (Bridgestone은 타이어 회사인데, 여러 정비소 지점을 가지고 있기 때문에 정비소마다 캘리툴을 배치하려는 노력을 하고 있다 - 캘리 정비소 시장을 먹겠다는 것).</p>
 
     </div>
@@ -536,19 +529,19 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210119-autonomous-driving/" rel="bookmark">자율주행 자동차 만들기 - 2019년도 온라인 스터디 링크</a></div>
+      <div class="popular-posts-title"><a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="bookmark">IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210120-slam-dunk-2/" rel="bookmark">2020년 SLAM 이론 스터디 (SLAM DUNK Season 2) + 스터디 링크</a></div>
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210121-visual-slam-roadmap-beginner/" rel="bookmark">Visual-SLAM developer roadmap [1] - 컴퓨터 비전 입문</a></div>
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210121-visual-slam-roadmap/" rel="bookmark">Visual-SLAM developer roadmap [0] - 로드맵 개요</a></div>
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
     </li>
   </ul>
 
@@ -621,7 +614,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

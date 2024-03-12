@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -336,19 +336,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -466,15 +466,12 @@ mjx-container[display="true"] + br {
 <h2 id="Native-CPU-가속-설정-빌드-시간"><a href="#Native-CPU-가속-설정-빌드-시간" class="headerlink" title="Native CPU 가속 설정 빌드 시간"></a>Native CPU 가속 설정 빌드 시간</h2><p>이 프로젝트에 대한 설정은 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjIwMTI4LW0xLW9wZW5jdi1idWlsZC8=">지난 글<i class="fa fa-external-link-alt"></i></span>과 동일하다.</p>
 <p>아래 커맨드를 이용해서 빌드하는데 걸린 시간을 측정하였다. </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time ninja</span><br></pre></td></tr></table></figure>
-
 <p>x86 CPU와 비교하기 위해 귀가해서 x86 워크스테이션 급 CPU로도 빌드를 해봤다.</p>
 <p>아래 테이블에 사용한 장비들의 스펙을 작성해놨다.</p>
 <div class="tabs" id="장비-비교"><ul class="nav-tabs"><li class="tab active"><a href="#장비-비교-1">M1 맥북</a></li><li class="tab"><a href="#장비-비교-2">AMD Threadripper 2950X 워크스테이션</a></li></ul><div class="tab-content"><div class="tab-pane active" id="장비-비교-1"><p>2021 MacBook Pro M1 Max<br>10 코어 CPU (8코어 메인, 2코어 보조)<br>64GB RAM<br>기본 스왑 메모리</p></div><div class="tab-pane" id="장비-비교-2"><p>데스크탑 워크스테이션<br>CPU - AMD Threadripper 2950X - 16코어 32쓰레드. 모든 코어 4.8GHz 오버클럭<br>RAM - 64GB, DDR4 3200 MHz (3400 MHz 오버클럭), 16-18-18-38 타이밍. 램카드 4개 모두 동일 타이밍.</p></div></div></div>
-
 <p>동일한 셋팅으로, 뒤에 크롬 탭 몇개 켜있는거 빼고는 다른 작업은 하지 않았다.</p>
 <p>결과는 다음과 같이 나왔다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># M1 Max</span></span><br><span class="line">ninja  1665.10s user 55.95s system 837% cpu 3:25.47 total</span><br><span class="line"></span><br><span class="line"><span class="comment"># x86 Workstation</span></span><br><span class="line">ninja  7395.31s user 300.40s system 2793% cpu 4:35.47 total</span><br></pre></td></tr></table></figure>
-
 <p>M1 max는 실제 흐른 시간 <strong>56초</strong>. 전체 CPU 시간 1665초.<br>x86 워크스테이션은 실제 흐른시간 <strong>300초</strong>, 전체 CPU 시간 7395초.</p>
 <p>…??????</p>
 <p>노트북이 워크스테이션보다 빌드가 6배나 빠르게 나왔다.</p>
@@ -488,7 +485,6 @@ mjx-container[display="true"] + br {
 <p>x86 빌드로 기준을 맞춰서 빌드를 해보았다.</p>
 <p>M1 칩에서는 CMake 설정을 건드려서 강제로 SSE/AVX를 빌드하게 해야한다. 가능한 모든 옵션을 빌드하게 했다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=../install_sse -GNinja -DCPU_BASELINE=SSE3 -DCPU_DISPATCH=SSE4_1,SSE4_2,FP16,AVX,AVX2,AVX512-SKX ..</span><br></pre></td></tr></table></figure>
-
 <p>…를 하면 될 줄 알았는데, 컴파일러가 SSE/AVX 관련을 지원하지 않는다고 다 스킵해버리네? ㅠㅠ… 아직까지 제대로 성공하지 못했다.</p>
 <p>다음과 같은 로그가 나타난다. 심지어 x86 CPU를 에뮬레이션 하는 Rosetta 까지 사용해도 같은 로그가가 난다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-- Optimization SSE3 is not available, skipped                                                                            </span><br><span class="line">-- Dispatch optimization SSE4_1 is not available, skipped                                                                 </span><br><span class="line">-- Dispatch optimization SSE4_2 is not available, skipped                                                                 </span><br><span class="line">-- Dispatch optimization AVX is not available, skipped                                                                    </span><br><span class="line">-- Dispatch optimization AVX2 is not available, skipped                                                                   </span><br><span class="line">-- Dispatch optimization AVX512-SKX is not available, skipped  </span><br></pre></td></tr></table></figure>
@@ -589,7 +585,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

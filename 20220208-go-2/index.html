@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -462,7 +462,6 @@ mjx-container[display="true"] + br {
 <p>패키지 이름을 선언하고, 구현체를 만든다.</p>
 <p>main.go에서 해당 패키지를 부를 때는 import에 경로를 지정해준다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// samplePackage/samplePackage.go</span></span><br><span class="line"><span class="keyword">package</span> samplePackage</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">sayHello</span><span class="params">()</span></span>{</span><br><span class="line">    fmt.Println(<span class="string">"Hello!"</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">SayBye</span><span class="params">()</span></span>{</span><br><span class="line">    fmt.Println(<span class="string">"Bye!"</span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.go</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/changh95/go-tutorial/samplePackage"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	fmt.Println(<span class="string">"Hello, Go World!"</span>)</span><br><span class="line">	samplePackage.SayBye()</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <h2 id="Public-Private-함수"><a href="#Public-Private-함수" class="headerlink" title="Public / Private 함수"></a>Public / Private 함수</h2><p>Public 함수는 대문자로 시작한다.</p>
 <p>Private 함수는 소문자로 시작한다.</p>
 <h2 id="변수"><a href="#변수" class="headerlink" title="변수"></a>변수</h2><p>Go 는 Typed language이다. </p>
@@ -477,7 +476,6 @@ mjx-container[display="true"] + br {
 <p>const와 non-const도 존재한다. const는 <code>const</code>로 시작하고, non-const는 <code>var</code>로 시작한다.</p>
 <p><code>var</code>의 또다른 표기법으로는 <code>:=</code>가 있다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">	<span class="keyword">const</span> str_const <span class="keyword">string</span> = <span class="string">"Const"</span></span><br><span class="line">	<span class="keyword">var</span> str_non_const <span class="keyword">string</span> = <span class="string">"non-const"</span></span><br><span class="line">	str_non_const2 := <span class="string">"non-const2"</span></span><br><span class="line"></span><br><span class="line">    fmt.Println(str_const)</span><br><span class="line">	fmt.Println(str_non_const)</span><br><span class="line">	fmt.Println(str_non_const2)</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h2 id="함수"><a href="#함수" class="headerlink" title="함수"></a>함수</h2><p>Go의 함수는 아래와 같이 생겼다.</p>
 <p><code>func</code> 키워드로 시작하며, arguments마다 type을 작성하고 return type도 작성한다.</p>
@@ -580,7 +578,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

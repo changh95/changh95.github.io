@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -477,17 +477,14 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p>하나의 클래스가 거의 모든 기능을 담당하는 것을 본 적이 있을 것이다. 우리는 이것을 ‘<strong>전지전능 클래스</strong>‘라고 부른다. 전지전능 클래스는 처음 짤 때는 편하고 좋으나, 나중에 기능을 세분화하려고 하거나, 기능을 따로 떼려고 하거나, 새로운 기능을 추가하려고 하거나, 기존의 기능을 수정하려고 하거나 할 때 굉장히 골치아파진다. 전지전능 클래스 내부에 작은 수정을 하기 위해서는 해당 클래스에 정보를 주거나 받는 여러 다른 클래스들의 코드도 고쳐야하는 경우가 많다. 작은 수정을 여러 클래스에 걸쳐서 해야한다면 아키텍처에 뭔가 문제가 있는 것이다. 이처럼 <strong>코드를 수정하기 어렵게 하는 주 범인 중 하나가 전지전능 클래스</strong>이다.</p>
 <p>예시로, ‘공책’ 이라는 클래스를 만들었다고 해보자. 우리는 이 클래스에 멤버변수로 ‘공책 제목’을 담는 string과 ‘노트 내용’을 담는 string을 모은 dynamic array를 멤버 변수로 가지고 있다. 그리고 ‘노트 작성’이라는 public 함수를 통해 그날의 일기를 쓸 수 있다고 해보자.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Notebook</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> title;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; note_entries;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Notebook</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; title)</span> : title</span>{title} {}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; note_entry)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        note_entries.push_back(<span class="built_in">std</span>::to_string(count++) + <span class="string">": "</span> + note_entry);</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Notebook</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    std::string title;</span><br><span class="line">    std::vector&lt;std::string&gt; note_entries;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">Notebook</span><span class="params">(<span class="keyword">const</span> std::string&amp; title)</span> : title{</span>title} {}</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">const</span> std::string&amp; note_entry)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">1</span>;</span><br><span class="line">        note_entries.<span class="built_in">push_back</span>(std::<span class="built_in">to_string</span>(count++) + <span class="string">": "</span> + note_entry);</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
 <p>이 구조는 ‘공책’의 기능을 잘 표현하고 있다. 일기를 적는데에 필요한 정보가 클래스 멤버 변수로 들어있고, 적절한 메소드를 통해 멤버변수와 교류할 수 있다.</p>
 <p>이제 이 ‘공책’에 적힌 정보를 파일로 저장하는 기능을 만든다고 해보자. 다음과 같은 코드를 짤 수 있다.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Notebook::save</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; filename)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::ofstream <span class="title">ofs</span><span class="params">(filename)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : entries)</span><br><span class="line">    {</span><br><span class="line">        ofs &lt;&lt; entry &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Notebook::save</span><span class="params">(<span class="keyword">const</span> std::string&amp; filename)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="function">std::ofstream <span class="title">ofs</span><span class="params">(filename)</span></span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry : entries)</span><br><span class="line">    {</span><br><span class="line">        ofs &lt;&lt; entry &lt;&lt; std::endl;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p>전지전능 클래스라면 Notebook 클래스가 1. 내용 기입, 2. 저장 기능을 모두 다 가지고 있을 것이다. 호환성 좋게 2개 기능을 쓴다고 얘기할 수도 있겠지만, 기능이 조금만 세분화되고 많아지기만 해도 감당이 되지 않을 것이다. Notebook의 내용을 수정한다면? 내용을 셔플링한다면? 파일로 저장하는거 말고 클라우드에도 저장한다면? 프린트한다면? 이런것들도 다 Notebook에 들어가야하지 않을까?</p>
 <p>Notebook의 책임은 ‘노트 항목들을 기입/관리’하는 것이지, 디스크에 쓰는 것이 아니다. 그러므로 <code>save</code>라는 기능은 처음부터 Notebook 클래스에 들어가면 안된다.</p>
 <p>이러한 파일 저장 기능은 아예 별도로 취급하는 것이 좋다. 예를 들어, 다음과 같이 만들 수 있다.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DiskWriter</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(<span class="keyword">const</span> Notebook&amp; notebook, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; filename)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DiskWriter</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(<span class="keyword">const</span> Notebook&amp; notebook, <span class="keyword">const</span> std::string&amp; filename)</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p> </p>
 <hr>
 <h2 id="열림-닫힘-원칙-Open-Closed-Principle-OCP"><a href="#열림-닫힘-원칙-Open-Closed-Principle-OCP" class="headerlink" title="열림-닫힘 원칙 (Open-Closed Principle, OCP)"></a>열림-닫힘 원칙 (Open-Closed Principle, OCP)</h2>
@@ -567,7 +564,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -340,19 +340,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -465,56 +465,43 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Optimizing using an exotic associative container”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9ib29zdF9mbGF0bWFwLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <h1 id="문제"><a href="#문제" class="headerlink" title="문제"></a>문제</h1><hr>
 <p>지난주에 제가 사용하는 모듈 중 CPU를 많이 잡아먹는 친구를 뜯어보았습니다.</p>
 <p>정확히 어떤 모듈인지 설명드릴 수는 없지만, 대충 로우레벨 하드웨어 인터페이스로 저희 회사 로봇 제품의 모터를 제어하는 코드입니다.</p>
 <p>저는 이 코드가 CPU 코어 하나를 다 차지할정도로 이 소프트웨어가 무거우면 안되는 것을 잘 알고 있습니다. 하지만, 안타깝게도 지금의 코드는 그런 상태이죠.</p>
 <p>언제나와 같이, 저는 제 무기인 <strong>Hotspot</strong>을 꺼내들었고, CPU가 코드의 어떤 부분에서 시간을 제일 많이 보내는지 알아봤습니다.</p>
 <img src="/20201214-exotic-container/motor_profile1.png" class="" title="모터 프로파일링 1">
-
 <p>좀 지저분하지요? 어쩔 수 없습니다.</p>
 <p><span class="exturl" data-url="aHR0cDovL3d3dy5icmVuZGFuZ3JlZ2cuY29tL2ZsYW1lZ3JhcGhzLmh0bWw=">Flamegraph<i class="fa fa-external-link-alt"></i></span>를 처음 보시는 분들에게 간단하게 설명을 드리자면, caller function이 제일 밑에 있고, 점차 위로 callee function이 쌓여가는거라고 보시면 됩니다.</p>
 <p>여기서 제가 발견한 것은, 제 CPU의 30%가 <code>std::unordered_map&lt;&gt;::operator[]</code>에 쓰이고 있다는 것입니다.</p>
 <img src="/20201214-exotic-container/motor_profile2.png" class="" title="모터 프로파일링 2">
-
 <p>오른쪽에는 엄청나게 큰 블록이 있고, 왼쪽에는 작은 블록이 여러개 많이 있습니다.</p>
 <p>오른쪽 블록은 caching으로 쉽게 풀 수 있고, 왼쪽은 좀 풀기 어렵죠.</p>
 <p>문제가 되는 코드는 아래와 같습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 간단한 코드</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">unordered_map</span>&lt;Address, Entry*&gt; m_dictionary;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Address</span>&#123;</span></span><br><span class="line">    <span class="keyword">int16_t</span> index;</span><br><span class="line">    <span class="keyword">unt8_t</span> subindex;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 간단한 코드</span></span><br><span class="line">std::unordered_map&lt;Address, Entry*&gt; m_dictionary;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Address</span>&#123;</span></span><br><span class="line">    <span class="keyword">int16_t</span> index;</span><br><span class="line">    <span class="keyword">unt8_t</span> subindex;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <h1 id="해결-방법"><a href="#해결-방법" class="headerlink" title="해결 방법"></a>해결 방법</h1><hr>
 <p>코드를 좀 더 뜯어봤습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 간단하게 적은 코드</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasEntry</span><span class="params">(<span class="keyword">const</span> Address&amp; address)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m_dictionary.count(address) != <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Value <span class="title">getEntry</span><span class="params">(<span class="keyword">const</span> Address&amp; address)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( !hasEntry(address) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    Entry* = m_dictionary[address];</span><br><span class="line">    <span class="comment">// ... 나머지 코드</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 간단하게 적은 코드</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasEntry</span><span class="params">(<span class="keyword">const</span> Address&amp; address)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m_dictionary.<span class="built_in">count</span>(address) != <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Value <span class="title">getEntry</span><span class="params">(<span class="keyword">const</span> Address&amp; address)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( !<span class="built_in">hasEntry</span>(address) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    Entry* = m_dictionary[address];</span><br><span class="line">    <span class="comment">// ... 나머지 코드</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <img src="/20201214-exotic-container/two_lookups.jpg" class="" title="두번 룩업하네요!">
-
-<br>
-
+<p><br></p>
 <p><strong><em>두번이나 값을 찾네요</em></strong>! </p>
 <p>누가 짠거야 이 코드!</p>
 <p>아래처럼 코드를 바꿔줬습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 한번만 값을 찾도록 바꿈</span></span><br><span class="line"><span class="function">Value <span class="title">getEntry</span><span class="params">(<span class="keyword">const</span> Address&amp; address)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> it = m_dictionary.find(address);</span><br><span class="line">    <span class="keyword">if</span>( it ==  m_dictionary.end() ) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    Entry* = it-&gt;second;</span><br><span class="line">    <span class="comment">// ... 나머지 코드</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 한번만 값을 찾도록 바꿈</span></span><br><span class="line"><span class="function">Value <span class="title">getEntry</span><span class="params">(<span class="keyword">const</span> Address&amp; address)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> it = m_dictionary.<span class="built_in">find</span>(address);</span><br><span class="line">    <span class="keyword">if</span>( it ==  m_dictionary.<span class="built_in">end</span>() ) &#123;</span><br><span class="line">        <span class="keyword">throw</span> ...</span><br><span class="line">    &#125;</span><br><span class="line">    Entry* = it-&gt;second;</span><br><span class="line">    <span class="comment">// ... 나머지 코드</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>이렇게 코드를 바꿔주는 것 만으로도 <code>std::unordered_map</code>의 오버헤드를 반이나 줄일 수 있었습니다.</p>
 <p>이제 오른쪽, 왼쪽 블록의 문제를 해결해봅시다.</p>
-<br>
-
+<p><br></p>
 <h2 id="오른쪽-블록-캐싱을-합시다-i-e-따로-저장해둡시다"><a href="#오른쪽-블록-캐싱을-합시다-i-e-따로-저장해둡시다" class="headerlink" title="오른쪽 블록: 캐싱을 합시다! (i.e. 따로 저장해둡시다!)"></a>오른쪽 블록: 캐싱을 합시다! (i.e. 따로 저장해둡시다!)</h2><hr>
 <p>우선 짚고 넘어가야하는 점은, 이 <code>std::unordered_map</code> 형태의 dictionary는 한번 만들어지면 run-time에서 절대 바뀌지 않는다는 점 입니다.</p>
 <p>이 점을 이용해서 우리는 flamegraph의 오른쪽에서 엄청 큰 블록에 최적화를 할 수 있습니다. 바로 캐싱을 이용하면 됩니다. </p>
 <p>Map에서 값을 찾을 때 우리는 <code>Address</code>를 통해 <code>Entry*</code>를 찾습니다. 하지만 이 pair가 절대로 변하지 않는다면, 그냥 <code>Entry*</code>만 저장해도 되지 않을까요?</p>
 <p>그 결과, <code>std::unordered_map</code>를 사용한 오른쪽 블록의 큰 오버헤드가 사라졌고 , 약 15%의 CPU만 사용하는 효율적인 코드가 되었습니다.</p>
 <p>이렇게 따로 값을 저장하는 LUT를 만들고 사용하는 것은 굉장히 효과적입니다. 좀 더 자세히 알고싶으신 분들은 <a href="https://changh95.github.io/20201211-dont-compute-twice/">지난 글</a>을 참조하시길 바랍니다.</p>
-<br>
-
+<p><br></p>
 <h2 id="왼쪽-블록-boost-container-flat-map로-광명찾기"><a href="#왼쪽-블록-boost-container-flat-map로-광명찾기" class="headerlink" title="왼쪽 블록: boost::container_flat_map로 광명찾기"></a>왼쪽 블록: <code>boost::container_flat_map</code>로 광명찾기</h2><hr>
 <p>이제 왼쪽의 코드를 봅시다. </p>
 <p>왼쪽의 경우, 모두 <code>std::unordered_map</code>을 사용하기는 하지만, 사용하는 코드가 다 제각각입니다. 이 모든 코드를 하나하나 다 LUT로 바꿔주기는 굉장히 귀찮습니다.</p>
@@ -523,8 +510,7 @@ mjx-container[display="true"] + br {
 <p><code>std;:has&lt;Address&gt;</code>는 왜 이렇게 오래걸리는걸까요? 이게 딱 그 hash table이 잘 작동하지 못하는 (Big O() 노테이션이 작동하지 않는) 몇개의 <strong><em>레어 케이스</em></strong> 인걸까요?</p>
 <p><code>std::unordered_map</code> 룩업은 O(1) 이여야 할 터입니다. </p>
 <p>분명 잘 되야할텐데, 기가차고 코가찰 노릇입니다.</p>
-<br>
-
+<p><br></p>
 <h3 id="Boost-라이브러리-flat-map"><a href="#Boost-라이브러리-flat-map" class="headerlink" title="Boost 라이브러리 - flat_map"></a>Boost 라이브러리 - flat_map</h3><hr>
 <p>이 문제를 풀려면 꽤나 머리를 싸매야 할 것 같습니다.</p>
 <p>한번 다른 시각에서 문제를 바라보겠습니다. O(logn)을 쓰면서, hash function의 단점이 없는 마법같은 컨테이너는 없는걸까요?</p>
@@ -580,8 +566,8 @@ mjx-container[display="true"] + br {
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20201215-Harris-corner/" rel="next" title="Harris Corner (Harris & Stephens 1988)">
-                  Harris Corner (Harris & Stephens 1988) <i class="fa fa-chevron-right"></i>
+                <a href="/20201215-case-study-pcl/" rel="next" title="(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (11) - PCL 라이브러리 최적화">
+                  (번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (11) - PCL 라이브러리 최적화 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -632,7 +618,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

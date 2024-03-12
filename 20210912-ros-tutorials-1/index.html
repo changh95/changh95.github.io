@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -336,19 +336,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -506,18 +506,15 @@ mjx-container[display="true"] + br {
 <h3 id="tmux-설치"><a href="#tmux-설치" class="headerlink" title="tmux 설치"></a>tmux 설치</h3><p>tmux는 여러개의 터미널을 하나의 윈도우에 띄울 수 있는 유용한 툴이다.</p>
 <p>아래의 커맨드를 사용해서 tmux를 설치한다</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install tmux</span><br></pre></td></tr></table></figure>
-
 <h3 id="tmux-사용해서-터미널-쪼개기"><a href="#tmux-사용해서-터미널-쪼개기" class="headerlink" title="tmux 사용해서 터미널 쪼개기"></a>tmux 사용해서 터미널 쪼개기</h3><p>설치가 끝나면 터미널에서 <code>tmux</code> 커맨드를 입력하여 tmux를 실행한다.<br>이후 <code>ctrl + b</code>를 누르고 <code>"</code>를 누르면 하나의 터미널이 위/아래로 쪼개지고, <code>ctrl + b</code>를 누른 후 <code>%</code>를 누르면 하나의 터미널이 좌/우로 쪼개진다.</p>
 <p>터미널을 옮겨다니려면 <code>ctrl + b</code>를 누르고 화살표 키를 눌러서 움직일 수 있다.</p>
 <p>위/아래와 좌/우를 한번씩 쪼개면 아래의 사진처럼 큰 윈도우가 4개로 쪼개진다.</p>
 <img src="/20210912-ros-tutorials-1/tmux.png" class="" title="tmux">
-
 <p> </p>
 <hr>
 <h2 id="X11-포워딩-환경-준비하기"><a href="#X11-포워딩-환경-준비하기" class="headerlink" title="X11 포워딩 환경 준비하기"></a>X11 포워딩 환경 준비하기</h2><p>필자의 PC 환경은 Nvidia GPU를 사용하는 PC로, GPU 드라이버는 기본 Ubuntu 20.04가 잡아준 것을 사용하고있다.</p>
 <p>우선 호스트 PC 환경에서 다음과 같은 커맨드를 사용해서 Ubuntu GUI 패키지를 설치해준다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install xorg xrdp xserver-xorg mesa-utils xauth gdm3</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <hr>
 <h2 id="Docker-설치"><a href="#Docker-설치" class="headerlink" title="Docker 설치"></a>Docker 설치</h2><p>Docker 설치에 관한 부분은 필자가 이전에 적은 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwODA4LWRvY2tlci1mb3Itc2xhbS8=">Docker 글<i class="fa fa-external-link-alt"></i></span>을 참조하면 좋다.</p>
@@ -526,7 +523,6 @@ mjx-container[display="true"] + br {
 <h2 id="OSRF-ROS-Docker-이미지"><a href="#OSRF-ROS-Docker-이미지" class="headerlink" title="OSRF ROS Docker 이미지"></a>OSRF ROS Docker 이미지</h2><h3 id="이미지-땡겨오기"><a href="#이미지-땡겨오기" class="headerlink" title="이미지 땡겨오기"></a>이미지 땡겨오기</h3><p>이번 글에서는 우선 빠르게 결과를 보기 위해, Open Source Robotics Foundation (이하 OSRF)에서 제작한 ROS docker 이미지를 사용한다.</p>
 <p>Base ubuntu 이미지에 ROS를 직접 설치할 수도 있지만, 이 방식은 다음 글에서 설명하도록 한다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &lt;DISTRO&gt;는 원하는대로 바꿀 수 있다. indigo / kinetic / melodic / noetic 등등...</span></span><br><span class="line">docker run -it \</span><br><span class="line">    --env=<span class="string">"DISPLAY"</span> \</span><br><span class="line">    --env=<span class="string">"QT_X11_NO_MITSHM=1"</span> \</span><br><span class="line">    --volume=<span class="string">"/tmp/.X11-unix:/tmp/.X11-unix:rw"</span> \</span><br><span class="line">    osrf/ros:&lt;DISTRO&gt;-desktop-full</span><br><span class="line"><span class="built_in">export</span> containerId=$(docker ps -l -q)</span><br></pre></td></tr></table></figure>
-
 <h3 id="ROS-환경-활성화-roscore-실행"><a href="#ROS-환경-활성화-roscore-실행" class="headerlink" title="ROS 환경 활성화 + roscore 실행"></a>ROS 환경 활성화 + roscore 실행</h3><p>이 커맨드를 입력하고나면 DockerHub로부터 해당 Distro의 ROS가 포함된 Docker 이미지를 다운받고 컨테이너를 생성한 후 실행한다.</p>
 <p>실행된 컨테이너에서 <code>source /opt/ros/&lt;DISTRO&gt;/setup.bash</code>를 통해 ROS 환경을 읽어준 후, <code>printenv | grep ROS</code>를 사용해서 정확하게 환경이 읽혔는지 확인한다.</p>
 <p>ROS 환경이 잘 읽힌게 확인이 되면 <code>roscore</code> 커맨드를 통해 ros 서버를 실행시킨다.</p>
@@ -539,7 +535,6 @@ mjx-container[display="true"] + br {
 <p>우선 가장 먼저 <code>source /opt/ros/&lt;DISTRO&gt;/setup.bash</code>를 통해 ROS 환경을 읽어주고, <code>printenv | grep ROS</code>를 사용해서 정확하게 환경이 읽혔는지 확인한다.</p>
 <h3 id="TurtleSim-설치하기"><a href="#TurtleSim-설치하기" class="headerlink" title="TurtleSim 설치하기"></a>TurtleSim 설치하기</h3><p>TurtleSim을 바로 돌리면 좋겠지만, 이 컨테이너에는 아직 turtlesim이 없으므로 아래 커맨드를 통해 직접 설치해줘야한다.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get -y install ros-&lt;DISTRO&gt;-ros-tutorials</span><br></pre></td></tr></table></figure>
-
 <p>이후, <code>rosrun turtlesim turtlesim_node</code> 커맨드를 통해 Turtlesim을 실행시키면 GUI 앱이 렌더링 될 것이다.</p>
 <p>다시 한번 tmux 기능을 이용해서 새로운 터미널로 옮긴다.</p>
 <p><code>docker exec -it &lt;CONTAINER_NAME&gt; bash</code> 커맨드를 이용해 새 터미널을 열어주고, 다시 <code>source /opt/ros/&lt;DISTRO&gt;/setup.bash</code> 커맨드를 이용해서 ROS 환경을 읽어준다.</p>
@@ -556,6 +551,9 @@ mjx-container[display="true"] + br {
   <ul class="popular-posts">
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20210808-docker-for-slam/" rel="bookmark">SLAMOps를 위한 첫걸음 - Docker + CI</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20240305-ros1-study/" rel="bookmark">ROS1 공부 1차</a></div>
     </li>
   </ul>
 
@@ -627,7 +625,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

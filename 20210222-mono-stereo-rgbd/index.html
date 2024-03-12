@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -336,19 +336,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -468,13 +468,17 @@ mjx-container[display="true"] + br {
 <li>Stereo나 RGB-D가 Monocular 방식에 대해 가지는 장점이 무엇일까요?</li>
 </ol>
 <h2 id="답"><a href="#답" class="headerlink" title="답"></a>답</h2><h3 id="Monocular-SLAM"><a href="#Monocular-SLAM" class="headerlink" title="Monocular SLAM"></a>Monocular SLAM</h3><ul>
-<li>카메라 1대를 사용하여 SLAM을 하는 것</li>
+<li>카메라 1대를 사용하여 SLAM을 하는 것<ul>
 <li>최소 2개의 카메라를 사용하는 stereo 시스템이나, projector-camera 하드웨어를 사용하는 RGB-D 카메라보다 저렴함 (+ 전력 소비량도 작음).</li>
-<li>Monocular camera 이미지 1장으로는 3D 공간을 up-to-scale로 추정할 수 있음 (i.e. 정확한 lambda 값을 모름).</li>
+</ul>
+</li>
+<li>Monocular camera 이미지 1장으로는 3D 공간을 up-to-scale로 추정할 수 있음 (i.e. 정확한 lambda 값을 모름).<ul>
 <li>Image projection, 또는 N-view geometry로도 up-to-scale로만 추정 가능함.<ul>
 <li>정확한 scale 값을 모르기 때문에 <strong>Scale ambiguity</strong>가 있다고 할 수 있음.<ul>
 <li>이미 알고있는 물체의 크기를 (i.e. Fiducial 마커) 대조하거나, 아니면 IMU 센서를 통해 취득한 모션 등으로 metric scale을 복원할 수 있음.</li>
 <li>최근 딥러닝 기반 monocular depth estimation, 또는 single image monocular depth estimation 기술을 사용해 depth 정보를 추출하기도 함. </li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -533,19 +537,19 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+      <div class="popular-posts-title"><a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="bookmark">IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210228-AD-sensors/" rel="bookmark">SLAM에서 사용할 수 있는 센서의 종류</a></div>
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
     </li>
   </ul>
 
@@ -620,7 +624,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

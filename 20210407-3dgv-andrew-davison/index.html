@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -36,9 +36,9 @@
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Deep SLAM">
+<meta property="article:tag" content="Spatial AI">
 <meta property="article:tag" content="Rearrangement">
 <meta property="article:tag" content="Embodied AI">
-<meta property="article:tag" content="Spatial AI">
 <meta property="article:tag" content="RLBench">
 <meta property="article:tag" content="iMAP">
 <meta name="twitter:card" content="summary">
@@ -340,19 +340,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -465,7 +465,6 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <div class="video-container"><iframe src="https://www.youtube.com/embed/ERCqnJnLH9Y" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
-
 <p>토크의 상당 부분은 <a href="https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/">이전 세미나</a>와 내용이 겹칠 것으로 예상된다. 이번 글에서는 새로 업데이트 된 내용만 커버하기로…</p>
 <hr>
 <h2 id="Spatial-AI-Perception-for-Embodied-Intelligence"><a href="#Spatial-AI-Perception-for-Embodied-Intelligence" class="headerlink" title="Spatial AI - Perception for Embodied Intelligence"></a>Spatial AI - Perception for Embodied Intelligence</h2><ul>
@@ -542,7 +541,6 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h2 id="iMAP-Implicit-Mapping-and-Positioning-in-Real-Time"><a href="#iMAP-Implicit-Mapping-and-Positioning-in-Real-Time" class="headerlink" title="iMAP - Implicit Mapping and Positioning in Real-Time"></a>iMAP - Implicit Mapping and Positioning in Real-Time</h2><div class="video-container"><iframe src="https://www.youtube.com/embed/c-zkKGArl5Y" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
-
 <ul>
 <li>Uses <strong>implicit neural representations</strong>, like how <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMDg5MzQ=">NeRF<i class="fa fa-external-link-alt"></i></span> is using the thing<ul>
 <li>하지만 이 논문에서는 RGB-D를 사용하기 때문에 훨씬 쉽다고 교수님이 얘기하심.</li>
@@ -566,7 +564,7 @@ mjx-container[display="true"] + br {
 <li>Keyframe은 DB를 만들어서 관리한다.<ul>
 <li>Mapping thread에서는 이전에 취득한 키프레임과 가장 최신의 프레임을 이용해서 정보를 공유한다.</li>
 <li>모든 키프레임을 다 쓰는거는 아니다. 그러면 너무 느릴것이다.</li>
-<li>**’가장 유용한 키프레임’**을 고르고, 그 후 그 키프레임에서 **’가장 유용한 point’**를 뽑아 최적화한다.<ul>
+<li><strong>‘가장 유용한 키프레임’</strong>을 고르고, 그 후 그 키프레임에서 <strong>‘가장 유용한 point’</strong>를 뽑아 최적화한다.<ul>
 <li>이런 방식으로 <strong>계산해야할 포인트의 수를 줄여서 실시간 작동</strong>을 구현할 수 있었다.</li>
 <li>2Hz (ㅋㅋ 겨우 실시간)으로 실시간 맵핑을 할 수 있었다.</li>
 </ul>
@@ -640,13 +638,13 @@ mjx-container[display="true"] + br {
   <div class="popular-posts-header">Related Posts</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
@@ -663,9 +661,9 @@ mjx-container[display="true"] + br {
               <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
               <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
               <a href="/tags/Deep-SLAM/" rel="tag"># Deep SLAM</a>
+              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
               <a href="/tags/Rearrangement/" rel="tag"># Rearrangement</a>
               <a href="/tags/Embodied-AI/" rel="tag"># Embodied AI</a>
-              <a href="/tags/Spatial-AI/" rel="tag"># Spatial AI</a>
               <a href="/tags/RLBench/" rel="tag"># RLBench</a>
               <a href="/tags/iMAP/" rel="tag"># iMAP</a>
           </div>
@@ -731,7 +729,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

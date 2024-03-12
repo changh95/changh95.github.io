@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -332,19 +332,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -464,12 +464,10 @@ mjx-container[display="true"] + br {
 <p>Ubuntu Linux 등에서 관리자 권한으로 폴더를 지울 때는 sudo를 입력해야할 때가 있는데, 이럴 때는 사전에 sudo 권한을 켜두면 좋다. Docker에서는 자동으로 관리자 권한이라 좀 더 편하긴 하다.</p>
 <p>아래 코드에는 내가 좋아하는 패스워드 모듈을 함께 첨부했다. 이 모듈은 argparse를 통해 스크립트 실행 시 커맨드라인에 패스워드를 입력해서 sudo 권한을 매번 자동으로 입력하게 해주는 모듈이다. (물론 보안 상 엄청 안 좋은 방법이지만, 가장 쉬운 방법 중 하나이다)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Password</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, password</span>):</span></span><br><span class="line">        self.data = password</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sudo</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.data == <span class="string">""</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"sudo "</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"echo "</span> + self.data + <span class="string">" | sudo -S "</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    parser = argparse.ArgumentParser(</span><br><span class="line">            description=<span class="string">'sample script'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'--password'</span>, metavar=<span class="string">'\b'</span>, <span class="built_in">type</span>=<span class="built_in">str</span>, default=<span class="string">""</span>,</span><br><span class="line">                        <span class="built_in">help</span>=<span class="string">'Provide your Linux password to avoid manually typing in your password for every auto internal \'sudo\' command usage. This will leave traces of your password in your shell history. If you are concerned about security, do not use this option.'</span>)        </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">global</span> pw</span><br><span class="line">    pw = Password(args.password)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ... some code</span></span><br><span class="line"></span><br><span class="line">    folder_path = <span class="string">"~/directory/to/some/path"</span></span><br><span class="line">    os.system(pw.sudo() + <span class="string">"rm -rf "</span> + folder_path)</span><br></pre></td></tr></table></figure>
-
 <h2 id="방법-2-shutil-rmtree"><a href="#방법-2-shutil-rmtree" class="headerlink" title="방법 2: shutil.rmtree"></a>방법 2: shutil.rmtree</h2><p>크로스플랫폼 지원이 되는 방법이다.</p>
 <p>사실 위 방법보다 이게 좀 더 좋은듯?</p>
 <p><code>ignore_errors</code> 옵션을 넣으면 폴더가 없을 때도 삭제할 수 있다.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"></span><br><span class="line">shutil.rmtree(<span class="string">'~/folder'</span>, ignore_errors=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <h2 id="방법-3-os-rmdir"><a href="#방법-3-os-rmdir" class="headerlink" title="방법 3: os.rmdir"></a>방법 3: os.rmdir</h2><p>아무 내용이 없는 빈 폴더를 지울 때만 사용 가능하다.</p>
 <p>개인적으로 아직 실제로 써본 적은 없는듯</p>
 
@@ -562,7 +560,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

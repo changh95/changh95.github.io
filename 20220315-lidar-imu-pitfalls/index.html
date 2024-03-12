@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -340,19 +340,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -500,7 +500,6 @@ mjx-container[display="true"] + br {
 </blockquote>
 <h2 id="캘리브레이션"><a href="#캘리브레이션" class="headerlink" title="캘리브레이션"></a>캘리브레이션</h2><p>종종 직접 캘리브레이션 해야하는 IMU 들이 있다. 그리고 진짜 가끔, 캘리를 해줬는데 껐다가 키면 캘리 정보가 날아가는 IMU도 있다 (너 말하는거다, BNO055…). IMU를 타겟 디바이스에 탑재하고나서 모든 축으로 회전할 수 있는지, IMU를 사기 전에 꼭 확인하자. 탑재까지 다 했는데 캘리 다시해야하면 진짜 골치아프다.</p>
 <img src="/20220315-lidar-imu-pitfalls/1.gif" class="" title="rofl"> 
-
 <p> </p>
 <hr>
 <h1 id="LiDARs"><a href="#LiDARs" class="headerlink" title="LiDARs"></a>LiDARs</h1><p>라이다를 쓰면 ‘스마트’해진다. 내 로봇이 드디어 주변 환경을 ‘인식’할 수 있게 되고, 또 라이다라는거 그 자체가 그냥 엄청 미래적이잖아! </p>
@@ -523,12 +522,10 @@ mjx-container[display="true"] + br {
 <p>정확히 어떤 현상이나면, <strong>실제 거리보다 훨씬 적은 거리로 센서 값이 나오는 것</strong>이다.</p>
 <p>실제 거리는 초록색+빨간색이다. 근데 센서는 초록색이라고 말하는거고.</p>
 <img src="/20220315-lidar-imu-pitfalls/2.png" class="" title="flip"> 
-
 <h2 id="시야각"><a href="#시야각" class="headerlink" title="시야각"></a>시야각</h2><p>LiDAR에 탑재된 레이저 에미터도 시야각이 있다. 약 1~3도 정도 된다.</p>
 <p>아래 그림처럼 생긴 상황에서 레이저를 쏘면, 센서는 어떤 값을 내놓을거라고 생각하는가?</p>
 <p>정답: 센서마다 다르다. <strong>어떤 센서는 Y를 주고, 어떤 센서는 X,Y 다 주고, 어떤 센서는 X랑 Y의 평균값을 준다</strong>. 이런-</p>
 <img src="/20220315-lidar-imu-pitfalls/3.png" class="" title="fov"> 
-
 <h2 id="최대거리-vs-외부환경"><a href="#최대거리-vs-외부환경" class="headerlink" title="최대거리 vs 외부환경"></a>최대거리 vs 외부환경</h2><p>LiDAR의 데이터시트를 보면 최대거리를 보통 알려준다. 하지만 실제로 쓸 떄는 이 <strong>최대거리에서 센서 값 절대로 안나온다</strong>.</p>
 <p>이런 라이다 스펙은 보통 어느정도 반사가 가능한 물체들에 대해서 테스트 되기 때문이다. 완전 시꺼먼 물체에서는 절대로 최대거리로 나오지 않는다.</p>
 <p>아래 그림은 태양빛에 있는 여러 빛의 스펙트럼이다. 보통 라이다 센서들은 여기 빨간색으로 표시된 부분에서 푹 떨어지는 곳들의 파장으로 레이저를 쏜다. 그래야 태양빛에 대한 간섭을 덜 받게 된다.</p>
@@ -555,7 +552,7 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20220322-is-slam-solved/" rel="bookmark">Is SLAM solved? 고수들에게 물어본다</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20231127-100-slam-interview-questions/" rel="bookmark">SLAM 기술면접 질문 100선</a></div>
     </li>
   </ul>
 
@@ -629,7 +626,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

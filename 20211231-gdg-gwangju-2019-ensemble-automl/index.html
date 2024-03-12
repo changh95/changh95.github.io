@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -350,19 +350,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -508,7 +508,6 @@ mjx-container[display="true"] + br {
 <p>위의 케이스들을 딥러닝의 관점으로 보면 오버피팅(low bias high variance) / 언더피팅(high bias low variance)으로 볼 수 있다.</p>
 <p>최적의 해 (low bias / low variance)를 구하기 위해서 (언더피팅도 아니고 오버피팅도 아닌), Ensemble 기법들에 대해 알아본다.</p>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/48673F8D-40E7-4E01-B2E9-3749BFD4BFCB.jpeg" class="" title="ml_sdfdl">
-
 <p> </p>
 <hr>
 <h2 id="Ensemble-기법들-머신러닝"><a href="#Ensemble-기법들-머신러닝" class="headerlink" title="Ensemble 기법들 (머신러닝)"></a>Ensemble 기법들 (머신러닝)</h2><h3 id="Voting"><a href="#Voting" class="headerlink" title="Voting"></a>Voting</h3><ul>
@@ -516,7 +515,6 @@ mjx-container[display="true"] + br {
 <li>여러 모델들이 개, 개, 개, 개, 고양이, 고양이를 내뱉는다면, 개를 아웃풋으로 내는 방식. 물론 이에 대해서 여러가지 방식이 있다 (softmax probability output으로 한다던지…)</li>
 </ul>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/84C6017B-121D-497E-A577-4542E8EA8197.jpeg" class="" title="ml_sdfdl">
-
 <h3 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h3><ul>
 <li>Bagging = Bootstrap aggregating - 학습 데이터를 달리하여 여러 모델을 생성</li>
 <li>Variance를 낮춤으로써 overfitting을 방지 (일반화)</li>
@@ -524,7 +522,6 @@ mjx-container[display="true"] + br {
 </ul>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/6BA94029-7121-4711-AE3D-8E8262E83750.jpeg" class="" title="ml_sdfdl">
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/77B3AAA8-C654-4999-B518-ACD09A3959D5.jpeg" class="" title="ml_sdfdl">
-
 <h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><ul>
 <li>머신러닝 쪽에서 상당히 성능이 좋다고 함… 테이블과 같이 정형화된 데이터에서.</li>
 <li>Bagging을 기본으로 하지만, 순차적으로 학습을 진행. 이 때, 이전 모델의 오답에 가중치를 부여 (boosting).</li>
@@ -532,7 +529,6 @@ mjx-container[display="true"] + br {
 <li>Adaboost, XGBoost, LightGBM, CatBoost</li>
 </ul>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/AB58E03D-868D-4C3F-88A1-1AA171F9D03F.jpeg" class="" title="ml_sdfdl">
-
 <h3 id="Stacking-amp-Blending"><a href="#Stacking-amp-Blending" class="headerlink" title="Stacking & Blending"></a>Stacking &amp; Blending</h3><ul>
 <li>Meta modelling (Meta Learning)!</li>
 <li>각 모델이 도출한 결과들을 또 다른 모델의 입력으로 사용. 보통 3층 4층 정도 쌓음.</li>
@@ -541,7 +537,6 @@ mjx-container[display="true"] + br {
 <li>리얼타임으로 안 도니까 기업들에서는 보통 안 쓰는 편이고… 쓴다면 좀 어려운 문제를 꼭 풀어야할때?</li>
 </ul>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/E955FB9B-B1A4-4EF8-BA71-3933638827DB.jpeg" class="" title="ml_sdfdl">
-
 <p> </p>
 <h2 id="Ensemble-기법들-딥러닝"><a href="#Ensemble-기법들-딥러닝" class="headerlink" title="Ensemble 기법들 (딥러닝)"></a>Ensemble 기법들 (딥러닝)</h2><h3 id="데이터를-다양하게-하는-방법"><a href="#데이터를-다양하게-하는-방법" class="headerlink" title="데이터를 다양하게 하는 방법"></a>데이터를 다양하게 하는 방법</h3><ul>
 <li>K-fold cross-validation ensemble</li>
@@ -553,7 +548,6 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/7B04D521-A6D0-457F-A59C-EB9468709930.jpeg" class="" title="ml_sdfdl">
-
 <h3 id="모델을-다양하게-하는-경우"><a href="#모델을-다양하게-하는-경우" class="headerlink" title="모델을 다양하게 하는 경우"></a>모델을 다양하게 하는 경우</h3><ul>
 <li>딥러닝에서는 모델 아키텍처를 어설프게 바꿔서 앙상블을 하는거보다, 차라리 initial weight기법이나 optimisation기법을 다르게 해서 앙상블을 하는게 훨씬 좋음! (힌튼 교수 연구)</li>
 </ul>
@@ -564,30 +558,25 @@ mjx-container[display="true"] + br {
 </li>
 </ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/4899BF51-668B-4584-A84C-D911E27DE8AF.jpeg" class="" title="ml_sdfdl">
-
-<ol start="2">
+<ol>
 <li>“SGDR: Stochastic Gradient Descent with Warm Restarts” 논문</li>
 </ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/5BC7BAA5-0AA4-4B69-A514-4AFD94FA1B10.jpeg" class="" title="ml_sdfdl">
-
-<ol start="3">
+<ol>
 <li>“Loss Surfaces, Mode Connectivity and Fast Ensembling of DNNs.” 논문</li>
 </ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/2BDA7064-3F4C-4D73-AB2C-D771D02F292B.jpeg" class="" title="ml_sdfdl">
-
 <h3 id="모델-조합을-다양하게-하는-경우"><a href="#모델-조합을-다양하게-하는-경우" class="headerlink" title="모델 조합을 다양하게 하는 경우"></a>모델 조합을 다양하게 하는 경우</h3><ol>
-<li>Knowledge Distillation - 힌튼 교수가 만든 기법인데, 모델에서 좋은 정보를 추출해서 다른 모델에 심자는 기법. 현재는 모델 경량화에 사용되고 있지만, 원래는 앙상블을 위해 만든 것이다.</li>
-</ol>
-<ul>
+<li>Knowledge Distillation - 힌튼 교수가 만든 기법인데, 모델에서 좋은 정보를 추출해서 다른 모델에 심자는 기법. 현재는 모델 경량화에 사용되고 있지만, 원래는 앙상블을 위해 만든 것이다.<ul>
 <li>하나의 모델에서 좋은 정보를 추출해서 여러개의 훨씬 작은 모델들에 이식하고, 그 작은 모델들로 앙상블을 한다.</li>
 </ul>
+</li>
+</ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/1549E85F-EDF5-43C2-A8A8-4A7130F1506E.jpeg" class="" title="ml_sdfdl">
-
-<ol start="2">
+<ol>
 <li>Weight의 평균값을 취함으로써 더 넓은 Optima와 Better Generalization을 얻을 수 있다.</li>
 </ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/2F968751-0739-4379-B08A-473C7676332D.jpeg" class="" title="ml_sdfdl">   
-
 <h3 id="Specializing-models"><a href="#Specializing-models" class="headerlink" title="Specializing models"></a>Specializing models</h3><ol>
 <li>A novel Image Classification Method with CNN-XGBoost Model<ul>
 <li>한때 유행했던 방법. 성능은 좋았는데, 너무 특정 케이스에만 적용됨.</li>
@@ -595,23 +584,20 @@ mjx-container[display="true"] + br {
 </li>
 </ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/128AE4DE-4EB6-4CAD-BE2A-87CEE66F8E63.jpeg" class="" title="ml_sdfdl">
-
-<ol start="2">
+<ol>
 <li>Confidence multiple choice learning<ul>
 <li>특정 클래스만 찾는 모델 (e.g. 강아지만 찾는다던가… 고양이만 찾는다던가…)을 여러개를 학습을 시키고, 그 모델들을 앙상블함.</li>
 </ul>
 </li>
 </ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/95D6EB0E-A8B2-4342-BD17-4BF71576F45D.jpeg" class="" title="ml_sdfdl">
-
-<ol start="3">
+<ol>
 <li>Learning to specialize with knowledge distillation for Visual Question Answering<ul>
 <li>위의 방법들에 knowledge distillation을 적용함.</li>
 </ul>
 </li>
 </ol>
 <img src="/20211231-gdg-gwangju-2019-ensemble-automl/98C4D0E5-214D-4E71-B474-15FC2349C071.jpeg" class="" title="ml_sdfdl">
-
 <p> </p>
 <hr>
 <h2 id="Ensemble-정리"><a href="#Ensemble-정리" class="headerlink" title="Ensemble 정리"></a>Ensemble 정리</h2><ul>
@@ -843,7 +829,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -341,19 +341,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -468,9 +468,9 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p>Optimisation 기반 SLAM 방법론 중 가장 유명한 방법은 <strong>Graph-based SLAM</strong>이며, 보통 <strong>Frontend</strong>와 <strong>Backend</strong> 두가지 단계를 거친다.</p>
 <p><strong>Frontend</strong>는 센서 값들로부터 현재 <strong>로봇의 이동치</strong>와 <strong>주변 환경</strong>에 대한 정보를 계산하는데, 이 때 이동치는 motion model을, 주변 환경 정보는 observation model을 사용해서 계산한다. Graph-based SLAM에서는 로봇의 위치와 주위 랜드마크의 위치를 node로 표현하는데, 우리가 계산한 <strong>이동치는 로봇의 위치를 표현하는 node끼리를 이어주는 motion constraint</strong>, 그리고 <strong>주변 환경의 위치 정보는 로봇-랜드마크 간의 상대적인 관계를 표현하는 node를 이어주는 observation constraint</strong>로 표현된다. Frontend는 이렇게 새로운 node를 만들고, 또 node 끼리의 constraint도 이어주기 때문에 graph construction이라고 불리기도 한다.</p>
-<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png"></p>
+<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png" alt=""></p>
 <p><strong>Backend</strong>는 frontend에서 생성된 <strong>constraint들을 기반으로 최적의 (i.e. optimal) pose &amp; map을 계산</strong>한다. Graph solving에 가장 보편적인 방법은 <strong>least squares</strong>로써, 선형대수에서 이야기하는 Ax=b 형태의 문제에서 A가 graph matrix, b가 센서 정보일 때, x가 무엇이 나와야하는지 찾는 것이라고 보면 된다. 이러한 Graph matrix는 엄청나게 거대하기 때문에 단번에 푸는 것은 불가능하고 (특히나 SLAM에서 요구하는 실시간 계산 조건에서는!), 그렇기 때문에 <strong>iterative</strong>하게 풀어야한다. <strong>우리가 사용하는 센서들은 non-linear</strong>하기 때문에 iterative solving에도 매번 <strong>linearization 과정</strong>이 들어가야한다.</p>
-<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.png"></p>
+<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.png" alt=""></p>
 <blockquote>
 <p>Backend를 좀 더 자세히 이해하고 싶다면 다음 글을 참조하면 좋다. 1.’<a href="https://changh95.github.io/20210313-ba/">Bundle adjustment란?</a>‘, 2. ‘<a href="https://changh95.github.io/20210314-nonlinear-optimisation/">비선형 최적화 Non-linear optimisation - Gradient descent, Newton-Raphson, Gauss-Newton, Levenberg-Marquardt</a>‘</p>
 </blockquote>
@@ -495,7 +495,7 @@ mjx-container[display="true"] + br {
 <p>2011년 릴리즈 당시 저자들은 SOTA 알고리즘들의 성능에 준한다고 이야기했고, 현재도 지속적으로 업데이트되면서 다양한 모던 프로세서에 대해 호환성도 가지고 있다. </p>
 <p>프레임워크에서 Pose graph optimisation을 푸는 방법으로는 Gauss-Newton, Levenberg-Marquardt, Doglog 방식을 지원하는데, 이는 <strong>왠만한 SLAM 문제는 다 풀 수 있다</strong>고 볼 수 있다. <strong>사용하기 굉장히 쉬운 편</strong>이기 때문에 Visual-SLAM 연구/개발에서 많이 사용하며, <strong>ORB-SLAM과 SVO에서도 사용</strong>되었다. </p>
 <p>특정 모듈들이 LGPL3+와 GPL3+ 라이센스를 가지고 있지만, 특정 linear solver 및 뷰어에 한정되어있다. 연구 쪽에서는 오픈소스하는 경우가 많기 때문에 GPL-v3 라이센스는 문제가 되지 않아 <strong>연구와 궁합이 잘 맞고</strong>, 상용쪽에서는 최적의 성능을 위해 어차피 뷰어를 잘 사용하지 않기 때문에 <strong>상용에도 궁합이 잘 맞는 편</strong>이다.</p></div><div class="tab-pane" id="solvers-2"><p>Ceres-solver는 대형 nonlinear least squares 최적화 문제를 풀기위해 만든 오픈소스 라이브러리이다. Bundle adjustment 기법을 사용하는 SLAM과 SfM (i.e. Structure from Motion) 분야에서 많이 사용한다.</p>
-<p><strong>사용하기 쉬운 편</strong>이며 <strong>뛰어난 성능</strong>을 가졌고 <strong>portable</strong>하다는 장점을 가지고 있다. 하지만 무엇보다 가장 큰 장점은 <strong>최적화에 필요한 objective function을 유저가 직접 만들 수 있다는 점 (i.e. custom function)**인데, 이는 새로운 아이디어/방법론을 연구할 때 엄청난 이점이 된다. 여기에 **linearization을 쉽게 할 수 있는 auto-diff 기능</strong>까지 있으니 <strong>기능과 편의성을 동시에 잡았다</strong>고 볼 수 있다.</p>
+<p><strong>사용하기 쉬운 편</strong>이며 <strong>뛰어난 성능</strong>을 가졌고 <strong>portable</strong>하다는 장점을 가지고 있다. 하지만 무엇보다 가장 큰 장점은 <strong>최적화에 필요한 objective function을 유저가 직접 만들 수 있다는 점 (i.e. custom function)</strong>인데, 이는 새로운 아이디어/방법론을 연구할 때 엄청난 이점이 된다. 여기에 <strong>linearization을 쉽게 할 수 있는 auto-diff 기능</strong>까지 있으니 <strong>기능과 편의성을 동시에 잡았다</strong>고 볼 수 있다.</p>
 <p>지원하는 solver는 trust region solver (i.e. Levenberg-marquardt, dogleg)와 line search solver가 있다.</p>
 <p><strong>센서퓨전을 이용해서 tightly-fused 알고리즘들은 왠만하면 Ceres를 이용</strong>하며, Camera + IMU를 사용하는 <strong>OKVIS와 VINS-Mono가 Ceres 를 사용</strong>한다.</p></div><div class="tab-pane" id="solvers-3"><p>GTSAM은 로보틱스 환경에서 센서퓨전 최적화 문제를 풀기 위해 만든 오픈소스 라이브러리이다.</p>
 <p>GTSAM은 <strong>factor graph</strong>를 이용해서 최적화 문제를 모델링하는데, 다른 라이브러리들에 비해 내부적으로 matrix sparsity를 잘 이용해서 <strong>계산 효율이 가장 좋다</strong>고 볼 수 있다. </p>
@@ -504,7 +504,6 @@ mjx-container[display="true"] + br {
 <p>2D/3D geometry fitting, graph-based SLAM, camera motion estimation 등에서 사용할 수 있다.</p>
 <p>가장 최신의 프레임워크이라 <strong>아직 유저층이 두텁지는 않다</strong>.</p>
 <p>다른 프레임워크들에 비해 <strong>가장 진보된 알고리즘</strong>을 가지고 있다. 예를 들어, large scale optimisation을 풀 때는 많은 constraint들로 인해 non-convex한 manifold가 구축되는데 (i.e. local minima가 많이 생기는데), 이 문제를 좀 더 <strong>풀기 쉬운 convex 형태의 문제로 근사시켜 global minima를 계산하는 semidefinite relaxation 기법</strong> 등이 있다. (Trust region 방법으로 truncated-Newton Riemannian method를 사용한다고 하는데… 뭔지 잘 모르겠다 이름은 멋있는데!)</p></div></div></div>
-
 <hr>
 <h2 id="어떤것을-써야하는가"><a href="#어떤것을-써야하는가" class="headerlink" title="어떤것을 써야하는가?"></a>어떤것을 써야하는가?</h2><p><a href="https://changh95.github.io/20210607-solver-comp/">Juric 2021 논문</a>에서 발표한 내용은 다음과 같다.</p>
 <ul>
@@ -528,16 +527,16 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20210607-solver-comp/" rel="bookmark">Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210128-gbp-poplar/" rel="bookmark">Graphcore IPU로 Bundle adjustment / SLAM 하기!</a></div>
+      <div class="popular-posts-title"><a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="bookmark">IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210221-50-CV-SLAM-interview-questions/" rel="bookmark">50가지 CV/SLAM 기술면접 질문 리스트</a></div>
+      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210222-image-projection/" rel="bookmark">Image projection 이란? Intrinsic / Extrinsic / Projection matrix란?</a></div>
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
     </li>
   </ul>
 
@@ -557,13 +556,13 @@ mjx-container[display="true"] + br {
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/20210604-tartan-kaess/" rel="prev" title="Tartan Series 2021 - Factor Graphs and Robust Perception (Prof. Michael Kaess)">
-                  <i class="fa fa-chevron-left"></i> Tartan Series 2021 - Factor Graphs and Robust Perception (Prof. Michael Kaess)
+                <a href="/20210607-solver-comp/" rel="prev" title="Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM">
+                  <i class="fa fa-chevron-left"></i> Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20210607-solver-comp/" rel="next" title="Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM">
-                  Juric 2021 - A Comparison of Graph Optimization Approaches for Pose Estimation in SLAM <i class="fa fa-chevron-right"></i>
+                <a href="/20210619-cvpr-2021/" rel="next" title="CVPR 2021 튜토리얼 / 워크샵 리스트">
+                  CVPR 2021 튜토리얼 / 워크샵 리스트 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -614,7 +613,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

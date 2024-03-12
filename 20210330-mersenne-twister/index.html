@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -336,19 +336,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -480,17 +480,14 @@ mjx-container[display="true"] + br {
 <li>커스텀 Mersenne Twister를 만들 때 사용되는 std::mersenne_twister_engine</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">UIntType</span>,</span></span><br><span class="line"><span class="class">    <span class="title">size_t</span> <span class="title">w</span>, <span class="title">size_t</span> <span class="title">n</span>, <span class="title">size_t</span> <span class="title">m</span>, <span class="title">size_t</span> <span class="title">r</span>,</span></span><br><span class="line"><span class="class">    <span class="title">UIntType</span> <span class="title">a</span>, <span class="title">size_t</span> <span class="title">u</span>, <span class="title">UIntType</span> <span class="title">d</span>, <span class="title">size_t</span> <span class="title">s</span>,</span></span><br><span class="line"><span class="class">    <span class="title">UIntType</span> <span class="title">b</span>, <span class="title">size_t</span> <span class="title">t</span>,</span></span><br><span class="line"><span class="class">    <span class="title">UIntType</span> <span class="title">c</span>, <span class="title">size_t</span> <span class="title">l</span>, <span class="title">UIntType</span> <span class="title">f</span></span></span><br><span class="line"><span class="class">&gt;</span> <span class="class"><span class="keyword">class</span> <span class="title">mersenne_twister_engine</span>;</span></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>1998년도에 나온 32-bit MT를 구현하는 std::mt19937</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> mersenne_twister_engine&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="number">32</span>, <span class="number">624</span>, <span class="number">397</span>, <span class="number">31</span>, <span class="number">0x9908b0df</span>,</span><br><span class="line">    <span class="number">11</span>, <span class="number">0xffffffff</span>, <span class="number">7</span>, <span class="number">0x9d2c5680</span>, <span class="number">15</span>, <span class="number">0xefc60000</span>, <span class="number">18</span>, <span class="number">1812433253</span>&gt; mt19937;</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>2000년도에 나온 64-bit MT를 구현하는 std::mt19937_64</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> mersenne_twister_engine&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>, <span class="number">64</span>, <span class="number">312</span>, <span class="number">156</span>, <span class="number">31</span>,</span><br><span class="line">    <span class="number">0xb5026f5aa96619e9</span>ULL, <span class="number">29</span>,</span><br><span class="line">    <span class="number">0x5555555555555555</span>ULL, <span class="number">17</span>,</span><br><span class="line">    <span class="number">0x71d67fffeda60000</span>ULL, <span class="number">37</span>,</span><br><span class="line">    <span class="number">0xfff7eee000000000</span>ULL, <span class="number">43</span>,</span><br><span class="line">    <span class="number">6364136223846793005U</span>LL&gt; mt19937_64;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> mersenne_twister_engine&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>, <span class="number">64</span>, <span class="number">312</span>, <span class="number">156</span>, <span class="number">31</span>,</span><br><span class="line">    <span class="number">0xb5026f5aa96619e9</span>ULL, <span class="number">29</span>,</span><br><span class="line">    <span class="number">0x5555555555555555</span>ULL, <span class="number">17</span>,</span><br><span class="line">    <span class="number">0x71d67fffeda60000</span>ULL, <span class="number">37</span>,</span><br><span class="line">    <span class="number">0xfff7eee000000000</span>ULL, <span class="number">43</span>,</span><br><span class="line">    <span class="number">6364136223846793005ULL</span>&gt; mt19937_64;</span><br></pre></td></tr></table></figure>
 <p> </p>
 <blockquote>
 <p>이론에 관심 있으신 분들은 오리지널 논문을 참조바랍니다.<br><span class="exturl" data-url="aHR0cHM6Ly9kbC5hY20ub3JnL2RvaS8xMC4xMTQ1LzI3Mjk5MS4yNzI5OTU=">“Mersenne twister: a 623-dimensionally equidistributed uniform pseudo-random number generator”<i class="fa fa-external-link-alt"></i></span></p>
@@ -522,8 +519,7 @@ mjx-container[display="true"] + br {
 </ul>
 <p> </p>
 <hr>
-<h2 id="내가-사용하는-방법"><a href="#내가-사용하는-방법" class="headerlink" title="내가 사용하는 방법"></a>내가 사용하는 방법</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::random_device randDev;</span><br><span class="line"><span class="function"><span class="built_in">std</span>::mt19937 <span class="title">mtGenerator</span><span class="params">(randDev())</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... //</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int32_t</span>&gt; someData;</span><br><span class="line"><span class="built_in">std</span>::shuffle(someData.begin(), someData.end(), mtGenerator); <span class="comment">// 랜덤 셔플</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+<h2 id="내가-사용하는-방법"><a href="#내가-사용하는-방법" class="headerlink" title="내가 사용하는 방법"></a>내가 사용하는 방법</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"></span><br><span class="line">std::random_device randDev;</span><br><span class="line"><span class="function">std::mt19937 <span class="title">mtGenerator</span><span class="params">(randDev())</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ... //</span></span><br><span class="line"></span><br><span class="line">std::vector&lt;<span class="keyword">int32_t</span>&gt; someData;</span><br><span class="line">std::<span class="built_in">shuffle</span>(someData.<span class="built_in">begin</span>(), someData.<span class="built_in">end</span>(), mtGenerator); <span class="comment">// 랜덤 셔플</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>mt19937을 이용해서 랜덤 데이터 셔플을 한다던지, RANSAC을 돌린다던지, random seed 를 만든다던지 할 때 쓰면 좋다.</p>
 
     </div>
@@ -541,13 +537,13 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
     </li>
   </ul>
 
@@ -620,7 +616,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

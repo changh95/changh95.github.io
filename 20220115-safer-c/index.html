@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -340,19 +340,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -515,63 +515,59 @@ mjx-container[display="true"] + br {
 <p>정말 정말 백보 물러나서 얘기하는건데, 적어도 하나의 테스트는 꼭 돌려주시길 바랍니다. 테스트도 안되고 도큐먼팅도 안된 코드를 사용해야하는 상황이 오면, 당신은 그날 저녁부터 이 상황으로부터 도망가기 위해 이직 준비를 시작하게 될겁니다. 그러다가 극심한 스트레스로 두통과 몸살이 동시에 와 침대에서 끙끙거리다가 ‘내 인생 왜 이 모양 이 꼴이냐’ 하며 눈물 한방울을 흘리게 될겁니다.</p>
 <p>정말 코드에 자신이 있으려면, 작성하신 모든 함수 하나하나마다 유닛테스트를 만들어서 ‘내 코드는 주어진 시나리오에서 잘 작동합니다’ 라고 얘기할 수 있도록 합시다.</p>
 <img src="/20220115-safer-c/result.png" class="" title="result">
-
 <p> </p>
 <hr>
 <h2 id="정적분석-Static-analysis"><a href="#정적분석-Static-analysis" class="headerlink" title="정적분석 (Static analysis)"></a>정적분석 (Static analysis)</h2><p>정적분석은 소스코드를 분석해서 좋지 않은 코드가 있으면 알려주는 툴입니다.</p>
 <p>Visual Studio에는 기본적으로 적용되어있는 기능이며, 위험한 코드를 짜게 되면 ‘이렇게 짜지 않을래?’하고 제안을 하는 친구입니다. VSCode에서는 이 기능이 자동으로 지원되지 않는데, 그러다보니 VSCode 유저들 중에 코드 퀄리티가 엉망이신 분들도 꽤 많습니다. 하지만 다 핑계입니다. <strong><code>clang-tidy</code> 익스텐션</strong> 받으면 곧바로 정적 분석이 돌아가기 때문입니다. CLion IDE를 사용하면 기본 적용되어있습니다.</p>
 <p>clang-tidy도 플래그를 추가로 적용해서 더 좋은 코드를 만들 수 있습니다. 아래는 제가 좋아하는 플래그들입니다.</p>
+<hr>
 <ul>
-<li>-*<ul>
-<li>기본 체크</li>
+<li>기본 체크<ul>
+<li>bugprone-*</li>
 </ul>
 </li>
-<li>bugprone-*<ul>
-<li>버그 잡이</li>
+<li>버그 잡이<ul>
+<li>clang-analyzer-*</li>
 </ul>
 </li>
-<li>clang-analyzer-*<ul>
-<li>버그 잡이 2</li>
+<li>버그 잡이 2<ul>
+<li>concurrency-*</li>
 </ul>
 </li>
-<li>concurrency-*<ul>
-<li>동시성 프로그래밍 버그 잡이</li>
+<li>동시성 프로그래밍 버그 잡이<ul>
+<li>cppcoreguidelines-*</li>
 </ul>
 </li>
-<li>cppcoreguidelines-*<ul>
-<li>C++ Core guideline 준수</li>
+<li>C++ Core guideline 준수<ul>
+<li>hicpp-*</li>
 </ul>
 </li>
-<li>hicpp-*<ul>
-<li>High integrity C++ 가이드라인 준수</li>
+<li>High integrity C++ 가이드라인 준수<ul>
+<li>linuxkernel-*</li>
 </ul>
 </li>
-<li>linuxkernel-*<ul>
-<li>리눅스 커널에 맞는 코드 준수</li>
+<li>리눅스 커널에 맞는 코드 준수<ul>
+<li>modernize-*</li>
 </ul>
 </li>
-<li>modernize-*<ul>
-<li>모던 C++ 사용</li>
+<li>모던 C++ 사용<ul>
+<li>openmp-*</li>
 </ul>
 </li>
-<li>openmp-*<ul>
-<li>OpenMP 사용 법 준수</li>
+<li>OpenMP 사용 법 준수<ul>
+<li>performance-*</li>
 </ul>
 </li>
-<li>performance-*<ul>
-<li>성능 향상 제안</li>
+<li>성능 향상 제안<ul>
+<li>portability-*</li>
 </ul>
 </li>
-<li>portability-*<ul>
 <li>이식성 제안</li>
-</ul>
-</li>
 </ul>
 <p>이러한 체커도 하나만 쓰면 좀 아쉽습니다.</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhbm1hci9jcHBjaGVjay8=">CppCheck<i class="fa fa-external-link-alt"></i></span>라는 정적분석 툴도 좋으니, clang-tidy와 함께 돌립시다.</p>
 <p>아래는 clang-tidy를 돌렸을 때 나오는 코드 제안들의 예시입니다 (출처: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLndob2xldG9tYXRvLmNvbS8yMDIxLzAxLzA4L2EtYnJpZWYtaW50cm9kdWN0aW9uLXRvLWNsYW5nLXRpZHktYW5kLWl0cy1yb2xlLWluLXZpc3VhbC1hc3Npc3Qv">https://blog.wholetomato.com/2021/01/08/a-brief-introduction-to-clang-tidy-and-its-role-in-visual-assist/<i class="fa fa-external-link-alt"></i></span>)</p>
 <img src="/20220115-safer-c/clang.png" class="" title="clang">
-
 <p> </p>
 <hr>
 <h2 id="동적분석-메모리-주소-메모리-leak-쓰레드-관리"><a href="#동적분석-메모리-주소-메모리-leak-쓰레드-관리" class="headerlink" title="동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)"></a>동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)</h2><p>동적 분석은 실제로 코드가 돌아가면서 생기는 허점들을 잡아줄 수 있습니다.</p>
@@ -582,7 +578,7 @@ mjx-container[display="true"] + br {
 <h2 id="MISRA"><a href="#MISRA" class="headerlink" title="MISRA"></a>MISRA</h2><p>MISRA C++은 실제로 안전이 중요한 시스템에서 지켜져야하는 C++ 프로그래밍 가이드입니다.</p>
 <p>프로토타입 단계에서 필요한건 아니지만, 제품으로 만들려고 하면 꼭 거쳐야합니다. 어차피 거칠거면 처음부터 오토체커를 사용해서 잘 짜면 되지 않을까요?</p>
 <p>오토체커 방법은 두가지가 있습니다.</p>
-<p>첫번째는 <strong>CLion IDE에서 지원하는 오토체커</strong>를 사용하는겁니다. CLion에서는 정적분석 툴로 MISRA 오토체커가 들어가있습니다. 하지만 그렇게 막 좋은 편은 아닙니다. 2022년 1월 16일 기준으로, 211개 체크 중 65개만 구현이 되어있습니다. 구현 상황은 <span class="exturl" data-url="aHR0cHM6Ly95b3V0cmFjay5qZXRicmFpbnMuY29tL2FydGljbGVzL0NQUC1BLTE5MTQzMDY4Mj9fZ2E9Mi4xNTE2Mzg3NzguMjExMzM0NTA5NS4xNjQyMjUwNjAxLTIzMTMwODMwMi4xNjI1NjE2NTU0Jl9nbD0xKmJzYWtidypfZ2EqTWpNeE16QTRNekF5TGpFMk1qVTJNVFkxTlRRLipfZ2FfMFdRMlpGNVZHVCpNVFkwTWpJMk1UTTFNUzR4TGpFdU1UWTBNakkyTVRVeU1DNHc=">링크<i class="fa fa-external-link-alt"></i></span>에 잘 나와있습니다. 하지만 그래도 65개라도 돌아가는거 어디입니까 헛헛</p>
+<p>첫번째는 <strong>CLion IDE에서 지원하는 오토체커</strong>를 사용하는겁니다. CLion에서는 정적분석 툴로 MISRA 오토체커가 들어가있습니다. 하지만 그렇게 막 좋은 편은 아닙니다. 2022년 1월 16일 기준으로, 211개 체크 중 65개만 구현이 되어있습니다. 구현 상황은 <span class="exturl" data-url="aHR0cHM6Ly95b3V0cmFjay5qZXRicmFpbnMuY29tL2FydGljbGVzL0NQUC1BLTE5MTQzMDY4Mj9fZ2E9Mi4xNTE2Mzg3NzguMjExMzM0NTA5NS4xNjQyMjUwNjAxLTIzMTMwODMwMi4xNjI1NjE2NTU0JmFtcDtfZ2w9MSpic2FrYncqX2dhKk1qTXhNekE0TXpBeUxqRTJNalUyTVRZMU5UUS4qX2dhXzBXUTJaRjVWR1QqTVRZME1qSTJNVE0xTVM0eExqRXVNVFkwTWpJMk1UVXlNQzR3">링크<i class="fa fa-external-link-alt"></i></span>에 잘 나와있습니다. 하지만 그래도 65개라도 돌아가는거 어디입니까 헛헛</p>
 <blockquote>
 <p>물론 이 방법을 사용하려면 CLion IDE를 써야합니다. 유료이긴 하지만 성능이 빵빵하니 개인적으로 추천하는 IDE입니다. 학생이시라면 교육용 라이센스로, 직장인이라면 회사에 사달라고 하세요. 개인 사용은 선택에 맡기겠습니다.</p>
 </blockquote>
@@ -601,6 +597,9 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
     <li class="popular-posts-item">
@@ -608,9 +607,6 @@ mjx-container[display="true"] + br {
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210107-gcc-ffast-math/" rel="bookmark">C++ 프로그램 속도를 빠르게 만들어주는 gcc 컴파일러 플래그</a></div>
     </li>
   </ul>
 
@@ -685,7 +681,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

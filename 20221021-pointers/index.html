@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -332,19 +332,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -470,7 +470,7 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="동적-할당-dynamic-allocation"><a href="#동적-할당-dynamic-allocation" class="headerlink" title="동적 할당 (dynamic allocation)"></a>동적 할당 (dynamic allocation)</h1><p><code>Object myObject</code>와 같은 방식으로 객체를 <strong>정적할당</strong> 하면 <strong>객체의 수명이 자동적으로 결정</strong>된다. 객체는 scope를 벗어나는 순간 자동으로 메모리에서 삭제된다. 이 방식은 아주 유용한데, 우리가 객체 하나하나 수명을 직접 관리해줄 필요가 없기 때문이다. 즉, 잘못 관리해서 메모리를 차지하기만 하고 아무것도 안하는 메모리가 없을 것이라는 것이다.</p>
-<p>정적할당의 반대는 <strong>동적할당 (dynamic allocation)**이다. 그리고 동적할당을 할 때 <code>Object* myObject = new Object;</code> 와 같은 방식으로 포인터를 사용하게 된다. 생성한 후에 객체를 다룰 때는 <code>myObject-&gt;foo()</code> 와 같은 형태로 사용한다. Raw pointer로 생성하면 추후에 <code>delete</code>를 직접 해줘야하는데, 이 경우 위 정적할당 부분에서 언급한 것 처럼 ‘해제를 잊어버리면 메모리에 죽은 메모리가 남는다’라는 문제가 생긴다 (i.e. **Memory leak</strong>). 하지만 이 문제를 파훼하기 위해 <code>std::unique_ptr</code>이나 <code>std::shared_ptr</code> 같은 스마트 포인터라는 개념이 생겼다. <code>std::unique_ptr</code>은 정적할당 object처럼 scope를 벗어나게 되면 메모리 오너십이 사라지며 자동으로 해제되고, <code>std::shared_ptr</code>은 공유 메모리 오너십이 사라지면 자동으로 해제된다. 이렇게 스마트 포인터가 raw pointer보다 안전하기 때문에, 모던 C++에서는 ‘<strong>Raw pointer 보다 스마트 포인터를 사용하라</strong>‘ 라는 룰이 생기게 되었다.</p>
+<p>정적할당의 반대는 <strong>동적할당 (dynamic allocation)</strong>이다. 그리고 동적할당을 할 때 <code>Object* myObject = new Object;</code> 와 같은 방식으로 포인터를 사용하게 된다. 생성한 후에 객체를 다룰 때는 <code>myObject-&gt;foo()</code> 와 같은 형태로 사용한다. Raw pointer로 생성하면 추후에 <code>delete</code>를 직접 해줘야하는데, 이 경우 위 정적할당 부분에서 언급한 것 처럼 ‘해제를 잊어버리면 메모리에 죽은 메모리가 남는다’라는 문제가 생긴다 (i.e. <strong>Memory leak</strong>). 하지만 이 문제를 파훼하기 위해 <code>std::unique_ptr</code>이나 <code>std::shared_ptr</code> 같은 스마트 포인터라는 개념이 생겼다. <code>std::unique_ptr</code>은 정적할당 object처럼 scope를 벗어나게 되면 메모리 오너십이 사라지며 자동으로 해제되고, <code>std::shared_ptr</code>은 공유 메모리 오너십이 사라지면 자동으로 해제된다. 이렇게 스마트 포인터가 raw pointer보다 안전하기 때문에, 모던 C++에서는 ‘<strong>Raw pointer 보다 스마트 포인터를 사용하라</strong>‘ 라는 룰이 생기게 되었다.</p>
 <p>객체의 수명에 관련해서는 Object로 직접 다루나 스마트 포인터를 사용하나 결국 자동 수명 관리 시스템을 사용하기 때문에 차이가 없다고 볼 수 있다. <strong>그러면 언제 정적할당을 하고 언제 동적할당을 해야하는가?</strong></p>
 <p>동적할당이 필요한 경우는 다음과 같다.</p>
 <ol>
@@ -514,6 +514,9 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
+    </li>
+    <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
     <li class="popular-posts-item">
@@ -521,9 +524,6 @@ mjx-container[display="true"] + br {
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201203-faconti-Value-semantics-vs-references/" rel="bookmark">(번역) 실시간 컴퓨터 비전을 위한 C++ 최적화 (0) - Const reference를 쓰세요!</a></div>
     </li>
   </ul>
 
@@ -594,7 +594,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -54,8 +54,8 @@
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Deep SLAM">
-<meta property="article:tag" content="3D">
 <meta property="article:tag" content="AR">
+<meta property="article:tag" content="3D">
 <meta property="article:tag" content="CubeSLAM">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/object_representation.png">
@@ -357,19 +357,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -482,7 +482,7 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><h2 id="Shichao-Yang의-연구-주제"><a href="#Shichao-Yang의-연구-주제" class="headerlink" title="Shichao Yang의 연구 주제"></a>Shichao Yang의 연구 주제</h2><p>Shape prior를 사용하지 않는 Object와 plane을 이용한 Monocular SLAM.<br>Large scale로 indoor와 outdoor에서 사용 가능.<br>Scene understanding이 SLAM에 도움이 되는 것을 증명함.</p>
-<p>Shichao Yang은 <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1RblZsZXhYaTlfYyZhYl9jaGFubmVsPVNoaWNoYW9ZYW5n">CubeSLAM<i class="fa fa-external-link-alt"></i></span>의 저자이다.</p>
+<p>Shichao Yang은 <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1RblZsZXhYaTlfYyZhbXA7YWJfY2hhbm5lbD1TaGljaGFvWWFuZw==">CubeSLAM<i class="fa fa-external-link-alt"></i></span>의 저자이다.</p>
 <hr>
 <h1 id="Point를-사용하는-SLAM의-단점"><a href="#Point를-사용하는-SLAM의-단점" class="headerlink" title="Point를 사용하는 SLAM의 단점"></a>Point를 사용하는 SLAM의 단점</h1><p>Point feature를 사용하는 SLAM이 잘 안되는 케이스가 있다.</p>
 <ul>
@@ -507,7 +507,7 @@ mjx-container[display="true"] + br {
 <li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMTI5ODA=">Huang 2020 CVPR : ClusterVO - Clustering moving instances and estimating visual odometry<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>하나씩 계산하면 되는 쉬운 방법.<br>하지만 SLAM이 잘 안되거나 Point cloud의 퀄리티가 떨어지면 object detection도 잘 안된다.</p>
-<ol start="2">
+<ol>
 <li>Tightly coupled 방법 - Camera motion, Object / Plane geometry를 동시에 최적화</li>
 </ol>
 <ul>
@@ -518,12 +518,9 @@ mjx-container[display="true"] + br {
 <li><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDcuMDIwNjI=">Li 2018 ECCV : Stereo vision-based semantic 3D object and ego-motion tracking<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>동시에 최적화를 하면서 정확도를 이끌어내려는 시도이다.</p>
-<br>
-
-<h2 id="Object를-표현하는-방법"><a href="#Object를-표현하는-방법" class="headerlink" title="Object를 표현하는 방법"></a>Object를 표현하는 방법</h2><br>
-
+<p><br></p>
+<h2 id="Object를-표현하는-방법"><a href="#Object를-표현하는-방법" class="headerlink" title="Object를 표현하는 방법"></a>Object를 표현하는 방법</h2><p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/object_representation.png" class="" title="Object Representation">
-
 <h2 id="최적화-cost-function"><a href="#최적화-cost-function" class="headerlink" title="최적화 cost function"></a>최적화 cost function</h2><ul>
 <li><p>Object-camera 3D relative pose</p>
 <ul>
@@ -561,26 +558,18 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/3d_detection.png" class="" title="General approach">
-
 <p>하지만 SLAM의 용도로는 우리는 한번도 본 적 없거나 복잡한 object에도 generalise 할 수 있어야한다.</p>
 <p>여기 제안하는 새로운 방법은 2D bounding box와 SLAM으로 얻어낸 camera pose를 사용한다.<br>여러시점의 Camera의 위치로부터 2D bounding box가 projective geometry 기반으로 커버할 수 있는 공간을 계산한다.<br>그리고 이 공간을 잘 표현하는 cuboid 모델로 표현해주면 간단하게 표현할 수 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/cuboid.png" class="" title="Cuboid model generation">
-
 <p>위 사진은 vanishing point를 사용하여 cuboid 모델을 만드는 방법을 소개한다.<br>Cuboid는 2D 이미지로 보았을 때 3개의 vanishing point가 있어야한다.<br>굉장히 정확하고 또 간단하게 풀 수 있는 방법이다.<br>계산된 Cuboid 모델은 항상 2D bounding box 안에서 발견된다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/proposals.png" class="" title="Cuboid model proposals">
-
 <p>위의 방식으로 cuboid 모델을 만들면, 보통 여러개의 가능성이 나온다.<br>휴리스틱하게 룰을 만들어서 제일 정확한 모델에게 가장 높은 score를 주는 방식을 이전까지는 많이 써왔다.<br>하지만 이 scoring system을 딥러닝으로 만들 수 있지 않을까 생각해서 도전해봤다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/result.png" class="" title="Results">
-
 <p>실제로 돌려본 결과, object shape prior가 없는데도 cuboid 모양을 잘 잡는 것을 볼 수 있다.<br>다양한 object들에 cuboid model을 생성할 수 있었다.<br>Indoor 데이터셋에서는 굉장히 잘 되었다.<br>Outdoor 데이터셋은 <span class="exturl" data-url="aHR0cDovL3d3dy5jdmxpYnMubmV0L2RhdGFzZXRzL2tpdHRpL2V2YWxfb2JqZWN0LnBocD9vYmpfYmVuY2htYXJrPTNk">KITTI 데이터셋<i class="fa fa-external-link-alt"></i></span>을 사용했는데, 우리의 방식보다 결과가 좋게 나왔다.<br>그도 그럴만한게, KITTI 데이터셋에는 shape prior + 다양한 차들의 데이터가 충분히 있다.<br>Shape prior가 없는 우리 방식의 성능을 뛰어넘을 수 있다는 것을 인지해야한다.</p>
 <hr>
 <h1 id="Plane-detection"><a href="#Plane-detection" class="headerlink" title="Plane detection"></a>Plane detection</h1><ul>
@@ -601,73 +590,48 @@ mjx-container[display="true"] + br {
 </ul>
 <p>딥러닝 기반 layout detection은 매 프레임마다 layout prediction을 하기 때문에 정확한 값을 얻을 수 없다. (i.e. layout이 떨린다)</p>
 <p>여기에 SLAM을 섞으면 어떨까?<br>SLAM의 경우, 하나의 feature point를 다양한 각도에서 봐도 안정적이게 추출할 수 있다.<br>이 점을 이용하면, layout도 여러 각도에서 봐도 안정적이게 추출할 수 있을 것이다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/plane_proposal.png" class="" title="Plane proposal">
-
 <p>우선, 기존의 line detector를 써서 line을 찾는다.<br>Occlusion된 line이 있을 수 있으니, segmentation을 사용해서 object를 찾고 segmentation mask 내부에 line을 더 이어서 그려준다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/plane_proposal_2.png" class="" title="Plane proposal 2">
-
 <p>위의 방법으로 여러개의 plane candidate가 나올 것이다.<br>벽과 바닥이 90도 직각이라는 가정을 두고, wall plane과 floor plane을 뽑아준다.<br>이 때, 3D object detection도 할 것이라면, 동시에 같이 뽑을 수도 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/object_plane_joint.png" class="" title="Object / Plane joint optimisation">
-
 <p>3D object pose와 wall/floor plane 정보를 함께 이용해서 joint optimisation을 할 수 있다.<br>예를 들어, object의 기울기는 floor plane과 평행해야할 수도 있다.<br>또, object의 cuboid는 wall/floor plane과 intersect 할 수 없다. (i.e. intersect하면 벽을 뚫은거니까…)<br>이러한 추가적인 geometric constraint를 추가해줌으로써 더욱 정확하게 결과를 뽑을 수 있다.</p>
 <hr>
-<h1 id="Monocular-SLAM-with-objects-and-planes"><a href="#Monocular-SLAM-with-objects-and-planes" class="headerlink" title="Monocular SLAM with objects and planes"></a>Monocular SLAM with objects and planes</h1><br>
-
+<h1 id="Monocular-SLAM-with-objects-and-planes"><a href="#Monocular-SLAM-with-objects-and-planes" class="headerlink" title="Monocular SLAM with objects and planes"></a>Monocular SLAM with objects and planes</h1><p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/representations.png" class="" title="Objects and planes as factors">
-
 <p>기존의 SLAM에서는 factor graph optimisation을 할 때 camera pose와 map point location만 고려한다.<br>여기에 object와 plane 정보도 함께 넣어 최적화 하는것이다.<br>즉, tightly-coupled optimisation을 수행하는 것이다.</p>
 <p>Objects와 Planes는 어떤 방식으로 factor로 표현할 수 있을까?<br>Plane의 경우, 3 dof를 가지는 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="8.664ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 3829.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D70B" d="M132 -11Q98 -11 98 22V33L111 61Q186 219 220 334L228 358H196Q158 358 142 355T103 336Q92 329 81 318T62 297T53 285Q51 284 38 284Q19 284 19 294Q19 300 38 329T93 391T164 429Q171 431 389 431Q549 431 553 430Q573 423 573 402Q573 371 541 360Q535 358 472 358H408L405 341Q393 269 393 222Q393 170 402 129T421 65T431 37Q431 20 417 5T381 -10Q370 -10 363 -7T347 17T331 77Q330 86 330 121Q330 170 339 226T357 318T367 358H269L268 354Q268 351 249 275T206 114T175 17Q164 -11 132 -11Z"></path></g><g data-mml-node="mo" transform="translate(847.8, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(1903.6, 0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mi" transform="translate(2181.6, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mtext" transform="translate(2781.6, 0)"><path data-c="A0" d=""></path></g><g data-mml-node="mi" transform="translate(3031.6, 0)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mo" transform="translate(3551.6, 0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></svg></mjx-container> 가 되겠다.<br>Cuboid object의 경우, 6 dof pose와 (i.e. 3d rotation + 3d translation) 3 dof size를 (i.e. width, length, height) 가지겠다.<br>종종 특정 용도에서 자동차의 경우 size를 고정하기도 한다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/measurement_error.png" class="" title="Measurement errors">
-
 <p>최적화를 수행할 때는 measurement error 값을 이용한다.<br>여기서 우리는 두가지 방식으로 measurement error를 사용할 수 있다.</p>
 <p>첫번째는 3D measurement이다.<br>다양한 카메라 각도에서 object의 pose와 size를 추정하면서 나타나는 차이 값이다.</p>
 <p>두번째는 2D measurement이다.<br>Cuboid를 2D 이미지에 projection시켜 생기는 사각형을 2D bounding box와 비교하는 reprojection error를 사용하는 것이다.<br>이 방법은 3D measurement를 사용하는 방법보다 더 robust하다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/measurement_error2.png" class="" title="Measurement errors 2">
-
 <p>Plane 정보는 항상 바닥에서 추출한 line으로부터 만들어진다.<br>그렇기 때문에, 우리가 추정한 plane 정보는 unproject된 바닥 line과 비교하여 에러 값을 추정할 수 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/data_association.png" class="" title="Data association">
-
 <p>위의 방법들을 사용하면, 우리는 자연스럽게 point feature와 object 정보에 대해서 data association을 할 수 있다.<br>여기에 epipolar checking 등을 하면 더 정확해질 수 있다.<br>이 방법으로 cluttered / repetitive / occluded object에 대해서도 강인하게 트랙킹하는 것을 보았다.<br>이 방법은 기존의 object tracking이나 template 기반 트랙킹 방법보다 정확하다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/eval.png" class="" title="Evaluation">
-
 <p>Object의 크기를 fixed-size로 고정해놓고 이 방법을 구현한 것이 CubeSLAM이다.<br>CubeSLAM은 loop closure과 같은 기능도 없지만, scale drift가 전혀 없는 것을 볼 수 있다.<br>ORB-SLAM과 비교하였을 때 훨씬 정확한 모습을 볼 수 있다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/eval2.png" class="" title="Evaluation 2">
-
 <p>이런 경우에는 feature point의 수가 굉장히 적기 때문에 기존의 ORB-SLAM과 같은 방식은 모두 실패한다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/eval3.png" class="" title="Evaluation 3">
-
 <p>왼쪽의 reconstruction 결과를 보면 object의 정보만 사용했을 때는 pose가 많이 흔들린 것을 볼 수 있다.<br>이는 wall 정보를 사용하지 않았기 때문이라고 판단이 된다.<br>오른쪽에 보이는 결과는 후속 연구에서 wall 정보를 사용한 것인데, 훨씬 더 좋은 결과가 나타났다.<br>오피스의 한 층을 돌고 와도 굉장히 정확한 object pose + odometry 추정이 된다.<br>데모영상은 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9qekJNc0tDbTB1aw==">여기<i class="fa fa-external-link-alt"></i></span>를 보면 된다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/eval4.png" class="" title="Evaluation 4">
-
 <p>이렇게 Object detection + SLAM을 이용한 방식은 기존의 방식과 비교했을 때 더 좋은 성능을 보여준다.<br>Single view 3D object detection 보다 더 정확하고,<br>또 기존의 monocular SLAM 시스템보다 정확하다.</p>
 <hr>
 <h1 id="Dynamic-object-SLAM"><a href="#Dynamic-object-SLAM" class="headerlink" title="Dynamic object SLAM"></a>Dynamic object SLAM</h1><p>기존의 SLAM 방법론들은 모두 움직이는 객체는 outlier로 처리한다.<br>하지만 실제 환경은 그렇지 않다.<br>움직이는 객체들이 많으면 어떻게 해야할까?</p>
 <p>우선 문제를 간단하게 하기 위해, 모든 움직이는 객체는 rigid-body라고 가정한다.<br>그리고 움직임에 대한 motion model이 있다고 가정한다.<br>그리고 아래와 같은 graph를 만들어서 풀면 된다.</p>
-<br>
-
+<p><br></p>
 <img src="/20201228-cvpr2020-slam-yang/dynamic.png" class="" title="Dynamic">
-
-
 
     </div>
 
@@ -702,8 +666,8 @@ mjx-container[display="true"] + br {
               <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
               <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
               <a href="/tags/Deep-SLAM/" rel="tag"># Deep SLAM</a>
-              <a href="/tags/3D/" rel="tag"># 3D</a>
               <a href="/tags/AR/" rel="tag"># AR</a>
+              <a href="/tags/3D/" rel="tag"># 3D</a>
               <a href="/tags/CubeSLAM/" rel="tag"># CubeSLAM</a>
           </div>
 
@@ -768,7 +732,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

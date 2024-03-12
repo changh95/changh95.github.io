@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -338,19 +338,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -463,13 +463,11 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Case study: filter a Point Cloud faster”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9wYWxpbmRyb21lLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <p>이번 글은 다른 글들에 비해서 컴퓨터 비전과 크게 관련은 없을 수 있습니다.</p>
 <p>그래도 적는 이유는… 조건 분기문을 없앰으로써 얼마나 코드가 빨라질 수 있는지 보여줄 수 있는 좋은 예시라고 생각되서입니다.</p>
 <p><code>if</code>문은 보통 엄청나게 빠르기 때문에 런타임 cost를 보통 생각하지 않아도 됩니다. 하지만 종종 특수 케이스에서는 실제로 눈에 보일만큼 성능 향상이 나타날 때도 있습니다.</p>
-<br>
-
+<p><br></p>
 <h2 id="코딩-인터뷰"><a href="#코딩-인터뷰" class="headerlink" title="코딩 인터뷰"></a>코딩 인터뷰</h2><hr>
 <p>제가 이 글을 적고 있었을 때는 (역자 코멘트: 제가 아니라, 원글의 저자입니다!), 저는 엄청 활발하게 이직할 회사를 찾고 있었습니다. 그러다보니 자연스럽게 코딩 인터뷰도 보게 되었지요.</p>
 <p>코딩 인터뷰는 왠만하면 할만합니다.</p>
@@ -479,19 +477,15 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p>자연스럽게 이런 생각이 들더군요</p>
 <img src="/20201216-fast-palindrome/fizzbuzz.jpg" class="" title="fizzbuzz">
-
 <p>나랑 말장난하자는거군!</p>
 <p>이런 질문을 하는게 잘못된건 아닙니다 ㅎㅎ. 아이스 브레이킹 용도로 딱 좋은 질문인 것 같아요. 하지만 저는 좀 더 real-world code를 적는 걸 예상했는데 말이죠.</p>
 <p>어찌되었건, 이렇게 답을 했습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsPalindrome</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N = str.size();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_half = N / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;N_half; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( str[i] != str[N<span class="number">-1</span>-i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsPalindrome</span><span class="params">(<span class="keyword">const</span> std::string&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N = str.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_half = N / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;N_half; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( str[i] != str[N<span class="number">-1</span>-i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>이 정도 문제는 껌이지요 :)</p>
 <p>너무 쉽습니다!</p>
 <p>여기에 최적화를 끼얹어서 재미를 좀 봅시다!</p>
-<br>
-
+<p><br></p>
 <h2 id="더-빠른-IsPalindrome"><a href="#더-빠른-IsPalindrome" class="headerlink" title="더 빠른 IsPalindrome()"></a>더 빠른 IsPalindrome()</h2><hr>
 <p>오리지널 버전도 나쁘진 않았습니다.</p>
 <ul>
@@ -503,22 +497,16 @@ mjx-container[display="true"] + br {
 <p>한 글자씩 비교하는게 아니라, ‘word’끼리 비교를 하는겁니다.</p>
 <p><code>uint32_t</code>에 word를 저장해봅시다. <code>uint32_t</code>는 4바이트를 한번에 다룰 수 있습니다.</p>
 <p>구현하면 아래 코드처럼 되겠습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;byteswap.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">IsPalindromeWord</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N = str.size();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_half = (N/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> S = <span class="keyword">sizeof</span>(<span class="keyword">uint32_t</span>);</span><br><span class="line">    <span class="comment">// number of words of size S in N_half</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_words = (N_half / S);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// example: if N = 18, half string is 9 bytes and</span></span><br><span class="line">    <span class="comment">// we need to compair 2 pairs of words and 1 pair of chars</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">size_t</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;N_words; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">uint32_t</span> word_left, word_right;</span><br><span class="line">        <span class="built_in">memcpy</span>(&amp;word_left, &amp;str[index], S);</span><br><span class="line">        <span class="built_in">memcpy</span>(&amp;word_right, &amp;str[N - S - index], S);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( word_left != bswap_32(word_right))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        index += S;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// remaining bytes.</span></span><br><span class="line">    <span class="keyword">while</span>(index &lt; N_half)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( str[index] != str[N<span class="number">-1</span>-index])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        index++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;byteswap.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">IsPalindromeWord</span><span class="params">(<span class="keyword">const</span> std::string&amp; str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N = str.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_half = (N/<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> S = <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">uint32_t</span>);</span><br><span class="line">    <span class="comment">// number of words of size S in N_half</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">size_t</span> N_words = (N_half / S);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// example: if N = 18, half string is 9 bytes and</span></span><br><span class="line">    <span class="comment">// we need to compair 2 pairs of words and 1 pair of chars</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">size_t</span> index = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;N_words; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">uint32_t</span> word_left, word_right;</span><br><span class="line">        <span class="built_in">memcpy</span>(&amp;word_left, &amp;str[index], S);</span><br><span class="line">        <span class="built_in">memcpy</span>(&amp;word_right, &amp;str[N - S - index], S);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>( word_left != <span class="built_in">bswap_32</span>(word_right))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        index += S;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// remaining bytes.</span></span><br><span class="line">    <span class="keyword">while</span>(index &lt; N_half)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( str[index] != str[N<span class="number">-1</span>-index])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        index++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>여기서 우리는 string을 4바이트의 ‘블럭’으로 쪼갤겁니다. 좌,우 순서대로 쪼갤거고, 중간에 남는 값들은 그대로 str로 둘겁니다.</p>
 <p>블럭끼리 비교는 <strong><em>단 한번</em></strong>만 하면 됩니다.</p>
 <p>뒤에서오는 블럭은 순서가 거꾸로 뒤집어져야 합니다. 우리는 이 방법을 위해 STL에 있는 <span class="exturl" data-url="aHR0cHM6Ly9tYW43Lm9yZy9saW51eC9tYW4tcGFnZXMvbWFuMy9ic3dhcF8zMi4zLmh0bWw=">bswap_32<i class="fa fa-external-link-alt"></i></span>라는 방식을 사용하겠습니다.  </p>
-<br>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">uint32_t</span> <span class="title">Swap</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uint32_t</span>&amp; val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">uint32_t</span> n;</span><br><span class="line">  &#125; data;</span><br><span class="line">  data.n = val;</span><br><span class="line">  <span class="built_in">std</span>::swap(data.c[<span class="number">0</span>], data.c[<span class="number">3</span>]);</span><br><span class="line">  <span class="built_in">std</span>::swap(data.c[<span class="number">1</span>], data.c[<span class="number">2</span>]);</span><br><span class="line">  <span class="keyword">return</span> data.n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<p><br></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">uint32_t</span> <span class="title">Swap</span><span class="params">(<span class="keyword">const</span> <span class="keyword">uint32_t</span>&amp; val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">uint32_t</span> n;</span><br><span class="line">  &#125; data;</span><br><span class="line">  data.n = val;</span><br><span class="line">  std::<span class="built_in">swap</span>(data.c[<span class="number">0</span>], data.c[<span class="number">3</span>]);</span><br><span class="line">  std::<span class="built_in">swap</span>(data.c[<span class="number">1</span>], data.c[<span class="number">2</span>]);</span><br><span class="line">  <span class="keyword">return</span> data.n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <h1 id="벤치마크"><a href="#벤치마크" class="headerlink" title="벤치마크"></a>벤치마크</h1><hr>
 <img src="/20201216-fast-palindrome/palindrome_benchmark.png" class="" title="벤치마크">
-
 <p>긴 string을 사용했을 때에 (8바이트보다 컸을 때) 성능은 약 <strong><em>50%</em></strong> 정도, 그리고 짧은 string에서는 약 <strong><em>150</em></strong>% 정도 성능 향상이 있었습니다.</p>
 <p>실제로 엄청나게 긴 string의 경우에는, 128이나 256 비트를 사용할수도 있겠습니다. 이 경우에는 <span class="exturl" data-url="aHR0cHM6Ly9zdGFja292ZXJmbG93LmJsb2cvMjAyMC8wNy8wOC9pbXByb3ZpbmctcGVyZm9ybWFuY2Utd2l0aC1zaW1kLWludHJpbnNpY3MtaW4tdGhyZWUtdXNlLWNhc2VzLw==">SIMD<i class="fa fa-external-link-alt"></i></span>를 사용할 수 있겠네요. 하지만 SIMD는 이번 글의 목적이 아닙니다.</p>
 <h1 id="정리하자면…"><a href="#정리하자면…" class="headerlink" title="정리하자면…"></a>정리하자면…</h1><p>이번 글에서 나온 코드는 ‘심플하고 읽기 좋은 코드를 적고, 최적화에 너무 집중하지 마세요’라는 말의 완전한 반대를 실천합니다.</p>
@@ -620,7 +608,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

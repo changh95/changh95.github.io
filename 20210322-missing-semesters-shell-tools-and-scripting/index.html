@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -335,19 +335,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -460,7 +460,6 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <div class="video-container"><iframe src="https://www.youtube.com/embed/kgII-YWo3Zw" frameborder="0" loading="lazy" allowfullscreen=""></iframe></div>
-
 <p> </p>
 <h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><ul>
 <li><strong><code>foo=bar</code> to assign a variable</strong></li>
@@ -487,7 +486,6 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">mcd</span></span>() {</span><br><span class="line">    mkdir -p <span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="string">"<span class="variable">$1</span>"</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>This function is like mv + cd.</li>
 <li><strong><code>$1</code> is a special variable, similar to argv.</strong><ul>
@@ -510,7 +508,6 @@ mjx-container[display="true"] + br {
 <li><code>$_</code> gives the last argument from the previous command… like below.</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rmdir <span class="built_in">test</span></span><br><span class="line">mkdir <span class="variable">$_</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$_</span></span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h2 id="Using-error-codes"><a href="#Using-error-codes" class="headerlink" title="Using error codes"></a>Using error codes</h2><ul>
 <li><strong><code>$?</code> gives the error code</strong> from the previous command.<ul>
@@ -545,7 +542,6 @@ mjx-container[display="true"] + br {
 </ul>
 <p> </p>
 <h2 id="Example-function"><a href="#Example-function" class="headerlink" title="Example function"></a>Example function</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Staring program at <span class="subst">$(date)</span>"</span> <span class="comment"># Date will be substituted</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Running program <span class="variable">$0</span> with <span class="variable">$#</span> arguments with pid $$"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> <span class="string">"<span class="variable">$@</span>"</span>; <span class="keyword">do</span></span><br><span class="line">    grep foobar <span class="string">"<span class="variable">$file</span>"</span> &gt; /dev/null 2&gt; /dev/null</span><br><span class="line">    <span class="comment"># When pattern is not found, grep has exit status 1</span></span><br><span class="line">    <span class="comment"># We redirect STDOUT and STDERR to a null register since we do not care about them</span></span><br><span class="line"></span><br><span class="line">    ,<span class="keyword">if</span> [[ :$?<span class="string">" -ne 0 ]]; then</span></span><br><span class="line"><span class="string">        echo "</span>File <span class="variable">$file</span> does not have any foobar, adding one<span class="string">"</span></span><br><span class="line"><span class="string">        echo "</span><span class="comment"># foobar" &gt;&gt; "$file"</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li><code>date</code> is a built-in bash function.</li>
 <li><code>$0</code> is the name of the script we are running</li>
@@ -576,7 +572,7 @@ mjx-container[display="true"] + br {
 <li>Using <code>ls project?</code> will give ‘project1’ and ‘project2’ as it only suggests possibilities with 1 single character.</li>
 </ul>
 </li>
-<li>**Curly braces **are power tools.<ul>
+<li><strong>Curly braces </strong>are power tools.<ul>
 <li>When running <code>convert image.png image.jpg</code>, we can do it as <code>convert image.{png, jpg}</code></li>
 <li><code>touch foo{,1,2,10}</code> will mean <code>touch foo, foo1, foo2, foo10</code>.</li>
 <li><code>touch project{1,2}/src/test/test{1,2,3}.py</code> will be very useful in automation.</li>
@@ -585,8 +581,7 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <p> </p>
-<h2 id="Shell-tricks-Python"><a href="#Shell-tricks-Python" class="headerlink" title="Shell tricks - Python"></a>Shell tricks - Python</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">for</span> arg <span class="keyword">in</span> <span class="built_in">reversed</span>(sys.argv[<span class="number">1</span>:]):</span><br><span class="line">    print(arg)</span><br></pre></td></tr></table></figure>
-
+<h2 id="Shell-tricks-Python"><a href="#Shell-tricks-Python" class="headerlink" title="Shell tricks - Python"></a>Shell tricks - Python</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/local/bin/python</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">for</span> arg <span class="keyword">in</span> <span class="built_in">reversed</span>(sys.argv[<span class="number">1</span>:]):</span><br><span class="line">    <span class="built_in">print</span>(arg)</span><br></pre></td></tr></table></figure>
 <ul>
 <li>The first line <code>#!/usr/local/bin/python</code> will allow the user to run the script like <code>./scripy.py a1 a2 a3</code> instead of the normal way <code>python3 ./script.py a1 a2 a3</code>.<ul>
 <li>The downside of this method is that different environments might have different directories of saving python.</li>
@@ -744,7 +739,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

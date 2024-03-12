@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -338,19 +338,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -463,62 +463,47 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Iterating over 2D matrix”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8yZF9tYXRyaXhfaXRlcmF0aW9uLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <h1 id="2D-matrix-iteration-하기"><a href="#2D-matrix-iteration-하기" class="headerlink" title="2D matrix iteration 하기"></a>2D matrix iteration 하기</h1><hr>
 <p>2D matrix는 로보틱스에서 엄청나게 자주 사용됩니다.</p>
 <p>이미지, gridmap/costmap 등등을 2D 매트릭스로 표현하지요. </p>
 <p>최근에 저는 우리 팀에서 costmap 계산에서 사용되는 알고리즘이 꽤 느리다고 느꼈고, <strong>Hotspot</strong>을 이용해서 프로파일링을 해봤습니다.</p>
 <p>두개의 costmap을 합쳐서 새로운 costmap을 만드는 과정에서 바틀넥이 있었습니다.</p>
 <p>대충 이런 코드였죠.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 대충 적은 코드입니다.</span></span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">size_t</span> y = y_min; y &lt; y_max; y++ ) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">size_t</span> x = x_min; x &lt; x_max; x++ ) </span><br><span class="line">    &#123;</span><br><span class="line">        matrix_out( x,y ) = <span class="built_in">std</span>::max( mat_a( x,y ), mat_b( x,y ) ); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 대충 적은 코드입니다.</span></span><br><span class="line"><span class="keyword">for</span>( <span class="keyword">size_t</span> y = y_min; y &lt; y_max; y++ ) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">size_t</span> x = x_min; x &lt; x_max; x++ ) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">matrix_out</span>( x,y ) = std::<span class="built_in">max</span>( <span class="built_in">mat_a</span>( x,y ), <span class="built_in">mat_b</span>( x,y ) ); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>이해하기는 쉬운 코드였습니다.</p>
 <p>잘 적었으니까요. 그쵸? </p>
 <p>하지만 이 계산은 실제로 돌 때 너무 많은 CPU 사이클을 잡아먹고 있었습니다.</p>
 <p>어쩔수 없이 저는 최적화 여행을 또 떠나게 되었지요 (휴)</p>
-<br>
-
+<p><br></p>
 <h2 id="C-에서-좋은-2D-매트릭스-만드는-방법"><a href="#C-에서-좋은-2D-매트릭스-만드는-방법" class="headerlink" title="C++에서 좋은 2D 매트릭스 만드는 방법"></a>C++에서 좋은 2D 매트릭스 만드는 방법</h2><hr>
 <p>이런 코드를 적어본 적 있으시나요?</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴공 학생 때 교수님은 이런 코드를 적으셨는데요...</span></span><br><span class="line"><span class="keyword">float</span>** matrix = (<span class="keyword">float</span>**) <span class="built_in">malloc</span>( rows_count * <span class="keyword">sizeof</span>(<span class="keyword">float</span>*) );</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> r=<span class="number">0</span>; r&lt;rows_count; r++) </span><br><span class="line">&#123;</span><br><span class="line">    matrix[r] = (<span class="keyword">float</span>*) <span class="built_in">malloc</span>( columns_count * <span class="keyword">sizeof</span>(<span class="keyword">float</span>) );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// element access는 이렇게 합니다</span></span><br><span class="line">matrix[row][col] = <span class="number">42</span>;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 컴공 학생 때 교수님은 이런 코드를 적으셨는데요...</span></span><br><span class="line"><span class="keyword">float</span>** matrix = (<span class="keyword">float</span>**) <span class="built_in">malloc</span>( rows_count * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">float</span>*) );</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> r=<span class="number">0</span>; r&lt;rows_count; r++) </span><br><span class="line">&#123;</span><br><span class="line">    matrix[r] = (<span class="keyword">float</span>*) <span class="built_in">malloc</span>( columns_count * <span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">float</span>) );</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// element access는 이렇게 합니다</span></span><br><span class="line">matrix[row][col] = <span class="number">42</span>;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>이러면 망한겁니다.</p>
 <p>이 코드를 본 이상, 어쩔 수 없이 이 코드를 USB에 담아서 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTW91bnRfRG9vbQ==">모르도르로<i class="fa fa-external-link-alt"></i></span> 가져가 용암 속에 던질 수 밖에 없어요.</p>
 <img src="/20201212-2d-matrix-iteration/mordor.jpg" class="" title="이 코드는 불태워버려야합니다">
-
-
-<br>
-
-<p>우선, 저희는 <span class="exturl" data-url="aHR0cDovL2VpZ2VuLnR1eGZhbWlseS5vcmcv">Eigen 라이브러리<i class="fa fa-external-link-alt"></i></span>를 사용해보는 것을 고려해봐야합니다. Eigen 라이브러리는 성능도 좋고, 이해하기 쉬운 API를 가지고 있어요.</p>
+<p><br></p>
+<p>우선, 저희는 <span class="exturl" data-url="aHR0cDovL2VpZ2VuLnR1eGZhbWlseS5vcmc=">Eigen 라이브러리<i class="fa fa-external-link-alt"></i></span>를 사용해보는 것을 고려해봐야합니다. Eigen 라이브러리는 성능도 좋고, 이해하기 쉬운 API를 가지고 있어요.</p>
 <p>실사용은 Eigen으로 한다지만, 공부를 하기 위한 목적으로는 물론 직접 짜봐야겠지요 (하지만… 진짜 그냥 Eigen 쓰시는게 좋아요. 진심으로.). 아래 코드에 예시가 있습니다.</p>
-<br>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">Matrix2D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Matrix2D(<span class="keyword">size_t</span> rows, <span class="keyword">size_t</span> columns):  _num_rows(rows)</span><br><span class="line">    &#123;</span><br><span class="line">        _data.resize( rows * columns );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">size_t</span> <span class="title">rows</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123; </span><br><span class="line">    	<span class="keyword">return</span> _num_rows; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">T&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">size_t</span> row, <span class="keyword">size_t</span> col)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">size_t</span> index = col*_num_rows + row; </span><br><span class="line">        <span class="keyword">return</span> _data[index];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    T&amp; <span class="keyword">operator</span>[](<span class="keyword">size_t</span> index)  </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> _data[index];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 다른 method는 딱히 설명하지 않겠습니다.</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;T&gt; _data;</span><br><span class="line">    <span class="keyword">size_t</span> _num_rows;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// element access는 이렇게 하시면 됩니다.</span></span><br><span class="line">matrix(row, col) = <span class="number">42</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
+<p><br></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">Matrix2D</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Matrix2D</span>(<span class="keyword">size_t</span> rows, <span class="keyword">size_t</span> columns):  _num_rows(rows)</span><br><span class="line">    &#123;</span><br><span class="line">        _data.<span class="built_in">resize</span>( rows * columns );</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">size_t</span> <span class="title">rows</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123; </span><br><span class="line">    	<span class="keyword">return</span> _num_rows; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">T&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">size_t</span> row, <span class="keyword">size_t</span> col)</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">size_t</span> index = col*_num_rows + row; </span><br><span class="line">        <span class="keyword">return</span> _data[index];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    T&amp; <span class="keyword">operator</span>[](<span class="keyword">size_t</span> index)  </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> _data[index];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 다른 method는 딱히 설명하지 않겠습니다.</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;T&gt; _data;</span><br><span class="line">    <span class="keyword">size_t</span> _num_rows;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// element access는 이렇게 하시면 됩니다.</span></span><br><span class="line"><span class="built_in">matrix</span>(row, col) = <span class="number">42</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>이 방법이 가장 캐시메모리 사용에 유용한 매트릭스 생성 방법입니다. Single memory allocation에, 데이터는 <span class="exturl" data-url="aHR0cHM6Ly93d3cuZ2Vla3Nmb3JnZWVrcy5vcmcvcm93LXdpc2UtdnMtY29sdW1uLXdpc2UtdHJhdmVyc2FsLW1hdHJpeC8=">column-wise<i class="fa fa-external-link-alt"></i></span>방식으로 저장됩니다.</p>
 <p>우리가 쉽게 이해하는 row/column 값을 vector의 index값으로 변환하기 위해서는, 단 한번의 곱셈연산과 덧셈연산이 필요합니다.</p>
-<br>
-
+<p><br></p>
 <h2 id="원래-문제로-돌아가서…"><a href="#원래-문제로-돌아가서…" class="headerlink" title="원래 문제로 돌아가서…"></a>원래 문제로 돌아가서…</h2><hr>
 <p>처음에 보여드렸던 제 코드로 돌아가봅시다.</p>
 <p>우리는 여러번 iteration을 해야하는데, 매번 <code>(x_max-x_min)*(y_max-y_min)</code> 계산을 할 겁니다.</p>
 <p>종종, 꽤 많은 pixel 또는 cell에 대한 계산이 들어가겠죠.</p>
 <p>매 iteration마다 우리는 다음과 같은 방법으로 index 값을 세번 계산해야합니다.  </p>
-<pre><code> size_t index = col*_num_rows + row;</code></pre>
-<p>곱셈 계산이 엄청나게 많군요! 좋지 않습니다.</p>
-<br>
-
+<pre><code> size_t index = col*_num_rows + row;
+</code></pre><p>곱셈 계산이 엄청나게 많군요! 좋지 않습니다.</p>
+<p><br></p>
 <p>아래와 같은 코드로 바꿔보았습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index를 직접 계산해봅시다.</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">size_t</span> y = y_min; y &lt; y_max; y++) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">size_t</span> offset_out =  y * matrix_out.rows();</span><br><span class="line">    <span class="keyword">size_t</span> offset_a   =  y * mat_a.rows();</span><br><span class="line">    <span class="keyword">size_t</span> offset_b   =  y * mat_b.rows();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> x = x_min; x &lt; x_max; x++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">size_t</span> index_out =  offset_out + x;</span><br><span class="line">        <span class="keyword">size_t</span> index_a   =  offset_a + x;</span><br><span class="line">        <span class="keyword">size_t</span> index_b   =  offset_b + x;</span><br><span class="line">        matrix_out( index_out ) = <span class="built_in">std</span>::max( mat_a( index_a ), mat_b( index_b ) ); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<br>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index를 직접 계산해봅시다.</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">size_t</span> y = y_min; y &lt; y_max; y++) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">size_t</span> offset_out =  y * matrix_out.<span class="built_in">rows</span>();</span><br><span class="line">    <span class="keyword">size_t</span> offset_a   =  y * mat_a.<span class="built_in">rows</span>();</span><br><span class="line">    <span class="keyword">size_t</span> offset_b   =  y * mat_b.<span class="built_in">rows</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> x = x_min; x &lt; x_max; x++) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">size_t</span> index_out =  offset_out + x;</span><br><span class="line">        <span class="keyword">size_t</span> index_a   =  offset_a + x;</span><br><span class="line">        <span class="keyword">size_t</span> index_b   =  offset_b + x;</span><br><span class="line">        <span class="built_in">matrix_out</span>( index_out ) = std::<span class="built_in">max</span>( <span class="built_in">mat_a</span>( index_a ), <span class="built_in">mat_b</span>( index_b ) ); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <p>무슨 생각을 하고 계신지 압니다. <strong><em>제 눈도 아파요</em></strong>.</p>
 <p>코드가 엄청 더럽죠.</p>
 <p>하지만 이로써 얻는 성능 개선은 무시할 수 없는 정도입니다.</p>
@@ -620,7 +605,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

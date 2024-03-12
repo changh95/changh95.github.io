@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -334,19 +334,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -482,13 +482,12 @@ mjx-container[display="true"] + br {
 <p>기본적인 Hello world까지야 <code>printf()</code>와 <code>sscanf()</code>로 어떻게든 됩니다.</p>
 <p>하지만 조금만 더 깊게 들어가 string을 다루기 위해서는 1. char array에서 pointer를 이동하는 방법, 2. off-by-one error 이해, 3. null terminator의 대한 개념까지 이해해야합니다.</p>
 <p>그 이후에 구현을 위해 여러가지 C에서 제공하는 string 함수들을 외워야합니다 (e.g. <code>strcmp()</code>).</p>
-<p>5분만 들어도 **’와 쓰읍 C++은 어렵구나’**라고 생각하게 만드는 주범 입니다.</p>
+<p>5분만 들어도 <strong>‘와 쓰읍 C++은 어렵구나’</strong>라고 생각하게 만드는 주범 입니다.</p>
 <h4 id="해결책"><a href="#해결책" class="headerlink" title="해결책"></a>해결책</h4><p>C++ 방식으로 처음부터 가르치면 <code>char*</code> 대신에 <code>&lt;string&gt;</code>을 사용할 수 있습니다.</p>
 <p><code>&lt;string&gt;</code>은 <code>char*</code>에 비해 이해하기 훨씬 쉬우며, Python이나 javascript와 같이 string이 built-in 기능으로 포함되어있는 다른 프로그래밍 언어를 겪은 사람들은 string을 곧바로 이해할 수 있습니다.</p>
 <p>1980~년대에 공부하신 분들은 char*로 배우셨을 텐데, 이는 그 당시에 <code>&lt;string&gt;</code>이라는 기능 자체가 최신 기능처럼 느껴졌을 것 이기 때문입니다. (그리고 2021년 현대에 string은 그냥 어디에든 있는 기본 기능입니다)</p>
 <p><code>&lt;string&gt;</code>을 사용하면서 C++의 강점인 operator overloading과 strong type을 소개할 수도 있습니다.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> name;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="built_in">string</span> greeting = <span class="string">"Hello, "</span> + name;</span><br><span class="line"><span class="keyword">if</span> (name == <span class="string">"Kate"</span>)</span><br><span class="line">    greeting += <span class="string">", I know you!"</span>;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line">string name;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">string greeting = <span class="string">"Hello, "</span> + name;</span><br><span class="line"><span class="keyword">if</span> (name == <span class="string">"Kate"</span>)</span><br><span class="line">    greeting += <span class="string">", I know you!"</span>;</span><br></pre></td></tr></table></figure>
 <p> </p>
 <h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><p>변수의 값을 확인하기 위해 <code>printf()</code>를 가르칩니다.</p>
 <p><code>printf()</code>를 사용하기 위해서는 format specifier를 다 외워야합니다.</p>
@@ -526,10 +525,10 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
+      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
+      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
     </li>
   </ul>
 
@@ -602,7 +601,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

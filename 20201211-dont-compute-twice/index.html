@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -337,19 +337,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -462,50 +462,39 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “don’t compute it twice”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8yZF90cmFuc2Zvcm1zLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <h1 id="두번-계산하지-마세요"><a href="#두번-계산하지-마세요" class="headerlink" title="두번 계산하지 마세요!"></a>두번 계산하지 마세요!</h1><hr>
 <p>의미가 없는 계산을 하지 않는 것은 최적화 측면에서 엄청나게 당연한겁니다.</p>
 <p>문제는 우리가 보통 코드를 짤 때 ‘의미가 없는 계산’인지 모르고 짤 때가 많다는 거죠. 이런 문제는 코드 리뷰 또는 회고를 할 때만 보입니다.</p>
 <p>사실 이런 문제는 (심지어 같은 목적의 같은 맥락에서 사용되는 코드를) 여러 오픈소스 프로젝트 코드에서 종종 보이곤 합니다.</p>
 <p>몇 백개의 Github star를 뽐내는 프로젝트들에서도 이런 부분이 최적화가 안 된 경우도 많습니다.</p>
 <p>아래 좋은 예제를 가져왔습니다. Velodyne 라이다를 이용한 LOAM (라이다 오도메트리) 프로젝트의 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2xhYm9zaGlubC9sb2FtX3ZlbG9keW5lL3B1bGwvMjA=">‘Speed up improvement for laserOdometry and scanRegister (20%)’<i class="fa fa-external-link-alt"></i></span> PR 입니다.</p>
-<br>
-
+<p><br></p>
 <h2 id="제일-자주-보이는-실수-LUT를-사용합시다"><a href="#제일-자주-보이는-실수-LUT를-사용합시다" class="headerlink" title="제일 자주 보이는 실수: LUT를 사용합시다."></a>제일 자주 보이는 실수: LUT를 사용합시다.</h2><hr>
 <p>아래 코드를 한번 봅시다.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> x1 = x*<span class="built_in">cos</span>(ang) - y*<span class="built_in">sin</span>(ang) + tx;</span><br><span class="line"><span class="keyword">double</span> y1 = x*<span class="built_in">sin</span>(ang) + y*<span class="built_in">cos</span>(ang) + ty;</span><br></pre></td></tr></table></figure>
-
 <p>그래픽스나 로보틱스를 공부하신 분들에게는 이 코드가 어떤건지 바로 알아보실겁니다. </p>
 <p>2D point의 Affine transformation이죠.</p>
 <p>이 코드에는 최적화가 될 수 있는 부분이 뻔하게 보입니다.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Cos = <span class="built_in">cos</span>(angle);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">double</span> Sin = <span class="built_in">sin</span>(angle);</span><br><span class="line"><span class="keyword">double</span> x1 = x*Cos - y*Sin + tx;</span><br><span class="line"><span class="keyword">double</span> y1 = x*Sin + y*Cos + ty;</span><br></pre></td></tr></table></figure>
-
 <p>Trigonometic function은 생각보다 계산량이 꽤 높습니다. 이 함수로 동일한 값을 두번이나 계산하는 것은 효율적이지 않습니다. 실제로, 아래의 개선된 코드가 위의 코드보다 두배 빠릅니다. </p>
 <p>이런 affine transformation 코드에서는 다양한 <code>angle</code>값이 사용될 수 있습니다. 특정 floating point의 값이 사용될 수도 있고, 아니면 고정 integer 값이 사용될 수도 있죠. </p>
 <p>우리가 사용할 <code>angle</code>값이 많지 않을 때는, 해당 값들을 미리 계산해서 따로 저장해두는 <strong><em>look-up table (LUT)</em></strong>를 만들어두면 좋습니다.</p>
 <p>아까 링크에 적어둔 PR이 풀려고 하는 문제가 딱 이 케이스였습니다. Laser scan data가 polar coordinate에서 Cartesian coordinate로 변환되는 코드 부분이였습니다.</p>
 <img src="/20201211-dont-compute-twice/laser_scan_matcher.png" class="" title="Laser scan matching">
-
 <p>이 코드를 아래에 간단하게 정리해뒀습니다. 매 point마다 trigonometric function이 적용되며, 이 계산은 1초에 몇 천번 수행되죠.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 비효율적인 코드...!</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; scan_distance; <span class="comment">// 인풋</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Pos2D&gt; cartesian_points; <span class="comment">// 아웃풋</span></span><br><span class="line"></span><br><span class="line">cartesian_points.reserve( scan_distance.size() );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;scan_distance.size(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> dist = scan_distance[i];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> angle = angle_minimum + (angle_increment*i);</span><br><span class="line">    <span class="keyword">double</span> x = dist*<span class="built_in">cos</span>(angle);</span><br><span class="line">    <span class="keyword">double</span> y = dist*<span class="built_in">sin</span>(angle);</span><br><span class="line">    cartesian_points.push_back( Pos2D(x,y) );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br >
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 비효율적인 코드...!</span></span><br><span class="line">std::vector&lt;<span class="keyword">double</span>&gt; scan_distance; <span class="comment">// 인풋</span></span><br><span class="line">std::vector&lt;Pos2D&gt; cartesian_points; <span class="comment">// 아웃풋</span></span><br><span class="line"></span><br><span class="line">cartesian_points.<span class="built_in">reserve</span>( scan_distance.<span class="built_in">size</span>() );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;scan_distance.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> dist = scan_distance[i];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> angle = angle_minimum + (angle_increment*i);</span><br><span class="line">    <span class="keyword">double</span> x = dist*<span class="built_in">cos</span>(angle);</span><br><span class="line">    <span class="keyword">double</span> y = dist*<span class="built_in">sin</span>(angle);</span><br><span class="line">    cartesian_points.<span class="built_in">push_back</span>( <span class="built_in">Pos2D</span>(x,y) );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br ></p>
 <p>여기 우리 잠깐 멈추고 생각해봅시다: </p>
 <ul>
-<li><p><strong>최소 angle 값</strong>과 **매 angle이 바뀌는 값 (increment value)**는 일정합니다.</p>
-</li>
+<li><strong>최소 angle 값</strong>과 <strong>매 angle이 바뀌는 값 (increment value)</strong>는 일정합니다.</li>
 <li><p><strong>scan_distance</strong>의 size도 항상 일정합니다. </p>
 <p>이런 경우가 우리가 LUT를 써서 성능을 향상시킬 수 있는 좋은 예시입니다.</p>
 </li>
 </ul>
-<br>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="comment">//------ 여기 부분을 한번만 계산하고 LUT를 만듭니다 -------</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; LUT_cos;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; LUT_sin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;scan_distance.size(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> angle = angle_minimum + (angle_increment*i);</span><br><span class="line">    LUT_cos.push_back( <span class="built_in">cos</span>(angle) );</span><br><span class="line">    LUT_sin.push_back( <span class="built_in">sin</span>(angle) );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----- 그리고 여기 conversion에서 LUT값을 불러와 효울적으로 계산을 수행합니다. ------</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; scan_distance;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Pos2D&gt; cartesian_points;</span><br><span class="line"></span><br><span class="line">cartesian_points.reserve( scan_distance.size() );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;scan_distance.size(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> dist = scan_distance[i];</span><br><span class="line">    <span class="keyword">double</span> x = dist*LUT_cos[i];</span><br><span class="line">    <span class="keyword">double</span> y = dist*LUT_sin[i];</span><br><span class="line">    cartesian_points.push_back( Pos2D(x,y) );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
+<p><br></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="comment">//------ 여기 부분을 한번만 계산하고 LUT를 만듭니다 -------</span></span><br><span class="line">std::vector&lt;<span class="keyword">double</span>&gt; LUT_cos;</span><br><span class="line">std::vector&lt;<span class="keyword">double</span>&gt; LUT_sin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;scan_distance.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> angle = angle_minimum + (angle_increment*i);</span><br><span class="line">    LUT_cos.<span class="built_in">push_back</span>( <span class="built_in">cos</span>(angle) );</span><br><span class="line">    LUT_sin.<span class="built_in">push_back</span>( <span class="built_in">sin</span>(angle) );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ----- 그리고 여기 conversion에서 LUT값을 불러와 효울적으로 계산을 수행합니다. ------</span></span><br><span class="line">std::vector&lt;<span class="keyword">double</span>&gt; scan_distance;</span><br><span class="line">std::vector&lt;Pos2D&gt; cartesian_points;</span><br><span class="line"></span><br><span class="line">cartesian_points.<span class="built_in">reserve</span>( scan_distance.<span class="built_in">size</span>() );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;scan_distance.<span class="built_in">size</span>(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> dist = scan_distance[i];</span><br><span class="line">    <span class="keyword">double</span> x = dist*LUT_cos[i];</span><br><span class="line">    <span class="keyword">double</span> y = dist*LUT_sin[i];</span><br><span class="line">    cartesian_points.<span class="built_in">push_back</span>( <span class="built_in">Pos2D</span>(x,y) );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
 <h1 id="정리하자면…"><a href="#정리하자면…" class="headerlink" title="정리하자면…"></a>정리하자면…</h1><hr>
 <p>위에서 우리는 간단한 예제를 보았습니다. </p>
 <p>여기서 우리가 알아야할것은 비싼 계산이 들어갈 때마다 (e.g. SQL 쿼리, state를 거치지 않는 계산) 우리는 미리 저장된 값을 사용하거나 LUT를 사용하는 것을 고려해봐야합니다.</p>
@@ -606,7 +595,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -337,19 +337,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -462,30 +462,24 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “Small string optimizations”을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9zbWFsbF9zdHJpbmdzLw==">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <h1 id="Small-String-최적화-small-string-optimisation-SSO"><a href="#Small-String-최적화-small-string-optimisation-SSO" class="headerlink" title="Small String 최적화 (small string optimisation - SSO)"></a>Small String 최적화 (small string optimisation - SSO)</h1><hr>
 <p>제가 “<code>std::string</code>은 결국 <code>std::vector&lt;char&gt;</code>와 다를게 많이 없다고 했던 것을 기억하시나요.</p>
 <p>훌륭하신 분들께서, 이미 할당된 메모리 안에서 string을 사용하는 방법을 고안하셨습니다. </p>
 <p><code>std::string</code>의 크기는 64-bit 플랫폼에서 <strong><em>24 바이트</em></strong>입니다 (데이터 포인터, size, capacity 등을 저장합니다). 근데 여기서 우리가 메모리를 할당하기 전 까지 <strong><em>‘static’</em></strong>하게 23바이트의 메모리를 저장하는 방법이 있어요.</p>
 <p>이 방법을 사용하면 성능이 엄청나게 좋아집니다!</p>
 <img src="/20201210-small-string-optimisation/relax_sso.jpg" class="" title="Relax, SSO!">
-
 <p>이 방법을 <strong>Small String Optimisation (SSO)</strong> 라고 합니다. 이 방법의 구현 방법이 궁금하신 분들을 위해 링크를 준비해놨습니다.</p>
 <ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2VsbGlvdGdvb2RyaWNoL1NTTy0yMw==">SSO-23<i class="fa fa-external-link-alt"></i></span></li>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1rUFI4aDQtcVpkaw==">CppCon 2016: “The strange details of std::string at Facebook”<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 <p>주의하셔야할 점은, 사용하는 컴파일러의 버전에 따라서 사용할 수 있는 크기가 23바이트보다 작을 수도 있습니다. 23바이트는 이론적으로 가능한 최대 크기에요.</p>
-<br>
-
+<p><br></p>
 <h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><hr>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* SHORT_STR = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShortStringCreation</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// String을 계속해서 만드는 예제입니다.</span></span><br><span class="line">  <span class="comment">// SHORT_STR 정도면 23바이트 안에 들어갑니다.</span></span><br><span class="line">  <span class="comment">// 즉 SSO가 돌아요!</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">created_string</span><span class="params">(SHORT_STR)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShortStringCopy</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 여기 예제에서는 string을 한번 만들고, 내용을 계속 복사합니다.</span></span><br><span class="line">  <span class="comment">// ... 카피가 계속 만드는거보다 빠를 줄 알았는데, 왜 ShortStringCreation보다 느릴까요?</span></span><br><span class="line">  <span class="comment">// 알고보니, 컴파일러가 생각보다 많이 똑똑한거였습니다. SSO 최고,, </span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> x; <span class="comment">// create once</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    x = SHORT_STR; <span class="comment">// copy</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* LONG_STR = <span class="string">&quot;this will not fit into small string optimization&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LongStringCreation</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// LONG_STR 정도의 긴 string은 분명히 memory allocation을 트리거 할겁니다.</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    <span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">created_string</span><span class="params">(LONG_STR)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LongStringCopy</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// String 내용을 복사할 때는 원래 이렇게 빨라야합니다.</span></span><br><span class="line">  <span class="comment">// 긴 string 을 쓸 때는 무조건 한번 만들고 recycle 해야해요.</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> x;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    x = LONG_STR;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* SHORT_STR = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShortStringCreation</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// String을 계속해서 만드는 예제입니다.</span></span><br><span class="line">  <span class="comment">// SHORT_STR 정도면 23바이트 안에 들어갑니다.</span></span><br><span class="line">  <span class="comment">// 즉 SSO가 돌아요!</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    <span class="function">std::string <span class="title">created_string</span><span class="params">(SHORT_STR)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShortStringCopy</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 여기 예제에서는 string을 한번 만들고, 내용을 계속 복사합니다.</span></span><br><span class="line">  <span class="comment">// ... 카피가 계속 만드는거보다 빠를 줄 알았는데, 왜 ShortStringCreation보다 느릴까요?</span></span><br><span class="line">  <span class="comment">// 알고보니, 컴파일러가 생각보다 많이 똑똑한거였습니다. SSO 최고,, </span></span><br><span class="line">  std::string x; <span class="comment">// create once</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    x = SHORT_STR; <span class="comment">// copy</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span>* LONG_STR = <span class="string">&quot;this will not fit into small string optimization&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LongStringCreation</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// LONG_STR 정도의 긴 string은 분명히 memory allocation을 트리거 할겁니다.</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    <span class="function">std::string <span class="title">created_string</span><span class="params">(LONG_STR)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LongStringCopy</span><span class="params">(benchmark::State&amp; state)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// String 내용을 복사할 때는 원래 이렇게 빨라야합니다.</span></span><br><span class="line">  <span class="comment">// 긴 string 을 쓸 때는 무조건 한번 만들고 recycle 해야해요.</span></span><br><span class="line">  std::string x;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> _ : state) &#123;</span><br><span class="line">    x = LONG_STR;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>우리가 보통 알고 있는 “매번 새롭게 String을 만들면 느릴꺼야!” 라는 생각이 여기서 깨지게 됩니다. String이 짧다면, 복사를 하는 것 보다 더 빠를 수 있어요.<br>물론 긴 string을 만드는 것은 예상했던대로 memory allocation이 들어가서 느립니다. 이 경우는 한번만 만들고 내용을 계속 복사해주는 게 더 빨라요.</p>
 <img src="/20201210-small-string-optimisation/sso_in_action.png" class="" title="SSO 실행">
-
-
 
     </div>
 
@@ -581,7 +575,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

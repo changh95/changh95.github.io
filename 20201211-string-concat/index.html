@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
@@ -338,19 +338,19 @@ mjx-container[display="true"] + br {
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">239</span>
+          <span class="site-state-item-count">253</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
-        <span class="site-state-item-count">333</span>
+        <span class="site-state-item-count">351</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -463,67 +463,53 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <p>Davide Faconti의 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC8=">CPP Optimization Diary 블로그<i class="fa fa-external-link-alt"></i></span> 글 중 “String concatenation the false sense of security of <code>operator+</code>“을 적당히 번역했습니다. 원글 링크는 <span class="exturl" data-url="aHR0cHM6Ly9jcHAtb3B0aW1pemF0aW9ucy5uZXRsaWZ5LmFwcC9zdHJpbmdzX2NvbmNhdGVuYXRpb24v">여기<i class="fa fa-external-link-alt"></i></span>를 봐주세요.</p>
-<br>
-
+<p><br></p>
 <h1 id="String-이어붙이기"><a href="#String-이어붙이기" class="headerlink" title="String 이어붙이기"></a>String 이어붙이기</h1><hr>
 <p>이 글을 시작하기 전에 룰 #1을 설명하고 시작하겠습니다.</p>
 <p>룰 #1 : <strong><em>“Profiler로 봤을 때 오버헤드가 있는 경우에만 최적화를 하세요”</em></strong></p>
 <p>이전 글에서도 얘기했듯이, string은 <code>std::vector&lt;char&gt;</code>과 다를바가 없습니다. 그렇기 때문에 데이터를 저장하기 위해 heap allocation를 해야할 수도 있죠.</p>
 <p>C++에서 string을 이어붙이는 것은 (i.e. concatenate) 굉장히 쉽습니다. 하지만 조심해야할 점이 있습니다. </p>
-<br>
-
+<p><br></p>
 <h2 id="많이-사용하는-concatenation-방법"><a href="#많이-사용하는-concatenation-방법" class="headerlink" title="많이 사용하는 concatenation 방법"></a>많이 사용하는 concatenation 방법</h2><hr>
 <p>우리가 자주 쓰는 방법은 아래와 같습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>:<span class="built_in">string</span> big_string = first + <span class="string">&quot; &quot;</span> + second + <span class="string">&quot; &quot;</span> + third;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Where...</span></span><br><span class="line"><span class="comment">// std::string first(&quot;This is my first string.&quot;);</span></span><br><span class="line"><span class="comment">// std::string second(&quot;This is the second string I want to append.&quot;);</span></span><br><span class="line"><span class="comment">// std::string third(&quot;This is the third and last string to append.&quot;); </span></span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std:string big_string = first + <span class="string">&quot; &quot;</span> + second + <span class="string">&quot; &quot;</span> + third;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Where...</span></span><br><span class="line"><span class="comment">// std::string first(&quot;This is my first string.&quot;);</span></span><br><span class="line"><span class="comment">// std::string second(&quot;This is the second string I want to append.&quot;);</span></span><br><span class="line"><span class="comment">// std::string third(&quot;This is the third and last string to append.&quot;); </span></span><br></pre></td></tr></table></figure>
 <p>우리가 많이 썼던 방식이지만… 최적화 글을 몇개 읽으신 당신에게는 아마 이제 뭔가 쎄한 느낌이 들겁니다. </p>
 <blockquote>
 <p>‘이렇게 적으면 Heap allocation에 문제가 있을텐데…??”</p>
 </blockquote>
 <img src="/20201211-string-concat/spider_senses.png" class="" title="string sense가 팅글링한다~~">
-
-<br>
-
+<p><br></p>
 <p>쎄한 느낌에 최적화 센스가 팅글링합니다.</p>
 <p>Heap allocation을 고려해서 다시 적어보겠습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>:<span class="built_in">string</span> big_string = (((first + <span class="string">&quot; &quot;</span>) + second) + <span class="string">&quot; &quot;</span>) + third;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std:string big_string = (((first + <span class="string">&quot; &quot;</span>) + second) + <span class="string">&quot; &quot;</span>) + third;</span><br></pre></td></tr></table></figure>
 <p>이 정도 길이의 string을 이어붙이려면, heap allocation이 많이 수행되어야하고, 매번 이전 메모리에서 신규 메모리로 복사가 되어야합니다.</p>
 <p><code>std::string</code>이 <code>std::vector::reserve()</code>와 같은 기능이 있었으면 좋겠는데 말이죠… :(</p>
 <p>…는 실제로 <span class="exturl" data-url="aHR0cHM6Ly9lbi5jcHByZWZlcmVuY2UuY29tL3cvY3BwL3N0cmluZy9iYXNpY19zdHJpbmcvcmVzZXJ2ZQ==">이 기능<i class="fa fa-external-link-alt"></i></span>이 있었네요? 띠용용</p>
-<br>
-
+<p><br></p>
 <h2 id="무작정-가져다-붙이기"><a href="#무작정-가져다-붙이기" class="headerlink" title="무작정 가져다 붙이기"></a>무작정 가져다 붙이기</h2><hr>
 <p><code>reserve</code>를 사용해서 heap allocation의 횟수를 한번으로 줄여봅시다.</p>
 <p><code>big_string</code> 안에 들어가는 글자의 수를 미리 세어두고 <code>reserve</code>를 사용하면 이렇게 될겁니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> big_one;</span><br><span class="line">big_one.reserve(first_str.size() + </span><br><span class="line">                second_str.size() + </span><br><span class="line">                third_str.size() + </span><br><span class="line">                <span class="built_in">strlen</span>(<span class="string">&quot; &quot;</span>)*<span class="number">2</span> );</span><br><span class="line"></span><br><span class="line">big_one += first;</span><br><span class="line">big_one += <span class="string">&quot; &quot;</span>;</span><br><span class="line">big_one += second;</span><br><span class="line">big_one += <span class="string">&quot; &quot;</span>;</span><br><span class="line">big_one += third;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">std::string big_one;</span><br><span class="line">big_one.<span class="built_in">reserve</span>(first_str.<span class="built_in">size</span>() + </span><br><span class="line">                second_str.<span class="built_in">size</span>() + </span><br><span class="line">                third_str.<span class="built_in">size</span>() + </span><br><span class="line">                <span class="built_in">strlen</span>(<span class="string">&quot; &quot;</span>)*<span class="number">2</span> );</span><br><span class="line"></span><br><span class="line">big_one += first;</span><br><span class="line">big_one += <span class="string">&quot; &quot;</span>;</span><br><span class="line">big_one += second;</span><br><span class="line">big_one += <span class="string">&quot; &quot;</span>;</span><br><span class="line">big_one += third;</span><br></pre></td></tr></table></figure>
 <p>이 코드를 보시는 여러분들이 무슨 생각을 하시는지 다 압니다. </p>
 <img src="/20201211-string-concat/feel_bad.jpg" class="" title="어우야 대체 왜 제발 좀">
-
 <p>으… 이 더러운 코드는 뭐야…</p>
 <p>라고 생각하게 되지만, 실제로 Profiler를 돌려보면 이 코드는 기존의 방법보다 <strong><em>2.5배</em></strong> 나 더 빠릅니다. </p>
 <p>속도는 좋은데, 진짜 가독성 어떻게하죠 이거?</p>
-<br>
-
+<p><br></p>
 <h2 id="더-나은-방법-Variadic-concatenation"><a href="#더-나은-방법-Variadic-concatenation" class="headerlink" title="더 나은 방법? - Variadic concatenation"></a>더 나은 방법? - Variadic concatenation</h2><hr>
 <p>좀 더 빠르고, 재사용하기 좋고, 읽기 쉬운 string concat 방법이 없을까요?</p>
 <p>Modern C++을 사용해야하는 이유가 여기에 있습니다. <strong><em>Variadic templates</em></strong>를 사용해봅시다.</p>
 <p>Variadic template가 뭔지 모르신다면, 여기 템플릿에 대해 설명을 잘 해주는 굉장히 좋은 <span class="exturl" data-url="aHR0cHM6Ly9hcm5lLW1lcnR6LmRlLzIwMTYvMTEvbW9yZS12YXJpYWRpYy10ZW1wbGF0ZXMv">링크<i class="fa fa-external-link-alt"></i></span>가 있습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//--- String의 전체 크기를 구해주는 함수 ---</span></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">StrSize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">strlen</span>(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">StrSize</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; str)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.size();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Head</span>, <span class="title">class</span>... <span class="title">Tail</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">StrSize</span><span class="params">(<span class="keyword">const</span> Head&amp; head, Tail <span class="keyword">const</span>&amp;... tail)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> StrSize(head) + StrSize(tail...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//--- String append 를 해주는 함수 ---</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Head</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StrAppend</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span>&amp; out, <span class="keyword">const</span> Head&amp; head)</span> </span>&#123;</span><br><span class="line">  out = head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Head</span>, <span class="title">class</span>... <span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StrAppend</span><span class="params">(<span class="built_in">std</span>::<span class="built_in">string</span>&amp; out, <span class="keyword">const</span> Head&amp; head, Args <span class="keyword">const</span>&amp;... args)</span> </span>&#123;</span><br><span class="line">  out += head;</span><br><span class="line">  StrAppend(out, args...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//--- String concat을 해주는 함수 ---</span></span><br><span class="line"><span class="keyword">template</span> &lt;class... Args&gt; </span><br><span class="line"><span class="function"><span class="built_in">std</span>::<span class="built_in">string</span> <span class="title">StrCat</span><span class="params">(Args <span class="keyword">const</span>&amp;... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> tot_size = StrSize(args...);</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> out;</span><br><span class="line">  out.reserve(tot_size);</span><br><span class="line"></span><br><span class="line">  StrAppend(out, args...);</span><br><span class="line">  <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//--- String의 전체 크기를 구해주는 함수 ---</span></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">StrSize</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* str)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">strlen</span>(str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">StrSize</span><span class="params">(<span class="keyword">const</span> std::string&amp; str)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.<span class="built_in">size</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Head</span>, <span class="title">class</span>... <span class="title">Tail</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">size_t</span> <span class="title">StrSize</span><span class="params">(<span class="keyword">const</span> Head&amp; head, Tail <span class="keyword">const</span>&amp;... tail)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">StrSize</span>(head) + <span class="built_in">StrSize</span>(tail...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//--- String append 를 해주는 함수 ---</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Head</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StrAppend</span><span class="params">(std::string&amp; out, <span class="keyword">const</span> Head&amp; head)</span> </span>&#123;</span><br><span class="line">  out = head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">Head</span>, <span class="title">class</span>... <span class="title">Args</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StrAppend</span><span class="params">(std::string&amp; out, <span class="keyword">const</span> Head&amp; head, Args <span class="keyword">const</span>&amp;... args)</span> </span>&#123;</span><br><span class="line">  out += head;</span><br><span class="line">  <span class="built_in">StrAppend</span>(out, args...);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//--- String concat을 해주는 함수 ---</span></span><br><span class="line"><span class="keyword">template</span> &lt;class... Args&gt; </span><br><span class="line"><span class="function">std::string <span class="title">StrCat</span><span class="params">(Args <span class="keyword">const</span>&amp;... args)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> tot_size = <span class="built_in">StrSize</span>(args...);</span><br><span class="line">  std::string out;</span><br><span class="line">  out.<span class="built_in">reserve</span>(tot_size);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">StrAppend</span>(out, args...);</span><br><span class="line">  <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>복잡한 코드가 좀 많았죠? </p>
 <p>그래도 우리는 이제 아래와 같이 굉장히 읽기 좋고 편한 방법으로 string concat을 할 수 있습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>:<span class="built_in">string</span> big_string = StrCat(first, <span class="string">&quot; &quot;</span>, second, <span class="string">&quot; &quot;</span>, third );</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std:string big_string = <span class="built_in">StrCat</span>(first, <span class="string">&quot; &quot;</span>, second, <span class="string">&quot; &quot;</span>, third );</span><br></pre></td></tr></table></figure>
 <p>그럼 이제 얼마나 빨라졌는지 봅시다.</p>
 <img src="/20201211-string-concat/string_concatenation.png" class="" title="string concat - benchmark">
-
 <p>이 Variadic template 방식이 위의 ‘더러운’ 코드보다 느린 이유는…</p>
 <p>사실 잘 모르겠습니다!</p>
 <p>대신, variadic template 방식은 기존의 방식보다 2배나 빠르고 또 읽기 쉽다는건 확신합니다.</p>
-<br>
-
+<p><br></p>
 <h2 id="제-코드를-복붙하시기-전에…"><a href="#제-코드를-복붙하시기-전에…" class="headerlink" title="제 코드를 복붙하시기 전에…"></a>제 코드를 복붙하시기 전에…</h2><hr>
 <p>제가 구현한 <code>StrCat</code>은 사실 그렇게 사용성이 좋지 않습니다. 제가 이 코드를 만든 이유는, 단순히 기존의 string concat보다 이 방식이 더 빠르다는걸 보여드리고 싶었어요.</p>
 <p>실제로 구현 하실 때는, 위의 코드도 다 잊어버리시고 그냥 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZtdGxpYi9mbXQ=">{fmt} 라이브러리<i class="fa fa-external-link-alt"></i></span>를 사용하세요.</p>
@@ -625,7 +611,7 @@ mjx-container[display="true"] + br {
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
