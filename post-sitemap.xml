@@ -9,6 +9,22 @@
 
 
     <url>
+        <loc>https://changh95.github.io/20240312-hexo-mathjax-renderer/</loc>
+        <lastmod>2024-03-12T00:36:54.861Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231221-how-to-follow-slam-papers/</loc>
+        <lastmod>2024-03-12T00:26:10.512Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/</loc>
         <lastmod>2024-03-12T00:07:54.542Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -51,14 +67,6 @@
     <url>
         <loc>https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/</loc>
         <lastmod>2024-03-04T02:12:57.285Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/20231221-how-to-follow-slam-papers/</loc>
-        <lastmod>2024-03-04T02:12:57.245Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -25565,21 +25565,21 @@ Domain Calibration via Robust SLAM </summary>
 <li><strong>Arxiv 보다 다운로드가 빠릅니다. Scholar inbox 만의 PDF 캐쉬 서버가 있기 떄문입니다.</strong></li>
 <li><strong>PC와 모바일 둘 다 읽을 수 있습니다.</strong></li>
 </ol>
-<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-2.png" class="" title="Why scholar inbox?">
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-2.png" class="" width="800" title="Why scholar inbox?">
 <p> </p>
 <p>Scholar inbox를 사용하기 위해서는 회원가입이 필요합니다.</p>
 <p>계정 정보와 비밀번호를 넣고, 이메일로 인증을 하면 바로 계정을 생성할 수 있습니다.</p>
 <p>이후, 나의 <strong>논문 성향 파악을 위해 조사</strong>를 합니다.</p>
 <p>내가 좋아하는 논문 저자의 이름을 넣으면, 그분의 논문 리스트가 쭉 나옵니다.</p>
 <p>이 중에서 내가 좋아하는 논문들을 다 골라주면 됩니다. </p>
-<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-3.png" class="" title="bootstrapping">
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-3.png" class="" width="800" title="bootstrapping">
 <p> </p>
 <p>논문을 다 골라주면 바로 <strong>오늘의 추천 논문 리스트</strong>가 나옵니다.</p>
 <p>내일 새로운 논문이 나온다? 바로 내일 리스트에 추가가 될겁니다.</p>
 <p>내가 좋아하는 분야와 가까운 논문일 경우 주황색으로 표시되고, 내가 잘 모르는 분야의 논문일 경우 파란색으로 표시됩니다. (필터링을 조정해서 내가 모르는 분야 논문은 아예 없애버려도 됩니다)</p>
 <p>논문들마다 ‘좋아요’가 몇개인지, ‘몇번 읽었는지’, ‘GitHub 링크’ 연결, ‘ArXiV 연결’, ‘트위터 쓰레드 연결’ 등등 여러 기능이 있습니다.</p>
 <p>여기서 내가 ‘좋아요’를 누르거나 ‘즐겨찾기’를 누르게 되면, 이 선택이 추천 시스템 알고리즘에 반영되어 앞으로의 추천에 영향을 주게 됩니다.</p>
-<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-5.png" class="" title="paper recommendations">
+<img src="/20231221-how-to-follow-slam-papers/scholar-inbox-5.png" class="" width="1200" title="paper recommendations">
 <p> </p>
 <p>추천 시스템이라는건 기본적으로 데이터가 쌓여야 잘 동작하게 됩니다.</p>
 <p>추천 시스템을 개선하기 위해 <strong>데이터를 제공해줌으로써 실시간으로 모델을 개선</strong>시킬 수 있습니다.</p>
@@ -26032,6 +26032,38 @@ Domain Calibration via Robust SLAM </summary>
         <tag>NVIDIA</tag>
         <tag>Foundation model</tag>
         <tag>LLM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 블로그에서 LaTeX 렌더링하기 (MathJax)</title>
+    <url>/20240312-hexo-mathjax-renderer/</url>
+    <content><![CDATA[<blockquote>
+<p>출처: <span class="exturl" data-url="aHR0cHM6Ly9kYXRhYnV6ei10ZWFtLmdpdGh1Yi5pby8yMDE4LzEwLzEzL2hleG8tbWF0aGpheC8=">https://databuzz-team.github.io/2018/10/13/hexo-mathjax/<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<h1 id="배경"><a href="#배경" class="headerlink" title="배경"></a>배경</h1><p>Hexo 블로그에는 Mathjax 플러그인을 깔아도 Markdown 문법과 LaTeX 문법이 충돌하면서 종종 렌더링이 되지 않는 경우가 있다.</p>
+<p>이걸 수정하려면 웹기반 렌더러와 Javascript 쪽 지식이 있어야하는것 같은데, 나는 그 부분에 대해 지식이 전무하다.</p>
+<p>구글 검색을 하면서 찾은 좋은 자료를 찾았는데, 보통 렌더러 셋업하는 과정이 1년에 한두번 있을까말까 한 작업이기 때문에 나중에 또 찾게될까봐 기록용으로 남긴다.</p>
+<p> </p>
+<hr>
+<h1 id="렌더러-셋업"><a href="#렌더러-셋업" class="headerlink" title="렌더러 셋업"></a>렌더러 셋업</h1><p>Hexo의 기본 renderer인 hexo-renderer-marked를 새로운 rendering engine인 hexo-renderer-kramed 로 교체한다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+<p>그리고 &lt;블로그_경로&gt;/node_modules/hexo-reneder-kramed/lib/renderer.js를 열어 다음과 같이 수정한다.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatText</span>(<span class="params">text</span>) </span>{</span><br><span class="line">  <span class="comment">// Fit kramed's rule: $$ + \1 + $$</span></span><br><span class="line">  <span class="comment">// return text.replace(/`\$(.*?)\$`/g, '$$$$$1$$$$');</span></span><br><span class="line">  <span class="keyword">return</span> text;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<h1 id="mathjax-설치"><a href="#mathjax-설치" class="headerlink" title="mathjax 설치"></a>mathjax 설치</h1><p>아래 커맨드를 입력해 mathjax를 설치한다. 아마 이미 설치되어있을 확률이 높다.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-renderer-mathjax --save</span><br></pre></td></tr></table></figure>
+<p>그리고 &lt;블로그_경로&gt;/node_modules/hexo-reneder-mathjax/mathjax.html을 열고 아래와 같이 수정한다.</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- &lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;&lt;/script&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="LaTex와-markdown의-문법-충돌-fix하기"><a href="#LaTex와-markdown의-문법-충돌-fix하기" class="headerlink" title="LaTex와 markdown의 문법 충돌 fix하기"></a>LaTex와 markdown의 문법 충돌 fix하기</h1><p>LaTex와 markdown의 문법이 충돌하는 것을 방지하기 위해 &lt;블로그_경로&gt;/node_modules\kramed\lib\rules\inline.js의 초반 부분을 같이 수정합니다.</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">escape</span>: <span class="regexp">/^\\([`*\[\]()#$+\-.!_&gt;])/</span>,</span><br><span class="line">em: <span class="regexp">/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/</span>,</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>3. Life</category>
+        <category>3.3 Blog</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>Mathjax</tag>
+        <tag>LaTeX</tag>
       </tags>
   </entry>
 </search>

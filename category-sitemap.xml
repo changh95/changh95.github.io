@@ -9,21 +9,49 @@
 
 
     <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2024-03-12T00:07:54.542Z</lastmod>
+        <loc>https://changh95.github.io/categories/3-Life/3-3-Blog/</loc>
+        <lastmod>2024-03-12T00:36:54.861Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/3-Life/</loc>
+        <lastmod>2024-03-12T00:36:54.861Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EC%259B%2594%25EA%25B0%2584-SLAM-%25EB%2589%25B4%25EC%258A%25A4/</loc>
+        <lastmod>2024-03-12T00:26:10.512Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
+        <lastmod>2024-03-12T00:26:10.512Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/</loc>
-        <lastmod>2024-03-12T00:07:54.542Z</lastmod>
+        <lastmod>2024-03-12T00:26:10.512Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/</loc>
+        <lastmod>2024-03-12T00:26:10.512Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25ED%2595%2599%25ED%259A%258C-%25EB%25B0%259C%25ED%2591%259C-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
         <lastmod>2024-03-12T00:07:54.542Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -32,13 +60,6 @@
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-2-Machine-Learning-Deep-Learning/</loc>
         <lastmod>2024-03-12T00:05:28.816Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EC%259B%2594%25EA%25B0%2584-SLAM-%25EB%2589%25B4%25EC%258A%25A4/</loc>
-        <lastmod>2024-03-08T04:28:03.919Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -53,13 +74,6 @@
     <url>
         <loc>https://changh95.github.io/categories/1-Spatial-AI/1-4-Robotics/</loc>
         <lastmod>2024-03-05T11:02:23.406Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/1-Spatial-AI/1-1-SLAM/%25EB%2585%25BC%25EB%25AC%25B8-%25EB%25A6%25AC%25EB%25B7%25B0/</loc>
-        <lastmod>2024-03-04T02:12:57.245Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -80,13 +94,6 @@
 
     <url>
         <loc>https://changh95.github.io/categories/3-Life/3-2-%25EC%25BB%25A4%25EB%25A6%25AC%25EC%2596%25B4/</loc>
-        <lastmod>2024-02-17T08:28:42.097Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/3-Life/</loc>
         <lastmod>2024-02-17T08:28:42.097Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -234,13 +241,6 @@
 
     <url>
         <loc>https://changh95.github.io/categories/2-Programming/2-2-C/C-Best-Practices-%25EC%258B%259C%25EB%25A6%25AC%25EC%25A6%2588/</loc>
-        <lastmod>2023-06-09T06:12:01.987Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/categories/3-Life/3-3-Blog/</loc>
         <lastmod>2023-06-09T06:12:01.987Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
