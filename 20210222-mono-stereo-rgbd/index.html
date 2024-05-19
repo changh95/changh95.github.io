@@ -482,13 +482,17 @@ mjx-container[display="true"] + br {
 <li>Stereo나 RGB-D가 Monocular 방식에 대해 가지는 장점이 무엇일까요?</li>
 </ol>
 <h2 id="답"><a href="#답" class="headerlink" title="답"></a>답</h2><h3 id="Monocular-SLAM"><a href="#Monocular-SLAM" class="headerlink" title="Monocular SLAM"></a>Monocular SLAM</h3><ul>
-<li>카메라 1대를 사용하여 SLAM을 하는 것</li>
+<li>카메라 1대를 사용하여 SLAM을 하는 것<ul>
 <li>최소 2개의 카메라를 사용하는 stereo 시스템이나, projector-camera 하드웨어를 사용하는 RGB-D 카메라보다 저렴함 (+ 전력 소비량도 작음).</li>
-<li>Monocular camera 이미지 1장으로는 3D 공간을 up-to-scale로 추정할 수 있음 (i.e. 정확한 lambda 값을 모름).</li>
+</ul>
+</li>
+<li>Monocular camera 이미지 1장으로는 3D 공간을 up-to-scale로 추정할 수 있음 (i.e. 정확한 lambda 값을 모름).<ul>
 <li>Image projection, 또는 N-view geometry로도 up-to-scale로만 추정 가능함.<ul>
 <li>정확한 scale 값을 모르기 때문에 <strong>Scale ambiguity</strong>가 있다고 할 수 있음.<ul>
 <li>이미 알고있는 물체의 크기를 (i.e. Fiducial 마커) 대조하거나, 아니면 IMU 센서를 통해 취득한 모션 등으로 metric scale을 복원할 수 있음.</li>
 <li>최근 딥러닝 기반 monocular depth estimation, 또는 single image monocular depth estimation 기술을 사용해 depth 정보를 추출하기도 함. </li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -556,10 +560,10 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
     </li>
   </ul>
 

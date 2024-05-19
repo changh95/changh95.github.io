@@ -474,11 +474,9 @@ mjx-container[display="true"] + br {
     <div class="post-body" itemprop="articleBody">
         <h2 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h2><p>기본적인 if-else는 다음과 같다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">canDrinkAlcohol</span><span class="params">(age <span class="keyword">int</span>)</span> <span class="title">bool</span></span> {</span><br><span class="line">	<span class="keyword">if</span> age &lt; <span class="number">18</span> {</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h2 id="Go만의-특성-if를-할-때-variable-생성하기"><a href="#Go만의-특성-if를-할-때-variable-생성하기" class="headerlink" title="Go만의 특성 - if를 할 때 variable 생성하기"></a>Go만의 특성 - if를 할 때 variable 생성하기</h2><p>go에서는 if를 할 때 변수를 생성할 수 있다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">canDrinkAlcoholKoreanAge</span><span class="params">(western_age <span class="keyword">int</span>)</span> <span class="title">bool</span></span> {</span><br><span class="line">	<span class="keyword">if</span> korean_age := western_age + <span class="number">2</span>; korean_age &lt; <span class="number">18</span> {</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
 <p> </p>
 <h2 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h2><p>C나 java 처럼 switch문도 사용 가능하다.</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">canDrinkAlcoholKoreanAgeSwitch</span><span class="params">(western_age <span class="keyword">int</span>)</span> <span class="title">bool</span></span> {</span><br><span class="line">	<span class="keyword">switch</span> korean_age := western_age + <span class="number">2</span>; korean_age {</span><br><span class="line">	<span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">	<span class="keyword">case</span> <span class="number">18</span>:</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	}</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
@@ -494,10 +492,10 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20220206-go-lecture/" rel="bookmark">Go 언어 강의 레퍼런스</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220208-go-1/" rel="bookmark">(0) Install Golang on M1 Mac</a></div>
+      <div class="popular-posts-title"><a href="/20220210-go-3/" rel="bookmark">(2) Go의 기본 - For loop, range, ...args</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220210-go-3/" rel="bookmark">(2) Go의 기본 - For loop, range, ...args</a></div>
+      <div class="popular-posts-title"><a href="/20220208-go-1/" rel="bookmark">(0) Install Golang on M1 Mac</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="/20220208-go-2/" rel="bookmark">(1) Go의 기본 - 패키지, 변수, 함수</a></div>

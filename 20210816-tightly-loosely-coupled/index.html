@@ -494,7 +494,6 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h3 id="Tightly-coupled-강결합-방식"><a href="#Tightly-coupled-강결합-방식" class="headerlink" title="Tightly-coupled (강결합) 방식"></a>Tightly-coupled (강결합) 방식</h3><img src="/20210816-tightly-loosely-coupled/vins.png" class="" title="vins">
-
 <ul>
 <li><strong>각각의 센서들에서 나온 관측치들을 한꺼번에 하나의 cost function을 통해 optimal state를 추정</strong>하는 방법<ul>
 <li>e.g. Tightly-coupled VIO : 카메라 센서 관측치에 대해서는 reprojection error를 계산, IMU 센서에 대해서는 kinematic residual을 계산, 이후 이 값들을 합한 값이 최저치가 되는 motion을 추정.</li>
@@ -515,14 +514,13 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul></div><div class="tab-pane" id="graph-vs-filter-2"><ul>
-<li><strong>Extended Kalman filter (EKF)</strong> 또는 <strong>Unscented Kalman filter (UKF)**와 같은 **filter 알고리즘의 인풋으로 다양한 센서의 관측치를 포함</strong>한다.<ul>
+<li><strong>Extended Kalman filter (EKF)</strong> 또는 <strong>Unscented Kalman filter (UKF)</strong>와 같은 <strong>filter 알고리즘의 인풋으로 다양한 센서의 관측치를 포함</strong>한다.<ul>
 <li>이로 인해 얻는 장점: Graph-optimisation 방식에 비해 <strong>절대적인 계산량이 적기 때문에 저전력 CPU를 사용</strong>할 수 있다.</li>
 <li>이로 인해 얻는 단점: EKF 방식은 선형화 오차로 graph-optimisation 방식에 비해 <strong>조금 부정확</strong>하다</li>
 <li>이로 인해 얻는 단점2: EKF 방식은 관측치의 수가 많아질수록 연산량이 늘어나기 때문에 <strong>적은 수의 관측치만 이용</strong>할 수 있는데, 이는 <strong>상태추정을 불안정하게 만든다</strong> (i.e. robustness가 떨어진다).</li>
 </ul>
 </li>
 </ul></div></div></div>
-
 <p> </p>
 <hr>
 <h3 id="Loosely-coupled-약결합-방식"><a href="#Loosely-coupled-약결합-방식" class="headerlink" title="Loosely-coupled (약결합) 방식"></a>Loosely-coupled (약결합) 방식</h3><ul>
@@ -570,7 +568,7 @@ mjx-container[display="true"] + br {
       <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
+      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
     </li>
   </ul>
 
