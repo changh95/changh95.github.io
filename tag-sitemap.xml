@@ -3,6 +3,69 @@
 
 
     <url>
+        <loc>https://changh95.github.io/tags/3D-Gaussian-Splatting/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/LiDAR-inertial-odometry/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/NeRF/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/LIO/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/LiDAR-SLAM/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/IMU/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/LiDAR/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/ICRA/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/SLAM/</loc>
+        <lastmod>2024-05-20T09:00:56.432Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/Semantic-SLAM/</loc>
         <lastmod>2024-05-20T06:49:19.885Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +74,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
-        <lastmod>2024-05-20T06:49:19.885Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/SLAM/</loc>
         <lastmod>2024-05-20T06:49:19.885Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -66,13 +122,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/LiDAR-SLAM/</loc>
-        <lastmod>2024-05-20T06:49:19.884Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Spatial-AI/</loc>
         <lastmod>2024-05-20T06:49:19.884Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -88,13 +137,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Robotics/</loc>
-        <lastmod>2024-05-20T06:49:19.884Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/ICRA/</loc>
         <lastmod>2024-05-20T06:49:19.884Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -556,13 +598,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/LIO/</loc>
-        <lastmod>2024-05-20T06:49:19.846Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Autonomous-driving/</loc>
         <lastmod>2024-05-20T06:49:19.846Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -655,13 +690,6 @@
 
     <url>
         <loc>https://changh95.github.io/tags/Visual-SLAM/</loc>
-        <lastmod>2024-05-20T06:49:19.846Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/IMU/</loc>
         <lastmod>2024-05-20T06:49:19.846Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -1732,13 +1760,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/LiDAR/</loc>
-        <lastmod>2024-05-20T06:49:19.483Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/Community/</loc>
         <lastmod>2024-05-20T06:49:19.483Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1760,13 +1781,6 @@
     </url>
 
     <url>
-        <loc>https://changh95.github.io/tags/LiDAR-inertial-odometry/</loc>
-        <lastmod>2024-05-20T06:49:19.466Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://changh95.github.io/tags/%EC%9C%A0%ED%98%84%EC%9A%B0-%EA%B5%90%EC%88%98%EB%8B%98/</loc>
         <lastmod>2024-05-20T06:49:19.466Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -1776,20 +1790,6 @@
     <url>
         <loc>https://changh95.github.io/tags/UNIST/</loc>
         <lastmod>2024-05-20T06:49:19.466Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/3D-Gaussian-Splatting/</loc>
-        <lastmod>2024-05-19T16:14:49.938Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://changh95.github.io/tags/NeRF/</loc>
-        <lastmod>2024-05-19T16:14:49.938Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

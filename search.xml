@@ -26109,6 +26109,7 @@ Domain Calibration via Robust SLAM </summary>
 <li>JacobiGPU: GPU-Accelerated Numerical Differentiation for Loop Closure in Visual SLAM</li>
 </ul>
 <h1 id="Localization"><a href="#Localization" class="headerlink" title="Localization"></a>Localization</h1><ul>
+<li>Salience-Guided Ground Factor for Robust Localization of Delivery Robots in Complex Urban Environments</li>
 <li>Block-Map-Based Localization in Large-Scale Environment</li>
 <li>Colmap-PCD: An Open-Source Tool for Fine Image-To-Point Cloud Registration</li>
 <li>COIN-LIO: Complementary Intensity-Augmented LiDAR Inertial Odometry</li>
@@ -26160,6 +26161,10 @@ Domain Calibration via Robust SLAM </summary>
 <h1 id="Manipulation"><a href="#Manipulation" class="headerlink" title="Manipulation"></a>Manipulation</h1><ul>
 <li>Open X-Embodiment: Robotic Learning Datasets and RT-X Models</li>
 <li>SARA-RT: Scaling up Robotics Transformers with Self-Adaptive Robust Attention</li>
+<li>Robi Butler: Multimodal Remote Interaction with Household Robotic Assistants</li>
+<li>OK-Robot: What Really Matters in Integrating Open-Knowledge Models for<br>Robotics</li>
+<li>Scaling Robot Policy Learning via Zero-Shot Labeling with Foundation Models</li>
+<li>What Do We Learn from a Large-Scale Study of Pre-Trained Visual Representations in Sim and Real Environments?</li>
 </ul>
 <h1 id="Localization-and-Mapping"><a href="#Localization-and-Mapping" class="headerlink" title="Localization and Mapping"></a>Localization and Mapping</h1><ul>
 <li>VBR: A Vision Benchmark in Rome</li>
