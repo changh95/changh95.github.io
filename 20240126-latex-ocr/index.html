@@ -29,17 +29,17 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="MathPix의 시대는 갔습니다. 미래는 pix2tex!">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/latex_ocr.png">
-<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/run.png">
-<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/help.png">
-<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/works.png">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/latex_ocr.webp">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/run.webp">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/help.webp">
+<meta property="og:image" content="https://changh95.github.io/20240126-latex-ocr/works.webp">
 <meta property="article:published_time" content="2024-01-26T07:50:21.000Z">
-<meta property="article:modified_time" content="2024-01-26T14:43:56.679Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.834Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="OCR">
 <meta property="article:tag" content="pix2tex">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20240126-latex-ocr/latex_ocr.png">
+<meta name="twitter:image" content="https://changh95.github.io/20240126-latex-ocr/latex_ocr.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20240126-latex-ocr/">
@@ -431,10 +431,16 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-01-26 16:50:21 / Modified: 23:43:56" itemprop="dateCreated datePublished" datetime="2024-01-26T16:50:21+09:00">2024-01-26</time>
+      <time title="Created: 2024-01-26 16:50:21" itemprop="dateCreated datePublished" datetime="2024-01-26T16:50:21+09:00">2024-01-26</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -478,7 +484,7 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p> </p>
 <p>이번 글에서는 완전 무료인 LaTeX OCR 소프트웨어 - pix2tex를 소개한다.</p>
-<img src="/20240126-latex-ocr/latex_ocr.png" class="" title="pix2tex">
+<img src="/20240126-latex-ocr/latex_ocr.webp" class="" title="pix2tex">
 <p> </p>
 <hr>
 <h1 id="pix2tex"><a href="#pix2tex" class="headerlink" title="pix2tex"></a>pix2tex</h1><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2x1a2FzLWJsZWNoZXIvTGFUZVgtT0NS">pix2tex<i class="fa fa-external-link-alt"></i></span>는 GitHub에 올라와있는 레포지토리에서 받을 수 있다.</p>
@@ -489,14 +495,14 @@ mjx-container[display="true"] + br {
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install <span class="string">"pix2tex[gui]"</span></span><br></pre></td></tr></table></figure>
 <p>설치 후 <code>pix2tex</code> 커맨드를 실행해보니, 모델을 다운로드 받는 것 같았다.</p>
 <p>모델은 ViT 모델을 기준으로 학습된거라고 한다.</p>
-<img src="/20240126-latex-ocr/run.png" class="" title="run">
+<img src="/20240126-latex-ocr/run.webp" class="" title="run">
 <p> </p>
 <p>모델 다운로드가 끝나면 자동으로 프로그램이 실행된다.</p>
 <p>어떻게 쓰는지 잘 모르겠을 때는 <code>h</code> 버튼을 눌러서 help를 볼 수 있다고 한다.</p>
 <p>사용 방법을 보니 Windows나 MacOS에서는 내가 분석하려는 수식에 대한 이미지를 클립보드에 넣어둔 상태에서 <code>Enter</code>를 누르면 된다고 한다.</p>
 <p>MacOS에서는 command + shift + 5 를 누르면 스크린샷 윈도우가 나타나고, 여기서 command + c를 누르면 클립보드에 이미지를 저장할 수 있다.</p>
 <p>저장후 엔터를 누르고 나니 결과가 나온다.</p>
-<img src="/20240126-latex-ocr/help.png" class="" title="pix2tex help">
+<img src="/20240126-latex-ocr/help.webp" class="" title="pix2tex help">
 <p> </p>
 <p>pix2tex의 워크플로우를 보면 아래처럼 되겠다.</p>
 <ol>
@@ -504,7 +510,7 @@ mjx-container[display="true"] + br {
 <li>수식에 대한 스크린샷을 따고, pix2tex에서 Enter를 누른다. LaTeX 수식이 나온다.</li>
 <li>내가 사용하는 LaTeX 렌더러에 작성한다. 사실 이 글의 초반에 작성한 ‘10초만에 못 적을 수식’은 pix2tex로 1초만에 적은 수식이다.</li>
 </ol>
-<img src="/20240126-latex-ocr/works.png" class="" title="it works">
+<img src="/20240126-latex-ocr/works.webp" class="" title="it works">
 <p>pix2tex를 이용하면 OCR로 상당히 높은 정확도로 빠르게 수식을 LaTeX로 변환할 수 있다. </p>
 <p>해피 논문 라이프를 위한 필수 템이다.</p>
 

@@ -30,11 +30,11 @@
 <meta property="og:description" content="LiDAR와 IMU를 사용할 때 주의해야하는 점">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/1.gif">
-<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/2.png">
-<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/3.png">
-<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/4.png">
+<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/2.webp">
+<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/3.webp">
+<meta property="og:image" content="https://changh95.github.io/20220315-lidar-imu-pitfalls/4.webp">
 <meta property="article:published_time" content="2022-03-15T04:10:31.000Z">
-<meta property="article:modified_time" content="2022-07-04T12:25:13.791Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.846Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="IMU">
@@ -441,7 +441,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-07-04 21:25:13" itemprop="dateModified" datetime="2022-07-04T21:25:13+09:00">2022-07-04</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -535,16 +535,16 @@ mjx-container[display="true"] + br {
 <p>이건 뭐 어떻게 고쳐야할지도 모르겠다. 그냥 센서 펌웨어를 업데이트하고 기도할 수밖에.</p>
 <p>정확히 어떤 현상이나면, <strong>실제 거리보다 훨씬 적은 거리로 센서 값이 나오는 것</strong>이다.</p>
 <p>실제 거리는 초록색+빨간색이다. 근데 센서는 초록색이라고 말하는거고.</p>
-<img src="/20220315-lidar-imu-pitfalls/2.png" class="" title="flip"> 
+<img src="/20220315-lidar-imu-pitfalls/2.webp" class="" title="flip"> 
 <h2 id="시야각"><a href="#시야각" class="headerlink" title="시야각"></a>시야각</h2><p>LiDAR에 탑재된 레이저 에미터도 시야각이 있다. 약 1~3도 정도 된다.</p>
 <p>아래 그림처럼 생긴 상황에서 레이저를 쏘면, 센서는 어떤 값을 내놓을거라고 생각하는가?</p>
 <p>정답: 센서마다 다르다. <strong>어떤 센서는 Y를 주고, 어떤 센서는 X,Y 다 주고, 어떤 센서는 X랑 Y의 평균값을 준다</strong>. 이런-</p>
-<img src="/20220315-lidar-imu-pitfalls/3.png" class="" title="fov"> 
+<img src="/20220315-lidar-imu-pitfalls/3.webp" class="" title="fov"> 
 <h2 id="최대거리-vs-외부환경"><a href="#최대거리-vs-외부환경" class="headerlink" title="최대거리 vs 외부환경"></a>최대거리 vs 외부환경</h2><p>LiDAR의 데이터시트를 보면 최대거리를 보통 알려준다. 하지만 실제로 쓸 떄는 이 <strong>최대거리에서 센서 값 절대로 안나온다</strong>.</p>
 <p>이런 라이다 스펙은 보통 어느정도 반사가 가능한 물체들에 대해서 테스트 되기 때문이다. 완전 시꺼먼 물체에서는 절대로 최대거리로 나오지 않는다.</p>
 <p>아래 그림은 태양빛에 있는 여러 빛의 스펙트럼이다. 보통 라이다 센서들은 여기 빨간색으로 표시된 부분에서 푹 떨어지는 곳들의 파장으로 레이저를 쏜다. 그래야 태양빛에 대한 간섭을 덜 받게 된다.</p>
 <p><strong>라이다를 사려고 하는데 몇 nm의 파장을 쓰는지 안알려준다? 그 라이다 회사는 걸러야한다</strong>.</p>
-<img src="/20220315-lidar-imu-pitfalls/4.png" class="" title="fov"> 
+<img src="/20220315-lidar-imu-pitfalls/4.webp" class="" title="fov"> 
     </div>
 
     

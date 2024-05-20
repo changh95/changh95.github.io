@@ -29,17 +29,17 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Do you actually need to use std::map?&quot;을 적당히 번역했습니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20201206-do-you-need-map/velodyne.png">
+<meta property="og:image" content="https://changh95.github.io/20201206-do-you-need-map/velodyne.webp">
 <meta property="og:image" content="https://changh95.github.io/20201206-do-you-need-map/that_is_logn.jpg">
-<meta property="og:image" content="https://changh95.github.io/20201206-do-you-need-map/quote.png">
+<meta property="og:image" content="https://changh95.github.io/20201206-do-you-need-map/quote.webp">
 <meta property="article:published_time" content="2020-12-06T11:38:19.000Z">
-<meta property="article:modified_time" content="2022-04-22T13:42:47.818Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.846Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="CV">
 <meta property="article:tag" content="Optimisation">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20201206-do-you-need-map/velodyne.png">
+<meta name="twitter:image" content="https://changh95.github.io/20201206-do-you-need-map/velodyne.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20201206-do-you-need-map/">
@@ -439,7 +439,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-04-22 22:42:47" itemprop="dateModified" datetime="2022-04-22T22:42:47+09:00">2022-04-22</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -497,7 +497,7 @@ mjx-container[display="true"] + br {
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Jvcy1kcml2ZXJzL3ZlbG9keW5lL3B1bGwvMTk0">Avoid unnecessary computation in RawData::unpack<i class="fa fa-external-link-alt"></i></span></p>
 <p>작은 변화가 아주 큰 성능 개선을 만들었지요.</p>
 <p>우선 이 드라이버가 어떤 기능을 하는지 설명드리겠습니다.</p>
-<img src="/20201206-do-you-need-map/velodyne.png" class="" title="Velodyne LiDAR 드라이버">
+<img src="/20201206-do-you-need-map/velodyne.webp" class="" title="Velodyne LiDAR 드라이버">
 <p><strong>벨로다인 (Velodyne)</strong> LiDAR 센서는 매 초 마다 수많은 포인트 값을 계산합니다 (i.e. 장애물과의 거리 값). </p>
 <p>수 많은 자율주행 자동차에서 이 센서를 사용합니다.</p>
 <p>벨로다인 드라이버는 polar coordinates에서 얻어진 관측 값을 3D cartesian coordinates (i.e. PointCloud) 형태로 바꿔줍니다.</p>
@@ -516,7 +516,7 @@ mjx-container[display="true"] + br {
 <p>여기서 주의하셔야할 점은, index값은 랜덤값이 아닙니다. 이 값은 언제나 0~N-1이며, N은 작은 수에요.</p>
 <p>그래서 다음와 같이 수정해서 제안을 했고, 아래와 같은 피드백을 받았습니다.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;LaserCorrection&gt; laser_corrections;</span><br></pre></td></tr></table></figure>
-<img src="/20201206-do-you-need-map/quote.png" class="" title="답장">
+<img src="/20201206-do-you-need-map/quote.webp" class="" title="답장">
 <p>요약하자면, 여기에는 associative containe가 애초부터 필요하지 않았습니다. 그냥 <code>std::vector</code>의 포지션 값을 사용해도 됬죠.</p>
 <p>벨로다인 개발자들이 잘못했다는게 아닙니다. 이러한 문제는 회고를 할 때만 보이는게 정상이고, 또 실제로 프로파일러를 돌려보면서 시간을 재봐야 쓸데없는 오버헤드를 찾을 수 있기 때문이죠.</p>
 <p>개발자의 입장에서는 대부분의 코드가 엄청나게 복잡하고 어려운 수학 계산을 하기 때문에, bottleneck이 수학쪽 계산에서 나타난다고 생각하기 쉽습니다. 하지만 종종 진짜 bottleneck은 <code>std::map</code>과 같은 기본적인 곳에서 나타나기도 하며, 이런 bottleneck을 알아차리기는 정말로 쉽지 않습니다.</p>

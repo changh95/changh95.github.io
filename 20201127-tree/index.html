@@ -29,21 +29,21 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Tree 구조, Binary Search Tree, Balanced Tree (AVL, red-black tree) 정리">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://www.softwaretestinghelp.com/wp-content/qa/uploads/2019/08/1-tree-and-its-various-parts.png">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1280px-Binary_search_tree.svg.png">
-<meta property="og:image" content="https://changh95.github.io/20201127-tree/add.png">
-<meta property="og:image" content="https://changh95.github.io/20201127-tree/remove_1.png">
-<meta property="og:image" content="https://changh95.github.io/20201127-tree/remove_2.png">
-<meta property="og:image" content="https://changh95.github.io/20201127-tree/remove_3.png">
+<meta property="og:image" content="https://www.softwaretestinghelp.com/wp-content/qa/uploads/2019/08/1-tree-and-its-various-parts.webp">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1280px-Binary_search_tree.svg.webp">
+<meta property="og:image" content="https://changh95.github.io/20201127-tree/add.webp">
+<meta property="og:image" content="https://changh95.github.io/20201127-tree/remove_1.webp">
+<meta property="og:image" content="https://changh95.github.io/20201127-tree/remove_2.webp">
+<meta property="og:image" content="https://changh95.github.io/20201127-tree/remove_3.webp">
 <meta property="og:image" content="https://qph.fs.quoracdn.net/main-qimg-eccb472654af69385afe691e9958a713.webp">
 <meta property="article:published_time" content="2020-11-27T02:25:13.000Z">
-<meta property="article:modified_time" content="2022-07-04T12:51:01.981Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.875Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Data structures">
 <meta property="article:tag" content="STL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://www.softwaretestinghelp.com/wp-content/qa/uploads/2019/08/1-tree-and-its-various-parts.png">
+<meta name="twitter:image" content="https://www.softwaretestinghelp.com/wp-content/qa/uploads/2019/08/1-tree-and-its-various-parts.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20201127-tree/">
@@ -443,7 +443,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-07-04 21:51:01" itemprop="dateModified" datetime="2022-07-04T21:51:01+09:00">2022-07-04</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -477,7 +477,7 @@ mjx-container[display="true"] + br {
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="Tree-소개"><a href="#Tree-소개" class="headerlink" title="Tree 소개"></a>Tree 소개</h1><p> </p>
-<h2 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology"></a>Terminology</h2><p><img src="https://www.softwaretestinghelp.com/wp-content/qa/uploads/2019/08/1-tree-and-its-various-parts.png" alt=""></p>
+<h2 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology"></a>Terminology</h2><p><img src="https://www.softwaretestinghelp.com/wp-content/qa/uploads/2019/08/1-tree-and-its-various-parts.webp" alt=""></p>
 <ul>
 <li><strong>Root node</strong>: 가장 상단의 node이며 parent node가 없음.</li>
 <li><strong>Leaf node</strong>: 가장 하단에 위치한 node들이며 child node가 없음.</li>
@@ -507,7 +507,7 @@ mjx-container[display="true"] + br {
 </ul>
 <p> </p>
 <hr>
-<h1 id="BST-Binary-Search-Tree"><a href="#BST-Binary-Search-Tree" class="headerlink" title="BST (Binary Search Tree)"></a>BST (Binary Search Tree)</h1><h2 id="BST-특징"><a href="#BST-특징" class="headerlink" title="BST 특징"></a>BST 특징</h2><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1280px-Binary_search_tree.svg.png" alt="drawing" width="500"></p>
+<h1 id="BST-Binary-Search-Tree"><a href="#BST-Binary-Search-Tree" class="headerlink" title="BST (Binary Search Tree)"></a>BST (Binary Search Tree)</h1><h2 id="BST-특징"><a href="#BST-특징" class="headerlink" title="BST 특징"></a>BST 특징</h2><p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/1280px-Binary_search_tree.svg.webp" alt="drawing" width="500"></p>
 <p><img src="" alt=""></p>
 <ul>
 <li>부모 노드의 값 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.312ex" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.751ex" role="img" focusable="false" viewBox="0 -636 778 774"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="2265" d="M83 616Q83 624 89 630T99 636Q107 636 253 568T543 431T687 361Q694 356 694 346T687 331Q685 329 395 192L107 56H101Q83 58 83 76Q83 77 83 79Q82 86 98 95Q117 105 248 167Q326 204 378 228L626 346L360 472Q291 505 200 548Q112 589 98 597T83 616ZM84 -118Q84 -108 99 -98H678Q694 -104 694 -118Q694 -130 679 -138H98Q84 -131 84 -118Z"></path></g></g></g></svg></mjx-container> 왼쪽 자식 노드의 값<ul>
@@ -527,7 +527,7 @@ mjx-container[display="true"] + br {
 </ul>
 <h2 id="BST-원소-삽입"><a href="#BST-원소-삽입" class="headerlink" title="BST 원소 삽입"></a>BST 원소 삽입</h2><ul>
 <li>그냥 downstream으로 추가하면 됨</li>
-<li><img src="/20201127-tree/add.png" class="" title="add">
+<li><img src="/20201127-tree/add.webp" class="" title="add">
 </li>
 </ul>
 <h2 id="BST-원소-삭제"><a href="#BST-원소-삭제" class="headerlink" title="BST 원소 삭제"></a>BST 원소 삭제</h2><ul>
@@ -539,9 +539,9 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<img src="/20201127-tree/remove_1.png" class="" title="remove">
-<img src="/20201127-tree/remove_2.png" class="" title="remove2">
-<img src="/20201127-tree/remove_3.png" class="" title="remove3">
+<img src="/20201127-tree/remove_1.webp" class="" title="remove">
+<img src="/20201127-tree/remove_2.webp" class="" title="remove2">
+<img src="/20201127-tree/remove_3.webp" class="" title="remove3">
 <p> </p>
 <hr>
 <h1 id="Balanced-tree-AVL-red-black-tree"><a href="#Balanced-tree-AVL-red-black-tree" class="headerlink" title="Balanced tree (AVL, red-black tree)"></a>Balanced tree (AVL, red-black tree)</h1><h2 id="BST-의-단점"><a href="#BST-의-단점" class="headerlink" title="BST 의 단점"></a>BST 의 단점</h2><p><img src="https://qph.fs.quoracdn.net/main-qimg-eccb472654af69385afe691e9958a713.webp" alt=""></p>

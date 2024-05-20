@@ -29,10 +29,10 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="메가존 클라우드에서 지원을 받아 Graphcore IPU로 Bundle adjustment &#x2F; SLAM을 해봤습니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20210128-gbp-poplar/ipu-running.png">
+<meta property="og:image" content="https://changh95.github.io/20210128-gbp-poplar/ipu-running.webp">
 <meta property="og:image" content="https://changh95.github.io/20210128-gbp-poplar/gbp-poplar.gif">
 <meta property="article:published_time" content="2021-01-28T13:38:19.000Z">
-<meta property="article:modified_time" content="2022-04-22T13:42:47.833Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.520Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
@@ -40,7 +40,7 @@
 <meta property="article:tag" content="IPU">
 <meta property="article:tag" content="Bundle adjustment">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20210128-gbp-poplar/ipu-running.png">
+<meta name="twitter:image" content="https://changh95.github.io/20210128-gbp-poplar/ipu-running.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20210128-gbp-poplar/">
@@ -440,7 +440,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-04-22 22:42:47" itemprop="dateModified" datetime="2022-04-22T22:42:47+09:00">2022-04-22</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -480,7 +480,7 @@ mjx-container[display="true"] + br {
 <hr>
 <h1 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h1><p>이 논문에 꽤나 감명받아있던 때에, 국내 클라우드 업체인 <span class="exturl" data-url="aHR0cHM6Ly93d3cubWVnYXpvbmUuY29tLw==">메가존 클라우드<i class="fa fa-external-link-alt"></i></span>에서 Graphcore IPU 서버를 수입하고 테스터들을 모집하고 있었다. 아무래도 IPU 칩은 주로 클라우드 기반 딥러닝 학습에 초점을 두고 있다보니 모집인원은 딥러닝에 집중되어있었지만, 감사하게도 지인분께서 IPU를 사용해볼 수 있게 메가존 클라우드에 나를 소개해주셨다. 나를 포함한 3명이 첫 라운드로 하나의 서버를 할당받았고, 메가존 클라우드 측에서도 TensorFlow 환경과 PyTorch 환경을 미리 설정해주시고 Q&amp;A 채널을 만들어주시는 등 지원을 아낌없이 해주셨다. 물론 나는 딥러닝을 할 것이 아니기 때문에, BA / SLAM 코드를 따로 끌어왔어야했다.</p>
 <p>다행히도 Bundle adjustment on a graph processor 코드는 저자의 Github에 올라와있었다. 지원받은 기기는 M2000 IPU 속 일정 부분이였는데 (POD64와 성능이 비슷한? 또는 동일한? 것으로 알고 있다), 논문에서 구현된 내용을 돌리기에는 충분했을 것이다. ssh로 서버에 접속 후 git clone으로 끌어와서 돌려봤는데, 런타임 에러가 있었다. IPU를 다루게 해주는 프레임워크인 Poplar SDK 코드가 업데이트 되면서 바뀐건가? 했는데 그건 아닌 것 같았다. 어쩐지 조금 불신이 생겼지만, 해당 내용을 수정하고 저자의 repo에 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2pvZWFvcnRpei9nYnAtcG9wbGFyL3B1bGwvMQ==">PR<i class="fa fa-external-link-alt"></i></span>을 넣었다.</p>
-<img src="/20210128-gbp-poplar/ipu-running.png" class="" title="BA">
+<img src="/20210128-gbp-poplar/ipu-running.webp" class="" title="BA">
 <p>그리고 코드를 실행해보았다. 우선 첫번째로 느낀 점은 <strong>데이터 로딩이 무지하게 오래 걸린다는 점</strong>이다. 거의 <strong>20~30초</strong>는 데이터로딩에 걸린 것 같다 (즉, 이 상태로 20~30초를 기다린다). 이게 이렇게 되는게 맞는건가…? 아직도 솔직히 의문이긴 하다.</p>
 <img src="/20210128-gbp-poplar/gbp-poplar.gif" class="" title="BA-2">
 <p>그리고는 위와 같이 코드가 돌아갔다. 이렇게 돌아가면서 느낀 점은 <strong>여전히 너무 느리다는 것</strong>이다. ‘설마 iteration 도는거를 보기 쉽게 하려고 std::chrono 같은걸 끼얹었나?’ 라는 생각도 들어서 코드를 뜯어봤지만 그런건 없었다. 분명 논문에서는 250ms에 BA가 끝났다는데, 내가 돌린 코드에서는 20초가 걸렸다 ㅋㅋㅋ 이런 결과를 보면 IPU에 대한 신뢰도가 사라질 것이다. 왜냐하면 CPU에서 ceres-solver가 도는 모습을 log로 찍으면 눈에 보이지도 않기 때문이다.</p>

@@ -29,20 +29,20 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="논문을 리뷰하면서 고급 semantic SLAM을 구현하는데에 필요한 점에 대해 제 의견을 더해 적어봅니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/slam_pp.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/nodeslam.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/kimera.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/niceslam.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/lmnav.png">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/slam_pp.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/nodeslam.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/kimera.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/niceslam.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/lmnav.webp">
 <meta property="article:published_time" content="2023-02-17T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-02-16T16:49:59.819Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.834Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Semantic SLAM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.png">
+<meta name="twitter:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20230215-rosen-2021/">
@@ -434,10 +434,16 @@ mjx-container[display="true"] + br {
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-02-17 16:50:21 / Modified: 01:49:59" itemprop="dateCreated datePublished" datetime="2023-02-17T16:50:21+09:00">2023-02-17</time>
+      <time title="Created: 2023-02-17 16:50:21" itemprop="dateCreated datePublished" datetime="2023-02-17T16:50:21+09:00">2023-02-17</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -503,7 +509,7 @@ mjx-container[display="true"] + br {
 </ol>
 <p> </p>
 <hr>
-<h1 id="Semantic-정보와-geometry-정보의-조합"><a href="#Semantic-정보와-geometry-정보의-조합" class="headerlink" title="Semantic 정보와 geometry 정보의 조합"></a>Semantic 정보와 geometry 정보의 조합</h1><img src="/20230215-rosen-2021/bowman.png" class="" title="bowman">
+<h1 id="Semantic-정보와-geometry-정보의-조합"><a href="#Semantic-정보와-geometry-정보의-조합" class="headerlink" title="Semantic 정보와 geometry 정보의 조합"></a>Semantic 정보와 geometry 정보의 조합</h1><img src="/20230215-rosen-2021/bowman.webp" class="" title="bowman">
 <p>2015년 이후 부터 SLAM 커뮤니티에서도 머신러닝 기반의 퍼셉션 모델에 관심을 가지기 시작했다. Object detection이라던지, place recognition 등을 통해서 좀 더 높은 수준의 플래닝 및 액션을 꾀하는 연구가 진행이 되었다. 좀 더 설명하자면, 거실에서 침실로 로봇을 이동해야한다는 task가 있다면 2015년 이전에는 거실의 coordinate에서 침실의 coordinate로 이동하기 위해 occupancy grid map에서 최적경로를 계산했을텐데, 2015년 이후에는 거실을 어떻게 인지하고 침실을 어떻게 인지할지에 대한 연구로 방향을 틀었다는 것이다.</p>
 <p>이러한 연구는 결국 <strong>Semantic map</strong>에 대한 개념을 만들었다. Semantic map은 단순히 object와 place에 대한 정보만 가지면 되었기 떄문에, geometric map 보다 <strong>훨씬 더 적은 메모리와 계산량을 소모한다는 장점</strong>도 알게 되었다. 그리고 <strong>로봇이 만든 지도를 사람이 이전보다 훨씬 더 쉽게 이해할 수 있다는 장점</strong>도 알게 되었다.</p>
 <p>하지만 <strong>semantic 정보를 어떻게 조합해야하는지에 대한 정해진 룰이 없었다</strong>. 현재까지도 몇가지 제안된 방법은 있다만, de-facto로 정해진 방법이 없다. 지금까지 정해진건 단 하나 - SLAM 이전에 <strong>머신러닝 기반 perception 모델을 돌리고, 그 결과를 마치 버추얼 센서처럼 사용</strong>하자는 것만 있다.</p>
@@ -513,9 +519,9 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="Semantic-map-representation"><a href="#Semantic-map-representation" class="headerlink" title="Semantic map representation"></a>Semantic map representation</h1><p>Semantic map을 만드는 방법에는 어떤 것들이 있을까? <strong>가장 쉬운 방법은 기존에 사용하는 geometric map (e.g. point cloud, mesh)에 semantic label을 추가하는 방법</strong>이다. 실제로 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MDkuMDUxMzA=">SemanticFusion<i class="fa fa-external-link-alt"></i></span>에서는 dense map에 semantic label을 넣고, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDEuMDY4OTQ=">Kimera<i class="fa fa-external-link-alt"></i></span>에서는 mesh에 semantic label을 넣어 semantic mesh를 만들어낸다.</p>
-<img src="/20230215-rosen-2021/slam_pp.png" class="" title="slam_plus_plus">
+<img src="/20230215-rosen-2021/slam_pp.webp" class="" title="slam_plus_plus">
 <p>2010년 초반에는 object-level SLAM도 꽤 많이 연구가 되었다. Object-level SLAM이란 map을 구성하는 요소가 object밖에 없는 경우를 말한다. <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jLmljLmFjLnVrL35hamQvUHVibGljYXRpb25zL3NhbGFzLW1vcmVub19ldGFsX2N2cHIyMDEzLnBkZg==">SLAM++<i class="fa fa-external-link-alt"></i></span>가 대표적인 예시이다. Object 단위로 map을 만든다는건, object를 인식할 수 있어야한다는 것인데, SLAM++가 나왔을 2013년에는 아직 뉴럴넷 기반의 3D object detection이 안정적이지 못했기 때문에, prior shape에 대해 fitting 작업이 주로 진행되었다. 하지만 이후 뉴럴넷 기반의 2D object detection을 거쳐 3D object detection, shape estimation, pose estimation 관련 기법이 많이 연구되면서, 차차 이 기술들을 사용하는 방향으로 트렌드가 바뀌고 있다.</p>
-<img src="/20230215-rosen-2021/nodeslam.png" class="" title="nodeslam">
+<img src="/20230215-rosen-2021/nodeslam.webp" class="" title="nodeslam">
 <p>Object 기반 map을 만들때, 가장 쉽게 만드는 방법은 object를 하나의 semantic label이 붙어있는 point landmark로써 다루는 것이다. 하지만 이러한 경우에는 object의 방향이나 경계를 알 수 없기 때문에, 이러한 정보를 담기 위한 다양한 representation이 나오고 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDQuMDQwMTE=">Nicholson 2018 - QuadricSLAM: Dual Quadrics from Object Detections as Landmarks in Object-oriented SLAM<i class="fa fa-external-link-alt"></i></span>이나 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDkuMDk2Mjc=">Superquadric Object Representation for Optimization-based Semantic SLAM<i class="fa fa-external-link-alt"></i></span>과 연구에서는 object를 dual-quadric 형태에 넣음으로써 방향성을 가진 공간으로 다룬다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDYuMDA1NTc=">CubeSLAM<i class="fa fa-external-link-alt"></i></span>에서는 object를 3D object detection의 결과인 3D bounding box로 다루기도 한다. 조금 더 나아가 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDQuMDQ0ODV2Mg==">NodeSLAM: Neural Object Descriptors for Multi-View Shape Reconstruction<i class="fa fa-external-link-alt"></i></span>에서는 뉴럴넷으로 학습한 object descriptor를 기반으로 semantic label을 표현하며, shape과 pose (i.e. geometric)에 대한 부분은 SLAM 기반 최적화를 통해 계산하는 알고리즘을 사용한다.</p>
 <p> </p>
 <hr>
@@ -526,7 +532,7 @@ mjx-container[display="true"] + br {
 <p>이제 세상의 형태가 실시간으로 바뀐다고 해보자. <strong>Deformable environment</strong>는 환경이 말랑말랑하다는 전제를 가지고 있다. 아쉽게도 SLAM 분야에서 이 분야에 대한 연구는 그렇게 많이 진행되고 있지 않다. <span class="exturl" data-url="aHR0cHM6Ly9ncmFpbC5jcy53YXNoaW5ndG9uLmVkdS9wcm9qZWN0cy9keW5hbWljZnVzaW9uL3BhcGVycy9EeW5hbWljRnVzaW9uLnBkZg==">DynamicFusion<i class="fa fa-external-link-alt"></i></span> 같은 경우에는 RGB-D 카메라를 이용해서 deformable한 물체의 형태를 dense reconstruction하는 방법을 제안한다. 이 분야의 연구는 주로 의료 쪽 연구에서 하는 경우가 많은데, 예를 들어서 <span class="exturl" data-url="aHR0cHM6Ly9wdWJtZWQubmNiaS5ubG0ubmloLmdvdi8yMDg3OTM1Mi8=">사람의 심장이 두근두근 뛸 때 dense reconstruction을 하면서 형태를 추정하고 카메라의 위치를 추정하는 연구<i class="fa fa-external-link-alt"></i></span>가 있다. 보통 이런 연구에서는 motion 추정을 할 때 기본적인 model이 있어서 (e.g. 사람의 심장은 반복적인 모션 - cyclic motion을 하기 때문에, 이것을 잘 관찰해서 모델로 만들면 t-1, t, t+1 시점에서 어떤 움직임을 할지 추론할 수 있다), 이를 기반으로 형태 추정도 가능하다.</p>
 <p> </p>
 <hr>
-<h1 id="Hierarchical-representation"><a href="#Hierarchical-representation" class="headerlink" title="Hierarchical representation"></a>Hierarchical representation</h1><img src="/20230215-rosen-2021/kimera.png" class="" title="kimera">
+<h1 id="Hierarchical-representation"><a href="#Hierarchical-representation" class="headerlink" title="Hierarchical representation"></a>Hierarchical representation</h1><img src="/20230215-rosen-2021/kimera.webp" class="" title="kimera">
 <p>기본적으로 SLAM을 돌리면 point cloud나 occupancy grid map이 나온다. Point cloud에서 모든 point는 동일한 중요성을 가지고, occupancy grid map에서 모든 grid cell은 동일한 중요성을 가진다. Point landmark가 1천만개가 쌓여도, 이 중 navigation에 중요한 point landmark가 어떤건지 알 수 없다. 이게 기본적인 SLAM이 가지는 문제 중 하나였다.</p>
 <p>Navigation을 위해 중요한 정보만을 추출해야한다. 이를 위해 <strong>abstraction(추상화)</strong>과 <strong>hierarchy(계층구조)</strong> 개념이 생겼다. 예를 들어, 특정 부분의 point landmark들은 책상을 의미한다, 바닥을 의미한다, 벽을 의미한다, 소파를 의미한다, 이런것들로 추상화를 할 수 있다. 그리고 책상,바닥,벽,소파가 모여서 거실을 의미한다 -&gt; 거실과 화장실과 몇개의 방이 모여 하나의 층을 의미한다 -&gt; 여러 층이 모여 건물을 의미한다, 이런 것들로 계층 구조를 가질 수 있다. 이렇게 <strong>추상화와 계층구조를 통해 SLAM mapping의 확장성과 효율성이 극대화</strong> 된다. 주로 이런 구조를 spatial-semantic hierarchy라고 한다.</p>
 <p>Spatial-semantic hierarchy는 사실 현대적인 SLAM 구성이 생기기 이전 - 즉 고전 로봇 맵핑에서 사용되던 <strong>topology model</strong>과 굉장히 유사하다. Topology model을 빠르게 이해하려면 자동차 내비게이션 지도를 생각하면 된다 - ‘다음 교차로에서 좌회전하세요. 그후 직진하다가 다음 교차로에서 우회전하세요’ 같이 metric한 개념이 없이 연결성에 대한 구조만 가지고 지도를 표현하는 방법이다. Topology model의 정확도는 로봇의 판단 과정에 (decision making, planning) 있어서 아주 중요한 역할을 하는데, 예를 들어 내비게이션에서 좌회전/우회전을 잘못하면 삥 돌아가는 것과 같은 효과를 낼 수 있다. Topological model은 <strong>강력하게 abstraction에만 초점을 둔 방법</strong>이라고 볼 수 있지만, <strong>엄청나게 가벼운 representation</strong>이라는 특징을 가지게 되었고 이러한 특징은 <strong>planning과 decision making에 엄청난 도움</strong>을 준다. 조금 더 개선 시킨 방법으로는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MDkuMDgxNTU=">Mu 2016 - Information-based active SLAM via topological feature graphs<i class="fa fa-external-link-alt"></i></span>에서 사용한 topological feature graph는 geometric landmark와 topology를 결합한 형태인데, graph의 vertex는 geometric feature를 의미하고 edge가 obstacle을 의미하는 방법을 사용한다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMTQzNjg=">Stein 2020 - Enabling topological planning with monocular vision<i class="fa fa-external-link-alt"></i></span>에서는 점점 topology graph를 강화시켜 planning task에 적합하게 만드는 방식을 제안하며, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDUuMTIyNTY=">Chaplot 2020 - Neural topological SLAM for visual navigation<i class="fa fa-external-link-alt"></i></span> 논문에서는 vertex는 location을 저장하고 edge에는 traversability를 저장하는 방법으로 topological graph 기법의 정점(?)을 찍었다. </p>
@@ -536,9 +542,9 @@ mjx-container[display="true"] + br {
 <h1 id="딥러닝-중심의-representation"><a href="#딥러닝-중심의-representation" class="headerlink" title="딥러닝 중심의 representation"></a>딥러닝 중심의 representation</h1><p>대부분의 semantic SLAM을 보면, 뉴럴넷의 결과를 그대로 믿고 받아쓰는 경우가 많다. 멀티뷰 데이터를 누적하다보면 조금씩 오차가 생길텐데, 그정도는 SLAM backend가 어느정도 보정을 해줄거라는 희망을 가지고 하는 것이다. 근데 사실 이건 소위 ‘블랙박스’, ‘될때까지 튜닝하기’, ‘잘 되길 기도하기’ 방법과 다를 바가 없다. 진정 하나의 perception 시스템으로써 동작하길 바란다면, 로봇 네비게이션을 하는 그 순간에도 새로운 파라미터를 학습해서 개선한다던가, 또는 뉴럴넷의 결과가 보정되야하지 않을까? SLAM이 인식하는 scene geometry와 robot motion을 기반으로 뉴럴넷을 학습할 수도 있을 것이다.</p>
 <p>실제로 SLAM의 결과를 뉴럴넷 학습에 사용하기도 한다. <strong>Self-supervised learning</strong> 기법은 뉴럴넷을 학습에 사용되는 데이터에서 추가적인 정보를 구해내고 그것을 ground truth label 및 학습에 도움되는 auxiliary data로 사용함으로써 학습을 진전시키는 방법이다. SLAM으로 추정한 global representation은 충분히 다양한 뉴럴넷 네트워크를 학습하는데에 필요한 데이터로써 사용될 수 있다.</p>
 <p>딥러닝 모델로써 scene에 대한 coarse한 정보를 제공하고, SLAM이 이를 받아 최적화함으로써 기존의 뉴럴넷 결과보다 더욱 좋은 결과를 이끌어낼 수도 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDMuMDY0ODI=">SceneCode<i class="fa fa-external-link-alt"></i></span>와 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDQuMDQ0ODU=">NodeSLAM<i class="fa fa-external-link-alt"></i></span>에서는 object들의 성질을 variational auto-encoder를 사용해서 압축한 vector의 값들에 대해 SLAM 최적화를 함으로써 reconstruction을 수행한다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDEuMDUwNDk=">DeepFactors<i class="fa fa-external-link-alt"></i></span>에서는 depth map을 압축해서 SLAM 최적화 시 depth map 최적화도 함께 수행한다.</p>
-<img src="/20230215-rosen-2021/niceslam.png" class="" title="niceslam">
+<img src="/20230215-rosen-2021/niceslam.webp" class="" title="niceslam">
 <p>뉴럴넷이 backpropagation을 수행하며 내부 파라미터 최적화를 하듯이, SLAM의 backend를 differentiable하게 만들려고 하는 시도도 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMTA2NzI=">GradSLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDYuMDQ4MDc=">BANet<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDguMTA4Njk=">DROID-SLAM<i class="fa fa-external-link-alt"></i></span>과 같이 SLAM 전체를 differentiable하게 만들려고 하는 시스템부터, 최근에는 NeRF도 함께 사용하는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIyMTAuMTM2NDE=">NeRF-SLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDMuMTIzNTI=">iMAP<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIzMDIuMDE4Mzg=">vMAP<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMTIuMTIxMzA=">NICE-SLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIzMDIuMDM1OTQ=">NICER-SLAM<i class="fa fa-external-link-alt"></i></span> 등이 있다 (NeRF 관련 논문들은 이 글이 참조하고 있는 논문인 Rosen 2021에는 없다. 이 논문이 나오고 나서 공개된 논문이기 때문).</p>
-<img src="/20230215-rosen-2021/lmnav.png" class="" title="lmnav">
+<img src="/20230215-rosen-2021/lmnav.webp" class="" title="lmnav">
 <p>마지막으로 완전 다른 노선으로 가고 있는 연구도 있다. 바로 <strong>SLAM도, 지도도 필요 없이 navigation 자체를 학습하는 방법</strong>이다 (이 글을 적고있는 저자의 마음은 찢어집니다… 슬램 소중해…). 센서 값을 인풋으로 받아 단일 네트워크를 거쳐 아웃풋으로 navigation의 결과를 내는 <strong>End-to-end learning</strong> 기법이다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDYuMDk1MjA=">Zhang 2017 - NeuralSLAM: Learning to explore with external memory<i class="fa fa-external-link-alt"></i></span>는 그래도 occupancy map을 사용해서 navigation을 하지만, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDQuMDAxNjg=">Mirowski 2018 - Learning to navigate in cities without a map<i class="fa fa-external-link-alt"></i></span> 연구에서는 아예 지도 자체를 없애버렸다. 위에서 이야기했던 Neural topological SLAM 연구도 사실 지도 없이 navigation을 하는 연구이다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIyMDcuMDQ0Mjk=">LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, Vision, and Action<i class="fa fa-external-link-alt"></i></span>에서는 vision-language model을 이용해서 language prompt로 action 커맨드로 받고, visual observation으로 topological 정보만 인식해 navigation을 하는 연구도 있다.</p>
 <p> </p>
 <hr>

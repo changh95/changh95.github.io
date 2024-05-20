@@ -29,16 +29,16 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Don&#39;t compute it twice&#96;&quot;을 적당히 번역했습니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20201211-dont-compute-twice/laser_scan_matcher.png">
+<meta property="og:image" content="https://changh95.github.io/20201211-dont-compute-twice/laser_scan_matcher.webp">
 <meta property="article:published_time" content="2020-12-12T11:38:19.000Z">
-<meta property="article:modified_time" content="2022-04-22T13:42:47.818Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.834Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="CV">
 <meta property="article:tag" content="Optimisation">
 <meta property="article:tag" content="Robotics">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20201211-dont-compute-twice/laser_scan_matcher.png">
+<meta name="twitter:image" content="https://changh95.github.io/20201211-dont-compute-twice/laser_scan_matcher.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20201211-dont-compute-twice/">
@@ -438,7 +438,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-04-22 22:42:47" itemprop="dateModified" datetime="2022-04-22T22:42:47+09:00">2022-04-22</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -495,7 +495,7 @@ mjx-container[display="true"] + br {
 <p>이런 affine transformation 코드에서는 다양한 <code>angle</code>값이 사용될 수 있습니다. 특정 floating point의 값이 사용될 수도 있고, 아니면 고정 integer 값이 사용될 수도 있죠. </p>
 <p>우리가 사용할 <code>angle</code>값이 많지 않을 때는, 해당 값들을 미리 계산해서 따로 저장해두는 <strong><em>look-up table (LUT)</em></strong>를 만들어두면 좋습니다.</p>
 <p>아까 링크에 적어둔 PR이 풀려고 하는 문제가 딱 이 케이스였습니다. Laser scan data가 polar coordinate에서 Cartesian coordinate로 변환되는 코드 부분이였습니다.</p>
-<img src="/20201211-dont-compute-twice/laser_scan_matcher.png" class="" title="Laser scan matching">
+<img src="/20201211-dont-compute-twice/laser_scan_matcher.webp" class="" title="Laser scan matching">
 <p>이 코드를 아래에 간단하게 정리해뒀습니다. 매 point마다 trigonometric function이 적용되며, 이 계산은 1초에 몇 천번 수행되죠.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 비효율적인 코드...!</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; scan_distance; <span class="comment">// 인풋</span></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Pos2D&gt; cartesian_points; <span class="comment">// 아웃풋</span></span><br><span class="line"></span><br><span class="line">cartesian_points.reserve( scan_distance.size() );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;scan_distance.size(); i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> dist = scan_distance[i];</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">double</span> angle = angle_minimum + (angle_increment*i);</span><br><span class="line">    <span class="keyword">double</span> x = dist*<span class="built_in">cos</span>(angle);</span><br><span class="line">    <span class="keyword">double</span> y = dist*<span class="built_in">sin</span>(angle);</span><br><span class="line">    cartesian_points.push_back( Pos2D(x,y) );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br ></p>

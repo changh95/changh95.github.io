@@ -29,11 +29,11 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;Optimizing using an exotic associative container&#96;&quot;을 적당히 번역했습니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20201214-exotic-container/motor_profile1.png">
-<meta property="og:image" content="https://changh95.github.io/20201214-exotic-container/motor_profile2.png">
+<meta property="og:image" content="https://changh95.github.io/20201214-exotic-container/motor_profile1.webp">
+<meta property="og:image" content="https://changh95.github.io/20201214-exotic-container/motor_profile2.webp">
 <meta property="og:image" content="https://changh95.github.io/20201214-exotic-container/two_lookups.jpg">
 <meta property="article:published_time" content="2020-12-14T13:38:19.000Z">
-<meta property="article:modified_time" content="2022-04-22T13:42:47.829Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.520Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="CV">
@@ -41,7 +41,7 @@
 <meta property="article:tag" content="Data Structure">
 <meta property="article:tag" content="Boost">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20201214-exotic-container/motor_profile1.png">
+<meta name="twitter:image" content="https://changh95.github.io/20201214-exotic-container/motor_profile1.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20201214-exotic-container/">
@@ -441,7 +441,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-04-22 22:42:47" itemprop="dateModified" datetime="2022-04-22T22:42:47+09:00">2022-04-22</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -485,11 +485,11 @@ mjx-container[display="true"] + br {
 <p>정확히 어떤 모듈인지 설명드릴 수는 없지만, 대충 로우레벨 하드웨어 인터페이스로 저희 회사 로봇 제품의 모터를 제어하는 코드입니다.</p>
 <p>저는 이 코드가 CPU 코어 하나를 다 차지할정도로 이 소프트웨어가 무거우면 안되는 것을 잘 알고 있습니다. 하지만, 안타깝게도 지금의 코드는 그런 상태이죠.</p>
 <p>언제나와 같이, 저는 제 무기인 <strong>Hotspot</strong>을 꺼내들었고, CPU가 코드의 어떤 부분에서 시간을 제일 많이 보내는지 알아봤습니다.</p>
-<img src="/20201214-exotic-container/motor_profile1.png" class="" title="모터 프로파일링 1">
+<img src="/20201214-exotic-container/motor_profile1.webp" class="" title="모터 프로파일링 1">
 <p>좀 지저분하지요? 어쩔 수 없습니다.</p>
 <p><span class="exturl" data-url="aHR0cDovL3d3dy5icmVuZGFuZ3JlZ2cuY29tL2ZsYW1lZ3JhcGhzLmh0bWw=">Flamegraph<i class="fa fa-external-link-alt"></i></span>를 처음 보시는 분들에게 간단하게 설명을 드리자면, caller function이 제일 밑에 있고, 점차 위로 callee function이 쌓여가는거라고 보시면 됩니다.</p>
 <p>여기서 제가 발견한 것은, 제 CPU의 30%가 <code>std::unordered_map&lt;&gt;::operator[]</code>에 쓰이고 있다는 것입니다.</p>
-<img src="/20201214-exotic-container/motor_profile2.png" class="" title="모터 프로파일링 2">
+<img src="/20201214-exotic-container/motor_profile2.webp" class="" title="모터 프로파일링 2">
 <p>오른쪽에는 엄청나게 큰 블록이 있고, 왼쪽에는 작은 블록이 여러개 많이 있습니다.</p>
 <p>오른쪽 블록은 caching으로 쉽게 풀 수 있고, 왼쪽은 좀 풀기 어렵죠.</p>
 <p>문제가 되는 코드는 아래와 같습니다.</p>

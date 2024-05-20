@@ -29,16 +29,16 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="ICRA 2022에 발표된 Self-Supervised Camera Self-Calibration from Video 논문을 리뷰합니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.png">
-<meta property="og:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/calib_poster.png">
+<meta property="og:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.webp">
+<meta property="og:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/calib_poster.webp">
 <meta property="article:published_time" content="2023-03-15T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-06-02T13:24:26.277Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.846Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Self-supervised learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.png">
+<meta name="twitter:image" content="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/">
@@ -438,7 +438,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-02 22:24:26" itemprop="dateModified" datetime="2023-06-02T22:24:26+09:00">2023-06-02</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -489,11 +489,11 @@ mjx-container[display="true"] + br {
 <p>카메라 캘리브레이션은 로보틱스와 컴퓨터 비전 문제를 푸는데에 굉장히 중요한 역할을 한다. 하지만 캘리를 하는 과정 자체가 엄청나게 많은 노력이 들어갈 뿐 더러, 카메라 파라미터가 조금만 바뀌어도 (e.g. 진동이나 열로 인해 바뀌어도) 새로 캘리브레이션을 해야하기 때문에 전반적으로 캘리브레이션 과정 자체가 골칫거리로 여겨지는 경우가 많다.</p>
 <p>그에 비해, self-supervised depth / ego-motion 추정 기법들은 view-synthesis를 목적으로 매 프레임마다 projection model을 계산하는 방법을 통해 이러한 캘리 과정을 건너뛰는 경우가 많다.</p>
 <p>이 논문에서는 in-the-wild 비디오 시퀀스 (i.e. 캘리브레이션 타겟이 전혀 없는 실제 환경)에서 카메라 파라미터를 학습하는 방법을 통해 캘리브레이션을 수행하는 방법을 제안한다. 이 논문에서 제안하는 방식은 sub-pixel 단위의 에러를 보여주며, perspective, fisheye, catadioptric 카메라와 같은 다양한 카메라 모델에도 in-the-wild 캘리브레이션이 가능하다는 것을 보여준다. 또, 이 과정에 있어서 depth estimation 기법의 정확도가 올라가는 것도 보여준다.</p>
-<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.png" class="" title="Pipeline">
+<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/Screenshot%202023-04-17%20at%204.41.19%20PM.webp" class="" title="Pipeline">
 <p> </p>
 <hr>
 <h1 id="포스터"><a href="#포스터" class="headerlink" title="포스터"></a>포스터</h1><p>이 논문은 ICRA 2022에 나왔다.</p>
-<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/calib_poster.png" class="" title="poster">
+<img src="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/calib_poster.webp" class="" title="poster">
 <p> </p>
 <hr>
 <h1 id="Proxy-network-Self-supervised-monocular-depth-estimation"><a href="#Proxy-network-Self-supervised-monocular-depth-estimation" class="headerlink" title="Proxy network - Self-supervised monocular depth estimation"></a>Proxy network - Self-supervised monocular depth estimation</h1>

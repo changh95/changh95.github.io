@@ -29,11 +29,11 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="빌드 플래그, 멀티 컴파일러, 유닛 테스트, 정적분석, MISRA와 같은 방법들에 대해 알아봅니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/result.png">
-<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/clang.png">
-<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/misra.png">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/result.webp">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/clang.webp">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/misra.webp">
 <meta property="article:published_time" content="2022-01-15T14:34:06.000Z">
-<meta property="article:modified_time" content="2022-07-04T12:51:45.186Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.474Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="STL">
@@ -41,7 +41,7 @@
 <meta property="article:tag" content="MISRA">
 <meta property="article:tag" content="clang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20220115-safer-c/result.png">
+<meta name="twitter:image" content="https://changh95.github.io/20220115-safer-c/result.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20220115-safer-c/">
@@ -441,7 +441,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-07-04 21:51:45" itemprop="dateModified" datetime="2022-07-04T21:51:45+09:00">2022-07-04</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -528,7 +528,7 @@ mjx-container[display="true"] + br {
 <p>TDD 찬양론이 아니라는 점 우선 먼저 밝힙니다. 하지만 ‘그 코드 잘 작동해?’ 라고 물어봤을 때 ‘음 잘 몰라, 아마 그럴걸?’라는 답변을 듣고 반기는 프로그래머는 없을 겁니다.</p>
 <p>정말 정말 백보 물러나서 얘기하는건데, 적어도 하나의 테스트는 꼭 돌려주시길 바랍니다. 테스트도 안되고 도큐먼팅도 안된 코드를 사용해야하는 상황이 오면, 당신은 그날 저녁부터 이 상황으로부터 도망가기 위해 이직 준비를 시작하게 될겁니다. 그러다가 극심한 스트레스로 두통과 몸살이 동시에 와 침대에서 끙끙거리다가 ‘내 인생 왜 이 모양 이 꼴이냐’ 하며 눈물 한방울을 흘리게 될겁니다.</p>
 <p>정말 코드에 자신이 있으려면, 작성하신 모든 함수 하나하나마다 유닛테스트를 만들어서 ‘내 코드는 주어진 시나리오에서 잘 작동합니다’ 라고 얘기할 수 있도록 합시다.</p>
-<img src="/20220115-safer-c/result.png" class="" title="result">
+<img src="/20220115-safer-c/result.webp" class="" title="result">
 <p> </p>
 <hr>
 <h2 id="정적분석-Static-analysis"><a href="#정적분석-Static-analysis" class="headerlink" title="정적분석 (Static analysis)"></a>정적분석 (Static analysis)</h2><p>정적분석은 소스코드를 분석해서 좋지 않은 코드가 있으면 알려주는 툴입니다.</p>
@@ -581,7 +581,7 @@ mjx-container[display="true"] + br {
 <p>이러한 체커도 하나만 쓰면 좀 아쉽습니다.</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhbm1hci9jcHBjaGVjay8=">CppCheck<i class="fa fa-external-link-alt"></i></span>라는 정적분석 툴도 좋으니, clang-tidy와 함께 돌립시다.</p>
 <p>아래는 clang-tidy를 돌렸을 때 나오는 코드 제안들의 예시입니다 (출처: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLndob2xldG9tYXRvLmNvbS8yMDIxLzAxLzA4L2EtYnJpZWYtaW50cm9kdWN0aW9uLXRvLWNsYW5nLXRpZHktYW5kLWl0cy1yb2xlLWluLXZpc3VhbC1hc3Npc3Qv">https://blog.wholetomato.com/2021/01/08/a-brief-introduction-to-clang-tidy-and-its-role-in-visual-assist/<i class="fa fa-external-link-alt"></i></span>)</p>
-<img src="/20220115-safer-c/clang.png" class="" title="clang">
+<img src="/20220115-safer-c/clang.webp" class="" title="clang">
 <p> </p>
 <hr>
 <h2 id="동적분석-메모리-주소-메모리-leak-쓰레드-관리"><a href="#동적분석-메모리-주소-메모리-leak-쓰레드-관리" class="headerlink" title="동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)"></a>동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)</h2><p>동적 분석은 실제로 코드가 돌아가면서 생기는 허점들을 잡아줄 수 있습니다.</p>
@@ -598,7 +598,7 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p>두번째는 <strong>CppCheck 기반 오토체커</strong>를 쓰는겁니다. CppCheck는 clang-tidy와 같은 정적분석 툴인데, 이 안에도 MISRA 체커 기능이 있습니다. 대신 CLion에서 지원하는 것과는 다르게, 직접 MISRA 도큐먼트를 15 파운드 (약 3만원)으로 구매한 후 직접 설정해줘야하는게 매우 귀찮습니다.</p>
 <p>제 코드는 원래 경고/에러 없이 깔끔했습니다만, CLion의 MISRA 체커를 키니까 안전하지 않은 코드라고 호되게 혼나는 모습을 아래 사진에 담았습니다. 노란줄은 경고, 빨간줄은 에러인데, 211개의 체크를 다 거치면 얼마나 고쳐야할지 모르겠네요 허허</p>
-<img src="/20220115-safer-c/misra.png" class="" title="misra">
+<img src="/20220115-safer-c/misra.webp" class="" title="misra">
     </div>
 
     

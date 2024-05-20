@@ -29,10 +29,10 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Ceres-solver, g2o, GTSAM, SE-Sync 라이브러리를 소개합니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png">
-<meta property="og:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.png">
+<meta property="og:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.webp">
+<meta property="og:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.webp">
 <meta property="article:published_time" content="2021-06-07T04:50:21.000Z">
-<meta property="article:modified_time" content="2022-07-04T12:25:15.915Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.520Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
@@ -42,7 +42,7 @@
 <meta property="article:tag" content="g2o">
 <meta property="article:tag" content="SE-Sync">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png">
+<meta name="twitter:image" content="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20210607-solvers/">
@@ -442,7 +442,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-07-04 21:25:15" itemprop="dateModified" datetime="2022-07-04T21:25:15+09:00">2022-07-04</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -482,9 +482,9 @@ mjx-container[display="true"] + br {
 </blockquote>
 <p>Optimisation 기반 SLAM 방법론 중 가장 유명한 방법은 <strong>Graph-based SLAM</strong>이며, 보통 <strong>Frontend</strong>와 <strong>Backend</strong> 두가지 단계를 거친다.</p>
 <p><strong>Frontend</strong>는 센서 값들로부터 현재 <strong>로봇의 이동치</strong>와 <strong>주변 환경</strong>에 대한 정보를 계산하는데, 이 때 이동치는 motion model을, 주변 환경 정보는 observation model을 사용해서 계산한다. Graph-based SLAM에서는 로봇의 위치와 주위 랜드마크의 위치를 node로 표현하는데, 우리가 계산한 <strong>이동치는 로봇의 위치를 표현하는 node끼리를 이어주는 motion constraint</strong>, 그리고 <strong>주변 환경의 위치 정보는 로봇-랜드마크 간의 상대적인 관계를 표현하는 node를 이어주는 observation constraint</strong>로 표현된다. Frontend는 이렇게 새로운 node를 만들고, 또 node 끼리의 constraint도 이어주기 때문에 graph construction이라고 불리기도 한다.</p>
-<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.png" alt=""></p>
+<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph1.webp" alt=""></p>
 <p><strong>Backend</strong>는 frontend에서 생성된 <strong>constraint들을 기반으로 최적의 (i.e. optimal) pose &amp; map을 계산</strong>한다. Graph solving에 가장 보편적인 방법은 <strong>least squares</strong>로써, 선형대수에서 이야기하는 Ax=b 형태의 문제에서 A가 graph matrix, b가 센서 정보일 때, x가 무엇이 나와야하는지 찾는 것이라고 보면 된다. 이러한 Graph matrix는 엄청나게 거대하기 때문에 단번에 푸는 것은 불가능하고 (특히나 SLAM에서 요구하는 실시간 계산 조건에서는!), 그렇기 때문에 <strong>iterative</strong>하게 풀어야한다. <strong>우리가 사용하는 센서들은 non-linear</strong>하기 때문에 iterative solving에도 매번 <strong>linearization 과정</strong>이 들어가야한다.</p>
-<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.png" alt=""></p>
+<p><img src="http://jinyongjeong.github.io/images/post/SLAM/lec13_least_square_SLAM/graph2.webp" alt=""></p>
 <blockquote>
 <p>Backend를 좀 더 자세히 이해하고 싶다면 다음 글을 참조하면 좋다. 1.’<a href="https://changh95.github.io/20210313-ba/">Bundle adjustment란?</a>‘, 2. ‘<a href="https://changh95.github.io/20210314-nonlinear-optimisation/">비선형 최적화 Non-linear optimisation - Gradient descent, Newton-Raphson, Gauss-Newton, Levenberg-Marquardt</a>‘</p>
 </blockquote>

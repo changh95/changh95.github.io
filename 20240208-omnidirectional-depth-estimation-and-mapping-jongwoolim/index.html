@@ -29,13 +29,13 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="2023년 Spatial AI KR 오프라인 행사에서 서울대학교 임종우 교수님의 발표 정리입니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/intro.png">
+<meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/intro.webp">
 <meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/google_nerf.gif">
 <meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/indoor_street_view.gif">
-<meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/indoor_street_view_sfm.png">
-<meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/ms_cross_localization.png">
+<meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/indoor_street_view_sfm.webp">
+<meta property="og:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/ms_cross_localization.webp">
 <meta property="article:published_time" content="2024-02-08T11:38:19.000Z">
-<meta property="article:modified_time" content="2024-02-29T17:20:57.560Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.520Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
@@ -46,7 +46,7 @@
 <meta property="article:tag" content="서울대학교">
 <meta property="article:tag" content="임종우 교수님">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/intro.png">
+<meta name="twitter:image" content="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/intro.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/">
@@ -446,7 +446,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2024-03-01 02:20:57" itemprop="dateModified" datetime="2024-03-01T02:20:57+09:00">2024-03-01</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -491,16 +491,16 @@ mjx-container[display="true"] + br {
 <li>서울대학교 교수님</li>
 <li>MultiplEYE 대표이사</li>
 </ul>
-<img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/intro.png" class="" title="Prof Jong woo Lim">
+<img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/intro.webp" class="" title="Prof Jong woo Lim">
 <p> </p>
 <hr>
 <h1 id="교수님의-과거-연구"><a href="#교수님의-과거-연구" class="headerlink" title="교수님의 과거 연구"></a>교수님의 과거 연구</h1><h2 id="Google-map-earth-street-view"><a href="#Google-map-earth-street-view" class="headerlink" title="Google map/earth/street view"></a>Google map/earth/street view</h2><img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/google_nerf.gif" class="" title="NeRF on Google map/earth/street view">
 <img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/indoor_street_view.gif" class="" title="Indoor street view">
 <p>Google은 굉장히 오래 전 부터 3D에 진심이였다. 최신 Google Map을 보면 NeRF를 이용한 3D reconstruction 결과물도 자주 볼 수 있다. 임종우 교수님께서 Google에 계셨을 때는 indoor street view를 개발하는 업무를 맡으셨다. </p>
-<img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/indoor_street_view_sfm.png" class="" title="Indoor street view - structure from motion">
+<img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/indoor_street_view_sfm.webp" class="" title="Indoor street view - structure from motion">
 <p>기존의 Street view 카메라는 부피와 무게가 상당히 큰 멀티 카메라 시스템이였다. 당시에 Google에서는 indoor street view 기능을 개발하기 위해 작은 카메라 시스템을 만들어냈고, 매 시점마다 조리개를 3번씩 조정해 촬영하여 HDR 이미지를 만들 수 있도록 데이터를 서버에 저장해두었다. 하지만 정작 알고리즘과 파이프라인이 뚫려있지 않은 상태였기 때문에, 임종우 교수님께서는 이 이미지들을 모아 <strong>파노라마 이미지</strong>를 만들고, 이후 <strong>Structure-from-Motion</strong>을 통해 카메라 pose를 구하는 작업을 수행하셨다. 위 이미지에서 중앙에 보이는 ‘시점 변환’ 기능이 이에 해당한다.</p>
 <p> </p>
-<h2 id="Microsoft-Cross-device-Localization"><a href="#Microsoft-Cross-device-Localization" class="headerlink" title="Microsoft - Cross-device Localization"></a>Microsoft - Cross-device Localization</h2><img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/ms_cross_localization.png" class="" title="Work @ Microsoft - Cross-device localization">
+<h2 id="Microsoft-Cross-device-Localization"><a href="#Microsoft-Cross-device-Localization" class="headerlink" title="Microsoft - Cross-device Localization"></a>Microsoft - Cross-device Localization</h2><img src="/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/ms_cross_localization.webp" class="" title="Work @ Microsoft - Cross-device localization">
 <p>Microsoft에서는 Minecraft Earth라는 게임에 사용하는 ‘<strong>다중 디바이스 간 지도 쉐어링 및 위치 추정</strong>‘ 연구를 수행하셨다. Minecraft Earth와 같은 게임에서는 홀로렌즈, 안드로이드 핸드폰, 아이폰 등 다양한 시스템이 공통된 월드 좌표계를 공유하며 자신의 위치를 정확하게 추정하는게 필요하다. 예를 들어, 안드로이드 기기에서 만든 지도를 기반으로 홀로렌즈에서 위치를 추정하려고 할 때, 두 시스템의 카메라가 다를 수 있기 때문에 이를 고려한 Visual place recognition + Pose estimation 알고리즘을 만들어야한다. </p>
 <p> </p>
 <hr>

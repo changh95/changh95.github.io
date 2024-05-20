@@ -29,15 +29,15 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Docker에서 ROS 돌리는 방법 소개">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20210912-ros-tutorials-1/tmux.png">
-<meta property="og:image" content="https://changh95.github.io/20210912-ros-tutorials-1/ros.png">
+<meta property="og:image" content="https://changh95.github.io/20210912-ros-tutorials-1/tmux.webp">
+<meta property="og:image" content="https://changh95.github.io/20210912-ros-tutorials-1/ros.webp">
 <meta property="article:published_time" content="2021-09-12T12:58:51.000Z">
-<meta property="article:modified_time" content="2022-07-04T12:43:16.980Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.855Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="ROS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20210912-ros-tutorials-1/tmux.png">
+<meta name="twitter:image" content="https://changh95.github.io/20210912-ros-tutorials-1/tmux.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20210912-ros-tutorials-1/">
@@ -437,7 +437,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-07-04 21:43:16" itemprop="dateModified" datetime="2022-07-04T21:43:16+09:00">2022-07-04</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -523,7 +523,7 @@ mjx-container[display="true"] + br {
 <h3 id="tmux-사용해서-터미널-쪼개기"><a href="#tmux-사용해서-터미널-쪼개기" class="headerlink" title="tmux 사용해서 터미널 쪼개기"></a>tmux 사용해서 터미널 쪼개기</h3><p>설치가 끝나면 터미널에서 <code>tmux</code> 커맨드를 입력하여 tmux를 실행한다.<br>이후 <code>ctrl + b</code>를 누르고 <code>"</code>를 누르면 하나의 터미널이 위/아래로 쪼개지고, <code>ctrl + b</code>를 누른 후 <code>%</code>를 누르면 하나의 터미널이 좌/우로 쪼개진다.</p>
 <p>터미널을 옮겨다니려면 <code>ctrl + b</code>를 누르고 화살표 키를 눌러서 움직일 수 있다.</p>
 <p>위/아래와 좌/우를 한번씩 쪼개면 아래의 사진처럼 큰 윈도우가 4개로 쪼개진다.</p>
-<img src="/20210912-ros-tutorials-1/tmux.png" class="" title="tmux">
+<img src="/20210912-ros-tutorials-1/tmux.webp" class="" title="tmux">
 <p> </p>
 <hr>
 <h2 id="X11-포워딩-환경-준비하기"><a href="#X11-포워딩-환경-준비하기" class="headerlink" title="X11 포워딩 환경 준비하기"></a>X11 포워딩 환경 준비하기</h2><p>필자의 PC 환경은 Nvidia GPU를 사용하는 PC로, GPU 드라이버는 기본 Ubuntu 20.04가 잡아준 것을 사용하고있다.</p>
@@ -554,7 +554,7 @@ mjx-container[display="true"] + br {
 <p><code>docker exec -it &lt;CONTAINER_NAME&gt; bash</code> 커맨드를 이용해 새 터미널을 열어주고, 다시 <code>source /opt/ros/&lt;DISTRO&gt;/setup.bash</code> 커맨드를 이용해서 ROS 환경을 읽어준다.</p>
 <p>이후 <code>rosrun turtlesim teleop_key</code> 커맨드를 이용해서 TurtleSim의 거북이를 움직일 수 있는 node를 실행시킨다.</p>
 <p>이제 방향키를 움직여서 거북이가 움직이는 것을 볼 수 있다.</p>
-<h3 id="결과-확인"><a href="#결과-확인" class="headerlink" title="결과 확인"></a>결과 확인</h3><img src="/20210912-ros-tutorials-1/ros.png" class="" title="ros">
+<h3 id="결과-확인"><a href="#결과-확인" class="headerlink" title="결과 확인"></a>결과 확인</h3><img src="/20210912-ros-tutorials-1/ros.webp" class="" title="ros">
     </div>
 
     

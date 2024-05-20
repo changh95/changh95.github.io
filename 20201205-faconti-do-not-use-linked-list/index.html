@@ -29,16 +29,16 @@
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Davide Faconti의 CPP Optimization Diary 블로그 글 중 &quot;I have learnt linked-lists at university, should I use them?&quot; Nooope.&quot;을 적당히 번역했습니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/linked_list.png">
-<meta property="og:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/realsense.png">
+<meta property="og:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/linked_list.webp">
+<meta property="og:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/realsense.webp">
 <meta property="article:published_time" content="2020-12-05T11:38:19.000Z">
-<meta property="article:modified_time" content="2022-04-22T13:42:47.818Z">
+<meta property="article:modified_time" content="2024-05-20T06:49:19.509Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="CV">
 <meta property="article:tag" content="Optimisation">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/linked_list.png">
+<meta name="twitter:image" content="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/linked_list.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20201205-faconti-do-not-use-linked-list/">
@@ -438,7 +438,7 @@ mjx-container[display="true"] + br {
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-04-22 22:42:47" itemprop="dateModified" datetime="2022-04-22T22:42:47+09:00">2022-04-22</time>
+        <time title="Modified: 2024-05-20 15:49:19" itemprop="dateModified" datetime="2024-05-20T15:49:19+09:00">2024-05-20</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -479,7 +479,7 @@ mjx-container[display="true"] + br {
 <p>역자 코멘트: 원작자의 요청으로 최대한 원글의 뉘앙스를 그대로 옮겨왔습니다. 저는 <code>std::list</code>가 글에서 표현하는 것 처럼 쓸모없다고 생각하지는 않습니다. 그랬다면 이미 C++ 언어에서 사라졌겠지요 ㅎㅎ… 적시적기에 사용한다면 <code>std::list</code> 역시 타 자료구조보다 좋은 성능을 내겠습니다. 하지만, 실시간 컴퓨터 비전의 용도에서 그런 상황이 자주 나타나지 않는 점에도 동의합니다. 이 점 유의하시고 읽어주시길 부탁드립니다 :)</p>
 <p><br></p>
 <h1 id="std-list를-쓰고-계신다면-당장-그만두세요"><a href="#std-list를-쓰고-계신다면-당장-그만두세요" class="headerlink" title="std::list를 쓰고 계신다면, 당장 그만두세요."></a><code>std::list</code>를 쓰고 계신다면, 당장 그만두세요.</h1><hr>
-<img src="/20201205-faconti-do-not-use-linked-list/linked_list.png" class="" title="Linked List를 왜 씁니까?">
+<img src="/20201205-faconti-do-not-use-linked-list/linked_list.webp" class="" title="Linked List를 왜 씁니까?">
 <p>사실 linked list의 효율성에 대한 벤치마크는 이미 이전에도 다른 사람들이 많이 했었습니다. 제가 똑같은 벤치마크를 다시 돌릴 필요는 없다고 봅니다.</p>
 <ul>
 <li><p><span class="exturl" data-url="aHR0cHM6Ly9iYXB0aXN0ZS13aWNodC5jb20vcG9zdHMvMjAxMi8xMS9jcHAtYmVuY2htYXJrLXZlY3Rvci12cy1saXN0Lmh0bWw=">std::vector vs std::list benchmark<i class="fa fa-external-link-alt"></i></span></p>
@@ -503,7 +503,7 @@ mjx-container[display="true"] + br {
 <p> <br></p>
 <h2 id="실제로-쓰인-예시-Intel-RealSense-카메라-드라이버의-성능-끌어올리기"><a href="#실제로-쓰인-예시-Intel-RealSense-카메라-드라이버의-성능-끌어올리기" class="headerlink" title="실제로 쓰인 예시: Intel RealSense 카메라 드라이버의 성능 끌어올리기"></a>실제로 쓰인 예시: Intel RealSense 카메라 드라이버의 성능 끌어올리기</h2><hr>
 <p>제가 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ludGVsUmVhbFNlbnNl">Intel RealSense<i class="fa fa-external-link-alt"></i></span> 코드에 컨트리뷰트 했던 Pull Request에 대해 얘기해보려고 합니다.</p>
-<img src="/20201205-faconti-do-not-use-linked-list/realsense.png" class="" title="영롱한 RealSense">
+<img src="/20201205-faconti-do-not-use-linked-list/realsense.webp" class="" title="영롱한 RealSense">
 <p>대체 무슨 생각으로 그랬는지는 모르겠지만, RealSense의 코드에서는 <code>std::list&lt;&gt;</code>를 쓰고 있었습니다. Intel에서 왜 아직도 이런걸 쓰고 있었는지 정말 이해가 안되네요.</p>
 <p><strong><em>농담입니다, 인텔 개발자들 사랑해요 알러뷰!</em></strong></p>
 <p>여기 제가 건의했던 PR의 링크입니다. <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0ludGVsUmVhbFNlbnNlL3JlYWxzZW5zZS1yb3MvcHVsbC8xMDk3">Considerable CPU saving in BaseRealSenseNode::publishPointCloud()<i class="fa fa-external-link-alt"></i></span></p>
