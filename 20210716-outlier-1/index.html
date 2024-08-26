@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,31 +14,29 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="RANSAC에 대해 알아봅니다">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="RANSAC에 대해 알아봅니다">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Robust estimation 시리즈 (1) - RANSAC이란?">
 <meta property="og:url" content="https://changh95.github.io/20210716-outlier-1/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="RANSAC에 대해 알아봅니다">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%201.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%202.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%203.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%204.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%206.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%207.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%208.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%205.png">
-<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%209.png">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%201.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%202.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%203.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%204.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%206.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%207.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%208.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%205.webp">
+<meta property="og:image" content="https://changh95.github.io/20210716-outlier-1/Untitled%209.webp">
 <meta property="article:published_time" content="2021-07-16T09:50:58.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:01.967Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.248Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
@@ -49,61 +45,29 @@
 <meta property="article:tag" content="Robust estimation">
 <meta property="article:tag" content="M-Estimator">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20210716-outlier-1/Untitled.png">
+<meta name="twitter:image" content="https://changh95.github.io/20210716-outlier-1/Untitled.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20210716-outlier-1/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20210716-outlier-1/","path":"20210716-outlier-1/","title":"Robust estimation 시리즈 (1) - RANSAC이란?"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Robust estimation 시리즈 (1) - RANSAC이란? | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -227,10 +191,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -241,14 +205,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -257,27 +221,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -297,7 +241,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -310,15 +254,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -333,65 +271,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%85%BC%EB%AC%B8-%EC%86%8C%EA%B0%9C"><span class="nav-number">1.</span> <span class="nav-text">논문 소개</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RANSAC-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0"><span class="nav-number">2.</span> <span class="nav-text">RANSAC 알고리즘 이해하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B0%84%EB%8B%A8%ED%95%9C-Linear-regression-%EC%98%88%EC%8B%9C"><span class="nav-number">2.1.</span> <span class="nav-text">간단한 Linear regression 예시</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%B9%84%EC%A0%84-%EC%98%88%EC%8B%9C"><span class="nav-number">2.2.</span> <span class="nav-text">컴퓨터 비전 예시</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RANSAC%EC%9D%98-%EC%BD%94%EB%93%9C"><span class="nav-number">3.</span> <span class="nav-text">RANSAC의 코드</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -409,11 +333,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Robust estimation 시리즈 (1) - RANSAC이란? | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -430,13 +359,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2021-07-16 18:50:58" itemprop="dateCreated datePublished" datetime="2021-07-16T18:50:58+09:00">2021-07-16</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -456,7 +385,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -471,8 +400,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h2 id="논문-소개"><a href="#논문-소개" class="headerlink" title="논문 소개"></a>논문 소개</h2><p>RANSAC은 <strong>1981년에 Fischler와 Bolles가 제안한 Model fitting 방법론</strong>이다. RANSAC의 이름은 RANdom SAmple Consensus를 줄여서 만들어졌다. 논문이 처음 제안했던 방법도 컴퓨터 비전 분야에서의 사용 방법을 제안하였지만, 크게 주목을 받지 못하다가 2004년 Nister가 제안하는 이미지 프레임간 relative motion을 robust하게 찾아내는 5-point algorithm + RANSAC 프레임워크를 통해 주목을 받게 되었다.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="논문-소개"><a href="#논문-소개" class="headerlink" title="논문 소개"></a>논문 소개</h2><p>RANSAC은 <strong>1981년에 Fischler와 Bolles가 제안한 Model fitting 방법론</strong>이다. RANSAC의 이름은 RANdom SAmple Consensus를 줄여서 만들어졌다. 논문이 처음 제안했던 방법도 컴퓨터 비전 분야에서의 사용 방법을 제안하였지만, 크게 주목을 받지 못하다가 2004년 Nister가 제안하는 이미지 프레임간 relative motion을 robust하게 찾아내는 5-point algorithm + RANSAC 프레임워크를 통해 주목을 받게 되었다.</p>
 <p>그 후, 많은 양의 데이터로부터 outlier를 거르고 model fitting을 하는 방식으로 RANSAC이 많이 사용되고 있다. <strong>Fundamental matrix, Essential matrix, Homography, PnP, Rigid point cloud estimation</strong> 등등에서 사용된다.</p>
 <p><a href="./Fischler_Bolles_1981_-_Random_Sample_Consensus_-_A_Paradigm_for_Model_Fitting_with_Applications_to_Image_Analysis_and_Automated_Cartography.pdf">오리지널 논문 링크: Fischler 1981 - Random Sample Consensus: A Paradigm for Model Fitting with Applications to Image Analysis and Automated Cartography</a></p>
 <p> </p>
@@ -485,12 +413,12 @@ mjx-container[display="true"] + br {
 <p>RANSAC에서는 우선 제일 먼저 <strong>Minimal set 크기의 무작위 데이터 샘플링과 함께 시작</strong>한다. Minimal set 데이터, 우리가 만들고 싶어하는 모델을 만드는데 필요한 최소한의 데이터 갯수를 의미한다. Linear regression에서는 ‘선’ 이라는 모델을 만들려고 하니까, ‘점’ 두개가 필요하겠다. 이번 예시에서는 점 하나는 무조건 그래프의 (0,0)으로 고정시켜서 문제를 간단하게 만들기로 한다.</p>
 <p>무작위로 데이터를 뽑은 결과, 오른쪽 아래 있는 데이터가 뽑혔다. 이 데이터와 (0,0)에 고정된 위치를 이어서 ‘선’을 그렸다. 이때 우리는 <strong>이 데이터를 inlier라고 가정</strong>한다. 기존의 RANSAC 방법을 그대로 따르면 이 선 위에 올라가는 다른 데이터의 수를 고르면 된다. 하지만 로보틱스 기술 특성상, 모든 센서에는 노이즈가 포함되기 때문에, 이 선 위에 곧바로 올라가는 데이터는 거의 없을 것이다. 그러므로 <strong>어느정도 데이터에 여지를 줘서, <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex" xmlns="http://www.w3.org/2000/svg" width="1.005ex" height="1.645ex" role="img" focusable="false" viewBox="0 -717 444 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D6FF" d="M195 609Q195 656 227 686T302 717Q319 716 351 709T407 697T433 690Q451 682 451 662Q451 644 438 628T403 612Q382 612 348 641T288 671T249 657T235 628Q235 584 334 463Q401 379 401 292Q401 169 340 80T205 -10H198Q127 -10 83 36T36 153Q36 286 151 382Q191 413 252 434Q252 435 245 449T230 481T214 521T201 566T195 609ZM112 130Q112 83 136 55T204 27Q233 27 256 51T291 111T309 178T316 232Q316 267 309 298T295 344T269 400L259 396Q215 381 183 342T137 256T118 179T112 130Z"></path></g></g></g></svg></mjx-container> 만큼의 거리 안에 들어오는 데이터의 수를 센다.</strong> 3개의 데이터가 이 공간에서 발견되었다.</p>
 <p>그러면 노트에다가 <strong>‘현재까지 가장 잘 나온 모델은…  1. 샘플링 된 데이터 (i.e. 모델 파라미터로 쓰인 데이터), 2. inlier의 수’를 기록</strong>한다. </p>
-<img src="/20210716-outlier-1/Untitled.png" class="" title="asdf">
+<img src="/20210716-outlier-1/Untitled.webp" class="" title="asdf">
 <blockquote>
 <p>Attempt 1 - 3개의 inlier가 발견됨.</p>
 </blockquote>
 <p>이 후, <strong>다른 데이터를 다시 무작위 샘플링</strong>하고, 아까와 같이 모델 (i.e. ‘선’)을 그린 다음에, <strong><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.023ex" xmlns="http://www.w3.org/2000/svg" width="1.005ex" height="1.645ex" role="img" focusable="false" viewBox="0 -717 444 727"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D6FF" d="M195 609Q195 656 227 686T302 717Q319 716 351 709T407 697T433 690Q451 682 451 662Q451 644 438 628T403 612Q382 612 348 641T288 671T249 657T235 628Q235 584 334 463Q401 379 401 292Q401 169 340 80T205 -10H198Q127 -10 83 36T36 153Q36 286 151 382Q191 413 252 434Q252 435 245 449T230 481T214 521T201 566T195 609ZM112 130Q112 83 136 55T204 27Q233 27 256 51T291 111T309 178T316 232Q316 267 309 298T295 344T269 400L259 396Q215 381 183 342T137 256T118 179T112 130Z"></path></g></g></g></svg></mjx-container> 만큼의 공간 안에서 데이터의 수를 센다</strong>. 이때, <strong>새로 센 inlier의 수가 이전에 찾은 inlier의 수 보다 많으면, ‘현재까지 제일 잘 나온 모델’의 정보에서 이전의 기록을 삭제하고 새 데이터로 덮어씌운다</strong>.</p>
-<img src="/20210716-outlier-1/Untitled%201.png" class="" title="asdfasdf">
+<img src="/20210716-outlier-1/Untitled%201.webp" class="" title="asdfasdf">
 <blockquote>
 <p>Attempt 2 - 6개의 inlier가 발견됨. Attempt 1의 3개 inlier보다 많으므로, Attempt 2가 ‘현재까지 제일 잘 나온 모델’이 된다.</p>
 </blockquote>
@@ -513,36 +441,36 @@ mjx-container[display="true"] + br {
 <h3 id="컴퓨터-비전-예시"><a href="#컴퓨터-비전-예시" class="headerlink" title="컴퓨터 비전 예시"></a>컴퓨터 비전 예시</h3><p>이제 컴퓨터 비전에 RANSAC을 적용해본 예시를 들어본다.</p>
 <p><strong>Homography matrix</strong>를 구하기 위해서는, 두개의 이미지에서 공유하는 4쌍의 feature pair가 필요하다. 이 때 각각의 feature pair는 삼각측량을 했을 때 3D point를 구상해야하므로 총 4개의 3D point가 생기는데, 이 4개의 3D point 들은 하나의 plane 위에 있어야한다. 여기서 <strong>Homography matrix를 사용하면 하나의 이미지 위 4개의 feature들의 위치를 다른 이미지 위 4개의 feature들의 위치를 알 수 있다</strong>. 또, 여기서는 사용하지 않지만 이 homography matrix를 SVD 등을 통해 decompose하면 Rotation가 Translation을 얻을 수 있다.</p>
 <p>Homography matrix를 구하기 위해서는, 계산에 들어가는 feature pair에 outlier가 없다는 것이 전제이다.</p>
-<img src="/20210716-outlier-1/Untitled%202.png" class="" title="asdfsdf">
+<img src="/20210716-outlier-1/Untitled%202.webp" class="" title="asdfsdf">
 <blockquote>
 <p>Homography 의 원리. 4쌍의 correspondence가 만드는 plane 위의 4개의 3D point.</p>
 </blockquote>
 <p>두개의 이미지 사이의 homography를 구해보기로 하자. 두개의 이미지를 준비했고, 양쪽 이미지에서 feature detection 및 descriptor 추출을 했다. FLANN을 사용해서 descriptor matching을 했고, 총 100개의 feature matching이 만들어졌다. 하지만, 이들 중 분명 몇개는 잘못된 feature matching이 있을 것이며, 이런 feature pair가 homography 계산에 들어가면 완전히 잘못된 결과가 나올 것이다.</p>
-<img src="/20210716-outlier-1/Untitled%203.png" class="" title="aaasdf">
+<img src="/20210716-outlier-1/Untitled%203.webp" class="" title="aaasdf">
 <blockquote>
 <p>5-point algorithm을 위해 두 이미지에서 feature를 미리 뽑아놓음</p>
 </blockquote>
 <p>사실 RANSAC을 쓰지 않고도 homography 계산을 하는 방법은 있다. 100개의 피쳐매칭 중 어떤 피쳐매칭을 써야할지 모르겠을 때는, 존재하는 모든 경우의 수를 전부 계산한 후 가장 에러가 적은 방식을 고르는 것도 한가지 방법이다. 하지만 이 방법은 너무 오래 걸리기 때문에 실시간 컴퓨터 비전에서 돌리기에는 적절한 방법이 아니다.</p>
-<img src="/20210716-outlier-1/Untitled%204.png" class="" title="asdfasdf">
+<img src="/20210716-outlier-1/Untitled%204.webp" class="" title="asdfasdf">
 <blockquote>
 <p>존재하는 모든 경우의 수를 전부 계산하는 것도 하나의 방법이지만 너무 오래걸린다.</p>
 </blockquote>
 <p>그러므로, 우리는 RANSAC을 사용해 볼 것이다. <strong>우선, 랜덤하게 minimal set 데이터를 (i.e. feature pair 4개를) 고른다.</strong> 그리고, <strong>이 데이터로 모델 추정을 한다 (i.e. Homography 계산을 한다)</strong>.</p>
-<img src="/20210716-outlier-1/Untitled%206.png" class="" title="asdfasdf">
+<img src="/20210716-outlier-1/Untitled%206.webp" class="" title="asdfasdf">
 <blockquote>
 <p>Random sampling</p>
 </blockquote>
 <p>Homography matrix가 나왔으니, Image 1에 있는 feature들의 위치에 해당 homography matrix를 곱해주면, image 2에서 해당 feature들이 어디에서 보일지 예측할 수 있다. Image 1에 보이는 100개의 feature들의 위치에 homography matrix를 전부 곱해줘서, image 2에서 어디에 나올지 예상 위치를 찾는다.</p>
-<img src="/20210716-outlier-1/Untitled%207.png" class="" title="asdjkhfl">
+<img src="/20210716-outlier-1/Untitled%207.webp" class="" title="asdjkhfl">
 <blockquote>
 <p>Image 1의 feature 위치에 Homography를 곱하면 Image 2의 feature 위치를 알 수 있다.</p>
 </blockquote>
 <p>그리고 그 <strong>예상되는 위치와 실제 feature matching이 된 위치의 차이를 (i.e. residual) 구한다</strong>. 이 때, 각각의 feature 위치마다의 에러 값을 residual <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.685ex" height="1.357ex" role="img" focusable="false" viewBox="0 -442 745 599.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(451, -150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g></g></svg></mjx-container>로 고려하며, SSE를 이용할 경우 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.598ex" height="2.244ex" role="img" focusable="false" viewBox="0 -833.9 1148.5 991.7"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msup"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mi" transform="translate(451, -150) scale(0.707)"><path data-c="1D456" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></g></g></g><g data-mml-node="mn" transform="translate(745, 363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container> 을 계산한다. </p>
-<img src="/20210716-outlier-1/Untitled%208.png" class="" title="asjdklf">
+<img src="/20210716-outlier-1/Untitled%208.webp" class="" title="asjdklf">
 <p>또, <strong>설계자의 취향에 따라 특정 threshold 미만의 residual 값은 무시하는 방법</strong>도 있다. 이는 센서 noise 값을 고려해서 noise 제거와 outlier 제거를 명확히 구분하는 방법 중 하나이다. 이 residual 값들을 전부 더해서 SSE 값을 구하고, <strong>‘현재까지 가장 좋은 모델 값’</strong>으로 저장한다.</p>
-<img src="/20210716-outlier-1/Untitled%205.png" class="" title="asjdklf">
+<img src="/20210716-outlier-1/Untitled%205.webp" class="" title="asjdklf">
 <p>‘현재까지 가장 좋은 모델 값’에 대한 업데이트가 끝나면, <strong>다시 랜덤하게 또 샘플링을 한 후, 위의 과정을 반복한다.</strong></p>
-<img src="/20210716-outlier-1/Untitled%209.png" class="" title="akjsdlfasdf">
+<img src="/20210716-outlier-1/Untitled%209.webp" class="" title="akjsdlfasdf">
 <blockquote>
 <p>Random sampling</p>
 </blockquote>
@@ -577,26 +505,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210716-outlier-0/" rel="bookmark">Robust estimation 시리즈 (0) - Outlier란?</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210313-ransac/" rel="bookmark">RANSAC이란? Robust-estimator란? M-estimator란?</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="bookmark">IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -613,12 +521,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20210716-outlier-0/" rel="prev" title="Robust estimation 시리즈 (0) - Outlier란?">
-                  <i class="fa fa-chevron-left"></i> Robust estimation 시리즈 (0) - Outlier란?
+                  <i class="fa fa-angle-left"></i> Robust estimation 시리즈 (0) - Outlier란?
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20210719-icra-vins-stefan-leutenegger/" rel="next" title="ICRA 2021 - Visual-Inertial SLAM and Spatial AI for Mobile Robotics (Prof. Stefan Leutenegger)">
-                  ICRA 2021 - Visual-Inertial SLAM and Spatial AI for Mobile Robotics (Prof. Stefan Leutenegger) <i class="fa fa-chevron-right"></i>
+                  ICRA 2021 - Visual-Inertial SLAM and Spatial AI for Mobile Robotics (Prof. Stefan Leutenegger) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -638,45 +546,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -684,7 +569,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -698,36 +583,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -737,49 +621,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

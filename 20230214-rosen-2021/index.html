@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,86 +14,52 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="논문을 리뷰하면서 SLAM 추정 방법에 대한 고찰에 대한 제 의견을 더해 적어봅니다.">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="논문을 리뷰하면서 SLAM 추정 방법에 대한 고찰에 대한 제 의견을 더해 적어봅니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
 <meta property="og:url" content="https://changh95.github.io/20230214-rosen-2021/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="논문을 리뷰하면서 SLAM 추정 방법에 대한 고찰에 대한 제 의견을 더해 적어봅니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.png">
-<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/l_m.png">
-<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/convex_relaxation.png">
-<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/se_sync.png">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.webp">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/l_m.webp">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/convex_relaxation.webp">
+<meta property="og:image" content="https://changh95.github.io/20230214-rosen-2021/se_sync.webp">
 <meta property="article:published_time" content="2023-02-14T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:02.719Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.286Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Deep Learning">
 <meta property="article:tag" content="Certified algorithms">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.png">
+<meta name="twitter:image" content="https://changh95.github.io/20230214-rosen-2021/factor_graph.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20230214-rosen-2021/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20230214-rosen-2021/","path":"20230214-rosen-2021/","title":"SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -219,10 +183,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -233,14 +197,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -249,27 +213,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -289,7 +233,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -302,15 +246,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -325,65 +263,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">시작하기 전…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9D%B8-SLAM-%EB%AC%B8%EC%A0%9C%EC%9D%98-%EA%B5%AC%EC%84%B1"><span class="nav-number">2.</span> <span class="nav-text">기본적인 SLAM 문제의 구성</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM%EC%9D%B4-%ED%92%80%EA%B8%B0-%EC%96%B4%EB%A0%A4%EC%9A%B4-%EC%9D%B4%EC%9C%A0%EC%99%80-Nonconvexity%EC%97%90-%EB%8C%80%ED%95%9C-%EB%AC%B8%EC%A0%9C"><span class="nav-number">3.</span> <span class="nav-text">SLAM이 풀기 어려운 이유와 Nonconvexity에 대한 문제</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Certifiable-Correct-SLAM"><span class="nav-number">4.</span> <span class="nav-text">Certifiable Correct SLAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Robust-estimation"><span class="nav-number">5.</span> <span class="nav-text">Robust estimation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B7%B8%EB%9E%98%EC%84%9C-%EC%95%9E%EC%9C%BC%EB%A1%9C-%EB%AC%B4%EC%97%87%EC%9D%B4-%EB%8D%94-%EC%97%B0%EA%B5%AC%EB%90%98%EC%96%B4%EC%95%BC%ED%95%98%EB%8A%94%EA%B0%80"><span class="nav-number">6.</span> <span class="nav-text">그래서 앞으로 무엇이 더 연구되어야하는가?</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -401,11 +325,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -422,13 +351,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2023-02-14 16:50:21" itemprop="dateCreated datePublished" datetime="2023-02-14T16:50:21+09:00">2023-02-14</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -448,7 +377,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -463,8 +392,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><p>1저자인 <span class="exturl" data-url="aHR0cHM6Ly9kYXZpZC1tLXJvc2VuLmdpdGh1Yi5pbw==">David Rosen<i class="fa fa-external-link-alt"></i></span>은 Northeastern 대학의 조교수이며, John Leonard 교수님, Frank Dellaert 교수님, Luca Carlone 교수님과 함께 다수의 논문을 집필하셨다. SLAM 문제에 대해 수학적으로 파고드는 연구가 많으며, 주로 Certifiable algorithm 연구를 진행하셨다. 대표적인 작업물로는 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwNjA3LXNvbHZlci1jb21wLz9oaWdobGlnaHQ9c2Urc3luYw==">Juric 2021 논문리뷰<i class="fa fa-external-link-alt"></i></span>에도 나왔던 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkLW0tcm9zZW4vU0UtU3luYw==">SE-Sync<i class="fa fa-external-link-alt"></i></span> 라이브러리이다.</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><p>1저자인 <span class="exturl" data-url="aHR0cHM6Ly9kYXZpZC1tLXJvc2VuLmdpdGh1Yi5pbw==">David Rosen<i class="fa fa-external-link-alt"></i></span>은 Northeastern 대학의 조교수이며, John Leonard 교수님, Frank Dellaert 교수님, Luca Carlone 교수님과 함께 다수의 논문을 집필하셨다. SLAM 문제에 대해 수학적으로 파고드는 연구가 많으며, 주로 Certifiable algorithm 연구를 진행하셨다. 대표적인 작업물로는 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwNjA3LXNvbHZlci1jb21wLz9oaWdobGlnaHQ9c2Urc3luYw==">Juric 2021 논문리뷰<i class="fa fa-external-link-alt"></i></span>에도 나왔던 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2RhdmlkLW0tcm9zZW4vU0UtU3luYw==">SE-Sync<i class="fa fa-external-link-alt"></i></span> 라이브러리이다.</p>
 <p>2저자 중 한명인 <span class="exturl" data-url="aHR0cHM6Ly9wZW9wbGUuY3NhaWwubWl0LmVkdS9rZG9oZXJ0eS8=">Kevin Doherty<i class="fa fa-external-link-alt"></i></span>는 Semantic SLAM 분야에서 data association 관련 연구를 많이 진행하는 연구자이다.</p>
 <p>이 논문은 2가지 파트로 나눌 수 있는데, 저자들이 각각 한 파트씩 적은 것 같다.</p>
 <ol>
@@ -483,7 +411,7 @@ mjx-container[display="true"] + br {
 <p>Local observation을 의미하는 Y 데이터와 global model X가 있을 때, Joint likelihood인 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="7.181ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 3174 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D45D" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"></path></g><g data-mml-node="mo" transform="translate(503, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(892, 0)"><path data-c="1D44C" d="M66 637Q54 637 49 637T39 638T32 641T30 647T33 664T42 682Q44 683 56 683Q104 680 165 680Q288 680 306 683H316Q322 677 322 674T320 656Q316 643 310 637H298Q242 637 242 624Q242 619 292 477T343 333L346 336Q350 340 358 349T379 373T411 410T454 461Q546 568 561 587T577 618Q577 634 545 637Q528 637 528 647Q528 649 530 661Q533 676 535 679T549 683Q551 683 578 682T657 680Q684 680 713 681T746 682Q763 682 763 673Q763 669 760 657T755 643Q753 637 734 637Q662 632 617 587Q608 578 477 424L348 273L322 169Q295 62 295 57Q295 46 363 46Q379 46 384 45T390 35Q390 33 388 23Q384 6 382 4T366 1Q361 1 324 1T232 2Q170 2 138 2T102 1Q84 1 84 9Q84 14 87 24Q88 27 89 30T90 35T91 39T93 42T96 44T101 45T107 45T116 46T129 46Q168 47 180 50T198 63Q201 68 227 171L252 274L129 623Q128 624 127 625T125 627T122 629T118 631T113 633T105 634T96 635T83 636T66 637Z"></path></g><g data-mml-node="mo" transform="translate(1655, 0)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mi" transform="translate(1933, 0)"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g><g data-mml-node="mo" transform="translate(2785, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container>을 작은 conditional likelihood로 표현하면 아래와 같은 식이 된다. 결국 작은 likelihood를 모아 확률론적으로 가장 정확한 global model을 찾는다는 말이 된다.</p>
 <script type="math/tex; mode=display">p(\bar{Y} \mid X)=\prod_{k=1}^m p_k\left(\bar{Y}_k \mid X_k\right)</script><p>그리고 SLAM 문제를 잘 표현하기 위해 우리는 probabilistic graphical model을 사용한다. 사실 이렇게 길게 잘 표현하지는 않고, <strong>factor graph</strong>라고 부르는 경우가 더 많다.</p>
 <p>Factor graph를 통해 우리는 수많은 state 사이의 conditional dependency 및 joint distribution을 표현할 수 있다. </p>
-<img src="/20230214-rosen-2021/factor_graph.png" class="" title="factor_graph">
+<img src="/20230214-rosen-2021/factor_graph.webp" class="" title="factor_graph">
 <p>이렇게 joint distribution을 찾아낸 후, joint optimization을 통해 최적의 global model을 찾는게 SLAM이라고 볼 수 있다. Joint optimization을 위해 iSAM, GTSAM, g2o, Ceres-solver와 같은 비선형 최적화 라이브러리를 사용한다.</p>
 <p>그러면 이제 질문을 해보자. </p>
 <blockquote>
@@ -497,7 +425,7 @@ mjx-container[display="true"] + br {
 <h1 id="SLAM이-풀기-어려운-이유와-Nonconvexity에-대한-문제"><a href="#SLAM이-풀기-어려운-이유와-Nonconvexity에-대한-문제" class="headerlink" title="SLAM이 풀기 어려운 이유와 Nonconvexity에 대한 문제"></a>SLAM이 풀기 어려운 이유와 Nonconvexity에 대한 문제</h1><p>SLAM 문제에 대한 매니폴드를 그려보면, 굉장히 큰 고차원의 non-convex한 모양을 가질 것이다. 이 non-convex한 state space를 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: 0" xmlns="http://www.w3.org/2000/svg" width="1.928ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 852 683"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D44B" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"></path></g></g></g></svg></mjx-container> 라고 해보자. 이런 매니폴드에서 global minimum (i.e. 에러가 가장 낮은, 가장 정답에 가까운 파라미터들의 조합)을 찾기란 굉장히 어렵다.</p>
 <p>초창기 SLAM에서는 <strong>간단하지만 추적이 가능한 인퍼런스</strong> 방법을 사용해서 문제를 풀었다. 예를 들어, Extended Kalman Filter (EKF)나 Monte Carlo sampling 방법 같은 방법으로 말이다. </p>
 <p>하지만 2016년 발표된 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1606.05830"><strong>Past, Present and future of SLAM</strong></a>에서 새로운 SLAM의 기준을 <strong>maximum likelihood estimation (MLE)</strong>로 푸는 방법을 제안하면서 판도가 바뀌게 되었다. MLE 방법은 <em>이론적으로</em> 최적의 값을 찾을 수 있다. 이 때문에 SLAM 문제의 성향은 사실 Maximum-a-posteriori (MAP)문제에 가깝지만, 여러 테크닉을 사용해서 MLE 문제로 치환해 최적의 값을 찾는 문제로 방향을 바꾼다. 또, SLAM 문제의 특징 중 하나인 sparsity를 이용한다. Sparsity는 간단하게 설명하면 ‘state들끼리 연결되지 않은 경우가 많다’ 라고 할 수 있는데, 예시를 들면 SLAM을 수행하면서 이동하다보면 SLAM을 막 실행한 첫 시점에 보였던 랜드마크가 더 이상 보이지 않아 현재의 위치와 보이지 않는 랜드마크 간에 conditional probability를 연결할 수 없는 경우가 있다. Sparsity를 이용한 1차 또는 2차 미분을 이용해서 최적화를 수행하면, 모든 매니폴드를 탐색하지 않고 빠르게 critical point를 찾아 최적 값을 탐색할 수 있다는 장점이 있다. Gauss-Newton이나 Levenberg-Marquardt 최적화 기법이 여기에 해당하며, 이러한 알고리즘을 충분히 빨리 동작할 수 있게 만들어 실시간으로 동작시킨게 현재까지의 SLAM이다.</p>
-<img src="/20230214-rosen-2021/l_m.png" class="" title="l_m">
+<img src="/20230214-rosen-2021/l_m.webp" class="" title="l_m">
 <p>하지만 문제가 있다. 1차/2차 미분 값을 이용한다는건 ‘초기값’이 존재하며 최적화 수행 시 초기값 기준으로 1차/2차 미분값을 기반으로 더 좋은 값을 찾아가는 로컬 탐색을 한다는 것인데, 로컬 탐색을 ‘초기값 주변의 critical point’를 찾게 해주는 기능이지, <strong>MLE 문제의 전역 최적변수를 찾는 것이 아니다</strong> (i.e. Global minimum이 아닌 local minima를 찾는 것이다). 물론 로컬 탐색으로 찾은 변수가 global minimum일 확률이 아예 없는건 아니지만, SLAM을 해본 사람들은 대부분 최적화 실패로 인한 소위 ‘망한 값’을 본 적이 있을 것이고, 최적화가 성공했다고 해도 은근히 에러가 많이 쌓인 값을 본 적이 있을 것이다. <strong>로컬 탐색은 이처럼 전역 최적 변수를 보장할 수 없다</strong>.</p>
 <p>그러면 MLE 문제의 전역 최적 변수는 어떻게 찾는 것일까? SLAM 문제처럼 고차원의 non-convex 공간에서 최적점을 찾는 것은 NP-hard 문제이기 때문에, 모든 경우의 수를 검토하는 것은 좋은 방법이 아니다. 근데 또 생각해봐야하는건, 로컬 탐색이 항상 실패하는건 아니다. 우리가 만족할 만큼 꽤나 잘 동작했으니 또 SLAM이 연구개발되온 것일텐데, 그러면 ‘잘된 SLAM’과 ‘안된 SLAM’의 경계가 무엇인지도 생각해봐야한다.</p>
 <p>이렇게 SLAM inference 방법을 개발하고 평가할 때는 다음과 같은 2가지 기준으로 평가해야한다.</p>
@@ -508,11 +436,11 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="Certifiable-Correct-SLAM"><a href="#Certifiable-Correct-SLAM" class="headerlink" title="Certifiable Correct SLAM"></a>Certifiable Correct SLAM</h1><p>Certifiably correct method라는 분야는 <strong>전역 최적점을 찾았다는 것을 보장할 수 있는 알고리즘</strong>을 연구하는 분야이다. 1/2차 미분으로 로컬 탐색을 하는 보통의 SLAM과는 다르게, convex relaxation 기반으로 전역 최적점을 찾는 연구이다. Convex relaxation은 간단하게 설명하자면, non-convex 문제를 convex 문제로 근사한 후, convex 문제의 최적점을 찾는 방법이다.</p>
-<img src="/20230214-rosen-2021/convex_relaxation.png" class="" title="convex_relaxation_ohh">
+<img src="/20230214-rosen-2021/convex_relaxation.webp" class="" title="convex_relaxation_ohh">
 <p><span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MDYuMDA3NDY=">Carlone et.al. 2015 - Lagrangian duality in 3D SLAM: Verification techniques and optimal solutions<i class="fa fa-external-link-alt"></i></span>에서는 Lagrangian duality를 이용해서 SLAM 문제를 2차 함수 프로그램으로 변환해 최적점을 찾았다. 이는 결국 semidefinite program의 해를 찾는 것과 같은데, 당시에는 아쉽게도 해를 찾기 위해 로컬 탐색 기법을 사용하긴 했다.</p>
 <p>하지만 이런 duality 관련 연구가 발전하면서, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MTIuMDczODY=">Rosen et.al. 2016 - A certifiably correct algorithm for synchronization over the special Euclidean group<i class="fa fa-external-link-alt"></i></span> 연구를 통해 3D pose의 조합에서 해를 찾는 방법이 개발되었고, 이는 곧 3년 후 알고리즘이 몇개 더 추가된 후 SE-Sync 라이브러리가 되었다.</p>
 <p>3D pose에 대해 certified algorithm이 개발되었다는건, rotation averaging, two-view registration, sensor extrinsic calibration, 3D registration, shape reconstruction, SLAM에서 사용될 수 있다는 것을 의미한다.</p>
-<img src="/20230214-rosen-2021/se_sync.png" class="" title="se_sync">
+<img src="/20230214-rosen-2021/se_sync.webp" class="" title="se_sync">
 <p> </p>
 <hr>
 <h1 id="Robust-estimation"><a href="#Robust-estimation" class="headerlink" title="Robust estimation"></a>Robust estimation</h1><p>기존 SLAM의 최적화 방식에는 또 다른 큰 문제가 있다. 바로 <strong>MLE 알고리즘의 전제가 ‘모든 데이터가 통계적으로 올바를 때 최적점을 보장한다’ 라는 점</strong>인데, 모든 센서 데이터가 SLAM에 유용한 데이터를 제공하는게 아니기 때문이다. SLAM을 해본 사람들은 알겠지만, 센서 데이터 속에서 SLAM에 유용한 데이터를 솎아주는 frontend 설계하는 부분은 굉장히 섬세하고 어려운 작업이라 많은 피,땀,눈물을 필요로 한다. 통계적으로 <strong>유용한 데이터는 inlier</strong>, <strong>유용하지 않은 데이터는 outlier</strong>라고 칭하는데, 주로 outlier는 SLAM에서 세워둔 물리적인 모델을 따르지 않는 데이터가 된다. 그리고 MLE 문제를 풀 때, outlier가 몇개 끼어있기만해도 아주 잘못된 결과가 나오는 일이 태반이다.</p>
@@ -532,26 +460,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -566,12 +474,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20230214-sensor-calibration/" rel="prev" title="자율주행 차량을 위한 센서 캘리브레이션 기법">
-                  <i class="fa fa-chevron-left"></i> 자율주행 차량을 위한 센서 캘리브레이션 기법
+                  <i class="fa fa-angle-left"></i> 자율주행 차량을 위한 센서 캘리브레이션 기법
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20230215-rosen-2021/" rel="next" title="Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
-                  Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping <i class="fa fa-chevron-right"></i>
+                  Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -591,45 +499,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -637,7 +522,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -651,36 +536,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -690,49 +574,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

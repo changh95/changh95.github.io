@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,38 +14,36 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Shichao Yang께서 발표해주신 Visual SLAM with Object and Plane의 발표 노트입니다. CubeSLAM의">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Shichao Yang께서 발표해주신 Visual SLAM with Object and Plane의 발표 노트입니다. CubeSLAM의">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)">
 <meta property="og:url" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Shichao Yang께서 발표해주신 Visual SLAM with Object and Plane의 발표 노트입니다. CubeSLAM의">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/object_representation.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/3d_detection.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/cuboid.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/proposals.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/result.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/plane_proposal.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/plane_proposal_2.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/object_plane_joint.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/representations.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/measurement_error.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/measurement_error2.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/data_association.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval2.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval3.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval4.png">
-<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/dynamic.png">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/object_representation.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/3d_detection.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/cuboid.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/proposals.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/result.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/plane_proposal.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/plane_proposal_2.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/object_plane_joint.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/representations.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/measurement_error.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/measurement_error2.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/data_association.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval2.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval3.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/eval4.webp">
+<meta property="og:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/dynamic.webp">
 <meta property="article:published_time" content="2020-12-28T11:38:19.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.165Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="CV">
 <meta property="article:tag" content="SLAM">
@@ -58,61 +54,29 @@
 <meta property="article:tag" content="3D">
 <meta property="article:tag" content="CubeSLAM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/object_representation.png">
+<meta name="twitter:image" content="https://changh95.github.io/20201228-cvpr2020-slam-yang/object_representation.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20201228-cvpr2020-slam-yang/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20201228-cvpr2020-slam-yang/","path":"20201228-cvpr2020-slam-yang/","title":"CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표) | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -236,10 +200,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -250,14 +214,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -266,27 +230,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -306,7 +250,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -319,15 +263,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -342,65 +280,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">시작하기 전…</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shichao-Yang%EC%9D%98-%EC%97%B0%EA%B5%AC-%EC%A3%BC%EC%A0%9C"><span class="nav-number">1.1.</span> <span class="nav-text">Shichao Yang의 연구 주제</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Point%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EB%8A%94-SLAM%EC%9D%98-%EB%8B%A8%EC%A0%90"><span class="nav-number">2.</span> <span class="nav-text">Point를 사용하는 SLAM의 단점</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%97%B0%EA%B5%AC-%EB%B6%84%EC%95%BC-%EC%86%8C%EA%B0%9C"><span class="nav-number">3.</span> <span class="nav-text">연구 분야 소개</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B5%9C%EC%A0%81%ED%99%94-%EB%B0%A9%EB%B2%95%EB%A1%A0"><span class="nav-number">3.1.</span> <span class="nav-text">최적화 방법론</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object%EB%A5%BC-%ED%91%9C%ED%98%84%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95"><span class="nav-number">3.2.</span> <span class="nav-text">Object를 표현하는 방법</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B5%9C%EC%A0%81%ED%99%94-cost-function"><span class="nav-number">3.3.</span> <span class="nav-text">최적화 cost function</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3D-Object-detection"><span class="nav-number">4.</span> <span class="nav-text">3D Object detection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Plane-detection"><span class="nav-number">5.</span> <span class="nav-text">Plane detection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Monocular-SLAM-with-objects-and-planes"><span class="nav-number">6.</span> <span class="nav-text">Monocular SLAM with objects and planes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dynamic-object-SLAM"><span class="nav-number">7.</span> <span class="nav-text">Dynamic object SLAM</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -418,11 +342,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표) | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -439,13 +368,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2020-12-28 20:38:19" itemprop="dateCreated datePublished" datetime="2020-12-28T20:38:19+09:00">2020-12-28</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -465,7 +394,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -480,9 +409,8 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><h2 id="Shichao-Yang의-연구-주제"><a href="#Shichao-Yang의-연구-주제" class="headerlink" title="Shichao Yang의 연구 주제"></a>Shichao Yang의 연구 주제</h2><p>Shape prior를 사용하지 않는 Object와 plane을 이용한 Monocular SLAM.<br>Large scale로 indoor와 outdoor에서 사용 가능.<br>Scene understanding이 SLAM에 도움이 되는 것을 증명함.</p>
-<p>Shichao Yang은 <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1RblZsZXhYaTlfYyZhbXA7YWJfY2hhbm5lbD1TaGljaGFvWWFuZw==">CubeSLAM<i class="fa fa-external-link-alt"></i></span>의 저자이다.</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><h2 id="Shichao-Yang의-연구-주제"><a href="#Shichao-Yang의-연구-주제" class="headerlink" title="Shichao Yang의 연구 주제"></a>Shichao Yang의 연구 주제</h2><p>Shape prior를 사용하지 않는 Object와 plane을 이용한 Monocular SLAM.<br>Large scale로 indoor와 outdoor에서 사용 가능.<br>Scene understanding이 SLAM에 도움이 되는 것을 증명함.</p>
+<p>Shichao Yang은 <span class="exturl" data-url="aHR0cHM6Ly93d3cueW91dHViZS5jb20vd2F0Y2g/dj1RblZsZXhYaTlfYyZhYl9jaGFubmVsPVNoaWNoYW9ZYW5n">CubeSLAM<i class="fa fa-external-link-alt"></i></span>의 저자이다.</p>
 <hr>
 <h1 id="Point를-사용하는-SLAM의-단점"><a href="#Point를-사용하는-SLAM의-단점" class="headerlink" title="Point를 사용하는 SLAM의 단점"></a>Point를 사용하는 SLAM의 단점</h1><p>Point feature를 사용하는 SLAM이 잘 안되는 케이스가 있다.</p>
 <ul>
@@ -520,7 +448,7 @@ mjx-container[display="true"] + br {
 <p>동시에 최적화를 하면서 정확도를 이끌어내려는 시도이다.</p>
 <p><br></p>
 <h2 id="Object를-표현하는-방법"><a href="#Object를-표현하는-방법" class="headerlink" title="Object를 표현하는 방법"></a>Object를 표현하는 방법</h2><p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/object_representation.png" class="" title="Object Representation">
+<img src="/20201228-cvpr2020-slam-yang/object_representation.webp" class="" title="Object Representation">
 <h2 id="최적화-cost-function"><a href="#최적화-cost-function" class="headerlink" title="최적화 cost function"></a>최적화 cost function</h2><ul>
 <li><p>Object-camera 3D relative pose</p>
 <ul>
@@ -559,17 +487,17 @@ mjx-container[display="true"] + br {
 </li>
 </ul>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/3d_detection.png" class="" title="General approach">
+<img src="/20201228-cvpr2020-slam-yang/3d_detection.webp" class="" title="General approach">
 <p>하지만 SLAM의 용도로는 우리는 한번도 본 적 없거나 복잡한 object에도 generalise 할 수 있어야한다.</p>
 <p>여기 제안하는 새로운 방법은 2D bounding box와 SLAM으로 얻어낸 camera pose를 사용한다.<br>여러시점의 Camera의 위치로부터 2D bounding box가 projective geometry 기반으로 커버할 수 있는 공간을 계산한다.<br>그리고 이 공간을 잘 표현하는 cuboid 모델로 표현해주면 간단하게 표현할 수 있다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/cuboid.png" class="" title="Cuboid model generation">
+<img src="/20201228-cvpr2020-slam-yang/cuboid.webp" class="" title="Cuboid model generation">
 <p>위 사진은 vanishing point를 사용하여 cuboid 모델을 만드는 방법을 소개한다.<br>Cuboid는 2D 이미지로 보았을 때 3개의 vanishing point가 있어야한다.<br>굉장히 정확하고 또 간단하게 풀 수 있는 방법이다.<br>계산된 Cuboid 모델은 항상 2D bounding box 안에서 발견된다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/proposals.png" class="" title="Cuboid model proposals">
+<img src="/20201228-cvpr2020-slam-yang/proposals.webp" class="" title="Cuboid model proposals">
 <p>위의 방식으로 cuboid 모델을 만들면, 보통 여러개의 가능성이 나온다.<br>휴리스틱하게 룰을 만들어서 제일 정확한 모델에게 가장 높은 score를 주는 방식을 이전까지는 많이 써왔다.<br>하지만 이 scoring system을 딥러닝으로 만들 수 있지 않을까 생각해서 도전해봤다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/result.png" class="" title="Results">
+<img src="/20201228-cvpr2020-slam-yang/result.webp" class="" title="Results">
 <p>실제로 돌려본 결과, object shape prior가 없는데도 cuboid 모양을 잘 잡는 것을 볼 수 있다.<br>다양한 object들에 cuboid model을 생성할 수 있었다.<br>Indoor 데이터셋에서는 굉장히 잘 되었다.<br>Outdoor 데이터셋은 <span class="exturl" data-url="aHR0cDovL3d3dy5jdmxpYnMubmV0L2RhdGFzZXRzL2tpdHRpL2V2YWxfb2JqZWN0LnBocD9vYmpfYmVuY2htYXJrPTNk">KITTI 데이터셋<i class="fa fa-external-link-alt"></i></span>을 사용했는데, 우리의 방식보다 결과가 좋게 나왔다.<br>그도 그럴만한게, KITTI 데이터셋에는 shape prior + 다양한 차들의 데이터가 충분히 있다.<br>Shape prior가 없는 우리 방식의 성능을 뛰어넘을 수 있다는 것을 인지해야한다.</p>
 <hr>
 <h1 id="Plane-detection"><a href="#Plane-detection" class="headerlink" title="Plane detection"></a>Plane detection</h1><ul>
@@ -591,73 +519,53 @@ mjx-container[display="true"] + br {
 <p>딥러닝 기반 layout detection은 매 프레임마다 layout prediction을 하기 때문에 정확한 값을 얻을 수 없다. (i.e. layout이 떨린다)</p>
 <p>여기에 SLAM을 섞으면 어떨까?<br>SLAM의 경우, 하나의 feature point를 다양한 각도에서 봐도 안정적이게 추출할 수 있다.<br>이 점을 이용하면, layout도 여러 각도에서 봐도 안정적이게 추출할 수 있을 것이다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/plane_proposal.png" class="" title="Plane proposal">
+<img src="/20201228-cvpr2020-slam-yang/plane_proposal.webp" class="" title="Plane proposal">
 <p>우선, 기존의 line detector를 써서 line을 찾는다.<br>Occlusion된 line이 있을 수 있으니, segmentation을 사용해서 object를 찾고 segmentation mask 내부에 line을 더 이어서 그려준다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/plane_proposal_2.png" class="" title="Plane proposal 2">
+<img src="/20201228-cvpr2020-slam-yang/plane_proposal_2.webp" class="" title="Plane proposal 2">
 <p>위의 방법으로 여러개의 plane candidate가 나올 것이다.<br>벽과 바닥이 90도 직각이라는 가정을 두고, wall plane과 floor plane을 뽑아준다.<br>이 때, 3D object detection도 할 것이라면, 동시에 같이 뽑을 수도 있다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/object_plane_joint.png" class="" title="Object / Plane joint optimisation">
+<img src="/20201228-cvpr2020-slam-yang/object_plane_joint.webp" class="" title="Object / Plane joint optimisation">
 <p>3D object pose와 wall/floor plane 정보를 함께 이용해서 joint optimisation을 할 수 있다.<br>예를 들어, object의 기울기는 floor plane과 평행해야할 수도 있다.<br>또, object의 cuboid는 wall/floor plane과 intersect 할 수 없다. (i.e. intersect하면 벽을 뚫은거니까…)<br>이러한 추가적인 geometric constraint를 추가해줌으로써 더욱 정확하게 결과를 뽑을 수 있다.</p>
 <hr>
 <h1 id="Monocular-SLAM-with-objects-and-planes"><a href="#Monocular-SLAM-with-objects-and-planes" class="headerlink" title="Monocular SLAM with objects and planes"></a>Monocular SLAM with objects and planes</h1><p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/representations.png" class="" title="Objects and planes as factors">
+<img src="/20201228-cvpr2020-slam-yang/representations.webp" class="" title="Objects and planes as factors">
 <p>기존의 SLAM에서는 factor graph optimisation을 할 때 camera pose와 map point location만 고려한다.<br>여기에 object와 plane 정보도 함께 넣어 최적화 하는것이다.<br>즉, tightly-coupled optimisation을 수행하는 것이다.</p>
 <p>Objects와 Planes는 어떤 방식으로 factor로 표현할 수 있을까?<br>Plane의 경우, 3 dof를 가지는 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.566ex" xmlns="http://www.w3.org/2000/svg" width="8.664ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 3829.6 1000"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D70B" d="M132 -11Q98 -11 98 22V33L111 61Q186 219 220 334L228 358H196Q158 358 142 355T103 336Q92 329 81 318T62 297T53 285Q51 284 38 284Q19 284 19 294Q19 300 38 329T93 391T164 429Q171 431 389 431Q549 431 553 430Q573 423 573 402Q573 371 541 360Q535 358 472 358H408L405 341Q393 269 393 222Q393 170 402 129T421 65T431 37Q431 20 417 5T381 -10Q370 -10 363 -7T347 17T331 77Q330 86 330 121Q330 170 339 226T357 318T367 358H269L268 354Q268 351 249 275T206 114T175 17Q164 -11 132 -11Z"></path></g><g data-mml-node="mo" transform="translate(847.8, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mo" transform="translate(1903.6, 0)"><path data-c="5B" d="M118 -250V750H255V710H158V-210H255V-250H118Z"></path></g><g data-mml-node="mi" transform="translate(2181.6, 0)"><path data-c="1D45B" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mtext" transform="translate(2781.6, 0)"><path data-c="A0" d=""></path></g><g data-mml-node="mi" transform="translate(3031.6, 0)"><path data-c="1D451" d="M366 683Q367 683 438 688T511 694Q523 694 523 686Q523 679 450 384T375 83T374 68Q374 26 402 26Q411 27 422 35Q443 55 463 131Q469 151 473 152Q475 153 483 153H487H491Q506 153 506 145Q506 140 503 129Q490 79 473 48T445 8T417 -8Q409 -10 393 -10Q359 -10 336 5T306 36L300 51Q299 52 296 50Q294 48 292 46Q233 -10 172 -10Q117 -10 75 30T33 157Q33 205 53 255T101 341Q148 398 195 420T280 442Q336 442 364 400Q369 394 369 396Q370 400 396 505T424 616Q424 629 417 632T378 637H357Q351 643 351 645T353 664Q358 683 366 683ZM352 326Q329 405 277 405Q242 405 210 374T160 293Q131 214 119 129Q119 126 119 118T118 106Q118 61 136 44T179 26Q233 26 290 98L298 109L352 326Z"></path></g><g data-mml-node="mo" transform="translate(3551.6, 0)"><path data-c="5D" d="M22 710V750H159V-250H22V-210H119V710H22Z"></path></g></g></g></svg></mjx-container> 가 되겠다.<br>Cuboid object의 경우, 6 dof pose와 (i.e. 3d rotation + 3d translation) 3 dof size를 (i.e. width, length, height) 가지겠다.<br>종종 특정 용도에서 자동차의 경우 size를 고정하기도 한다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/measurement_error.png" class="" title="Measurement errors">
+<img src="/20201228-cvpr2020-slam-yang/measurement_error.webp" class="" title="Measurement errors">
 <p>최적화를 수행할 때는 measurement error 값을 이용한다.<br>여기서 우리는 두가지 방식으로 measurement error를 사용할 수 있다.</p>
 <p>첫번째는 3D measurement이다.<br>다양한 카메라 각도에서 object의 pose와 size를 추정하면서 나타나는 차이 값이다.</p>
 <p>두번째는 2D measurement이다.<br>Cuboid를 2D 이미지에 projection시켜 생기는 사각형을 2D bounding box와 비교하는 reprojection error를 사용하는 것이다.<br>이 방법은 3D measurement를 사용하는 방법보다 더 robust하다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/measurement_error2.png" class="" title="Measurement errors 2">
+<img src="/20201228-cvpr2020-slam-yang/measurement_error2.webp" class="" title="Measurement errors 2">
 <p>Plane 정보는 항상 바닥에서 추출한 line으로부터 만들어진다.<br>그렇기 때문에, 우리가 추정한 plane 정보는 unproject된 바닥 line과 비교하여 에러 값을 추정할 수 있다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/data_association.png" class="" title="Data association">
+<img src="/20201228-cvpr2020-slam-yang/data_association.webp" class="" title="Data association">
 <p>위의 방법들을 사용하면, 우리는 자연스럽게 point feature와 object 정보에 대해서 data association을 할 수 있다.<br>여기에 epipolar checking 등을 하면 더 정확해질 수 있다.<br>이 방법으로 cluttered / repetitive / occluded object에 대해서도 강인하게 트랙킹하는 것을 보았다.<br>이 방법은 기존의 object tracking이나 template 기반 트랙킹 방법보다 정확하다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/eval.png" class="" title="Evaluation">
+<img src="/20201228-cvpr2020-slam-yang/eval.webp" class="" title="Evaluation">
 <p>Object의 크기를 fixed-size로 고정해놓고 이 방법을 구현한 것이 CubeSLAM이다.<br>CubeSLAM은 loop closure과 같은 기능도 없지만, scale drift가 전혀 없는 것을 볼 수 있다.<br>ORB-SLAM과 비교하였을 때 훨씬 정확한 모습을 볼 수 있다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/eval2.png" class="" title="Evaluation 2">
+<img src="/20201228-cvpr2020-slam-yang/eval2.webp" class="" title="Evaluation 2">
 <p>이런 경우에는 feature point의 수가 굉장히 적기 때문에 기존의 ORB-SLAM과 같은 방식은 모두 실패한다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/eval3.png" class="" title="Evaluation 3">
+<img src="/20201228-cvpr2020-slam-yang/eval3.webp" class="" title="Evaluation 3">
 <p>왼쪽의 reconstruction 결과를 보면 object의 정보만 사용했을 때는 pose가 많이 흔들린 것을 볼 수 있다.<br>이는 wall 정보를 사용하지 않았기 때문이라고 판단이 된다.<br>오른쪽에 보이는 결과는 후속 연구에서 wall 정보를 사용한 것인데, 훨씬 더 좋은 결과가 나타났다.<br>오피스의 한 층을 돌고 와도 굉장히 정확한 object pose + odometry 추정이 된다.<br>데모영상은 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9qekJNc0tDbTB1aw==">여기<i class="fa fa-external-link-alt"></i></span>를 보면 된다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/eval4.png" class="" title="Evaluation 4">
+<img src="/20201228-cvpr2020-slam-yang/eval4.webp" class="" title="Evaluation 4">
 <p>이렇게 Object detection + SLAM을 이용한 방식은 기존의 방식과 비교했을 때 더 좋은 성능을 보여준다.<br>Single view 3D object detection 보다 더 정확하고,<br>또 기존의 monocular SLAM 시스템보다 정확하다.</p>
 <hr>
 <h1 id="Dynamic-object-SLAM"><a href="#Dynamic-object-SLAM" class="headerlink" title="Dynamic object SLAM"></a>Dynamic object SLAM</h1><p>기존의 SLAM 방법론들은 모두 움직이는 객체는 outlier로 처리한다.<br>하지만 실제 환경은 그렇지 않다.<br>움직이는 객체들이 많으면 어떻게 해야할까?</p>
 <p>우선 문제를 간단하게 하기 위해, 모든 움직이는 객체는 rigid-body라고 가정한다.<br>그리고 움직임에 대한 motion model이 있다고 가정한다.<br>그리고 아래와 같은 graph를 만들어서 풀면 된다.</p>
 <p><br></p>
-<img src="/20201228-cvpr2020-slam-yang/dynamic.png" class="" title="Dynamic">
+<img src="/20201228-cvpr2020-slam-yang/dynamic.webp" class="" title="Dynamic">
 
     </div>
 
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201225-CVPR2020-Cremers-SLAM-workshop/" rel="bookmark">CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20210407-3dgv-andrew-davison/" rel="bookmark">3DGV 2021 - Representations and Computational Patterns in Spatial AI (Prof. Andrew Davison)</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -676,12 +584,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20201227-cvpr2020-slam-malisiewicz/" rel="prev" title="CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)">
-                  <i class="fa fa-chevron-left"></i> CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)
+                  <i class="fa fa-angle-left"></i> CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20201229-dec-2020-slam-news/" rel="next" title="2020년 10~12월 SLAM 논문 소식">
-                  2020년 10~12월 SLAM 논문 소식 <i class="fa fa-chevron-right"></i>
+                  2020년 10~12월 SLAM 논문 소식 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -701,45 +609,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -747,7 +632,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -761,36 +646,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -800,49 +684,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

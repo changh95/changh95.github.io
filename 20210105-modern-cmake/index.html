@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,88 +14,54 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="Modern Cmake - An introduction 영상을 보고 공부한 노트입니다">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Modern Cmake - An introduction 영상을 보고 공부한 노트입니다">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Modern CMake">
 <meta property="og:url" content="https://changh95.github.io/20210105-modern-cmake/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="Modern Cmake - An introduction 영상을 보고 공부한 노트입니다">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/cmake_run.png">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/ninja_run.png">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/target_link_libraries.png">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string1.png">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string2.png">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string3.png">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/list1.png">
-<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/list2.png">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/cmake_run.webp">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/ninja_run.webp">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/target_link_libraries.webp">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string1.webp">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string2.webp">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/string3.webp">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/list1.webp">
+<meta property="og:image" content="https://changh95.github.io/20210105-modern-cmake/list2.webp">
 <meta property="article:published_time" content="2021-01-05T11:38:19.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.190Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20210105-modern-cmake/cmake_run.png">
+<meta name="twitter:image" content="https://changh95.github.io/20210105-modern-cmake/cmake_run.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20210105-modern-cmake/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20210105-modern-cmake/","path":"20210105-modern-cmake/","title":"Modern CMake"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Modern CMake | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -221,10 +185,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -235,14 +199,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -251,27 +215,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -291,7 +235,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -304,15 +248,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -327,65 +265,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B0%80%EC%9E%A5-%EC%89%AC%EC%9A%B4-%EC%9D%B8%ED%8A%B8%EB%A1%9C"><span class="nav-number">1.</span> <span class="nav-text">가장 쉬운 인트로</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Executable-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EB%A7%8C%EB%93%A4%EA%B8%B0"><span class="nav-number">1.1.</span> <span class="nav-text">Executable 프로그램 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cmake-%EC%BB%A4%EB%A7%A8%EB%93%9C-amp-ninja-%EC%BB%A4%EB%A7%A8%EB%93%9C-%EC%84%A4%EB%AA%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">cmake 커맨드 &amp; ninja 커맨드 설명</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add-executable%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.1.2.</span> <span class="nav-text">add_executable에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Library-%EB%A7%8C%EB%93%A4%EA%B8%B0"><span class="nav-number">1.2.</span> <span class="nav-text">Library 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-library%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.2.1.</span> <span class="nav-text">add_library에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Executable%EC%97%90-Library-%EB%A7%81%ED%81%AC%ED%95%98%EA%B8%B0"><span class="nav-number">1.3.</span> <span class="nav-text">Executable에 Library 링크하기.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#target-link-libraries%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.3.1.</span> <span class="nav-text">target_link_libraries에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%ED%8C%8C%EC%9D%BC-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EC%B6%94%EA%B0%80"><span class="nav-number">1.4.</span> <span class="nav-text">파일&#x2F;디렉토리 추가</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-subdirectory%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.4.1.</span> <span class="nav-text">add_subdirectory에 사용 가능한 옵션</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include%EC%97%90-%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-%EC%98%B5%EC%85%98"><span class="nav-number">1.4.2.</span> <span class="nav-text">include에 사용 가능한 옵션</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake-%EB%94%94%EB%B2%84%EA%B9%85%ED%95%98%EA%B8%B0"><span class="nav-number">1.5.</span> <span class="nav-text">CMake 디버깅하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B0%84%EB%8B%A8%ED%95%9C-%EB%94%94%EB%B2%84%EA%B9%85-%EC%98%88%EC%8B%9C"><span class="nav-number">1.5.1.</span> <span class="nav-text">간단한 디버깅 예시</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#message-mode%EB%A5%BC-variable%EB%A1%9C-%EC%84%A0%EC%96%B8%ED%95%98%EA%B8%B0"><span class="nav-number">1.5.2.</span> <span class="nav-text">message mode를 variable로 선언하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMake%EC%9D%98-%EB%AA%A8%EB%93%A0-message-%EB%B3%B4%EA%B8%B0"><span class="nav-number">1.5.3.</span> <span class="nav-text">CMake의 모든 message 보기</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variables"><span class="nav-number">2.</span> <span class="nav-text">Variables</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.1.</span> <span class="nav-text">Variables 사용하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%82%AC%EC%9A%A9-%EC%98%88%EC%8B%9C"><span class="nav-number">2.1.1.</span> <span class="nav-text">사용 예시</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EA%B0%99%EC%9D%80-%EC%9D%B4%EB%A6%84%EC%9D%98-variable%EB%93%A4"><span class="nav-number">2.1.2.</span> <span class="nav-text">같은 이름의 variable들</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set%EC%97%90-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%98%B5%EC%85%98"><span class="nav-number">2.1.3.</span> <span class="nav-text">set에 사용할 수 있는 옵션</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cache-variable%EC%9D%98-%ED%8A%B9%EC%A7%95"><span class="nav-number">2.1.4.</span> <span class="nav-text">Cache variable의 특징</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMakeCache-txt%EC%9D%98-%ED%8A%B9%EC%A7%95"><span class="nav-number">2.1.5.</span> <span class="nav-text">CMakeCache.txt의 특징</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8B%A4%EC%96%91%ED%95%9C-variable-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.2.</span> <span class="nav-text">다양한 variable 사용하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">String 사용하기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#List-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0"><span class="nav-number">2.2.2.</span> <span class="nav-text">List 사용하기</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Control-flow"><span class="nav-number">3.</span> <span class="nav-text">Control flow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Control-flow-%ED%95%A8%EC%88%98"><span class="nav-number">3.1.</span> <span class="nav-text">Control flow 함수</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if%EB%AC%B8"><span class="nav-number">3.2.</span> <span class="nav-text">if문</span></a></li></ol></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -403,11 +327,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Modern CMake | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -424,13 +353,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2021-01-05 20:38:19" itemprop="dateCreated datePublished" datetime="2021-01-05T20:38:19+09:00">2021-01-05</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -446,7 +375,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -461,8 +390,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>Joshua Lospinoso의 ‘<span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9iRGRrSnUtblZUbw==">Modern Cmake: An introduction<i class="fa fa-external-link-alt"></i></span>‘ 영상을 보고 공부한 노트입니다.<br>추천하는 책은 ‘<span class="exturl" data-url="aHR0cHM6Ly9jcmFzY2l0LmNvbS9wcm9mZXNzaW9uYWwtY21ha2Uv">Professional CMake: A Practical Guide<i class="fa fa-external-link-alt"></i></span>‘</p>
+    <div class="post-body" itemprop="articleBody"><p>Joshua Lospinoso의 ‘<span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9iRGRrSnUtblZUbw==">Modern Cmake: An introduction<i class="fa fa-external-link-alt"></i></span>‘ 영상을 보고 공부한 노트입니다.<br>추천하는 책은 ‘<span class="exturl" data-url="aHR0cHM6Ly9jcmFzY2l0LmNvbS9wcm9mZXNzaW9uYWwtY21ha2Uv">Professional CMake: A Practical Guide<i class="fa fa-external-link-alt"></i></span>‘</p>
 <hr>
 <h1 id="가장-쉬운-인트로"><a href="#가장-쉬운-인트로" class="headerlink" title="가장 쉬운 인트로"></a>가장 쉬운 인트로</h1><h2 id="Executable-프로그램-만들기"><a href="#Executable-프로그램-만들기" class="headerlink" title="Executable 프로그램 만들기"></a>Executable 프로그램 만들기</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"Hello, world!\n"</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 <p>위와 같은 형태의 .cpp 파일이 있다고 해보자.<br>우리는 이 파일을 기반으로 binary executable이나 library를 만들고싶다.<br>이를 위해 우리는 CMake를 사용한다.</p>
@@ -479,9 +407,9 @@ mjx-container[display="true"] + br {
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ ls -1</span><br><span class="line">   CMakeLists.txt</span><br><span class="line">   main.cpp</span><br><span class="line">$ mkdir build &amp;&amp; <span class="built_in">cd</span> build/</span><br><span class="line">$ cmake .. -GNinja</span><br><span class="line">$ ninja</span><br><span class="line">$ ./App</span><br><span class="line">Hello, world!</span><br></pre></td></tr></table></figure>
 <p>터미널에서 다음과 같은 커맨드를 사용하면 프로젝트를 생성하고 실행할 수 있다.<br><code>-GNinja</code> 라는 generator flag는 추후에 기술한다.<br>ninja 대신 make를 사용해도 된다 (Lospinoso는 ninja를 더 좋아한다고 한다).</p>
 <p><br></p>
-<h3 id="cmake-커맨드-amp-ninja-커맨드-설명"><a href="#cmake-커맨드-amp-ninja-커맨드-설명" class="headerlink" title="cmake 커맨드 & ninja 커맨드 설명"></a>cmake 커맨드 &amp; ninja 커맨드 설명</h3><img src="/20210105-modern-cmake/cmake_run.png" class="" title="CMake run">
+<h3 id="cmake-커맨드-amp-ninja-커맨드-설명"><a href="#cmake-커맨드-amp-ninja-커맨드-설명" class="headerlink" title="cmake 커맨드 & ninja 커맨드 설명"></a>cmake 커맨드 &amp; ninja 커맨드 설명</h3><img src="/20210105-modern-cmake/cmake_run.webp" class="" title="CMake run">
 <p><code>cmake .. -GNinja</code> 커맨드를 실행했을 때, 위와 같은 파일들이 생성된다.<br>이 중 제일 중요한 것은 <code>CMakeCache.txt</code>인데, 이 파일 안에 빌드에 필요한 캐쉬 값들이 저장된다.</p>
-<img src="/20210105-modern-cmake/ninja_run.png" class="" title="ninja run">
+<img src="/20210105-modern-cmake/ninja_run.webp" class="" title="ninja run">
 <p>이 후 <code>ninja</code> 커맨드를 실행하면 빌드를 위해 ninja 패키지가 사용하는 intermediate object와 log, dependency 등이 생성된다.<br>그리고 제일 중요한 빌드의 결과물인 <code>build/App</code> executable이 생성된다.</p>
 <p><br></p>
 <h3 id="add-executable에-사용-가능한-옵션"><a href="#add-executable에-사용-가능한-옵션" class="headerlink" title="add_executable에 사용 가능한 옵션"></a>add_executable에 사용 가능한 옵션</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span> (&lt;name&gt; [WIN32] [MACOSX_BUNDLE]</span><br><span class="line">                [EXCLUDE_FROM_ALL]</span><br><span class="line">                [source1] [source2 ...])</span><br></pre></td></tr></table></figure>
@@ -541,7 +469,7 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<img src="/20210105-modern-cmake/target_link_libraries.png" class="" title="target_link_libraries">
+<img src="/20210105-modern-cmake/target_link_libraries.webp" class="" title="target_link_libraries">
 <p>큰 프로젝트에서는 위와 같은 구조도 만들 수 있다.</p>
 <hr>
 <h2 id="파일-디렉토리-추가"><a href="#파일-디렉토리-추가" class="headerlink" title="파일/디렉토리 추가"></a>파일/디렉토리 추가</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(dir1)</span><br><span class="line"><span class="keyword">include</span>(dir2/HelperScript.cmake)</span><br></pre></td></tr></table></figure>
@@ -626,11 +554,11 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 </ul>
-<h3 id="String-사용하기"><a href="#String-사용하기" class="headerlink" title="String 사용하기"></a>String 사용하기</h3><img src="/20210105-modern-cmake/string1.png" class="" title="string1">
-<img src="/20210105-modern-cmake/string2.png" class="" title="string2">
-<img src="/20210105-modern-cmake/string3.png" class="" title="string3">
-<h3 id="List-사용하기"><a href="#List-사용하기" class="headerlink" title="List 사용하기"></a>List 사용하기</h3><img src="/20210105-modern-cmake/list1.png" class="" title="list1">
-<img src="/20210105-modern-cmake/list2.png" class="" title="list2">
+<h3 id="String-사용하기"><a href="#String-사용하기" class="headerlink" title="String 사용하기"></a>String 사용하기</h3><img src="/20210105-modern-cmake/string1.webp" class="" title="string1">
+<img src="/20210105-modern-cmake/string2.webp" class="" title="string2">
+<img src="/20210105-modern-cmake/string3.webp" class="" title="string3">
+<h3 id="List-사용하기"><a href="#List-사용하기" class="headerlink" title="List 사용하기"></a>List 사용하기</h3><img src="/20210105-modern-cmake/list1.webp" class="" title="list1">
+<img src="/20210105-modern-cmake/list2.webp" class="" title="list2">
 <hr>
 <h1 id="Control-flow"><a href="#Control-flow" class="headerlink" title="Control flow"></a>Control flow</h1><p>CMake에 control flow 함수는 많지 않다.</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (A)</span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
@@ -659,26 +587,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -691,12 +599,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20210330-why-cpp/" rel="prev" title="C++을 배워야하는 이유">
-                  <i class="fa fa-chevron-left"></i> C++을 배워야하는 이유
+                  <i class="fa fa-angle-left"></i> C++을 배워야하는 이유
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20210107-pipenv/" rel="next" title="pipenv 공부">
-                  pipenv 공부 <i class="fa fa-chevron-right"></i>
+                  pipenv 공부 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -716,45 +624,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -762,7 +647,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -776,36 +661,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -815,49 +699,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

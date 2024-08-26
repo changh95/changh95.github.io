@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,13 +14,11 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="Eigen Cheat sheet 레퍼런스">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Eigen Cheat sheet 레퍼런스">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Eigen Cheat sheet 레퍼런스">
 <meta property="og:url" content="https://changh95.github.io/20220108-eigen-cheatsheet/index.html">
@@ -39,55 +35,23 @@
 <link rel="canonical" href="https://changh95.github.io/20220108-eigen-cheatsheet/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20220108-eigen-cheatsheet/","path":"20220108-eigen-cheatsheet/","title":"Eigen Cheat sheet 레퍼런스"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Eigen Cheat sheet 레퍼런스 | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -211,10 +175,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -225,14 +189,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -241,27 +205,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -281,7 +225,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -294,15 +238,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -317,65 +255,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%B9%98%ED%8A%B8%EC%8B%9C%ED%8A%B8"><span class="nav-number">1.</span> <span class="nav-text">치트시트</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9B%90%EB%B3%B8-%EB%A7%81%ED%81%AC"><span class="nav-number">2.</span> <span class="nav-text">원본 링크</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -393,11 +317,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Eigen Cheat sheet 레퍼런스 | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -414,13 +343,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2022-01-08 20:01:22" itemprop="dateCreated datePublished" datetime="2022-01-08T20:01:22+09:00">2022-01-08</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -440,7 +369,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -455,8 +384,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h2 id="치트시트"><a href="#치트시트" class="headerlink" title="치트시트"></a>치트시트</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A simple quickref for Eigen. Add anything that's missing.</span></span><br><span class="line"><span class="comment">// Main author: Keir Mierle</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, <span class="number">3</span>, <span class="number">3</span>&gt; A;               <span class="comment">// Fixed rows and cols. Same as Matrix3d.</span></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, <span class="number">3</span>, Dynamic&gt; B;         <span class="comment">// Fixed rows, dynamic cols.</span></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, Dynamic, Dynamic&gt; C;   <span class="comment">// Full dynamic. Same as MatrixXd.</span></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, <span class="number">3</span>, <span class="number">3</span>, RowMajor&gt; E;     <span class="comment">// Row major; default is column-major.</span></span><br><span class="line">Matrix3f P, Q, R;                     <span class="comment">// 3x3 float matrix.</span></span><br><span class="line">Vector3f x, y, z;                     <span class="comment">// 3x1 float matrix.</span></span><br><span class="line">RowVector3f a, b, c;                  <span class="comment">// 1x3 float matrix.</span></span><br><span class="line">VectorXd v;                           <span class="comment">// Dynamic column vector of doubles</span></span><br><span class="line"><span class="keyword">double</span> s;                            </span><br><span class="line"></span><br><span class="line"><span class="comment">// Basic usage</span></span><br><span class="line"><span class="comment">// Eigen          // Matlab           // comments</span></span><br><span class="line">x.<span class="built_in">size</span>()          <span class="comment">// length(x)        // vector size</span></span><br><span class="line">C.<span class="built_in">rows</span>()          <span class="comment">// size(C,1)        // number of rows</span></span><br><span class="line">C.<span class="built_in">cols</span>()          <span class="comment">// size(C,2)        // number of columns</span></span><br><span class="line"><span class="built_in">x</span>(i)              <span class="comment">// x(i+1)           // Matlab is 1-based</span></span><br><span class="line"><span class="built_in">C</span>(i,j)            <span class="comment">// C(i+1,j+1)       //</span></span><br><span class="line"></span><br><span class="line">A.<span class="built_in">resize</span>(<span class="number">4</span>, <span class="number">4</span>);   <span class="comment">// Runtime error if assertions are on.</span></span><br><span class="line">B.<span class="built_in">resize</span>(<span class="number">4</span>, <span class="number">9</span>);   <span class="comment">// Runtime error if assertions are on.</span></span><br><span class="line">A.<span class="built_in">resize</span>(<span class="number">3</span>, <span class="number">3</span>);   <span class="comment">// Ok; size didn't change.</span></span><br><span class="line">B.<span class="built_in">resize</span>(<span class="number">3</span>, <span class="number">9</span>);   <span class="comment">// Ok; only dynamic cols changed.</span></span><br><span class="line">                  </span><br><span class="line">A &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,     <span class="comment">// Initialize A. The elements can also be</span></span><br><span class="line">     <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,     <span class="comment">// matrices, which are stacked along cols</span></span><br><span class="line">     <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>;     <span class="comment">// and then the rows are stacked.</span></span><br><span class="line">B &lt;&lt; A, A, A;     <span class="comment">// B is three horizontally stacked A's.</span></span><br><span class="line">A.<span class="built_in">fill</span>(<span class="number">10</span>);       <span class="comment">// Fill A with all 10's.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Eigen                                    // Matlab</span></span><br><span class="line">MatrixXd::<span class="built_in">Identity</span>(rows,cols)               <span class="comment">// eye(rows,cols)</span></span><br><span class="line">C.<span class="built_in">setIdentity</span>(rows,cols)                    <span class="comment">// C = eye(rows,cols)</span></span><br><span class="line">MatrixXd::<span class="built_in">Zero</span>(rows,cols)                   <span class="comment">// zeros(rows,cols)</span></span><br><span class="line">C.<span class="built_in">setZero</span>(rows,cols)                        <span class="comment">// C = zeros(rows,cols)</span></span><br><span class="line">MatrixXd::<span class="built_in">Ones</span>(rows,cols)                   <span class="comment">// ones(rows,cols)</span></span><br><span class="line">C.<span class="built_in">setOnes</span>(rows,cols)                        <span class="comment">// C = ones(rows,cols)</span></span><br><span class="line">MatrixXd::<span class="built_in">Random</span>(rows,cols)                 <span class="comment">// rand(rows,cols)*2-1            // MatrixXd::Random returns uniform random numbers in (-1, 1).</span></span><br><span class="line">C.<span class="built_in">setRandom</span>(rows,cols)                      <span class="comment">// C = rand(rows,cols)*2-1</span></span><br><span class="line">VectorXd::<span class="built_in">LinSpaced</span>(size,low,high)          <span class="comment">// linspace(low,high,size)'</span></span><br><span class="line">v.<span class="built_in">setLinSpaced</span>(size,low,high)               <span class="comment">// v = linspace(low,high,size)'</span></span><br><span class="line">VectorXi::<span class="built_in">LinSpaced</span>(((hi-low)/step)+<span class="number">1</span>,      <span class="comment">// low:step:hi</span></span><br><span class="line">                    low,low+step*(size<span class="number">-1</span>))  <span class="comment">//</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Matrix slicing and blocks. All expressions listed here are read/write.</span></span><br><span class="line"><span class="comment">// Templated size versions are faster. Note that Matlab is 1-based (a size N</span></span><br><span class="line"><span class="comment">// vector is x(1)...x(N)).</span></span><br><span class="line"><span class="comment">// Eigen                           // Matlab</span></span><br><span class="line">x.<span class="built_in">head</span>(n)                          <span class="comment">// x(1:n)</span></span><br><span class="line">x.head&lt;n&gt;()                        <span class="comment">// x(1:n)</span></span><br><span class="line">x.<span class="built_in">tail</span>(n)                          <span class="comment">// x(end - n + 1: end)</span></span><br><span class="line">x.tail&lt;n&gt;()                        <span class="comment">// x(end - n + 1: end)</span></span><br><span class="line">x.<span class="built_in">segment</span>(i, n)                    <span class="comment">// x(i+1 : i+n)</span></span><br><span class="line">x.segment&lt;n&gt;(i)                    <span class="comment">// x(i+1 : i+n)</span></span><br><span class="line">P.<span class="built_in">block</span>(i, j, rows, cols)          <span class="comment">// P(i+1 : i+rows, j+1 : j+cols)</span></span><br><span class="line">P.block&lt;rows, cols&gt;(i, j)          <span class="comment">// P(i+1 : i+rows, j+1 : j+cols)</span></span><br><span class="line">P.<span class="built_in">row</span>(i)                           <span class="comment">// P(i+1, :)</span></span><br><span class="line">P.<span class="built_in">col</span>(j)                           <span class="comment">// P(:, j+1)</span></span><br><span class="line">P.leftCols&lt;cols&gt;()                 <span class="comment">// P(:, 1:cols)</span></span><br><span class="line">P.<span class="built_in">leftCols</span>(cols)                   <span class="comment">// P(:, 1:cols)</span></span><br><span class="line">P.middleCols&lt;cols&gt;(j)              <span class="comment">// P(:, j+1:j+cols)</span></span><br><span class="line">P.<span class="built_in">middleCols</span>(j, cols)              <span class="comment">// P(:, j+1:j+cols)</span></span><br><span class="line">P.rightCols&lt;cols&gt;()                <span class="comment">// P(:, end-cols+1:end)</span></span><br><span class="line">P.<span class="built_in">rightCols</span>(cols)                  <span class="comment">// P(:, end-cols+1:end)</span></span><br><span class="line">P.topRows&lt;rows&gt;()                  <span class="comment">// P(1:rows, :)</span></span><br><span class="line">P.<span class="built_in">topRows</span>(rows)                    <span class="comment">// P(1:rows, :)</span></span><br><span class="line">P.middleRows&lt;rows&gt;(i)              <span class="comment">// P(i+1:i+rows, :)</span></span><br><span class="line">P.<span class="built_in">middleRows</span>(i, rows)              <span class="comment">// P(i+1:i+rows, :)</span></span><br><span class="line">P.bottomRows&lt;rows&gt;()               <span class="comment">// P(end-rows+1:end, :)</span></span><br><span class="line">P.<span class="built_in">bottomRows</span>(rows)                 <span class="comment">// P(end-rows+1:end, :)</span></span><br><span class="line">P.<span class="built_in">topLeftCorner</span>(rows, cols)        <span class="comment">// P(1:rows, 1:cols)</span></span><br><span class="line">P.<span class="built_in">topRightCorner</span>(rows, cols)       <span class="comment">// P(1:rows, end-cols+1:end)</span></span><br><span class="line">P.<span class="built_in">bottomLeftCorner</span>(rows, cols)     <span class="comment">// P(end-rows+1:end, 1:cols)</span></span><br><span class="line">P.<span class="built_in">bottomRightCorner</span>(rows, cols)    <span class="comment">// P(end-rows+1:end, end-cols+1:end)</span></span><br><span class="line">P.topLeftCorner&lt;rows,cols&gt;()       <span class="comment">// P(1:rows, 1:cols)</span></span><br><span class="line">P.topRightCorner&lt;rows,cols&gt;()      <span class="comment">// P(1:rows, end-cols+1:end)</span></span><br><span class="line">P.bottomLeftCorner&lt;rows,cols&gt;()    <span class="comment">// P(end-rows+1:end, 1:cols)</span></span><br><span class="line">P.bottomRightCorner&lt;rows,cols&gt;()   <span class="comment">// P(end-rows+1:end, end-cols+1:end)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Of particular note is Eigen's swap function which is highly optimized.</span></span><br><span class="line"><span class="comment">// Eigen                           // Matlab</span></span><br><span class="line">R.<span class="built_in">row</span>(i) = P.<span class="built_in">col</span>(j);               <span class="comment">// R(i, :) = P(:, j)</span></span><br><span class="line">R.<span class="built_in">col</span>(j1).<span class="built_in">swap</span>(mat1.<span class="built_in">col</span>(j2));      <span class="comment">// R(:, [j1 j2]) = R(:, [j2, j1])</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Views, transpose, etc;</span></span><br><span class="line"><span class="comment">// Eigen                           // Matlab</span></span><br><span class="line">R.<span class="built_in">adjoint</span>()                        <span class="comment">// R'</span></span><br><span class="line">R.<span class="built_in">transpose</span>()                      <span class="comment">// R.' or conj(R')       // Read-write</span></span><br><span class="line">R.<span class="built_in">diagonal</span>()                       <span class="comment">// diag(R)               // Read-write</span></span><br><span class="line">x.<span class="built_in">asDiagonal</span>()                     <span class="comment">// diag(x)</span></span><br><span class="line">R.<span class="built_in">transpose</span>().<span class="built_in">colwise</span>().<span class="built_in">reverse</span>()  <span class="comment">// rot90(R)              // Read-write</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">reverse</span>()              <span class="comment">// fliplr(R)</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">reverse</span>()              <span class="comment">// flipud(R)</span></span><br><span class="line">R.<span class="built_in">replicate</span>(i,j)                   <span class="comment">// repmat(P,i,j)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// All the same as Matlab, but matlab doesn't have *= style operators.</span></span><br><span class="line"><span class="comment">// Matrix-vector.  Matrix-matrix.   Matrix-scalar.</span></span><br><span class="line">y  = M*x;          R  = P*Q;        R  = P*s;</span><br><span class="line">a  = b*M;          R  = P - Q;      R  = s*P;</span><br><span class="line">a *= M;            R  = P + Q;      R  = P/s;</span><br><span class="line">                   R *= Q;          R  = s*P;</span><br><span class="line">                   R += Q;          R *= s;</span><br><span class="line">                   R -= Q;          R /= s;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Vectorized operations on each element independently</span></span><br><span class="line"><span class="comment">// Eigen                       // Matlab</span></span><br><span class="line">R = P.<span class="built_in">cwiseProduct</span>(Q);         <span class="comment">// R = P .* Q</span></span><br><span class="line">R = P.<span class="built_in">array</span>() * s.<span class="built_in">array</span>();     <span class="comment">// R = P .* s</span></span><br><span class="line">R = P.<span class="built_in">cwiseQuotient</span>(Q);        <span class="comment">// R = P ./ Q</span></span><br><span class="line">R = P.<span class="built_in">array</span>() / Q.<span class="built_in">array</span>();     <span class="comment">// R = P ./ Q</span></span><br><span class="line">R = P.<span class="built_in">array</span>() + s.<span class="built_in">array</span>();     <span class="comment">// R = P + s</span></span><br><span class="line">R = P.<span class="built_in">array</span>() - s.<span class="built_in">array</span>();     <span class="comment">// R = P - s</span></span><br><span class="line">R.<span class="built_in">array</span>() += s;                <span class="comment">// R = R + s</span></span><br><span class="line">R.<span class="built_in">array</span>() -= s;                <span class="comment">// R = R - s</span></span><br><span class="line">R.<span class="built_in">array</span>() &lt; Q.<span class="built_in">array</span>();         <span class="comment">// R &lt; Q</span></span><br><span class="line">R.<span class="built_in">array</span>() &lt;= Q.<span class="built_in">array</span>();        <span class="comment">// R &lt;= Q</span></span><br><span class="line">R.<span class="built_in">cwiseInverse</span>();              <span class="comment">// 1 ./ P</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">inverse</span>();           <span class="comment">// 1 ./ P</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">sin</span>()                <span class="comment">// sin(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">cos</span>()                <span class="comment">// cos(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">pow</span>(s)               <span class="comment">// P .^ s</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">square</span>()             <span class="comment">// P .^ 2</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">cube</span>()               <span class="comment">// P .^ 3</span></span><br><span class="line">R.<span class="built_in">cwiseSqrt</span>()                  <span class="comment">// sqrt(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">sqrt</span>()               <span class="comment">// sqrt(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">exp</span>()                <span class="comment">// exp(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">log</span>()                <span class="comment">// log(P)</span></span><br><span class="line">R.<span class="built_in">cwiseMax</span>(P)                  <span class="comment">// max(R, P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">max</span>(P.<span class="built_in">array</span>())       <span class="comment">// max(R, P)</span></span><br><span class="line">R.<span class="built_in">cwiseMin</span>(P)                  <span class="comment">// min(R, P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">min</span>(P.<span class="built_in">array</span>())       <span class="comment">// min(R, P)</span></span><br><span class="line">R.<span class="built_in">cwiseAbs</span>()                   <span class="comment">// abs(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">abs</span>()                <span class="comment">// abs(P)</span></span><br><span class="line">R.<span class="built_in">cwiseAbs2</span>()                  <span class="comment">// abs(P.^2)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">abs2</span>()               <span class="comment">// abs(P.^2)</span></span><br><span class="line">(R.<span class="built_in">array</span>() &lt; s).<span class="built_in">select</span>(P,Q );  <span class="comment">// (R &lt; s ? P : Q)</span></span><br><span class="line">R = (Q.<span class="built_in">array</span>()==<span class="number">0</span>).<span class="built_in">select</span>(P,A) <span class="comment">// R(Q==0) = P(Q==0)</span></span><br><span class="line">R = P.<span class="built_in">unaryExpr</span>(<span class="built_in">ptr_fun</span>(func)) <span class="comment">// R = arrayfun(func, P)   // with: scalar func(const scalar &amp;x);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Reductions.</span></span><br><span class="line"><span class="keyword">int</span> r, c;</span><br><span class="line"><span class="comment">// Eigen                  // Matlab</span></span><br><span class="line">R.<span class="built_in">minCoeff</span>()              <span class="comment">// min(R(:))</span></span><br><span class="line">R.<span class="built_in">maxCoeff</span>()              <span class="comment">// max(R(:))</span></span><br><span class="line">s = R.<span class="built_in">minCoeff</span>(&amp;r, &amp;c)    <span class="comment">// [s, i] = min(R(:)); [r, c] = ind2sub(size(R), i);</span></span><br><span class="line">s = R.<span class="built_in">maxCoeff</span>(&amp;r, &amp;c)    <span class="comment">// [s, i] = max(R(:)); [r, c] = ind2sub(size(R), i);</span></span><br><span class="line">R.<span class="built_in">sum</span>()                   <span class="comment">// sum(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">sum</span>()         <span class="comment">// sum(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">sum</span>()         <span class="comment">// sum(R, 2) or sum(R')'</span></span><br><span class="line">R.<span class="built_in">prod</span>()                  <span class="comment">// prod(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">prod</span>()        <span class="comment">// prod(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">prod</span>()        <span class="comment">// prod(R, 2) or prod(R')'</span></span><br><span class="line">R.<span class="built_in">trace</span>()                 <span class="comment">// trace(R)</span></span><br><span class="line">R.<span class="built_in">all</span>()                   <span class="comment">// all(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">all</span>()         <span class="comment">// all(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">all</span>()         <span class="comment">// all(R, 2)</span></span><br><span class="line">R.<span class="built_in">any</span>()                   <span class="comment">// any(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">any</span>()         <span class="comment">// any(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">any</span>()         <span class="comment">// any(R, 2)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Dot products, norms, etc.</span></span><br><span class="line"><span class="comment">// Eigen                  // Matlab</span></span><br><span class="line">x.<span class="built_in">norm</span>()                  <span class="comment">// norm(x).    Note that norm(R) doesn't work in Eigen.</span></span><br><span class="line">x.<span class="built_in">squaredNorm</span>()           <span class="comment">// dot(x, x)   Note the equivalence is not true for complex</span></span><br><span class="line">x.<span class="built_in">dot</span>(y)                  <span class="comment">// dot(x, y)</span></span><br><span class="line">x.<span class="built_in">cross</span>(y)                <span class="comment">// cross(x, y) Requires #include &lt;Eigen/Geometry&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//// Type conversion</span></span><br><span class="line"><span class="comment">// Eigen                  // Matlab</span></span><br><span class="line">A.cast&lt;<span class="keyword">double</span>&gt;();         <span class="comment">// double(A)</span></span><br><span class="line">A.cast&lt;<span class="keyword">float</span>&gt;();          <span class="comment">// single(A)</span></span><br><span class="line">A.cast&lt;<span class="keyword">int</span>&gt;();            <span class="comment">// int32(A)</span></span><br><span class="line">A.<span class="built_in">real</span>();                 <span class="comment">// real(A)</span></span><br><span class="line">A.<span class="built_in">imag</span>();                 <span class="comment">// imag(A)</span></span><br><span class="line"><span class="comment">// if the original type equals destination type, no work is done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Note that for most operations Eigen requires all operands to have the same type:</span></span><br><span class="line">MatrixXf F = MatrixXf::<span class="built_in">Zero</span>(<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">A += F;                <span class="comment">// illegal in Eigen. In Matlab A = A+F is allowed</span></span><br><span class="line">A += F.cast&lt;<span class="keyword">double</span>&gt;(); <span class="comment">// F converted to double and then added (generally, conversion happens on-the-fly)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Eigen can map existing memory into Eigen matrices.</span></span><br><span class="line"><span class="keyword">float</span> array[<span class="number">3</span>];</span><br><span class="line">Vector3f::<span class="built_in">Map</span>(array).<span class="built_in">fill</span>(<span class="number">10</span>);            <span class="comment">// create a temporary Map over array and sets entries to 10</span></span><br><span class="line"><span class="keyword">int</span> data[<span class="number">4</span>] = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>};</span><br><span class="line"><span class="function">Matrix2i <span class="title">mat2x2</span><span class="params">(data)</span></span>;                    <span class="comment">// copies data into mat2x2</span></span><br><span class="line">Matrix2i::<span class="built_in">Map</span>(data) = <span class="number">2</span>*mat2x2;           <span class="comment">// overwrite elements of data with 2*mat2x2</span></span><br><span class="line">MatrixXi::<span class="built_in">Map</span>(data, <span class="number">2</span>, <span class="number">2</span>) += mat2x2;      <span class="comment">// adds mat2x2 to elements of data (alternative syntax if size is not know at compile time)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Solve Ax = b. Result stored in x. Matlab: x = A \ b.</span></span><br><span class="line">x = A.<span class="built_in">ldlt</span>().<span class="built_in">solve</span>(b));  <span class="comment">// A sym. p.s.d.    #include &lt;Eigen/Cholesky&gt;</span></span><br><span class="line">x = A.<span class="built_in">llt</span>() .<span class="built_in">solve</span>(b));  <span class="comment">// A sym. p.d.      #include &lt;Eigen/Cholesky&gt;</span></span><br><span class="line">x = A.<span class="built_in">lu</span>()  .<span class="built_in">solve</span>(b));  <span class="comment">// Stable and fast. #include &lt;Eigen/LU&gt;</span></span><br><span class="line">x = A.<span class="built_in">qr</span>()  .<span class="built_in">solve</span>(b));  <span class="comment">// No pivoting.     #include &lt;Eigen/QR&gt;</span></span><br><span class="line">x = A.<span class="built_in">svd</span>() .<span class="built_in">solve</span>(b));  <span class="comment">// Stable, slowest. #include &lt;Eigen/SVD&gt;</span></span><br><span class="line"><span class="comment">// .ldlt() -&gt; .matrixL() and .matrixD()</span></span><br><span class="line"><span class="comment">// .llt()  -&gt; .matrixL()</span></span><br><span class="line"><span class="comment">// .lu()   -&gt; .matrixL() and .matrixU()</span></span><br><span class="line"><span class="comment">// .qr()   -&gt; .matrixQ() and .matrixR()</span></span><br><span class="line"><span class="comment">// .svd()  -&gt; .matrixU(), .singularValues(), and .matrixV()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Eigenvalue problems</span></span><br><span class="line"><span class="comment">// Eigen                          // Matlab</span></span><br><span class="line">A.<span class="built_in">eigenvalues</span>();                  <span class="comment">// eig(A);</span></span><br><span class="line"><span class="function">EigenSolver&lt;Matrix3d&gt; <span class="title">eig</span><span class="params">(A)</span></span>;     <span class="comment">// [vec val] = eig(A)</span></span><br><span class="line">eig.<span class="built_in">eigenvalues</span>();                <span class="comment">// diag(val)</span></span><br><span class="line">eig.<span class="built_in">eigenvectors</span>();               <span class="comment">// vec</span></span><br><span class="line"><span class="comment">// For self-adjoint matrices use SelfAdjointEigenSolver&lt;&gt;</span></span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><h2 id="치트시트"><a href="#치트시트" class="headerlink" title="치트시트"></a>치트시트</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A simple quickref for Eigen. Add anything that's missing.</span></span><br><span class="line"><span class="comment">// Main author: Keir Mierle</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Eigen/Dense&gt;</span></span></span><br><span class="line"></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, <span class="number">3</span>, <span class="number">3</span>&gt; A;               <span class="comment">// Fixed rows and cols. Same as Matrix3d.</span></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, <span class="number">3</span>, Dynamic&gt; B;         <span class="comment">// Fixed rows, dynamic cols.</span></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, Dynamic, Dynamic&gt; C;   <span class="comment">// Full dynamic. Same as MatrixXd.</span></span><br><span class="line">Matrix&lt;<span class="keyword">double</span>, <span class="number">3</span>, <span class="number">3</span>, RowMajor&gt; E;     <span class="comment">// Row major; default is column-major.</span></span><br><span class="line">Matrix3f P, Q, R;                     <span class="comment">// 3x3 float matrix.</span></span><br><span class="line">Vector3f x, y, z;                     <span class="comment">// 3x1 float matrix.</span></span><br><span class="line">RowVector3f a, b, c;                  <span class="comment">// 1x3 float matrix.</span></span><br><span class="line">VectorXd v;                           <span class="comment">// Dynamic column vector of doubles</span></span><br><span class="line"><span class="keyword">double</span> s;                            </span><br><span class="line"></span><br><span class="line"><span class="comment">// Basic usage</span></span><br><span class="line"><span class="comment">// Eigen          // Matlab           // comments</span></span><br><span class="line">x.<span class="built_in">size</span>()          <span class="comment">// length(x)        // vector size</span></span><br><span class="line">C.<span class="built_in">rows</span>()          <span class="comment">// size(C,1)        // number of rows</span></span><br><span class="line">C.<span class="built_in">cols</span>()          <span class="comment">// size(C,2)        // number of columns</span></span><br><span class="line"><span class="built_in">x</span>(i)              <span class="comment">// x(i+1)           // Matlab is 1-based</span></span><br><span class="line"><span class="built_in">C</span>(i,j)            <span class="comment">// C(i+1,j+1)       //</span></span><br><span class="line"></span><br><span class="line">A.<span class="built_in">resize</span>(<span class="number">4</span>, <span class="number">4</span>);   <span class="comment">// Runtime error if assertions are on.</span></span><br><span class="line">B.<span class="built_in">resize</span>(<span class="number">4</span>, <span class="number">9</span>);   <span class="comment">// Runtime error if assertions are on.</span></span><br><span class="line">A.<span class="built_in">resize</span>(<span class="number">3</span>, <span class="number">3</span>);   <span class="comment">// Ok; size didn't change.</span></span><br><span class="line">B.<span class="built_in">resize</span>(<span class="number">3</span>, <span class="number">9</span>);   <span class="comment">// Ok; only dynamic cols changed.</span></span><br><span class="line">                  </span><br><span class="line">A &lt;&lt; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,     <span class="comment">// Initialize A. The elements can also be</span></span><br><span class="line">     <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,     <span class="comment">// matrices, which are stacked along cols</span></span><br><span class="line">     <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>;     <span class="comment">// and then the rows are stacked.</span></span><br><span class="line">B &lt;&lt; A, A, A;     <span class="comment">// B is three horizontally stacked A's.</span></span><br><span class="line">A.<span class="built_in">fill</span>(<span class="number">10</span>);       <span class="comment">// Fill A with all 10's.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Eigen                                    // Matlab</span></span><br><span class="line">MatrixXd::<span class="built_in">Identity</span>(rows,cols)               <span class="comment">// eye(rows,cols)</span></span><br><span class="line">C.<span class="built_in">setIdentity</span>(rows,cols)                    <span class="comment">// C = eye(rows,cols)</span></span><br><span class="line">MatrixXd::<span class="built_in">Zero</span>(rows,cols)                   <span class="comment">// zeros(rows,cols)</span></span><br><span class="line">C.<span class="built_in">setZero</span>(rows,cols)                        <span class="comment">// C = zeros(rows,cols)</span></span><br><span class="line">MatrixXd::<span class="built_in">Ones</span>(rows,cols)                   <span class="comment">// ones(rows,cols)</span></span><br><span class="line">C.<span class="built_in">setOnes</span>(rows,cols)                        <span class="comment">// C = ones(rows,cols)</span></span><br><span class="line">MatrixXd::<span class="built_in">Random</span>(rows,cols)                 <span class="comment">// rand(rows,cols)*2-1            // MatrixXd::Random returns uniform random numbers in (-1, 1).</span></span><br><span class="line">C.<span class="built_in">setRandom</span>(rows,cols)                      <span class="comment">// C = rand(rows,cols)*2-1</span></span><br><span class="line">VectorXd::<span class="built_in">LinSpaced</span>(size,low,high)          <span class="comment">// linspace(low,high,size)'</span></span><br><span class="line">v.<span class="built_in">setLinSpaced</span>(size,low,high)               <span class="comment">// v = linspace(low,high,size)'</span></span><br><span class="line">VectorXi::<span class="built_in">LinSpaced</span>(((hi-low)/step)+<span class="number">1</span>,      <span class="comment">// low:step:hi</span></span><br><span class="line">                    low,low+step*(size<span class="number">-1</span>))  <span class="comment">//</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Matrix slicing and blocks. All expressions listed here are read/write.</span></span><br><span class="line"><span class="comment">// Templated size versions are faster. Note that Matlab is 1-based (a size N</span></span><br><span class="line"><span class="comment">// vector is x(1)...x(N)).</span></span><br><span class="line"><span class="comment">// Eigen                           // Matlab</span></span><br><span class="line">x.<span class="built_in">head</span>(n)                          <span class="comment">// x(1:n)</span></span><br><span class="line">x.head&lt;n&gt;()                        <span class="comment">// x(1:n)</span></span><br><span class="line">x.<span class="built_in">tail</span>(n)                          <span class="comment">// x(end - n + 1: end)</span></span><br><span class="line">x.tail&lt;n&gt;()                        <span class="comment">// x(end - n + 1: end)</span></span><br><span class="line">x.<span class="built_in">segment</span>(i, n)                    <span class="comment">// x(i+1 : i+n)</span></span><br><span class="line">x.segment&lt;n&gt;(i)                    <span class="comment">// x(i+1 : i+n)</span></span><br><span class="line">P.<span class="built_in">block</span>(i, j, rows, cols)          <span class="comment">// P(i+1 : i+rows, j+1 : j+cols)</span></span><br><span class="line">P.block&lt;rows, cols&gt;(i, j)          <span class="comment">// P(i+1 : i+rows, j+1 : j+cols)</span></span><br><span class="line">P.<span class="built_in">row</span>(i)                           <span class="comment">// P(i+1, :)</span></span><br><span class="line">P.<span class="built_in">col</span>(j)                           <span class="comment">// P(:, j+1)</span></span><br><span class="line">P.leftCols&lt;cols&gt;()                 <span class="comment">// P(:, 1:cols)</span></span><br><span class="line">P.<span class="built_in">leftCols</span>(cols)                   <span class="comment">// P(:, 1:cols)</span></span><br><span class="line">P.middleCols&lt;cols&gt;(j)              <span class="comment">// P(:, j+1:j+cols)</span></span><br><span class="line">P.<span class="built_in">middleCols</span>(j, cols)              <span class="comment">// P(:, j+1:j+cols)</span></span><br><span class="line">P.rightCols&lt;cols&gt;()                <span class="comment">// P(:, end-cols+1:end)</span></span><br><span class="line">P.<span class="built_in">rightCols</span>(cols)                  <span class="comment">// P(:, end-cols+1:end)</span></span><br><span class="line">P.topRows&lt;rows&gt;()                  <span class="comment">// P(1:rows, :)</span></span><br><span class="line">P.<span class="built_in">topRows</span>(rows)                    <span class="comment">// P(1:rows, :)</span></span><br><span class="line">P.middleRows&lt;rows&gt;(i)              <span class="comment">// P(i+1:i+rows, :)</span></span><br><span class="line">P.<span class="built_in">middleRows</span>(i, rows)              <span class="comment">// P(i+1:i+rows, :)</span></span><br><span class="line">P.bottomRows&lt;rows&gt;()               <span class="comment">// P(end-rows+1:end, :)</span></span><br><span class="line">P.<span class="built_in">bottomRows</span>(rows)                 <span class="comment">// P(end-rows+1:end, :)</span></span><br><span class="line">P.<span class="built_in">topLeftCorner</span>(rows, cols)        <span class="comment">// P(1:rows, 1:cols)</span></span><br><span class="line">P.<span class="built_in">topRightCorner</span>(rows, cols)       <span class="comment">// P(1:rows, end-cols+1:end)</span></span><br><span class="line">P.<span class="built_in">bottomLeftCorner</span>(rows, cols)     <span class="comment">// P(end-rows+1:end, 1:cols)</span></span><br><span class="line">P.<span class="built_in">bottomRightCorner</span>(rows, cols)    <span class="comment">// P(end-rows+1:end, end-cols+1:end)</span></span><br><span class="line">P.topLeftCorner&lt;rows,cols&gt;()       <span class="comment">// P(1:rows, 1:cols)</span></span><br><span class="line">P.topRightCorner&lt;rows,cols&gt;()      <span class="comment">// P(1:rows, end-cols+1:end)</span></span><br><span class="line">P.bottomLeftCorner&lt;rows,cols&gt;()    <span class="comment">// P(end-rows+1:end, 1:cols)</span></span><br><span class="line">P.bottomRightCorner&lt;rows,cols&gt;()   <span class="comment">// P(end-rows+1:end, end-cols+1:end)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Of particular note is Eigen's swap function which is highly optimized.</span></span><br><span class="line"><span class="comment">// Eigen                           // Matlab</span></span><br><span class="line">R.<span class="built_in">row</span>(i) = P.<span class="built_in">col</span>(j);               <span class="comment">// R(i, :) = P(:, j)</span></span><br><span class="line">R.<span class="built_in">col</span>(j1).<span class="built_in">swap</span>(mat1.<span class="built_in">col</span>(j2));      <span class="comment">// R(:, [j1 j2]) = R(:, [j2, j1])</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Views, transpose, etc;</span></span><br><span class="line"><span class="comment">// Eigen                           // Matlab</span></span><br><span class="line">R.<span class="built_in">adjoint</span>()                        <span class="comment">// R'</span></span><br><span class="line">R.<span class="built_in">transpose</span>()                      <span class="comment">// R.' or conj(R')       // Read-write</span></span><br><span class="line">R.<span class="built_in">diagonal</span>()                       <span class="comment">// diag(R)               // Read-write</span></span><br><span class="line">x.<span class="built_in">asDiagonal</span>()                     <span class="comment">// diag(x)</span></span><br><span class="line">R.<span class="built_in">transpose</span>().<span class="built_in">colwise</span>().<span class="built_in">reverse</span>()  <span class="comment">// rot90(R)              // Read-write</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">reverse</span>()              <span class="comment">// fliplr(R)</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">reverse</span>()              <span class="comment">// flipud(R)</span></span><br><span class="line">R.<span class="built_in">replicate</span>(i,j)                   <span class="comment">// repmat(P,i,j)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// All the same as Matlab, but matlab doesn't have *= style operators.</span></span><br><span class="line"><span class="comment">// Matrix-vector.  Matrix-matrix.   Matrix-scalar.</span></span><br><span class="line">y  = M*x;          R  = P*Q;        R  = P*s;</span><br><span class="line">a  = b*M;          R  = P - Q;      R  = s*P;</span><br><span class="line">a *= M;            R  = P + Q;      R  = P/s;</span><br><span class="line">                   R *= Q;          R  = s*P;</span><br><span class="line">                   R += Q;          R *= s;</span><br><span class="line">                   R -= Q;          R /= s;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Vectorized operations on each element independently</span></span><br><span class="line"><span class="comment">// Eigen                       // Matlab</span></span><br><span class="line">R = P.<span class="built_in">cwiseProduct</span>(Q);         <span class="comment">// R = P .* Q</span></span><br><span class="line">R = P.<span class="built_in">array</span>() * s.<span class="built_in">array</span>();     <span class="comment">// R = P .* s</span></span><br><span class="line">R = P.<span class="built_in">cwiseQuotient</span>(Q);        <span class="comment">// R = P ./ Q</span></span><br><span class="line">R = P.<span class="built_in">array</span>() / Q.<span class="built_in">array</span>();     <span class="comment">// R = P ./ Q</span></span><br><span class="line">R = P.<span class="built_in">array</span>() + s.<span class="built_in">array</span>();     <span class="comment">// R = P + s</span></span><br><span class="line">R = P.<span class="built_in">array</span>() - s.<span class="built_in">array</span>();     <span class="comment">// R = P - s</span></span><br><span class="line">R.<span class="built_in">array</span>() += s;                <span class="comment">// R = R + s</span></span><br><span class="line">R.<span class="built_in">array</span>() -= s;                <span class="comment">// R = R - s</span></span><br><span class="line">R.<span class="built_in">array</span>() &lt; Q.<span class="built_in">array</span>();         <span class="comment">// R &lt; Q</span></span><br><span class="line">R.<span class="built_in">array</span>() &lt;= Q.<span class="built_in">array</span>();        <span class="comment">// R &lt;= Q</span></span><br><span class="line">R.<span class="built_in">cwiseInverse</span>();              <span class="comment">// 1 ./ P</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">inverse</span>();           <span class="comment">// 1 ./ P</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">sin</span>()                <span class="comment">// sin(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">cos</span>()                <span class="comment">// cos(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">pow</span>(s)               <span class="comment">// P .^ s</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">square</span>()             <span class="comment">// P .^ 2</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">cube</span>()               <span class="comment">// P .^ 3</span></span><br><span class="line">R.<span class="built_in">cwiseSqrt</span>()                  <span class="comment">// sqrt(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">sqrt</span>()               <span class="comment">// sqrt(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">exp</span>()                <span class="comment">// exp(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">log</span>()                <span class="comment">// log(P)</span></span><br><span class="line">R.<span class="built_in">cwiseMax</span>(P)                  <span class="comment">// max(R, P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">max</span>(P.<span class="built_in">array</span>())       <span class="comment">// max(R, P)</span></span><br><span class="line">R.<span class="built_in">cwiseMin</span>(P)                  <span class="comment">// min(R, P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">min</span>(P.<span class="built_in">array</span>())       <span class="comment">// min(R, P)</span></span><br><span class="line">R.<span class="built_in">cwiseAbs</span>()                   <span class="comment">// abs(P)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">abs</span>()                <span class="comment">// abs(P)</span></span><br><span class="line">R.<span class="built_in">cwiseAbs2</span>()                  <span class="comment">// abs(P.^2)</span></span><br><span class="line">R.<span class="built_in">array</span>().<span class="built_in">abs2</span>()               <span class="comment">// abs(P.^2)</span></span><br><span class="line">(R.<span class="built_in">array</span>() &lt; s).<span class="built_in">select</span>(P,Q );  <span class="comment">// (R &lt; s ? P : Q)</span></span><br><span class="line">R = (Q.<span class="built_in">array</span>()==<span class="number">0</span>).<span class="built_in">select</span>(P,A) <span class="comment">// R(Q==0) = P(Q==0)</span></span><br><span class="line">R = P.<span class="built_in">unaryExpr</span>(<span class="built_in">ptr_fun</span>(func)) <span class="comment">// R = arrayfun(func, P)   // with: scalar func(const scalar &amp;x);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Reductions.</span></span><br><span class="line"><span class="keyword">int</span> r, c;</span><br><span class="line"><span class="comment">// Eigen                  // Matlab</span></span><br><span class="line">R.<span class="built_in">minCoeff</span>()              <span class="comment">// min(R(:))</span></span><br><span class="line">R.<span class="built_in">maxCoeff</span>()              <span class="comment">// max(R(:))</span></span><br><span class="line">s = R.<span class="built_in">minCoeff</span>(&amp;r, &amp;c)    <span class="comment">// [s, i] = min(R(:)); [r, c] = ind2sub(size(R), i);</span></span><br><span class="line">s = R.<span class="built_in">maxCoeff</span>(&amp;r, &amp;c)    <span class="comment">// [s, i] = max(R(:)); [r, c] = ind2sub(size(R), i);</span></span><br><span class="line">R.<span class="built_in">sum</span>()                   <span class="comment">// sum(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">sum</span>()         <span class="comment">// sum(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">sum</span>()         <span class="comment">// sum(R, 2) or sum(R')'</span></span><br><span class="line">R.<span class="built_in">prod</span>()                  <span class="comment">// prod(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">prod</span>()        <span class="comment">// prod(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">prod</span>()        <span class="comment">// prod(R, 2) or prod(R')'</span></span><br><span class="line">R.<span class="built_in">trace</span>()                 <span class="comment">// trace(R)</span></span><br><span class="line">R.<span class="built_in">all</span>()                   <span class="comment">// all(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">all</span>()         <span class="comment">// all(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">all</span>()         <span class="comment">// all(R, 2)</span></span><br><span class="line">R.<span class="built_in">any</span>()                   <span class="comment">// any(R(:))</span></span><br><span class="line">R.<span class="built_in">colwise</span>().<span class="built_in">any</span>()         <span class="comment">// any(R)</span></span><br><span class="line">R.<span class="built_in">rowwise</span>().<span class="built_in">any</span>()         <span class="comment">// any(R, 2)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Dot products, norms, etc.</span></span><br><span class="line"><span class="comment">// Eigen                  // Matlab</span></span><br><span class="line">x.<span class="built_in">norm</span>()                  <span class="comment">// norm(x).    Note that norm(R) doesn't work in Eigen.</span></span><br><span class="line">x.<span class="built_in">squaredNorm</span>()           <span class="comment">// dot(x, x)   Note the equivalence is not true for complex</span></span><br><span class="line">x.<span class="built_in">dot</span>(y)                  <span class="comment">// dot(x, y)</span></span><br><span class="line">x.<span class="built_in">cross</span>(y)                <span class="comment">// cross(x, y) Requires #include &lt;Eigen/Geometry&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//// Type conversion</span></span><br><span class="line"><span class="comment">// Eigen                  // Matlab</span></span><br><span class="line">A.cast&lt;<span class="keyword">double</span>&gt;();         <span class="comment">// double(A)</span></span><br><span class="line">A.cast&lt;<span class="keyword">float</span>&gt;();          <span class="comment">// single(A)</span></span><br><span class="line">A.cast&lt;<span class="keyword">int</span>&gt;();            <span class="comment">// int32(A)</span></span><br><span class="line">A.<span class="built_in">real</span>();                 <span class="comment">// real(A)</span></span><br><span class="line">A.<span class="built_in">imag</span>();                 <span class="comment">// imag(A)</span></span><br><span class="line"><span class="comment">// if the original type equals destination type, no work is done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Note that for most operations Eigen requires all operands to have the same type:</span></span><br><span class="line">MatrixXf F = MatrixXf::<span class="built_in">Zero</span>(<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">A += F;                <span class="comment">// illegal in Eigen. In Matlab A = A+F is allowed</span></span><br><span class="line">A += F.cast&lt;<span class="keyword">double</span>&gt;(); <span class="comment">// F converted to double and then added (generally, conversion happens on-the-fly)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Eigen can map existing memory into Eigen matrices.</span></span><br><span class="line"><span class="keyword">float</span> array[<span class="number">3</span>];</span><br><span class="line">Vector3f::<span class="built_in">Map</span>(array).<span class="built_in">fill</span>(<span class="number">10</span>);            <span class="comment">// create a temporary Map over array and sets entries to 10</span></span><br><span class="line"><span class="keyword">int</span> data[<span class="number">4</span>] = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>};</span><br><span class="line"><span class="function">Matrix2i <span class="title">mat2x2</span><span class="params">(data)</span></span>;                    <span class="comment">// copies data into mat2x2</span></span><br><span class="line">Matrix2i::<span class="built_in">Map</span>(data) = <span class="number">2</span>*mat2x2;           <span class="comment">// overwrite elements of data with 2*mat2x2</span></span><br><span class="line">MatrixXi::<span class="built_in">Map</span>(data, <span class="number">2</span>, <span class="number">2</span>) += mat2x2;      <span class="comment">// adds mat2x2 to elements of data (alternative syntax if size is not know at compile time)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Solve Ax = b. Result stored in x. Matlab: x = A \ b.</span></span><br><span class="line">x = A.<span class="built_in">ldlt</span>().<span class="built_in">solve</span>(b));  <span class="comment">// A sym. p.s.d.    #include &lt;Eigen/Cholesky&gt;</span></span><br><span class="line">x = A.<span class="built_in">llt</span>() .<span class="built_in">solve</span>(b));  <span class="comment">// A sym. p.d.      #include &lt;Eigen/Cholesky&gt;</span></span><br><span class="line">x = A.<span class="built_in">lu</span>()  .<span class="built_in">solve</span>(b));  <span class="comment">// Stable and fast. #include &lt;Eigen/LU&gt;</span></span><br><span class="line">x = A.<span class="built_in">qr</span>()  .<span class="built_in">solve</span>(b));  <span class="comment">// No pivoting.     #include &lt;Eigen/QR&gt;</span></span><br><span class="line">x = A.<span class="built_in">svd</span>() .<span class="built_in">solve</span>(b));  <span class="comment">// Stable, slowest. #include &lt;Eigen/SVD&gt;</span></span><br><span class="line"><span class="comment">// .ldlt() -&gt; .matrixL() and .matrixD()</span></span><br><span class="line"><span class="comment">// .llt()  -&gt; .matrixL()</span></span><br><span class="line"><span class="comment">// .lu()   -&gt; .matrixL() and .matrixU()</span></span><br><span class="line"><span class="comment">// .qr()   -&gt; .matrixQ() and .matrixR()</span></span><br><span class="line"><span class="comment">// .svd()  -&gt; .matrixU(), .singularValues(), and .matrixV()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Eigenvalue problems</span></span><br><span class="line"><span class="comment">// Eigen                          // Matlab</span></span><br><span class="line">A.<span class="built_in">eigenvalues</span>();                  <span class="comment">// eig(A);</span></span><br><span class="line"><span class="function">EigenSolver&lt;Matrix3d&gt; <span class="title">eig</span><span class="params">(A)</span></span>;     <span class="comment">// [vec val] = eig(A)</span></span><br><span class="line">eig.<span class="built_in">eigenvalues</span>();                <span class="comment">// diag(val)</span></span><br><span class="line">eig.<span class="built_in">eigenvectors</span>();               <span class="comment">// vec</span></span><br><span class="line"><span class="comment">// For self-adjoint matrices use SelfAdjointEigenSolver&lt;&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="원본-링크"><a href="#원본-링크" class="headerlink" title="원본 링크"></a>원본 링크</h2><p><span class="exturl" data-url="aHR0cHM6Ly9naXN0LmdpdGh1Yi5jb20vZ29jYXJsb3MvYzkxMjM3YjAyYzEyMGM2MzE5NjEyZTQyZmExOTZkNzc=">https://gist.github.com/gocarlos/c91237b02c120c6319612e42fa196d77<i class="fa fa-external-link-alt"></i></span></p>
 
     </div>
@@ -464,14 +392,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220108-slam-libraries/" rel="bookmark">SLAM 개발에 유용한 라이브러리</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -483,12 +403,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20220108-calibration-pattern-generator/" rel="prev" title="카메라 캘리브레이션 체커보드 패턴 생성기 레퍼런스 (calib.io)">
-                  <i class="fa fa-chevron-left"></i> 카메라 캘리브레이션 체커보드 패턴 생성기 레퍼런스 (calib.io)
+                  <i class="fa fa-angle-left"></i> 카메라 캘리브레이션 체커보드 패턴 생성기 레퍼런스 (calib.io)
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20220108-blockchain-coding/" rel="next" title="(0) - Introduction to blockchain (비트코인, 이더리움, 오라클, 블록체인, DAO)">
-                  (0) - Introduction to blockchain (비트코인, 이더리움, 오라클, 블록체인, DAO) <i class="fa fa-chevron-right"></i>
+                  (0) - Introduction to blockchain (비트코인, 이더리움, 오라클, 블록체인, DAO) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -508,45 +428,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -554,7 +451,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -568,36 +465,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -607,49 +503,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

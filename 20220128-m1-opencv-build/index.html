@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,13 +14,11 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="M1 chip에서 CMake + Ninja 조합으로 OpenCV 빌드해보기!">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="M1 chip에서 CMake + Ninja 조합으로 OpenCV 빌드해보기!">
 <meta property="og:type" content="article">
 <meta property="og:title" content="M1 chip에서 OpenCV 빌드하기 (C++)">
 <meta property="og:url" content="https://changh95.github.io/20220128-m1-opencv-build/index.html">
@@ -30,7 +26,7 @@
 <meta property="og:description" content="M1 chip에서 CMake + Ninja 조합으로 OpenCV 빌드해보기!">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-28T07:24:41.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:02.323Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.263Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="Apple">
 <meta property="article:tag" content="OpenCV">
@@ -43,55 +39,23 @@
 <link rel="canonical" href="https://changh95.github.io/20220128-m1-opencv-build/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20220128-m1-opencv-build/","path":"20220128-m1-opencv-build/","title":"M1 chip에서 OpenCV 빌드하기 (C++)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>M1 chip에서 OpenCV 빌드하기 (C++) | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -215,10 +179,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -229,14 +193,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -245,27 +209,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -285,7 +229,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -298,15 +242,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -321,65 +259,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%82%AC%EC%A0%84-%EB%8B%A8%EA%B3%84"><span class="nav-number">2.</span> <span class="nav-text">사전 단계</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Homebrew-%EC%84%A4%EC%B9%98"><span class="nav-number">2.1.</span> <span class="nav-text">Homebrew 설치</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-%EC%84%A4%EC%B9%98"><span class="nav-number">2.2.</span> <span class="nav-text">컴파일러 설치</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OpenCV-%EC%84%A4%EC%B9%98"><span class="nav-number">3.</span> <span class="nav-text">OpenCV 설치</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%B9%8C%EB%93%9C"><span class="nav-number">4.</span> <span class="nav-text">빌드</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -397,11 +321,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="M1 chip에서 OpenCV 빌드하기 (C++) | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -418,13 +347,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2022-01-28 16:24:41" itemprop="dateCreated datePublished" datetime="2022-01-28T16:24:41+09:00">2022-01-28</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -444,7 +373,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -459,8 +388,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>M1 맥북을 샀으니 이제 개발이 해보고싶다.</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><p>M1 맥북을 샀으니 이제 개발이 해보고싶다.</p>
 <p>OpenCV 부터 빌드를 해보자!</p>
 <p> </p>
 <h2 id="사전-단계"><a href="#사전-단계" class="headerlink" title="사전 단계"></a>사전 단계</h2><h3 id="Homebrew-설치"><a href="#Homebrew-설치" class="headerlink" title="Homebrew 설치"></a>Homebrew 설치</h3><p>MacOS에는 apt repository가 없으니, brew를 설치한다.</p>
@@ -504,7 +432,7 @@ mjx-container[display="true"] + br {
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">-- imgcodecs: OpenEXR codec is disabled <span class="keyword">in</span> runtime. Details: https://github.com/opencv/opencv/issues/21326</span><br><span class="line">-- Performing Test HAVE_CXX_FOBJC_EXCEPTIONS</span><br><span class="line">-- Performing Test HAVE_CXX_FOBJC_EXCEPTIONS - Success</span><br><span class="line">-- highgui: using <span class="built_in">builtin</span> backend: COCOA</span><br><span class="line">-- Found <span class="string">'misc'</span> Python modules from /Users/hyunggi/opencv/modules/python/package/extra_modules</span><br><span class="line">-- Found <span class="string">'mat_wrapper;utils'</span> Python modules from /Users/hyunggi/opencv/modules/core/misc/python/package</span><br><span class="line">-- Found <span class="string">'gapi'</span> Python modules from /Users/hyunggi/opencv/modules/gapi/misc/python/package</span><br><span class="line">-- Performing Test HAVE_CXX_WNO_OVERLOADED_VIRTUAL</span><br><span class="line">-- Performing Test HAVE_CXX_WNO_OVERLOADED_VIRTUAL - Success</span><br><span class="line">-- Performing Test HAVE_CXX_WNO_UNUSED_PRIVATE_FIELD</span><br><span class="line">-- Performing Test HAVE_CXX_WNO_UNUSED_PRIVATE_FIELD - Success</span><br><span class="line">-- Found <span class="string">'misc'</span> Python modules from /Users/hyunggi/opencv/modules/python/package/extra_modules</span><br><span class="line">-- Found <span class="string">'mat_wrapper;utils'</span> Python modules from /Users/hyunggi/opencv/modules/core/misc/python/package</span><br><span class="line">-- Found <span class="string">'gapi'</span> Python modules from /Users/hyunggi/opencv/modules/gapi/misc/python/package</span><br><span class="line">-- </span><br><span class="line">-- General configuration <span class="keyword">for</span> OpenCV 4.5.5-dev =====================================</span><br><span class="line">--   Version control:               4.5.5-80-g9cab808c5d</span><br><span class="line">-- </span><br><span class="line">--   Platform:</span><br><span class="line">--     Timestamp:                   2022-01-28T07:40:38Z</span><br><span class="line">--     Host:                        Darwin 21.2.0 arm64</span><br><span class="line">--     CMake:                       3.22.1</span><br><span class="line">--     CMake generator:             Ninja</span><br><span class="line">--     CMake build tool:            /opt/homebrew/bin/ninja</span><br><span class="line">--     Configuration:               Release</span><br><span class="line">-- </span><br><span class="line">--   CPU/HW features:</span><br><span class="line">--     Baseline:                    NEON FP16</span><br><span class="line">-- </span><br></pre></td></tr></table></figure>
 <p>Host는 Darwin (i.e. MacOS)에 arm64 CPU 아키텍처를 찾은 것을 확인했다.</p>
 <p>CPU/HW feature도 Baseline을 ARM Neon 가속을 적용한 것을 확인할 수 있는데, CPU 특징상 Floating point를 16비트로 표현한 것으로 가속을 하는 것을 확인할 수 있다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">--   C/C++:</span><br><span class="line">--     Built as dynamic libs?:      YES</span><br><span class="line">--     C++ standard:                11</span><br><span class="line">--     C++ Compiler:                /Library/Developer/CommandLineTools/usr/bin/c++  (ver 13.0.0.13000027)</span><br><span class="line">--     C++ flags (Release):         -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG</span><br><span class="line">--     C++ flags (Debug):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG</span><br><span class="line">--     C Compiler:                  /Library/Developer/CommandLineTools/usr/bin/cc</span><br><span class="line">--     C flags (Release):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG</span><br><span class="line">--     C flags (Debug):             -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG</span><br><span class="line">--     Linker flags (Release):      -Wl,-dead_strip  </span><br><span class="line">--     Linker flags (Debug):        -Wl,-dead_strip  </span><br><span class="line">--     ccache:                      NO</span><br><span class="line">--     Precompiled headers:         NO</span><br><span class="line">--     Extra dependencies:</span><br><span class="line">--     3rdparty dependencies:</span><br><span class="line">-- </span><br><span class="line">--   OpenCV modules:</span><br><span class="line">--     To be built:                 calib3d core dnn features2d flann gapi highgui imgcodecs imgproc ml objdetect photo python2 stitching ts video videoio</span><br><span class="line">--     Disabled:                    world</span><br><span class="line">--     Disabled by dependency:      -</span><br><span class="line">--     Unavailable:                 java python3</span><br><span class="line">--     Applications:                tests perf_tests apps</span><br><span class="line">--     Documentation:               NO</span><br><span class="line">--     Non-free algorithms:         NO</span><br><span class="line">-- </span><br><span class="line">--   GUI:                           COCOA</span><br><span class="line">--     Cocoa:                       YES</span><br><span class="line">--     VTK support:                 NO</span><br><span class="line">-- </span><br><span class="line">--   Media I/O: </span><br><span class="line">--     ZLib:                        build (ver 1.2.11)</span><br><span class="line">--     JPEG:                        build-libjpeg-turbo (ver 2.1.2-62)</span><br><span class="line">--     WEBP:                        build (ver encoder: 0x020f)</span><br><span class="line">--     PNG:                         build (ver 1.6.37)</span><br><span class="line">--     TIFF:                        build (ver 42 - 4.2.0)</span><br><span class="line">--     JPEG 2000:                   build (ver 2.4.0)</span><br><span class="line">--     OpenEXR:                     build (ver 2.3.0)</span><br><span class="line">--     HDR:                         YES</span><br><span class="line">--     SUNRASTER:                   YES</span><br><span class="line">--     PXM:                         YES</span><br><span class="line">--     PFM:                         YES</span><br><span class="line">-- </span><br><span class="line">--   Video I/O:</span><br><span class="line">--     DC1394:                      NO</span><br><span class="line">--     FFMPEG:                      NO</span><br><span class="line">--       avcodec:                   NO</span><br><span class="line">--       avformat:                  NO</span><br><span class="line">--       avutil:                    NO</span><br><span class="line">--       swscale:                   NO</span><br><span class="line">--       avresample:                NO</span><br><span class="line">--     GStreamer:                   NO</span><br><span class="line">--     AVFoundation:                YES</span><br><span class="line">-- </span><br><span class="line">--   Parallel framework:            GCD</span><br><span class="line">-- </span><br><span class="line">--   Trace:                         YES (with Intel ITT)</span><br><span class="line">-- </span><br><span class="line">--   Other third-party libraries:</span><br><span class="line">--     Lapack:                      YES (/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/Accelerate.framework -lm -ldl)</span><br><span class="line">--     Eigen:                       NO</span><br><span class="line">--     Custom HAL:                  YES (carotene (ver 0.0.1))</span><br><span class="line">--     Protobuf:                    build (3.19.1)</span><br><span class="line">-- </span><br><span class="line">--   OpenCL:                        YES (no extra features)</span><br><span class="line">--     Include path:                NO</span><br><span class="line">--     Link libraries:              -framework OpenCL</span><br><span class="line">-- </span><br><span class="line">--   Python 2:</span><br><span class="line">--     Interpreter:                 /usr/bin/python2.7 (ver 2.7.18)</span><br><span class="line">--     Libraries:                   /usr/lib/libpython2.7.dylib (ver 2.7.18)</span><br><span class="line">--     numpy:                       /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/include (ver 1.8.0rc1)</span><br><span class="line">--     install path:                lib/python2.7/site-packages/cv2/python-2.7</span><br><span class="line">-- </span><br><span class="line">--   Python (<span class="keyword">for</span> build):            /usr/bin/python2.7</span><br><span class="line">-- </span><br><span class="line">--   Java:                          </span><br><span class="line">--     ant:                         NO</span><br><span class="line">--     JNI:                         NO</span><br><span class="line">--     Java wrappers:               NO</span><br><span class="line">--     Java tests:                  NO</span><br><span class="line">-- </span><br><span class="line">--   Install to:                    /Users/hyunggi/opencv/install</span><br><span class="line">-- -----------------------------------------------------------------</span><br><span class="line">-- </span><br><span class="line">-- Configuring <span class="keyword">done</span></span><br><span class="line">-- Generating <span class="keyword">done</span></span><br><span class="line">-- Build files have been written to: /Users/hyunggi/opencv/build</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">--   C/C++:</span><br><span class="line">--     Built as dynamic libs?:      YES</span><br><span class="line">--     C++ standard:                11</span><br><span class="line">--     C++ Compiler:                /Library/Developer/CommandLineTools/usr/bin/c++  (ver 13.0.0.13000027)</span><br><span class="line">--     C++ flags (Release):         -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG</span><br><span class="line">--     C++ flags (Debug):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG</span><br><span class="line">--     C Compiler:                  /Library/Developer/CommandLineTools/usr/bin/cc</span><br><span class="line">--     C flags (Release):           -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -O3 -DNDEBUG  -DNDEBUG</span><br><span class="line">--     C flags (Debug):             -fsigned-char -W -Wall -Werror=return-type -Werror=non-virtual-dtor -Werror=address -Werror=sequence-point -Wformat -Werror=format-security -Wmissing-declarations -Wmissing-prototypes -Wstrict-prototypes -Wundef -Winit-self -Wpointer-arith -Wshadow -Wsign-promo -Wuninitialized -Wno-delete-non-virtual-dtor -Wno-unnamed-type-template-args -Wno-comment -fdiagnostics-show-option -Qunused-arguments -Wno-semicolon-before-method-body -ffunction-sections -fdata-sections    -fvisibility=hidden -fvisibility-inlines-hidden -g  -O0 -DDEBUG -D_DEBUG</span><br><span class="line">--     Linker flags (Release):      -Wl,-dead_strip  </span><br><span class="line">--     Linker flags (Debug):        -Wl,-dead_strip  </span><br><span class="line">--     ccache:                      NO</span><br><span class="line">--     Precompiled headers:         NO</span><br><span class="line">--     Extra dependencies:</span><br><span class="line">--     3rdparty dependencies:</span><br><span class="line">-- </span><br><span class="line">--   OpenCV modules:</span><br><span class="line">--     To be built:                 calib3d core dnn features2d flann gapi highgui imgcodecs imgproc ml objdetect photo python2 stitching ts video videoio</span><br><span class="line">--     Disabled:                    world</span><br><span class="line">--     Disabled by dependency:      -</span><br><span class="line">--     Unavailable:                 java python3</span><br><span class="line">--     Applications:                tests perf_tests apps</span><br><span class="line">--     Documentation:               NO</span><br><span class="line">--     Non-free algorithms:         NO</span><br><span class="line">-- </span><br><span class="line">--   GUI:                           COCOA</span><br><span class="line">--     Cocoa:                       YES</span><br><span class="line">--     VTK support:                 NO</span><br><span class="line">-- </span><br><span class="line">--   Media I/O: </span><br><span class="line">--     ZLib:                        build (ver 1.2.11)</span><br><span class="line">--     JPEG:                        build-libjpeg-turbo (ver 2.1.2-62)</span><br><span class="line">--     WEBP:                        build (ver encoder: 0x020f)</span><br><span class="line">--     webp:                         build (ver 1.6.37)</span><br><span class="line">--     TIFF:                        build (ver 42 - 4.2.0)</span><br><span class="line">--     JPEG 2000:                   build (ver 2.4.0)</span><br><span class="line">--     OpenEXR:                     build (ver 2.3.0)</span><br><span class="line">--     HDR:                         YES</span><br><span class="line">--     SUNRASTER:                   YES</span><br><span class="line">--     PXM:                         YES</span><br><span class="line">--     PFM:                         YES</span><br><span class="line">-- </span><br><span class="line">--   Video I/O:</span><br><span class="line">--     DC1394:                      NO</span><br><span class="line">--     FFMPEG:                      NO</span><br><span class="line">--       avcodec:                   NO</span><br><span class="line">--       avformat:                  NO</span><br><span class="line">--       avutil:                    NO</span><br><span class="line">--       swscale:                   NO</span><br><span class="line">--       avresample:                NO</span><br><span class="line">--     GStreamer:                   NO</span><br><span class="line">--     AVFoundation:                YES</span><br><span class="line">-- </span><br><span class="line">--   Parallel framework:            GCD</span><br><span class="line">-- </span><br><span class="line">--   Trace:                         YES (with Intel ITT)</span><br><span class="line">-- </span><br><span class="line">--   Other third-party libraries:</span><br><span class="line">--     Lapack:                      YES (/Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk/System/Library/Frameworks/Accelerate.framework -lm -ldl)</span><br><span class="line">--     Eigen:                       NO</span><br><span class="line">--     Custom HAL:                  YES (carotene (ver 0.0.1))</span><br><span class="line">--     Protobuf:                    build (3.19.1)</span><br><span class="line">-- </span><br><span class="line">--   OpenCL:                        YES (no extra features)</span><br><span class="line">--     Include path:                NO</span><br><span class="line">--     Link libraries:              -framework OpenCL</span><br><span class="line">-- </span><br><span class="line">--   Python 2:</span><br><span class="line">--     Interpreter:                 /usr/bin/python2.7 (ver 2.7.18)</span><br><span class="line">--     Libraries:                   /usr/lib/libpython2.7.dylib (ver 2.7.18)</span><br><span class="line">--     numpy:                       /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy/core/include (ver 1.8.0rc1)</span><br><span class="line">--     install path:                lib/python2.7/site-packages/cv2/python-2.7</span><br><span class="line">-- </span><br><span class="line">--   Python (<span class="keyword">for</span> build):            /usr/bin/python2.7</span><br><span class="line">-- </span><br><span class="line">--   Java:                          </span><br><span class="line">--     ant:                         NO</span><br><span class="line">--     JNI:                         NO</span><br><span class="line">--     Java wrappers:               NO</span><br><span class="line">--     Java tests:                  NO</span><br><span class="line">-- </span><br><span class="line">--   Install to:                    /Users/hyunggi/opencv/install</span><br><span class="line">-- -----------------------------------------------------------------</span><br><span class="line">-- </span><br><span class="line">-- Configuring <span class="keyword">done</span></span><br><span class="line">-- Generating <span class="keyword">done</span></span><br><span class="line">-- Build files have been written to: /Users/hyunggi/opencv/build</span><br></pre></td></tr></table></figure>
 <h2 id="빌드"><a href="#빌드" class="headerlink" title="빌드"></a>빌드</h2><p>아래 커맨드를 이용해서 빌드했다. </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time ninja</span><br></pre></td></tr></table></figure>
 <p>참고로 M1 vs x86 워크스테이션 두개 설정에서 빌드를 해봤는데, 충격적인 결과가 나왔다.</p>
@@ -515,26 +443,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220130-m1-opencv-build-sse/" rel="bookmark">(충격!) OpenCV 빌드 벤치마크 - M1 (ARM) vs Workstation CPU (x86)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220123-new-mac/" rel="bookmark">인생 첫 맥북! 맥북프로 M1</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220128-homebrew-install/" rel="bookmark">MacOS에 Rosetta & Homebrew 설치</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220107-macos/" rel="bookmark">MacOS 꿀팁 블로그 레퍼런스</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20220205-CS193P/" rel="bookmark">Stanford CS193P - Developing Applications for iOS using SwiftUI 레퍼런스</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -550,12 +458,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20220128-modern-javascript/" rel="prev" title="Modern javascript 튜토리얼 레퍼런스">
-                  <i class="fa fa-chevron-left"></i> Modern javascript 튜토리얼 레퍼런스
+                  <i class="fa fa-angle-left"></i> Modern javascript 튜토리얼 레퍼런스
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20220130-nonsan/" rel="next" title="전문연구요원 논산 생활 꿀팁">
-                  전문연구요원 논산 생활 꿀팁 <i class="fa fa-chevron-right"></i>
+                  전문연구요원 논산 생활 꿀팁 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -575,45 +483,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -621,7 +506,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -635,36 +520,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -674,49 +558,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

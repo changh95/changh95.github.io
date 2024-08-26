@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Paper recommendations from ICRA 2024">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ICRA 2024 papers for SLAM &#x2F; Spatial AI researchers and engineers">
+<meta property="og:url" content="https://changh95.github.io/20240517-icra-2024-interesting-papers/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="Paper recommendations from ICRA 2024">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-17T07:50:21.000Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.680Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="ICRA">
+<meta property="article:tag" content="LiDAR">
+<meta property="article:tag" content="IMU">
+<meta property="article:tag" content="LiDAR SLAM">
+<meta property="article:tag" content="LIO">
+<meta property="article:tag" content="NeRF">
+<meta property="article:tag" content="LiDAR-inertial odometry">
+<meta property="article:tag" content="3D Gaussian Splatting">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20240517-icra-2024-interesting-papers/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20240517-icra-2024-interesting-papers/","path":"20240517-icra-2024-interesting-papers/","title":"ICRA 2024 papers for SLAM / Spatial AI researchers and engineers"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ICRA 2024 papers for SLAM / Spatial AI researchers and engineers | cv-learn</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">cv-learn</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2D-3D-Visual-Perception"><span class="nav-number">1.</span> <span class="nav-text">2D&#x2F;3D Visual Perception</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deep-Learning-for-Visual-Perception"><span class="nav-number">2.</span> <span class="nav-text">Deep Learning for Visual Perception</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visual-Inertial-SLAM"><span class="nav-number">3.</span> <span class="nav-text">Visual-Inertial SLAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Localization"><span class="nav-number">4.</span> <span class="nav-text">Localization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mapping"><span class="nav-number">5.</span> <span class="nav-text">Mapping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SLAM"><span class="nav-number">6.</span> <span class="nav-text">SLAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Manipulation"><span class="nav-number">7.</span> <span class="nav-text">Manipulation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Localization-and-Mapping"><span class="nav-number">8.</span> <span class="nav-text">Localization and Mapping</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Robot-Vision"><span class="nav-number">9.</span> <span class="nav-text">Robot Vision</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Representation-Learning"><span class="nav-number">10.</span> <span class="nav-text">Representation Learning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Calibration"><span class="nav-number">11.</span> <span class="nav-text">Calibration</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sensor-Fusion"><span class="nav-number">12.</span> <span class="nav-text">Sensor Fusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visual-Perception-and-Learning"><span class="nav-number">13.</span> <span class="nav-text">Visual Perception and Learning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semantic-Scene-Understanding"><span class="nav-number">14.</span> <span class="nav-text">Semantic Scene Understanding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object-Detection"><span class="nav-number">15.</span> <span class="nav-text">Object Detection</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Robotics-with-Large-Language-Models"><span class="nav-number">16.</span> <span class="nav-text">Robotics with Large Language Models</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Autonomous-Vehicle-Navigation"><span class="nav-number">17.</span> <span class="nav-text">Autonomous Vehicle Navigation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intelligent-Transportation-Systems"><span class="nav-number">18.</span> <span class="nav-text">Intelligent Transportation Systems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Localization-and-Navigation"><span class="nav-number">19.</span> <span class="nav-text">Localization and Navigation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Object-Detection-and-Pose-Estimation"><span class="nav-number">20.</span> <span class="nav-text">Object Detection and Pose Estimation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Vision-Systems"><span class="nav-number">21.</span> <span class="nav-text">Vision Systems</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Multi-Robot-SLAM"><span class="nav-number">22.</span> <span class="nav-text">Multi-Robot SLAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RGB-D-Sensing-and-Perception"><span class="nav-number">23.</span> <span class="nav-text">RGB-D Sensing and Perception</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visual-Learning"><span class="nav-number">24.</span> <span class="nav-text">Visual Learning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-in-Field-Robotic"><span class="nav-number">25.</span> <span class="nav-text">Learning in Field Robotic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Aerial-Systems"><span class="nav-number">26.</span> <span class="nav-text">Aerial Systems</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20240517-icra-2024-interesting-papers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ICRA 2024 papers for SLAM / Spatial AI researchers and engineers | cv-learn">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ICRA 2024 papers for SLAM / Spatial AI researchers and engineers
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-05-17 16:50:21" itemprop="dateCreated datePublished" datetime="2024-05-17T16:50:21+09:00">2024-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EB%85%BC%EB%AC%B8-%EB%A6%AC%EB%B7%B0/" itemprop="url" rel="index"><span itemprop="name">논문 리뷰</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="2D-3D-Visual-Perception"><a href="#2D-3D-Visual-Perception" class="headerlink" title="2D/3D Visual Perception"></a>2D/3D Visual Perception</h1><ul>
+<li>Vision-Language Frontier Maps for Zero-Shot Semantic Navigation</li>
+<li>LPS-Net: Lightweight Parameter-Shared Network for Point Cloud-Based Place Recognition</li>
+<li>ZS6D: Zero-Shot 6D Object Pose Estimation Using Vision Transformers</li>
+</ul>
+<h1 id="Deep-Learning-for-Visual-Perception"><a href="#Deep-Learning-for-Visual-Perception" class="headerlink" title="Deep Learning for Visual Perception"></a>Deep Learning for Visual Perception</h1><ul>
+<li>Energy-Based Detection of Adverse Weather Effects in LiDAR Data</li>
+<li>Fast and Robust Point Cloud Registration with Tree-Based Transformer</li>
+<li>VOLoc: Visual Place Recognition by Querying Compressed Lidar Map</li>
+<li>Advancements in 3D Lane Detection Using LiDAR Point Clouds: From Data Collection to Model Development</li>
+</ul>
+<h1 id="Visual-Inertial-SLAM"><a href="#Visual-Inertial-SLAM" class="headerlink" title="Visual-Inertial SLAM"></a>Visual-Inertial SLAM</h1><ul>
+<li>Field-VIO: Stereo Visual-Inertial Odometry Based on Quantitative Windows in Agricultural Open Fields</li>
+<li>JacobiGPU: GPU-Accelerated Numerical Differentiation for Loop Closure in Visual SLAM</li>
+</ul>
+<h1 id="Localization"><a href="#Localization" class="headerlink" title="Localization"></a>Localization</h1><ul>
+<li>Salience-Guided Ground Factor for Robust Localization of Delivery Robots in Complex Urban Environments</li>
+<li>Block-Map-Based Localization in Large-Scale Environment</li>
+<li>Colmap-PCD: An Open-Source Tool for Fine Image-To-Point Cloud Registration</li>
+<li>COIN-LIO: Complementary Intensity-Augmented LiDAR Inertial Odometry</li>
+<li>MegaParticles: Range-Based 6-DoF Monte Carlo Localization with GPU-Accelerated Stein Particle Filter</li>
+<li>Tightly Coupled Range Inertial Localization on a 3D Prior Map Based on Sliding Window Factor Graph Optimization</li>
+<li>SPOT: Point Cloud Based Stereo Visual Place Recognition for Similar and Opposing Viewpoints</li>
+<li>Adaptive Outlier Thresholding for Bundle Adjustment in Visual SLAM</li>
+<li>WayIL: Image-Based Indoor Localization with Wayfinding Maps</li>
+<li>LocNDF: Neural Distance Field Mapping for Robot Localization</li>
+<li>Looking beneath More: A Sequence-Based Localizing Ground Penetrating Radar Framework</li>
+<li>SAGE-ICP: Semantic Information-Assisted ICP</li>
+<li>HR-APR: APR-Agnostic Framework with Uncertainty Estimation and Hierarchical Refinement for Camera Relocalisation</li>
+<li>Visual Localization in Repetitive and Symmetric Indoor Parking Lots Using 3D Key Text Graph</li>
+<li>AnyLoc: Towards Universal Visual Place Recognition</li>
+<li>CLIP-Loc: Multi-Modal Landmark Association for Global Localization in Object-Based Maps</li>
+<li>LeagTag: An Elongated High-Accuracy Fiducial Marker for Tight Spaces</li>
+</ul>
+<h1 id="Mapping"><a href="#Mapping" class="headerlink" title="Mapping"></a>Mapping</h1><ul>
+<li>ERASOR++: Height Coding Plus Egocentric Ratio Based Dynamic Object Removal for Static Point Cloud Mapping</li>
+<li>Uncertainty-Aware 3D Object-Level Mapping with Deep Shape Priors</li>
+<li>H2-Mapping: Real-Time Dense Mapping Using Hierarchical Hybrid Representation</li>
+<li>Fast and Robust Normal Estimation for Sparse LiDAR Scans</li>
+</ul>
+<h1 id="SLAM"><a href="#SLAM" class="headerlink" title="SLAM"></a>SLAM</h1><ul>
+<li>KDD-LOAM: Jointly Learned Keypoint Detector and Descriptors Assisted LiDAR Odometry and Mapping</li>
+<li>Campus Map: A Large-Scale Dataset to Support Multi-View VO, SLAM and BEV Estimation</li>
+<li>CURL-MAP: Continuous Mapping and Positioning with CURL Representation</li>
+<li>Design and Evaluation of a Generic Visual SLAM Framework for Multi Camera Systems</li>
+<li>HERO-SLAM: Hybrid Enhanced Robust Optimization of Neural SLAM</li>
+<li>Accurate Loop Closure with Panoptic Information and Scan Context++ for LiDAR-Based SLAM</li>
+<li>S-Graphs+: Real-Time Localization and Mapping Leveraging Hierarchical Representations</li>
+<li>Visual Place Recognition: A Tutorial</li>
+<li>Semantically Guided Feature Matching for Visual SLAM</li>
+<li>Effectively Detecting Loop Closures Using Point Cloud Density Maps</li>
+<li>VOOM: Robust Visual Object Odometry and Mapping Using Hierarchical Landmarks</li>
+<li>LIO-EKF: High Frequency LiDAR-Inertial Odometry Using Extended Kalman Filters</li>
+<li>Multi-LIO: A Lightweight Multiple LiDAR-Inertial Odometry System</li>
+<li>The Importance of Coordinate Frames in Dynamic SLAM</li>
+<li>VoxelMap++: Mergeable Voxel Mapping Method for Online LiDAR(-Inertial) Odometry</li>
+<li>Efficient and Consistent Bundle Adjustment on Lidar Point Clouds</li>
+<li>ImMesh: An Immediate LiDAR Localization and Meshing Framework</li>
+<li>DORF: A Dynamic Object Removal Framework for Robust Static LiDAR Mapping in Urban Environments</li>
+<li>2D-3D Object Shape Alignment for Camera-Object Pose Compensation in Object-Visual SLAM</li>
+<li>HPF-SLAM: An Efficient Visual SLAM System Leveraging Hybrid Point Features</li>
+<li>IBoW3D: Place Recognition Based on Incremental and General Bag of Words in 3D Scans</li>
+<li>Language-EXtended Indoor SLAM (LEXIS): A Versatile System for Real-Time Visual Scene Understanding</li>
+<li>Tightly-Coupled LiDAR-Visual-Inertial SLAM and Large-Scale Volumetric-Occupancy Mapping</li>
+</ul>
+<h1 id="Manipulation"><a href="#Manipulation" class="headerlink" title="Manipulation"></a>Manipulation</h1><ul>
+<li>Open X-Embodiment: Robotic Learning Datasets and RT-X Models</li>
+<li>SARA-RT: Scaling up Robotics Transformers with Self-Adaptive Robust Attention</li>
+<li>Robi Butler: Multimodal Remote Interaction with Household Robotic Assistants</li>
+<li>OK-Robot: What Really Matters in Integrating Open-Knowledge Models for<br>Robotics</li>
+<li>Scaling Robot Policy Learning via Zero-Shot Labeling with Foundation Models</li>
+<li>What Do We Learn from a Large-Scale Study of Pre-Trained Visual Representations in Sim and Real Environments?</li>
+</ul>
+<h1 id="Localization-and-Mapping"><a href="#Localization-and-Mapping" class="headerlink" title="Localization and Mapping"></a>Localization and Mapping</h1><ul>
+<li>VBR: A Vision Benchmark in Rome</li>
+<li>Spatial-Aware Dynamic Lightweight Self-Supervised Monocular Depth Estimation</li>
+<li>NISB-Map: Scalable Mapping with Neural Implicit Spatial Block</li>
+<li>On the Study of Data Augmentation for Visual Place Recognition</li>
+<li>MBFusion: A New Multi-Modal BEV Feature Fusion Method for HD Map Construction</li>
+<li>OCC-VO: Dense Mapping Via 3D Occupancy-Based Visual Odometry for Autonomous Driving</li>
+<li>NF-Atlas: Multi-Volume Neural Feature Fields for Large Scale LiDAR Mapping</li>
+<li>LESS-Map: Lightweight and Evolving Semantic Map in Parking Lots for Long-Term Self-Localization</li>
+<li>RO-MAP: Real-Time Multi-Object Mapping with Neural Radiance Fields</li>
+<li>OctoMap-RT: Fast Probabilistic Volumetric Mapping Using Ray-Tracing GPUs</li>
+</ul>
+<h1 id="Robot-Vision"><a href="#Robot-Vision" class="headerlink" title="Robot Vision"></a>Robot Vision</h1><ul>
+<li>NGEL-SLAM: Neural Implicit Representation-Based Global Consistent Low-Latency SLAM System</li>
+<li>Ultrafast Square-Root Filter-Based VINS</li>
+<li>Lifting 2D Pretrained Knowledge to 3D for Object Grounding</li>
+</ul>
+<h1 id="Representation-Learning"><a href="#Representation-Learning" class="headerlink" title="Representation Learning"></a>Representation Learning</h1><ul>
+<li>NeRF-Loc: Transformer-Based Object Localization within Neural Radiance Fields</li>
+<li>NeRF-Loc: Transformer-Based Object Localization within Neural Radiance Fields</li>
+</ul>
+<h1 id="Calibration"><a href="#Calibration" class="headerlink" title="Calibration"></a>Calibration</h1><ul>
+<li>Zero-Training LiDAR-Camera Extrinsic Calibration Method Using Segment Anything Model</li>
+<li>Online Camera-LiDAR Calibration Monitoring and Rotational Drift Tracking</li>
+<li>A Novel, Efficient and Accurate Method for Lidar Camera Calibration</li>
+<li>An Extrinsic Calibration Method between LiDAR and GNSS/INS for Autonomous Driving</li>
+<li>SGCalib: A Two-Stage Camera-LiDAR Calibration Method Using Semantic Information and Geometric Features</li>
+<li>LiDAR-Camera Extrinsic Calibration with Hierachical and Iterative Feature Matching</li>
+<li>CalibFormer: A Transformer-Based Automatic LiDAR-Camera Calibration Network</li>
+</ul>
+<h1 id="Sensor-Fusion"><a href="#Sensor-Fusion" class="headerlink" title="Sensor Fusion"></a>Sensor Fusion</h1><ul>
+<li>Influence of Camera-LiDAR Configuration on 3D Object Detection for Autonomous Driving</li>
+<li>SuperFusion: Multilevel LiDAR-Camera Fusion for Long-Range HD Map Generation</li>
+<li>GICI-LIB: A GNSS/INS/Camera Integrated Navigation Library</li>
+<li>LiDAR-Camera Calibration Using Intensity Variance Cost</li>
+</ul>
+<h1 id="Visual-Perception-and-Learning"><a href="#Visual-Perception-and-Learning" class="headerlink" title="Visual Perception and Learning"></a>Visual Perception and Learning</h1><ul>
+<li>Bag of Views: An Appearance-Based Approach to Next-Best-View Planning for 3D Reconstruction</li>
+<li>CopperTag: A Real-Time Occlusion-Resilient Fiducial Marker</li>
+<li>Marrying NeRF with Feature Matching for One-Step Pose Estimation</li>
+</ul>
+<h1 id="Semantic-Scene-Understanding"><a href="#Semantic-Scene-Understanding" class="headerlink" title="Semantic Scene Understanding"></a>Semantic Scene Understanding</h1><ul>
+<li>Mapping High-Level Semantic Regions in Indoor Environments without Object Recognition</li>
+<li>LLM-Grounder: Open-Vocabulary 3D Visual Grounding with Large Language Model As an Agent</li>
+<li>Few-Shot Panoptic Segmentation with Foundation Models</li>
+<li>Open-Fusion: Real-Time Open-Vocabulary 3D Mapping and Queryable Scene Representation</li>
+<li>Mask4Former: Mask Transformer for 4D Panoptic Segmentation</li>
+<li>Mask4D: End-To-End Mask-Based 4D Panoptic Segmentation for LiDAR Sequences</li>
+<li>SG-RoadSeg: End-To-End Collision-Free Space Detection Sharing Encoder Representations Jointly Learned Via Unsupervised Deep Stereo</li>
+<li>Collaborative Dynamic 3D Scene Graphs for Automated Driving</li>
+<li>BroadBEV: Collaborative LiDAR-Camera Fusion for Broad-Sighted Bird’s Eye View Map Construction</li>
+</ul>
+<h1 id="Object-Detection"><a href="#Object-Detection" class="headerlink" title="Object Detection"></a>Object Detection</h1><ul>
+<li>Road Obstacle Detection Based on Unknown Objectness Scores</li>
+<li>Efficient Semantic Segmentation for Compressed Video</li>
+<li>Cross-Cluster Shifting for Efficient and Effective 3D Object Detection in Autonomous Driving</li>
+<li>Dynablox: Real-Time Detection of Diverse Dynamic Objects in Complex Environments</li>
+<li>3D Object Detection with VI-SLAM Point Clouds: The Impact of Object and Environment Characteristics on Model Performance</li>
+<li>Uplifting Range-View-Based 3D Semantic Segmentation in Real-Time with Multi-Sensor Fusion</li>
+</ul>
+<h1 id="Robotics-with-Large-Language-Models"><a href="#Robotics-with-Large-Language-Models" class="headerlink" title="Robotics with Large Language Models"></a>Robotics with Large Language Models</h1><ul>
+<li>Grasp-Anything: Large-Scale Grasp Dataset from Foundation Models</li>
+</ul>
+<h1 id="Autonomous-Vehicle-Navigation"><a href="#Autonomous-Vehicle-Navigation" class="headerlink" title="Autonomous Vehicle Navigation"></a>Autonomous Vehicle Navigation</h1><ul>
+<li>Driving with LLMs: Fusing Object-Level Vector Modality for Explainable Autonomous Driving</li>
+<li>Monocular Localization with Semantics Map for Autonomous Vehicles</li>
+<li>Talk2BEV: Language-Enhanced Bird’s-Eye View Maps for Autonomous Driving</li>
+<li>FastOcc: Accelerating 3D Occupancy Prediction by Fusing the 2D Bird’s-Eye View and Perspective View</li>
+</ul>
+<h1 id="Intelligent-Transportation-Systems"><a href="#Intelligent-Transportation-Systems" class="headerlink" title="Intelligent Transportation Systems"></a>Intelligent Transportation Systems</h1><ul>
+<li>PCB-RandNet: Rethinking Random Sampling for LiDAR Semantic Segmentation in Autonomous Driving Scene</li>
+</ul>
+<h1 id="Localization-and-Navigation"><a href="#Localization-and-Navigation" class="headerlink" title="Localization and Navigation"></a>Localization and Navigation</h1><ul>
+<li>3D-BBS: Global Localization for 3D Point Cloud Scan Matching Using Branch-And-Bound Algorithm</li>
+<li>DynaInsRemover: A Real-Time Dynamic Instance-Aware Static 3D LiDAR Mapping Framework for Dynamic Environment</li>
+<li>Efficient 3D Instance Mapping and Localization with Neural Fields</li>
+<li>MonoOcc: Digging into Monocular Semantic Occupancy Prediction</li>
+</ul>
+<h1 id="Object-Detection-and-Pose-Estimation"><a href="#Object-Detection-and-Pose-Estimation" class="headerlink" title="Object Detection and Pose Estimation"></a>Object Detection and Pose Estimation</h1><ul>
+<li><p>IFFNeRF:</p>
+<p>Initialisation Free and Fast 6DoF Pose Estimation from a Single Image and a NeRF Model</p>
+</li>
+<li>Toward Accurate Camera-Based 3D Object Detection Via Cascade Depth Estimation and Calibration</li>
+<li>RGB-Based Category-Level Object Pose Estimation Via Decoupled Metric Scale Recovery</li>
+</ul>
+<h1 id="Vision-Systems"><a href="#Vision-Systems" class="headerlink" title="Vision Systems"></a>Vision Systems</h1><ul>
+<li>Nvblox: GPU-Accelerated Incremental Signed Distance Field Mapping</li>
+</ul>
+<h1 id="Multi-Robot-SLAM"><a href="#Multi-Robot-SLAM" class="headerlink" title="Multi-Robot SLAM"></a>Multi-Robot SLAM</h1><ul>
+<li>Swarm-SLAM: Sparse Decentralized Collaborative Simultaneous Localization and Mapping Framework for Multi-Robot Systems</li>
+<li>Asynchronous Multiple LiDAR-Inertial Odometry Using Point-Wise Inter-LiDAR Uncertainty Propagation</li>
+<li>AutoMerge: A Framework for Map Assembling and Smoothing in City-Scale Environments</li>
+</ul>
+<h1 id="RGB-D-Sensing-and-Perception"><a href="#RGB-D-Sensing-and-Perception" class="headerlink" title="RGB-D Sensing and Perception"></a>RGB-D Sensing and Perception</h1><ul>
+<li>ConceptGraphs: Open-Vocabulary 3D Scene Graphs for Perception and Planning</li>
+</ul>
+<h1 id="Visual-Learning"><a href="#Visual-Learning" class="headerlink" title="Visual Learning"></a>Visual Learning</h1><ul>
+<li>AnyOKP: One-Shot and Instance-Aware Object Keypoint Extraction with Pretrained ViT</li>
+</ul>
+<h1 id="Learning-in-Field-Robotic"><a href="#Learning-in-Field-Robotic" class="headerlink" title="Learning in Field Robotic"></a>Learning in Field Robotic</h1><ul>
+<li>TartanDrive 2.0: More Modalities and Better Infrastructure to Further Self-Supervised Learning Research in Off-Road Driving Tasks</li>
+</ul>
+<h1 id="Aerial-Systems"><a href="#Aerial-Systems" class="headerlink" title="Aerial Systems"></a>Aerial Systems</h1><ul>
+<li>High-Speed Stereo Visual SLAM for Low-Powered Computing Devices</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/ICRA/" rel="tag"># ICRA</a>
+              <a href="/tags/LiDAR/" rel="tag"># LiDAR</a>
+              <a href="/tags/IMU/" rel="tag"># IMU</a>
+              <a href="/tags/LiDAR-SLAM/" rel="tag"># LiDAR SLAM</a>
+              <a href="/tags/LIO/" rel="tag"># LIO</a>
+              <a href="/tags/NeRF/" rel="tag"># NeRF</a>
+              <a href="/tags/LiDAR-inertial-odometry/" rel="tag"># LiDAR-inertial odometry</a>
+              <a href="/tags/3D-Gaussian-Splatting/" rel="tag"># 3D Gaussian Splatting</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20240329-LIO-SAM-Review/" rel="prev" title="LIO-SAM 논문 리뷰 (적는 중)">
+                  <i class="fa fa-angle-left"></i> LIO-SAM 논문 리뷰 (적는 중)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

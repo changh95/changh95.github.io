@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,86 +14,51 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="필수 툴을 소개합니다 - Disassembly, Compiler Explorer, QuickBench, Profiler, Valgrind, Massif, ASAN">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="필수 툴을 소개합니다 - Disassembly, Compiler Explorer, QuickBench, Profiler, Valgrind, Massif, ASAN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++ 프로그램 성능을 높이는 방법">
 <meta property="og:url" content="https://changh95.github.io/20221013-cpp-essential-tools/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="필수 툴을 소개합니다 - Disassembly, Compiler Explorer, QuickBench, Profiler, Valgrind, Massif, ASAN">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/godbolt.png">
-<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/disassembly.png">
-<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/image.png">
-<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/quickbench.png">
-<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/easy_profiler.png">
-<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/valgrind.png">
-<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/massif-visualizer.png">
+<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/godbolt.webp">
+<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/disassembly.webp">
+<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/image.webp">
+<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/quickbench.webp">
+<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/easy_profiler.webp">
+<meta property="og:image" content="https://changh95.github.io/20221013-cpp-essential-tools/valgrind.webp">
 <meta property="article:published_time" content="2022-10-13T05:48:45.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:02.643Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.277Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20221013-cpp-essential-tools/godbolt.png">
+<meta name="twitter:image" content="https://changh95.github.io/20221013-cpp-essential-tools/godbolt.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20221013-cpp-essential-tools/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20221013-cpp-essential-tools/","path":"20221013-cpp-essential-tools/","title":"C++ 프로그램 성능을 높이는 방법"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>C++ 프로그램 성능을 높이는 방법 | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -219,10 +182,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -233,14 +196,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -249,27 +212,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -289,7 +232,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -302,15 +245,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -325,65 +262,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%EC%96%B8%EC%96%B4%EB%A5%BC-%EC%93%B0%EB%8A%94-%EC%9D%B4%EC%9C%A0"><span class="nav-number">1.</span> <span class="nav-text">C++ 언어를 쓰는 이유</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Compiler-Explorer-amp-Disassembly"><span class="nav-number">2.</span> <span class="nav-text">Compiler Explorer &amp; Disassembly</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Quickbench-amp-Profiler"><span class="nav-number">3.</span> <span class="nav-text">Quickbench &amp; Profiler</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Valgrind-amp-Massif"><span class="nav-number">4.</span> <span class="nav-text">Valgrind &amp; Massif</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -401,11 +324,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++ 프로그램 성능을 높이는 방법 | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -422,13 +350,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2022-10-13 14:48:45" itemprop="dateCreated datePublished" datetime="2022-10-13T14:48:45+09:00">2022-10-13</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -444,7 +372,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -459,8 +387,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <blockquote>
+    <div class="post-body" itemprop="articleBody"><blockquote>
 <p><strong>Compiler Explorer, Disassembly, QuickBench, Easy-profiler, Valgrind, Massif</strong>를 소개합니다.</p>
 </blockquote>
 <h1 id="C-언어를-쓰는-이유"><a href="#C-언어를-쓰는-이유" class="headerlink" title="C++ 언어를 쓰는 이유"></a>C++ 언어를 쓰는 이유</h1><p>‘<span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjEwMzMwLXdoeS1jcHAv">C++을 배워야하는 이유<i class="fa fa-external-link-alt"></i></span>‘ 글에서도 소개한 바와 같이, C++ 언어는 비효율적인 개발 시간을 감수하고서라도 ‘<strong>최적화 된 성능</strong>‘을 얻어내기 위해 사용하는 언어이다.</p>
@@ -473,16 +400,16 @@ mjx-container[display="true"] + br {
 <p><span class="exturl" data-url="aHR0cHM6Ly9nb2Rib2x0Lm9yZw==">https://godbolt.org<i class="fa fa-external-link-alt"></i></span> - 온라인 Disassembly 체커</p>
 </blockquote>
 <p>내 C++ 코드가 효율적으로 작성되었는지 확인하는 가장 쉬운 방법은 컴파일 후 생성된 ‘<strong>어셈블리 코드</strong>‘를 확인하는 것이다. 그리고 <strong>Godbolt</strong> 또는 <strong>Compiler Explorer</strong>라고 불리는 이 웹사이트는 <strong>온라인에서 어셈블리 코드를 확인</strong>할 수 있게 해준다. C++의 대가인 Jason Turner가 유투브 영상에서 자주 사용하는 웹사이트이기도 하다. 컴파일러의 버전도 고를 수 있고, 플랫폼도 고를 수 있다.</p>
-<img src="/20221013-cpp-essential-tools/godbolt.png" class="" title="godbolt"> 
+<img src="/20221013-cpp-essential-tools/godbolt.webp" class="" title="godbolt"> 
 <p> </p>
 <p>웹사이트로는 사실 간단한 STL 함수의 성능 정도만 체크할 수 있고, 내가 심혈을 기울여 만들고 있는 프로그램에서 성능을 체크하기는 쉽지 않다. 내가 직접 만들고 있는 프로그램에 대해서는, <strong>IDE에서 제공하는 Disassembly 기능</strong>을 사용해서 어셈블리 코드를 볼 수 있다. MS Visual Studio도 지원하고, JetBrains CLion도 지원한다. VSCode는 아마 안되는 것으로 알고 있다.</p>
-<img src="/20221013-cpp-essential-tools/disassembly.png" class="" title="disassembly"> 
+<img src="/20221013-cpp-essential-tools/disassembly.webp" class="" title="disassembly"> 
 <p> </p>
 <p>여기서 많이들 이렇게 생각하실 것 같다 - ‘C++ 프로그래밍도 어려운데, 어셈블리까지 알아야하나??’. 물론 어셈블리 까지 제대로 알고 있다면 정확히 코드가 얼마나 효율적으로 돌아가는지 알 수 있겠지만, <strong>어셈블리 특성 상 C++ 프로그래밍보다 몇배나 어렵게 느껴질 수 있다</strong>.</p>
 <p>그래서 간단한 꿀팁을 소개하려고 한다.</p>
 <p>첫번째 꿀팁 - ‘<strong>어셈블리 코드의 라인 수가 적으면, 아무래도 효율적인 코드일 확률이 높다</strong>‘. 어셈블리 코드는 아무래도 굉장히 작은 operation들이 많아 abstraction이 적을 것이라고 생각하기 때문에, 이런 추측을 할 수 있다.</p>
 <p>두번째 꿀팁 - ‘<strong>대략적인 operation들의 CPU 사이클 수를 외워두자</strong>‘. 어셈블리 프로그래밍을 10년간 해온 장인이 Stack Overflow에서 어디선가 언급한 것을 스크린샷으로 찍어둔 것이 있다. (출처가 기억이 나지 않아서… 언젠간 추가할 예정). 이 정보를 기반으로 효율적인 프로그램을 작성하기 위한 그라운드 룰을 만들 수 있다.</p>
-<img src="/20221013-cpp-essential-tools/image.png" class="" title="tips"> 
+<img src="/20221013-cpp-essential-tools/image.webp" class="" title="tips"> 
 <p> </p>
 <hr>
 <h1 id="Quickbench-amp-Profiler"><a href="#Quickbench-amp-Profiler" class="headerlink" title="Quickbench & Profiler"></a>Quickbench &amp; Profiler</h1><blockquote>
@@ -491,12 +418,12 @@ mjx-container[display="true"] + br {
 <p>어셈블리 라인을 보는 것도 좋지만, <strong>실제로 얼마나 빠르게 동작했는지 보는 것도 중요</strong>하다.</p>
 <p>우선 툴을 소개하기 전에 ‘프로그램의 속도를 측정하면 사실 효율성은 다 본게 아닌가? 굳이 어셈블리 코드도 봐야할 필요가 있는가?’ 라는 질문이 들 수 있다. 정답부터 말하자면, <strong>어셈블리 코드 + 런타임 벤치마크 둘 다 봐야한다</strong>. 어셈블리 코드는 CPU에 내려지는 하이레벨 instruction을 의미하는데, CPU 내부에서 동작하는 로우레벨 instruction은 우리가 뜯어볼 수도 없고 상당히 복잡하게 되어있다. 현재 OS가 어떤 작업을 수행중인지, 어떤 하드웨어 포트가 열려있고 닫혀있는지, 어떤 백그라운드 프로세스가 있는지, 메모리 여유분이 어떻게 되어있는지에 따라 CPU 내부에서 동작하는 로우레벨 instruction의 동작 방법이 달라진다. 극단적인 예시를 들면, CPU 온도가 낮을 때에는 CPU가 자율적으로 단기 오버클럭을 수행해서 더 빠르게 작업을 수행할 수도 있는데, 이러한 작업은 이미 온도가 높을 때에는 동작하지 않기 때문에 runtime이 달라질 수도 있다.</p>
 <p><strong>QuickBench</strong>는 온라인 런타임 체커 웹사이트다. Godbolt와 비슷하게 컴파일러를 선택한 후, Google Benchmark 코드와 비슷한 방식으로 코드를 작성해서 <strong>내 코드의 효율성을 체크</strong>할 수 있다. 하지만 이 웹사이트는 기부받은 CPU들에 작동하기 때문에, 종종 운이 나쁘면 돌릴 때 마다 다른 결과가 나타나기도 한다.</p>
-<img src="/20221013-cpp-essential-tools/quickbench.png" class="" title="quickbench"> 
+<img src="/20221013-cpp-essential-tools/quickbench.webp" class="" title="quickbench"> 
 <p> </p>
 <p>내 컴퓨터 / 내 타겟 디바이스에서 정확히 런타임이 어떻게 되는지 확인하기 위해서는 CPU profiler를 돌려보는 것이 좋다. 필자가 추천하는 방식은 <strong>Easy-profiler</strong>이다. 이름처럼 사용하기 쉬울 뿐 더러, 로깅 오버헤드가 작고, 멀티 쓰레드 성능이 시각화가 잘 되어있어서 사용하기 아주 좋다.</p>
 <p>단점이 있다면, 로깅 오버헤드가 아예 없는 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0tEQUIvaG90c3BvdA==">hotspot<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9wZXJmLndpa2kua2VybmVsLm9yZy9pbmRleC5waHAvTWFpbl9QYWdl">perf<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9rby53aWtpcGVkaWEub3JnL3dpa2kvRFRyYWNl">dTrace<i class="fa fa-external-link-alt"></i></span> 같은 방법들도 있지만, 개인적으로 이 방법들로는 SLAM의 멀티쓰레드 특성을 한눈에 분석하기가 어렵다고 생각이 든다. </p>
 <p>개인적으로 Easy-profiler를 사용하면서 런타임을 로깅하고 체크하다가, 마지막 실제 릴리즈 직전에 easy-profiler를 빌드에서 뺌으로써 로깅을 하지 않고, 이로써 조금이라도 더 성능을 얻어내는 방법을 사용하고 있다.</p>
-<img src="/20221013-cpp-essential-tools/easy_profiler.png" class="" title="easy_profiler"> 
+<img src="/20221013-cpp-essential-tools/easy_profiler.webp" class="" title="easy_profiler"> 
 <p> </p>
 <hr>
 <h1 id="Valgrind-amp-Massif"><a href="#Valgrind-amp-Massif" class="headerlink" title="Valgrind & Massif"></a>Valgrind &amp; Massif</h1><blockquote>
@@ -505,36 +432,16 @@ mjx-container[display="true"] + br {
 <p>Valgrind와 Massif는 메모리를 분석하는 툴이다. <strong>Valgrind</strong>는 예전부터 <strong>Memory leak을 분석하는 툴</strong>로 많이 쓰이고, <strong>Massif</strong>는 많이 알려진 툴은 아니지만 valgrind 내부에서 <strong>heap memory profiling</strong>을 하는 도구이다.</p>
 <p>제발, 대체, 왜 2022년에 아직도 new/delete를 사용하는 사람이 있는지는 모르겠지만, 혹시나 new/delete를 사용하고 있는 사람이라면 valgrind를 꼭 돌려보는 것을 추천한다. Valgrind를 사용하면 1. 전체 heap allocation이 몇번 일어났는지, 2. 전체 heap deallocation이 몇번 일어났는지, 3. Dangling pointer (i.e. memory leak)이 얼마나 있는지를 알 수 있다.</p>
 <p>SLAM의 경우 heap allocation을 사용하는 경우가 굉장히 많다 (물론 안 쓰고 하는 방법도 있겠지만, 대부분의 오픈소스에서 보이는 방식은 전부 힙이라고 보면 된다). 왜냐하면 맵이 점점 커지는 형태의 프로그램인데, 이 맵 포인트를 추가할 때 거의 대부분의 경우 heap으로 추가하기 때문이다. 또, 멀티쓰레딩을 위해 여러 쓰레드에서 접근할 수 있는 공유자원을 만들면서 heap에 올리는 경우도 굉장히 많다. 그렇기 때문에, SLAM을 하는 사람들에게는 필수 툴이라고 볼 수 있다.</p>
-<img src="/20221013-cpp-essential-tools/valgrind.png" class="" title="valgrind"> 
+<img src="/20221013-cpp-essential-tools/valgrind.webp" class="" title="valgrind"> 
 <p> </p>
 <p>그 다음은 massif 이다. Massif 자체만으로는 memory profiling 기능만을 지원하지만, KDE에서 만든 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0tERS9tYXNzaWYtdmlzdWFsaXplcg==">massif-visualizer<i class="fa fa-external-link-alt"></i></span>를 사용하면 프로그램이 진행되면서 얼마나 많은 stack / heap 메모리가 점유되었는지도 볼 수 있다. 어떤 프로세스 / 어떤 모듈이 얼마나 메모리를 먹는지 볼 수 있고, 이를 통해 이유없이 데이터를 저장하고 있는 부분들을 발견해서 메모리 최적화를 진행할 수도 있다. PC에서 개발할 때에는 왠만하면 CPU나 메모리가 부족할 일이 없는데 (만약 부족했다면 높은 확률로 뭔가 크게 잘못하고 있을 확률이 높다), 타겟 디바이스에서는 PC에서의 작은 실수가 아주 큰 부메랑으로 돌아오기 때문에 메모리 프로파일링이 큰 도움이 될 수 있다.</p>
-<img src="/20221013-cpp-essential-tools/massif-visualizer.png" class="" title="massif-visualizer"> 
+ 
 
     </div>
 
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -546,12 +453,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20220707-army-over/" rel="prev" title="전문연구요원 끝!!!!!">
-                  <i class="fa fa-chevron-left"></i> 전문연구요원 끝!!!!!
+                  <i class="fa fa-angle-left"></i> 전문연구요원 끝!!!!!
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20221021-pointers/" rel="next" title="Pointer를 써도 될 때는 언제인가?">
-                  Pointer를 써도 될 때는 언제인가? <i class="fa fa-chevron-right"></i>
+                  Pointer를 써도 될 때는 언제인가? <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -571,45 +478,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -617,7 +501,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -631,36 +515,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -670,49 +553,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,88 +14,54 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="VINS-Mono와 AVP-SLAM의 저자인 Qin의 semantic slam 논문을 리뷰합니다.">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="VINS-Mono와 AVP-SLAM의 저자인 Qin의 semantic slam 논문을 리뷰합니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qin 2021 - RoadMap - A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving">
 <meta property="og:url" content="https://changh95.github.io/20230218-qin-2021-roadmap/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="VINS-Mono와 AVP-SLAM의 저자인 Qin의 semantic slam 논문을 리뷰합니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.57.46%20PM.png">
-<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.46.45%20PM.png">
-<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.55.57%20PM.png">
-<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.53.40%20PM.png">
-<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.31.50%20PM.png">
-<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.49.02%20PM.png">
-<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.55.15%20PM.png">
+<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.57.46%20PM.webp">
+<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.46.45%20PM.webp">
+<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.55.57%20PM.webp">
+<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.53.40%20PM.webp">
+<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.31.50%20PM.webp">
+<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.49.02%20PM.webp">
+<meta property="og:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.55.15%20PM.webp">
 <meta property="article:published_time" content="2023-02-18T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:02.739Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.295Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Semantic SLAM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.57.46%20PM.png">
+<meta name="twitter:image" content="https://changh95.github.io/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.57.46%20PM.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20230218-qin-2021-roadmap/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20230218-qin-2021-roadmap/","path":"20230218-qin-2021-roadmap/","title":"Qin 2021 - RoadMap - A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Qin 2021 - RoadMap - A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -221,10 +185,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -235,14 +199,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -251,27 +215,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -291,7 +235,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -304,15 +248,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -327,65 +265,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%85%BC%EB%AC%B8-%EC%9A%94%EC%95%BD"><span class="nav-number">1.</span> <span class="nav-text">논문 요약</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%98%A4%EB%B2%84%EB%B7%B0"><span class="nav-number">2.</span> <span class="nav-text">시스템 오버뷰</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%A1%9C%EC%BB%AC-%EC%A7%80%EB%8F%84-%EC%83%9D%EC%84%B1"><span class="nav-number">3.</span> <span class="nav-text">로컬 지도 생성</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RTK-GPS-Wheel-odometry%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%ED%8F%AC%EC%A6%88-%EC%B6%94%EC%A0%95"><span class="nav-number">3.1.</span> <span class="nav-text">RTK-GPS + Wheel odometry를 이용한 포즈 추정</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BEV-segmentation"><span class="nav-number">3.2.</span> <span class="nav-text">BEV segmentation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%84%BC%EC%84%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B7%A8%ED%95%A9-gt-%EB%A1%9C%EC%BB%AC-%EC%A7%80%EB%8F%84-%EC%83%9D%EC%84%B1"><span class="nav-number">3.3.</span> <span class="nav-text">센서 데이터 취합 -&gt; 로컬 지도 생성</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%84%9C%EB%B2%84%EC%97%90%EC%84%9C-%EC%A7%80%EB%8F%84-%EC%B7%A8%ED%95%A9-%EC%95%95%EC%B6%95"><span class="nav-number">4.</span> <span class="nav-text">클라우드 서버에서 지도 취합 + 압축</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A7%80%EB%8F%84-%EC%B7%A8%ED%95%A9"><span class="nav-number">4.1.</span> <span class="nav-text">지도 취합</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A7%80%EB%8F%84-%EC%95%95%EC%B6%95"><span class="nav-number">4.2.</span> <span class="nav-text">지도 압축</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%B0%A8%EB%9F%89-%EB%B0%B0%ED%8F%AC-%EB%B0%8F-%EC%A7%80%EB%8F%84-%EC%82%AC%EC%9A%A9"><span class="nav-number">5.</span> <span class="nav-text">서비스 차량 배포 및 지도 사용</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A7%80%EB%8F%84-%EC%95%95%EC%B6%95%ED%92%80%EA%B8%B0"><span class="nav-number">5.1.</span> <span class="nav-text">지도 압축풀기</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9C%84%EC%B9%98-%EC%B6%94%EC%A0%95"><span class="nav-number">5.2.</span> <span class="nav-text">위치 추정</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Related-works"><span class="nav-number">6.</span> <span class="nav-text">Related works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EA%B4%80%EB%A0%A8-%EC%9C%A0%ED%88%AC%EB%B8%8C-%EC%98%81%EC%83%81"><span class="nav-number">7.</span> <span class="nav-text">관련 유투브 영상</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -403,11 +327,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Qin 2021 - RoadMap - A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -424,13 +353,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2023-02-18 16:50:21" itemprop="dateCreated datePublished" datetime="2023-02-18T16:50:21+09:00">2023-02-18</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -450,7 +379,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -465,13 +394,12 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="논문-요약"><a href="#논문-요약" class="headerlink" title="논문 요약"></a>논문 요약</h1><p>이 논문에서는 Semantic 정보로 이뤄져있는 지도를 만들고, 관리하고, visual localization 목적으로 사용하는 프레임워크를 제안한다. </p>
+    <div class="post-body" itemprop="articleBody"><h1 id="논문-요약"><a href="#논문-요약" class="headerlink" title="논문 요약"></a>논문 요약</h1><p>이 논문에서는 Semantic 정보로 이뤄져있는 지도를 만들고, 관리하고, visual localization 목적으로 사용하는 프레임워크를 제안한다. </p>
 <p>지도는 노면에서 검출 가능한 road marker로 이뤄져있고, semantic 정보만을 포함하기에 굉장히 적은 용량을 요구한다.</p>
-<img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.57.46%20PM.png" class="" title="RTK+Wheel">
+<img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.57.46%20PM.webp" class="" title="RTK+Wheel">
 <p> </p>
 <hr>
-<h1 id="시스템-오버뷰"><a href="#시스템-오버뷰" class="headerlink" title="시스템 오버뷰"></a>시스템 오버뷰</h1><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.46.45%20PM.png" class="" title="system overview">
+<h1 id="시스템-오버뷰"><a href="#시스템-오버뷰" class="headerlink" title="시스템 오버뷰"></a>시스템 오버뷰</h1><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.46.45%20PM.webp" class="" title="system overview">
 <p>시스템은 3가지 컴포넌트로 나눠진다.</p>
 <ol>
 <li>고성능 센서를 탑재한 지도 생성용 자동차</li>
@@ -482,12 +410,12 @@ mjx-container[display="true"] + br {
 <hr>
 <h1 id="로컬-지도-생성"><a href="#로컬-지도-생성" class="headerlink" title="로컬 지도 생성"></a>로컬 지도 생성</h1><p>RTK-GPS, wheel odometry, front facing camera를 가진 ‘데이터 수집용 차량’이 운행을 하면서 지도를 만든다.</p>
 <p>RTK-GPS + Wheel odometry로 로봇 포즈를 구하고, Front facing camera 이미지를 이용해 bird eye view segmentation 이미지를 생성한다. 이 정보를 지도 관리 서버로 보낸다.</p>
-<h2 id="RTK-GPS-Wheel-odometry를-이용한-포즈-추정"><a href="#RTK-GPS-Wheel-odometry를-이용한-포즈-추정" class="headerlink" title="RTK-GPS + Wheel odometry를 이용한 포즈 추정"></a>RTK-GPS + Wheel odometry를 이용한 포즈 추정</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.55.57%20PM.png" class="" title="RTK+Wheel">
-<img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.53.40%20PM.png" class="" title="RTK+Wheel factor graph">
+<h2 id="RTK-GPS-Wheel-odometry를-이용한-포즈-추정"><a href="#RTK-GPS-Wheel-odometry를-이용한-포즈-추정" class="headerlink" title="RTK-GPS + Wheel odometry를 이용한 포즈 추정"></a>RTK-GPS + Wheel odometry를 이용한 포즈 추정</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.55.57%20PM.webp" class="" title="RTK+Wheel">
+<img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%2012.53.40%20PM.webp" class="" title="RTK+Wheel factor graph">
 <p>RTK-GPS는 정확한 absolute pose를 구해줄 수 있지만, 종종 도심에서는 GPS multi-path 문제로 인해 RTK-GPS 조차 신호가 흔들리기도 한다. 저자는 언제나 정확한 포즈를 추정할 수 있도록 다음과 같은 알고리즘을 설계했다: RTK-GPS의 정보가 흔들리지 않을 때는 RTK-GPS + Wheel odometry의 tightly-coupled 추정 값을 사용하고, RTK-GPS의 정보가 흔들릴 때는 RTK-GPS 데이터를 제거해서 wheel odometry만 믿는다. 이를 위해 GPS와 wheel-odometry의 residual을 최소화하는 cost function을 제안한다 (굉장히 스탠다드한 방법이다.)</p>
 <p>사실 이 논문은 RTK-GPS를 사용함으로써 시스템이 굉장히 간단해졌다. RTK-GPS는 absolute pose를 얻을 수 있기 때문에 다음 단계인 클라우드 서버에서 map merging을 수행할 때 multi-session map들 사이의 overlap 및 relative pose를 구하지 않고 단순 이어붙히기로 작업을 완료할 수 있다.</p>
 <p>하지만 필자는 이러한 시스템이 적절치 않다고 생각하는데, RTK-GPS 센서는 굉장히 비싸고 커버리지도 작기 때문에 전혀 scalable 한 방식이 아니라고 생각되며, RTK-GPS+Wheel 방식의 odometry가 아닌 visual odometry로 추정하고 relocalization 기능을 사용해서 map merging을 하는 것이 적절하다고 생각한다. 아마 실제 저자들도 이것을 알고 있겠지만, 내부 기술을 전부 노출할 수 없으니, 대안으로 RTK+Wheel 방식으로 위장을 했다고 생각한다. 따라서 이번 리뷰에서는 RTK+Wheel 퓨전 관련 수식을 설명하지 않는다.</p>
-<h2 id="BEV-segmentation"><a href="#BEV-segmentation" class="headerlink" title="BEV segmentation"></a>BEV segmentation</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.31.50%20PM.png" class="" title="BEV seg">
+<h2 id="BEV-segmentation"><a href="#BEV-segmentation" class="headerlink" title="BEV segmentation"></a>BEV segmentation</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.31.50%20PM.webp" class="" title="BEV seg">
 <p>Front facing camera 이미지에서 CNN 기반 semantic segmentation 모델을 돌려 segmentation image를 얻는다. 특별히 어떤 모델을 사용했는지는 나오지 않는다.</p>
 <p>이후 inverse perspective mapping (IPM) 기법을 사용해서 이미지를 바닥면에 projection 한다. 이를 하기 위해서는 사전에 캘리브레이션된 camera intrinsic parameter와 extrinsic을 알고 있어야한다. IPM을 수행하면 엄청 멀리까지 맵핑되는데, 여기서 차량 전방 12 m x 8 m 만 맵핑을 한다고 한다. 이러한 IPM 기법은 저자의 이전 논문인 AVP-SLAM에서도 사용했던 방법이다.</p>
 <p>사실 IPM을 제대로 하기가 굉장히 어렵다. IPM을 제대로 한다는건 제대로 바닥면을 추정했다는건데, 이를 위해서는 1. 바닥면이 완벽하게 평평하거나, 2. 바닥면이 울퉁불퉁해도 gravity 방향을 알고있어야한다. 완벽하게 평평한 바닥면은 없고, 또 차가 가속/감속을 하거나 코너를 돌 때 중심이 바뀌기 때문에 제대로 된 projection이 안되는 경우가 많다. 보통 IMU를 탑재한 자동차들만 이것이 가능한데, 저자 이름을 찾아 중국 블로그까지 스토킹해서 들어가본 결과 Huawei의 프리미엄 자동차 라인에 대해 설명하는걸 보니 그정도 되는 차에 IMU가 들어갈 것을 추정할 수 있다. IMU가 없는 차에서는 아마 IPM이 굉장히 흔들릴 가능성이 높다.</p>
@@ -499,7 +427,7 @@ mjx-container[display="true"] + br {
 <h1 id="클라우드-서버에서-지도-취합-압축"><a href="#클라우드-서버에서-지도-취합-압축" class="headerlink" title="클라우드 서버에서 지도 취합 + 압축"></a>클라우드 서버에서 지도 취합 + 압축</h1><p>지도 관리 서버에서는 여러 ‘데이터 수집용 자동차’에서 받은 BEV segmentation 정보를 수집한다. 수집한 BEV segmentation을 함께 수집한 로봇 포즈 정보를 기반으로 global map에 깐다. 여기서 contour를 계산해서 중요한 정보만 남긴다.</p>
 <h2 id="지도-취합"><a href="#지도-취합" class="headerlink" title="지도 취합"></a>지도 취합</h2><p>데이터를 수집한 차량은 클라우드 서버에 semantic 지도를 보낸다. 보낼 때, 데이터 송수신량을 줄이기 위해 ‘공간을 차지하는 부분’에 대한 정보만 보낸다.</p>
 <p>클라우드 서버는 다수의 차량에게서 다수의 지도를 받는다. 그리고 global map에 전부 이 지도를 덧대어서 그린다. 이전 단계와 동일하게, 0.1 x 0.1 x 0.1 m 단위로 scene을 쪼갠 후, 최종 class label을 voting scheme을 통해 정한다.</p>
-<h2 id="지도-압축"><a href="#지도-압축" class="headerlink" title="지도 압축"></a>지도 압축</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.49.02%20PM.png" class="" title="Map compression">
+<h2 id="지도-압축"><a href="#지도-압축" class="headerlink" title="지도 압축"></a>지도 압축</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.49.02%20PM.webp" class="" title="Map compression">
 <p>이렇게 만들어진 global map을 다시 운행중인 자동차로 보내기에는 너무 데이터가 클 수 있다. 지도를 압축해야하는데, 여기서 road marker에 대해 contour를 추출해서 정보를 압축할 수 있다.</p>
 <p>3D 지도에서 top view만 추출한 후, contour를 추출해서 새로운 global map을 만든다. 어떻게 contour를 추출하는지, 어떤 자료구조로 저장하는지는 또 설명하지 않았다.</p>
 <p> </p>
@@ -508,7 +436,7 @@ mjx-container[display="true"] + br {
 <p>서비스 중인 자율주행 차량은 저가형 카메라로 얻은 BEV segmentation 정보와 지도 정보를 매칭해서 자신의 위치를 추정한다. 추정한 위치와 wheel odometry 정보를 extended kalman filter로 퓨전해 보다 정확한 위치를 추정한다.</p>
 <h2 id="지도-압축풀기"><a href="#지도-압축풀기" class="headerlink" title="지도 압축풀기"></a>지도 압축풀기</h2><p>중앙 클라우드 서버는 contour만 있는 지도를 현재 운행중인 차량에 송신한다. 운행중인 차량은 RTK와 같은 고급 센서는 없다. 아마 front facing camera와 wheel 정보만 있을 것이다.</p>
 <p>차량은 contour 지도를 수신한 후, contour 내부의 빈 곳을 채워넣는 작업을 한다. 이로써 다시 dense한 semantic map을 만들었다.</p>
-<h2 id="위치-추정"><a href="#위치-추정" class="headerlink" title="위치 추정"></a>위치 추정</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.55.15%20PM.png" class="" title="Vis loc">
+<h2 id="위치-추정"><a href="#위치-추정" class="headerlink" title="위치 추정"></a>위치 추정</h2><img src="/20230218-qin-2021-roadmap/Screenshot%202023-02-28%20at%201.55.15%20PM.webp" class="" title="Vis loc">
 <p>현재 front facing camera로 얻은 이미지에 semantic segmentation을 수행하고, 이를 IPM을 통해 BEV segmentation 이미지로 만든다.</p>
 <p>여기서 얻은 데이터를 복원한 semantic map에 대조해서 현재 pose를 알아낼 수 있다. BEV segmentation에 있는 semantic 정보를 모두 포인트 클라우드처럼 다루고, semantic map에 있는 정보도 포인트 클라우드처럼 다룬다면, iterative closest point (ICP) 알고리즘을 통해 3D-3D 매칭을 수행해서 6dof 포즈를 알아낼 수 있을 것이다 (이 과정이 visual localization이 된다).</p>
 <p>하지만 매 순간마다 ICP를 계산히기는 너무 계산량이 클 것이다. ICP는 기회가 될 때마다 계산하고, 이를 자동차의 wheel odometry와 함께 visual localization 결과를 Extended Kalman Filter (EKF)로 퓨전하면 위치 추정의 결과도 더 정확하게 만들 수 있고 trajectory smoothing 도 가능하다.</p>
@@ -535,26 +463,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230215-rosen-2021/" rel="bookmark">Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230218-qin-2020-avpslam/" rel="bookmark">Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230329-rosinol-2021-kimera-3d-dgs/" rel="bookmark">Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/" rel="bookmark">Mazur 2022 - Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding 논문 리뷰</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230618-cvpr2023-tutorials-workshops/" rel="bookmark">CVPR 2023 학회에서 눈여겨볼 SLAM 관련 튜토리얼/워크샵</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -568,12 +476,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20230218-qin-2020-avpslam/" rel="prev" title="Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot">
-                  <i class="fa fa-chevron-left"></i> Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot
+                  <i class="fa fa-angle-left"></i> Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/20240308-papers/" rel="next" title="2024년 1분기 Spatial AI 뉴스">
-                  2024년 1분기 Spatial AI 뉴스 <i class="fa fa-chevron-right"></i>
+                <a href="/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/" rel="next" title="Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰">
+                  Fang 2022 - Self-Supervised Camera Self-Calibration from Video 논문 리뷰 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -593,45 +501,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -639,7 +524,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -653,36 +538,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -692,49 +576,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

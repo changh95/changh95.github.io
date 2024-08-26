@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,38 +14,36 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Daniel Cremers 교수님께서 발표해주신 Deep Direct Visual SLAM 영상의 노트입니다.">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Daniel Cremers 교수님께서 발표해주신 Deep Direct Visual SLAM 영상의 노트입니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)">
 <meta property="og:url" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="CVPR 2020 학회에서 Joint Workshop on Long-Term Visual Localization, Visual Odometry and Geometric and Learning-based SLAM 워크샵 중 Daniel Cremers 교수님께서 발표해주신 Deep Direct Visual SLAM 영상의 노트입니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/avengers.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/keypoint_vs_direct.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_slam.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_tracking.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/dso.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/semantic.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/deep.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/dvso.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/dvso_comp.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/affine_brightness.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/uncertainty.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_depth.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_vo.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_recon.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/vis_loc.png">
-<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/gn-net.png">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/avengers.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/keypoint_vs_direct.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_slam.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_tracking.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/dso.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/semantic.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/deep.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/dvso.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/dvso_comp.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/affine_brightness.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/uncertainty.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_depth.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_vo.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_recon.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/vis_loc.webp">
+<meta property="og:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/gn-net.webp">
 <meta property="article:published_time" content="2020-12-25T11:38:19.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:01.835Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.129Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="CV">
 <meta property="article:tag" content="SLAM">
@@ -60,61 +56,29 @@
 <meta property="article:tag" content="D3VO">
 <meta property="article:tag" content="GN-Net">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/avengers.png">
+<meta name="twitter:image" content="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/avengers.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/","path":"20201225-CVPR2020-Cremers-SLAM-workshop/","title":"CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표) | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -238,10 +202,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -252,14 +216,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -268,27 +232,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -308,7 +252,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -321,15 +265,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -344,65 +282,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">시작하기 전…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feature-based-SLAM-vs-Direct-SLAM"><span class="nav-number">2.</span> <span class="nav-text">Feature-based SLAM vs Direct SLAM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Feature-based-SLAM"><span class="nav-number">2.1.</span> <span class="nav-text">Feature-based SLAM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Direct-SLAM"><span class="nav-number">2.2.</span> <span class="nav-text">Direct SLAM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%B4%88%EA%B8%B0-Direct-SLAM-LSD-SLAM"><span class="nav-number">3.</span> <span class="nav-text">초기 Direct SLAM - LSD-SLAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Direct-SLAM-DSO-Direct-Sparse-Odometry"><span class="nav-number">4.</span> <span class="nav-text">Direct SLAM - DSO (Direct Sparse Odometry)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deep-Neural-Networks"><span class="nav-number">5.</span> <span class="nav-text">Deep Neural Networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%94%A5%EB%9F%AC%EB%8B%9D-SLAM-DVSO-Deep-Virtual-Stereo-Odometry"><span class="nav-number">6.</span> <span class="nav-text">딥러닝 SLAM - DVSO (Deep Virtual Stereo Odometry)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%94%A5%EB%9F%AC%EB%8B%9D-SLAM-D3VO-3-Depth-Pose-Uncertainty"><span class="nav-number">7.</span> <span class="nav-text">딥러닝 SLAM - D3VO (3 - Depth, Pose, Uncertainty)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%94%A5%EB%9F%AC%EB%8B%9D-SLAM-GN-Net-Multi-weather-relocalization"><span class="nav-number">8.</span> <span class="nav-text">딥러닝 SLAM - GN-Net (Multi weather relocalization)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%B0%9C%ED%91%9C%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A7%88%EB%AC%B8"><span class="nav-number">9.</span> <span class="nav-text">발표에 대한 질문</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Photometric-error%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0-%EB%95%8C%EC%9D%98-%EB%8B%A8%EC%A0%90%EC%9D%B4-%EC%9E%88%EB%8B%A4%EB%A9%B4-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94"><span class="nav-number">9.1.</span> <span class="nav-text">Photometric error를 사용할 때의 단점이 있다면 무엇인가요?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8B%A4%EB%A5%B8-%EC%84%BC%EC%84%9C%EC%99%80-%ED%93%A8%EC%A0%84%ED%95%9C%EB%8B%A4%EB%A9%B4-%EC%96%B4%EB%96%A4-%EA%B2%83%EA%B3%BC-%ED%95%B4%EC%95%BC%ED%95%A0%EA%B9%8C%EC%9A%94"><span class="nav-number">9.2.</span> <span class="nav-text">다른 센서와 퓨전한다면 어떤 것과 해야할까요?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Robustness%EC%99%80-Accuracy%EB%A5%BC-%EC%9C%84%ED%95%B4%EC%84%9C-End-to-End%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%EA%B2%8C-%EC%A2%8B%EC%9D%84%EA%B9%8C%EC%9A%94-%EC%95%84%EB%8B%88%EB%A9%B4-Hybrid%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94%EA%B2%8C-%EC%A2%8B%EC%9D%84%EA%B9%8C%EC%9A%94"><span class="nav-number">9.3.</span> <span class="nav-text">Robustness와 Accuracy를 위해서 End-to-End를 공부하는게 좋을까요? 아니면 Hybrid를 공부하는게 좋을까요?</span></a></li></ol></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -420,11 +344,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CVPR 2020 - Deep Direct Visual SLAM (Prof. Daniel Cremers 발표) | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -441,13 +370,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2020-12-25 20:38:19" itemprop="dateCreated datePublished" datetime="2020-12-25T20:38:19+09:00">2020-12-25</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:01" itemprop="dateModified" datetime="2023-06-09T15:12:01+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -467,7 +396,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -482,9 +411,8 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <hr>
-<h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><img src="/20201225-CVPR2020-Cremers-SLAM-workshop/avengers.png" class="" title="어벤저스 ㄷㄷ">
+    <div class="post-body" itemprop="articleBody"><hr>
+<h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><img src="/20201225-CVPR2020-Cremers-SLAM-workshop/avengers.webp" class="" title="어벤저스 ㄷㄷ">
 <p>소개되는 내용에 참여신 분들은 TUM의 Cremers 교수님 랩실의 어벤저스 이다.</p>
 <p>Nan Yang - DVSO와 D3VO를 성공시킨 떠오르는 딥러닝 슬램 스타,<br>Lukas von Stumberg - GN-Net, LM-Reloc 등 기존 다이렉트 방식의 한계를 깨부수는 딥러닝 기법을 만든 연구자,<br>Rui Wang - 수많은 DSO의 베리에이션을 만들었고, 최신 Cremers 교수님 랩실의 굵직한 연구에는 다 참여하는 연구자,<br>Jörg Stückler - 막스 플랑크…,<br>Jakob Engel - Direct 방식을 띄워준 장본인인 LSD-SLAM과 DSO의 1저자,<br>그리고 Cremers 대장님</p>
 <p>숨만 쉬어도 새 논문이 나올 것 같은 조합 ㄷㄷ</p>
@@ -493,7 +421,7 @@ mjx-container[display="true"] + br {
 <h1 id="Feature-based-SLAM-vs-Direct-SLAM"><a href="#Feature-based-SLAM-vs-Direct-SLAM" class="headerlink" title="Feature-based SLAM vs Direct SLAM"></a>Feature-based SLAM vs Direct SLAM</h1><p>SLAM의 목적은 Camera motion + 3D Structure를 구해내는 방법이다.</p>
 <p>Erwin Kruppa라는 오스트리아 수학자/과학자가 SLAM의 기초 아이디어를 처음 제안하였다.<br>1913년에 (무려 100년도 전에… ㄷㄷ) “두개의 view로부터 5개의 correspondence가 있으면, 그 view들 사이의 motion과 3D 구조를 유한한 해로 추측할 수 있다’라는 것을 증명했다고 한다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/keypoint_vs_direct.png" class="" title="Keypoint vs Direct">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/keypoint_vs_direct.webp" class="" title="Keypoint vs Direct">
 <p><br></p>
 <h2 id="Feature-based-SLAM"><a href="#Feature-based-SLAM" class="headerlink" title="Feature-based SLAM"></a>Feature-based SLAM</h2><p>Kruppa의 방식을 그대로 따른 방법이 Feature-based (Keypoint-based) SLAM이다.<br>Kruppa가 이야기한대로, 2개의 이미지로부터 correspondence match를 만들어준다.<br>이 때, feature detector / descriptor를 이용한다.<br>또, 매치가 잘 안될 경우를 고려해서 RANSAC 등의 테크닉을 함께 사용한다.<br>Bundle adjustment를 수행하면 camera motion과 3D structure를 얻을 수 있다.</p>
 <p><br></p>
@@ -501,11 +429,11 @@ mjx-container[display="true"] + br {
 <p>두 방식의 다른 점을 뽑으라면,<br>Feature-based SLAM은 reprojection error를 최소화하는 reconstruction을 목적으로 최적화 프로그래밍 (즉, motion과 structure가 서로 동의할 수 있는 추정치를 가질 때 까지)을 수행하는 것이고,<br>Direct SLAM은 이미지 밝기 값에 대한 에러인 photometric error / brightness consistency 값이 최소화 되는 최적화 프로그래밍을 한다 (이 과정은 optical flow등을 생각하면 굉장히 유사하다).</p>
 <hr>
 <h1 id="초기-Direct-SLAM-LSD-SLAM"><a href="#초기-Direct-SLAM-LSD-SLAM" class="headerlink" title="초기 Direct SLAM - LSD-SLAM"></a>초기 Direct SLAM - LSD-SLAM</h1><p><span class="exturl" data-url="aHR0cHM6Ly92aXNpb24uaW4udHVtLmRlL3Jlc2VhcmNoL3ZzbGFtL2xzZHNsYW0=">LSD-SLAM<i class="fa fa-external-link-alt"></i></span>은 Jakob Engel이 ECCV 2014 학회에서 발표한 최초의 Large scale 환경을 커버할 수 있는 direct 기반 SLAM 이다.</p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_slam.png" class="" title="LSD-SLAM">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_slam.webp" class="" title="LSD-SLAM">
 <p>LSD-SLAM은 다음과 같은 방식으로 작동한다.<br>영상이 들어오면 Tracking과 Depth map estimation 두개의 작업이 동시에 이뤄진다.<br>그리고 keyframe에서 추출된 Depth map들은 Point cloud 형태의 Global map으로 추가된다.<br>Large-scale에서 작동할 수 있는 이유는 오른쪽 상단의 Similarity optimisation 방식이 정확하게 계산을 해주기 때문이다.<br>이 방식은 원래 LiDAR SLAM에서 사용하던 것인데, trajectory를 효과적으로 계산하는 것을 보고 채용해왔다.</p>
 <p>Cremers 교수님 말씀으로는, 대부분의 연구/작업은 Jakob Engel이 진행하였고, 본인은 LSD-SLAM이라는 이름을 만들어서 인기있게 만든 것 뿐이라고 하신다 (LSD는 마약 이름이기도 하니까, 노이즈마케팅이라고 하신다 ㅋㅋㅋ…)</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_tracking.png" class="" title="LSD-SLAM Tracking">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/lsd_tracking.webp" class="" title="LSD-SLAM Tracking">
 <p>LSD-SLAM이 Direct SLAM인 이유에 대해서 잠시 설명하자면…<br>Keyframe 이미지와 카메라에서 방금 들어온 최신 이미지가 있을 때,<br>이 이미지를 어떤 rigid body motion (i.e. 3d rotation + 3d translation)으로 warp해야, keyframe 이미지와 똑같이 생기는가? 라는 문제를 푸는 것이다.<br>여기서 keyframe 이미지와 현재 이미지에서의 밝기를 (intensity) 비교하기 때문에, Direct 방식이라고 할 수 있다.<br>그리고 이 과정은 단순히 6개의 파라미터 (i.e. xyz rotation, xyz translation)만 추정하기 때문에 계산량이 적고, 그렇기에 CPU 속 1개의 코어에서 실시간으로 돌아간다고 한다.<br>나머지 코어에서는 다른 부분인 Depth map estimation과 Global realignment / pose graph optimisation을 수행한다고 한다.</p>
 <p>이러한 방식으로 LSD-SLAM은 Large-scale에서도 굉장히 작은 drift을 가지게 된다고 한다.<br><span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9HbnVRelAzZ3R5NA==">영상<i class="fa fa-external-link-alt"></i></span>으로 볼 수 있다.</p>
 <p>LSD-SLAM에는 단점이 하나 있다.<br>LSD-SLAM 은 camera trajectory를 계산하고나서 map에 대한 계산을 이어간다.<br>하지만 사실 이러한 계산은 단일 과정으로 jointly하게 풀어내는게 훨씬 더 좋다.<br>trajectory에 에러가 생긴만큼, map 계산에 그 에러가 전파되기 때문이다.<br>물론 jointly하게 계산하는 방식은 방식은 계산해야할 파라미터의 수가 훨씬 많아져서 iterative하게 풀어낼 수 밖에 없다.<br>그리고 iterative하게 풀기 위해서는 어쩔 수 없이 photometric bundle adjustment라는 방식을 만들어내야한다.<br>이 당시에는 photometric bundle adjustment라는 방식이 만들어지지 않았었다.</p>
@@ -516,55 +444,55 @@ mjx-container[display="true"] + br {
 <p>DSO는 pose graph optimisation이라던지 loop closure와 같은 global optimisation을 수행하지 않는다.<br>그렇기 때문에 오랜기간동안 트랙킹을 진행할 경우 어쩔 수 없이 drift가 쌓일 수 밖에 없다.<br>그래서 DSO도 ‘SLAM’ 이라는 이름 대신 ‘Odometry’라는 이름을 채택하였다.<br>하지만 그럼에도 drift가 굉장히 작은 것을 볼 수 있다 - 몇백 m를 움직였는데도 drift는 2-3m 밖에 나타나지 않는데, 그만큼 DSO가 정확하다는 것을 볼 수 있다.</p>
 <p>여기서 우리는 SLAM에서 ‘정확도’라는 개념에 대해서 조금 생각을 해보게 된다.<br>Large-scale에서 정확도는 어떻게 재야할까?<br>Small-scale에서 정밀하게 트랙킹하며 GT 데이터로 사용되는 모션 캡처 카메라는 large-scale에서 사용할 수 없다.<br>GPS, IMU 등은 오차가 +- x m단위로 부정확해서 논외이다.<br>시뮬레이션으로 만든 방식으로는 정확한 GT를 얻어낼 수 있다.<br>하지만 시뮬레이션에서 잘 작동하는 SLAM 방식을 만들어도 종종 실제 환경에서 잘 작동하지 않는 경우가 있다.<br>그러므로 시뮬레이션 GT도 사용하기 애매하다.</p>
 <p>Jakob Engel이 택한 방법은, real-life scene에 대한 큰 데이터셋을 구축하는 것이다.<br>Indoor, outdoor 환경에서 perspective, fisheye 등의 다양한 카메라 셋팅을 사용해서 약 50개의 시퀀스를 구비해놨다.<br>모든 시퀀스는 끝나갈 때 쯤에 시퀀스가 처음 시작한 위치로 돌아오는데, 이 때 최종 위치와 초기 위치를 align시켜 정확한 위치를 찾고, DSO가 추정한 위치 값을 비교하여 translation, rotation, scale 등에 대한 ‘정확도’를 추정하였다.</p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/dso.png" class="" title="DSO performance">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/dso.webp" class="" title="DSO performance">
 <p>DSO의 정확도 벤치마크 결과이다.<br>DSO가 ORB-SLAM (잘되는 feature-based SLAM 모듈)보다 훨씬 정확하다는 결과가 나온다.<br>DSO에는 pose graph optimisation이나 loop closure가 없는데도 말이다.<br>Cremers 교수님은 ‘이미지를 직접 다루는 Direct 방식이기 때문에’ 이런 정확도가 나올 수 있다고 이야기한다. </p>
 <p><br></p>
 <hr>
 <h1 id="Deep-Neural-Networks"><a href="#Deep-Neural-Networks" class="headerlink" title="Deep Neural Networks"></a>Deep Neural Networks</h1><p>딥러닝 방식은 현재 Classical한 방식이 만드는 reconstruction 정확도를 이기지 못한다고 알려져있다.<br>물론 여기에는 정말 다양한 이유가 있지만, 이번 발표의 주제가 아니기 때문에 깊게 들어가지 않는다.<br>그럼에도 딥러닝은 지속적으로 연구할만한 가치가 있다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/semantic.png" class="" title="Semantic map">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/semantic.webp" class="" title="Semantic map">
 <p>SLAM에 딥러닝을 섞었을 때, 현재 단계에서는 Semantic understanding을 통해 가장 효과적으로 가치를 창출할 수 있다. </p>
 <p>단순히 3D point cloud map을 만드는게 아니라, 실제로 어떤 object가 어디에 있는지도 알려주는 것이다.<br>위의 사진은 Cremers 교수님의 스타트업인 Artisense에서 만든 3D semantic map이다.<br>하늘색은 건물, 초록색은 식물, 주황색은 도보, 파란색은 자동차 등등이 라벨링이 되어있는 것을 볼 수 있다.<br>이는 여러대의 자동차에 각각 센서 시스템을 구축하고, 각각의 차에서 얻어진 맵을 하나로 합친 결과이다.<br>Artisense의 목적은 저렴한 센서 시스템을 구축해서 자율주행을 위한 정확하고 쓸모있는 3D semantic map을 구축하는 것이 목표라고 한다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/deep.png" class="" title="Deep learning slam">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/deep.webp" class="" title="Deep learning slam">
 <p>실제로 딥러닝을 SLAM 파이프라인에 집어넣는 연구는 2017년부터 시작되었다고 볼 수 있다.</p>
 <p>딥러닝을 이용해서 직접적으로 카메라 포즈를 구해내고 3D reconstruction을 수행하는 것이다.<br>이러한 연구들은 이런 계산이 ‘가능하다는 것’을 보여주었다.<br>하지만 아직 State-of-the-Art 성능을 보여주지는 못했다.</p>
 <p>이러한 이유 중 하나를 이야기하자면, 많은 연구가 SLAM에서 필요로 하는 과정을 정확하게 이해하지 못하고 overly-ambitious + blind하게 end-to-end로 풀어내려는 것이라고 생각한다.<br>현재의 기술로는, 뛰어난 성능의 추론능력을 보여주는 딥러닝 네트워크를 기존의 SLAM 프레임워크에 부분적으로 사용하는 방식이 가장 효과적이라고 본다.</p>
 <hr>
-<h1 id="딥러닝-SLAM-DVSO-Deep-Virtual-Stereo-Odometry"><a href="#딥러닝-SLAM-DVSO-Deep-Virtual-Stereo-Odometry" class="headerlink" title="딥러닝 SLAM - DVSO (Deep Virtual Stereo Odometry)"></a>딥러닝 SLAM - DVSO (Deep Virtual Stereo Odometry)</h1><img src="/20201225-CVPR2020-Cremers-SLAM-workshop/dvso.png" class="" title="Deep Virtual Stereo Odometry">
+<h1 id="딥러닝-SLAM-DVSO-Deep-Virtual-Stereo-Odometry"><a href="#딥러닝-SLAM-DVSO-Deep-Virtual-Stereo-Odometry" class="headerlink" title="딥러닝 SLAM - DVSO (Deep Virtual Stereo Odometry)"></a>딥러닝 SLAM - DVSO (Deep Virtual Stereo Odometry)</h1><img src="/20201225-CVPR2020-Cremers-SLAM-workshop/dvso.webp" class="" title="Deep Virtual Stereo Odometry">
 <p>Cremers 교수님 랩실에서 제일 먼저 성공적으로 만든 딥러닝 기반 SLAM은  ECCV 2018 학회에서 공개한 <span class="exturl" data-url="aHR0cHM6Ly95b3V0dS5iZS9zTFpPZUM5el90dw==">Deep Virtual Stereo Odometry<i class="fa fa-external-link-alt"></i></span>이다. </p>
 <p>CVPR 2017 학회에서 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDIuMDI3MDY=">Kuznietsov 2017<i class="fa fa-external-link-alt"></i></span> 논문에서 발표된 Single image depth estimation 네트워크의 개선하여 DVSO에서는 새로운 StackNet이라는 네트워크를 제안하였다.<br>위에서 언급하였던 Nan Yang, Rui Wang, Jörg Stückler가 연구를 리드하였다.<br>Depth estimation의 성능만 보았을 때 StackNet은 기존의 Kuznietsov의 연구보다 더 좋은 성능을 보였다.<br>하지만 DVSO 논문의 포인트는 그게 아니다.<br>DVSO는 이 StackNet을 기존의 SLAM 프레임워크에 포함시켜, Classical 방식의 SLAM보다 더 정확한 SLAM을 만들어냈다.<br>StackNet을 이용해서 Keyframe에 대한 초기 depth map을 만들었다는 점과, Direct SLAM 파이프라인을 고려해서 reconstruction되는 3D 구조와 StackNet이 추론하는 depth map이 서로 동의할 수 있게 + brightness consistency를 고려한 새로운 loss function을 사용했다는 점이 이 논문의 포인트이다.<br>또, 이 방식은 Self-supervised learning으로 트레이닝 할 수 있다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/dvso_comp.png" class="" title="DVSO Performance">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/dvso_comp.webp" class="" title="DVSO Performance">
 <p>DVSO는 기존의 Classical 방식들과 비교했을 때, 월등히 좋은 성능을 보여준다.<br>특히, State-of-the-Art인 ORB-SLAM 2와 Stereo-DSO와 비교했을 때도 더 좋은 성능을 보여준다. 놀라운 점은 이 두가지 방식은 정확한 맵핑을 위해 Stereovision을 사용했음에도 불구하고, Mono camera를 사용한 DVSO가 더 좋은 성능을 보여줬다는 것이다.<br>또 다른 놀라운 점은 scale drift에 있다.<br>보통 Monocular SLAM을 사용할 때는 scale drift가 나타난다.<br>하지만 DVSO는 scale drift가 거의 없다.</p>
 <p>딥러닝을 잘 사용하기만 하면 하드웨어의 한계도 뛰어넘을 수 있다는 결과가 나타난 것이기 때문에, Artisense가 추구하는 ‘저렴한 센서 시스템으로 정확한…’ 부분과 잘 맞아떨어진다고 볼 수 있다.</p>
 <hr>
 <h1 id="딥러닝-SLAM-D3VO-3-Depth-Pose-Uncertainty"><a href="#딥러닝-SLAM-D3VO-3-Depth-Pose-Uncertainty" class="headerlink" title="딥러닝 SLAM - D3VO (3 - Depth, Pose, Uncertainty)"></a>딥러닝 SLAM - D3VO (3 - Depth, Pose, Uncertainty)</h1><p>DVSO가 진화한 버전이 D3VO라고 볼 수 있다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo.png" class="" title="What is D3VO">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo.webp" class="" title="What is D3VO">
 <p>CVPR 2020 학회에 발표된 이 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMDEwNjA=">논문<i class="fa fa-external-link-alt"></i></span>의 주 저자는 DVSO의 주 저자인 Nan Yang이다.<br>DVSO가 딥러닝 기술로 depth를 추정하고 direct slam 파이프라인에 포함시킨거였다면, D3VO는 depth, camera pose, uncertainty를 모두 딥러닝으로 추정하고 SLAM 파이프라인에 포함시키는 것이다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/affine_brightness.png" class="" title="How D3VO works">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/affine_brightness.webp" class="" title="How D3VO works">
 <p>D3VO가 작동하는 방법은 다음과 같다.</p>
 <p>우선, <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.686ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 745.3 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43C" d="M43 1Q26 1 26 10Q26 12 29 24Q34 43 39 45Q42 46 54 46H60Q120 46 136 53Q137 53 138 54Q143 56 149 77T198 273Q210 318 216 344Q286 624 286 626Q284 630 284 631Q274 637 213 637H193Q184 643 189 662Q193 677 195 680T209 683H213Q285 681 359 681Q481 681 487 683H497Q504 676 504 672T501 655T494 639Q491 637 471 637Q440 637 407 634Q393 631 388 623Q381 609 337 432Q326 385 315 341Q245 65 245 59Q245 52 255 50T307 46H339Q345 38 345 37T342 19Q338 6 332 0H316Q279 2 179 2Q143 2 113 2T65 2T43 1Z"></path></g><g data-mml-node="mi" transform="translate(440, -150) scale(0.707)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g></g></svg></mjx-container> (시간 t에 얻는 이미지 I)를 single image depth estimation 네트워크에 넣어서 depth map을 추정한다.</p>
 <p>동시에, <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="1.686ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 745.3 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43C" d="M43 1Q26 1 26 10Q26 12 29 24Q34 43 39 45Q42 46 54 46H60Q120 46 136 53Q137 53 138 54Q143 56 149 77T198 273Q210 318 216 344Q286 624 286 626Q284 630 284 631Q274 637 213 637H193Q184 643 189 662Q193 677 195 680T209 683H213Q285 681 359 681Q481 681 487 683H497Q504 676 504 672T501 655T494 639Q491 637 471 637Q440 637 407 634Q393 631 388 623Q381 609 337 432Q326 385 315 341Q245 65 245 59Q245 52 255 50T307 46H339Q345 38 345 37T342 19Q338 6 332 0H316Q279 2 179 2Q143 2 113 2T65 2T43 1Z"></path></g><g data-mml-node="mi" transform="translate(440, -150) scale(0.707)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g></g></svg></mjx-container> 와 그 다음 프레임인 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.357ex" xmlns="http://www.w3.org/2000/svg" width="2.077ex" height="1.902ex" role="img" focusable="false" viewBox="0 -683 918.1 840.8"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43C" d="M43 1Q26 1 26 10Q26 12 29 24Q34 43 39 45Q42 46 54 46H60Q120 46 136 53Q137 53 138 54Q143 56 149 77T198 273Q210 318 216 344Q286 624 286 626Q284 630 284 631Q274 637 213 637H193Q184 643 189 662Q193 677 195 680T209 683H213Q285 681 359 681Q481 681 487 683H497Q504 676 504 672T501 655T494 639Q491 637 471 637Q440 637 407 634Q393 631 388 623Q381 609 337 432Q326 385 315 341Q245 65 245 59Q245 52 255 50T307 46H339Q345 38 345 37T342 19Q338 6 332 0H316Q279 2 179 2Q143 2 113 2T65 2T43 1Z"></path></g><g data-mml-node="TeXAtom" transform="translate(440, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="mo" transform="translate(361, 289) scale(0.707)"><path data-c="2032" d="M79 43Q73 43 52 49T30 61Q30 68 85 293T146 528Q161 560 198 560Q218 560 240 545T262 501Q262 496 260 486Q259 479 173 263T84 45T79 43Z"></path></g></g></g></g></g></g></svg></mjx-container>를 pose estimation 네트워크에 넣어서 relative motion을 (i.e. 3D rotation + 3D translation) 구한다.<br>이 3D transformation 값으로 이미지를 align시켜서, 전체 네트워크를 <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.667ex" xmlns="http://www.w3.org/2000/svg" width="18.14ex" height="2.364ex" role="img" focusable="false" viewBox="0 -750 8017.9 1045"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D43F" d="M228 637Q194 637 192 641Q191 643 191 649Q191 673 202 682Q204 683 217 683Q271 680 344 680Q485 680 506 683H518Q524 677 524 674T522 656Q517 641 513 637H475Q406 636 394 628Q387 624 380 600T313 336Q297 271 279 198T252 88L243 52Q243 48 252 48T311 46H328Q360 46 379 47T428 54T478 72T522 106T564 161Q580 191 594 228T611 270Q616 273 628 273H641Q647 264 647 262T627 203T583 83T557 9Q555 4 553 3T537 0T494 -1Q483 -1 418 -1T294 0H116Q32 0 32 10Q32 17 34 24Q39 43 44 45Q48 46 59 46H65Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Q285 635 228 637Z"></path></g><g data-mml-node="TeXAtom" transform="translate(681, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mi" transform="translate(469, 0)"><path data-c="1D452" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"></path></g><g data-mml-node="mi" transform="translate(935, 0)"><path data-c="1D459" d="M117 59Q117 26 142 26Q179 26 205 131Q211 151 215 152Q217 153 225 153H229Q238 153 241 153T246 151T248 144Q247 138 245 128T234 90T214 43T183 6T137 -11Q101 -11 70 11T38 85Q38 97 39 102L104 360Q167 615 167 623Q167 626 166 628T162 632T157 634T149 635T141 636T132 637T122 637Q112 637 109 637T101 638T95 641T94 647Q94 649 96 661Q101 680 107 682T179 688Q194 689 213 690T243 693T254 694Q266 694 266 686Q266 675 193 386T118 83Q118 81 118 75T117 65V59Z"></path></g><g data-mml-node="mi" transform="translate(1233, 0)"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g></g></g><g data-mml-node="mo" transform="translate(2269.5, 0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="mi" transform="translate(3325.3, 0)"><path data-c="1D45F" d="M21 287Q22 290 23 295T28 317T38 348T53 381T73 411T99 433T132 442Q161 442 183 430T214 408T225 388Q227 382 228 382T236 389Q284 441 347 441H350Q398 441 422 400Q430 381 430 363Q430 333 417 315T391 292T366 288Q346 288 334 299T322 328Q322 376 378 392Q356 405 342 405Q286 405 239 331Q229 315 224 298T190 165Q156 25 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 114 189T154 366Q154 405 128 405Q107 405 92 377T68 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mo" transform="translate(3776.3, 0)"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="msub" transform="translate(4165.3, 0)"><g data-mml-node="mi"><path data-c="1D43C" d="M43 1Q26 1 26 10Q26 12 29 24Q34 43 39 45Q42 46 54 46H60Q120 46 136 53Q137 53 138 54Q143 56 149 77T198 273Q210 318 216 344Q286 624 286 626Q284 630 284 631Q274 637 213 637H193Q184 643 189 662Q193 677 195 680T209 683H213Q285 681 359 681Q481 681 487 683H497Q504 676 504 672T501 655T494 639Q491 637 471 637Q440 637 407 634Q393 631 388 623Q381 609 337 432Q326 385 315 341Q245 65 245 59Q245 52 255 50T307 46H339Q345 38 345 37T342 19Q338 6 332 0H316Q279 2 179 2Q143 2 113 2T65 2T43 1Z"></path></g><g data-mml-node="TeXAtom" transform="translate(440, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g><g data-mml-node="mo" transform="translate(4910.6, 0)"><path data-c="2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path></g><g data-mml-node="msub" transform="translate(5355.3, 0)"><g data-mml-node="mi"><path data-c="1D43C" d="M43 1Q26 1 26 10Q26 12 29 24Q34 43 39 45Q42 46 54 46H60Q120 46 136 53Q137 53 138 54Q143 56 149 77T198 273Q210 318 216 344Q286 624 286 626Q284 630 284 631Q274 637 213 637H193Q184 643 189 662Q193 677 195 680T209 683H213Q285 681 359 681Q481 681 487 683H497Q504 676 504 672T501 655T494 639Q491 637 471 637Q440 637 407 634Q393 631 388 623Q381 609 337 432Q326 385 315 341Q245 65 245 59Q245 52 255 50T307 46H339Q345 38 345 37T342 19Q338 6 332 0H316Q279 2 179 2Q143 2 113 2T65 2T43 1Z"></path></g><g data-mml-node="TeXAtom" transform="translate(440, -150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="msup"><g data-mml-node="mi"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g><g data-mml-node="mo" transform="translate(361, 289) scale(0.707)"><path data-c="2032" d="M79 43Q73 43 52 49T30 61Q30 68 85 293T146 528Q161 560 198 560Q218 560 240 545T262 501Q262 496 260 486Q259 479 173 263T84 45T79 43Z"></path></g></g><g data-mml-node="mo" transform="translate(605.5, 0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mo" transform="translate(1383.5, 0)"><path data-c="3E" d="M84 520Q84 528 88 533T96 539L99 540Q106 540 253 471T544 334L687 265Q694 260 694 250T687 235Q685 233 395 96L107 -40H101Q83 -38 83 -20Q83 -19 83 -17Q82 -10 98 -1Q117 9 248 71Q326 108 378 132L626 250L378 368Q90 504 86 509Q84 513 84 520Z"></path></g><g data-mml-node="mi" transform="translate(2161.5, 0)"><path data-c="1D461" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path></g></g></g><g data-mml-node="mo" transform="translate(7628.9, 0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g></g></svg></mjx-container> loss로 self-supervised training을 할 수 있다.<br>이 값이 brightness consistency가 되겠다. </p>
 <p>D3VO에서 새롭게 내보이는 방식인 딥러닝을 통한 affine brightness correction도 이 단계에서 계산한다.<br>실제 환경에서 카메라를 가지고 이미지를 얻을 때 aperture가 (i.e. 카메라 조리개 값 == 빛을 받는 양) 변한다면 이미지의 밝기가 변한다.<br>즉, 동일 위치를 바라보고 있는 상태에서도 두 이미지의 밝기가 다르다는건데, 이는 기존의 Direct 방식이 풀 수 없는 조건이였다.<br>이 부분을 딥러닝 네트워크를 통해 affine brightness correction 값을 학습하여, 동일 위치를 바라볼 때 direct 방식으로 이미지를 비교할 수 있도록 조명의 밝기를 맞춰준다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/uncertainty.png" class="" title="Aliatoric uncertainty">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/uncertainty.webp" class="" title="Aliatoric uncertainty">
 <p>이 affine brightness correction은 사실 빛의 반사 모델 중 하나인 <span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvTGFtYmVydGlhbl9yZWZsZWN0YW5jZQ==">lambertian model<i class="fa fa-external-link-alt"></i></span>에 기반한 방법이다.<br>하지만 실제 세상에서는 사실 금속이나 유리처럼 특별히 반사가 잘 되거나 안되는 재질이 있다.<br>이러한 재질에서는 어떤 값이 나올지 모르기 때문에, 이에 해당하는 uncertainty를 할당해줘야하는데, 이를 위해서 <span class="exturl" data-url="aHR0cHM6Ly9wYXBlcnMubmlwcy5jYy9wYXBlci8yMDE3L2ZpbGUvMjY1MGQ2MDg5YTZkNjQwYzVlODViMmI4ODI2NWRjMmItUGFwZXIucGRm">Kendall 2017 논문<i class="fa fa-external-link-alt"></i></span>과 <span class="exturl" data-url="aHR0cHM6Ly93d3cucm9ib3RzLm94LmFjLnVrL352Z2cvcHVibGljYXRpb25zLzIwMTgvS2xvZHQxOC9rbG9kdDE4LnBkZg==">Klodt 2018 논문<i class="fa fa-external-link-alt"></i></span>에서 제안된 aliatoric uncertainty 기법을 사용하였다.<br>이 uncertainty가 높은 부분에서는 아무래도 brightness consistency가 낮을 것이라고 예상을 할 수 있기 때문에, 이 부분에 uncertainty 값을 이용해서 최적화 과정에 weight를 줄 수 있다.<br>사진에 보이는 것 처럼, 금속이나 유리 재질 뿐만이 아니라 나무 꼭대기처럼 motion이 생겨서 높은 brightness consistency를 가지는 부분은 높은 uncertainty를 가지는 것 처럼 보이게 된다.</p>
 <p>그 후, 모든 Depth, Uncertainty, Pose, Affine brightness correction을 Frontend tracking과 Backend optimisation에 넣는 것이다.<br>Frontend에서는 nonlinear factor graph를 사용해서 brightness consistency를 계산하고, Backend에서는 reconstruction된 모델이 pose와 depth에 대해 추론한다 (추론 모델은 이 둘에 대해 사전 트레이닝 되어있다).</p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_depth.png" class="" title="Depth estimation">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_depth.webp" class="" title="Depth estimation">
 <p>결과를 보았을 때, 우선 depth estimation의 성능을 보면 sota 모델 중 하나인 MonoDepth2보다 더 좋은 성능을 냈으며, 굉장히 좋은 generalization을 보여줬다.<br>반사가 잘 되는 재질에서 aliatoric uncertainty가 굉장히 잘 나타나는 것을 볼 수 있다.</p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_vo.png" class="" title="Visual odometry">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_vo.webp" class="" title="Visual odometry">
 <p>SLAM에 대한 결과를 보면, classical method나 deep learning 기반 기술 양쪽 모두에서 State-of-the-art를 달성한 것을 볼 수 있다.<br>특히, Stereo Visual-inertial odometry인 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDQuMDY1MDQ=">Basalt<i class="fa fa-external-link-alt"></i></span>와 동일한 성능을 내는 것을 볼 수 있는데, 여기서 다시 한번 D3VO는 monocular visual odometry인 것을 생각하면 엄청나게 성능이 좋다는 것을 알 수 있다.</p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_recon.png" class="" title="Reconstruction">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/d3vo_recon.webp" class="" title="Reconstruction">
 <p>Mono DSO와 D3VO의 reconstruction 결과를 비교했을 때도, D3VO의 결과가 훨씬 깨끗한 점을 알 수 있다.</p>
 <hr>
-<h1 id="딥러닝-SLAM-GN-Net-Multi-weather-relocalization"><a href="#딥러닝-SLAM-GN-Net-Multi-weather-relocalization" class="headerlink" title="딥러닝 SLAM - GN-Net (Multi weather relocalization)"></a>딥러닝 SLAM - GN-Net (Multi weather relocalization)</h1><img src="/20201225-CVPR2020-Cremers-SLAM-workshop/vis_loc.png" class="" title="Visual localization under lighting and weather">
+<h1 id="딥러닝-SLAM-GN-Net-Multi-weather-relocalization"><a href="#딥러닝-SLAM-GN-Net-Multi-weather-relocalization" class="headerlink" title="딥러닝 SLAM - GN-Net (Multi weather relocalization)"></a>딥러닝 SLAM - GN-Net (Multi weather relocalization)</h1><img src="/20201225-CVPR2020-Cremers-SLAM-workshop/vis_loc.webp" class="" title="Visual localization under lighting and weather">
 <p>이쯤되면 Direct 방식의 가장 큰 문제점을 알 수 있다.<br>조명이 바뀌어버리면, photometric 최적화를 할 수 없다는 점이다.<br>그렇다면, 동일한 장소라도 다른 시간대에 온 경우에는 (낮/밤, 여름/겨울) 조명이 다르니 동일 장소로 인식할 수 없을 것이다.<br>위에 있는 사진을 예시로 들면, 여름에는 비가와서 물이 고였고 잔디가 파릇파릇하게 자랐고, 겨울에는 눈이 덮혔다.<br>이 때문에 이미지 속 밝기 값이 많이 다르게 보이고, 이전에 봤던 위치랑은 다르게 인식이 될 것이다.</p>
 <p>하지만 이러한 high-level representation은 딥러닝 기반 기술이 제일 잘 푸는 문제 중 하나이다.<br>이 문제를 풀어보기위해 데이터셋을 제작하고, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDQuMTE5MzI=">GN-Net<i class="fa fa-external-link-alt"></i></span>이라는 기술을 von Sturmberg가 발표하였다.<br>GN-Net은 high-dimensional feature space에서 intensity transformation을 하는데, 사실 이러한 방법은 이전에 다른 네트워크에서도 많이 제안되었던 방법이다.<br>이 논문이 다른 점은, Gauss-Netwon 기반 최적화를 하는 SLAM에서 좋은 결과를 낼 수 있도록 학습했다는 점이다.</p>
 <p><br></p>
-<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/gn-net.png" class="" title="GN-Net">
+<img src="/20201225-CVPR2020-Cremers-SLAM-workshop/gn-net.webp" class="" title="GN-Net">
 <p>여기 이미지에서 왼쪽 아래 빨간 박스에 쳐진 이미지는 현재 보고있는 이미지, 오른쪽 아래 박스에 쳐진 이미지는 트레이닝 데이터셋에서 보았던 가장 비슷한 이미지이다.<br>그리고 회색 포인트 클라우드는 이전에 만들었던 포인트 클라우드이고, 파란색 포인트 클라우드는 새로 만들어지는 포인트 클라우드이다.<br>그래서 사진을 보았을 때, 회색에는 없지만 파란색에는 있는 차가 있지만, 바닥에 그려진 차선은 정확하게 일치하는 것을 볼 수 있다.</p>
 <p>GN-Net은 GPS 센서 없이 direct 방식만으로도 relocalization을 할 수 있다는 것을 증명하였다.<br>또, 지금까지의 direct 방식에서는 odometry 방식으로 SLAM을 했왔는데, 이제는 large-scale에서 필수적인 relocalization을 할 수 있다는 것을 증명하였다.</p>
 <hr>
@@ -586,26 +514,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="bookmark">CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201227-cvpr2020-slam-malisiewicz/" rel="bookmark">CVPR 2020 - Deep Visual SLAM Frontends - SuperPoint, SuperGlue and SuperMaps (Tomasz Malisiewicz 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201228-cvpr2020-slam-yang/" rel="bookmark">CVPR 2020 - Visual SLAM with Object and Plane (Shichao Yang 발표)</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201229-dec-2020-slam-news/" rel="bookmark">2020년 10~12월 SLAM 논문 소식</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201215-Harris-corner/" rel="bookmark">Harris Corner (Harris & Stephens 1988)</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -626,12 +534,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20201223-IROS2020-Luca-Carlone-SLAM-workshop/" rel="prev" title="IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)">
-                  <i class="fa fa-chevron-left"></i> IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)
+                  <i class="fa fa-angle-left"></i> IROS 2020 - Past, Present, and Future of SLAM (Prof. Luca Carlone 발표)
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20201226-CVPR-2020-SLAM-workshop-Davison/" rel="next" title="CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표)">
-                  CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표) <i class="fa fa-chevron-right"></i>
+                  CVPR 2020 - From SLAM to Spatial AI (Prof. Andrew Davison 발표) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -651,45 +559,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -697,7 +582,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -711,36 +596,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -750,49 +634,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

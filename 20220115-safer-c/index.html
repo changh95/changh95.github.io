@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,24 +14,22 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="빌드 플래그, 멀티 컴파일러, 유닛 테스트, 정적분석, MISRA와 같은 방법들에 대해 알아봅니다.">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="빌드 플래그, 멀티 컴파일러, 유닛 테스트, 정적분석, MISRA와 같은 방법들에 대해 알아봅니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="더 안전하게 C++ 코드를 작성하는 법">
 <meta property="og:url" content="https://changh95.github.io/20220115-safer-c/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="빌드 플래그, 멀티 컴파일러, 유닛 테스트, 정적분석, MISRA와 같은 방법들에 대해 알아봅니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/result.png">
-<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/clang.png">
-<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/misra.png">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/result.webp">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/clang.webp">
+<meta property="og:image" content="https://changh95.github.io/20220115-safer-c/misra.webp">
 <meta property="article:published_time" content="2022-01-15T14:34:06.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:02.203Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.262Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="STL">
@@ -41,61 +37,29 @@
 <meta property="article:tag" content="MISRA">
 <meta property="article:tag" content="clang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20220115-safer-c/result.png">
+<meta name="twitter:image" content="https://changh95.github.io/20220115-safer-c/result.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20220115-safer-c/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20220115-safer-c/","path":"20220115-safer-c/","title":"더 안전하게 C++ 코드를 작성하는 법"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>더 안전하게 C++ 코드를 작성하는 법 | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -219,10 +183,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -233,14 +197,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -249,27 +213,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -289,7 +233,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -302,15 +246,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -325,65 +263,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%9D%B4-%EA%B8%80%EC%97%90%EC%84%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0%ED%95%98%EB%8A%94-%E2%80%98%EC%95%88%EC%A0%84%ED%95%9C-%EC%BD%94%EB%93%9C%E2%80%99%EC%9D%98-%EC%9D%98%EB%AF%B8"><span class="nav-number">1.</span> <span class="nav-text">이 글에서 이야기하는 ‘안전한 코드’의 의미</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EA%B0%84%EB%8B%A8%EC%9A%94%EC%95%BD-TLDR"><span class="nav-number">2.</span> <span class="nav-text">간단요약 &#x2F; TLDR;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-%EC%A2%85%EB%A5%98%EB%8A%94-%EC%B5%9C%EC%86%8C-2%EA%B0%9C%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%98%EC%84%B8%EC%9A%94"><span class="nav-number">3.</span> <span class="nav-text">컴파일러 종류는 최소 2개를 사용하세요</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%AA%A8%ED%98%B8%ED%95%9C-%EC%BD%94%EB%94%A9%EC%9D%84-%EA%B2%80%EC%88%98%ED%95%98%EB%8A%94-%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC-%ED%94%8C%EB%9E%98%EA%B7%B8%EB%A5%BC-%ED%99%9C%EC%84%B1%ED%99%94%ED%95%98%EC%84%B8%EC%9A%94"><span class="nav-number">4.</span> <span class="nav-text">모호한 코딩을 검수하는 컴파일러 플래그를 활성화하세요</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit-test%EB%A5%BC-%EC%93%B0%EC%84%B8%EC%9A%94"><span class="nav-number">5.</span> <span class="nav-text">Unit test를 쓰세요</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EC%A0%95%EC%A0%81%EB%B6%84%EC%84%9D-Static-analysis"><span class="nav-number">6.</span> <span class="nav-text">정적분석 (Static analysis)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EB%8F%99%EC%A0%81%EB%B6%84%EC%84%9D-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%A3%BC%EC%86%8C-%EB%A9%94%EB%AA%A8%EB%A6%AC-leak-%EC%93%B0%EB%A0%88%EB%93%9C-%EA%B4%80%EB%A6%AC"><span class="nav-number">7.</span> <span class="nav-text">동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISRA"><span class="nav-number">8.</span> <span class="nav-text">MISRA</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -401,11 +325,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="더 안전하게 C++ 코드를 작성하는 법 | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -422,13 +351,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2022-01-15 23:34:06" itemprop="dateCreated datePublished" datetime="2022-01-15T23:34:06+09:00">2022-01-15</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -444,7 +373,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -459,8 +388,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h2 id="이-글에서-이야기하는-‘안전한-코드’의-의미"><a href="#이-글에서-이야기하는-‘안전한-코드’의-의미" class="headerlink" title="이 글에서 이야기하는 ‘안전한 코드’의 의미"></a>이 글에서 이야기하는 ‘안전한 코드’의 의미</h2><blockquote>
+    <div class="post-body" itemprop="articleBody"><h2 id="이-글에서-이야기하는-‘안전한-코드’의-의미"><a href="#이-글에서-이야기하는-‘안전한-코드’의-의미" class="headerlink" title="이 글에서 이야기하는 ‘안전한 코드’의 의미"></a>이 글에서 이야기하는 ‘안전한 코드’의 의미</h2><blockquote>
 <p>적어도 빌드는 돼야지…<br>적어도 왕초보 실수는 없어야지…<br>적어도 돌리다가 터지진 않아야지…</p>
 </blockquote>
 <p>적어도 이게 ‘작동하는 코드’인가 에 대한 내용이 주가 됩니다.</p>
@@ -514,7 +442,7 @@ mjx-container[display="true"] + br {
 <p>TDD 찬양론이 아니라는 점 우선 먼저 밝힙니다. 하지만 ‘그 코드 잘 작동해?’ 라고 물어봤을 때 ‘음 잘 몰라, 아마 그럴걸?’라는 답변을 듣고 반기는 프로그래머는 없을 겁니다.</p>
 <p>정말 정말 백보 물러나서 얘기하는건데, 적어도 하나의 테스트는 꼭 돌려주시길 바랍니다. 테스트도 안되고 도큐먼팅도 안된 코드를 사용해야하는 상황이 오면, 당신은 그날 저녁부터 이 상황으로부터 도망가기 위해 이직 준비를 시작하게 될겁니다. 그러다가 극심한 스트레스로 두통과 몸살이 동시에 와 침대에서 끙끙거리다가 ‘내 인생 왜 이 모양 이 꼴이냐’ 하며 눈물 한방울을 흘리게 될겁니다.</p>
 <p>정말 코드에 자신이 있으려면, 작성하신 모든 함수 하나하나마다 유닛테스트를 만들어서 ‘내 코드는 주어진 시나리오에서 잘 작동합니다’ 라고 얘기할 수 있도록 합시다.</p>
-<img src="/20220115-safer-c/result.png" class="" title="result">
+<img src="/20220115-safer-c/result.webp" class="" title="result">
 <p> </p>
 <hr>
 <h2 id="정적분석-Static-analysis"><a href="#정적분석-Static-analysis" class="headerlink" title="정적분석 (Static analysis)"></a>정적분석 (Static analysis)</h2><p>정적분석은 소스코드를 분석해서 좋지 않은 코드가 있으면 알려주는 툴입니다.</p>
@@ -567,7 +495,7 @@ mjx-container[display="true"] + br {
 <p>이러한 체커도 하나만 쓰면 좀 아쉽습니다.</p>
 <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhbm1hci9jcHBjaGVjay8=">CppCheck<i class="fa fa-external-link-alt"></i></span>라는 정적분석 툴도 좋으니, clang-tidy와 함께 돌립시다.</p>
 <p>아래는 clang-tidy를 돌렸을 때 나오는 코드 제안들의 예시입니다 (출처: <span class="exturl" data-url="aHR0cHM6Ly9ibG9nLndob2xldG9tYXRvLmNvbS8yMDIxLzAxLzA4L2EtYnJpZWYtaW50cm9kdWN0aW9uLXRvLWNsYW5nLXRpZHktYW5kLWl0cy1yb2xlLWluLXZpc3VhbC1hc3Npc3Qv">https://blog.wholetomato.com/2021/01/08/a-brief-introduction-to-clang-tidy-and-its-role-in-visual-assist/<i class="fa fa-external-link-alt"></i></span>)</p>
-<img src="/20220115-safer-c/clang.png" class="" title="clang">
+<img src="/20220115-safer-c/clang.webp" class="" title="clang">
 <p> </p>
 <hr>
 <h2 id="동적분석-메모리-주소-메모리-leak-쓰레드-관리"><a href="#동적분석-메모리-주소-메모리-leak-쓰레드-관리" class="headerlink" title="동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)"></a>동적분석 (메모리 주소, 메모리 leak, 쓰레드 관리)</h2><p>동적 분석은 실제로 코드가 돌아가면서 생기는 허점들을 잡아줄 수 있습니다.</p>
@@ -578,38 +506,18 @@ mjx-container[display="true"] + br {
 <h2 id="MISRA"><a href="#MISRA" class="headerlink" title="MISRA"></a>MISRA</h2><p>MISRA C++은 실제로 안전이 중요한 시스템에서 지켜져야하는 C++ 프로그래밍 가이드입니다.</p>
 <p>프로토타입 단계에서 필요한건 아니지만, 제품으로 만들려고 하면 꼭 거쳐야합니다. 어차피 거칠거면 처음부터 오토체커를 사용해서 잘 짜면 되지 않을까요?</p>
 <p>오토체커 방법은 두가지가 있습니다.</p>
-<p>첫번째는 <strong>CLion IDE에서 지원하는 오토체커</strong>를 사용하는겁니다. CLion에서는 정적분석 툴로 MISRA 오토체커가 들어가있습니다. 하지만 그렇게 막 좋은 편은 아닙니다. 2022년 1월 16일 기준으로, 211개 체크 중 65개만 구현이 되어있습니다. 구현 상황은 <span class="exturl" data-url="aHR0cHM6Ly95b3V0cmFjay5qZXRicmFpbnMuY29tL2FydGljbGVzL0NQUC1BLTE5MTQzMDY4Mj9fZ2E9Mi4xNTE2Mzg3NzguMjExMzM0NTA5NS4xNjQyMjUwNjAxLTIzMTMwODMwMi4xNjI1NjE2NTU0JmFtcDtfZ2w9MSpic2FrYncqX2dhKk1qTXhNekE0TXpBeUxqRTJNalUyTVRZMU5UUS4qX2dhXzBXUTJaRjVWR1QqTVRZME1qSTJNVE0xTVM0eExqRXVNVFkwTWpJMk1UVXlNQzR3">링크<i class="fa fa-external-link-alt"></i></span>에 잘 나와있습니다. 하지만 그래도 65개라도 돌아가는거 어디입니까 헛헛</p>
+<p>첫번째는 <strong>CLion IDE에서 지원하는 오토체커</strong>를 사용하는겁니다. CLion에서는 정적분석 툴로 MISRA 오토체커가 들어가있습니다. 하지만 그렇게 막 좋은 편은 아닙니다. 2022년 1월 16일 기준으로, 211개 체크 중 65개만 구현이 되어있습니다. 구현 상황은 <span class="exturl" data-url="aHR0cHM6Ly95b3V0cmFjay5qZXRicmFpbnMuY29tL2FydGljbGVzL0NQUC1BLTE5MTQzMDY4Mj9fZ2E9Mi4xNTE2Mzg3NzguMjExMzM0NTA5NS4xNjQyMjUwNjAxLTIzMTMwODMwMi4xNjI1NjE2NTU0Jl9nbD0xKmJzYWtidypfZ2EqTWpNeE16QTRNekF5TGpFMk1qVTJNVFkxTlRRLipfZ2FfMFdRMlpGNVZHVCpNVFkwTWpJMk1UTTFNUzR4TGpFdU1UWTBNakkyTVRVeU1DNHc=">링크<i class="fa fa-external-link-alt"></i></span>에 잘 나와있습니다. 하지만 그래도 65개라도 돌아가는거 어디입니까 헛헛</p>
 <blockquote>
 <p>물론 이 방법을 사용하려면 CLion IDE를 써야합니다. 유료이긴 하지만 성능이 빵빵하니 개인적으로 추천하는 IDE입니다. 학생이시라면 교육용 라이센스로, 직장인이라면 회사에 사달라고 하세요. 개인 사용은 선택에 맡기겠습니다.</p>
 </blockquote>
 <p>두번째는 <strong>CppCheck 기반 오토체커</strong>를 쓰는겁니다. CppCheck는 clang-tidy와 같은 정적분석 툴인데, 이 안에도 MISRA 체커 기능이 있습니다. 대신 CLion에서 지원하는 것과는 다르게, 직접 MISRA 도큐먼트를 15 파운드 (약 3만원)으로 구매한 후 직접 설정해줘야하는게 매우 귀찮습니다.</p>
 <p>제 코드는 원래 경고/에러 없이 깔끔했습니다만, CLion의 MISRA 체커를 키니까 안전하지 않은 코드라고 호되게 혼나는 모습을 아래 사진에 담았습니다. 노란줄은 경고, 빨간줄은 에러인데, 211개의 체크를 다 거치면 얼마나 고쳐야할지 모르겠네요 허허</p>
-<img src="/20220115-safer-c/misra.png" class="" title="misra">
+<img src="/20220115-safer-c/misra.webp" class="" title="misra">
     </div>
 
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201125-cpp-linear-structures/" rel="bookmark">C++ 선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201125-stl-containers/" rel="bookmark">STL containers</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-heap/" rel="bookmark">Heap</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-nonlinear-data-structure/" rel="bookmark">C++ 비선형 자료 구조</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20201127-tree/" rel="bookmark">Tree (Tree란? Binary Search Tree란? Balanced tree란? - Red-black tree)</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -625,12 +533,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20220115-libstdc-gpl/" rel="prev" title="아니 왜 C++ 언어가 GPL 라이센스지?? (libc++ / libstdc++)">
-                  <i class="fa fa-chevron-left"></i> 아니 왜 C++ 언어가 GPL 라이센스지?? (libc++ / libstdc++)
+                  <i class="fa fa-angle-left"></i> 아니 왜 C++ 언어가 GPL 라이센스지?? (libc++ / libstdc++)
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20220120-static-vs-shared-libs/" rel="next" title="Static lib vs Shared lib (.lib vs .dll)">
-                  Static lib vs Shared lib (.lib vs .dll) <i class="fa fa-chevron-right"></i>
+                  Static lib vs Shared lib (.lib vs .dll) <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -650,45 +558,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -696,7 +581,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -710,36 +595,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -749,49 +633,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 

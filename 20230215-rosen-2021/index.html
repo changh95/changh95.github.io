@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.2">
-
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -16,87 +14,53 @@
 
 
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
 
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","version":"8.0.2","exturl":true,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-<meta name="description" content="논문을 리뷰하면서 고급 semantic SLAM을 구현하는데에 필요한 점에 대해 제 의견을 더해 적어봅니다.">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="논문을 리뷰하면서 고급 semantic SLAM을 구현하는데에 필요한 점에 대해 제 의견을 더해 적어봅니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
 <meta property="og:url" content="https://changh95.github.io/20230215-rosen-2021/index.html">
 <meta property="og:site_name" content="cv-learn">
 <meta property="og:description" content="논문을 리뷰하면서 고급 semantic SLAM을 구현하는데에 필요한 점에 대해 제 의견을 더해 적어봅니다.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/slam_pp.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/nodeslam.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/kimera.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/niceslam.png">
-<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/lmnav.png">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/slam_pp.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/nodeslam.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/kimera.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/niceslam.webp">
+<meta property="og:image" content="https://changh95.github.io/20230215-rosen-2021/lmnav.webp">
 <meta property="article:published_time" content="2023-02-17T07:50:21.000Z">
-<meta property="article:modified_time" content="2023-06-09T06:12:02.727Z">
+<meta property="article:modified_time" content="2024-08-26T04:39:45.288Z">
 <meta property="article:author" content="cv-learn">
 <meta property="article:tag" content="SLAM">
 <meta property="article:tag" content="Visual-SLAM">
 <meta property="article:tag" content="Semantic SLAM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.png">
+<meta name="twitter:image" content="https://changh95.github.io/20230215-rosen-2021/bowman.webp">
 
 
 <link rel="canonical" href="https://changh95.github.io/20230215-rosen-2021/">
 
 
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20230215-rosen-2021/","path":"20230215-rosen-2021/","title":"Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping | cv-learn</title>
   
 
 
 
+
+
+
+
+
   <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <style>mjx-container[jax="SVG"] {
   direction: ltr;
 }
@@ -220,10 +184,10 @@ mjx-container[display="true"] + br {
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
         <span class="toggle-line"></span>
@@ -234,14 +198,14 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">cv-learn</h1>
+      <p class="site-title">cv-learn</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -250,27 +214,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
         </a>
@@ -290,7 +234,7 @@ mjx-container[display="true"] + br {
            placeholder="Searching..." spellcheck="false"
            type="search" class="search-input">
   </div>
-  <span class="popup-btn-close">
+  <span class="popup-btn-close" role="button">
     <i class="fa fa-times-circle"></i>
   </span>
 </div>
@@ -303,15 +247,9 @@ mjx-container[display="true"] + br {
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -326,65 +264,51 @@ mjx-container[display="true"] + br {
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
+        <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0-%EC%A0%84%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">시작하기 전…</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Global-representation%EC%9D%80-%EC%96%B4%EB%96%A4-%ED%98%95%ED%83%9C%EA%B0%80-%EC%A0%81%ED%95%A9%ED%95%9C%EA%B0%80"><span class="nav-number">2.</span> <span class="nav-text">Global representation은 어떤 형태가 적합한가?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Geometric-representation"><span class="nav-number">3.</span> <span class="nav-text">Geometric representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semantic-%EC%A0%95%EB%B3%B4%EC%99%80-geometry-%EC%A0%95%EB%B3%B4%EC%9D%98-%EC%A1%B0%ED%95%A9"><span class="nav-number">4.</span> <span class="nav-text">Semantic 정보와 geometry 정보의 조합</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semantic-map-representation"><span class="nav-number">5.</span> <span class="nav-text">Semantic map representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%84%B8%EC%83%81%EC%9D%80-%EC%A0%88%EB%8C%80-%EA%B0%80%EB%A7%8C%ED%9E%88-%EC%9E%88%EC%A7%80-%EC%95%8A%EC%95%84-Static-vs-dynamic-vs-semistatic-vs-deformable-world"><span class="nav-number">6.</span> <span class="nav-text">세상은 절대 가만히 있지 않아 (Static vs dynamic vs semistatic vs deformable world)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hierarchical-representation"><span class="nav-number">7.</span> <span class="nav-text">Hierarchical representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EB%94%A5%EB%9F%AC%EB%8B%9D-%EC%A4%91%EC%8B%AC%EC%9D%98-representation"><span class="nav-number">8.</span> <span class="nav-text">딥러닝 중심의 representation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%95%9E%EC%9C%BC%EB%A1%9C-%EC%97%B0%EA%B5%AC%ED%95%A0-%EA%B1%B0%EB%A6%AC%EB%8A%94-%EC%96%B4%EB%96%A4-%EA%B2%83%EB%93%A4%EC%9D%B4-%EC%9E%88%EB%8A%94%EA%B0%80-%EC%A0%95%EB%A6%AC"><span class="nav-number">9.</span> <span class="nav-text">앞으로 연구할 거리는 어떤 것들이 있는가? + 정리</span></a></li></ol></div>
-        </section>
+        </div>
         <!--/noindex-->
 
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">cv-learn</p>
   <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">254</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">256</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
+          <a href="/categories/">
         <span class="site-state-item-count">43</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-        <span class="site-state-item-count">354</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">357</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
       </span>
   </div>
 
-
-
-        </section>
+        </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -402,11 +326,16 @@ mjx-container[display="true"] + br {
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="cv-learn">
-      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spatial AI를 만드는 방법 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping | cv-learn">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -423,13 +352,13 @@ mjx-container[display="true"] + br {
 
       <time title="Created: 2023-02-17 16:50:21" itemprop="dateCreated datePublished" datetime="2023-02-17T16:50:21+09:00">2023-02-17</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-09 15:12:02" itemprop="dateModified" datetime="2023-06-09T15:12:02+09:00">2023-06-09</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-26 13:39:45" itemprop="dateModified" datetime="2024-08-26T13:39:45+09:00">2024-08-26</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -449,7 +378,7 @@ mjx-container[display="true"] + br {
     </span>
 
   
-    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
         <i class="far fa-eye"></i>
       </span>
@@ -464,8 +393,7 @@ mjx-container[display="true"] + br {
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjMwMjE0LXJvc2VuLTIwMjEv">Part 1 - SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping<i class="fa fa-external-link-alt"></i></span>을 먼저 읽으시면 좋습니다.</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="시작하기-전…"><a href="#시작하기-전…" class="headerlink" title="시작하기 전…"></a>시작하기 전…</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY3YtbGVhcm4uY29tLzIwMjMwMjE0LXJvc2VuLTIwMjEv">Part 1 - SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping<i class="fa fa-external-link-alt"></i></span>을 먼저 읽으시면 좋습니다.</p>
 <p> </p>
 <hr>
 <h1 id="Global-representation은-어떤-형태가-적합한가"><a href="#Global-representation은-어떤-형태가-적합한가" class="headerlink" title="Global representation은 어떤 형태가 적합한가?"></a>Global representation은 어떤 형태가 적합한가?</h1><p>현재까지 Point cloud, Occupancy grid map, Mesh, Voxel, surface map 등등 다양한 형태의 global representation을 사용하는 SLAM들이 있었다.</p>
@@ -495,7 +423,7 @@ mjx-container[display="true"] + br {
 </ol>
 <p> </p>
 <hr>
-<h1 id="Semantic-정보와-geometry-정보의-조합"><a href="#Semantic-정보와-geometry-정보의-조합" class="headerlink" title="Semantic 정보와 geometry 정보의 조합"></a>Semantic 정보와 geometry 정보의 조합</h1><img src="/20230215-rosen-2021/bowman.png" class="" title="bowman">
+<h1 id="Semantic-정보와-geometry-정보의-조합"><a href="#Semantic-정보와-geometry-정보의-조합" class="headerlink" title="Semantic 정보와 geometry 정보의 조합"></a>Semantic 정보와 geometry 정보의 조합</h1><img src="/20230215-rosen-2021/bowman.webp" class="" title="bowman">
 <p>2015년 이후 부터 SLAM 커뮤니티에서도 머신러닝 기반의 퍼셉션 모델에 관심을 가지기 시작했다. Object detection이라던지, place recognition 등을 통해서 좀 더 높은 수준의 플래닝 및 액션을 꾀하는 연구가 진행이 되었다. 좀 더 설명하자면, 거실에서 침실로 로봇을 이동해야한다는 task가 있다면 2015년 이전에는 거실의 coordinate에서 침실의 coordinate로 이동하기 위해 occupancy grid map에서 최적경로를 계산했을텐데, 2015년 이후에는 거실을 어떻게 인지하고 침실을 어떻게 인지할지에 대한 연구로 방향을 틀었다는 것이다.</p>
 <p>이러한 연구는 결국 <strong>Semantic map</strong>에 대한 개념을 만들었다. Semantic map은 단순히 object와 place에 대한 정보만 가지면 되었기 떄문에, geometric map 보다 <strong>훨씬 더 적은 메모리와 계산량을 소모한다는 장점</strong>도 알게 되었다. 그리고 <strong>로봇이 만든 지도를 사람이 이전보다 훨씬 더 쉽게 이해할 수 있다는 장점</strong>도 알게 되었다.</p>
 <p>하지만 <strong>semantic 정보를 어떻게 조합해야하는지에 대한 정해진 룰이 없었다</strong>. 현재까지도 몇가지 제안된 방법은 있다만, de-facto로 정해진 방법이 없다. 지금까지 정해진건 단 하나 - SLAM 이전에 <strong>머신러닝 기반 perception 모델을 돌리고, 그 결과를 마치 버추얼 센서처럼 사용</strong>하자는 것만 있다.</p>
@@ -505,9 +433,9 @@ mjx-container[display="true"] + br {
 <p> </p>
 <hr>
 <h1 id="Semantic-map-representation"><a href="#Semantic-map-representation" class="headerlink" title="Semantic map representation"></a>Semantic map representation</h1><p>Semantic map을 만드는 방법에는 어떤 것들이 있을까? <strong>가장 쉬운 방법은 기존에 사용하는 geometric map (e.g. point cloud, mesh)에 semantic label을 추가하는 방법</strong>이다. 실제로 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE2MDkuMDUxMzA=">SemanticFusion<i class="fa fa-external-link-alt"></i></span>에서는 dense map에 semantic label을 넣고, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDEuMDY4OTQ=">Kimera<i class="fa fa-external-link-alt"></i></span>에서는 mesh에 semantic label을 넣어 semantic mesh를 만들어낸다.</p>
-<img src="/20230215-rosen-2021/slam_pp.png" class="" title="slam_plus_plus">
+<img src="/20230215-rosen-2021/slam_pp.webp" class="" title="slam_plus_plus">
 <p>2010년 초반에는 object-level SLAM도 꽤 많이 연구가 되었다. Object-level SLAM이란 map을 구성하는 요소가 object밖에 없는 경우를 말한다. <span class="exturl" data-url="aHR0cHM6Ly93d3cuZG9jLmljLmFjLnVrL35hamQvUHVibGljYXRpb25zL3NhbGFzLW1vcmVub19ldGFsX2N2cHIyMDEzLnBkZg==">SLAM++<i class="fa fa-external-link-alt"></i></span>가 대표적인 예시이다. Object 단위로 map을 만든다는건, object를 인식할 수 있어야한다는 것인데, SLAM++가 나왔을 2013년에는 아직 뉴럴넷 기반의 3D object detection이 안정적이지 못했기 때문에, prior shape에 대해 fitting 작업이 주로 진행되었다. 하지만 이후 뉴럴넷 기반의 2D object detection을 거쳐 3D object detection, shape estimation, pose estimation 관련 기법이 많이 연구되면서, 차차 이 기술들을 사용하는 방향으로 트렌드가 바뀌고 있다.</p>
-<img src="/20230215-rosen-2021/nodeslam.png" class="" title="nodeslam">
+<img src="/20230215-rosen-2021/nodeslam.webp" class="" title="nodeslam">
 <p>Object 기반 map을 만들때, 가장 쉽게 만드는 방법은 object를 하나의 semantic label이 붙어있는 point landmark로써 다루는 것이다. 하지만 이러한 경우에는 object의 방향이나 경계를 알 수 없기 때문에, 이러한 정보를 담기 위한 다양한 representation이 나오고 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDQuMDQwMTE=">Nicholson 2018 - QuadricSLAM: Dual Quadrics from Object Detections as Landmarks in Object-oriented SLAM<i class="fa fa-external-link-alt"></i></span>이나 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDkuMDk2Mjc=">Superquadric Object Representation for Optimization-based Semantic SLAM<i class="fa fa-external-link-alt"></i></span>과 연구에서는 object를 dual-quadric 형태에 넣음으로써 방향성을 가진 공간으로 다룬다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDYuMDA1NTc=">CubeSLAM<i class="fa fa-external-link-alt"></i></span>에서는 object를 3D object detection의 결과인 3D bounding box로 다루기도 한다. 조금 더 나아가 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDQuMDQ0ODV2Mg==">NodeSLAM: Neural Object Descriptors for Multi-View Shape Reconstruction<i class="fa fa-external-link-alt"></i></span>에서는 뉴럴넷으로 학습한 object descriptor를 기반으로 semantic label을 표현하며, shape과 pose (i.e. geometric)에 대한 부분은 SLAM 기반 최적화를 통해 계산하는 알고리즘을 사용한다.</p>
 <p> </p>
 <hr>
@@ -518,7 +446,7 @@ mjx-container[display="true"] + br {
 <p>이제 세상의 형태가 실시간으로 바뀐다고 해보자. <strong>Deformable environment</strong>는 환경이 말랑말랑하다는 전제를 가지고 있다. 아쉽게도 SLAM 분야에서 이 분야에 대한 연구는 그렇게 많이 진행되고 있지 않다. <span class="exturl" data-url="aHR0cHM6Ly9ncmFpbC5jcy53YXNoaW5ndG9uLmVkdS9wcm9qZWN0cy9keW5hbWljZnVzaW9uL3BhcGVycy9EeW5hbWljRnVzaW9uLnBkZg==">DynamicFusion<i class="fa fa-external-link-alt"></i></span> 같은 경우에는 RGB-D 카메라를 이용해서 deformable한 물체의 형태를 dense reconstruction하는 방법을 제안한다. 이 분야의 연구는 주로 의료 쪽 연구에서 하는 경우가 많은데, 예를 들어서 <span class="exturl" data-url="aHR0cHM6Ly9wdWJtZWQubmNiaS5ubG0ubmloLmdvdi8yMDg3OTM1Mi8=">사람의 심장이 두근두근 뛸 때 dense reconstruction을 하면서 형태를 추정하고 카메라의 위치를 추정하는 연구<i class="fa fa-external-link-alt"></i></span>가 있다. 보통 이런 연구에서는 motion 추정을 할 때 기본적인 model이 있어서 (e.g. 사람의 심장은 반복적인 모션 - cyclic motion을 하기 때문에, 이것을 잘 관찰해서 모델로 만들면 t-1, t, t+1 시점에서 어떤 움직임을 할지 추론할 수 있다), 이를 기반으로 형태 추정도 가능하다.</p>
 <p> </p>
 <hr>
-<h1 id="Hierarchical-representation"><a href="#Hierarchical-representation" class="headerlink" title="Hierarchical representation"></a>Hierarchical representation</h1><img src="/20230215-rosen-2021/kimera.png" class="" title="kimera">
+<h1 id="Hierarchical-representation"><a href="#Hierarchical-representation" class="headerlink" title="Hierarchical representation"></a>Hierarchical representation</h1><img src="/20230215-rosen-2021/kimera.webp" class="" title="kimera">
 <p>기본적으로 SLAM을 돌리면 point cloud나 occupancy grid map이 나온다. Point cloud에서 모든 point는 동일한 중요성을 가지고, occupancy grid map에서 모든 grid cell은 동일한 중요성을 가진다. Point landmark가 1천만개가 쌓여도, 이 중 navigation에 중요한 point landmark가 어떤건지 알 수 없다. 이게 기본적인 SLAM이 가지는 문제 중 하나였다.</p>
 <p>Navigation을 위해 중요한 정보만을 추출해야한다. 이를 위해 <strong>abstraction(추상화)</strong>과 <strong>hierarchy(계층구조)</strong> 개념이 생겼다. 예를 들어, 특정 부분의 point landmark들은 책상을 의미한다, 바닥을 의미한다, 벽을 의미한다, 소파를 의미한다, 이런것들로 추상화를 할 수 있다. 그리고 책상,바닥,벽,소파가 모여서 거실을 의미한다 -&gt; 거실과 화장실과 몇개의 방이 모여 하나의 층을 의미한다 -&gt; 여러 층이 모여 건물을 의미한다, 이런 것들로 계층 구조를 가질 수 있다. 이렇게 <strong>추상화와 계층구조를 통해 SLAM mapping의 확장성과 효율성이 극대화</strong> 된다. 주로 이런 구조를 spatial-semantic hierarchy라고 한다.</p>
 <p>Spatial-semantic hierarchy는 사실 현대적인 SLAM 구성이 생기기 이전 - 즉 고전 로봇 맵핑에서 사용되던 <strong>topology model</strong>과 굉장히 유사하다. Topology model을 빠르게 이해하려면 자동차 내비게이션 지도를 생각하면 된다 - ‘다음 교차로에서 좌회전하세요. 그후 직진하다가 다음 교차로에서 우회전하세요’ 같이 metric한 개념이 없이 연결성에 대한 구조만 가지고 지도를 표현하는 방법이다. Topology model의 정확도는 로봇의 판단 과정에 (decision making, planning) 있어서 아주 중요한 역할을 하는데, 예를 들어 내비게이션에서 좌회전/우회전을 잘못하면 삥 돌아가는 것과 같은 효과를 낼 수 있다. Topological model은 <strong>강력하게 abstraction에만 초점을 둔 방법</strong>이라고 볼 수 있지만, <strong>엄청나게 가벼운 representation</strong>이라는 특징을 가지게 되었고 이러한 특징은 <strong>planning과 decision making에 엄청난 도움</strong>을 준다. 조금 더 개선 시킨 방법으로는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE1MDkuMDgxNTU=">Mu 2016 - Information-based active SLAM via topological feature graphs<i class="fa fa-external-link-alt"></i></span>에서 사용한 topological feature graph는 geometric landmark와 topology를 결합한 형태인데, graph의 vertex는 geometric feature를 의미하고 edge가 obstacle을 의미하는 방법을 사용한다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDMuMTQzNjg=">Stein 2020 - Enabling topological planning with monocular vision<i class="fa fa-external-link-alt"></i></span>에서는 점점 topology graph를 강화시켜 planning task에 적합하게 만드는 방식을 제안하며, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDUuMTIyNTY=">Chaplot 2020 - Neural topological SLAM for visual navigation<i class="fa fa-external-link-alt"></i></span> 논문에서는 vertex는 location을 저장하고 edge에는 traversability를 저장하는 방법으로 topological graph 기법의 정점(?)을 찍었다. </p>
@@ -528,9 +456,9 @@ mjx-container[display="true"] + br {
 <h1 id="딥러닝-중심의-representation"><a href="#딥러닝-중심의-representation" class="headerlink" title="딥러닝 중심의 representation"></a>딥러닝 중심의 representation</h1><p>대부분의 semantic SLAM을 보면, 뉴럴넷의 결과를 그대로 믿고 받아쓰는 경우가 많다. 멀티뷰 데이터를 누적하다보면 조금씩 오차가 생길텐데, 그정도는 SLAM backend가 어느정도 보정을 해줄거라는 희망을 가지고 하는 것이다. 근데 사실 이건 소위 ‘블랙박스’, ‘될때까지 튜닝하기’, ‘잘 되길 기도하기’ 방법과 다를 바가 없다. 진정 하나의 perception 시스템으로써 동작하길 바란다면, 로봇 네비게이션을 하는 그 순간에도 새로운 파라미터를 학습해서 개선한다던가, 또는 뉴럴넷의 결과가 보정되야하지 않을까? SLAM이 인식하는 scene geometry와 robot motion을 기반으로 뉴럴넷을 학습할 수도 있을 것이다.</p>
 <p>실제로 SLAM의 결과를 뉴럴넷 학습에 사용하기도 한다. <strong>Self-supervised learning</strong> 기법은 뉴럴넷을 학습에 사용되는 데이터에서 추가적인 정보를 구해내고 그것을 ground truth label 및 학습에 도움되는 auxiliary data로 사용함으로써 학습을 진전시키는 방법이다. SLAM으로 추정한 global representation은 충분히 다양한 뉴럴넷 네트워크를 학습하는데에 필요한 데이터로써 사용될 수 있다.</p>
 <p>딥러닝 모델로써 scene에 대한 coarse한 정보를 제공하고, SLAM이 이를 받아 최적화함으로써 기존의 뉴럴넷 결과보다 더욱 좋은 결과를 이끌어낼 수도 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MDMuMDY0ODI=">SceneCode<i class="fa fa-external-link-alt"></i></span>와 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDQuMDQ0ODU=">NodeSLAM<i class="fa fa-external-link-alt"></i></span>에서는 object들의 성질을 variational auto-encoder를 사용해서 압축한 vector의 값들에 대해 SLAM 최적화를 함으로써 reconstruction을 수행한다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIwMDEuMDUwNDk=">DeepFactors<i class="fa fa-external-link-alt"></i></span>에서는 depth map을 압축해서 SLAM 최적화 시 depth map 최적화도 함께 수행한다.</p>
-<img src="/20230215-rosen-2021/niceslam.png" class="" title="niceslam">
+<img src="/20230215-rosen-2021/niceslam.webp" class="" title="niceslam">
 <p>뉴럴넷이 backpropagation을 수행하며 내부 파라미터 최적화를 하듯이, SLAM의 backend를 differentiable하게 만들려고 하는 시도도 있다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE5MTAuMTA2NzI=">GradSLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDYuMDQ4MDc=">BANet<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDguMTA4Njk=">DROID-SLAM<i class="fa fa-external-link-alt"></i></span>과 같이 SLAM 전체를 differentiable하게 만들려고 하는 시스템부터, 최근에는 NeRF도 함께 사용하는 <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIyMTAuMTM2NDE=">NeRF-SLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMDMuMTIzNTI=">iMAP<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIzMDIuMDE4Mzg=">vMAP<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIxMTIuMTIxMzA=">NICE-SLAM<i class="fa fa-external-link-alt"></i></span>, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIzMDIuMDM1OTQ=">NICER-SLAM<i class="fa fa-external-link-alt"></i></span> 등이 있다 (NeRF 관련 논문들은 이 글이 참조하고 있는 논문인 Rosen 2021에는 없다. 이 논문이 나오고 나서 공개된 논문이기 때문).</p>
-<img src="/20230215-rosen-2021/lmnav.png" class="" title="lmnav">
+<img src="/20230215-rosen-2021/lmnav.webp" class="" title="lmnav">
 <p>마지막으로 완전 다른 노선으로 가고 있는 연구도 있다. 바로 <strong>SLAM도, 지도도 필요 없이 navigation 자체를 학습하는 방법</strong>이다 (이 글을 적고있는 저자의 마음은 찢어집니다… 슬램 소중해…). 센서 값을 인풋으로 받아 단일 네트워크를 거쳐 아웃풋으로 navigation의 결과를 내는 <strong>End-to-end learning</strong> 기법이다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE3MDYuMDk1MjA=">Zhang 2017 - NeuralSLAM: Learning to explore with external memory<i class="fa fa-external-link-alt"></i></span>는 그래도 occupancy map을 사용해서 navigation을 하지만, <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzE4MDQuMDAxNjg=">Mirowski 2018 - Learning to navigate in cities without a map<i class="fa fa-external-link-alt"></i></span> 연구에서는 아예 지도 자체를 없애버렸다. 위에서 이야기했던 Neural topological SLAM 연구도 사실 지도 없이 navigation을 하는 연구이다. <span class="exturl" data-url="aHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzIyMDcuMDQ0Mjk=">LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, Vision, and Action<i class="fa fa-external-link-alt"></i></span>에서는 vision-language model을 이용해서 language prompt로 action 커맨드로 받고, visual observation으로 topological 정보만 인식해 navigation을 하는 연구도 있다.</p>
 <p> </p>
 <hr>
@@ -561,26 +489,6 @@ mjx-container[display="true"] + br {
     
     
     
-      
-  <div class="popular-posts-header">Related Posts</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230218-qin-2020-avpslam/" rel="bookmark">Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230218-qin-2021-roadmap/" rel="bookmark">Qin 2021 - RoadMap - A Light-Weight Semantic Map for Visual Localization towards Autonomous Driving</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230329-rosinol-2021-kimera-3d-dgs/" rel="bookmark">Rosinol 2021 - Kimera - from SLAM to Spatial Perception with 3D Dynamic Scene Graphs 논문 리뷰</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/" rel="bookmark">Mazur 2022 - Feature-Realistic Neural Fusion for Real-Time, Open Set Scene Understanding 논문 리뷰</a></div>
-    </li>
-    <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="/20230618-cvpr2023-tutorials-workshops/" rel="bookmark">CVPR 2023 학회에서 눈여겨볼 SLAM 관련 튜토리얼/워크샵</a></div>
-    </li>
-  </ul>
-
 
     <footer class="post-footer">
           <div class="post-tags">
@@ -594,12 +502,12 @@ mjx-container[display="true"] + br {
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/20230214-rosen-2021/" rel="prev" title="SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping">
-                  <i class="fa fa-chevron-left"></i> SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping
+                  <i class="fa fa-angle-left"></i> SLAM 추정 효율성에 대한 고찰 - Rosen 2021 - Advances in Inference and Representation for Simultaneous Localization and Mapping
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/20230218-qin-2020-avpslam/" rel="next" title="Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot">
-                  Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot <i class="fa fa-chevron-right"></i>
+                  Qin 2020 - AVP-SLAM - Semantic Visual Mapping and Localization for Autonomous Vehicles in the Parking Lot <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -619,45 +527,22 @@ mjx-container[display="true"] + br {
   </div>
   
   
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
 </div>
   </main>
 
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">cv-learn</span>
-</div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
 <div class="busuanzi-count">
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -665,7 +550,7 @@ mjx-container[display="true"] + br {
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -679,36 +564,35 @@ mjx-container[display="true"] + br {
   </footer>
 
   
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
 
-<script src="/js/local-search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
 
 
 
-<script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  const url = element.dataset.target;
-  const pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  const pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  const fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
-</script>
 
 
 
@@ -718,49 +602,10 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
 
 
 
+  
 
-  <script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              const target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    const script = document.createElement('script');
-    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
-    script.defer = true;
-    document.head.appendChild(script);
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.typesetClear();
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
