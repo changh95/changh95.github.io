@@ -3,6 +3,20 @@
 
 
     <url>
+        <loc>https://changh95.github.io/tags/ffmpeg/</loc>
+        <lastmod>2024-08-26T05:31:38.782Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/tags/webp/</loc>
+        <lastmod>2024-08-26T05:31:38.782Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://changh95.github.io/tags/3D-Gaussian-Splatting/</loc>
         <lastmod>2024-08-26T04:39:45.680Z</lastmod>
         <changefreq>weekly</changefreq>
