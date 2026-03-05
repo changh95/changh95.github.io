@@ -1,0 +1,2068 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://changh95.github.io/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+
+    <url>
+        <loc>https://changh95.github.io/20240517-icra-2024-interesting-papers/</loc>
+        <lastmod>2026-03-05T05:40:44.322Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240826-ffmpeg-efficient-video-compression/</loc>
+        <lastmod>2026-03-05T05:40:44.322Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240329-LIO-SAM-Review/</loc>
+        <lastmod>2026-03-05T05:40:44.317Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240304-fast-kitti-download/</loc>
+        <lastmod>2026-03-05T05:40:44.307Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240305-ros1-study/</loc>
+        <lastmod>2026-03-05T05:40:44.307Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240312-hexo-mathjax-renderer/</loc>
+        <lastmod>2026-03-05T05:40:44.307Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240312-nvidia-ngc/</loc>
+        <lastmod>2026-03-05T05:40:44.307Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240208-omnidirectional-depth-estimation-and-mapping-jongwoolim/</loc>
+        <lastmod>2026-03-05T05:40:44.211Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240207-spatial-ai-kr-hyunwoo-yoo/</loc>
+        <lastmod>2026-03-05T05:40:44.173Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20240126-latex-ocr/</loc>
+        <lastmod>2026-03-05T05:40:44.172Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231221-how-to-follow-slam-papers/</loc>
+        <lastmod>2026-03-05T05:40:44.166Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231128-slam-interview-questions-100-eng/</loc>
+        <lastmod>2026-03-05T05:40:44.165Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230618-cvpr2023-tutorials-workshops/</loc>
+        <lastmod>2026-03-05T05:40:44.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230907-kiss-icp/</loc>
+        <lastmod>2026-03-05T05:40:44.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230910-red-flags-from-top-vcs/</loc>
+        <lastmod>2026-03-05T05:40:44.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231127-100-slam-interview-questions/</loc>
+        <lastmod>2026-03-05T05:40:44.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20231128-dsp-slam/</loc>
+        <lastmod>2026-03-05T05:40:44.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230609-python-like-rust/</loc>
+        <lastmod>2026-03-05T05:40:44.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230614-buy-write-strategy/</loc>
+        <lastmod>2026-03-05T05:40:44.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230614-feature-realistic-neural-fusion-for-real-time-open-set-scene-understanding/</loc>
+        <lastmod>2026-03-05T05:40:44.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230616-slam-book-kr/</loc>
+        <lastmod>2026-03-05T05:40:44.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230602-icra2023-hilti/</loc>
+        <lastmod>2026-03-05T05:40:44.156Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230602-icra-day-5/</loc>
+        <lastmod>2026-03-05T05:40:44.132Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230602-icra2023-day5-poster/</loc>
+        <lastmod>2026-03-05T05:40:44.132Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230531-icra2023-day4-poster/</loc>
+        <lastmod>2026-03-05T05:40:44.038Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230531-icra2023-day3-poster/</loc>
+        <lastmod>2026-03-05T05:40:43.907Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230530-icra2023-day2-poster/</loc>
+        <lastmod>2026-03-05T05:40:43.574Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230529-icra2023-day1-posters/</loc>
+        <lastmod>2026-03-05T05:40:43.486Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230529-icra2023-day-1-2/</loc>
+        <lastmod>2026-03-05T05:40:43.428Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230529-icra2023-day-1/</loc>
+        <lastmod>2026-03-05T05:40:43.428Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230419-icra-2023/</loc>
+        <lastmod>2026-03-05T05:40:43.424Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230529-icra2023-day-1-1/</loc>
+        <lastmod>2026-03-05T05:40:43.424Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230405-q1-2023-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:43.423Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230411-python3-debugging-tip/</loc>
+        <lastmod>2026-03-05T05:40:43.423Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230413-vector-norms/</loc>
+        <lastmod>2026-03-05T05:40:43.423Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230325-xvfb/</loc>
+        <lastmod>2026-03-05T05:40:43.116Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230329-rosinol-2021-kimera-3d-dgs/</loc>
+        <lastmod>2026-03-05T05:40:43.116Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230321-ccmake/</loc>
+        <lastmod>2026-03-05T05:40:43.115Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230315-Fang-2022-self-supervised-camera-self-calibration-from-video/</loc>
+        <lastmod>2026-03-05T05:40:43.113Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230218-qin-2021-roadmap/</loc>
+        <lastmod>2026-03-05T05:40:43.111Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230218-qin-2020-avpslam/</loc>
+        <lastmod>2026-03-05T05:40:43.108Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230215-rosen-2021/</loc>
+        <lastmod>2026-03-05T05:40:43.091Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230214-sensor-calibration/</loc>
+        <lastmod>2026-03-05T05:40:43.088Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230214-rosen-2021/</loc>
+        <lastmod>2026-03-05T05:40:43.086Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230213-ubuntu-partition/</loc>
+        <lastmod>2026-03-05T05:40:43.085Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230115-2022-retro/</loc>
+        <lastmod>2026-03-05T05:40:43.085Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20230102-2022-seminar-showdown/</loc>
+        <lastmod>2026-03-05T05:40:43.079Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20221219-bean-brothers-talk/</loc>
+        <lastmod>2026-03-05T05:40:43.012Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20221021-pointers/</loc>
+        <lastmod>2026-03-05T05:40:42.999Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20221215-moducon2022/</loc>
+        <lastmod>2026-03-05T05:40:42.999Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20221013-cpp-essential-tools/</loc>
+        <lastmod>2026-03-05T05:40:42.995Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220428-thread-esyang/</loc>
+        <lastmod>2026-03-05T05:40:42.989Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220707-army-over/</loc>
+        <lastmod>2026-03-05T05:40:42.989Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220418-10-lessons-from-smartest-engineer/</loc>
+        <lastmod>2026-03-05T05:40:42.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220418-is-a-default-constructor-a-must/</loc>
+        <lastmod>2026-03-05T05:40:42.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220421-10x-developer/</loc>
+        <lastmod>2026-03-05T05:40:42.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220421-nvidia-self-driving-cars-gtc2022/</loc>
+        <lastmod>2026-03-05T05:40:42.761Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220322-is-slam-solved/</loc>
+        <lastmod>2026-03-05T05:40:42.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220328-startup-questions/</loc>
+        <lastmod>2026-03-05T05:40:42.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220324-clean-coders-tdd/</loc>
+        <lastmod>2026-03-05T05:40:42.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220329-standford-machine-learning-cs229/</loc>
+        <lastmod>2026-03-05T05:40:42.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220402-clean-coders-practicing/</loc>
+        <lastmod>2026-03-05T05:40:42.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220403-pass-by-value-primitives/</loc>
+        <lastmod>2026-03-05T05:40:42.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220408-2022-april-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:42.760Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220315-transformers/</loc>
+        <lastmod>2026-03-05T05:40:42.758Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220315-tuples-pair-programming-guide/</loc>
+        <lastmod>2026-03-05T05:40:42.758Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220319-stanford-robotics-cs223a/</loc>
+        <lastmod>2026-03-05T05:40:42.758Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220319-stanford-convex-optimization/</loc>
+        <lastmod>2026-03-05T05:40:42.758Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220315-lidar-imu-pitfalls/</loc>
+        <lastmod>2026-03-05T05:40:42.726Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220315-autonomous-driving-lidar/</loc>
+        <lastmod>2026-03-05T05:40:42.554Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220309-stock-option/</loc>
+        <lastmod>2026-03-05T05:40:42.554Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220315-autonomous-driving-tech-and-datasets/</loc>
+        <lastmod>2026-03-05T05:40:42.554Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220315-event-cameras-with-davide-scaramuzza/</loc>
+        <lastmod>2026-03-05T05:40:42.554Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220309-nft-scams/</loc>
+        <lastmod>2026-03-05T05:40:42.553Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220309-nft-my-thoughts/</loc>
+        <lastmod>2026-03-05T05:40:42.552Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220304-clean-coders-coding/</loc>
+        <lastmod>2026-03-05T05:40:42.551Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220309-hyundai-tesla/</loc>
+        <lastmod>2026-03-05T05:40:42.551Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220303-clean-coders-saying-yes/</loc>
+        <lastmod>2026-03-05T05:40:42.551Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220222-go-cv/</loc>
+        <lastmod>2026-03-05T05:40:42.550Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220221-tdd/</loc>
+        <lastmod>2026-03-05T05:40:42.550Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220208-go-2/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220208-go-1/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220210-go-3/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220210-go-5/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220210-go-4/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220214-coffee-bean-brothers/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220210-go-6/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220214-gnn-tutorial/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220214-szeliski-book/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220216-solid-principles/</loc>
+        <lastmod>2026-03-05T05:40:42.549Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220130-clean-coders-saying-no/</loc>
+        <lastmod>2026-03-05T05:40:42.548Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220130-m1-opencv-build-sse/</loc>
+        <lastmod>2026-03-05T05:40:42.548Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220130-nonsan/</loc>
+        <lastmod>2026-03-05T05:40:42.548Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220205-CS193P/</loc>
+        <lastmod>2026-03-05T05:40:42.548Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220206-go-lecture/</loc>
+        <lastmod>2026-03-05T05:40:42.548Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220207-deep-learning-interview/</loc>
+        <lastmod>2026-03-05T05:40:42.548Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220207-software-engineering-at-google/</loc>
+        <lastmod>2026-03-05T05:40:42.548Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220128-homebrew-install/</loc>
+        <lastmod>2026-03-05T05:40:42.547Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220128-m1-opencv-build/</loc>
+        <lastmod>2026-03-05T05:40:42.547Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220128-modern-javascript/</loc>
+        <lastmod>2026-03-05T05:40:42.547Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220128-senior-dev-jobsearch/</loc>
+        <lastmod>2026-03-05T05:40:42.547Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220128-stop-teaching-c/</loc>
+        <lastmod>2026-03-05T05:40:42.547Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220124-clean-coders-professionalism/</loc>
+        <lastmod>2026-03-05T05:40:42.519Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220123-new-mac/</loc>
+        <lastmod>2026-03-05T05:40:42.384Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220121-open3d-build-story/</loc>
+        <lastmod>2026-03-05T05:40:42.383Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220115-std-experimental-filesystem/</loc>
+        <lastmod>2026-03-05T05:40:42.382Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220115-safer-c/</loc>
+        <lastmod>2026-03-05T05:40:42.382Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220120-static-vs-shared-libs/</loc>
+        <lastmod>2026-03-05T05:40:42.382Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220120-unused-parameter/</loc>
+        <lastmod>2026-03-05T05:40:42.382Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220110-solidity-tutorial-website/</loc>
+        <lastmod>2026-03-05T05:40:42.381Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220115-libstdc-gpl/</loc>
+        <lastmod>2026-03-05T05:40:42.381Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220109-blockchain-coding-3/</loc>
+        <lastmod>2026-03-05T05:40:42.379Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220109-blockchain-coding-4/</loc>
+        <lastmod>2026-03-05T05:40:42.379Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220110-misra-c-c-17/</loc>
+        <lastmod>2026-03-05T05:40:42.379Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-slam-libraries/</loc>
+        <lastmod>2026-03-05T05:40:42.368Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-cvpr14-visual-slam-tutorial/</loc>
+        <lastmod>2026-03-05T05:40:42.367Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-cpp-libraries/</loc>
+        <lastmod>2026-03-05T05:40:42.367Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-delete-folder/</loc>
+        <lastmod>2026-03-05T05:40:42.367Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-eigen-cheatsheet/</loc>
+        <lastmod>2026-03-05T05:40:42.367Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-jump-to-python-ebook/</loc>
+        <lastmod>2026-03-05T05:40:42.367Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-calibration-pattern-generator/</loc>
+        <lastmod>2026-03-05T05:40:42.366Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-blockchain-coding2/</loc>
+        <lastmod>2026-03-05T05:40:42.364Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-blockchain-coding/</loc>
+        <lastmod>2026-03-05T05:40:42.363Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220108-3d-rotation-converter/</loc>
+        <lastmod>2026-03-05T05:40:42.363Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220107-mlops-for-all/</loc>
+        <lastmod>2026-03-05T05:40:42.362Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220107-modern-cpp-features-cheatsheet/</loc>
+        <lastmod>2026-03-05T05:40:42.362Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220107-gotw/</loc>
+        <lastmod>2026-03-05T05:40:42.361Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220107-2019-iros-vins-workshop/</loc>
+        <lastmod>2026-03-05T05:40:42.361Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220107-macos/</loc>
+        <lastmod>2026-03-05T05:40:42.361Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220107-leaving-google-jayconrod/</loc>
+        <lastmod>2026-03-05T05:40:42.361Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211231-slam-researcher-follow/</loc>
+        <lastmod>2026-03-05T05:40:42.360Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211231-visual-slam-keyword/</loc>
+        <lastmod>2026-03-05T05:40:42.360Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220102-what-i-want-to-do-2022/</loc>
+        <lastmod>2026-03-05T05:40:42.360Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220105-libstdc-libc/</loc>
+        <lastmod>2026-03-05T05:40:42.360Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20220106-boost-vs-abseil/</loc>
+        <lastmod>2026-03-05T05:40:42.360Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211231-ml-vs-dl/</loc>
+        <lastmod>2026-03-05T05:40:42.358Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211231-gdg-gwangju-2019-ensemble-automl/</loc>
+        <lastmod>2026-03-05T05:40:42.324Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211231-deep-learning-ai-news/</loc>
+        <lastmod>2026-03-05T05:40:42.307Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211010-ICCV2021/</loc>
+        <lastmod>2026-03-05T05:40:42.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211201-lidar-slam/</loc>
+        <lastmod>2026-03-05T05:40:42.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211207-rust-start-0/</loc>
+        <lastmod>2026-03-05T05:40:42.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20211230-190626-UR-seminar/</loc>
+        <lastmod>2026-03-05T05:40:42.120Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210925-cpp-best-practices/</loc>
+        <lastmod>2026-03-05T05:40:42.119Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210925-cpp-best-practices-automated-tests/</loc>
+        <lastmod>2026-03-05T05:40:42.119Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210817-vslam-vs-vio/</loc>
+        <lastmod>2026-03-05T05:40:42.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210827-new-domain-but-lost-all-view-counts/</loc>
+        <lastmod>2026-03-05T05:40:42.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210829-2021-august-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:42.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210910-2021-september-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:42.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210912-ros-tutorials-1/</loc>
+        <lastmod>2026-03-05T05:40:42.118Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210816-tightly-loosely-coupled/</loc>
+        <lastmod>2026-03-05T05:40:42.117Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210802-2021-june-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:42.107Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210728-2021-july-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:42.107Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210804-2021-may-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:42.107Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210808-docker-for-slam/</loc>
+        <lastmod>2026-03-05T05:40:42.107Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210719-icra-vins-stefan-leutenegger/</loc>
+        <lastmod>2026-03-05T05:40:42.104Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210716-outlier-1/</loc>
+        <lastmod>2026-03-05T05:40:42.098Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210629-guitar-overdrive/</loc>
+        <lastmod>2026-03-05T05:40:42.095Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210628-MS-rust/</loc>
+        <lastmod>2026-03-05T05:40:42.095Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210630-overdrive-study/</loc>
+        <lastmod>2026-03-05T05:40:42.095Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210716-outlier-0/</loc>
+        <lastmod>2026-03-05T05:40:42.095Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210627-guitar/</loc>
+        <lastmod>2026-03-05T05:40:42.088Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210607-solver-comp/</loc>
+        <lastmod>2026-03-05T05:40:42.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210607-solvers/</loc>
+        <lastmod>2026-03-05T05:40:42.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210619-cvpr-2021/</loc>
+        <lastmod>2026-03-05T05:40:42.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210625-multithread-image-buffer/</loc>
+        <lastmod>2026-03-05T05:40:42.087Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210604-tartan-kaess/</loc>
+        <lastmod>2026-03-05T05:40:42.084Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210530-icra-2021/</loc>
+        <lastmod>2026-03-05T05:40:42.083Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210528-work-history/</loc>
+        <lastmod>2026-03-05T05:40:41.954Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210529-tartan-scherer/</loc>
+        <lastmod>2026-03-05T05:40:41.954Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210523-cpp-coding-guideline/</loc>
+        <lastmod>2026-03-05T05:40:41.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210525-slam-field-job-offers/</loc>
+        <lastmod>2026-03-05T05:40:41.926Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210408-slamantic-blog/</loc>
+        <lastmod>2026-03-05T05:40:41.925Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210415-gtc-2021-lists/</loc>
+        <lastmod>2026-03-05T05:40:41.925Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210405-naver-labs-visloc/</loc>
+        <lastmod>2026-03-05T05:40:41.924Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210405-visloc-my-thoughts/</loc>
+        <lastmod>2026-03-05T05:40:41.924Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210407-3dgv-andrew-davison/</loc>
+        <lastmod>2026-03-05T05:40:41.924Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210330-mersenne-twister/</loc>
+        <lastmod>2026-03-05T05:40:41.923Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210405-naver-labs-europe-kapture/</loc>
+        <lastmod>2026-03-05T05:40:41.923Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210405-R2D2/</loc>
+        <lastmod>2026-03-05T05:40:41.923Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210330-why-cpp/</loc>
+        <lastmod>2026-03-05T05:40:41.923Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210328-cpp-basics2/</loc>
+        <lastmod>2026-03-05T05:40:41.874Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210328-cpp-containers-iterators/</loc>
+        <lastmod>2026-03-05T05:40:41.874Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210329-mar-2021-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:41.874Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210329-motion-blur/</loc>
+        <lastmod>2026-03-05T05:40:41.874Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210327-RFSC-Kim-The-Age-of-Robot-Exploration/</loc>
+        <lastmod>2026-03-05T05:40:41.873Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210328-cpp-basics-3/</loc>
+        <lastmod>2026-03-05T05:40:41.873Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210327-Andrew-Ng-MLOps-talk/</loc>
+        <lastmod>2026-03-05T05:40:41.872Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210325-ctrl-capslock-swap/</loc>
+        <lastmod>2026-03-05T05:40:41.871Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210325-missing-semester-data-wranglnig/</loc>
+        <lastmod>2026-03-05T05:40:41.871Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210326-alacritty-tmux-zsh-prezto/</loc>
+        <lastmod>2026-03-05T05:40:41.871Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210326-tmux/</loc>
+        <lastmod>2026-03-05T05:40:41.871Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210321-cpp-basics/</loc>
+        <lastmod>2026-03-05T05:40:41.870Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210322-missing-semester-shell/</loc>
+        <lastmod>2026-03-05T05:40:41.870Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210322-missing-semesters-shell-tools-and-scripting/</loc>
+        <lastmod>2026-03-05T05:40:41.870Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210323-cracking-the-coding-interview-notes1/</loc>
+        <lastmod>2026-03-05T05:40:41.870Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210323-missing-semesters-vim/</loc>
+        <lastmod>2026-03-05T05:40:41.870Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210314-nonlinear-optimisation/</loc>
+        <lastmod>2026-03-05T05:40:41.867Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210313-ransac/</loc>
+        <lastmod>2026-03-05T05:40:41.866Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210313-ba/</loc>
+        <lastmod>2026-03-05T05:40:41.863Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210222-image-projection/</loc>
+        <lastmod>2026-03-05T05:40:41.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210222-mono-stereo-rgbd/</loc>
+        <lastmod>2026-03-05T05:40:41.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210228-AD-sensors/</loc>
+        <lastmod>2026-03-05T05:40:41.860Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210221-50-CV-SLAM-interview-questions/</loc>
+        <lastmod>2026-03-05T05:40:41.857Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210216-SW-tech-interview-prep/</loc>
+        <lastmod>2026-03-05T05:40:41.856Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210213-february-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:41.853Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210214-data-structures-and-algorithms/</loc>
+        <lastmod>2026-03-05T05:40:41.853Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210128-2021-january-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:41.801Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210128-gbp-poplar/</loc>
+        <lastmod>2026-03-05T05:40:41.801Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210119-autonomous-driving/</loc>
+        <lastmod>2026-03-05T05:40:41.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210120-slam-dunk-2/</loc>
+        <lastmod>2026-03-05T05:40:41.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210121-visual-slam-roadmap-beginner/</loc>
+        <lastmod>2026-03-05T05:40:41.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210121-visual-slam-roadmap/</loc>
+        <lastmod>2026-03-05T05:40:41.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210122-slam-master-500/</loc>
+        <lastmod>2026-03-05T05:40:41.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210123-slam-book-translation/</loc>
+        <lastmod>2026-03-05T05:40:41.800Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210116-sensor-size/</loc>
+        <lastmod>2026-03-05T05:40:41.790Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210114-graduate-school-math-linear-algebra/</loc>
+        <lastmod>2026-03-05T05:40:41.789Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210115-qira/</loc>
+        <lastmod>2026-03-05T05:40:41.789Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210107-pipenv/</loc>
+        <lastmod>2026-03-05T05:40:41.788Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210113-maths-for-graduate-school/</loc>
+        <lastmod>2026-03-05T05:40:41.788Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210107-gcc-ffast-math/</loc>
+        <lastmod>2026-03-05T05:40:41.785Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20210105-modern-cmake/</loc>
+        <lastmod>2026-03-05T05:40:41.783Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201229-dec-2020-slam-news/</loc>
+        <lastmod>2026-03-05T05:40:41.764Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201231-retro/</loc>
+        <lastmod>2026-03-05T05:40:41.764Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201228-cvpr2020-slam-yang/</loc>
+        <lastmod>2026-03-05T05:40:41.749Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201227-cvpr2020-slam-malisiewicz/</loc>
+        <lastmod>2026-03-05T05:40:41.725Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201226-CVPR-2020-SLAM-workshop-Davison/</loc>
+        <lastmod>2026-03-05T05:40:41.712Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201225-CVPR2020-Cremers-SLAM-workshop/</loc>
+        <lastmod>2026-03-05T05:40:41.695Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201223-IROS2020-Luca-Carlone-SLAM-workshop/</loc>
+        <lastmod>2026-03-05T05:40:41.686Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201220-warwick-podcast/</loc>
+        <lastmod>2026-03-05T05:40:41.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201216-fast-palindrome/</loc>
+        <lastmod>2026-03-05T05:40:41.684Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201217-std-vector-reserve/</loc>
+        <lastmod>2026-03-05T05:40:41.684Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201215-case-study-pcl/</loc>
+        <lastmod>2026-03-05T05:40:41.682Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201215-Harris-corner/</loc>
+        <lastmod>2026-03-05T05:40:41.673Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201214-exotic-container/</loc>
+        <lastmod>2026-03-05T05:40:41.672Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-paperswithcode/</loc>
+        <lastmod>2026-03-05T05:40:41.671Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-prml-kor/</loc>
+        <lastmod>2026-03-05T05:40:41.671Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-wolfram-mathworld/</loc>
+        <lastmod>2026-03-05T05:40:41.671Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-medicine-references/</loc>
+        <lastmod>2026-03-05T05:40:41.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-metallurgy/</loc>
+        <lastmod>2026-03-05T05:40:41.670Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-maths-notes/</loc>
+        <lastmod>2026-03-05T05:40:41.669Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-jetson/</loc>
+        <lastmod>2026-03-05T05:40:41.669Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201212-2d-matrix-iteration/</loc>
+        <lastmod>2026-03-05T05:40:41.668Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201211-dont-compute-twice/</loc>
+        <lastmod>2026-03-05T05:40:41.667Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201211-string-concat/</loc>
+        <lastmod>2026-03-05T05:40:41.667Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201209-strings-are-almost-vectors/</loc>
+        <lastmod>2026-03-05T05:40:41.666Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201210-small-string-optimisation/</loc>
+        <lastmod>2026-03-05T05:40:41.666Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201208-small-vector-optimisation/</loc>
+        <lastmod>2026-03-05T05:40:41.665Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201206-do-you-need-map/</loc>
+        <lastmod>2026-03-05T05:40:41.664Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201205-faconti-use-vector-reserve/</loc>
+        <lastmod>2026-03-05T05:40:41.663Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201203-faconti-Value-semantics-vs-references/</loc>
+        <lastmod>2026-03-05T05:40:41.661Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201205-faconti-do-not-use-linked-list/</loc>
+        <lastmod>2026-03-05T05:40:41.661Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201127-heap/</loc>
+        <lastmod>2026-03-05T05:40:41.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201127-nonlinear-data-structure/</loc>
+        <lastmod>2026-03-05T05:40:41.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201127-tree/</loc>
+        <lastmod>2026-03-05T05:40:41.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201125-stl-containers/</loc>
+        <lastmod>2026-03-05T05:40:41.659Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201125-cpp-linear-structures/</loc>
+        <lastmod>2026-03-05T05:40:41.658Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://changh95.github.io/20201124-Notion-blog-to-Github-blog/</loc>
+        <lastmod>2026-03-05T05:40:41.657Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

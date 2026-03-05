@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.2.0">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changh95.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"right","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":true,"lazyload":false,"pangu":false,"comments":{"style":"disqus","active":false,"storage":false,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":"auto","top_n_per_article":1,"unescape":false,"preload":false,"trigger":"auto"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="2021년 2월 SLAM 논문 소식을 정리했습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021년 2월 SLAM 뉴스">
+<meta property="og:url" content="https://changh95.github.io/20210213-february-slam-news/index.html">
+<meta property="og:site_name" content="cv-learn">
+<meta property="og:description" content="2021년 2월 SLAM 논문 소식을 정리했습니다.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-13T11:38:19.000Z">
+<meta property="article:modified_time" content="2026-03-05T05:40:41.853Z">
+<meta property="article:author" content="cv-learn">
+<meta property="article:tag" content="SLAM">
+<meta property="article:tag" content="Visual-SLAM">
+<meta property="article:tag" content="논문 소식">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://changh95.github.io/20210213-february-slam-news/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://changh95.github.io/20210213-february-slam-news/","path":"20210213-february-slam-news/","title":"2021년 2월 SLAM 뉴스"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2021년 2월 SLAM 뉴스 | cv-learn</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">cv-learn</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Vision, SLAM, Spatial AI</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="Searching..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%9D%B4%EB%B2%88-%EB%8B%AC-%EB%82%B4%EA%B0%80-%EA%B4%80%EC%8B%AC%EA%B0%80%EC%A7%80%EB%8A%94-%EB%85%BC%EB%AC%B8%EB%93%A4"><span class="nav-number">1.</span> <span class="nav-text">이번 달 내가 관심가지는 논문들</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%8B%9C%EA%B0%84%EB%82%98%EB%A9%B4-%EC%9D%BD%EC%96%B4%EB%B3%BC-%EB%85%BC%EB%AC%B8%EB%93%A4"><span class="nav-number">2.</span> <span class="nav-text">시간나면 읽어볼 논문들</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%EC%95%84%EC%A7%81-%ED%99%95%EC%9D%B8-%EC%95%88%EB%90%9C-%EB%85%BC%EB%AC%B8%EB%93%A4"><span class="nav-number">3.</span> <span class="nav-text">아직 확인 안된 논문들</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cv-learn</p>
+  <div class="site-description" itemprop="description">Vision, SLAM, Spatial AI</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">257</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">359</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NoYW5naDk1" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changh95"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288"
+     crossorigin="anonymous"></script>
+      <!-- 사이드바 광고 -->
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-5473245269912288"
+          data-ad-slot="8224659436"
+          data-ad-format="rectangle"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://changh95.github.io/20210213-february-slam-news/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cv-learn">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="cv-learn">
+      <meta itemprop="description" content="Vision, SLAM, Spatial AI">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2021년 2월 SLAM 뉴스 | cv-learn">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2021년 2월 SLAM 뉴스
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-13 20:38:19" itemprop="dateCreated datePublished" datetime="2021-02-13T20:38:19+09:00">2021-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-05 14:40:41" itemprop="dateModified" datetime="2026-03-05T14:40:41+09:00">2026-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/" itemprop="url" rel="index"><span itemprop="name">1. Spatial AI</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/" itemprop="url" rel="index"><span itemprop="name">1.1 SLAM</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/1-Spatial-AI/1-1-SLAM/%EC%9B%94%EA%B0%84-SLAM-%EB%89%B4%EC%8A%A4/" itemprop="url" rel="index"><span itemprop="name">월간 SLAM 뉴스</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>논문 이름 누르면 자세한 정보가 열립니다!</p>
+<h1 id="이번-달-내가-관심가지는-논문들"><a href="#이번-달-내가-관심가지는-논문들" class="headerlink" title="이번 달 내가 관심가지는 논문들"></a>이번 달 내가 관심가지는 논문들</h1><details>
+  <summary> Tight Integration of Feature-Based Relocalization in Monocular Direct Visual Odometry </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.01191.pdf)
+- Daniel Cremers 교수님과 Rui Wang의 연구
+  - DSO에 relocalization 기능이...?
+
+</details>
+
+<details>
+  <summary> PHASER: A Robust and Correspondence-Free Global Pointcloud Registration </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9327458)
+- Cadena 교수님, Roland Siegwart 교수님, Juan Nieto 교수님 연구 
+
+</details>
+
+<details>
+  <summary> Freetures: Localization in Signed Distance Function Maps </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9327493)
+- Jeffrey Delmerico, Juan Nieto, Roland Siegwart, Marc Pollefeys, Cesar Cadena Lerma (슬벤저스 ㄷㄷ)
+
+</details>
+
+<details>
+  <summary> Embedding Manifold Structures into Kalman Filters </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.03804.pdf)
+- 엄마... 수학 논문...
+
+</details>
+
+<details>
+  <summary> Escaping Poor Local Minima in Large Scale Robust Estimation </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.10928.pdf)
+
+</details>
+
+<details>
+  <summary> Landmark Based Visual Place Recognition </summary>
+
+- [논문 링크](http://www.rsc.wce.ac.in/asset/RSC%202019%20Proceeding.pdf#page=56)
+
+</details>
+
+<details>
+  <summary> Corner Cases for Visual Perception in Automated Driving: Some Guidance on Detection Approaches </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05897.pdf)
+
+</details>
+
+<details>
+  <summary> A Switching-Coupled Backend for Simultaneous Localization and Dynamic Object Tracking </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9343683)
+
+</details>
+
+<details>
+  <summary> A Unified Hybrid Formulation for Visual SLAM </summary>
+
+- [논문 링크](https://uwspace.uwaterloo.ca/bitstream/handle/10012/16807/Younes_Georges.pdf)
+- Younes의 PhD 졸업 논문
+
+</details>
+
+<details>
+  <summary> Asynchronous Multi-View SLAM </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.06562.pdf)
+
+</details>
+
+<details>
+  <summary> Improved Visual Localization via Graph Filtering </summary>
+
+- [논문 링크](https://www.mdpi.com/2313-433X/7/2/20/pdf)
+- Ian Reid 교수님 랩실
+
+</details>
+
+<details>
+  <summary> RigidFusion: RGB-D Scene Reconstruction with Rigidly-moving Objects </summary>
+
+- [논문 링크](http://geometry.cs.ucl.ac.uk/projects/2021/rigidfusion/paper_docs/rigidfusion_eg21.pdf)
+- Niessner 교수님 랩실
+
+</details>
+
+<details>
+  <summary> Review of Place Recognition Approaches: Traditional and Deep Learning Methods </summary>
+
+- [논문 링크](https://www.researchgate.net/profile/Melike-Sah/publication/348209290_Review_of_Place_Recognition_Approaches_Traditional_and_Deep_Learning_Methods/links/5ff8579ea6fdccdcb83be2a9/Review-of-Place-Recognition-Approaches-Traditional-and-Deep-Learning-Methods.pdf)
+
+</details>
+
+<details>
+  <summary> Optical flow and scene flow estimation: A survey </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0031320321000480)
+
+</details>
+
+<details>
+  <summary> Attention Models for Point Clouds in Deep Learning: A Survey </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.10788.pdf)
+
+</details>
+
+<h1 id="시간나면-읽어볼-논문들"><a href="#시간나면-읽어볼-논문들" class="headerlink" title="시간나면 읽어볼 논문들"></a>시간나면 읽어볼 논문들</h1><details>
+  <summary> Automatic object annotation in streamed and remotely explored large 3D reconstructions </summary>
+
+- [논문 링크](http://scholar.google.com/scholar_url?url=https://link.springer.com/content/pdf/10.1007/s41095-020-0194-4.pdf&amp;hl=en&amp;sa=X&amp;d=1626110032522529506&amp;ei=chEcYPf1HeaKywSr2qLQBA&amp;scisig=AAGBfm0CNTtgpTwB_3ZlRsv55MN72ZPfzg&amp;nossl=1&amp;oi=scholaralrt&amp;hist=g4sYyGIAAAAJ:9348091814999700012:AAGBfm1H7Xc1GiCUB6yrQDNTUsLvTcDOSA&amp;html=)
+
+</details>
+
+<details>
+  <summary> Characterizing Marginalization and Incremental Operations on the Bayes Tree </summary>
+
+- [논문 링크](https://books.google.co.kr/books?hl=en&amp;lr=lang_en&amp;id=uYYbEAAAQBAJ&amp;oi=fnd&amp;pg=PA227&amp;ots=dtdxmozTb2&amp;sig=XFzNCPorAK_8ZqS1-OjVv_jkL60&amp;redir_esc=y#v=onepage&amp;q&amp;f=false)
+- Kaess, Leonard 교수님
+
+</details>
+
+<details>
+  <summary> Camera Calibration with Pose Guidance </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.10202.pdf)
+
+</details>
+
+<details>
+  <summary> SOSD-Net: Joint Semantic Object Segmentation and Depth Estimation from Monocular images </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.07422.pdf)
+
+</details>
+
+<details>
+  <summary> Feature-based Initialization for Monocular Direct Visual Odometry </summary>
+
+- [논문 링크](https://vision.in.tum.de/_media/members/demmeln/gladkova2020idp.pdf)
+- 오... Daniel Cremers 교수님 랩실의 석사 연구?
+
+</details>
+
+<details>
+  <summary> RDS-SLAM: Real-Time Dynamic SLAM Using Semantic Segmentation Methods </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9318990)
+- Mask-RCNN을 사용해서 움직이는 물체를 검출하고 제거함으로써, 움직이는 물체가 있는 환경에서도 잘 되는 SLAM을 구현.
+- [지난달에도 RDS-SLAM이라고 나왔는데...](https://ieeexplore.ieee.org/abstract/document/9304693) ㅋㅋㅋ 이름이 겹친다
+
+</details>
+
+<details>
+  <summary> A Collaborative Visual SLAM Framework for Service Robots </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.03228.pdf)
+
+</details>
+
+<details>
+  <summary> Visual SLAM for robot navigation in healthcare facility </summary>
+
+- [논문 링크](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7816967/)
+
+</details>
+
+<details>
+  <summary> The Devils in the Point Clouds: Studying the Robustness of Point Cloud Convolutions </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.07832.pdf)
+
+</details>
+
+<details>
+  <summary> Practical Globally Optimal Consensus Maximization by Branch-and-Bound based on Interval Arithmetic </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0031320321000844)
+
+</details>
+
+<details>
+  <summary> Automated building change detection with amodal completion of point clouds </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0926580521000194)
+
+</details>
+
+<hr>
+<h1 id="아직-확인-안된-논문들"><a href="#아직-확인-안된-논문들" class="headerlink" title="아직 확인 안된 논문들"></a>아직 확인 안된 논문들</h1><details>
+  <summary> Online Extrinsic Calibration based on Per-Sensor Ego-Motion Using Dual Quaternions </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.11440.pdf)
+
+</details>
+
+<details>
+  <summary> Ground-Aware Monocular 3D Object Detection for Autonomous Driving </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9327478)
+
+</details>
+
+<details>
+  <summary> Ego-Motion Estimation Using Recurrent Convolutional Neural Networks through Optical Flow Learning </summary>
+
+- [논문 링크](https://search.proquest.com/openview/f62fc1cfdf1b27629d36ccf6736ab5d8/1?pq-origsite=gscholar&amp;cbl=2032404)
+
+</details>
+
+<details>
+  <summary> An adaptive visual Dynamic-SLAM method based on fusing the semantic information </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9323060)
+- 위에 RDS-SLAM과 비슷한 맥락인 것 같다.
+
+</details>
+
+<details>
+  <summary> PV-RCNN++: Point-Voxel Feature Set Abstraction With Local Vector Representation for 3D Object Detection </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.00463.pdf)
+
+</details>
+
+<details>
+  <summary> Unsupervised Learning of Depth and Camera Pose with Feature Map Warping </summary>
+
+- [논문 링크](http://scholar.google.com/scholar_url?url=https://www.mdpi.com/1424-8220/21/3/923/pdf&amp;hl=en&amp;sa=X&amp;d=8167159703508464356&amp;ei=W9MeYKnhNoi6mwGNtY2ABA&amp;scisig=AAGBfm1VVxW53aquht0lTVtlImiVy5O2aQ&amp;nossl=1&amp;oi=scholaralrt&amp;hist=g4sYyGIAAAAJ:12090984375177028978:AAGBfm2qKllSiKwPb_W001CAt43ydX5q_Q&amp;html=)
+
+</details>
+
+<details>
+  <summary> Monocular Depth Estimation Using Laplacian Pyramid-Based Depth Residuals </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/document/9316778/)
+
+</details>
+
+<details>
+  <summary> Gated3D: Monocular 3D Object Detection From Temporal Illumination Cues </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.03602.pdf)
+
+</details>
+
+<details>
+  <summary> Learned Camera Gain and Exposure Control for Improved Visual Feature Detection and Matching </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.04341.pdf)
+- 좋은 visual keypoint를 찾는 적절한 camera gain과 exposure를 딥러닝으로 컨트롤! 좋은 연구인것 같다 (하지만 inference 시간이 어떻게 될까...)
+
+</details>
+
+<details>
+  <summary> OV2SLAM : A Fully Online and Versatile Visual SLAM for Real-Time
+Applications </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.04060.pdf)
+- <mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.05ex" xmlns="http://www.w3.org/2000/svg" width="4.513ex" height="1.937ex" role="img" focusable="false" viewBox="0 -833.9 1994.9 855.9"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path></g><g data-mml-node="msup" transform="translate(763, 0)"><g data-mml-node="mi"><path data-c="1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></g><g data-mml-node="mn" transform="translate(828.3, 363) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g></g></svg></mjx-container> SLAM
+
+</details>
+
+<details>
+  <summary> FisheyeDistanceNet++: Self-Supervised Fisheye Distance Estimation with Self-Attention, Robust Loss Function and Camera View Generalization </summary>
+
+- [논문 링크](https://www.researchgate.net/profile/Senthil_Yogamani2/publication/348900057_FisheyeDistanceNet_Self-Supervised_Fisheye_Distance_Estimation_with_Self-Attention_Robust_Loss_Function_and_Camera_View_Generalization/links/601524d7a6fdcc071ba15585/FisheyeDistanceNet-Self-Supervised-Fisheye-Distance-Estimation-with-Self-Attention-Robust-Loss-Function-and-Camera-View-Generalization.pdf)
+
+</details>
+
+<details>
+  <summary> SuperVO: A Monocular Visual Odometry based on Learned Feature Matching with GNN </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9342136)
+- 본격 SuperPoint + SuperGlue의 후계자인척 하기
+
+</details>
+
+<details>
+  <summary> Adversarial Imaging Pipelines </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.03728.pdf)
+
+</details>
+
+<details>
+  <summary> Points2Vec: Unsupervised Object-level Feature Learning from Point Clouds </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.04136.pdf)
+- Roland Siegwart
+
+</details>
+
+<details>
+  <summary> IDOL: Inertial Deep Orientation-Estimation and Localization </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.04024.pdf)
+
+</details>
+
+<details>
+  <summary> LION: Lidar-Inertial Observability-Aware Navigator for Vision-Denied Environments </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.03443.pdf)
+- Luca Carlone 교수님 참여!
+
+</details>
+
+<details>
+  <summary> On the Robustness of Multi-View Rotation Averaging </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05454.pdf)
+
+</details>
+
+<details>
+  <summary> DARE-SLAM: Degeneracy-Aware and Resilient Loop Closing in Perceptually-Degraded Environments </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05117.pdf)
+
+</details>
+
+<details>
+  <summary> The VCU-RVI Benchmark: Evaluating Visual Inertial Odometry for Indoor Navigation Applications with an RGB-D Camera </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9341713)
+
+</details>
+
+<details>
+  <summary> Speed and Memory Efficient Dense RGB-D SLAM in Dynamic Scenes </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9341542)
+
+</details>
+
+<details>
+  <summary> Nonlinear Observers Design for Vision-Aided Inertial Navigation Systems </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05111.pdf)
+
+</details>
+
+<details>
+  <summary> Lightweight 3-D Localization and Mapping for Solid-State LiDAR </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.03800.pdf)
+
+</details>
+
+<details>
+  <summary> Radar-to-Lidar: Heterogeneous Place Recognition via Joint Learning </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.04960.pdf)
+
+</details>
+
+<details>
+  <summary> Fast and Accurate 3D Object Detection for Lidar-Camera-Based Autonomous Vehicles Using One Shared Voxel-Based Backbone </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9340187)
+
+</details>
+
+<details>
+  <summary> Polarimetric Monocular Dense Mapping Using Relative Deep Depth Prior* </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05212.pdf)
+
+</details>
+
+<details>
+  <summary> Scale Normalized Image Pyramids with AutoFocus for Object Detection </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05646.pdf)
+
+</details>
+
+<details>
+  <summary> Multi-camera fast bundle adjustment algorithm based on normalized matrix dimensionality reduction </summary>
+
+- [논문 링크](http://www.irla.cn/en/article/doi/10.3788/IRLA20200156?)
+
+</details>
+
+<details>
+  <summary> Label-Efficient Point Cloud Semantic Segmentation: An Active Learning Approach </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.06931.pdf)
+
+</details>
+
+<details>
+  <summary> VIODE: A Simulated Dataset to Address the Challenges of Visual-Inertial Odometry in Dynamic Environments </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05965.pdf)
+
+</details>
+
+<details>
+  <summary> A Geometric Nonlinear Stochastic Filter for Simultaneous Localization and Mapping </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.06150.pdf)
+
+</details>
+
+<details>
+  <summary> VMLoc: Variational Fusion For Learning-Based Multimodal Camera Localization </summary>
+
+- [논문 링크](http://www.cs.ox.ac.uk/files/12581/vmloc.pdf)
+
+</details>
+
+<details>
+  <summary> 3D-CenterNet: 3D object detection network for point clouds with center estimation priority </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0031320321000716)
+
+</details>
+
+<details>
+  <summary> HyperPocket: Generative Point Cloud Completion </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.05973.pdf)
+
+</details>
+
+<details>
+  <summary> Panoramic Visual SLAM Technology for Spherical Images </summary>
+
+- [논문 링크](https://www.mdpi.com/1424-8220/21/3/705/pdf)
+
+</details>
+
+<details>
+  <summary> Robust monocular pose tracking of less-distinct objects based on Contour-part model </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9333633)
+
+</details>
+
+<details>
+  <summary> 3D mesh transformation preprocessing system in the real space for augmented reality services </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/pii/S2405959521000175)
+
+</details>
+
+<details>
+  <summary> A Two-Stage Data Association Approach for 3D Multi-Object Tracking </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.08684.pdf)
+
+</details>
+
+<details>
+  <summary> Surprisingly Simple Semi-Supervised Domain Adaptation with Pretraining and Consistency </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.12727.pdf)
+
+</details>
+
+<details>
+  <summary> Single Image Desmoking via Attentive Generative Adversarial Network for Smoke Detection Process </summary>
+
+- [논문 링크](https://link.springer.com/article/10.1007/s10694-021-01096-z)
+
+</details>
+
+<details>
+  <summary> Self-supervised Multi-view Stereo via Effective Co-Segmentation and Data-Augmentation </summary>
+
+- [논문 링크](https://www.aaai.org/AAAI21Papers/AAAI-2549.XuH.pdf)
+
+</details>
+
+<details>
+  <summary> Deep Inertial Odometry with Accurate IMU Preintegration </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.07061.pdf)
+
+</details>
+
+<details>
+  <summary> Keypoint detection by wave propagation </summary>
+
+- [논문 링크](https://www.spiedigitallibrary.org/journals/journal-of-electronic-imaging/volume-30/issue-1/013003/Keypoint-detection-by-wave-propagation/10.1117/1.JEI.30.1.013003.short?SSO=1)
+
+</details>
+
+<details>
+  <summary> 3D reconstruction of deformable objects from RGB-D cameras: an omnidirectional inward-facing multi-camera system </summary>
+
+- [논문 링크](http://commandia.unizar.es/wp-content/uploads/VISAPP_2021_222.pdf)
+
+</details>
+
+<details>
+  <summary> Unstructured Road Segmentation Based on Road Boundary Enhancement Point-Cylinder Network Using LiDAR Sensor </summary>
+
+- [논문 링크](https://www.mdpi.com/2072-4292/13/3/495/pdf)
+
+</details>
+
+<details>
+  <summary> Decentralised Autonomous Navigation of a UAV Network for Road Traffic Monitoring </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9329129)
+
+</details>
+
+<details>
+  <summary> Semantic Segmentation Leveraging Simultaneous Depth Estimation </summary>
+
+- [논문 링크](https://www.mdpi.com/1424-8220/21/3/690/pdf)
+
+</details>
+
+<details>
+  <summary> Text-Guided Graph Neural Networks for Referring 3D Instance Segmentation </summary>
+
+- [논문 링크](https://www.aaai.org/AAAI21Papers/AAAI-4433.HuangP.pdf)
+
+</details>
+
+<details>
+  <summary> Robust RGB-D SLAM for Dynamic Environments Based on YOLOv4 </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9348738)
+
+</details>
+
+<details>
+  <summary> Visual Odometry/Inertial Integration for Enhanced Land Vehicle Navigation in GNSS Denied Environment </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9348698)
+
+</details>
+
+<details>
+  <summary> LEAD: LiDAR Extender for Autonomous Driving </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.07989.pdf)
+
+</details>
+
+<details>
+  <summary> OmniDet: Surround View Cameras based Multi-task Visual Perception Network for Autonomous Driving </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.07448.pdf)
+
+</details>
+
+<details>
+  <summary> Point-line-based RGB-D SLAM and Bundle Adjustment Uncertainty Analysis </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.07110.pdf)
+
+</details>
+
+<details>
+  <summary> Monocular 3D Object Detection using Dual Quadric for Autonomous Driving </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0925231221002071)
+
+</details>
+
+<details>
+  <summary> FastHand: Fast Hand Pose Estimation From A Monocular Camera </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.07067.pdf)
+
+</details>
+
+<details>
+  <summary> Mirror Reconstruction </summary>
+
+- [논문 링크](https://www.freepatentsonline.com/y2021/0035329.html)
+- Richard Newcombe
+
+</details>
+
+<details>
+  <summary> Systems and methods for providing a mobile artificial reality user with environmental awareness </summary>
+
+- [논문 링크](https://www.freepatentsonline.com/10901215.html)
+- Richard Newcombe
+
+</details>
+
+<details>
+  <summary> Hough2Map – Iterative Event-based Hough Transform for High-Speed Railway Mapping </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.08145.pdf)
+- Roland Siegwart, Juan Nieto 교수님 랩실
+
+</details>
+
+<details>
+  <summary> MamboNet: Adversarial Semantic Segmentation for Autonomous Driving </summary>
+
+- [논문 링크](https://www.csie.ntu.edu.tw/~fuh/personal/MamboNetAdversarialSemanticSegmentationforAutonomousDriving.pdf)
+
+</details>
+
+<details>
+  <summary> EfficientLPS: Efficient LiDAR Panoptic Segmentation </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.08009.pdf)
+
+</details>
+
+<details>
+  <summary> Instance Localization for Self-supervised Detection Pretraining </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.08318.pdf)
+
+</details>
+
+<details>
+  <summary> Linear-PoseNet: A Real-Time Camera Pose Estimation System Using Linear Regression and Principal Component Analysis </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9348762)
+
+</details>
+
+<details>
+  <summary> End-to-End Egospheric Spatial Memory </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.07764.pdf)
+- Ronald Clark, Andrew Davison 교수님 랩실 연구
+
+</details>
+
+<details>
+  <summary> PA-MVSNet: Sparse-to-Dense Multi-View Stereo With Pyramid Attention </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9352763)
+
+</details>
+
+<details>
+  <summary> Improving Visual Place Recognition Performance by Maximising Complementarity </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.08416.pdf)
+
+</details>
+
+<details>
+  <summary> Hierarchical Attention Fusion for Geo-Localization </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.09186.pdf)
+
+</details>
+
+<details>
+  <summary> Intensity-SLAM: Intensity Assisted Localization and Mapping for Large Scale Environment </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.03798.pdf)
+
+</details>
+
+<details>
+  <summary> Movement Prediction based on Pose Estimation </summary>
+
+- [논문 링크](https://netlibrary.aau.at/obvuklhs/content/titleinfo/5809498/full.pdf)
+
+</details>
+
+<details>
+  <summary> Towards Semantic SLAM: 3D Position and Velocity Estimation by Fusing Image Semantic Information with Camera Motion Parameters for Traffic Scene Analysis </summary>
+
+- [논문 링크](https://www.researchgate.net/profile/Mostafa-Mansour-2/publication/348716719_remote_sensing_Towards_Semantic_SLAM_3D_Position_and_Velocity_Estimation_by_Fusing_Image_Semantic_Information_with_Camera_Motion_Parameters_for_Traffic_Scene_Analysis/links/600c75fe92851c13fe32078e/remote-sensing-Towards-Semantic-SLAM-3D-Position-and-Velocity-Estimation-by-Fusing-Image-Semantic-Information-with-Camera-Motion-Parameters-for-Traffic-Scene-Analysis.pdf)
+
+</details>
+
+<details>
+  <summary> Consistent Right-Invariant Fixed-Lag Smoother with Application to Visual Inertial SLAM </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.08596.pdf)
+
+</details>
+
+<details>
+  <summary> Weakly Supervised Learning of Rigid 3D Scene Flow </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.08945.pdf)
+
+</details>
+
+<details>
+  <summary> Probability Dueling DQN active visual SLAM for autonomous navigation in indoor environmen </summary>
+
+- [논문 링크](https://www.emerald.com/insight/content/doi/10.1108/IR-08-2020-0160/full/html)
+
+</details>
+
+<details>
+  <summary> A hybrid global structure from motion method for synchronously estimating global rotations and global translations </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S0924271621000356)
+
+</details>
+
+<details>
+  <summary> D3DLO: Deep 3D LiDAR Odometry </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2101.12242.pdf)
+
+</details>
+
+<details>
+  <summary> STEP: Segmenting and Tracking Every Pixel </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.11859.pdf)
+- Daniel Cremers
+
+</details>
+
+<details>
+  <summary> New SLAM Fusion Algorithm based on Lidar/IMU Sensors </summary>
+
+- [논문 링크](https://www.ion.org/publications/abstract.cfm?articleID=17868)
+
+</details>
+
+<details>
+  <summary> Accurate 3D Localization Using RGB-TOF Camera and IMU for Industrial Mobile Robots </summary>
+
+- [논문 링크](https://www.cambridge.org/core/journals/robotica/article/abs/accurate-3d-localization-using-rgbtof-camera-and-imu-for-industrial-mobile-robots/2F4D8821D8BFAA43BF142D27F72BC7E2)
+
+</details>
+
+<details>
+  <summary> Improved Genetic Algorithm for Bundle Adjustment in Photogrammetry </summary>
+
+- [논문 링크](https://ieeexplore.ieee.org/abstract/document/9323649)
+
+</details>
+
+<details>
+  <summary> Semantic loop closure detection based on graph matching in multi-objects scenes </summary>
+
+- [논문 링크](https://www.sciencedirect.com/science/article/abs/pii/S1047320321000389)
+
+</details>
+
+<details>
+  <summary> Unsupervised Learning of Lidar Features for Use in a Probabilistic Trajectory Estimator </summary>
+
+- [논문 링크](https://arxiv.org/pdf/2102.11261.pdf)
+
+</details>
+
+<details>
+  <summary> Accurate Covariance Estimation for Pose Data from Iterative Closest Point Algorithm </summary>
+
+- [논문 링크](https://www.ion.org/publications/abstract.cfm?articleID=17866)
+
+</details>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM/" rel="tag"># SLAM</a>
+              <a href="/tags/Visual-SLAM/" rel="tag"># Visual-SLAM</a>
+              <a href="/tags/%EB%85%BC%EB%AC%B8-%EC%86%8C%EC%8B%9D/" rel="tag"># 논문 소식</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/20210128-gbp-poplar/" rel="prev" title="Graphcore IPU로 Bundle adjustment / SLAM 하기!">
+                  <i class="fa fa-angle-left"></i> Graphcore IPU로 Bundle adjustment / SLAM 하기!
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/20210214-data-structures-and-algorithms/" rel="next" title="자료구조와 알고리즘 이해">
+                  자료구조와 알고리즘 이해 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5473245269912288"
+     crossorigin="anonymous"></script>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="changh95/blog_comments" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">cv-learn</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.1/dist/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+
+
+
+  
+  <script defer src="https://events.vercount.one/js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
